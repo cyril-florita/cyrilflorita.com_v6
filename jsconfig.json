@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./*"],
+      "@css/*": ["./public/css/*"],
+      "@scss/*": ["./public/scss/*"],
+      "@fonts/*": ["./public/fonts/*"]
+    }
+  }
+}
