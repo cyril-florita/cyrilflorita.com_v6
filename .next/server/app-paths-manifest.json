@@ -1,1 +1,7 @@
-{}
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/portfolio/gtyweb8/page": "app/portfolio/gtyweb8/page.js",
+  "/portfolio/page": "app/portfolio/page.js",
+  "/portfolio/gtyweb9/page": "app/portfolio/gtyweb9/page.js",
+  "/page": "app/page.js"
+}

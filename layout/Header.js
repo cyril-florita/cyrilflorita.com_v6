@@ -18,7 +18,7 @@ const Header = () => {
 
       <div className="cyril-tp-frame">
 
-        <Link legacyBehavior href="http://www.cyrilflorita.com">
+        <Link legacyBehavior href="https://www.cyrilflorita.com">
           <a className="cyril-logo">
             <strong>C<span>yril</span></strong>
           </a>

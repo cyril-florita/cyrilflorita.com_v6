@@ -16,7 +16,7 @@ const Banner = ( { bgImage = "img/cyril-profile-serious-lol.jpg" } ) => {
                   className="cyril-bg-title-boxed"
                   style={{ top: 0, left: "-82%" }}
                 />
-                <p className="cyril-upper cyril-mb-30 subheader">
+                <p className="cyril-upper cyril-mb-20 subheader">
                 <span className="cyril-accent">Hello!</span> I&apos;m 
                 </p>
                 <h1 className="cyril-up cyril-mb-30" data-text="Cyril Florita">Cyril Florita</h1>

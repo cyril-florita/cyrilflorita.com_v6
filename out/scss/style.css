@@ -141,9 +141,11 @@ h1 {
 }
 
 h2 {
-  line-height: 100%;
+  font-family: var(--font-atkinson);
   font-size: 58px;
+  text-transform: uppercase;
   text-shadow: 5px 5px 0px rgba(16, 16, 16, 0.18);
+  line-height: 100%;
 }
 @media screen and (max-width: 1400px) {
   h2 {
@@ -200,6 +202,7 @@ h4 {
 
 .cyril-text-right-adapt {
   text-align: right;
+  padding: 10px 60px 0 60px;
 }
 @media screen and (max-width: 1200px) {
   .cyril-text-right-adapt {
@@ -823,6 +826,14 @@ page
 .cyril-page {
   position: relative;
   margin: 20px;
+  transform: translateY(90px) scale(0.95);
+  opacity: 0%;
+  transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
+}
+.cyril-page.cyril-active {
+  opacity: 100%;
+  transform: translateY(0) scale(1);
+  transition-delay: 0.4s;
 }
 @media screen and (max-width: 1200px) {
   .cyril-page {
@@ -1553,8 +1564,8 @@ banner
 
 ------------------------------------------- */
 .cyril-top-banner {
-  padding-top: 150px;
-  padding-bottom: 60px;
+  padding-top: 120px;
+  padding-bottom: 40px;
 }
 @media screen and (max-width: 1200px) {
   .cyril-top-banner {
@@ -2163,7 +2174,7 @@ portfolio
      object-position: center;
   transform: scale(1);
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
-  filter: grayscale(95%) brightness(170%) contrast(110%);
+  filter: grayscale(100%) brightness(180%) contrast(120%);
 }
 .cyril-portfolio-item .cyril-cover h3 {
   position: absolute;
@@ -2174,14 +2185,14 @@ portfolio
   justify-content: center;
   align-items: center;
   text-align: center;
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   margin: 0 0 10px;
   background-color: #fa4729;
   border-radius: 50%;
   color: rgb(255, 255, 255);
   font-family: var(--font-atkinson);
-  font-size: 11px;
+  font-size: 12px;
   text-transform: uppercase;
   text-shadow: none;
   z-index: 1;

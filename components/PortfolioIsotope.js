@@ -147,7 +147,7 @@ const PortfolioIsotope = () => {
 
           {/* long . gty v8 */}
           <div className="cyril-grid-item fil-uix">
-            <Link legacyBehavior href="/portfolio/projectname">
+            <Link legacyBehavior href="/portfolio/gtyweb8">
               <div className="cyril-portfolio-item cyril-long-item cyril-mb-60">
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_gty8.jpg" alt="cover" />

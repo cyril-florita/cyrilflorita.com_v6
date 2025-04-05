@@ -10,6 +10,12 @@ const page = () => {
 
   useEffect(() => {
     cyrilUtility.tpInner();
+    setTimeout(() => {
+      const pageElement = document.querySelector('.cyril-page');
+      if (pageElement) {
+        pageElement.classList.add('cyril-active');
+      }
+    }, 100);
   }, []);
 
   return (
@@ -22,11 +28,11 @@ const page = () => {
 
             {/* top banner */}
             <div className="cyril-top-banner cyril-text-center">
-              <img src="/img/portfolio/main_gty8.jpg" alt="cover" />
+              <img src="/img/portfolio/main_gty9.jpg" alt="cover" />
               <p className="cyril-upper cyril-mb-30">
-                <span className="cyril-accent">UX Design &amp; Front-End Web Development</span>
+                <span className="cyril-accent">UX Design</span>
               </p>
-              <h2 className="cyril-mb-60">Grace to You Website, v.8</h2>
+              <h2 className="cyril-mb-60">Grace to You Website, v.9</h2>
             </div>
             {/* dend of top banner */}
 
@@ -42,11 +48,11 @@ const page = () => {
                   <div className="row cyril-mb-20">
                     <div className="col-md-4 cyril-mb-30">
                       <p className="cyril-upper cyril-mb-10">Employer:</p>
-                      <p className="cyril-text-sm"><a href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Non-Profit Media Organization</p>
+                      <p className="cyril-text-sm"><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Non-Profit Media Organization</p>
                     </div>
                     <div className="col-md-4 cyril-mb-30">
                       <p className="cyril-upper cyril-mb-10">Role:</p>
-                      <p className="cyril-text-sm">Web Designer &amp; Front-End Developer</p>
+                      <p className="cyril-text-sm">User Experience Designer</p>
                     </div>
                     <div className="col-md-4 cyril-mb-30">
                       <p className="cyril-upper cyril-mb-10">Start / Launch Date:</p>

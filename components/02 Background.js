@@ -25,12 +25,12 @@ const Background = ( { bgImage = "img/cyril-profile-w-a-smile.jpg" } ) => {
           <div className="col-xl-7">
             <div className="row">
               <div className="col-xl-12">
-                <p className="cyril-upper cyril-mb-30 subheader">
-                  My <span className="cyril-accent">story:</span>
+                <p className="cyril-upper cyril-mb-20 subheader">
+                &#91; My <span className="cyril-accent">story</span> &#93;
                 </p>
                 <h2 className="cyril-up cyril-mb-30">Background</h2>
                 <p className="cyril-mb-10">
-                  With <strong><span className="cyril-accent">almost 2 decades of industry experience</span></strong> and through my <strong>thoughtfully-</strong>, <strong>carefully-</strong>, <strong>and-beautifully-crafted</strong> projects, I have established myself as a versatile Designer and Developer with a proven track record of:
+                  With <strong><span className="cyril-accent">almost 2 decades of industry experience</span></strong>, and through my <strong>thoughtfully-</strong>, <strong>carefully-</strong>, <strong>and-beautifully-crafted</strong> projects, I have established myself as a versatile Designer and Developer with a proven track record of:
                 </p>
                 <ul className="cyril-left-offset cyril-mt-20 cyril-mb-20">
                   <li>enhancing product value</li>

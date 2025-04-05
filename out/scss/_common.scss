@@ -84,9 +84,11 @@ h1 {
 }
 
 h2 {
-    line-height: 100%;
+    font-family: var(--font-atkinson);
     font-size: 58px;
+    text-transform: uppercase;
     text-shadow: 5px 5px 0px $soft;
+    line-height: 100%;
 
     @media screen and (max-width: 1400px) {
         font-size: 48px;
@@ -139,6 +141,7 @@ h4 {
 
 .cyril-text-right-adapt {
     text-align: right;
+    padding: 10px 60px 0 60px;
 
     @media screen and (max-width: 1200px) {
         text-align: left;

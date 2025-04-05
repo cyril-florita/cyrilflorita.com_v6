@@ -6,13 +6,12 @@ const Education = () => {
         style={{ bottom: "0%", left: "25%", transform: "rotate(-25deg)" }}
       />
       <div className="container">
-        <div className="row justify-content-between align-items-center">
-          <div className="col-xl-1"></div>
-          <div className="col-xl-4 cyril-mb-30">
+        <div className="row justify-content-betweenx align-items-centerx">
+          <div className="col-xl-5 cyril-mb-30">
 
             <div className="cyril-text-right-adapt">
-              <p className="cyril-upper cyril-mb-30 subheader">
-                My <span className="cyril-accent">Foundational Training:</span>
+              <p className="cyril-upper cyril-mb-20 subheader">
+              &#91; My <span className="cyril-accent">Foundational Training</span> &#93;
               </p>
               <h2 className="cyril-up cyril-mb-30">Education</h2>
               <p>Structured learning that equipped me with technical expertise in design and web development, geared for cross-functional collaboration and project leadership.
@@ -20,8 +19,7 @@ const Education = () => {
             </div>
 
           </div>
-          <div className="col-xl-1"></div>
-          <div className="col-xl-6">
+          <div className="col-xl-7">
 
             <div className="cyril-icon-box cyril-mt-40 cyril-mb-40">
               <div className="cyril-text-icon">

@@ -13,8 +13,8 @@ const Experience = () => {
         style={{ bottom: "15%", left: "-5%", transform: "rotate(-25deg)" }}
       />
       <div className="container">
-        <p className="cyril-upper cyril-mb-30 subheader">
-          My <span className="cyril-accent">career</span> spanning <span className="cyril-accent">18 years:</span>
+        <p className="cyril-upper cyril-mb-20 subheader">
+        &#91; My <span className="cyril-accent">career</span> in <span className="cyril-accent">18 years</span> &#93;
         </p>
         <h2 className="cyril-up">Experience</h2>
 
