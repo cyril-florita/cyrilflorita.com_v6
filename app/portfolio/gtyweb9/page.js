@@ -56,7 +56,7 @@ const page = () => {
                     </div>
                     <div className="col-md-4 cyril-mb-30">
                       <p className="cyril-upper cyril-mb-10">Start / Launch Date:</p>
-                      <p className="cyril-text-sm">Jan. 2015 / Jan. 2017</p>
+                      <p className="cyril-text-sm">Nov. 2023 / May 2025</p>
                     </div>
                   </div>
 

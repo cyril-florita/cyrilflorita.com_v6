@@ -37,7 +37,7 @@ const Page = () => {
           <div className="container">
             <div className="cyril-top-banner">
               <p className="cyril-upper cyril-mb-20 subheader">
-                My <span className="cyril-accent">projects:</span>
+                &#91; My <span className="cyril-accent">select projects</span> &#93;
               </p>
               <h2 className="cyril-up cyril-mb-20">Portfolio</h2>
               <p className="cyril-left-offset">

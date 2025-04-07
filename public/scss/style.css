@@ -763,10 +763,10 @@ frame
   */
 }
 .cyril-frame.hide .cyril-top-panel {
-  transform: translateY(-80px);
+  transform: translateY(-79px);
 }
 .cyril-frame.hide .cyril-social {
-  transform: translateY(-80px);
+  transform: translateY(-78px);
 }
 @media screen and (max-width: 740px) {
   .cyril-frame.hide .cyril-social {
@@ -774,7 +774,7 @@ frame
   }
 }
 .cyril-frame.hide .cyril-bottom-panel {
-  transform: translateY(80px);
+  transform: translateY(78px);
 }
 
 /* -------------------------------------------

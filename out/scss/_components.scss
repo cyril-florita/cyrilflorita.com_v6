@@ -42,18 +42,18 @@ frame
     &.hide {
 
         & .cyril-top-panel {
-            transform: translateY(-80px);
+            transform: translateY(-79px);
         }
 
         & .cyril-social {
-            transform: translateY(-80px);
+            transform: translateY(-78px);
             @media screen and (max-width: 740px)   {
                 transform: translateY(80px);                
             }
         }
 
         & .cyril-bottom-panel {
-            transform: translateY(80px);
+            transform: translateY(78px);
         }
         /*
         & .cyril-top-panel {

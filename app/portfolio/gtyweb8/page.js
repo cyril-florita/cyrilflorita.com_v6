@@ -32,7 +32,7 @@ const page = () => {
               <p className="cyril-upper cyril-mb-30">
                 <span className="cyril-accent">UX Design &amp; Front-End Web Development</span>
               </p>
-              <h2 className="cyril-mb-60">Grace to You Website, v.8</h2>
+              <h2 className="cyril-mb-60">GTY Website, v.8</h2>
             </div>
             {/* dend of top banner */}
 
@@ -62,10 +62,15 @@ const page = () => {
 
                   <div className="cyril-divider cyril-mb-60" />
 
-                  <h4 className="cyril-up cyril-mb-30">Project Overview:</h4>
-                  <p>GTY.org is a comprehensive platform offering biblical resources, sermons, and theological content. Despite its valuable offerings, the website faces usability challenges such as outdated design elements, limited accessibility features, and a lack of intuitive navigation. This case study focuses on redesigning GTY.org to enhance user engagement and accessibility while maintaining its core mission of delivering high-quality theological content.</p>
+                  <h4 className="cyril-up cyril-mb-30">Problem Statement:</h4>
+                  <p>GTY.org is a global platform offering biblical resources for personal growth, group discipleship, pastoral study helps, and theological training. Despite its valuable resources, the older version of the website&mdash;version 7&mdash;faced usability challenges such as outdated design elements, limited mobile responsiveness, absence of accessibility compliance, and a non-intuitive navigation and content structure.</p>
 
-                  {/*
+                  <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
+
+                  <h4 className="cyril-up cyril-mb-30">Project Goal:</h4>
+                  <p>Redesign GTY.org to improve mobility, accessibility, navigation, and content structure to enhance user engagement while maintaining its core mission of delivering high-quality biblical content.</p>
+
+                  {/* 
 
                   <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
 
@@ -109,7 +114,6 @@ const page = () => {
                   </dl>
 
                   <div className="row cyril-mb-10">
-
                     <div className="col-xl-12">
                       <Swiper
                         {...sliderProps.projectSlider}
@@ -191,22 +195,10 @@ const page = () => {
                             </div>
                           </div>
                         </SwiperSlide>
-                      
+
                       </Swiper>
                     </div>
-
-                   
-
                   </div>
-
-                  */}
-
-
-
-
-
-
-
 
                   <div className="row">
                     <div className="offset-lg-6 col-lg-6">
@@ -248,8 +240,6 @@ const page = () => {
                     </div>
                   </div>
 
-
-
                   <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
 
                   <h4 className="cyril-up cyril-mt-60 cyril-mb-30">Solution:</h4>
@@ -281,12 +271,15 @@ const page = () => {
                   <h4 className="cyril-up cyril-mt-60 cyril-mb-30">Reflection:</h4>
                   <p>This project highlighted the importance of aligning design solutions with both user needs and organizational goals. Future iterations could focus on incorporating personalization features like saved playlists or recommended content based on user preferences.</p>
 
+                  */}
+
                 </div>
                 {/* end of <div className="offset-lg-1-custom col-lg-9"> */}
 
                 {/* pagination */}
+                
+                {/*
                 <div className="offset-lg-1-custom col-lg-9 cyril-mt-60">
-
                   <div className="cyril-pagination-panel">
                     <a href="#" className="cyril-button cyril-type-2 cyril-mb-30">
                       Previous Project
@@ -295,8 +288,9 @@ const page = () => {
                       Next Project
                     </a>
                   </div>
-
                 </div>
+                */}
+
                 {/* end of pagination */}
 
               </div>
@@ -305,12 +299,11 @@ const page = () => {
             </div>
             {/* end of main content */}
 
-
-
           </div>
           {/* end of .container */}
 
         </div>
+        {/* end of .cyril-page .cyril-project-page */}
       </div>
     </SiteLayout>
   );
