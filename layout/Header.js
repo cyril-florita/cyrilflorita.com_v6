@@ -2,6 +2,7 @@
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import Nav from "./Nav";
+import { cyrilUtility } from "@/utility/index";
 
 const Header = () => {
   const pathname = usePathname();
@@ -36,8 +37,15 @@ const Header = () => {
     }
   }, [pathname]);
 
-  const handleIntroClick = (e) => {
+  const handleIntroClick = async (e) => {
     e.preventDefault();
+    
+    if (pathname !== '/') {
+      await cyrilUtility.handlePageTransition();
+      window.location.href = '/';
+      return;
+    }
+    
     const sections = document.querySelectorAll(".cyril-section");
     const introSection = document.querySelector("#intro");
     

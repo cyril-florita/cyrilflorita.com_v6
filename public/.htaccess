@@ -1,9 +1,17 @@
 RewriteEngine On
 
-# Handle Next.js client-side routing
+# Redirect trailing slashes
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+# Handle Next.js pages
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/api/
 RewriteRule ^(.*)$ /index.html [L]
+
+# Specific rule for portfolio
+RewriteRule ^portfolio/?$ /portfolio.html [L]
 
 # Prevent directory listing
 Options -Indexes

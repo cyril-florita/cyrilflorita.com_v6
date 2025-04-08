@@ -29,6 +29,7 @@ frame
         right: 0;
         bottom: 0;
     }
+    
     @media screen and (max-width: 1200px) {
         margin: 0 10px;
         height: 100%;
@@ -153,7 +154,7 @@ page
     transform: translateY(90px) scale(0.95);
     opacity: 0%;
     transition: $tr;
-
+    
     &.cyril-active {
         opacity: 100%;
         transform: translateY(0) scale(1);

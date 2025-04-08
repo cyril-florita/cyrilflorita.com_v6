@@ -97,4 +97,12 @@ export const cyrilUtility = {
       }
     }
   },
+  handlePageTransition() {
+          return new Promise(resolve => {
+              document.body.classList.add('page-exit');
+              setTimeout(() => {
+                  resolve();
+              }, 400);
+          });
+      },
 };

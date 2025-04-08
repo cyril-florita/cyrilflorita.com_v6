@@ -1,6 +1,7 @@
 "use client";
 import { usePathname } from "next/navigation";
 import { Fragment, useState, useEffect } from "react";
+import { cyrilUtility } from "@/utility/index";
 
 const Nav = () => {
   const pathname = usePathname();
@@ -17,16 +18,23 @@ const Nav = () => {
   }, []);
 
   // Update handleIntroClick to match Header.js behavior
-  const handleIntroClick = (e) => {
+  const handleIntroClick = async (e) => {
     e.preventDefault();
+    
+    if (pathname !== '/') {
+        await cyrilUtility.handlePageTransition();
+        window.location.href = '/';
+        return;
+    }
+    
     const sections = document.querySelectorAll(".cyril-section");
     const introSection = document.querySelector("#intro");
-    
+
     // Don't do anything if we're on home page and intro is active
     if (pathname === '/' && introSection?.classList.contains('cyril-active')) {
       return;
     }
-    
+
     if (pathname === '/') {
       const dots = document.querySelectorAll(".cyril-dot");
       const introIndex = Array.from(sections).findIndex(section => section.id === 'intro');
@@ -72,16 +80,25 @@ const Nav = () => {
       <nav>
         <ul>
           <li className={pathname.includes("index") || pathname == "/" ? "cyril-active" : ""}>
-            <a 
-              href="/" 
-              className={isIntroActive ? 'cyril-disabled' : ''} 
+            <a
+              href="/"
+              className={isIntroActive ? 'cyril-disabled' : ''}
               onClick={handleIntroClick}
             >
               About Me
             </a>
           </li>
           <li className={pathname == "/portfolio" ? "cyril-active" : ""}>
-            <a href="/portfolio">My Work</a>
+            <a 
+              href="/portfolio" 
+              onClick={async (e) => {
+                e.preventDefault();
+                await cyrilUtility.handlePageTransition();
+                window.location.href = '/portfolio';
+              }}
+            >
+              My Work
+            </a>
           </li>
         </ul>
       </nav>
