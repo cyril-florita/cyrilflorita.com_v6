@@ -65,35 +65,7 @@ const Nav = () => {
     }
   }, [pathname]);
 
-  const handleAboutClick = (e) => {
-    e.preventDefault();
-    if (pathname === '/') {
-      const sections = document.querySelectorAll(".cyril-section");
-      const dots = document.querySelectorAll(".cyril-dot");
-      const introIndex = Array.from(sections).findIndex(section => section.id === 'intro');
-      
-      // Don't do anything if intro is already active
-      const introSection = document.querySelector("#intro");
-      if (introSection?.classList.contains('cyril-active')) {
-        return;
-      }
-
-      if (introIndex !== -1) {
-        window.scrollTo({
-          top: introIndex * window.innerHeight,
-          behavior: "smooth",
-        });
-        sections.forEach((section, sectionIndex) => {
-          section.classList.toggle("cyril-active", sectionIndex === introIndex);
-        });
-        dots.forEach((dot, dotIndex) => {
-          dot.classList.toggle("cyril-active", dotIndex === introIndex);
-        });
-      }
-    } else {
-      window.location.href = '/';
-    }
-  };
+  // Remove handleAboutClick function as it's redundant
 
   return (
     <Fragment>

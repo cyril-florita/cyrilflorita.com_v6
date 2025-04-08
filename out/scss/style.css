@@ -1110,6 +1110,12 @@ top panel
 .cyril-top-panel .cyril-logo:hover {
   color: #fa4729;
 }
+.cyril-top-panel .cyril-logo.cyril-disabled {
+  cursor: default;
+}
+.cyril-top-panel .cyril-logo.cyril-disabled:hover {
+  color: #101010;
+}
 .cyril-top-panel .cyril-logo strong {
   display: block;
   margin: 0 auto;
@@ -1501,61 +1507,6 @@ footer
   .cyril-bottom-panel.hide {
     transform: translateY(80px);
   }
-}
-
-/* -------------------------------------------
-
-menu button
-
-------------------------------------------- */
-.cyril-menu-btn {
-  margin-right: 30px;
-  background-color: rgb(255, 255, 255);
-  padding: 25px 15px;
-  border: solid 2px #101010;
-  height: 24px;
-  cursor: pointer;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 6px 6px 0 0 rgba(16, 16, 16, 0.18);
-  transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
-}
-@media screen and (max-width: 1200px) {
-  .cyril-menu-btn {
-    display: flex;
-  }
-}
-.cyril-menu-btn span, .cyril-menu-btn span:after, .cyril-menu-btn span:before {
-  content: "";
-  display: block;
-  width: 24px;
-  height: 2px;
-  background: #101010;
-  backface-visibility: hidden;
-  transition: inherit;
-}
-.cyril-menu-btn span {
-  position: relative;
-}
-.cyril-menu-btn span:after, .cyril-menu-btn span:before {
-  position: absolute;
-}
-.cyril-menu-btn span:before {
-  top: -8px;
-}
-.cyril-menu-btn span:after {
-  top: 8px;
-}
-.cyril-menu-btn.cyril-active span {
-  transform: rotate(45deg);
-}
-.cyril-menu-btn.cyril-active span:before {
-  transform: translate(0px, 8px) rotate(-90deg);
-}
-.cyril-menu-btn.cyril-active span:after {
-  width: 24px;
-  transform: translate(0px, -8px) rotate(-90deg);
 }
 
 /* -------------------------------------------
@@ -2319,4 +2270,46 @@ portfolio
 }
 .two-column-text img {
   width: 100%;
+}
+/* -------------------------------------------
+
+back to top
+
+------------------------------------------- */
+.cyril-back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  cursor: pointer;
+  width: 60px;
+  height: 60px;
+  border: solid 2px #101010;
+  display: flex;
+  color: #101010;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 6px 6px 0 0 rgba(16, 16, 16, 0.18);
+  transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 999;
+  background: rgb(255, 255, 255);
+  pointer-events: all;
+}
+.cyril-back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.cyril-back-to-top svg {
+  transform: rotate(-90deg);
+}
+.cyril-back-to-top:hover {
+  box-shadow: 0px 0px 0 0 rgba(16, 16, 16, 0.18);
+}
+@media screen and (max-width: 768px) {
+  .cyril-back-to-top {
+    bottom: 20px;
+    right: 20px;
+  }
 }/*# sourceMappingURL=style.css.map */

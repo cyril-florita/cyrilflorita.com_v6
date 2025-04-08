@@ -1,0 +1,13 @@
+RewriteEngine On
+
+# Handle Next.js client-side routing
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /index.html [L]
+
+# Prevent directory listing
+Options -Indexes
+
+# Handle errors
+ErrorDocument 403 /index.html
+ErrorDocument 404 /404.html

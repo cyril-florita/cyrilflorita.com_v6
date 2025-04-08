@@ -26,6 +26,52 @@ export const cyrilUtility = {
       });
     }
   },
+
+  backToTop() {
+    const handleScroll = () => {
+      const backToTop = document.querySelector('.cyril-back-to-top');
+      if (backToTop) {
+        if (window.scrollY > 300) {
+          backToTop.classList.add('visible');
+        } else {
+          backToTop.classList.remove('visible');
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  },
+
+  handleBackToTop(pathname) {
+    if (pathname === '/') {
+      const sections = document.querySelectorAll(".cyril-section");
+      const dots = document.querySelectorAll(".cyril-dot");
+      if (!sections.length || !dots.length) return;
+      
+      const introIndex = Array.from(sections).findIndex(section => section.id === 'intro');
+      if (introIndex !== -1) {
+        window.scrollTo({
+          top: introIndex * window.innerHeight,
+          behavior: 'smooth'
+        });
+        
+        sections.forEach((section, sectionIndex) => {
+          section.classList.toggle("cyril-active", sectionIndex === introIndex);
+        });
+        
+        dots.forEach((dot, dotIndex) => {
+          dot.classList.toggle("cyril-active", dotIndex === introIndex);
+        });
+      }
+    } else {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+  },
+
   getPagination(totalNumber, sort) {
     let arr = new Array(Math.ceil(totalNumber / sort))
       .fill()

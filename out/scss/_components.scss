@@ -475,6 +475,14 @@ top panel
         &:hover {
             color: $accent;
         }
+        // Disabled state
+        &.cyril-disabled {
+            cursor: default;
+            &:hover {
+                color: $dark;
+            }
+        }
+
         & strong {
             display: block;
             margin: 0 auto;
@@ -914,76 +922,6 @@ footer
         }
     }
 
-}
-
-
-
-/* -------------------------------------------
-
-menu button
-
-------------------------------------------- */
-
-.cyril-menu-btn {
-    margin-right: 30px;
-    background-color: $light;
-    padding: 25px 15px;
-    border: solid 2px $dark;
-    height: 24px;
-    cursor: pointer;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 6px 6px 0 0 $soft;
-    transition: $tr;
-
-    @media screen and (max-width: 1200px) {
-        display: flex;
-    }
-
-    & span,
-    & span:after,
-    & span:before {
-        content: "";
-        display: block;
-        width: 24px;
-        height: 2px;
-        background: $dark;
-        backface-visibility: hidden;
-        transition: inherit;
-    }
-
-    & span {
-        position: relative;
-
-        &:after,
-        &:before {
-            position: absolute;
-        }
-
-        &:before {
-            top: -8px;
-        }
-
-        &:after {
-            top: 8px;
-        }
-    }
-
-    &.cyril-active {
-        & span {
-            transform: rotate(45deg);
-
-            &:before {
-                transform: translate(0px, 8px) rotate(-90deg);
-            }
-
-            &:after {
-                width: 24px;
-                transform: translate(0px, -8px) rotate(-90deg);
-            }
-        }
-    }
 }
 
 /* -------------------------------------------
@@ -1864,3 +1802,48 @@ portfolio
       // flex-direction: column;
     }
   }
+
+/* -------------------------------------------
+
+back to top
+
+------------------------------------------- */
+.cyril-back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    border: solid 2px $dark;
+    display: flex;
+    color: $dark;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 6px 6px 0 0 $soft;
+    transition: $tr;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 999;
+    background: $light;
+    pointer-events: all;
+
+    &.visible {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    svg {
+        transform: rotate(-90deg);
+    }
+
+    &:hover {
+        box-shadow: 0px 0px 0 0 $soft;
+    }
+
+    @media screen and (max-width: 768px) {
+        bottom: 20px;
+        right: 20px;
+    }
+}
