@@ -1497,7 +1497,7 @@ footer
   height: 80px;
   display: flex;
   align-items: center;
-  padding: 0 50px;
+  padding: 0 35px;
   pointer-events: all;
   border-top: 2px solid #101010;
 }
@@ -1516,14 +1516,14 @@ footer
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
   background: rgb(255, 255, 255);
   display: inline-block;
-  padding: 0;
+  padding: 0 15px;
 }
 .cyril-bottom-panel .cyril-footer a:hover {
   color: #fa4729;
 }
 .cyril-bottom-panel .cyril-footer a i {
   position: relative;
-  bottom: -3px;
+  bottom: -2px;
   display: inline-block;
   margin-right: 12px;
 }
