@@ -1,14 +1,33 @@
 "use client";
 import { usePathname } from "next/navigation";
-import { Fragment } from "react";
+import { Fragment, useState, useEffect } from "react";
 
-const Nav = ({ toggle }) => {
+const Nav = () => {
   const pathname = usePathname();
+  const [isIntroActive, setIsIntroActive] = useState(false);
 
+  // Initial check on mount
+  useEffect(() => {
+    if (pathname === '/') {
+      const introSection = document.querySelector("#intro");
+      if (introSection) {
+        setIsIntroActive(introSection.classList.contains('cyril-active'));
+      }
+    }
+  }, []);
+
+  // Update handleIntroClick to match Header.js behavior
   const handleIntroClick = (e) => {
     e.preventDefault();
+    const sections = document.querySelectorAll(".cyril-section");
+    const introSection = document.querySelector("#intro");
+    
+    // Don't do anything if we're on home page and intro is active
+    if (pathname === '/' && introSection?.classList.contains('cyril-active')) {
+      return;
+    }
+    
     if (pathname === '/') {
-      const sections = document.querySelectorAll(".cyril-section");
       const dots = document.querySelectorAll(".cyril-dot");
       const introIndex = Array.from(sections).findIndex(section => section.id === 'intro');
       if (introIndex !== -1) {
@@ -19,7 +38,6 @@ const Nav = ({ toggle }) => {
         sections.forEach((section, sectionIndex) => {
           section.classList.toggle("cyril-active", sectionIndex === introIndex);
         });
-        // Update pagination dots
         dots.forEach((dot, dotIndex) => {
           dot.classList.toggle("cyril-active", dotIndex === introIndex);
         });
@@ -28,13 +46,67 @@ const Nav = ({ toggle }) => {
       window.location.href = '/';
     }
   };
-  
+
+  useEffect(() => {
+    const checkIntroActive = () => {
+      if (pathname === '/') {
+        const introSection = document.querySelector("#intro");
+        setIsIntroActive(introSection?.classList.contains('cyril-active'));
+      } else {
+        setIsIntroActive(false);
+      }
+    };
+
+    checkIntroActive();
+
+    if (pathname === '/') {
+      window.addEventListener('scroll', checkIntroActive);
+      return () => window.removeEventListener('scroll', checkIntroActive);
+    }
+  }, [pathname]);
+
+  const handleAboutClick = (e) => {
+    e.preventDefault();
+    if (pathname === '/') {
+      const sections = document.querySelectorAll(".cyril-section");
+      const dots = document.querySelectorAll(".cyril-dot");
+      const introIndex = Array.from(sections).findIndex(section => section.id === 'intro');
+      
+      // Don't do anything if intro is already active
+      const introSection = document.querySelector("#intro");
+      if (introSection?.classList.contains('cyril-active')) {
+        return;
+      }
+
+      if (introIndex !== -1) {
+        window.scrollTo({
+          top: introIndex * window.innerHeight,
+          behavior: "smooth",
+        });
+        sections.forEach((section, sectionIndex) => {
+          section.classList.toggle("cyril-active", sectionIndex === introIndex);
+        });
+        dots.forEach((dot, dotIndex) => {
+          dot.classList.toggle("cyril-active", dotIndex === introIndex);
+        });
+      }
+    } else {
+      window.location.href = '/';
+    }
+  };
+
   return (
     <Fragment>
-      <nav className={toggle ? "cyril-active" : ""}>
+      <nav>
         <ul>
           <li className={pathname.includes("index") || pathname == "/" ? "cyril-active" : ""}>
-            <a href="/" onClick={handleIntroClick}>About Me</a>
+            <a 
+              href="/" 
+              className={isIntroActive ? 'cyril-disabled' : ''} 
+              onClick={handleIntroClick}
+            >
+              About Me
+            </a>
           </li>
           <li className={pathname == "/portfolio" ? "cyril-active" : ""}>
             <a href="/portfolio">My Work</a>

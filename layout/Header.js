@@ -1,17 +1,52 @@
 "use client";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Nav from "./Nav";
 
 const Header = () => {
   const pathname = usePathname();
-  const [toggle, setToggle] = useState(false);
+  const [isIntroActive, setIsIntroActive] = useState(false);
+
+  // Initial check on mount
+  useEffect(() => {
+    if (pathname === '/') {
+      const introSection = document.querySelector("#intro");
+      if (introSection) {
+        setIsIntroActive(introSection.classList.contains('cyril-active'));
+      }
+    }
+  }, []);
+
+  // Existing scroll effect
+  useEffect(() => {
+    const checkIntroActive = () => {
+      if (pathname === '/') {
+        const introSection = document.querySelector("#intro");
+        setIsIntroActive(introSection?.classList.contains('cyril-active'));
+      } else {
+        setIsIntroActive(false);
+      }
+    };
+
+    checkIntroActive();
+
+    if (pathname === '/') {
+      window.addEventListener('scroll', checkIntroActive);
+      return () => window.removeEventListener('scroll', checkIntroActive);
+    }
+  }, [pathname]);
 
   const handleIntroClick = (e) => {
     e.preventDefault();
+    const sections = document.querySelectorAll(".cyril-section");
+    const introSection = document.querySelector("#intro");
+    
+    // Don't do anything if we're on home page and intro is active
+    if (pathname === '/' && introSection?.classList.contains('cyril-active')) {
+      return;
+    }
+    
     if (pathname === '/') {
-      const sections = document.querySelectorAll(".cyril-section");
       const dots = document.querySelectorAll(".cyril-dot");
       const introIndex = Array.from(sections).findIndex(section => section.id === 'intro');
       if (introIndex !== -1) {
@@ -22,27 +57,22 @@ const Header = () => {
         sections.forEach((section, sectionIndex) => {
           section.classList.toggle("cyril-active", sectionIndex === introIndex);
         });
-        // Update pagination dots
         dots.forEach((dot, dotIndex) => {
           dot.classList.toggle("cyril-active", dotIndex === introIndex);
         });
       }
+    } else {
+      window.location.href = '/';
     }
   };
 
   return (
     <div className="cyril-top-panel cyril-tp-2">
       <div className="cyril-tp-frame">
-        <a className="cyril-logo" onClick={handleIntroClick}>
+        <a href="/" className={`cyril-logo ${isIntroActive ? 'cyril-disabled' : ''}`} onClick={handleIntroClick}>
           <strong>C<span>yril</span></strong>
         </a>
-        <div 
-          className={`cyril-menu-btn ${toggle ? 'cyril-active' : ''}`} 
-          onClick={() => setToggle(!toggle)}
-        >
-          <span></span>
-        </div>
-        <Nav toggle={toggle} />
+        <Nav />
       </div>
     </div>
   );
