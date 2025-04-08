@@ -1497,7 +1497,7 @@ footer
   height: 80px;
   display: flex;
   align-items: center;
-  padding: 0 50px;
+  padding: 0 35px;
   pointer-events: all;
   border-top: 2px solid #101010;
 }
@@ -1516,14 +1516,14 @@ footer
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
   background: rgb(255, 255, 255);
   display: inline-block;
-  padding: 0;
+  padding: 0 15px;
 }
 .cyril-bottom-panel .cyril-footer a:hover {
   color: #fa4729;
 }
 .cyril-bottom-panel .cyril-footer a i {
   position: relative;
-  bottom: -3px;
+  bottom: -2px;
   display: inline-block;
   margin-right: 12px;
 }
@@ -2171,6 +2171,11 @@ portfolio
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
   filter: grayscale(100%) brightness(180%) contrast(120%);
 }
+@media screen and (max-width: 1200px) {
+  .cyril-portfolio-item .cyril-cover img {
+    filter: grayscale(0) brightness(100%) contrast(100%);
+  }
+}
 .cyril-portfolio-item .cyril-cover h3 {
   position: absolute;
   top: 30px;
@@ -2194,7 +2199,7 @@ portfolio
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
 }
 .cyril-portfolio-item .cyril-cover:hover img {
-  filter: grayscale(0);
+  filter: grayscale(0) brightness(100%) contrast(100%);
 }
 .cyril-portfolio-item .cyril-cover:hover h3 {
   transform: translate(-10px, 5px);

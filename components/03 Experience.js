@@ -69,7 +69,7 @@ const Experience = () => {
                       <div className="cyril-box-text">
                         <p className="cyril-upper cyril-text-lg cyril-mb-15">Product Designer</p>
                         <p className="cyril-upper cyril-mb-30 cyril-text-normal">
-                          Oct 2014 &mdash; Nov 2014 &#40;<span className="cyril-accent">1 month</span>&#41;
+                          Oct 2014 &mdash; Nov 2014 &#40;<span className="cyril-accent">2 months</span>&#41;
                         </p>
                         <p>
                           <a className="cyril-text-underline" href="https://www.scorpion.co" target="_blank"><strong>Scorpion Design</strong></a>, a design and marketing agency in Santa Clarita, CA.

@@ -13,8 +13,9 @@ frame
     right: 0;
     width: calc(100% - 20px);
     height: calc(100% - 20px);
-    
-    &:before, &:after {
+
+    &:before,
+    &:after {
         content: '';
         position: absolute;
         left: 7px;
@@ -23,6 +24,7 @@ frame
         bottom: -7px;
         border: 2px solid $soft;
     }
+
     &:after {
         border: 2px solid $black;
         left: 0;
@@ -30,17 +32,19 @@ frame
         right: 0;
         bottom: 0;
     }
-    
+
     @media screen and (max-width: 1200px) {
         margin: 0 10px;
         height: 100%;
         z-index: 1;
     }
+
     @media screen and (min-width: 1600px) {
         margin: 15px;
         width: calc(100% - 30px);
         height: calc(100% - 30px);
     }
+
     &.hide {
 
         & .cyril-top-panel {
@@ -49,14 +53,16 @@ frame
 
         & .cyril-social {
             transform: translateY(-78px);
-            @media screen and (max-width: 740px)   {
-                transform: translateY(80px);                
+
+            @media screen and (max-width: 740px) {
+                transform: translateY(80px);
             }
         }
 
         & .cyril-bottom-panel {
             transform: translateY(78px);
         }
+
         /*
         & .cyril-top-panel {
             @media screen and (max-width: 1200px) {
@@ -155,12 +161,13 @@ page
     transform: translateY(90px) scale(0.95);
     opacity: 0;
     transition: $tr;
+
     // transition-delay: 0.4s;
     &.cyril-active {
         opacity: 1;
         transform: translateY(0) scale(1);
     }
-    
+
     @media screen and (max-width: 1200px) {
         margin: 0;
     }
@@ -169,18 +176,21 @@ page
         & .cyril-top-banner {
             padding-bottom: 20px;
         }
+
         & img {
             width: 100%;
             display: block;
             margin: 0 auto 60px;
         }
+
         & ul {
             margin-left: 60px;
         }
+
         & .offset-lg-1-custom {
             margin-left: 12.5%;
 
-            @media screen and (max-width: 1200px)  {
+            @media screen and (max-width: 1200px) {
                 margin-left: 0;
             }
         }
@@ -262,6 +272,7 @@ pagination
                 opacity: 1;
                 transform: translateX(0) scale(1);
             }
+
             &:after {
                 border-color: $accent;
                 background: $light;
@@ -271,12 +282,13 @@ pagination
         &.cyril-active {
             opacity: 1;
             cursor: default;
-            
+
             &::after {
                 border-color: $accent;
                 background: $accent;
                 animation: throb 3s ease-in-out infinite;
             }
+
             &:before {
                 opacity: 1;
             }
@@ -346,6 +358,7 @@ pagination
     &.cyril-bg-item-large {
         width: 400px;
         height: 460px;
+
         &::before {
             display: none;
         }
@@ -405,7 +418,9 @@ top panel
 
     &.cyril-tp-inner {
         background: $light;
-        &::before, &::after {
+
+        &::before,
+        &::after {
             content: '';
             position: absolute;
             left: 0;
@@ -415,12 +430,13 @@ top panel
             background: $light;
             z-index: -1;
         }
+
         &::after {
             top: auto;
             bottom: -20px;
         }
     }
-    
+
     /*
     &.cyril-active {
         transition-delay: .6s;
@@ -456,7 +472,7 @@ top panel
         text-shadow: 3px 3px 0px $soft;
         transition: $tr;
 
-        &::before, 
+        &::before,
         &::after {
             content: '';
             position: absolute;
@@ -477,9 +493,11 @@ top panel
         &:hover {
             color: $accent;
         }
+
         // Disabled state
         &.cyril-disabled {
             cursor: default;
+
             &:hover {
                 color: $dark;
             }
@@ -488,17 +506,17 @@ top panel
         & strong {
             display: block;
             margin: 0 auto;
-            
+
             & span {
-                
-                @media screen and (max-width: 450px)  {
+
+                @media screen and (max-width: 450px) {
                     display: none;
                 }
 
             }
         }
 
-        @media screen and (max-width: 670px)  {
+        @media screen and (max-width: 670px) {
             padding: 0 40px;
         }
 
@@ -509,7 +527,7 @@ top panel
         border-top: none;
         border-bottom: solid 2px $black;
         padding: 0 50px 0 50px;
-        
+
         &::after {
             content: '';
             position: absolute;
@@ -543,7 +561,7 @@ top panel
                     white-space: nowrap;
                     transition: $tr;
 
-                    @media screen and (max-width: 768px)   {
+                    @media screen and (max-width: 768px) {
                         font-size: 14px;
                     }
 
@@ -553,7 +571,7 @@ top panel
                 }
 
                 &.cyril-active {
-                    & > a {
+                    &>a {
                         color: $accent;
                         cursor: default;
                     }
@@ -605,13 +623,13 @@ top panel
             }
         }
 
-        @media screen and (max-width: 450px)    {
-            width: 100%;                
+        @media screen and (max-width: 450px) {
+            width: 100%;
         }
 
-        @media screen and (max-width: 520px)    {
+        @media screen and (max-width: 520px) {
             padding-left: 40px;
-            padding-right: 40px;                
+            padding-right: 40px;
         }
 
 
@@ -752,7 +770,7 @@ social panel
             }
         }
     }
-    
+
 }
 
 .cyril-social {
@@ -765,6 +783,7 @@ social panel
     transition: $tr;
     pointer-events: all;
     z-index: 1;
+
     &::after {
         content: '';
         position: absolute;
@@ -778,6 +797,7 @@ social panel
         display: flex;
         position: relative;
         z-index: 1;
+
         & li {
             list-style-type: none;
             margin-right: 25px;
@@ -837,6 +857,7 @@ footer
     transition: $tr;
 
     &.cyril-bp-inner {
+
         // background: $light;
         // width: 100%;
         &::after {
@@ -849,7 +870,7 @@ footer
             height: 20px;
             background: $light;
             z-index: -1;
-        }        
+        }
     }
 
     & .cyril-bp-frame {
@@ -860,17 +881,14 @@ footer
     }
 
     & .cyril-footer {
-        // position: absolute;
-        //bottom: 0;
-        //left: 0;
         position: relative;
         height: 80px;
         display: flex;
         align-items: center;
-        padding: 0 50px;
+        padding: 0 35px;
         pointer-events: all;
         border-top: 2px solid $dark;
-    
+
         &::before {
             content: "";
             position: absolute;
@@ -879,7 +897,7 @@ footer
             right: -9px;
             border-bottom: 2px solid $soft;
         }
-    
+
         & a {
             text-decoration: none;
             font-size: 16px;
@@ -887,16 +905,19 @@ footer
             transition: $tr;
             background: $light;
             display: inline-block;
-            padding: 0;
+            padding: 0 15px;
+
             &:hover {
                 color: $accent;
             }
-            i {
+
+            & i {
                 position: relative;
-                bottom: -3px;
+                bottom: -2px;
                 display: inline-block;
                 margin-right: 12px;
             }
+
             & span {
                 font-weight: bold;
                 text-decoration: underline;
@@ -905,20 +926,23 @@ footer
 
         @media screen and (max-width: 480px) {
             padding: 0 40px;
+
             & i {
                 font-size: 1.2em;
-                margin-right: 0!important;
+                margin-right: 0 !important;
             }
+
             & span {
                 display: none;
             }
         }
-        
+
     }
 
-    @media screen and (max-width: 1200px)  {
+    @media screen and (max-width: 1200px) {
         background: $light;
         width: 100%;
+
         &.hide {
             transform: translateY(80px);
         }
@@ -939,6 +963,7 @@ banner
     @media screen and (max-width: 1200px) {
         padding-top: 130px;
         padding-bottom: 60px;
+
         p br {
             display: none;
         }
@@ -971,7 +996,7 @@ banner
             display: block;
             margin: 0 auto;
             position: relative;
-            */  
+            */
         }
     }
 
@@ -988,9 +1013,11 @@ banner
 
     & .cyril-short {
         max-width: 680px;
+
         @media screen and (max-width: 1200px) {
             max-width: 100%;
         }
+
         & p {
             font-size: 1.25em;
             line-height: 1.55em;
@@ -1000,8 +1027,8 @@ banner
         &.intro {
             padding-left: 60px;
 
-            @media screen and (max-width: 1200px)  {
-                padding-left: 0;                
+            @media screen and (max-width: 1200px) {
+                padding-left: 0;
             }
         }
     }
@@ -1136,7 +1163,9 @@ iconbox
         justify-content: center;
         align-items: center;
         font-size: 32px;
-        &::before, &::after {
+
+        &::before,
+        &::after {
             content: '';
             position: absolute;
             left: -10px;
@@ -1146,6 +1175,7 @@ iconbox
             height: 100%;
             z-index: -2;
         }
+
         &::after {
             z-index: -1;
             top: -40px;
@@ -1154,9 +1184,9 @@ iconbox
             --dot-size: 2px;
             --dot-space: 10px;
             background:
-        linear-gradient(90deg, $light calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
-        linear-gradient($light calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
-        $dark;
+                linear-gradient(90deg, $light calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
+                linear-gradient($light calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
+                $dark;
             opacity: 0.3;
         }
 
@@ -1352,6 +1382,7 @@ experience
 
                 &.cyril-current {
                     color: $accent;
+
                     &::after {
                         content: '';
                         display: block;
@@ -1373,7 +1404,7 @@ experience
         &::before {
             width: 100%;
         }
-    
+
         &::after {
             left: 7px;
             right: -7px;
@@ -1458,7 +1489,7 @@ experience
                 & a {
                     background-color: $accent;
                     color: $light;
-                    border-color: $accent;                    
+                    border-color: $accent;
                 }
             }
         }
@@ -1612,6 +1643,10 @@ portfolio
             transform: scale(1);
             transition: $tr;
             filter: grayscale(100%) brightness(180%) contrast(120%);
+
+            @media screen and (max-width: 1200px) {
+                filter: grayscale(0) brightness(100%) contrast(100%);
+            }
         }
 
         & h3 {
@@ -1640,14 +1675,15 @@ portfolio
 
         &:hover {
             & img {
-                filter: grayscale(0);
+                filter: grayscale(0) brightness(100%) contrast(100%);
             }
+
             & h3 {
                 transform: translate(-10px, 5px);
             }
         }
 
-        
+
 
         & .cyril-hover-link {
             opacity: 0;
@@ -1664,7 +1700,8 @@ portfolio
             box-shadow: 6px 6px 0 0 $soft;
             transition: $tr;
 
-            & svg, & i {
+            & svg,
+            & i {
                 opacity: 0;
                 stroke: $dark;
                 transform: translateY(10px) scale(.6);
@@ -1723,7 +1760,8 @@ portfolio
             & .cyril-hover-link {
                 opacity: 1;
 
-                & svg, & i {
+                & svg,
+                & i {
                     opacity: 1;
                     transform: translateY(0) scale(1);
                 }
@@ -1763,11 +1801,13 @@ portfolio
 
 .swiper-slide {
     cursor: grab;
+
     & .cyril-icon-box {
         padding: 40px;
         border: solid 2px $dark;
         margin-top: -2px;
         margin-left: -2px;
+
         &::after {
             content: "";
             position: absolute;
@@ -1787,23 +1827,24 @@ portfolio
     // gap: 30px;
     column-count: 2;
     column-gap: 40px;
-    
+
     img {
         width: 100%;
     }
+
     p {
-      // flex: 1;
-      // margin: 0;
-      
-      @media screen and (max-width: 768px) {
-        // flex: 100%;
-      }
+        // flex: 1;
+        // margin: 0;
+
+        @media screen and (max-width: 768px) {
+            // flex: 100%;
+        }
     }
-    
+
     @media screen and (max-width: 768px) {
-      // flex-direction: column;
+        // flex-direction: column;
     }
-  }
+}
 
 /* -------------------------------------------
 

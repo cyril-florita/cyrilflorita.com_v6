@@ -25,9 +25,19 @@ const Banner = ( { bgImage = "img/cyril-profile-serious-lol.jpg" } ) => {
                     A multidisciplinary <strong><span className="cyril-accent">Designer</span></strong> and <strong><span className="cyril-accent">Developer</span></strong> based in Santa Clarita, California
                   </p>
                   <div className="cyril-buttons-frame">
-                    <Link legacyBehavior href="/portfolio">
-                      <a className="cyril-button cyril-type-3">See My Work</a>
-                    </Link>
+                    <a 
+                      href="/portfolio" 
+                      className="cyril-button cyril-type-3" 
+                      onClick={(e) => {
+                        e.preventDefault();
+                        document.body.classList.add('page-exit');
+                        setTimeout(() => {
+                          window.location.href = '/portfolio';
+                        }, 400);
+                      }}
+                    >
+                      See My Work
+                    </a>
                     <Link legacyBehavior href="mailto:cyril.florita@pm.me">
                       <a className="cyril-button">Email Me</a>
                     </Link>

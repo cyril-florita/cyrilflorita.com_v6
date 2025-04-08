@@ -2171,6 +2171,11 @@ portfolio
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
   filter: grayscale(100%) brightness(180%) contrast(120%);
 }
+@media screen and (max-width: 1200px) {
+  .cyril-portfolio-item .cyril-cover img {
+    filter: grayscale(0) brightness(100%) contrast(100%);
+  }
+}
 .cyril-portfolio-item .cyril-cover h3 {
   position: absolute;
   top: 30px;
@@ -2194,7 +2199,7 @@ portfolio
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
 }
 .cyril-portfolio-item .cyril-cover:hover img {
-  filter: grayscale(0);
+  filter: grayscale(0) brightness(100%) contrast(100%);
 }
 .cyril-portfolio-item .cyril-cover:hover h3 {
   transform: translate(-10px, 5px);

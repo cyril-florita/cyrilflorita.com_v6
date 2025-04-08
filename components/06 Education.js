@@ -14,7 +14,7 @@ const Education = () => {
               &#91; My <span className="cyril-accent">Foundational Training</span> &#93;
               </p>
               <h2 className="cyril-up cyril-mb-30">Education</h2>
-              <p>Structured learning that equipped me with technical expertise in design and web development, geared for cross-functional collaboration and project leadership.
+              <p>These structured learning, geared for cross-functional collaboration and project leadership, equipped me with technical expertise in the field of creative design and development.
               </p>
             </div>
 
@@ -33,7 +33,7 @@ const Education = () => {
                   <a className="cyril-text-underline" href="https://www.linkedin.com/school/westwood-college-los-angeles">Westwood College</a> &#40;2003 &mdash; 2006&#41;
                 </p>
                 <p>
-                  This enhanced my technical skills in design, multimedia, and web development, preparing me to thrive in a rapidly evolving industry for diverse roles in a competitive job market.
+                  This B.A. degree enhanced my technical skills in design, multimedia, and web development, preparing me to thrive in a rapidly evolving industry for diverse roles in a competitive job market.
                 </p>
               </div>
             </div>
