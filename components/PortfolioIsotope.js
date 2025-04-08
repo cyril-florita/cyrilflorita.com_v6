@@ -2,14 +2,18 @@
 import Isotope from "isotope-layout";
 import Link from "next/link";
 import { Fragment, useEffect, useRef, useState } from "react";
+import imagesLoaded from 'imagesloaded';
 
 const PortfolioIsotope = () => {
   // Isotope
   const isotope = useRef();
   const [filterKey, setFilterKey] = useState("*");
 
-  useEffect(() => {
-    setTimeout(() => {
+
+    useEffect(() => {
+      const grid = document.querySelector(".cyril-portfolio-grid");
+      if (!grid) return;
+
       isotope.current = new Isotope(".cyril-portfolio-grid", {
         itemSelector: ".cyril-grid-item",
         percentPosition: true,
@@ -21,18 +25,40 @@ const PortfolioIsotope = () => {
           easing: "linear",
           queue: false,
         },
+        initLayout: false,
       });
-    }, 500);
-  }, []);
+
+      // Add error handling for imagesLoaded
+      imagesLoaded(".cyril-portfolio-grid")
+        .on('done', function() {
+          isotope.current.layout();
+        })
+        .on('fail', function() {
+          console.error('Some images failed to load');
+          isotope.current.layout(); // Layout anyway
+        });
+
+      // Cleanup
+      return () => {
+        if (isotope.current) {
+          isotope.current.destroy();
+        }
+      };
+    }, []);
+ 
 
   useEffect(() => {
-    if (isotope.current) {
-      filterKey === "*"
-        ? isotope.current.arrange({ filter: `*` })
-        : isotope.current.arrange({ filter: `.${filterKey}` });
+    if (!isotope.current) return;
+    
+    try {
+      const filter = filterKey === "*" ? "*" : `.${filterKey}`;
+      isotope.current.arrange({ filter });
+    } catch (error) {
+      console.error('Error filtering items:', error);
     }
   }, [filterKey]);
-  const handleFilterKeyChange = (key) => () => {
+  const handleFilterKeyChange = (key) => (e) => {
+    e.preventDefault();
     setFilterKey(key);
   };
 

@@ -28,14 +28,26 @@ export const cyrilUtility = {
   },
 
   backToTop() {
+    let lastScrollTop = 0;
     const handleScroll = () => {
       const backToTop = document.querySelector('.cyril-back-to-top');
       if (backToTop) {
-        if (window.scrollY > 300) {
+        const currentScroll = window.scrollY;
+        
+        if (currentScroll > 300) {
           backToTop.classList.add('visible');
+          // Add hiding class when scrolling up
+          if (currentScroll < lastScrollTop) {
+            backToTop.classList.add('hiding');
+          } else {
+            backToTop.classList.remove('hiding');
+          }
         } else {
           backToTop.classList.remove('visible');
+          backToTop.classList.remove('hiding');
         }
+        
+        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
       }
     };
 

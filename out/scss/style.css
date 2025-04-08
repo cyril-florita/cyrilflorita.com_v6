@@ -88,6 +88,31 @@ main
     background-color: #e4e4e4;
   }
 }
+@keyframes buttonFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes throb {
+  0% {
+    transform: scale(1) rotate(45deg);
+  }
+  25% {
+    transform: scale(0.8) rotate(135deg);
+  }
+  50% {
+    transform: scale(1.1) rotate(225deg);
+  }
+  75% {
+    transform: scale(0.8) rotate(315deg);
+  }
+  100% {
+    transform: scale(1) rotate(405deg);
+  }
+}
 ::-webkit-scrollbar {
   width: 4px;
 }
@@ -114,7 +139,7 @@ body {
   -webkit-text-size-adjust: 100%;
   background-color: rgb(255, 255, 255);
   opacity: 0;
-  animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.4, 1) forwards;
+  animation: fadeIn 1s cubic-bezier(0.4, 0, 0.4, 1) forwards;
 }
 body:after {
   content: "";
@@ -822,7 +847,6 @@ page
 .cyril-onepage .cyril-section.cyril-active .container, .cyril-onepage .cyril-section.cyril-active .no-gutters {
   opacity: 1;
   transform: translateY(0) scale(1);
-  transition-delay: 0.4s;
 }
 @media screen and (max-width: 1200px) {
   .cyril-onepage .cyril-section {
@@ -847,13 +871,12 @@ page
   position: relative;
   margin: 20px;
   transform: translateY(90px) scale(0.95);
-  opacity: 0%;
+  opacity: 0;
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
 }
 .cyril-page.cyril-active {
-  opacity: 100%;
+  opacity: 1;
   transform: translateY(0) scale(1);
-  transition-delay: 0.4s;
 }
 @media screen and (max-width: 1200px) {
   .cyril-page {
@@ -960,7 +983,8 @@ pagination
 }
 .cyril-pagination .cyril-dot.cyril-active::after {
   border-color: #fa4729;
-  background: rgb(255, 255, 255);
+  background: #fa4729;
+  animation: throb 3s ease-in-out infinite;
 }
 .cyril-pagination .cyril-dot.cyril-active:before {
   opacity: 1;
@@ -2320,6 +2344,11 @@ back to top
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
+}
+@media screen and (max-width: 1200px) {
+  .cyril-back-to-top.hiding {
+    animation: buttonFadeOut 0.3s ease forwards;
+  }
 }
 .cyril-back-to-top svg {
   transform: rotate(-90deg);

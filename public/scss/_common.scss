@@ -33,6 +33,23 @@ main
     }
 }
 
+@keyframes buttonFadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes throb {
+    0% { transform: scale(1) rotate(45deg); }
+    25% { transform: scale(0.8) rotate(135deg); }
+    50% { transform: scale(1.1) rotate(225deg); }
+    75% { transform: scale(0.8) rotate(315deg); }
+    100% { transform: scale(1) rotate(405deg); }
+}
+
 ::-webkit-scrollbar {
     width: 4px;
 }
@@ -59,7 +76,7 @@ body {
     -webkit-text-size-adjust: 100%;
     background-color: $light;
     opacity: 0;
-    animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.4, 1) forwards;
+    animation: fadeIn 1s cubic-bezier(0.4, 0, 0.4, 1) forwards;
 
     &:after {
         content: '';
