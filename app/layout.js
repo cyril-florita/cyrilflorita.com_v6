@@ -26,15 +26,16 @@ const space_grotest = Space_Grotesk({
 export const metadata = {
   title: "Cyril Florita - Designer and Developer",
   description: "Cyril Florita's professional website showcasing his background, skills, experience, and projects as a designer and developer.",
+  icons: {
+    icon: './favicon.ico',
+    shortcut: './favicon.ico',
+    apple: './apple-touch-icon.png',
+  }
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${space_grotest.variable} ${atkinson.variable}`}>
-      <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" type="image/x-icon" />
-        <link rel="shortcut icon" href="/favicon.ico" sizes="any" type="image/x-icon" />
-      </head>
       <body className="cyril-custom-scroll">{children}</body>
     </html>
   );
