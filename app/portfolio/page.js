@@ -17,13 +17,20 @@ const Page = () => {
 
     cyrilUtility.tpInner();
     
+    // Enable smooth scroll behavior
+    document.documentElement.style.scrollBehavior = 'smooth';
+    
     setTimeout(() => {
       const pageElement = document.querySelector('.cyril-page');
       if (pageElement) {
         pageElement.classList.add('cyril-active');
       }
     }, 100);
-
+  
+    // Cleanup
+    return () => {
+      document.documentElement.style.scrollBehavior = 'auto';
+    };
   }, []);
 
   return (

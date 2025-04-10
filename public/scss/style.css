@@ -68,6 +68,10 @@ main
   margin: 0;
 }
 
+:root {
+  --vh: 1vh;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -129,6 +133,10 @@ main
   width: 100%;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: var(--font-space-grotesk);
   font-size: 18px;
@@ -137,6 +145,7 @@ body {
   overscroll-behavior: none;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
+  -webkit-overflow-scrolling: touch;
   background-color: rgb(255, 255, 255);
   opacity: 0;
   animation: fadeIn 1s cubic-bezier(0.4, 0, 0.4, 1) forwards;
@@ -870,6 +879,7 @@ page
   transform: translateY(90px) scale(0.95);
   opacity: 0;
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
+  min-height: calc(var(--vh, 1vh) * 100);
 }
 .cyril-page.cyril-active {
   opacity: 1;

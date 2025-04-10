@@ -11,6 +11,10 @@ main
     margin: 0;
 }
 
+:root {
+    --vh: 1vh;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -83,6 +87,10 @@ main
     width: 100%;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: var(--font-space-grotesk);
     font-size: 18px;
@@ -91,6 +99,7 @@ body {
     overscroll-behavior: none;
     -webkit-font-smoothing: antialiased;
     -webkit-text-size-adjust: 100%;
+    -webkit-overflow-scrolling: touch; // for iOS smooth scrolling
     background-color: $light;
     opacity: 0;
     animation: fadeIn 1s cubic-bezier(0.4, 0, 0.4, 1) forwards;
@@ -207,6 +216,7 @@ h4 {
         text-align: left;
         padding: 0;
     }
+
     @media screen and (max-width: 768px) {
         text-align: left;
         padding: 0;
@@ -619,48 +629,49 @@ dl {
 }
 
 .cyril-built {
-  position: fixed;
-  bottom: 38px;
-  left: 45px;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(20px);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 999;
-  font-family: var(--font-atkinson);
-  font-size: 12px;
-  font-weight: 900;
-  background: $light;
+    position: fixed;
+    bottom: 38px;
+    left: 45px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 999;
+    font-family: var(--font-atkinson);
+    font-size: 12px;
+    font-weight: 900;
+    background: $light;
 
-  &.show {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-
-  & p {
-    padding: 2px 15px;
-    & .fa-heart {
-      color: $accent;
-      position: relative;
-      top: 1px;
-      display: inline-block;
+    &.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
     }
-  }
 
-  @media screen and (max-width: 1200px) {
-    bottom: 30px;
-    left: 35px;
-  }
+    & p {
+        padding: 2px 15px;
 
-  @media screen and (max-width: 768px) {
-    display: inline-block;
-    width: 230px;
-    bottom: 28px;
-    left: 20px;
-    padding: 5px 0;
-    line-height: 1.5;
-    text-align: left;
-    font-size: 10px;
-  }
+        & .fa-heart {
+            color: $accent;
+            position: relative;
+            top: 1px;
+            display: inline-block;
+        }
+    }
+
+    @media screen and (max-width: 1200px) {
+        bottom: 30px;
+        left: 35px;
+    }
+
+    @media screen and (max-width: 768px) {
+        display: inline-block;
+        width: 230px;
+        bottom: 28px;
+        left: 20px;
+        padding: 5px 0;
+        line-height: 1.5;
+        text-align: left;
+        font-size: 10px;
+    }
 }
