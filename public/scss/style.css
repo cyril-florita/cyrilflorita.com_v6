@@ -133,6 +133,11 @@ main
   width: 100%;
 }
 
+html, body {
+  overscroll-behavior-y: none;
+  -webkit-overflow-scrolling: touch;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -711,6 +716,11 @@ dl.w-disc dd {
   }
 }
 
+.cyril-page {
+  overscroll-behavior-y: contain;
+  text-align: right;
+}
+
 /* -------------------------------------------
 
 frame
@@ -880,6 +890,7 @@ page
   opacity: 0;
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
   min-height: calc(var(--vh, 1vh) * 100);
+  overscroll-behavior-y: contain;
 }
 .cyril-page.cyril-active {
   opacity: 1;
@@ -1412,7 +1423,7 @@ social panel
   border-bottom: solid 2px #010101;
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
   pointer-events: all;
-  z-index: 1;
+  z-index: 101;
 }
 .cyril-social::after {
   content: "";
@@ -1553,8 +1564,12 @@ footer
 }
 @media screen and (max-width: 1200px) {
   .cyril-bottom-panel {
+    position: fixed;
     background: rgb(255, 255, 255);
     width: 100%;
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: auto;
+    z-index: 100;
   }
   .cyril-bottom-panel.hide {
     transform: translateY(80px);

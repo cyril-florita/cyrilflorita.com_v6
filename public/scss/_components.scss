@@ -205,6 +205,8 @@ page
     opacity: 0;
     transition: $tr;
     min-height: calc(var(--vh, 1vh) * 100);
+    overscroll-behavior-y: contain;
+    // text-align: right;
 
     // transition-delay: 0.4s;
     &.cyril-active {
@@ -822,7 +824,7 @@ social panel
     border-bottom: solid 2px $black;
     transition: $tr;
     pointer-events: all;
-    z-index: 1;
+    z-index: 101;
 
     &::after {
         content: '';
@@ -985,8 +987,12 @@ footer
     }
 
     @media screen and (max-width: 1200px) {
+        position: fixed;
         background: $light;
         width: 100%;
+        overscroll-behavior: none;
+        -webkit-overflow-scrolling: auto;
+        z-index: 100;
 
         &.hide {
             transform: translateY(80px);

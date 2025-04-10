@@ -87,6 +87,11 @@ main
     width: 100%;
 }
 
+html, body {
+    overscroll-behavior-y: none;
+    -webkit-overflow-scrolling: touch;
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -674,4 +679,10 @@ dl {
         text-align: left;
         font-size: 10px;
     }
+}
+
+
+.cyril-page {
+    overscroll-behavior-y: contain;
+    text-align: right;
 }
