@@ -117,4 +117,34 @@ export const cyrilUtility = {
               }, 400);
           });
       },
+  builtTextVisibility: () => {
+    const builtText = document.querySelector('.cyril-built');
+    const isOnePage = document.querySelector('.cyril-onepage');
+    const isMobileView = window.innerWidth <= 1200;
+    
+    window.addEventListener('scroll', () => {
+      if (isOnePage && !isMobileView) {
+        // Desktop onepage behavior
+        const sections = document.querySelectorAll('.cyril-section');
+        const lastSection = sections[sections.length - 1];
+        
+        if (lastSection && lastSection.classList.contains('cyril-active')) {
+          builtText.classList.add('show');
+        } else {
+          builtText.classList.remove('show');
+        }
+      } else {
+        // Mobile/tablet view or regular pages
+        const scrollHeight = document.documentElement.scrollHeight;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const clientHeight = document.documentElement.clientHeight;
+        
+        if ((scrollTop + clientHeight) >= (scrollHeight - 50)) {
+          builtText.classList.add('show');
+        } else {
+          builtText.classList.remove('show');
+        }
+      }
+    });
+  }
 };

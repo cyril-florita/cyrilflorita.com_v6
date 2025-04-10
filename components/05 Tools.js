@@ -22,11 +22,37 @@ const Tools = () => {
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
                     <div className="cyril-text-icon no-textured">
+                      <img src="img/tools/ai-generator.png" width="35" height="35"/>
+                    </div>
+                  </div>
+                  <div className="cyril-progress-inline">
+                    <span className="cyril-upper">AI Image Generators</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-30">
+                <div className="cyril-text-row">
+                  <div className="cyril-icon-box">
+                    <div className="cyril-text-icon no-textured">
                       <img src="img/tools/creative-suite.png" width="35" height="35"/>
                     </div>
                   </div>
                   <div className="cyril-progress-inline">
                     <span className="cyril-upper">Creative Suite</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-30">
+                <div className="cyril-text-row">
+                  <div className="cyril-icon-box">
+                    <div className="cyril-text-icon no-textured">
+                      <img src="img/tools/axure.png" width="35" height="35"/>
+                    </div>
+                  </div>
+                  <div className="cyril-progress-inline">
+                    <span className="cyril-upper">Axure RP</span>
                   </div>
                 </div>
               </div>
@@ -40,6 +66,19 @@ const Tools = () => {
                   </div>
                   <div className="cyril-progress-inline">
                     <span className="cyril-upper">Figma</span>                    
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-30">
+                <div className="cyril-text-row">
+                  <div className="cyril-icon-box">
+                    <div className="cyril-text-icon no-textured">
+                      <img src="img/tools/miro.png" width="35" height="35"/>
+                    </div>
+                  </div>
+                  <div className="cyril-progress-inline">
+                    <span className="cyril-upper">Miro</span>
                   </div>
                 </div>
               </div>
@@ -66,19 +105,6 @@ const Tools = () => {
                   </div>
                   <div className="cyril-progress-inline">
                     <span className="cyril-upper">Webflow</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-30">
-                <div className="cyril-text-row">
-                  <div className="cyril-icon-box">
-                    <div className="cyril-text-icon no-textured">
-                      <img src="img/tools/ai-generator.png" width="35" height="35"/>
-                    </div>
-                  </div>
-                  <div className="cyril-progress-inline">
-                    <span className="cyril-upper">AI Image Generators</span>
                   </div>
                 </div>
               </div>
@@ -130,7 +156,7 @@ const Tools = () => {
                     </div>
                   </div>
                   <div className="cyril-progress-inline">
-                    <span className="cyril-upper">Node / Node.JS</span>                    
+                    <span className="cyril-upper">Node.JS</span>                    
                   </div>
                 </div>
               </div>
@@ -156,7 +182,7 @@ const Tools = () => {
                     </div>
                   </div>
                   <div className="cyril-progress-inline">
-                    <span className="cyril-upper">React / Next.js</span>
+                    <span className="cyril-upper">React &amp; Next.js</span>
                   </div>
                 </div>
               </div>
@@ -174,19 +200,6 @@ const Tools = () => {
                 </div>
               </div>
               
-              <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-30">
-                <div className="cyril-text-row">
-                  <div className="cyril-icon-box">
-                    <div className="cyril-text-icon no-textured">
-                      <img src="img/tools/aspnet.png" width="35" height="35"/>
-                    </div>
-                  </div>
-                  <div className="cyril-progress-inline">
-                    <span className="cyril-upper">ASP.Net</span>
-                  </div>
-                </div>
-              </div>
-
               <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-30">
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">

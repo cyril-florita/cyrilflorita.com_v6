@@ -19,6 +19,7 @@ const SiteLayout = ({ children, header, footer, noFooter }) => {
 
     cyrilUtility.topBarActive();
     cyrilUtility.backToTop();
+    cyrilUtility.builtTextVisibility();
   }, []);
 
   return (
@@ -31,6 +32,9 @@ const SiteLayout = ({ children, header, footer, noFooter }) => {
         {!noFooter && <Footer footer={footer} />}
       </div>
       {children}
+      <div className="cyril-built">
+        <p>This site is built with React &amp; NextJS, a few awesome JS plugins, and lots of <i className="fa fa-heart"></i></p>
+      </div>
       <button 
         className="cyril-back-to-top"
         onClick={() => cyrilUtility.handleBackToTop(pathname)}

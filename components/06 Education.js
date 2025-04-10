@@ -1,12 +1,12 @@
 const Education = () => {
   return (
-    <div className="cyril-section cyril-op-space-90">
+    <div className="cyril-section cyril-education cyril-op-space-90">
       <div
         className="cyril-bg-item"
         style={{ bottom: "0%", left: "25%", transform: "rotate(-25deg)" }}
       />
       <div className="container">
-        <div className="row justify-content-betweenx align-items-centerx">
+        <div className="row">
           <div className="col-xl-5 cyril-mb-30">
 
             <div className="cyril-text-right-adapt">

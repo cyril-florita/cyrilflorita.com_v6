@@ -14,8 +14,9 @@ main
 @keyframes fadeIn {
     from {
         opacity: 0;
-        background-color: #e4e4e4;
+        background-color: $light-gray;
     }
+
     to {
         opacity: 1;
         background-color: $light;
@@ -27,9 +28,10 @@ main
         opacity: 1;
         background-color: $light;
     }
+
     to {
         opacity: 0;
-        background-color: #e4e4e4;
+        background-color: $light-gray;
     }
 }
 
@@ -37,17 +39,32 @@ main
     from {
         opacity: 1;
     }
+
     to {
         opacity: 0;
     }
 }
 
 @keyframes throb {
-    0% { transform: scale(1) rotate(45deg); }
-    25% { transform: scale(0.8) rotate(135deg); }
-    50% { transform: scale(1.1) rotate(225deg); }
-    75% { transform: scale(0.8) rotate(315deg); }
-    100% { transform: scale(1) rotate(405deg); }
+    0% {
+        transform: scale(1) rotate(45deg);
+    }
+
+    25% {
+        transform: scale(0.8) rotate(135deg);
+    }
+
+    50% {
+        transform: scale(1.1) rotate(225deg);
+    }
+
+    75% {
+        transform: scale(0.8) rotate(315deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(405deg);
+    }
 }
 
 ::-webkit-scrollbar {
@@ -86,7 +103,7 @@ body {
         top: 0;
         left: 0;
         width: 100%;
-        height: 100vh;
+        height: 100%;
         background-image: url(../img/bg-static.png);
         opacity: .27;
     }
@@ -97,18 +114,22 @@ body {
 
     @media screen and (max-width: 1200px) {
         padding: 0 30px;
+        font-size: 16px;
     }
 
     @media screen and (max-width: 768px) {
         padding: 0 10px;
+        font-size: 14px;
     }
 
 }
 
 p {
-    color: $gray; 
+    color: $gray;
+
     &.subheader {
-        font-size: 20px;;
+        font-size: 20px;
+        ;
     }
 }
 
@@ -184,6 +205,11 @@ h4 {
 
     @media screen and (max-width: 1200px) {
         text-align: left;
+        padding: 0;
+    }
+    @media screen and (max-width: 768px) {
+        text-align: left;
+        padding: 0;
     }
 }
 
@@ -192,11 +218,11 @@ h4 {
 }
 
 .cyril-text-underline {
-    text-decoration: underline!important;
+    text-decoration: underline !important;
 }
 
 .cyril-text-normal {
-    font-weight: normal!important;
+    font-weight: normal !important;
 }
 
 .cyril-text-center-adapt {
@@ -214,6 +240,7 @@ h4 {
     text-transform: uppercase;
     font-weight: 600;
     color: $dark;
+
     i {
         margin-right: 10px;
         font-size: 28px;
@@ -373,8 +400,9 @@ button
         }
     }
 
-    @media screen and (max-width: 414px)   {
+    @media screen and (max-width: 414px) {
         flex-direction: column;
+
         & .cyril-button {
             margin-right: 0;
             width: 70%;
@@ -382,7 +410,7 @@ button
         }
     }
 
-    @media screen and (max-width: 360px)  {
+    @media screen and (max-width: 360px) {
         & .cyril-button {
             padding: 0 20px;
         }
@@ -432,103 +460,11 @@ button
         box-shadow: 0px 0px 0px 0px $accent-light;
     }
 
-    @media screen and (max-width: 768px)  {
+    @media screen and (max-width: 768px) {
         font-size: 14px;
     }
 }
 
-/* -------------------------------------------
-
-fields
-
-------------------------------------------- */
-label {
-    display: block;
-    margin-bottom: 15px;
-}
-
-input {
-    height: 60px;
-    width: 100%;
-    border: none;
-    background-color: #f3f3f3;
-    padding: 0 30px;
-    font-size: 16px;
-    color: $dark;
-
-    &:focus {
-        outline: inherit;
-    }
-}
-
-textarea {
-    padding: 15px 30px;
-    height: 120px;
-    width: 100%;
-    border: none;
-    background-color: #f3f3f3;
-    font-size: 16px;
-    color: $dark;
-    resize: none;
-
-    &:focus {
-        outline: inherit;
-    }
-}
-
-.cyril-checkbox {
-    padding-left: 40px;
-    display: block;
-    position: relative;
-    cursor: pointer;
-    user-select: none;
-    margin-bottom: 0;
-    
-    & a {
-        color: $accent;
-    }
-}
-
-.cyril-checkbox input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-}
-
-.cyril-checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #f3f3f3;
-}
-
-.cyril-checkbox input:checked ~ .cyril-checkmark {
-    background-color: $accent;
-}
-
-.cyril-checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-}
-
-.cyril-checkbox input:checked ~ .cyril-checkmark:after {
-    display: block;
-}
-
-.cyril-checkbox .cyril-checkmark:after {
-    left: 10px;
-    top: 6px;
-    width: 5px;
-    height: 10px;
-    border: solid $light;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg) scale(1.2);
-}
 
 /* -------------------------------------------
 
@@ -660,10 +596,12 @@ spaces
 
 dl {
     margin-bottom: 30px;
+
     dt {
         font-weight: bold;
         margin-bottom: 15px;
     }
+
     dd {
         margin-bottom: 10px;
         margin-left: 40px;
@@ -671,10 +609,58 @@ dl {
 
     &.w-disc {
         list-style-type: disc;
+
         dd {
             display: list-item;
             padding-left: 15px;
         }
     }
 
+}
+
+.cyril-built {
+  position: fixed;
+  bottom: 38px;
+  left: 45px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 999;
+  font-family: var(--font-atkinson);
+  font-size: 12px;
+  font-weight: 900;
+  background: $light;
+
+  &.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  & p {
+    padding: 2px 15px;
+    & .fa-heart {
+      color: $accent;
+      position: relative;
+      top: 1px;
+      display: inline-block;
+    }
+  }
+
+  @media screen and (max-width: 1200px) {
+    bottom: 30px;
+    left: 35px;
+  }
+
+  @media screen and (max-width: 768px) {
+    display: inline-block;
+    width: 230px;
+    bottom: 28px;
+    left: 20px;
+    padding: 5px 0;
+    line-height: 1.5;
+    text-align: left;
+    font-size: 10px;
+  }
 }

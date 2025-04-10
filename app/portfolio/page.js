@@ -41,7 +41,7 @@ const Page = () => {
               </p>
               <h2 className="cyril-up cyril-mb-20">Portfolio</h2>
               <p className="cyril-left-offset">
-                A selection of my projects to showcase my experience and skills.
+                A selection of my projects to showcase my experience and skills.<br /><span className="cyril-accent"><strong>&#40;Project pages will be available as soon as I'm done writing a few case studies.&#41;</strong></span>
               </p>
             </div>
           </div>
