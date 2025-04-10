@@ -716,11 +716,6 @@ dl.w-disc dd {
   }
 }
 
-.cyril-page {
-  overscroll-behavior-y: contain;
-  text-align: right;
-}
-
 /* -------------------------------------------
 
 frame

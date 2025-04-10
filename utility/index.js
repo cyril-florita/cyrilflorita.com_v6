@@ -120,9 +120,10 @@ export const cyrilUtility = {
   builtTextVisibility: () => {
     const builtText = document.querySelector('.cyril-built');
     const isOnePage = document.querySelector('.cyril-onepage');
-    const isMobileView = window.innerWidth <= 1200;
     
     window.addEventListener('scroll', () => {
+      const isMobileView = window.innerWidth <= 1200;
+      
       if (isOnePage && !isMobileView) {
         // Desktop onepage behavior
         const sections = document.querySelectorAll('.cyril-section');
@@ -139,7 +140,11 @@ export const cyrilUtility = {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         const clientHeight = document.documentElement.clientHeight;
         
-        if ((scrollTop + clientHeight) >= (scrollHeight - 50)) {
+        // For screens <= 1200px, show when 60px from bottom
+        // For larger screens, show when very close to bottom (within 1px)
+        const threshold = isMobileView ? 60 : 1;
+        
+        if ((scrollTop + clientHeight) >= (scrollHeight - threshold)) {
           builtText.classList.add('show');
         } else {
           builtText.classList.remove('show');
