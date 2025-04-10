@@ -824,7 +824,7 @@ social panel
     border-bottom: solid 2px $black;
     transition: $tr;
     pointer-events: all;
-    z-index: 1;
+    z-index: 101;
 
     &::after {
         content: '';

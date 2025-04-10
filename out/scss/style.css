@@ -1423,7 +1423,7 @@ social panel
   border-bottom: solid 2px #010101;
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
   pointer-events: all;
-  z-index: 1;
+  z-index: 101;
 }
 .cyril-social::after {
   content: "";
