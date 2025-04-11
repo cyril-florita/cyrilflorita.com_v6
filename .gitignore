@@ -36,3 +36,4 @@ node_modules/
 
 #deploy JS
 deploy.js
+test-ftp.js
