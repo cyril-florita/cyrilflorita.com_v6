@@ -1,9 +1,9 @@
 "use client";
 
 import SiteLayout from "@/layout/SiteLayout";
-import { cyrilUtility } from "@/utility/index";
+import { cyrilUtility } from "@/public/utility/index";
 import { useEffect } from "react";
-import { sliderProps } from "@/utility/sliderProps";
+import { sliderProps } from "@/public/utility/sliderProps";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 const page = () => {

@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
-import useClickOutside from "../../utility/useClickOutside";
+import useClickOutside from "../../public/utility/useClickOutside";
 
 const ImgViews = ({ close, src }) => {
   let domNode = useClickOutside(() => {

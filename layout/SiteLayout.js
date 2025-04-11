@@ -7,7 +7,7 @@ import { Fragment, useEffect } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 import Social from "./Social";
-import { cyrilUtility } from "@/utility/index";
+import { cyrilUtility } from "@/public/utility/index";
 
 const SiteLayout = ({ children, header, footer, noFooter }) => {
   const pathname = usePathname();
@@ -33,7 +33,7 @@ const SiteLayout = ({ children, header, footer, noFooter }) => {
       </div>
       {children}
       <div className="cyril-built">
-        <p>This site is built with React &amp; NextJS, a few awesome JS plugins, and lots of <i className="fa fa-heart"></i></p>
+        <p>Built with React &amp; NextJS, some cool libraries &amp; plugins, and lots of <i className="fa fa-heart"></i></p>
       </div>
       <button 
         className="cyril-back-to-top"

@@ -8,7 +8,7 @@ import Tools from "@/components/05 Tools";
 import Education from "@/components/06 Education";
 import Pagination from "@/layout/Pagination";
 import SiteLayout from "@/layout/SiteLayout";
-import { onepage } from "@/utility/onepage";
+import { onepage } from "@/public/utility/onepage";
 import { useEffect } from "react";
 
 const Index = () => {

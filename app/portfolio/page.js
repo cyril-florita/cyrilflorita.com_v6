@@ -1,7 +1,7 @@
 "use client";
 import SiteLayout from "@/layout/SiteLayout";
 import dynamic from "next/dynamic";
-import { cyrilUtility } from "@/utility/index";
+import { cyrilUtility } from "@/public/utility/index";
 import { useEffect } from "react";
 
 const PortfolioIsotope = dynamic(

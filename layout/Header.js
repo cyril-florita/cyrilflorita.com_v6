@@ -2,7 +2,7 @@
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import Nav from "./Nav";
-import { cyrilUtility } from "@/utility/index";
+import { cyrilUtility } from "@/public/utility/index";
 
 const Header = () => {
   const pathname = usePathname();

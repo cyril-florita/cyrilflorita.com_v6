@@ -1,7 +1,7 @@
 "use client";
 import { usePathname } from "next/navigation";
 import { Fragment, useState, useEffect } from "react";
-import { cyrilUtility } from "@/utility/index";
+import { cyrilUtility } from "@/public/utility/index";
 
 const Nav = () => {
   const pathname = usePathname();

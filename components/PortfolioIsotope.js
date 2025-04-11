@@ -5,6 +5,7 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import imagesLoaded from 'imagesloaded';
 
 const PortfolioIsotope = () => {
+  
   // Isotope
   const isotope = useRef();
   const [filterKey, setFilterKey] = useState("*");
