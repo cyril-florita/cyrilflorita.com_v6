@@ -154,5 +154,20 @@ export const cyrilUtility = {
         }
       }
     });
+  },
+  
+  trackScrollProgress(setProgressCallback) {
+    const handleScroll = () => {
+      const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progress = (window.scrollY / totalHeight) * 100;
+      setProgressCallback(progress);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    
+    // Return cleanup function
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }
 };
