@@ -1,4 +1,7 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
   "/page": "app/page.js",
-  "/portfolio/page": "app/portfolio/page.js"
+  "/portfolio/page": "app/portfolio/page.js",
+  "/portfolio/gty_v9/page": "app/portfolio/gty_v9/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js"
 }

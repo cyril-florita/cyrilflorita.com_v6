@@ -119,7 +119,7 @@ body {
         width: 100%;
         height: 100%;
         background-image: url(../img/bg-static.png);
-        opacity: .27;
+        opacity: .23; // 0.27
     }
 
     &.page-exit {
@@ -626,6 +626,12 @@ dl {
         dd {
             display: list-item;
             padding-left: 15px;
+
+            dl {
+                list-style-type: circle;
+                margin-top: 15px;
+                margin-bottom: 15px;
+            }
         }
     }
 

@@ -165,7 +165,7 @@ body:after {
   width: 100%;
   height: 100%;
   background-image: url(../img/bg-static.png);
-  opacity: 0.27;
+  opacity: 0.23;
 }
 body.page-exit {
   animation: fadeOut 0.4s cubic-bezier(0.4, 0, 0.4, 1) forwards;
@@ -668,6 +668,11 @@ dl.w-disc dd {
   display: list-item;
   padding-left: 15px;
 }
+dl.w-disc dd dl {
+  list-style-type: circle;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
 
 .cyril-built {
   position: fixed;
@@ -876,10 +881,10 @@ page
 .cyril-page.cyril-project-page .cyril-top-banner {
   padding-bottom: 20px;
 }
-.cyril-page.cyril-project-page img {
+.cyril-page.cyril-project-page .cyril-top-banner img {
   width: 100%;
   display: block;
-  margin: 0 auto 60px;
+  margin: 0 auto 0;
 }
 .cyril-page.cyril-project-page ul {
   margin-left: 60px;
@@ -2045,7 +2050,12 @@ portfolio
 .cyril-portfolio-grid .cyril-grid-item.cyril-25 {
   width: 25%;
 }
-@media screen and (max-width: 992px) {
+@media screen and (min-width: 768px) and (max-width: 1200px) {
+  .cyril-portfolio-grid .grid-sizer, .cyril-portfolio-grid .cyril-grid-item {
+    width: 50% !important;
+  }
+}
+@media screen and (max-width: 768px) {
   .cyril-portfolio-grid .grid-sizer, .cyril-portfolio-grid .cyril-grid-item {
     width: 100%;
   }

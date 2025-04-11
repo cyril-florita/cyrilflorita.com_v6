@@ -193,12 +193,13 @@ page
     &.cyril-project-page {
         & .cyril-top-banner {
             padding-bottom: 20px;
-        }
+            
+            & img {
+                width: 100%;
+                display: block;
+                margin: 0 auto 0;
+            }
 
-        & img {
-            width: 100%;
-            display: block;
-            margin: 0 auto 60px;
         }
 
         & ul {
@@ -1532,7 +1533,14 @@ portfolio
         }
     }
 
-    @media screen and (max-width: 992px) {
+    @media screen and (min-width: 768px) and (max-width: 1200px)  {
+        & .grid-sizer,
+        & .cyril-grid-item {
+            width: 50% !important;
+          }
+    }
+
+    @media screen and (max-width: 768px) {
 
         & .grid-sizer,
         & .cyril-grid-item {

@@ -5,7 +5,7 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import imagesLoaded from 'imagesloaded';
 
 const PortfolioIsotope = () => {
-  
+
   // Isotope
   const isotope = useRef();
   const [filterKey, setFilterKey] = useState("*");
@@ -137,17 +137,17 @@ const PortfolioIsotope = () => {
 
           {/* long . gty v.9 */}
           <div className="cyril-grid-item fil-uix">
-            <Link legacyBehavior href="/portfolio/">
+            <Link legacyBehavior href="/portfolio/gty_v9">
               <div className="cyril-portfolio-item cyril-long-item cyril-mb-80">
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_gty9.jpg" alt="cover" />
                   <h3>Case<br />Study</h3>
-                  {/* <div className="cyril-hover-link">
+                  <div className="cyril-hover-link">
                     <i className="fas fa-link" />
-                  </div> */}
-                  <div className="cyril-hover-link coming-soon">
-                    <span className="cyril-upper">Project Page Coming Soon</span>
                   </div>
+                  {/* <div className="cyril-hover-link coming-soon">
+                    <span className="cyril-upper">Project Page Coming Soon</span>
+                  </div> */}
                 </div>
                 <div className="cyril-project-descr">
                   <p className="cyril-upper cyril-accent cyril-mb-10">UX Design</p>
