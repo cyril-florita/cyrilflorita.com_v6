@@ -63,28 +63,6 @@ frame
             transform: translateY(78px);
         }
 
-        /*
-        & .cyril-top-panel {
-            @media screen and (max-width: 1200px) {
-                transform: translateY(-80px);
-            }
-        }
-        & .cyril-social {
-            @media screen and (max-width: 1200px)  {
-                transform: translateY(-80px);
-            }
-            @media screen and (max-width: 740px)   {
-                transform: translateY(80px);                
-            }
-        }
-
-        & .cyril-bottom-panel {
-            @media screen and (max-width: 1200px)  {
-                transform: translateY(80px);
-            }
-        }
-        */
-
     }
 }
 
@@ -129,12 +107,9 @@ page
                 -webkit-transform: translateY(0) scale(1);
                 transform: translateY(0) scale(1);
 
-                // -webkit-transition-delay: 0.4s;
-                // transition-delay: 0.4s;
                 @media screen and (max-width: 1200px) {
                     transition: none;
                 }
-
 
             }
         }
@@ -167,7 +142,6 @@ page
         transform: translateY(90px) scale(0.95);
         -webkit-transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
         transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
-        // transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 
         &.loaded {
             opacity: 1;
@@ -206,9 +180,7 @@ page
     transition: $tr;
     min-height: calc(var(--vh, 1vh) * 100);
     overscroll-behavior-y: contain;
-    // text-align: right;
 
-    // transition-delay: 0.4s;
     &.cyril-active {
         opacity: 1;
         transform: translateY(0) scale(1);
@@ -479,12 +451,6 @@ top panel
 
     }
 
-    /*
-    &.cyril-active {
-        transition-delay: .6s;
-    }
-    */
-
     & .cyril-tp-frame {
         width: 100%;
         display: flex;
@@ -674,8 +640,6 @@ top panel
             padding-right: 40px;
         }
 
-
-
     }
 
     @media screen and (max-width: 1200px) {
@@ -686,79 +650,7 @@ top panel
             box-shadow: 0 20px 20px 0 $light;
             box-shadow: none;
         }
-
-        /*
-        & nav {
-            opacity: 0;
-            pointer-events: none;
-            padding: 30px 0;
-            border: none;
-            position: absolute;
-            background-color: $light;
-            top: 90px;
-            width: 100%;
-            border-bottom: solid 2px $soft;
-            transform: scale(.9) translateY(-5px);
-            transition: $tr;
-
-            &.cyril-active {
-                opacity: 1;
-                pointer-events: all;
-                transform: scale(1) translateY(0);
-            }
-
-            & ul {
-                flex-direction: column;
-
-                & li {
-                    flex-direction: column;
-                    height: auto;
-                    margin-right: 0;
-                    margin-bottom: 15px;
-
-                    &:last-child {
-                        margin-bottom: 0;
-                    }
-
-                    &.cyril-active {
-                        & > a {
-                            color: $accent;
-                        }
-
-                        &:after {
-                            display: none;
-                        }
-                    }
-
-                    & ul {
-                        border: none;
-                        background-color: #f3f3f3;
-                        padding: 0;
-                        position: static;
-                        width: 100%;
-                        max-height: 0;
-
-                        & li {
-                            &:first-child {
-                                margin-top: 30px;
-                            }
-
-                            &:last-child {
-                                margin-bottom: 30px;
-                            }
-                        }
-                    }
-
-                    &:hover {
-                        & ul {
-                            max-height: 400px;
-                            margin-top: 15px;
-                        }
-                    }
-                }
-            }
-        }
-        */
+        
     }
 }
 
@@ -905,8 +797,6 @@ footer
 
     &.cyril-bp-inner {
 
-        // background: $light;
-        // width: 100%;
         &::after {
             content: '';
             position: absolute;
@@ -1031,7 +921,6 @@ banner
 
     @media screen and (max-width: 1200px) {
         padding-top: 90px;
-        // margin-bottom: 60px;
     }
 
     & .cyril-banner-image {
@@ -1045,13 +934,6 @@ banner
 
         @media screen and (max-width: 1200px) {
             display: none;
-            /*
-            height: 60vh;
-            width: 70%;
-            display: block;
-            margin: 0 auto;
-            position: relative;
-            */
         }
     }
 
@@ -1131,12 +1013,9 @@ about
     }
 
     @media screen and (max-width: 1200px) {
-        // display: none;
-        // height: 60vh;
         width: 50%;
         display: block;
         margin: 0 auto 60px;
-        // position: relative;
     }
 
     @media screen and (max-width: 768px) {
@@ -1325,9 +1204,6 @@ experience
         margin-right: 30px;
     }
 
-    @media screen and (max-width: 1200px) {
-        // justify-content: flex-start;
-    }
 }
 
 .cyril-divider {
@@ -1746,13 +1622,9 @@ portfolio
             }
         }
 
-
-
         & .cyril-hover-link {
             opacity: 0;
             position: absolute;
-            // top: calc(50% - 30px);
-            // left: calc(50% - 30px);
             top: 50%;
             left: 50%;
             background-color: $light;
@@ -1917,30 +1789,6 @@ portfolio
         }
     }
 
-}
-
-.two-column-text {
-    //display: flex;
-    // gap: 30px;
-    column-count: 2;
-    column-gap: 40px;
-
-    img {
-        width: 100%;
-    }
-
-    p {
-        // flex: 1;
-        // margin: 0;
-
-        @media screen and (max-width: 768px) {
-            // flex: 100%;
-        }
-    }
-
-    @media screen and (max-width: 768px) {
-        // flex-direction: column;
-    }
 }
 
 /* -------------------------------------------

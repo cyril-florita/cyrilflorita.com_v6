@@ -1,5 +1,5 @@
 export const cyrilUtility = {
-  
+
   tpInner() {
     var topPanel = document.querySelector(".cyril-top-panel");
     var bottomPanel = document.querySelector(".cyril-bottom-panel");
@@ -16,7 +16,7 @@ export const cyrilUtility = {
       window.addEventListener("scroll", function () {
         var scrolling = window.scrollY || document.documentElement.scrollTop;
         // if scrolling down
-        if (scrolling > lastScrollTop) {          
+        if (scrolling > lastScrollTop) {
           cyrilFrame.classList.add("hide");
         } else {
           cyrilFrame.classList.remove("hide");
@@ -33,7 +33,7 @@ export const cyrilUtility = {
       const backToTop = document.querySelector('.cyril-back-to-top');
       if (backToTop) {
         const currentScroll = window.scrollY;
-        
+
         if (currentScroll > 300) {
           backToTop.classList.add('visible');
           // Add hiding class when scrolling up
@@ -46,7 +46,7 @@ export const cyrilUtility = {
           backToTop.classList.remove('visible');
           backToTop.classList.remove('hiding');
         }
-        
+
         lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
       }
     };
@@ -60,18 +60,18 @@ export const cyrilUtility = {
       const sections = document.querySelectorAll(".cyril-section");
       const dots = document.querySelectorAll(".cyril-dot");
       if (!sections.length || !dots.length) return;
-      
+
       const introIndex = Array.from(sections).findIndex(section => section.id === 'intro');
       if (introIndex !== -1) {
         window.scrollTo({
           top: introIndex * window.innerHeight,
           behavior: 'smooth'
         });
-        
+
         sections.forEach((section, sectionIndex) => {
           section.classList.toggle("cyril-active", sectionIndex === introIndex);
         });
-        
+
         dots.forEach((dot, dotIndex) => {
           dot.classList.toggle("cyril-active", dotIndex === introIndex);
         });
@@ -90,6 +90,7 @@ export const cyrilUtility = {
       .map((_, idx) => idx + 1);
     return arr;
   },
+
   pagination(listClass, sort, active) {
     let list = document.querySelectorAll(listClass);
     for (let i = 0; i < list.length; i++) {
@@ -109,26 +110,28 @@ export const cyrilUtility = {
       }
     }
   },
+
   handlePageTransition() {
-          return new Promise(resolve => {
-              document.body.classList.add('page-exit');
-              setTimeout(() => {
-                  resolve();
-              }, 400);
-          });
-      },
+    return new Promise(resolve => {
+      document.body.classList.add('page-exit');
+      setTimeout(() => {
+        resolve();
+      }, 400);
+    });
+  },
+
   builtTextVisibility: () => {
     const builtText = document.querySelector('.cyril-built');
     const isOnePage = document.querySelector('.cyril-onepage');
-    
+
     window.addEventListener('scroll', () => {
       const isMobileView = window.innerWidth <= 1200;
-      
+
       if (isOnePage && !isMobileView) {
         // Desktop onepage behavior
         const sections = document.querySelectorAll('.cyril-section');
         const lastSection = sections[sections.length - 1];
-        
+
         if (lastSection && lastSection.classList.contains('cyril-active')) {
           builtText.classList.add('show');
         } else {
@@ -139,11 +142,11 @@ export const cyrilUtility = {
         const scrollHeight = document.documentElement.scrollHeight;
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         const clientHeight = document.documentElement.clientHeight;
-        
+
         // For screens <= 1200px, show when 60px from bottom
         // For larger screens, show when very close to bottom (within 1px)
         const threshold = isMobileView ? 60 : 1;
-        
+
         if ((scrollTop + clientHeight) >= (scrollHeight - threshold)) {
           builtText.classList.add('show');
         } else {

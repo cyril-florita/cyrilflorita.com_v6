@@ -762,29 +762,6 @@ frame
     height: calc(100% - 30px);
   }
 }
-.cyril-frame.hide {
-  /*
-  & .cyril-top-panel {
-      @media screen and (max-width: 1200px) {
-          transform: translateY(-80px);
-      }
-  }
-  & .cyril-social {
-      @media screen and (max-width: 1200px)  {
-          transform: translateY(-80px);
-      }
-      @media screen and (max-width: 740px)   {
-          transform: translateY(80px);                
-      }
-  }
-
-  & .cyril-bottom-panel {
-      @media screen and (max-width: 1200px)  {
-          transform: translateY(80px);
-      }
-  }
-  */
-}
 .cyril-frame.hide .cyril-top-panel {
   transform: translateY(-79px);
 }
@@ -1099,11 +1076,6 @@ top panel
   height: 80px;
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
   transition-delay: 0s;
-  /*
-  &.cyril-active {
-      transition-delay: .6s;
-  }
-  */
 }
 .cyril-top-panel.cyril-tp-inner {
   background: rgb(255, 255, 255);
@@ -1283,78 +1255,6 @@ top panel
 @media screen and (max-width: 1200px) {
   .cyril-top-panel {
     background-color: rgb(255, 255, 255);
-    /*
-    & nav {
-        opacity: 0;
-        pointer-events: none;
-        padding: 30px 0;
-        border: none;
-        position: absolute;
-        background-color: $light;
-        top: 90px;
-        width: 100%;
-        border-bottom: solid 2px $soft;
-        transform: scale(.9) translateY(-5px);
-        transition: $tr;
-
-        &.cyril-active {
-            opacity: 1;
-            pointer-events: all;
-            transform: scale(1) translateY(0);
-        }
-
-        & ul {
-            flex-direction: column;
-
-            & li {
-                flex-direction: column;
-                height: auto;
-                margin-right: 0;
-                margin-bottom: 15px;
-
-                &:last-child {
-                    margin-bottom: 0;
-                }
-
-                &.cyril-active {
-                    & > a {
-                        color: $accent;
-                    }
-
-                    &:after {
-                        display: none;
-                    }
-                }
-
-                & ul {
-                    border: none;
-                    background-color: #f3f3f3;
-                    padding: 0;
-                    position: static;
-                    width: 100%;
-                    max-height: 0;
-
-                    & li {
-                        &:first-child {
-                            margin-top: 30px;
-                        }
-
-                        &:last-child {
-                            margin-bottom: 30px;
-                        }
-                    }
-                }
-
-                &:hover {
-                    & ul {
-                        max-height: 400px;
-                        margin-top: 15px;
-                    }
-                }
-            }
-        }
-    }
-    */
   }
   .cyril-top-panel.cyril-active {
     background-color: rgb(255, 255, 255);
@@ -1614,13 +1514,6 @@ banner
 @media screen and (max-width: 1200px) {
   .cyril-banner .cyril-banner-image {
     display: none;
-    /*
-    height: 60vh;
-    width: 70%;
-    display: block;
-    margin: 0 auto;
-    position: relative;
-    */
   }
 }
 .cyril-banner .cyril-banner-text {
@@ -1867,6 +1760,7 @@ experience
   width: auto;
   margin-right: 30px;
 }
+
 .cyril-divider {
   position: relative;
   background-color: #101010;
@@ -2364,15 +2258,6 @@ portfolio
   z-index: -2;
 }
 
-.two-column-text {
-  -moz-column-count: 2;
-       column-count: 2;
-  -moz-column-gap: 40px;
-       column-gap: 40px;
-}
-.two-column-text img {
-  width: 100%;
-}
 /* -------------------------------------------
 
 back to top
