@@ -5,7 +5,8 @@ import { cyrilUtility } from "@/public/utility/index";
 import { useEffect, useState } from "react";
 
 const page = () => {
-  // Add state for scroll progress
+
+  // Scroll Progress
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
@@ -17,14 +18,14 @@ const page = () => {
       }
     }, 100);
 
-    // Use the utility function for scroll tracking
+    // Scroll Tracking
     cyrilUtility.trackScrollProgress(setScrollProgress);
 
   }, []);
 
   return (
     <SiteLayout>
-      {/* Add progress bar at the top of the page */}
+      {/* Progress Bar */}
       <div
         style={{
           position: 'fixed',
@@ -32,7 +33,7 @@ const page = () => {
           left: 0,
           height: '7px',
           width: `${scrollProgress}%`,
-          backgroundColor: '#fa4729', // You can change this to match your theme
+          backgroundColor: '#fa4729',
           zIndex: 1000,
           transition: 'width 0.1s ease-out'
         }}
@@ -101,7 +102,6 @@ const page = () => {
                     <dd>Lack of continuity in experience, content presentation, and account management between GTY's website and it apps</dd>
                   </dl>
                   <p><strong>Business Need:</strong> The new GTY website must broaden audience reach and improve engagement & retention by creating a more accessible and unified digital experience.</p>
-
 
                   <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
 
@@ -181,7 +181,6 @@ const page = () => {
                     <dt>Content Audit</dt>
                     <dd>
                       Implemented a systematic process of evaluating and analyzing the existing content on a website to assess its quality, relevance, performance, and effectiveness
-
                     </dd>
                     <dd>
                       <strong>Key Initiatives:</strong> conducted and documented content inventory, site mapping, content evaluation, content performance & SEO analysis, content sorting & mapping & organization, content goals & alignment, content cleanup, content strategy planning
@@ -288,7 +287,7 @@ const page = () => {
 
                   <dl className="w-disc">
                     <dt>Balancing Stakeholder Expectations</dt>
-                    <dd>The project revealed tensions between modern design principles and stakeholder preferences for minimalism. Misunderstandings about design fidelity (e.g., mistaking minimalism for low-fidelity work) created friction that could have been mitigated through better communication and leadership.</dd>
+                    <dd>The project revealed tensions between modern design principles and stakeholder preferences for minimalism. Misunderstandings about design fidelity &#40;e.g., mistaking minimalism for low-fidelity work&#41; created friction that could have been mitigated through better communication and leadership.</dd>
                   </dl>
 
                   <dl className="w-disc">
@@ -332,8 +331,6 @@ const page = () => {
 
             </div>
             {/* end of main content */}
-
-
 
           </div>
           {/* end of .container */}
