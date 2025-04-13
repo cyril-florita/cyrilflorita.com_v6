@@ -23,10 +23,17 @@ const space_grotest = Space_Grotesk({
   display: 'swap',
 })
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  viewportFit: 'cover',
+  userScalable: 0
+}
+
 export const metadata = {
   title: "Cyril Florita - Designer and Developer",
   description: "Cyril Florita's professional website showcasing his background, skills, experience, and projects as a designer and developer.",
-  viewport: "width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=0",
   icons: {
     icon: './favicon.ico',
     shortcut: './favicon.ico',

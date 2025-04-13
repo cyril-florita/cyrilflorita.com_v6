@@ -48,11 +48,12 @@ const page = () => {
             {/* top banner */}
             <div className="cyril-top-banner cyril-text-center">
               <img src="/img/portfolio/main_gty9.jpg" alt="cover" />
-              <p className="cyril-text-sm cyril-accent"><strong>&#40; Earlier version of the design is used in this mockup since the project hasn't yet launched.&#41;</strong></p>
-              <p className="cyril-upper cyril-mt-60 cyril-mb-30">
+              <p className="cyril-text-sm cyril-accent"><strong>&#40;Earlier version of the design is used in this mockup since the project hasn't yet launched.&#41;</strong></p>
+              
+              <h2 className="cyril-mt-60">Grace to You Website, v.9</h2>
+              <p className="cyril-upper cyril-mt-30 cyril-mb-40">
                 <span className="cyril-accent">UX Design</span>
               </p>
-              <h2 className="cyril-mb-60">Grace to You Website, v.9</h2>
 
             </div>
             {/* dend of top banner */}
@@ -84,7 +85,11 @@ const page = () => {
                   <div className="cyril-divider cyril-mb-60" />
 
                   <h4 className="cyril-up cyril-mb-30 cyril-text-center">Project Overview</h4>
-                  <p>GTY.org is a global platform offering biblical resources for personal growth & discipleship, study & teaching materials, and pastoral & theological training. Despite its valuable resource offerings, the current website—version 8—faces usability and business challenges such as outdated design & UI elements, limited content internationalization features, less efficient search functionality, and lack of continuity in content & account management between the website and GTY's other platforms. This case study focuses on redesigning GTY.org to broaden audience reach and improve engagement & retention by creating a more accessible and unified digital experience while maintaining its core mission of delivering high-quality theological content.</p>
+                  <p>GTY.org is a Christian platform offering biblical resources for personal growth & discipleship, study & teaching materials, and pastoral & theological training.</p>
+                  <p>
+                  Despite its valuable resource offerings, the current website—version 8—faces usability and business challenges such as outdated design & UI elements, limited content internationalization features, less efficient search functionality, and lack of continuity in content & account management between the website and GTY's other platforms. 
+                  </p>
+                  <p>This case study focuses on redesigning GTY.org to broaden audience reach and improve engagement & retention by creating a more accessible and unified digital experience while maintaining its core mission of delivering high-quality theological content.</p>
                   <p className="cyril-text-sm cyril-accent cyril-mt-30"><strong>&#40;Screenshots of the processes and the designs will be supplied in the appropriate sections of this study once the project has launched.&#41;</strong></p>
 
                   <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
@@ -94,7 +99,7 @@ const page = () => {
                     <dt>Current Issues</dt>
                     <dd>Outdated visual design compared to modern web standards</dd>
                     <dd>Restrictive search results filtering and sorting mechanism</dd>
-                    <dd>Lack of continuity in experience and content management between the website and apps</dd>
+                    <dd>Lack of continuity in experience, content presentation, and account management between GTY's website and it apps</dd>
                   </dl>
                   <p><strong>Business Need:</strong> The new GTY website must broaden audience reach and improve engagement & retention by creating a more accessible and unified digital experience.</p>
 
@@ -139,13 +144,13 @@ const page = () => {
                   <dl className="w-disc">
                     <dt>User Insights</dt>
                     <dd>
-                      Leveraged on Google Analytics to gather quantitative data revealing user behavior patterns and website performance metrics
+                      Leveraged Google Analytics to gather quantitative data revealing user behavior patterns and website performance metrics
                       <dl>
                         <dd>Tracked activities such as user sessions, user uniqueness & frequency, user age & gender, user language, user location, page views, page ranks, average session duration, bounce rates, acquisition & navigation paths, devices used, etc.</dd>
                       </dl>
                     </dd>
                     <dd>
-                      Conducted surveys with existing users and organization employees to gather qualitative data identifying pain points, user sentiment, satisfaction, and preferences.
+                      Conducted surveys with existing users and organization employees to gather qualitative data identifying pain points, user sentiment, satisfaction, and preferences
                     </dd>
                     <dd>
                       <strong>Key Findings:</strong>
@@ -154,8 +159,6 @@ const page = () => {
                         <dd>Users were frustrated with how search results were organized according to their types; there is a lack of a simplified sorting/filtering mechanism</dd>
                         <dd>Users encountered friction in the giving/donation experience when asked about ministry exposure attribution—where they listen/watch GTY materials. The friction caused users to spend more time in the experience than needed and suggested that the attribution section be a part of another experience, e.g., account creation</dd>
                       </dl>
-
-
                     </dd>
                   </dl>
 
@@ -241,198 +244,32 @@ const page = () => {
                     <dt>Prototyping</dt>
                     <dd>Designed high-fidelity interactive prototypes for mobile, tablet, laptop/desktop screens using Axure RP to simulate user interactions, test usability, and refine designs before development
                       <dl>
-                        <dd>These prototypes closely mimic the final product's aesthetics, including detailed UI elements, typography, color schemes, and animations.</dd>
-                        <dd>And with these prototypes, stakeholders were able to visualize the final product more clearly, which facilitated approvals and alignment.</dd>
+                        <dd>These prototypes closely represented what would be the final version of the design, including detailed UI elements & functionality, typography, color schemes, and animations.</dd>
+                        <dd>Stakeholders then would be able to visualize the final project more clearly, which facilitated approvals and alignment.</dd>
                       </dl>
+                    </dd>                    
+                    <dd>
+                      <strong>Time and Resource:</strong> Creating high-fidelity prototypes required significantly more effort than low-fidelity wireframes. This caused specific stakeholders to misunderstand and underappreciate the importance of this stage of the UX process in terms of project completion and timeline. And so, the stakeholders set a new but tighter deadline. As a response, the Senior Software Architect and the development team thought of outsourcing the design and development of the e-commerce aspect of the site.
                     </dd>
                     <dd>
-                      <strong>Time and Resource Intensive:</strong> Creating high-fidelity prototypes required significant effort compared to low-fidelity wireframes
+                      <strong>Challenges:</strong> Balancing modern design with the traditional & clean aesthetic expected by GTY.org's core audience and stakeholders presented a challenge. Specific stakeholders wanted the simplicity and minimalism of the current site &#40;version 8&#41; to be carried over to this new version. To this UX Designer, this would be the best approach to the redesign project so as not to frustrate users when introduced to a newer site version. Specific stakeholders, however, thought that the minimalistic direction looked like a low-fidelity design. Specific stakeholders decided then to bypass the UX process and delegated the design and prototyping to the Front-End developer, treating the developed design as close to the final version. Moreover, at this point in the design process, the ministry partnered with a creative agency that focused more on branding and aesthetics rather than usability and functionality. The agency functioned as the authority over the originally implemented UX process and agile project & development process.
                     </dd>
                   </dl>
-                  
-
-
-
-                  {/*
-                  
-
-                  */}
-
-
-
-
-
-
-
-                  <div className="row cyril-mb-10">
-
-                    <div className="col-xl-12">
-                      <Swiper
-                        {...sliderProps.projectSlider}
-                        className="swiper-container cyril-timeline-slider-2"
-                      >
-
-                        <SwiperSlide className="swiper-slide">
-                          <div className="cyril-icon-box cyril-type-2">
-                            <div className="cyril-box-text">
-                              <p className="cyril-upper cyril-text-lg cyril-mb-15">Freelance</p>
-                              <p className="cyril-upper cyril-mb-30 cyril-text-normal">
-                                <span className="cyril-accent">today</span>
-                              </p>
-                              <p>
-                                Exploring the market while experimenting with new AI tools and technologies.
-                              </p>
-                            </div>
-                          </div>
-                        </SwiperSlide>
-
-                        <SwiperSlide className="swiper-slide">
-                          <div className="cyril-icon-box cyril-type-2">
-                            <div className="cyril-box-text">
-                              <p className="cyril-upper cyril-text-lg cyril-mb-15">
-                                UX Designer &amp; Web Developer
-                              </p>
-                              <p className="cyril-upper cyril-mb-30 cyril-text-normal">
-                                Dec 2014 &mdash; Feb 2024 &#40;<span className="cyril-accent">10 years</span>&#41;
-                              </p>
-                              <p>
-                                <a className="cyril-text-underline" href="https://www.gty.org" target="_blank"><strong>Grace to You</strong></a>, a Christian multimedia ministry in Santa Clarita, CA.
-                              </p>
-                            </div>
-                          </div>
-                        </SwiperSlide>
-
-                        <SwiperSlide className="swiper-slide">
-                          <div className="cyril-icon-box cyril-type-2">
-                            <div className="cyril-box-text">
-                              <p className="cyril-upper cyril-text-lg cyril-mb-15">Product Designer</p>
-                              <p className="cyril-upper cyril-mb-30 cyril-text-normal">
-                                Oct 2014 &mdash; Nov 2014 &#40;<span className="cyril-accent">1 month</span>&#41;
-                              </p>
-                              <p>
-                                <a className="cyril-text-underline" href="https://www.scorpion.co" target="_blank"><strong>Scorpion Design</strong></a>, a design and marketing agency in Santa Clarita, CA.
-                              </p>
-                            </div>
-                          </div>
-                        </SwiperSlide>
-
-                        <SwiperSlide className="swiper-slide">
-                          <div className="cyril-icon-box cyril-type-2">
-                            <div className="cyril-box-text">
-                              <p className="cyril-upper cyril-text-lg cyril-mb-15">
-                                Web Designer &amp; Developer
-                              </p>
-                              <p className="cyril-upper cyril-mb-30 cyril-text-normal">
-                                Jan. 2011 &mdash; Oct. 2014 &#40;<span className="cyril-accent">3 years</span>&#41;
-                              </p>
-                              <p>
-                                <a className="cyril-text-underline" href="https://www.digitalroominc.com" target="_blank"><strong>Digital Room, Inc.</strong></a>, a printing company in Van Nuys, CA.
-                              </p>
-                            </div>
-                          </div>
-                        </SwiperSlide>
-
-                        <SwiperSlide className="swiper-slide">
-                          <div className="cyril-icon-box cyril-type-2">
-                            <div className="cyril-box-text">
-                              <p className="cyril-upper cyril-text-lg cyril-mb-15">
-                                Senior Web Designer
-                              </p>
-                              <p className="cyril-upper cyril-mb-30 cyril-text-normal">
-                                Aug 2011 &mdash; Dec 2011  &#40;<span className="cyril-accent">4 months</span>&#41;
-                              </p>
-                              <p>
-                                <a className="cyril-text-underline" href="https://www.printrunner.com" target="_blank"><strong>PrintRunner</strong></a>, a printing company in Van Nuys, CA.
-                              </p>
-                            </div>
-                          </div>
-                        </SwiperSlide>
-
-                      </Swiper>
-                    </div>
-
-                  </div>
-
-
-
-
-
-
-
-
-                  <div className="row">
-                    <div className="offset-lg-6 col-lg-6">
-                      <div className="cyril-timeline-nav-2">
-                        <div className="cyril-timeline-2-pagination cyril-upper cyril-mb-30" />
-                        <div className="cyril-slider-nav cyril-mb-30">
-                          <div className="cyril-prev cyril-timeline-2-prev">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width={24}
-                              height={24}
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth={2}
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <polyline points="9 18 15 12 9 6" />
-                            </svg>
-                          </div>
-                          <div className="cyril-next cyril-timeline-2-next">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width={24}
-                              height={24}
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth={2}
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <polyline points="9 18 15 12 9 6" />
-                            </svg>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-
 
                   <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
 
-                  <h4 className="cyril-up cyril-mt-60 cyril-mb-30">Solution:</h4>
-                  <dl className="w-disc">
-                    <dd>Redesigned the homepage with a clean, modern layout emphasizing key resources</dd>
-                    <dd>Introduced a categorized search system with filters for sermons, books, and articles</dd>
-                    <dd>Enhanced mobile responsiveness and implemented WCAG-compliant accessibility features</dd>
-                  </dl>
+                  <h4 className="cyril-up cyril-mt-60 cyril-mb-30 cyril-text-center">Reflection</h4>
 
-                  <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
+                  <p>
+                  This project highlighted the importance of aligning design solutions with user needs and organizational goals. And time plays a critical role in completing UX design projects successfully. It impacts not only the final product's quality, but also the development process’s efficiency. When the UX process is abandoned or rushed, it could lead to significant setbacks in project outcomes. Skipping more prototyping and testing often results in design decisions based on assumptions rather than data. This could add stress and delays to the overall project timeline. It also could lead to suboptimal user experiences and reduced product success. Investing time upfront, effective time management strategies, and reasonable deadlines ensure project success while reducing post-launch rework and costly iterations, as usability issues are identified early.
+                  </p>
 
-                  <h4 className="cyril-up cyril-mt-60 cyril-mb-30">Challenges:</h4>
-                  <dl className="w-disc">
-                    <dd>Balancing modern design with the traditional aesthetic expected by GTY.org's core audience</dd>
-                    <dd>Ensuring seamless integration of new features without disrupting existing content</dd>
-                  </dl>
+                  <p className="cyril-mt-60">
+                  Moreover, this project underscored the importance of having a dedicated project manager. A dedicated and qualified project manager is essential for ensuring the success of a UX project as their role goes beyond task management; they act as the orchestrator, aligning team efforts, stakeholder expectations, and project goals to deliver high-quality deliverables on time. They also allocate resources efficiently, allowing the UX designer and the developers to focus on their expertise rather than logistical concerns. So, due to the lack of project management, the project team suffered from a lack of direction and task management. Between trying to complete the project, maintaining current platforms, and supporting various departments in the organization—the Senior Software Architect and this UX Designer—tried their best to manage the project while delivering solutions to routine and ad-hoc work requests. The redesign project suffered from clear and defined leadership, ownership, and direction. But in fairness to the stakeholders, they tried to provide a project manager. However, it was one who was not technically and experientially qualified. And this resulted in confusion among the project team regarding what or which work gets prioritized, causing the stakeholders to make further decisions to let the UX Designer go—someone had to bear the blame for the “delay” of the completion of the project.
+                    
+                  </p>
 
-                  <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
-
-                  <h4 className="cyril-up cyril-mt-60 cyril-mb-30">Results:</h4>
-                  <dl className="w-disc">
-                    <dd>Increased user retention by 25% within three months post-launch</dd>
-                    <dd>Positive feedback from users regarding ease of navigation and improved search functionality</dd>
-                    <dd>Expanded mobile traffic by 40% due to enhanced responsiveness</dd>
-                  </dl>
-
-                  <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
-
-                  <h4 className="cyril-up cyril-mt-60 cyril-mb-30">Reflection:</h4>
-                  <p>This project highlighted the importance of aligning design solutions with both user needs and organizational goals. Future iterations could focus on incorporating personalization features like saved playlists or recommended content based on user preferences.</p>
-
+                
                 </div>
                 {/* end of <div className="offset-lg-1-custom col-lg-9"> */}
 
