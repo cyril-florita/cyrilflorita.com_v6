@@ -33,7 +33,7 @@ const SiteLayout = ({ children, header, footer, noFooter }) => {
       </div>
       {children}
       <div className="cyril-built">
-        <p>Built with React &amp; NextJS, some cool libraries &amp; plugins, and lots of <i className="fa fa-heart"></i></p>
+        <p>Built with React &amp; NextJS and some cool JS libraries &amp; plugins, using <a className="cyril-dark" href="https://www.trae.ai" target="_blank">TRAE</a>, and with lots of <i className="fa fa-heart"></i></p>
       </div>
       <button 
         className="cyril-back-to-top"

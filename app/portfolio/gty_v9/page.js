@@ -3,8 +3,6 @@
 import SiteLayout from "@/layout/SiteLayout";
 import { cyrilUtility } from "@/public/utility/index";
 import { useEffect, useState } from "react";
-import { sliderProps } from "@/public/utility/sliderProps";
-import { Swiper, SwiperSlide } from "swiper/react";
 
 const page = () => {
   // Add state for scroll progress
@@ -49,7 +47,7 @@ const page = () => {
             <div className="cyril-top-banner cyril-text-center">
               <img src="/img/portfolio/main_gty9.jpg" alt="cover" />
               <p className="cyril-text-sm cyril-accent"><strong>&#40;Earlier version of the design is used in this mockup since the project hasn't yet launched.&#41;</strong></p>
-              
+
               <h2 className="cyril-mt-60">Grace to You Website, v.9</h2>
               <p className="cyril-upper cyril-mt-30 cyril-mb-40">
                 <span className="cyril-accent">UX Design</span>
@@ -86,10 +84,11 @@ const page = () => {
 
                   <h4 className="cyril-up cyril-mb-30 cyril-text-center">Project Overview</h4>
                   <p>GTY.org is a Christian platform offering biblical resources for personal growth & discipleship, study & teaching materials, and pastoral & theological training.</p>
-                  <p>
-                  Despite its valuable resource offerings, the current website—version 8—faces usability and business challenges such as outdated design & UI elements, limited content internationalization features, less efficient search functionality, and lack of continuity in content & account management between the website and GTY's other platforms. 
+                  <p className="cyril-mt-40">
+                    Despite its valuable resource offerings, the current website—version 8—faces usability and business challenges such as outdated design & UI elements, limited content internationalization features, less efficient search functionality, and lack of continuity in content & account management between the website and GTY's other platforms.
                   </p>
-                  <p>This case study focuses on redesigning GTY.org to broaden audience reach and improve engagement & retention by creating a more accessible and unified digital experience while maintaining its core mission of delivering high-quality theological content.</p>
+                  <p className="cyril-mt-40">
+                    This case study focuses on redesigning GTY.org to broaden audience reach and improve engagement & retention by creating a more accessible and unified digital experience while maintaining its core mission of delivering high-quality theological content.</p>
                   <p className="cyril-text-sm cyril-accent cyril-mt-30"><strong>&#40;Screenshots of the processes and the designs will be supplied in the appropriate sections of this study once the project has launched.&#41;</strong></p>
 
                   <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
@@ -247,12 +246,12 @@ const page = () => {
                         <dd>These prototypes closely represented what would be the final version of the design, including detailed UI elements & functionality, typography, color schemes, and animations.</dd>
                         <dd>Stakeholders then would be able to visualize the final project more clearly, which facilitated approvals and alignment.</dd>
                       </dl>
-                    </dd>                    
-                    <dd>
-                      <strong>Time and Resource:</strong> Creating high-fidelity prototypes required significantly more effort than low-fidelity wireframes. This caused specific stakeholders to misunderstand and underappreciate the importance of this stage of the UX process in terms of project completion and timeline. And so, the stakeholders set a new but tighter deadline. As a response, the Senior Software Architect and the development team thought of outsourcing the design and development of the e-commerce aspect of the site.
                     </dd>
                     <dd>
-                      <strong>Challenges:</strong> Balancing modern design with the traditional & clean aesthetic expected by GTY.org's core audience and stakeholders presented a challenge. Specific stakeholders wanted the simplicity and minimalism of the current site &#40;version 8&#41; to be carried over to this new version. To this UX Designer, this would be the best approach to the redesign project so as not to frustrate users when introduced to a newer site version. Specific stakeholders, however, thought that the minimalistic direction looked like a low-fidelity design. Specific stakeholders decided then to bypass the UX process and delegated the design and prototyping to the Front-End developer, treating the developed design as close to the final version. Moreover, at this point in the design process, the ministry partnered with a creative agency that focused more on branding and aesthetics rather than usability and functionality. The agency functioned as the authority over the originally implemented UX process and agile project & development process.
+                      <strong>Time and Resource:</strong> Creating high-fidelity prototypes required significantly more effort than low-fidelity wireframes. This caused specific stakeholders to misunderstand and underappreciate the importance of this stage of the UX process in terms of project completion and timeline. And so, the stakeholders set a new but tighter deadline. As a response, the Senior Software Architect thought of outsourcing the design and development of the e-commerce aspect of the site, and also decided to bypass the UX process and the UX Designer for some of the key homepage elements by having the Front-End Developer develop designs on the fly.
+                    </dd>
+                    <dd>
+                      <strong>Challenges:</strong> Balancing modern design with the traditional & clean aesthetic expected by GTY.org's core audience and stakeholders presented a challenge. Specific stakeholders wanted the simplicity and minimalism of the current site &#40;version 8&#41; to be carried over to this new version. To this UX Designer, this would be the best approach to the redesign project so as not to frustrate users when introduced to a newer site version. The Senior Software Architect, however, thought that the minimalistic direction looked like a low-fidelity design, and so decided to bypass the UX process and delegated the design to the Front-End developer Moreover, at this point in the design process, the ministry partnered with a creative agency that focused more on branding and aesthetics rather than usability and functionality. The agency functioned as the authority over the originally implemented UX process and agile project & development process.
                     </dd>
                   </dl>
 
@@ -260,21 +259,61 @@ const page = () => {
 
                   <h4 className="cyril-up cyril-mt-60 cyril-mb-30 cyril-text-center">Reflection</h4>
 
-                  <p>
-                  This project highlighted the importance of aligning design solutions with user needs and organizational goals. And time plays a critical role in completing UX design projects successfully. It impacts not only the final product's quality, but also the development process’s efficiency. When the UX process is abandoned or rushed, it could lead to significant setbacks in project outcomes. Skipping more prototyping and testing often results in design decisions based on assumptions rather than data. This could add stress and delays to the overall project timeline. It also could lead to suboptimal user experiences and reduced product success. Investing time upfront, effective time management strategies, and reasonable deadlines ensure project success while reducing post-launch rework and costly iterations, as usability issues are identified early.
+                  <dl className="w-disc">
+                    <dt>The Role of Time in UX Projects</dt>
+                    <dd>Time is a pivotal factor in UX design. Rushing or bypassing essential stages like prototyping and testing can lead to suboptimal outcomes. </dd>
+                    <dd>When time is not managed effectively, design decisions may rely on assumptions rather than user data, resulting in usability issues that require costly post-launch fixes.</dd>
+                    <dd>Investing time upfront in research, prototyping, and testing ensures that usability problems are identified early, reducing rework and improving the final product's quality.</dd>
+                  </dl>
+
+                  <dl className="w-disc">
+                    <dt>Consequences of Abandoning the UX Process</dt>
+                    <dd>Skipping critical UX steps—such as thorough prototyping and testing—can result in designs that fail to meet user needs or align with organizational goals.</dd>
+                    <dd>The case study illustrates how abandoning the UX process led to confusion, inefficiencies, and delays. For instance:
+                      <dl>
+                        <dd>
+                          The Senior Software Architect bypassed the UX designer's input, delegating design tasks directly to a Front-End developer.</dd>
+                        <dd>A creative agency prioritized branding over usability, disrupting the original UX process and Agile development framework.</dd>
+                      </dl>
+                    </dd>
+                    <dd>These decisions not only compromised the design's functionality but also strained team dynamics and timelines.</dd>
+                  </dl>
+
+                  <dl className="w-disc">
+                    <dt>The Importance of a Dedicated Project Manager</dt>
+                    <dd>In this case, the absence of a project manager led to poor task prioritization and misaligned expectations. The Senior Software Architect and this UX Designer had to juggle project management responsibilities alongside their core tasks and providing support and solutions to various departments, which further strained resources.</dd>
+                    <dd>In fairness to the stakeholders, they tried to provide a project manager. However, it was one who was not technically and experientially qualified. And so this resulted in confusion and strain among the project team regarding what or which work gets prioritized.</dd>
+                    <dd>The lack of clear leadership resulted in delays and ultimately led stakeholders to make reactive decisions, such as letting go of this UX Designer&mdash;someone had to bear the blame for the supposed “delay” of the completion of the project.</dd>
+                  </dl>
+
+                  <dl className="w-disc">
+                    <dt>Balancing Stakeholder Expectations</dt>
+                    <dd>The project revealed tensions between modern design principles and stakeholder preferences for minimalism. Misunderstandings about design fidelity (e.g., mistaking minimalism for low-fidelity work) created friction that could have been mitigated through better communication and leadership.</dd>
+                  </dl>
+
+                  <dl className="w-disc">
+                    <dt>Broader Takeaways</dt>
+                    <dd>
+                      <strong>Adherence to Process:</strong> Skipping or altering established UX processes can derail projects by introducing inefficiencies and compromising user-centered outcomes.
+                    </dd>
+                    <dd>
+                      <strong>Leadership Matters:</strong> A skilled project manager ensures that all team members remain aligned with goals and timelines while mitigating risks like scope creep or stakeholder interference.
+                    </dd>
+                    <dd>
+                      <strong>Time Management:</strong> A well-managed UX project ensures that resources are allocated efficiently, avoiding overburdening team members or delaying critical milestones.
+                    </dd>
+
+                  </dl>
+
+                  <p className="cyril-mt-40 cyril-mb-100">
+                    This reflection emphasizes that successful UX projects depend on careful planning, adherence to process, effective time management, and strong leadership. When these elements are neglected or disrupted, it can lead to delays, suboptimal designs, and strained team dynamics. By investing in qualified personnel and respecting the UX process, organizations can achieve better outcomes while fostering a collaborative environment that prioritizes both user satisfaction and business goals.
                   </p>
 
-                  <p className="cyril-mt-60">
-                  Moreover, this project underscored the importance of having a dedicated project manager. A dedicated and qualified project manager is essential for ensuring the success of a UX project as their role goes beyond task management; they act as the orchestrator, aligning team efforts, stakeholder expectations, and project goals to deliver high-quality deliverables on time. They also allocate resources efficiently, allowing the UX designer and the developers to focus on their expertise rather than logistical concerns. So, due to the lack of project management, the project team suffered from a lack of direction and task management. Between trying to complete the project, maintaining current platforms, and supporting various departments in the organization—the Senior Software Architect and this UX Designer—tried their best to manage the project while delivering solutions to routine and ad-hoc work requests. The redesign project suffered from clear and defined leadership, ownership, and direction. But in fairness to the stakeholders, they tried to provide a project manager. However, it was one who was not technically and experientially qualified. And this resulted in confusion among the project team regarding what or which work gets prioritized, causing the stakeholders to make further decisions to let the UX Designer go—someone had to bear the blame for the “delay” of the completion of the project.
-                    
-                  </p>
-
-                
                 </div>
                 {/* end of <div className="offset-lg-1-custom col-lg-9"> */}
 
                 {/* pagination */}
-                <div className="offset-lg-1-custom col-lg-9 cyril-mt-60">
+                {/* <div className="offset-lg-1-custom col-lg-9 cyril-mt-60">
 
                   <div className="cyril-pagination-panel">
                     <a href="#" className="cyril-button cyril-type-2 cyril-mb-30">
@@ -285,7 +324,7 @@ const page = () => {
                     </a>
                   </div>
 
-                </div>
+                </div> */}
                 {/* end of pagination */}
 
               </div>
