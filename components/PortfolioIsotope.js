@@ -250,12 +250,12 @@ const PortfolioIsotope = () => {
 
           {/* long . sekihmentis */}
           <div className="cyril-grid-item fil-illustration">
-            <Link legacyBehavior href="/portfolio">
+            <Link legacyBehavior href="/portfolio/sekihmentis">
               <div className="cyril-portfolio-item cyril-long-item cyril-mb-80">
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_sekihmentis.jpg" alt="cover" />
-                  <div className="cyril-hover-link coming-soon">
-                    <span className="cyril-upper">Coming Soon</span>
+                  <div className="cyril-hover-link">
+                    <i className="fas fa-link" />
                   </div>
                 </div>
                 <div className="cyril-project-descr">

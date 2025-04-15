@@ -1659,6 +1659,15 @@ portfolio
                 box-shadow: 0 0 0 0 $soft;
             }
 
+            @media screen and (max-width: 1200px)  {
+                opacity: 1;
+                & svg,
+                & i {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
+            }
+
             &.coming-soon {
 
                 width: 120px;
@@ -1676,7 +1685,6 @@ portfolio
                 }
 
                 @media screen and (max-width: 1200px) {
-                    opacity: 1;
                     width: 150px;
                     height: auto;
                     padding: 15px 20px;
