@@ -202,18 +202,30 @@ page
             }
 
         }
-
         & ul {
             margin-left: 60px;
         }
+
+        & .cyril-project-content {
+            
+            & .cyril-project-main-graphic {
+                display: block;
+                width: 100%;
+                margin: 60px auto 100px;
+                padding: 10px;
+                border: solid 2px $dark;
+            }
+
+            @media screen and (min-width: 1440px)  {
+                width: 77%;
+                margin: 0 auto;
+            }
+
+        }
+
     }
 
-    & .col-project-page {
-        @media screen and (min-width: 1440px)  {
-            width: 77%;
-            margin: 0 auto;
-        }
-    }
+    
 }
 
 /* -------------------------------------------
@@ -1756,30 +1768,6 @@ portfolio
         }
     }
 }
-
-.cyril-project-img {
-    width: 100%;
-    position: relative;
-
-    & img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-    }
-
-    &.cyril-square {
-        padding-bottom: 65%;
-    }
-
-    &.cyril-long {
-        padding-bottom: calc(130% + 30px);
-    }
-}
-
 
 .swiper-container {
     padding-left: 12px;

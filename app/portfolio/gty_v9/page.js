@@ -65,11 +65,9 @@ const page = () => {
             {/* dend of top banner */}
 
             {/* main content */}
-            <div className="cyril-project cyril-mb-60">
+            <div className="row cyril-mb-60">
 
-              <div className="row cyril-mb-60">
-
-                <div className="col-project-page">
+                <div className="cyril-project-content">
 
                   <div className="cyril-divider cyril-mb-60" />
 
@@ -378,8 +376,6 @@ const page = () => {
 
               </div>
               {/* end of .row */}
-
-            </div>
             {/* end of main content */}
 
           </div>

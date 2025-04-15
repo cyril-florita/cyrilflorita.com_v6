@@ -11,10 +11,27 @@ const PortfolioIsotope = dynamic(
   }
 );
 
-const Page = () => {
-  
+const PortfolioPage = () => {
   useEffect(() => {
+    // Check if we're returning to a specific project
+    const returnToProject = sessionStorage.getItem('returnToProject');
+    
+    if (returnToProject) {
+      // Clear the storage
+      sessionStorage.removeItem('returnToProject');
 
+      const projectElement = document.getElementById(returnToProject) || 
+                              document.querySelector(`[data-project="${returnToProject}"]`);
+        
+        if (projectElement) {
+          // Scroll to the element
+          projectElement.scrollIntoView({ behavior: 'smooth' });
+        }
+      
+      // Wait for the DOM to be fully loaded and isotope to initialize
+     
+    }
+    
     cyrilUtility.tpInner();
     
     // Enable smooth scroll behavior
@@ -26,11 +43,6 @@ const Page = () => {
         pageElement.classList.add('cyril-active');
       }
     }, 100);
-  
-    // Cleanup
-    return () => {
-      document.documentElement.style.scrollBehavior = 'auto';
-    };
   }, []);
 
   return (
@@ -52,6 +64,7 @@ const Page = () => {
               </p>
             </div>
           </div>
+          
           <PortfolioIsotope />
         </div>
       </div>
@@ -59,4 +72,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default PortfolioPage;

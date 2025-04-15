@@ -37,9 +37,7 @@ const page = () => {
             {/* dend of top banner */}
 
             {/* main content */}
-            <div className="cyril-project cyril-mb-60">
-
-              <div className="row cyril-mb-60">
+            <div className="row cyril-mb-60">
 
                 <div className="offset-lg-1-custom col-lg-9">
 
@@ -295,8 +293,6 @@ const page = () => {
 
               </div>
               {/* end of .row */}
-
-            </div>
             {/* end of main content */}
 
           </div>

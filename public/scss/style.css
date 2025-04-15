@@ -962,8 +962,15 @@ page
 .cyril-page.cyril-project-page ul {
   margin-left: 60px;
 }
+.cyril-page.cyril-project-page .cyril-project-content .cyril-project-main-graphic {
+  display: block;
+  width: 100%;
+  margin: 60px auto 100px;
+  padding: 10px;
+  border: solid 2px #101010;
+}
 @media screen and (min-width: 1440px) {
-  .cyril-page .col-project-page {
+  .cyril-page.cyril-project-page .cyril-project-content {
     width: 77%;
     margin: 0 auto;
   }
@@ -2299,28 +2306,6 @@ portfolio
 .cyril-portfolio-item:hover .cyril-cover .cyril-hover-link svg, .cyril-portfolio-item:hover .cyril-cover .cyril-hover-link i {
   opacity: 1;
   transform: translateY(0) scale(1);
-}
-
-.cyril-project-img {
-  width: 100%;
-  position: relative;
-}
-.cyril-project-img img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-  -o-object-position: center;
-     object-position: center;
-}
-.cyril-project-img.cyril-square {
-  padding-bottom: 65%;
-}
-.cyril-project-img.cyril-long {
-  padding-bottom: calc(130% + 30px);
 }
 
 .swiper-container {
