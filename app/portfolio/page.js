@@ -50,9 +50,6 @@ const Page = () => {
               <p className="cyril-left-offset">
                 A selection of my projects to showcase my experience and skills.
               </p>
-              <p className="cyril-left-offset cyril-accent cyril-mt-10">
-                <strong>&#40;Project pages will be available as soon as I'm done writing a few case studies.&#41;</strong>
-              </p>
             </div>
           </div>
           <PortfolioIsotope />
