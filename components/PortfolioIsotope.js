@@ -10,7 +10,6 @@ const PortfolioIsotope = () => {
   const isotope = useRef();
   const [filterKey, setFilterKey] = useState("*");
 
-
     useEffect(() => {
       const grid = document.querySelector(".cyril-portfolio-grid");
       if (!grid) return;
@@ -29,7 +28,7 @@ const PortfolioIsotope = () => {
         initLayout: false,
       });
 
-      // Add error handling for imagesLoaded
+      // Error handling for imagesLoaded
       imagesLoaded(".cyril-portfolio-grid")
         .on('done', function() {
           isotope.current.layout();
@@ -146,7 +145,7 @@ const PortfolioIsotope = () => {
                     <i className="fas fa-link" />
                   </div>
                   {/* <div className="cyril-hover-link coming-soon">
-                    <span className="cyril-upper">Project Page Coming Soon</span>
+                    <span className="cyril-upper">Coming Soon</span>
                   </div> */}
                 </div>
                 <div className="cyril-project-descr">
@@ -164,7 +163,7 @@ const PortfolioIsotope = () => {
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_truth-matters-podcast.jpg" alt="cover" />
                   <div className="cyril-hover-link coming-soon">
-                    <span className="cyril-upper">Project Page Coming Soon</span>
+                    <span className="cyril-upper">Coming Soon</span>
                   </div>
                 </div>
                 <div className="cyril-project-descr">
@@ -183,7 +182,7 @@ const PortfolioIsotope = () => {
                   <img src="/img/portfolio/thumb_gty8.jpg" alt="cover" />
                   <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link coming-soon">
-                    <span className="cyril-upper">Project Page Coming Soon</span>
+                    <span className="cyril-upper">Coming Soon</span>
                   </div>
                 </div>
                 <div className="cyril-project-descr">
@@ -202,7 +201,7 @@ const PortfolioIsotope = () => {
                   <img src="/img/portfolio/thumb_the-study-bible-app.jpg" alt="cover" />
                   <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link coming-soon">
-                    <span className="cyril-upper">Project Page Coming Soon</span>
+                    <span className="cyril-upper">Coming Soon</span>
                   </div>
                 </div>
                 <div className="cyril-project-descr">
@@ -220,7 +219,7 @@ const PortfolioIsotope = () => {
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_gty-dashboard.jpg" alt="cover" />
                   <div className="cyril-hover-link coming-soon">
-                    <span className="cyril-upper">Project Page Coming Soon</span>
+                    <span className="cyril-upper">Coming Soon</span>
                   </div>
                 </div>
                 <div className="cyril-project-descr">
@@ -238,7 +237,7 @@ const PortfolioIsotope = () => {
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_gty8-prototype.jpg" alt="cover" />
                   <div className="cyril-hover-link coming-soon">
-                    <span className="cyril-upper">Project Page Coming Soon</span>
+                    <span className="cyril-upper">Coming Soon</span>
                   </div>
                 </div>
                 <div className="cyril-project-descr">
@@ -256,7 +255,7 @@ const PortfolioIsotope = () => {
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_sekihmentis.jpg" alt="cover" />
                   <div className="cyril-hover-link coming-soon">
-                    <span className="cyril-upper">Project Page Coming Soon</span>
+                    <span className="cyril-upper">Coming Soon</span>
                   </div>
                 </div>
                 <div className="cyril-project-descr">
@@ -274,7 +273,7 @@ const PortfolioIsotope = () => {
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_gty-app-landing.jpg" alt="cover" />
                   <div className="cyril-hover-link coming-soon">
-                    <span className="cyril-upper">Project Page Coming Soon</span>
+                    <span className="cyril-upper">Coming Soon</span>
                   </div>
                 </div>
                 <div className="cyril-project-descr">
@@ -292,7 +291,7 @@ const PortfolioIsotope = () => {
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_gty-blog.jpg" alt="cover" />
                   <div className="cyril-hover-link coming-soon">
-                    <span className="cyril-upper">Project Page Coming Soon</span>
+                    <span className="cyril-upper">Coming Soon</span>
                   </div>
                 </div>
                 <div className="cyril-project-descr">
@@ -310,7 +309,7 @@ const PortfolioIsotope = () => {
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_grace-stream.jpg" alt="cover" />
                   <div className="cyril-hover-link coming-soon">
-                    <span className="cyril-upper">Project Page Coming Soon</span>
+                    <span className="cyril-upper">Coming Soon</span>
                   </div>
                 </div>
                 <div className="cyril-project-descr">
@@ -328,7 +327,7 @@ const PortfolioIsotope = () => {
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_patricia-macarthur-pastoral-fund.jpg" alt="cover" />
                   <div className="cyril-hover-link coming-soon">
-                    <span className="cyril-upper">Project Page Coming Soon</span>
+                    <span className="cyril-upper">Coming Soon</span>
                   </div>
                 </div>
                 <div className="cyril-project-descr">
@@ -346,7 +345,7 @@ const PortfolioIsotope = () => {
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_he-took-my-place.jpg" alt="cover" />
                   <div className="cyril-hover-link coming-soon">
-                    <span className="cyril-upper">Project Page Coming Soon</span>
+                    <span className="cyril-upper">Coming Soon</span>
                   </div>
                 </div>
                 <div className="cyril-project-descr">
@@ -364,7 +363,7 @@ const PortfolioIsotope = () => {
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_study-bible-app-logo.jpg" alt="cover" />
                   <div className="cyril-hover-link coming-soon">
-                    <span className="cyril-upper">Project Page Coming Soon</span>
+                    <span className="cyril-upper">Coming Soon</span>
                   </div>
                 </div>
                 <div className="cyril-project-descr">
@@ -382,7 +381,7 @@ const PortfolioIsotope = () => {
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_gty-social-media.jpg" alt="cover" />
                   <div className="cyril-hover-link coming-soon">
-                    <span className="cyril-upper">Project Page Coming Soon</span>
+                    <span className="cyril-upper">Coming Soon</span>
                   </div>
                 </div>
                 <div className="cyril-project-descr">
@@ -400,7 +399,7 @@ const PortfolioIsotope = () => {
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_gty-resources.jpg" alt="cover" />
                   <div className="cyril-hover-link coming-soon">
-                    <span className="cyril-upper">Project Page Coming Soon</span>
+                    <span className="cyril-upper">Coming Soon</span>
                   </div>
                 </div>
                 <div className="cyril-project-descr">

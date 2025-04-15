@@ -3,6 +3,13 @@
 import SiteLayout from "@/layout/SiteLayout";
 import { cyrilUtility } from "@/public/utility/index";
 import { useEffect, useState } from "react";
+import dynamic from 'next/dynamic';
+
+const ReactPlayer = dynamic(() => import('react-player/lazy'), {
+  ssr: false,
+});
+import Link from "next/link";
+
 
 const page = () => {
 
@@ -62,7 +69,7 @@ const page = () => {
 
               <div className="row cyril-mb-60">
 
-                <div className="offset-lg-1-custom col-lg-9">
+                <div className="col-project-page">
 
                   <div className="cyril-divider cyril-mb-60" />
 
@@ -99,10 +106,33 @@ const page = () => {
                     <dt>Current Issues</dt>
                     <dd>Outdated visual design compared to modern web standards</dd>
                     <dd>Restrictive search results filtering and sorting mechanism</dd>
-                    <dd>Lack of continuity in experience, content presentation, and account management between GTY's website and it apps</dd>
+                    <dd>
+                      Lack of continuity in experience, content presentation, and account management between GTY's website and its apps                      
+                                          
+                      <div className="cyril-video-container cyril-mt-20">
+                        <ReactPlayer
+                          url="/img/portfolio/gty9_problem-statement.mp4"
+                          className="cyril-video"
+                          width="100%"
+                          height="100%"
+                          style={{ position: 'absolute', top: 0, left: 0 }}
+                          controls={true}
+                          light={false}
+                          pip={true}
+                          config={{
+                            file: {
+                              attributes: {
+                                controlsList: 'nodownload',
+                              },
+                            },
+                          }}
+                        />
+                      </div>
+                      
+                    </dd>
                   </dl>
                   <p><strong>Business Need:</strong> The new GTY website must broaden audience reach and improve engagement & retention by creating a more accessible and unified digital experience.</p>
-
+                  
                   <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
 
                   <h4 className="cyril-up cyril-mt-60 cyril-mb-30 cyril-text-center">Research</h4>
@@ -119,7 +149,27 @@ const page = () => {
                       </dl>
                     </dd>
                     <dd>
+
+                    
+                      
                       <strong>Key Findings</strong>: With these interviews, I convinced the stakeholders that redesigning a website is more than just changing its look and feel; the project should improve the site's status quo, provide solutions to the user's needs based on data & research, and accomplish business goals. Along with stakeholders and the development team, we then elevated the following needs to be of utmost importance for this project:
+
+                      <a
+                        href="/img/portfolio/gty9_project-requirements.jpg"
+                        className="cyril-project-figure float-right w-30 mfp-image"
+                        data-effect="mfp-zoom-in"
+                      >                      
+                        <div className="cyril-cover">
+                          <img src="/img/portfolio/gty9_project-requirements.jpg" alt="cover" />
+                          <div className="cyril-hover-link">
+                            <i className="fa fa-search-plus" />
+                          </div>
+                        </div>
+                      </a>
+
+                      
+
+
                       <dl>
                         <dd>applied user-centric design</dd>
                         <dd>giving / business content priority</dd>

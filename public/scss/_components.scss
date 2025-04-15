@@ -193,9 +193,10 @@ page
     &.cyril-project-page {
         & .cyril-top-banner {
             padding-bottom: 20px;
-            
+
             & img {
                 width: 100%;
+                max-width: 1240px;
                 display: block;
                 margin: 0 auto 0;
             }
@@ -205,13 +206,12 @@ page
         & ul {
             margin-left: 60px;
         }
+    }
 
-        & .offset-lg-1-custom {
-            margin-left: 12.5%;
-
-            @media screen and (max-width: 1200px) {
-                margin-left: 0;
-            }
+    & .col-project-page {
+        @media screen and (min-width: 1440px)  {
+            width: 77%;
+            margin: 0 auto;
         }
     }
 }
@@ -651,7 +651,7 @@ top panel
             box-shadow: 0 20px 20px 0 $light;
             box-shadow: none;
         }
-        
+
     }
 }
 
@@ -1533,11 +1533,12 @@ portfolio
         }
     }
 
-    @media screen and (min-width: 768px) and (max-width: 1200px)  {
+    @media screen and (min-width: 768px) and (max-width: 1200px) {
+
         & .grid-sizer,
         & .cyril-grid-item {
             width: 50% !important;
-          }
+        }
     }
 
     @media screen and (max-width: 768px) {
@@ -1659,11 +1660,12 @@ portfolio
             }
 
             &.coming-soon {
-                
+
                 width: 120px;
                 height: 120px;
                 padding: 30px;
                 text-align: center;
+                z-index: 2;
 
                 span {
                     font-size: 12px;
@@ -1686,7 +1688,7 @@ portfolio
 
             }
 
-            
+
 
         }
     }
@@ -1848,4 +1850,70 @@ back to top
         bottom: 20px;
         right: 20px;
     }
+}
+
+
+.cyril-project-figure {
+    display: block;
+    padding: 10px;
+    box-shadow: 7px 7px 0px 0px rgba(16, 16, 16, 0.18);
+    border: solid 2px #101010;
+    transition: box-shadow $tr;
+    img {
+        width: 100%;
+        display: block;
+    }
+
+    & .cyril-cover {
+        position: relative;
+    }
+    & .cyril-hover-link {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        background-color: $light;
+        border: solid 2px $dark;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 6px 6px 0 0 $soft;
+        transition: $tr;
+        transform: translate(-50%, -50%);
+
+        & svg,
+        & i {
+            stroke: $dark;
+            color: $dark;
+        }
+
+    }
+    &:hover {
+        cursor: pointer;
+        box-shadow: 0 0 0 0 $soft;
+
+        & .cyril-hover-link {
+            cursor: pointer;
+            box-shadow: 0 0 0 0 $soft;
+        }
+    }
+
+    @media screen and (max-width: 768px)  {
+        width: 75%;
+        margin: 20px auto;
+    }
+}
+
+.cyril-video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 */
+}
+
+.cyril-video {
+    width: 100%;
+    height: 100%;
+    border: solid 2px $dark;
+    box-shadow: 7px 7px 0px 0px rgba(16, 16, 16, 0.18);
 }

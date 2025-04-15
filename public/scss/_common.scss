@@ -99,6 +99,7 @@ html {
 body {
     font-family: var(--font-space-grotesk);
     font-size: 18px;
+    font-weight: 400;
     line-height: 170%;
     color: $dark;
     overscroll-behavior: none;
@@ -113,7 +114,7 @@ body {
         content: '';
         position: fixed;
         pointer-events: none;
-        z-index: 999999;
+        z-index: 1001;
         top: 0;
         left: 0;
         width: 100%;
@@ -133,7 +134,7 @@ body {
 
     @media screen and (max-width: 768px) {
         padding: 0 10px;
-        font-size: 14px;
+        font-size: 15px;
     }
 
 }
@@ -626,11 +627,21 @@ dl {
         dd {
             display: list-item;
             padding-left: 15px;
+            margin-left: 15px;
+
+            @media screen and (max-width: 768px)  {
+                padding-left: 5px
+            }
 
             dl {
                 list-style-type: circle;
                 margin-top: 15px;
                 margin-bottom: 15px;
+
+                dd {
+                    margin-left: 15px;
+                }
+                
             }
         }
     }
@@ -647,7 +658,7 @@ dl {
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 999;
     font-family: var(--font-atkinson);
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 900;
     background: $light;
 
@@ -669,18 +680,19 @@ dl {
     }
 
     @media screen and (max-width: 1200px) {
-        bottom: 30px;
+        bottom: 45px;
         left: 35px;
+        font-size: 13px;
     }
 
     @media screen and (max-width: 768px) {
         display: inline-block;
-        width: 230px;
+        width: 245px;
         bottom: 20px;
         left: 20px;
         padding: 5px 0;
         line-height: 1.5;
         text-align: left;
-        font-size: 10px;
+        font-size: 11px;
     }
 }

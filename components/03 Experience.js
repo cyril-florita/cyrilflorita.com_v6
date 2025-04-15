@@ -120,7 +120,7 @@ const Experience = () => {
                           Apr 2009 &mdash; June 2011 &#40;<span className="cyril-accent">2 years</span>&#41;
                         </p>
                         <p>
-                          <a className="cyril-text-underline" href="https://www.latimes.com/archives/la-xpm-2010-sep-22-la-fi-mighty-net-20100922-story.html" target="_blank"><strong>Mighty Net, Inc.</strong></a>, a financial institution in Calabasas, CA &#40;Now <a className="cyril-text-underline" href="https://www.experian.com/" target="_blank"><strong>Experian</strong></a>&#41;.
+                          <a className="cyril-text-underline" href="https://www.latimes.com/archives/la-xpm-2010-sep-22-la-fi-mighty-net-20100922-story.html" target="_blank"><strong>Mighty Net, Inc.</strong></a> &#40;now <a className="cyril-text-underline" href="https://www.experian.com/" target="_blank"><strong>Experian</strong></a>&#41;, a financial institution in Calabasas, CA.
                         </p>
                       </div>
                     </div>
