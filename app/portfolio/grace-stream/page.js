@@ -126,13 +126,14 @@ const page = () => {
                                
                   <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
 
-                  <h4 className="cyril-up cyril-mt-60 cyril-mb-30 cyril-text-center">UX/UI Design, Web Development, &amp; Integration of 24/7 Seamless Stream</h4>
+                  <h4 className="cyril-up cyril-mt-60 cyril-mb-30 cyril-text-center">UX/UI Design</h4>
                   <p className="cyril-mt-40">
                     The user experience was all about minimizing friction. Even though this is a minimal page, every pixel was intentional. From the background textures to the soft lighting around the player module, I wanted the visuals to reinforce a sense of calm, focus, and trust. The background photo I picked captures the essence of the brand. I leaned into subtle gradients and soft neutrals, avoiding any overly trendy styles so that the experience stays classic and enduring, just like the content. It's a design that gets out of the way but still feels polished and complete. This page is about listening, not browsing.
                   </p>
                   <p className="cyril-mt-40">
                     Everything is optimized to be mobile-first, since many users might tune in while driving, working, or doing other tasks. Every touchpoint—from the play button to the info modals—is streamlined for quick access and readability. The interface is built to load fast, get out of the way, and let the stream take center stage. I intentionally avoided heavy visuals or complex interactions. The “Now Playing” section gives users just enough context without overwhelming them, and the CTA is always accessible without being pushy.
                   </p>
+                  <h4 className="cyril-up cyril-mt-60 cyril-mb-30 cyril-text-center">Web Development, &amp; Integration of 24/7 Seamless Stream</h4>
                   <p className="cyril-mt-40">
                     This was a lean build, but a thoughtful one. Working with a Back-End Developer, I handled the front-end development, focusing on performance, responsiveness, and real-time functionality for the stream. We implemented logic to keep the stream information current, and made sure the media player behaves consistently across devices and browsers. Accessibility standards were a priority—every listener should have access, regardless of how they interact with the page.
                   </p>
