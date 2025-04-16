@@ -78,6 +78,10 @@ img.mfp-img {
   }
 }
 
+.clearfix {
+  clear: both;
+}
+
 .w-10 {
   width: 10% !important;
 }
@@ -990,10 +994,14 @@ page
   padding: 10px;
   width: 77%;
 }
+@media screen and (max-width: 768px) {
+  .cyril-page.cyril-project-page .cyril-top-banner img.w-border {
+    width: 100%;
+  }
+}
 .cyril-page.cyril-project-page .cyril-project-content .cyril-project-main-graphic {
   display: block;
   width: 100%;
-  margin: 60px auto 100px;
   padding: 10px;
   border: solid 2px #101010;
 }
@@ -2411,9 +2419,7 @@ back to top
 
 .cyril-project-figure {
   display: block;
-  padding: 10px;
   box-shadow: 7px 7px 0px 0px rgba(16, 16, 16, 0.18);
-  border: solid 2px #101010;
   transition: box-shadow 0.4s cubic-bezier(0, 0, 0.3642, 1);
 }
 .cyril-project-figure img {
@@ -2460,7 +2466,6 @@ back to top
 .cyril-video-container {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%; /* 16:9 */
 }
 
 .cyril-video {

@@ -19,17 +19,18 @@ const PortfolioPage = () => {
     if (returnToProject) {
       // Clear the storage
       sessionStorage.removeItem('returnToProject');
-
-      const projectElement = document.getElementById(returnToProject) || 
+      
+      // Wait for the DOM to be fully loaded and isotope to initialize
+      setTimeout(() => {
+        // Find the element for the project
+        const projectElement = document.getElementById(returnToProject) || 
                               document.querySelector(`[data-project="${returnToProject}"]`);
         
         if (projectElement) {
           // Scroll to the element
           projectElement.scrollIntoView({ behavior: 'smooth' });
         }
-      
-      // Wait for the DOM to be fully loaded and isotope to initialize
-     
+      }, 800); // Give more time for isotope to render
     }
     
     cyrilUtility.tpInner();
@@ -64,7 +65,6 @@ const PortfolioPage = () => {
               </p>
             </div>
           </div>
-          
           <PortfolioIsotope />
         </div>
       </div>

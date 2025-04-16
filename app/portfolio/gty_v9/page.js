@@ -7,10 +7,6 @@ import dynamic from 'next/dynamic';
 import { useRouter } from "next/navigation";
 
 
-const ReactPlayer = dynamic(() => import('react-player/lazy'), {
-  ssr: false,
-});
-
 const page = () => {
 
   const router = useRouter();
@@ -119,36 +115,57 @@ const page = () => {
                     <dd>
                       Lack of continuity in experience, content presentation, and account management between GTY's website and its apps                      
                                           
-                      <div className="cyril-video-container cyril-mt-20">
-                        <ReactPlayer
-                          url="/img/portfolio/gty9_problem-statement.mp4"
-                          className="cyril-video"
-                          width="100%"
-                          height="100%"
-                          style={{ position: 'absolute', top: 0, left: 0 }}
-                          controls={true}
-                          light={false}
-                          pip={true}
-                          config={{
-                            file: {
-                              attributes: {
-                                controlsList: 'nodownload',
-                              },
-                            },
-                          }}
-                        />
-                      </div>
+                      
+                      <figure className="cyril-video-container cyril-mt-20">
+                        <video
+                          src="/img/portfolio/gty9_problem-statement.mp4"
+                          className="cyril-video" 
+                          width="100%" 
+                          // height="100%" 
+                          style={{ display: 'block' }} 
+                          controls 
+                          loop 
+                          autoPlay 
+                          muted 
+                          playsInline // Important for iOS inline playback
+                          controlsList="nodownload"
+                        >
+                          Your browser does not support the video tag.
+                        </video>
+                      </figure>
                       
                     </dd>
                   </dl>
-                  <p><strong>Business Need:</strong> The new GTY website must broaden audience reach and improve engagement & retention by creating a more accessible and unified digital experience.</p>
+
+                  <dl className="w-disc">
+                    <dt>Business Need</dt>
+                    <dd>
+                      The new GTY website must broaden audience reach and improve engagement & retention by creating a more accessible and unified digital experience.
+                    </dd>
+                  </dl>
+                  
                   
                   <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
 
                   <h4 className="cyril-up cyril-mt-60 cyril-mb-30 cyril-text-center">Research</h4>
+
+                  
+
                   <dl className="w-disc">
                     <dt>Business Insights</dt>
                     <dd>
+                      <a
+                        href="/img/portfolio/gty9_redesign-overview..jpg"
+                        className="cyril-project-figure float-right w-30 mfp-image"
+                        data-effect="mfp-zoom-in"
+                      >                      
+                        <div className="cyril-cover">
+                          <img src="/img/portfolio/gty9_redesign-overview.jpg" alt="cover" />
+                          <div className="cyril-hover-link">
+                            <i className="fa fa-search-plus" />
+                          </div>
+                        </div>
+                      </a>
                       Conducted stakeholder interviews to gather insight into the organization's goals, challenges, and priorities. This process:
                       <dl>
                         <dd>ensured the redesign aligns with broader organizational objectives while addressing specific departmental needs</dd>
@@ -158,15 +175,11 @@ const page = () => {
                         <dd>and increased their engagement and buy-in for the redesign project</dd>
                       </dl>
                     </dd>
-                    <dd>
-
-                    
-                      
-                      <strong>Key Findings</strong>: With these interviews, I convinced the stakeholders that redesigning a website is more than just changing its look and feel; the project should improve the site's status quo, provide solutions to the user's needs based on data & research, and accomplish business goals. Along with stakeholders and the development team, we then elevated the following needs to be of utmost importance for this project:
+                    <dd className="clearfix">
 
                       <a
                         href="/img/portfolio/gty9_project-requirements.jpg"
-                        className="cyril-project-figure float-right w-30 mfp-image"
+                        className="cyril-project-figure float-right cyril-mt-40 w-30 mfp-image"
                         data-effect="mfp-zoom-in"
                       >                      
                         <div className="cyril-cover">
@@ -176,6 +189,10 @@ const page = () => {
                           </div>
                         </div>
                       </a>
+                      
+                      <strong>Key Findings</strong>: With these interviews, I convinced the stakeholders that redesigning a website is more than just changing its look and feel; the project should improve the site's status quo, provide solutions to the user's needs based on data & research, and accomplish business goals. Along with stakeholders and the development team, we then elevated the following needs to be of utmost importance for this project:
+
+                      
 
                       
 
@@ -205,11 +222,47 @@ const page = () => {
                     <dd>
                       Leveraged Google Analytics to gather quantitative data revealing user behavior patterns and website performance metrics
                       <dl>
-                        <dd>Tracked activities such as user sessions, user uniqueness & frequency, user age & gender, user language, user location, page views, page ranks, average session duration, bounce rates, acquisition & navigation paths, devices used, etc.</dd>
+                        <dd>
+                          Tracked activities such as user sessions, user uniqueness & frequency, user age & gender, user language, user location, page views, page ranks, average session duration, bounce rates, acquisition & navigation paths, devices used, etc.
+                          <figure className="cyril-video-container cyril-mt-20 cyril-mb-40">
+                            <video
+                              src="/img/portfolio/gty9_google-analytics.mp4"
+                              className="cyril-video"
+                              width="100%"
+                              // height="100%" 
+                              style={{ display: 'block' }}
+                              controls
+                              loop
+                              autoPlay
+                              muted
+                              playsInline // Important for iOS inline playback
+                              controlsList="nodownload"
+                            >
+                              Your browser does not support the video tag.
+                            </video>
+                          </figure>
+                        </dd>
                       </dl>
                     </dd>
                     <dd>
                       Conducted surveys with existing users and organization employees to gather qualitative data identifying pain points, user sentiment, satisfaction, and preferences
+                      <figure className="cyril-video-container cyril-mt-20 cyril-mb-40">
+                        <video
+                          src="/img/portfolio/gty9_interviews.mp4"
+                          className="cyril-video"
+                          width="100%"
+                          // height="100%" 
+                          style={{ display: 'block' }}
+                          controls
+                          loop
+                          autoPlay
+                          muted
+                          playsInline // Important for iOS inline playback
+                          controlsList="nodownload"
+                        >
+                          Your browser does not support the video tag.
+                        </video>
+                      </figure>
                     </dd>
                     <dd>
                       <strong>Key Findings:</strong>
@@ -224,7 +277,25 @@ const page = () => {
                   <dl className="w-disc">
                     <dt>Competitive Analysis</dt>
                     <dd>
-                      Benchmarked against similar platforms like Ligonier.org, DesiringGod.org, TruthForLife.org, etc., in terms of their content offerings, content & navigation structure, search functionality, audience engagement, UX, SEO, and technology stack</dd>
+                      Benchmarked against similar platforms like Ligonier.org, DesiringGod.org, TruthForLife.org, etc., in terms of their content offerings, content & navigation structure, search functionality, audience engagement, UX, SEO, and technology stack
+                      <figure className="cyril-video-container cyril-mt-20 cyril-mb-40">
+                        <video
+                          src="/img/portfolio/gty9_tech-stack.mp4"
+                          className="cyril-video" 
+                          width="100%" 
+                          // height="100%" 
+                          style={{ display: 'block' }} 
+                          controls 
+                          loop 
+                          autoPlay 
+                          muted 
+                          playsInline // Important for iOS inline playback
+                          controlsList="nodownload"
+                        >
+                          Your browser does not support the video tag.
+                        </video>
+                      </figure>
+                    </dd>
                     <dd>
                       Observed trends in clean UI design, robust search functionality, mobile-first approaches, and social media integration</dd>
                     <dd>
@@ -237,6 +308,8 @@ const page = () => {
 
                   </dl>
 
+                  
+
                   <dl className="w-disc">
                     <dt>Content Audit</dt>
                     <dd>
@@ -244,6 +317,38 @@ const page = () => {
                     </dd>
                     <dd>
                       <strong>Key Initiatives:</strong> conducted and documented content inventory, site mapping, content evaluation, content performance & SEO analysis, content sorting & mapping & organization, content goals & alignment, content cleanup, content strategy planning
+                      <div className="row">
+                        <div className="col-md-6">
+                          <a
+                            href="/img/portfolio/gty9_content-inventory.jpg"
+                            className="cyril-project-figure cyril-mt-40 cyril-mb-40 mfp-image"
+                            data-effect="mfp-zoom-in"
+                          >
+                            <div className="cyril-cover">
+                              <img src="/img/portfolio/gty9_content-inventory.jpg" alt="cover" />
+                              <div className="cyril-hover-link">
+                                <i className="fa fa-search-plus" />
+                              </div>
+                            </div>
+                          </a>                  
+                        </div>
+                        <div className="col-md-6">
+                          <a
+                            href="/img/portfolio/gty9_sitemap.jpg"
+                            className="cyril-project-figure cyril-mt-40 cyril-mb-40 mfp-image"
+                            data-effect="mfp-zoom-in"
+                          >
+                            <div className="cyril-cover">
+                              <img src="/img/portfolio/gty9_sitemap.jpg" alt="cover" />
+                              <div className="cyril-hover-link">
+                                <i className="fa fa-search-plus" />
+                              </div>
+                            </div>
+                          </a>
+
+                        </div>
+
+                      </div>
                     </dd>
                     <dd>
                       <strong>Collaboration:</strong> worked with the Editorial Director, Chief Information Officer, and the Senior Software Architect in accomplishing the initiatives above
@@ -252,8 +357,9 @@ const page = () => {
                       <strong>Key Outcomes:</strong> Identified areas for improvement, made informed decisions about content strategy, organization, & optimization, and defined a more simplified content, site, & navigation structure—Listen, Watch, Read, Study, Shop
                     </dd>
                   </dl>
+                  
 
-                  <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
+                  <div className="cyril-divider cyril-mt-60 cyril-mb-60 clearfix" />
 
                   <h4 className="cyril-up cyril-mt-60 cyril-mb-30 cyril-text-center">Design Process</h4>
                   <dl className="w-disc">
@@ -263,35 +369,169 @@ const page = () => {
                       <dl>
                         <dd>These personas were used throughout the design and development process—from deciding on features to include in the design, to evaluating feature requirements—to ensure we're making intelligent, practical, and usable design and development solutions.</dd>
                       </dl>
+                      <a
+                        href="/img/portfolio/gty9_user-personas.jpg"
+                        className="cyril-project-figure cyril-mt-40 cyril-mb-40 w-70 mx-auto mfp-image"
+                        data-effect="mfp-zoom-in"
+                      >
+                        <div className="cyril-cover">
+                          <img src="/img/portfolio/gty9_user-personas.jpg" alt="cover" />
+                          <div className="cyril-hover-link">
+                            <i className="fa fa-search-plus" />
+                          </div>
+                        </div>
+                      </a>
                     </dd>
                     <dd>
                       Mapped user journeys to visualize the user's interactions across GTY's multiple platforms (apps, social media, etc.) and over an extended period of time, from initial awareness to post-purchase/donation engagement
                       <dl>
                         <dd>These journeys helped GTY understand the user's needs, pain points, and decision-making process so they can have an optimized experience that will increase content consumption and drive conversions or business success.</dd>
                       </dl>
+                      <a
+                        href="/img/portfolio/gty9_user-journeys.jpg"
+                        className="cyril-project-figure cyril-mt-40 cyril-mb-40 w-70 mx-auto mfp-image"
+                        data-effect="mfp-zoom-in"
+                      >
+                        <div className="cyril-cover">
+                          <img src="/img/portfolio/gty9_user-journeys.jpg" alt="cover" />
+                          <div className="cyril-hover-link">
+                            <i className="fa fa-search-plus" />
+                          </div>
+                        </div>
+                      </a>
                     </dd>
                     <dd>
                       Wrote user stories to express requirements in GTY's Agile software development and to describe features told from the perspective of the person—usually a user or a stakeholder—who desires a feature on a website so that they would be easily understandable to both developers and stakeholders
                       <dl>
-                        <dd><strong>Key Initiatives:</strong> These user stories were used as the basis for discussions, planning, and prioritization in GTY's agile development processes and as the basis for the project goals and principles.</dd>
-                        <dd><strong>Collaboration:</strong> Worked with the Senior Software Architect and the development team to write the project backlogs—a prioritized list of features and tasks based on their importance, value to the user base & stakeholders, and business goals—out of these user stories. The backlog acts as a tool for translating high-level visions into actionable details—MVP (Minimum Viable Product) list of user needs and stakeholder expectations, influencing the Senior Software Architect / Project Manager and the development team through the execution phase to achieve the project's goals efficiently.</dd>
+                        <dd>
+                          <strong>Key Initiatives:</strong> These user stories were used as the basis for discussions, planning, and prioritization in GTY's agile development processes and as the basis for the project goals and principles.
+                          <a
+                            href="/img/portfolio/gty9_user-stories.jpg"
+                            className="cyril-project-figure cyril-mt-40 cyril-mb-40 w-70 mx-auto mfp-image"
+                            data-effect="mfp-zoom-in"
+                          >
+                            <div className="cyril-cover">
+                              <img src="/img/portfolio/gty9_user-stories.jpg" alt="cover" />
+                              <div className="cyril-hover-link">
+                                <i className="fa fa-search-plus" />
+                              </div>
+                            </div>
+                          </a>
+                        </dd>
+                        <dd>
+                          <strong>Collaboration:</strong> Worked with the Senior Software Architect and the development team to write the project backlogs—a prioritized list of features and tasks based on their importance, value to the user base & stakeholders, and business goals—out of these user stories. The backlog acts as a tool for translating high-level visions into actionable details—MVP (Minimum Viable Product) list of user needs and stakeholder expectations, influencing the Senior Software Architect / Project Manager and the development team through the execution phase to achieve the project's goals efficiently.
+                          <a
+                            href="/img/portfolio/gty9_mvp.jpg"
+                            className="cyril-project-figure cyril-mt-40 cyril-mb-40 w-70 mx-auto mfp-image"
+                            data-effect="mfp-zoom-in"
+                          >
+                            <div className="cyril-cover">
+                              <img src="/img/portfolio/gty9_mvp.jpg" alt="cover" />
+                              <div className="cyril-hover-link">
+                                <i className="fa fa-search-plus" />
+                              </div>
+                            </div>
+                          </a>
+                        </dd>
                       </dl>
                     </dd>
                   </dl>
 
                   <dl className="w-disc">
                     <dt>Ideation</dt>
-                    <dd>Brainstormed solutions focusing on intuitive navigation, improved search functionality, and mobile-first / web app design approach</dd>
-                    <dd>Designed 3 sets of homepage mockups &#40;with dark modes&#41; to facilitate collaboration and foster alignment with the development team and stakeholders to establish the design direction, especially in terms of color, typography, and layout</dd>
-                    <dd>Collaborated with the development team to identify UI elements that would make the development process more efficient and more aligned with the GTY's technology stack. This collaboration also prepared the project team for the creation and development of the GTY's style guide and design system</dd>
+                    <dd>
+                      Collaborated with the development team to identify UI elements that would make the development process more efficient and more aligned with the GTY's technology stack. This collaboration also prepared the project team for the creation and development of the GTY's style guide and design system
+                      <div className="row">
+                        <div className="offset-md-2 col-md-8">
+                          <a
+                            href="/img/portfolio/gty9_homepage-components.jpg"
+                            className="cyril-project-figure cyril-mt-20 cyril-mb-20 w-80 mx-auto mfp-image"
+                            data-effect="mfp-zoom-in"
+                          >
+                            <div className="cyril-cover">
+                              <img src="/img/portfolio/gty9_homepage-components.jpg" alt="cover" />
+                              <div className="cyril-hover-link">
+                                <i className="fa fa-search-plus" />
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                        <div className="col-md-6">
+                          <a
+                            href="/img/portfolio/gty9_ui-inventory.jpg"
+                            className="cyril-project-figure cyril-mt-40 cyril-mb-20 mfp-image"
+                            data-effect="mfp-zoom-in"
+                          >
+                            <div className="cyril-cover">
+                              <img src="/img/portfolio/gty9_ui-inventory.jpg" alt="cover" />
+                              <div className="cyril-hover-link">
+                                <i className="fa fa-search-plus" />
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                        <div className="col-md-6">
+                          <a
+                            href="/img/portfolio/gty9_design-system.jpg"
+                            className="cyril-project-figure cyril-mt-40 cyril-mb-20 mfp-image"
+                            data-effect="mfp-zoom-in"
+                          >
+                            <div className="cyril-cover">
+                              <img src="/img/portfolio/gty9_design-system.jpg" alt="cover" />
+                              <div className="cyril-hover-link">
+                                <i className="fa fa-search-plus" />
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>                      
+                    </dd>
+                    <dd>
+                      Brainstormed solutions focusing on intuitive navigation, improved search functionality, and mobile-first / web app design approach. This led to 3 sets of homepage mockups &#40;with dark modes&#41; to facilitate collaboration and foster alignment with the development team and stakeholders to establish the design direction, especially in terms of color, typography, and layout
+                    </dd>
                   </dl>
 
                   <dl className="w-disc">
                     <dt>Wireframes</dt>
-                    <dd>Designed low-fidelity wireframes focusing on the structure, functionality, and placement of key content and elements without delving into visual details like colors, typography, or images
-                      <dl>
-                        <dd>These wireframes served as blueprints for the design, helping the development team and stakeholders visualize the flow and hierarchy of content before moving into more detailed stages of providing mockups and prototypes</dd>
-                      </dl>
+                    <dd>
+                      <strong>Collaboration:</strong> Worked closely with the Senior Software Architect and the development team to definine and organize UI elements, components, pages, journeys into wireframe requirements, preparing and serving as the basis for the further development of GTY's design system
+                      <figure className="cyril-video-container cyril-mt-20 cyril-mb-40">
+                        <video
+                          src="/img/portfolio/gty9_wireframes-requirements.mp4"
+                          className="cyril-video"
+                          width="100%"
+                          // height="100%" 
+                          style={{ display: 'block' }}
+                          controls
+                          loop
+                          autoPlay
+                          muted
+                          playsInline // Important for iOS inline playback
+                          controlsList="nodownload"
+                        >
+                          Your browser does not support the video tag.
+                        </video>
+                      </figure>
+                    </dd>
+                    <dd>
+                      Designed low-fidelity wireframes focusing on the structure, functionality, and placement of key content and elements without delving into visual details like colors, typography, or images. These wireframes served as blueprints for the design, helping the development team and stakeholders visualize the flow and hierarchy of content before moving into more detailed stages of providing mockups and prototypes
+                      <figure className="cyril-video-container cyril-mt-20 cyril-mb-40">
+                        <video
+                          src="/img/portfolio/gty9_wireframes.mp4"
+                          className="cyril-video"
+                          width="100%"
+                          // height="100%" 
+                          style={{ display: 'block' }}
+                          controls
+                          loop
+                          autoPlay
+                          muted
+                          playsInline // Important for iOS inline playback
+                          controlsList="nodownload"
+                        >
+                          Your browser does not support the video tag.
+                        </video>
+                      </figure>
                     </dd>
                     <dd>
                       <strong>Key Outcomes:</strong> The wireframes helped the development team and the stakeholders reach a common understanding by clearly communicating the prioritization and placement of specific resources and content and how UIs will function
