@@ -306,12 +306,12 @@ const PortfolioIsotope = () => {
 
           {/* square . gracestream */}
           <div id="gracestream" data-project="gracestream" className="cyril-grid-item fil-branding">
-            <Link legacyBehavior href="/portfolio">
+            <Link legacyBehavior href="/portfolio/grace-stream">
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_grace-stream.jpg" alt="cover" />
-                  <div className="cyril-hover-link coming-soon">
-                    <span className="cyril-upper">Coming Soon</span>
+                  <div className="cyril-hover-link">
+                    <i className="fas fa-link" />
                   </div>
                 </div>
                 <div className="cyril-project-descr">

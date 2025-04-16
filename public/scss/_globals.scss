@@ -74,57 +74,74 @@ img.mfp-img {
 }
 
 .float-right {
-    float: right;
-    margin: 20px;
+    float: right!important;
+    margin: 0 0 40px 40px;
     @media screen and (max-width: 768px)  {
-        float: none;
+        float: none!important;
+        margin: 0 0 20px!important;
     }
 }
 
 .float-left {
-    float: left;
-    margin: 20px;
+    float: left!important;
+    margin: 0 40px 40px 0;
     @media screen and (max-width: 768px)  {
-        float: none;
+        float: none!important;
+        margin: 0 0 20px!important;
     }
 }
 
 .w-10 {
-    width: 10%;
+    width: 10%!important;
 }
 
 .w-20 {
-    width: 20%;
+    width: 20%!important;
 }
 
 .w-30 {
-    width: 30%;
+    width: 30%!important;
 }
 
 .w-40 {
-    width: 40%;
+    width: 40%!important;
 }
 
 .w-50 {
-    width: 50%;
+    width: 50%!important;
 }
 
 .w-60 {
-    width: 60%;
+    width: 60%!important;
 }
 
 .w-70 {
-    width: 70%;
+    width: 70%!important;
 }
 
 .w-80 {
-    width: 80%;
+    width: 80%!important;
 }
 
 .w-90 {
-    width: 90%;
+    width: 90%!important;
 }
 
 .w-100 {
-    width: 100%;
+    width: 100%!important;
+}
+
+@media screen and (max-width: 768px)  {
+    .w-10,
+    .w-20,
+    .w-30,
+    .w-40,
+    .w-50,
+    .w-60,
+    .w-70,
+    .w-80,
+    .w-90,
+    .w-100 {
+        width: 100%!important;
+    }
 }

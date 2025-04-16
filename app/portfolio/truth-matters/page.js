@@ -3,13 +3,7 @@
 import SiteLayout from "@/layout/SiteLayout";
 import { cyrilUtility } from "@/public/utility/index";
 import { useEffect, useState } from "react";
-import dynamic from 'next/dynamic';
 import { useRouter } from "next/navigation";
-
-
-const ReactPlayer = dynamic(() => import('react-player/lazy'), {
-  ssr: false,
-});
 
 const page = () => {
 
@@ -65,7 +59,7 @@ const page = () => {
 
             {/* top banner */}
             <div className="cyril-top-banner cyril-text-center">
-              <img className="w-borderx" src="/img/portfolio/main_truth-matters-podcast.jpg" alt="cover" />              
+              <img src="/img/portfolio/main_truth-matters-podcast.jpg" alt="cover" />              
               <h2 className="cyril-mt-60">Truth Matters Podcast</h2>
               <p className="cyril-upper cyril-mt-30 cyril-mb-40">
                 <span className="cyril-accent">Branding, UX Design, and Front-End Development</span>
@@ -126,11 +120,13 @@ const page = () => {
                     </div>
                   </div>
 
+                  <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
+
                   <h4 className="cyril-up cyril-mt-60 cyril-mb-30 cyril-text-center">Graphics &amp; Supporting Media</h4>
                   <p className="cyril-mt-40">
                     Each podcast episode has its own hero product/imagery and thematic layout, designed to reflect the subject matter while staying true to the brand system. I created all the assets in-house, including episode thumbnail, podcast artwork, website banners, and social share images. These were crafted to feel cohesive yet distinctive, giving each episode a unique identity within the larger Truth Matters Podcast brand.
                   </p>
-
+                  
                   <div className="row cyril-mt-40">
                     <div className="col-md-6 cyril-mb-30">
                       <img src="/img/portfolio/truth-matters_youtube-thumb-1.jpg" alt="cover" />
@@ -148,6 +144,8 @@ const page = () => {
                       <img src="/img/portfolio/truth-matters_apple-podacast.png" alt="cover" />
                     </div>
                   </div>
+
+                  <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
 
                   <h4 className="cyril-up cyril-mt-60 cyril-mb-30 cyril-text-center">UX Design, Web Development, &amp; Podcast Integration</h4>
                   <p className="cyril-mt-40">
