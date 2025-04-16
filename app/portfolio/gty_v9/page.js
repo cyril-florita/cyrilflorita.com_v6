@@ -4,14 +4,16 @@ import SiteLayout from "@/layout/SiteLayout";
 import { cyrilUtility } from "@/public/utility/index";
 import { useEffect, useState } from "react";
 import dynamic from 'next/dynamic';
+import { useRouter } from "next/navigation";
+
 
 const ReactPlayer = dynamic(() => import('react-player/lazy'), {
   ssr: false,
 });
-import Link from "next/link";
-
 
 const page = () => {
+
+  const router = useRouter();
 
   // Scroll Progress
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -29,6 +31,16 @@ const page = () => {
     cyrilUtility.trackScrollProgress(setScrollProgress);
 
   }, []);
+
+  // Function to handle back navigation and save scroll position
+  const handleBackToPortfolio = () => {
+    // Get the project ID or identifier
+    const projectId = 'gty9'; // This is the current project
+
+    // Save the project ID for the portfolio page to use
+    sessionStorage.setItem('returnToProject', projectId);
+    router.push('/portfolio');
+  };
 
   return (
     <SiteLayout>
@@ -356,23 +368,19 @@ const page = () => {
                     This reflection emphasizes that successful UX projects depend on careful planning, adherence to process, effective time management, and strong leadership. When these elements are neglected or disrupted, it can lead to delays, suboptimal designs, and strained team dynamics. By investing in qualified personnel and respecting the UX process, organizations can achieve better outcomes while fostering a collaborative environment that prioritizes both user satisfaction and business goals.
                   </p>
 
+                  {/* pagination */}
+                  <div className="cyril-pagination-panel cyril-mt-60">
+                    <button
+                      onClick={handleBackToPortfolio}
+                      className="cyril-button cyril-type-2 cyril-mb-30"
+                    >
+                      Back to Portfolio
+                    </button>
+                  </div>
+                  {/* end of pagination */}
+
                 </div>
                 {/* end of <div className="offset-lg-1-custom col-lg-9"> */}
-
-                {/* pagination */}
-                {/* <div className="offset-lg-1-custom col-lg-9 cyril-mt-60">
-
-                  <div className="cyril-pagination-panel">
-                    <a href="#" className="cyril-button cyril-type-2 cyril-mb-30">
-                      Previous Project
-                    </a>
-                    <a href="#" className="cyril-button cyril-mb-30">
-                      Next Project
-                    </a>
-                  </div>
-
-                </div> */}
-                {/* end of pagination */}
 
               </div>
               {/* end of .row */}

@@ -22,7 +22,7 @@ const page = () => {
   const handleBackToPortfolio = () => {
     // Get the project ID or identifier
     const projectId = 'sekihmentis'; // This is the current project
-    
+
     // Save the project ID for the portfolio page to use
     sessionStorage.setItem('returnToProject', projectId);
     router.push('/portfolio');
@@ -74,12 +74,8 @@ const page = () => {
                 </div>
                 {/* end of pagination */}
 
-
-
               </div>
               {/* end of <div className="offset-lg-1-custom col-lg-9"> */}
-
-
 
             </div>
             {/* end of .row */}

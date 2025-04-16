@@ -950,6 +950,15 @@ page
     margin: 0;
   }
 }
+.cyril-page.cyril-project-page ul {
+  margin-left: 60px;
+}
+.cyril-page.cyril-project-page img {
+  display: block;
+  width: 100%;
+  border: solid 2px #101010;
+  padding: 10px;
+}
 .cyril-page.cyril-project-page .cyril-top-banner {
   padding-bottom: 20px;
 }
@@ -958,9 +967,12 @@ page
   max-width: 1240px;
   display: block;
   margin: 0 auto 0;
+  border: none;
 }
-.cyril-page.cyril-project-page ul {
-  margin-left: 60px;
+.cyril-page.cyril-project-page .cyril-top-banner img.w-border {
+  border: solid 2px #101010;
+  padding: 10px;
+  width: 77%;
 }
 .cyril-page.cyril-project-page .cyril-project-content .cyril-project-main-graphic {
   display: block;
