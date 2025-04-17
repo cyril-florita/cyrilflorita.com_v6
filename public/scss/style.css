@@ -1938,6 +1938,11 @@ experience
   width: 70%;
   border-bottom: 2px solid #101010;
 }
+@media screen and (max-width: 1024px) {
+  .cyril-filter::before {
+    width: 100%;
+  }
+}
 .cyril-filter::after {
   content: "";
   position: absolute;
@@ -1945,6 +1950,11 @@ experience
   right: -5px;
   width: 70%;
   border-bottom: 2px solid rgba(16, 16, 16, 0.18);
+}
+@media screen and (max-width: 1024px) {
+  .cyril-filter::after {
+    width: 100%;
+  }
 }
 .cyril-filter ul {
   padding-left: 30px;
@@ -2004,10 +2014,20 @@ experience
     flex-direction: column;
     width: 100%;
   }
+  .cyril-filter ul::before {
+    content: "filter:";
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    display: inline-block;
+    font-style: italic;
+    font-size: 0.9em;
+  }
   .cyril-filter ul li {
+    display: block;
+    text-align: right;
     height: auto;
-    margin: 0;
-    margin-bottom: 15px;
+    margin: 0 0 10px;
   }
   .cyril-filter ul li:last-child {
     margin: 0;

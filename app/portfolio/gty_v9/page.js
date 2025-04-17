@@ -3,9 +3,7 @@
 import SiteLayout from "@/layout/SiteLayout";
 import { cyrilUtility } from "@/public/utility/index";
 import { useEffect, useState } from "react";
-import dynamic from 'next/dynamic';
 import { useRouter } from "next/navigation";
-
 
 const page = () => {
 
@@ -114,8 +112,7 @@ const page = () => {
                     <dd>Restrictive search results filtering and sorting mechanism</dd>
                     <dd>
                       Lack of continuity in experience, content presentation, and account management between GTY's website and its apps                      
-                                          
-                      
+
                       <figure className="cyril-video-container cyril-mt-20">
                         <video
                           src="/img/portfolio/gty9_problem-statement.mp4"
@@ -142,14 +139,11 @@ const page = () => {
                     <dd>
                       The new GTY website must broaden audience reach and improve engagement & retention by creating a more accessible and unified digital experience.
                     </dd>
-                  </dl>
-                  
+                  </dl>                
                   
                   <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
 
                   <h4 className="cyril-up cyril-mt-60 cyril-mb-30 cyril-text-center">Research</h4>
-
-                  
 
                   <dl className="w-disc">
                     <dt>Business Insights</dt>
@@ -191,11 +185,6 @@ const page = () => {
                       </a>
                       
                       <strong>Key Findings</strong>: With these interviews, I convinced the stakeholders that redesigning a website is more than just changing its look and feel; the project should improve the site's status quo, provide solutions to the user's needs based on data & research, and accomplish business goals. Along with stakeholders and the development team, we then elevated the following needs to be of utmost importance for this project:
-
-                      
-
-                      
-
 
                       <dl>
                         <dd>applied user-centric design</dd>
@@ -307,21 +296,18 @@ const page = () => {
                     </dd>
 
                   </dl>
-
-                  
-
+                 
                   <dl className="w-disc">
-                    <dt>Content Audit</dt>
+                    <dt>Content Audit &amp; Information Architecture</dt>
                     <dd>
-                      Implemented a systematic process of evaluating and analyzing the existing content on a website to assess its quality, relevance, performance, and effectiveness
-                    </dd>
-                    <dd>
-                      <strong>Key Initiatives:</strong> conducted and documented content inventory, site mapping, content evaluation, content performance & SEO analysis, content sorting & mapping & organization, content goals & alignment, content cleanup, content strategy planning
-                      <div className="row">
-                        <div className="col-md-6">
+                      <strong>Mapping the Content Landscape: </strong>I approached the redesign through the lens of Information Architecture &#40;IA&#41; to ensure not just the quality of the content, but its structure, findability, and overall usability.
+                      <dl>                        
+                        <dd>
+                          <strong>Key Initatives:</strong> I started by cataloging the entire site and content ecosystem&mdash;sermons, devotionals, articles, videos, and radio archives. I categorized all the content by their type&mdash;page, audio, video, image, and product. I also laid the current site map for to see and show the team how content and pages are interconnected in the site's ecosystem. For each content item, I noted key details: title, URL, content type, topic hierarchy, metadata, and how it fit within the existing navigation. This gave me a birds-eye view of what was there, what was working, and what wasn't.
+
                           <a
                             href="/img/portfolio/gty9_content-inventory.jpg"
-                            className="cyril-project-figure cyril-mt-40 cyril-mb-40 mfp-image"
+                            className="cyril-project-figure cyril-mt-20 cyril-mb-20 mfp-image"
                             data-effect="mfp-zoom-in"
                           >
                             <div className="cyril-cover">
@@ -330,35 +316,75 @@ const page = () => {
                                 <i className="fa fa-search-plus" />
                               </div>
                             </div>
-                          </a>                  
-                        </div>
-                        <div className="col-md-6">
+                          </a>
                           <a
-                            href="/img/portfolio/gty9_sitemap.jpg"
+                            href="/img/portfolio/gty9_v8-sitemap.jpg"
                             className="cyril-project-figure cyril-mt-40 cyril-mb-40 mfp-image"
                             data-effect="mfp-zoom-in"
                           >
                             <div className="cyril-cover">
-                              <img src="/img/portfolio/gty9_sitemap.jpg" alt="cover" />
+                              <img src="/img/portfolio/gty9_v8-sitemap.jpg" alt="cover" />
                               <div className="cyril-hover-link">
                                 <i className="fa fa-search-plus" />
                               </div>
                             </div>
                           </a>
 
-                        </div>
+                        </dd>
+                      </dl>
+                      Doing these allowed me to visualize the current information structure and begin reshaping it into something more intuitive. It wasn't just about what content existed—it was about how it was organized and how users could logically navigate through it.
+                      
+                    </dd>
 
-                      </div>
-                    </dd>
                     <dd>
-                      <strong>Collaboration:</strong> worked with the Editorial Director, Chief Information Officer, and the Senior Software Architect in accomplishing the initiatives above
+                      <strong>Evaluating Content Through a UX Lens:</strong> From there, I assessed each piece of content for clarity, relevance, and engagement. Was it still accurate? Was it performing well? Did it actually meet user needs?
+                      <dl>
+                        <dd>
+                          <strong>Collaboration:</strong> After I conducted an SEO Analysis, I worked with the Chief Information Officer and the Editorial Manager to determine what should be updated, merged, archived, or even removed. This wasn't just a cleanup exercise—it was about aligning content with the mental models of real users and supporting their journeys through the site.<br /><br />
+                          I laid the groundwork for ongoing content governance. I proposed a system where content could be regularly reviewed and restructured as needed, with IA guiding the progressive development of site content alongside user needs.<br /><br />
+                          My goal was to create a content ecosystem that was not only clean and accessible now but could adapt and scale with the ministry's growth over time.
+                          <a
+                            href="/img/portfolio/gty9_content-audit-meeting.jpg"
+                            className="cyril-project-figure w-50 cyril-mt-20 cyril-mb-20 mfp-image"
+                            data-effect="mfp-zoom-in"
+                          >
+                            <div className="cyril-cover">
+                              <img src="/img/portfolio/gty9_content-audit-meeting.jpg" alt="cover" />
+                              <div className="cyril-hover-link">
+                                <i className="fa fa-search-plus" />
+                              </div>
+                            </div>
+                          </a>                        
+                        </dd>
+                      </dl>                      
+                      
                     </dd>
+
                     <dd>
-                      <strong>Key Outcomes:</strong> Identified areas for improvement, made informed decisions about content strategy, organization, & optimization, and defined a more simplified content, site, & navigation structure—Listen, Watch, Read, Study, Shop
+                      <strong>Restructuring for Discoverability</strong>: Applying IA principles, I began shaping a clearer hierarchy and navigation system. I redefined categories based on user behavior and logical groupings, ensuring that pathways to content felt natural and easy to predict.
+                      <br /><br />
+                      I also refined labeling across the board—using language that was more human, less technical or internal. Moreover, I started identifying possible UI components that would solve how different content are presented. This step was crucial in improving not only the navigation and the search, but also GTY design system, while reducing friction for first-time users and longtime visitors alike.                      
+                      <a
+                        href="/img/portfolio/gty9_site-and-component-map.jpg"
+                        className="cyril-project-figure cyril-mt-20 cyril-mb-20 mfp-image"
+                        data-effect="mfp-zoom-in"
+                      >
+                        <div className="cyril-cover">
+                          <img src="/img/portfolio/gty9_site-and-component-map.jpg" alt="cover" />
+                          <div className="cyril-hover-link">
+                            <i className="fa fa-search-plus" />
+                          </div>
+                        </div>
+                      </a>
+
+                    </dd>
+
+                    <dd>
+                      <strong>Key Outcomes:</strong> Integrating IA into the content audit gave me a more strategic, user-centered framework to work from. It turned what could have been a backend cleanup into a critical UX touchpoint&mdash;ensuring that every piece of content had purpose, place, and value within the larger experience.<br /><br />                      
+                      Working with the team and key stakeholders, I identified areas for improvement, made informed decisions about content strategy, organization, & optimization, and defined a more simplified content, site, & navigation structure&mdash;<strong>Listen, Watch, Read, Study, Shop.</strong>
                     </dd>
                   </dl>
                   
-
                   <div className="cyril-divider cyril-mt-60 cyril-mb-60 clearfix" />
 
                   <h4 className="cyril-up cyril-mt-60 cyril-mb-30 cyril-text-center">Design Process</h4>

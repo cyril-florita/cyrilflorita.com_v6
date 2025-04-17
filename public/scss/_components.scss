@@ -1304,6 +1304,9 @@ experience
         right: 0;
         width: 70%;
         border-bottom: 2px solid $dark;
+        @media screen and (max-width: 1024px)  {
+            width: 100%;
+        }
     }
 
     &::after {
@@ -1313,6 +1316,9 @@ experience
         right: -5px;
         width: 70%;
         border-bottom: 2px solid $soft;
+        @media screen and (max-width: 1024px)  {
+            width: 100%;
+        }
     }
 
     & ul {
@@ -1381,10 +1387,21 @@ experience
             flex-direction: column;
             width: 100%;
 
+            &::before {
+                content: "filter:";
+                position: absolute;
+                top: 30px;
+                left: 30px;
+                display: inline-block;
+                font-style: italic;
+                font-size: 0.9em;
+            }
+
             & li {
+                display: block;
+                text-align: right; 
                 height: auto;
-                margin: 0;
-                margin-bottom: 15px;
+                margin: 0 0 10px;
 
                 &:last-child {
                     margin: 0;

@@ -178,13 +178,13 @@ const PortfolioIsotope = () => {
 
           {/* long . gty v8 */}
           <div id="gty8" data-project="gty8"  className="cyril-grid-item fil-uix">
-            <Link legacyBehavior href="/portfolio">
+            <Link legacyBehavior href="/portfolio/gty_v8">
               <div className="cyril-portfolio-item cyril-long-item cyril-mb-80">
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_gty8.jpg" alt="cover" />
                   <h3>Case<br />Study</h3>
-                  <div className="cyril-hover-link coming-soon">
-                    <span className="cyril-upper">Coming Soon</span>
+                  <div className="cyril-hover-link">
+                    <i className="fas fa-link" />
                   </div>
                 </div>
                 <div className="cyril-project-descr">
@@ -214,98 +214,8 @@ const PortfolioIsotope = () => {
             </Link>
           </div>
 
-          {/* wide . gty dashboard */}
-          <div id="gtydashboard" data-project="gtydashboard" className="cyril-grid-item fil-uix">
-            <Link legacyBehavior href="/portfolio">
-              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
-                <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_gty-dashboard.jpg" alt="cover" />
-                  <div className="cyril-hover-link coming-soon">
-                    <span className="cyril-upper">Coming Soon</span>
-                  </div>
-                </div>
-                <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">UI Design &amp; Front-End</p>
-                  <h4 className="cyril-up">GTY Dashboard</h4>
-                </div>
-              </div>
-            </Link>
-          </div>
-
-          {/* wide . gty v8 prototye */}
-          <div id="gty8prototype" data-project="gty8prototype" className="cyril-grid-item fil-uix">
-            <Link legacyBehavior href="/portfolio">
-              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
-                <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_gty8-prototype.jpg" alt="cover" />
-                  <div className="cyril-hover-link coming-soon">
-                    <span className="cyril-upper">Coming Soon</span>
-                  </div>
-                </div>
-                <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Prototyping</p>
-                  <h4 className="cyril-up">GTY Website, v.8</h4>
-                </div>
-              </div>
-            </Link>
-          </div>
-
-          {/* long . sekihmentis */}
-          <div id="sekihmentis" data-project="sekihmentis" className="cyril-grid-item fil-illustration">
-            <Link legacyBehavior href="/portfolio/sekihmentis">
-              <div className="cyril-portfolio-item cyril-long-item cyril-mb-80">
-                <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_sekihmentis.jpg" alt="cover" />
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
-                </div>
-                <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Illustration</p>
-                  <h4 className="cyril-up">SekihMentis</h4>
-                </div>
-              </div>
-            </Link>
-          </div>
-          
-          {/* wide . gty app . */}
-          <div id="gtyapp" data-project="gtyapp" className="cyril-grid-item fil-uix">
-            <Link legacyBehavior href="/portfolio">
-              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
-                <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_gty-app-landing.jpg" alt="cover" />
-                  <div className="cyril-hover-link coming-soon">
-                    <span className="cyril-upper">Coming Soon</span>
-                  </div>
-                </div>
-                <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Web Design &amp; Front-End</p>
-                  <h4 className="cyril-up">GTY App Landing Page</h4>
-                </div>
-              </div>
-            </Link>
-          </div>
-
-          {/* wide . blog graphics */}
-          <div id="gtyblog" data-project="gtyblog" className="cyril-grid-item fil-marketing">
-            <Link legacyBehavior href="/portfolio">
-              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
-                <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_gty-blog.jpg" alt="cover" />
-                  <div className="cyril-hover-link coming-soon">
-                    <span className="cyril-upper">Coming Soon</span>
-                  </div>
-                </div>
-                <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Marketing</p>
-                  <h4 className="cyril-up">GTY Blog Graphics</h4>
-                </div>
-              </div>
-            </Link>
-          </div>
-
           {/* square . gracestream */}
-          <div id="gracestream" data-project="gracestream" className="cyril-grid-item fil-branding">
+          <div id="gracestream" data-project="gracestream" className="cyril-grid-item fil-branding fil-uix">
             <Link legacyBehavior href="/portfolio/grace-stream">
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -317,42 +227,6 @@ const PortfolioIsotope = () => {
                 <div className="cyril-project-descr">
                   <p className="cyril-upper cyril-accent cyril-mb-10">Branding/UI/UX/Web</p>
                   <h4 className="cyril-up">Grace Stream</h4>
-                </div>
-              </div>
-            </Link>
-          </div>
-
-          {/* square . patricia macarthur */}
-          <div id="patriciamacarthur" data-project="patriciamacarthur" className="cyril-grid-item fil-branding">
-            <Link legacyBehavior href="/portfolio">
-              <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
-                <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_patricia-macarthur-pastoral-fund.jpg" alt="cover" />
-                  <div className="cyril-hover-link coming-soon">
-                    <span className="cyril-upper">Coming Soon</span>
-                  </div>
-                </div>
-                <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Branding</p>
-                  <h4 className="cyril-up">The Patricia MacArthur Pastoral Care Fund</h4>
-                </div>
-              </div>
-            </Link>
-          </div>
-
-          {/* square . illustration . he took my place */}
-          <div id="hetookmyplace" data-project="hetookmyplace"  className="cyril-grid-item fil-illustration">
-            <Link legacyBehavior href="/portfolio/he-took-my-place">
-              <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
-                <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_he-took-my-place.jpg" alt="cover" />
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
-                </div>
-                <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Illustration</p>
-                  <h4 className="cyril-up">He Took My Place</h4>
                 </div>
               </div>
             </Link>
@@ -376,19 +250,97 @@ const PortfolioIsotope = () => {
             </Link>
           </div>
 
-          {/* square . social media graphics */}
-          <div id="gtysocial" data-project="gtysocial" className="cyril-grid-item fil-marketing">
+          {/* long . sekihmentis */}
+          <div id="sekihmentis" data-project="sekihmentis" className="cyril-grid-item fil-illustration">
+            <Link legacyBehavior href="/portfolio/sekihmentis">
+              <div className="cyril-portfolio-item cyril-long-item cyril-mb-80">
+                <div className="cyril-cover">
+                  <img src="/img/portfolio/thumb_sekihmentis.jpg" alt="cover" />
+                  <div className="cyril-hover-link">
+                    <i className="fas fa-link" />
+                  </div>
+                </div>
+                <div className="cyril-project-descr">
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Illustration</p>
+                  <h4 className="cyril-up">SekihMentis</h4>
+                </div>
+              </div>
+            </Link>
+          </div>
+
+          {/* wide . gty dashboard */}
+          <div id="gtydashboard" data-project="gtydashboard" className="cyril-grid-item fil-uix">
             <Link legacyBehavior href="/portfolio">
+              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
+                <div className="cyril-cover">
+                  <img src="/img/portfolio/thumb_gty-dashboard.jpg" alt="cover" />
+                  <div className="cyril-hover-link coming-soon">
+                    <span className="cyril-upper">Coming Soon</span>
+                  </div>
+                </div>
+                <div className="cyril-project-descr">
+                  <p className="cyril-upper cyril-accent cyril-mb-10">UI Design &amp; Front-End</p>
+                  <h4 className="cyril-up">GTY Dashboard</h4>
+                </div>
+              </div>
+            </Link>
+          </div>
+
+          {/* wide . gty app . */}
+          <div id="gtyapp" data-project="gtyapp" className="cyril-grid-item fil-uix">
+            <Link legacyBehavior href="/portfolio">
+              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
+                <div className="cyril-cover">
+                  <img src="/img/portfolio/thumb_gty-app-landing.jpg" alt="cover" />
+                  <div className="cyril-hover-link coming-soon">
+                    <span className="cyril-upper">Coming Soon</span>
+                  </div>
+                </div>
+                <div className="cyril-project-descr">
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Web Design &amp; Front-End</p>
+                  <h4 className="cyril-up">GTY App Landing Page</h4>
+                </div>
+              </div>
+            </Link>
+          </div>
+
+          {/* square . illustration . he took my place */}
+          <div id="hetookmyplace" data-project="hetookmyplace"  className="cyril-grid-item fil-illustration">
+            <Link legacyBehavior href="/portfolio/he-took-my-place">
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_gty-social-media.jpg" alt="cover" />
+                  <img src="/img/portfolio/thumb_he-took-my-place.jpg" alt="cover" />
+                  <div className="cyril-hover-link">
+                    <i className="fas fa-link" />
+                  </div>
+                </div>
+                <div className="cyril-project-descr">
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Illustration</p>
+                  <h4 className="cyril-up">He Took My Place</h4>
+                </div>
+              </div>
+            </Link>
+          </div>
+        
+          
+          
+          
+
+          
+
+          {/* wide . marketing . blog graphics */}
+          <div id="gtyblog" data-project="gtyblog" className="cyril-grid-item fil-marketing">
+            <Link legacyBehavior href="/portfolio">
+              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
+                <div className="cyril-cover">
+                  <img src="/img/portfolio/thumb_gty-blog.jpg" alt="cover" />
                   <div className="cyril-hover-link coming-soon">
                     <span className="cyril-upper">Coming Soon</span>
                   </div>
                 </div>
                 <div className="cyril-project-descr">
                   <p className="cyril-upper cyril-accent cyril-mb-10">Marketing</p>
-                  <h4 className="cyril-up">GTY Social Media Graphics</h4>
+                  <h4 className="cyril-up">GTY Blog Graphics</h4>
                 </div>
               </div>
             </Link>
@@ -407,6 +359,42 @@ const PortfolioIsotope = () => {
                 <div className="cyril-project-descr">
                   <p className="cyril-upper cyril-accent cyril-mb-10">Marketing</p>
                   <h4 className="cyril-up">GTY Resources</h4>
+                </div>
+              </div>
+            </Link>
+          </div>
+
+          {/* square . social media graphics */}
+          <div id="gtysocial" data-project="gtysocial" className="cyril-grid-item fil-marketing">
+            <Link legacyBehavior href="/portfolio">
+              <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
+                <div className="cyril-cover">
+                  <img src="/img/portfolio/thumb_gty-social-media.jpg" alt="cover" />
+                  <div className="cyril-hover-link coming-soon">
+                    <span className="cyril-upper">Coming Soon</span>
+                  </div>
+                </div>
+                <div className="cyril-project-descr">
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Marketing</p>
+                  <h4 className="cyril-up">GTY Social Media Graphics</h4>
+                </div>
+              </div>
+            </Link>
+          </div>
+
+          {/* square . patricia macarthur */}
+          <div id="patriciamacarthur" data-project="patriciamacarthur" className="cyril-grid-item fil-branding">
+            <Link legacyBehavior href="/portfolio">
+              <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
+                <div className="cyril-cover">
+                  <img src="/img/portfolio/thumb_patricia-macarthur-pastoral-fund.jpg" alt="cover" />
+                  <div className="cyril-hover-link coming-soon">
+                    <span className="cyril-upper">Coming Soon</span>
+                  </div>
+                </div>
+                <div className="cyril-project-descr">
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Branding</p>
+                  <h4 className="cyril-up">The Patricia MacArthur Pastoral Care Fund</h4>
                 </div>
               </div>
             </Link>

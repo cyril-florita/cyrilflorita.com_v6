@@ -68,8 +68,6 @@ const page = () => {
                   I would always included this piece as part of my portfolio, even though it's not a professional one. It's a great way to showcase my skills and creativity, especially when I was just a beginner learning layout, typography, color theory, and various design styles. It's also exhibits my ability to design using industry-standard tools&mdash;and back then, Adobe Illustrator and Photoshop dominated the craft.
                 </p>
 
-                
-
                 {/* pagination */}
                 <div className="cyril-pagination-panel cyril-mt-60">
                   <button
