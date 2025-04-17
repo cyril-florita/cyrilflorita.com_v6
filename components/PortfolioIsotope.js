@@ -158,43 +158,6 @@ const PortfolioIsotope = () => {
             </Link>
           </div>
 
-          {/* square . truth matters podcast */}
-          <div id="truthmatters" data-project="truthmatters" className="cyril-grid-item fil-branding fil-uix">
-            <Link legacyBehavior href="/portfolio/truth-matters">
-              <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
-                <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_truth-matters-podcast.jpg" alt="cover" />
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
-                </div>
-                <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Branding/UI/UX/Web</p>
-                  <h4 className="cyril-up">Truth Matters Podcast</h4>
-                </div>
-              </div>
-            </Link>
-          </div>
-
-          {/* long . gty v8 */}
-          <div id="gty8" data-project="gty8"  className="cyril-grid-item fil-uix">
-            <Link legacyBehavior href="/portfolio/gty_v8">
-              <div className="cyril-portfolio-item cyril-long-item cyril-mb-80">
-                <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_gty8.jpg" alt="cover" />
-                  <h3>Case<br />Study</h3>
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
-                </div>
-                <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Web Design & Front-End</p>
-                  <h4 className="cyril-up">GTY Website, v.8</h4>
-                </div>
-              </div>
-            </Link>
-          </div>
-
           {/* wide . the study bible app */}
           <div id="thestudybible" data-project="thestudybible" className="cyril-grid-item fil-uix">
             <Link legacyBehavior href="/portfolio">
@@ -209,6 +172,45 @@ const PortfolioIsotope = () => {
                 <div className="cyril-project-descr">
                   <p className="cyril-upper cyril-accent cyril-mb-10">App Design</p>
                   <h4 className="cyril-up">The Study Bible App</h4>
+                </div>
+              </div>
+            </Link>
+          </div>
+
+          {/* long . gty v8 */}
+          <div id="gty8" data-project="gty8"  className="cyril-grid-item fil-uix">
+            <Link legacyBehavior href="/portfolio/">
+              <div className="cyril-portfolio-item cyril-long-item cyril-mb-80">
+                <div className="cyril-cover">
+                  <img src="/img/portfolio/thumb_gty8.jpg" alt="cover" />
+                  <h3>Case<br />Study</h3>
+                  <div className="cyril-hover-link coming-soon">
+                    <span className="cyril-upper">Coming Soon</span>
+                  </div>
+                </div>
+                <div className="cyril-project-descr">
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Web Design & Front-End</p>
+                  <h4 className="cyril-up">GTY Website, v.8</h4>
+                </div>
+              </div>
+            </Link>
+          </div>
+
+          
+
+          {/* square . truth matters podcast */}
+          <div id="truthmatters" data-project="truthmatters" className="cyril-grid-item fil-branding fil-uix">
+            <Link legacyBehavior href="/portfolio/truth-matters">
+              <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
+                <div className="cyril-cover">
+                  <img src="/img/portfolio/thumb_truth-matters-podcast.jpg" alt="cover" />
+                  <div className="cyril-hover-link">
+                    <i className="fas fa-link" />
+                  </div>
+                </div>
+                <div className="cyril-project-descr">
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Branding/UI/UX/Web</p>
+                  <h4 className="cyril-up">Truth Matters Podcast</h4>
                 </div>
               </div>
             </Link>

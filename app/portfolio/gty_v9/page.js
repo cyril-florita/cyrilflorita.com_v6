@@ -160,7 +160,7 @@ const page = () => {
                           </div>
                         </div>
                       </a>
-                      Conducted stakeholder interviews to gather insight into the organization's goals, challenges, and priorities. This process:
+                      I conducted stakeholder interviews to gather insight into the organization's goals, challenges, and priorities. This process:
                       <dl>
                         <dd>ensured the redesign aligns with broader organizational objectives while addressing specific departmental needs</dd>
                         <dd>minimized guesswork and reduced the risk of designing solutions that fail to address key problems or meet expectations</dd>
@@ -209,10 +209,10 @@ const page = () => {
                   <dl className="w-disc">
                     <dt>User Insights</dt>
                     <dd>
-                      Leveraged Google Analytics to gather quantitative data revealing user behavior patterns and website performance metrics
+                      I leveraged Google Analytics to gather quantitative data revealing user behavior patterns and website performance metrics.
                       <dl>
                         <dd>
-                          Tracked activities such as user sessions, user uniqueness & frequency, user age & gender, user language, user location, page views, page ranks, average session duration, bounce rates, acquisition & navigation paths, devices used, etc.
+                          I tracked activities such as user sessions, user uniqueness &amp; frequency, user age & gender, user language, user location, page views, page ranks, average session duration, bounce rates, acquisition & navigation paths, devices used, etc.
                           <figure className="cyril-video-container cyril-mt-20 cyril-mb-40">
                             <video
                               src="/img/portfolio/gty9_google-analytics.mp4"
@@ -234,7 +234,7 @@ const page = () => {
                       </dl>
                     </dd>
                     <dd>
-                      Conducted surveys with existing users and organization employees to gather qualitative data identifying pain points, user sentiment, satisfaction, and preferences
+                      I conducted surveys with existing users and organization employees to gather qualitative data identifying pain points, user sentiment, satisfaction, and preferences.
                       <figure className="cyril-video-container cyril-mt-20 cyril-mb-40">
                         <video
                           src="/img/portfolio/gty9_interviews.mp4"
@@ -266,7 +266,7 @@ const page = () => {
                   <dl className="w-disc">
                     <dt>Competitive Analysis</dt>
                     <dd>
-                      Benchmarked against similar platforms like Ligonier.org, DesiringGod.org, TruthForLife.org, etc., in terms of their content offerings, content & navigation structure, search functionality, audience engagement, UX, SEO, and technology stack
+                      I benchmarked against similar platforms like Ligonier.org, DesiringGod.org, TruthForLife.org, etc., in terms of their content offerings, content & navigation structure, search functionality, audience engagement, UX, SEO, and technology stack
                       <figure className="cyril-video-container cyril-mt-20 cyril-mb-40">
                         <video
                           src="/img/portfolio/gty9_tech-stack.mp4"
@@ -286,11 +286,11 @@ const page = () => {
                       </figure>
                     </dd>
                     <dd>
-                      Observed trends in clean UI design, robust search functionality, mobile-first approaches, and social media integration</dd>
+                      I then observed trends in clean UI design, robust search functionality, mobile-first approaches, and social media integration</dd>
                     <dd>
                       <strong>Key Findings:</strong>
                       <dl>
-                        <dd><strong>Strengths:</strong> Deep sermon archive, loyal following, consistent theology</dd>
+                        <dd><strong>Strengths:</strong> GTY has deep sermon archive, loyal following, and consistent theology</dd>
                         <dd><strong>Opportunities:</strong> GTY could expand into interactive or visual content, enhance mobile user experience, and broaden appeal beyond the current core demographic</dd>
                       </dl>
                     </dd>
@@ -391,7 +391,7 @@ const page = () => {
                   <dl className="w-disc">
                     <dt>User Personas, Journeys, and Stories</dt>
                     <dd>
-                      Created user personas to represent the wants, needs, and behavior patterns of GTY's target audience
+                      I created user personas to represent the wants, needs, and behavior patterns of GTY's target audience.
                       <dl>
                         <dd>These personas were used throughout the design and development process—from deciding on features to include in the design, to evaluating feature requirements—to ensure we're making intelligent, practical, and usable design and development solutions.</dd>
                       </dl>
@@ -409,7 +409,7 @@ const page = () => {
                       </a>
                     </dd>
                     <dd>
-                      Mapped user journeys to visualize the user's interactions across GTY's multiple platforms (apps, social media, etc.) and over an extended period of time, from initial awareness to post-purchase/donation engagement
+                      I then mapped user journeys to visualize the user's interactions across GTY's multiple platforms (apps, social media, etc.) and over an extended period of time, from initial awareness to post-purchase/donation engagement
                       <dl>
                         <dd>These journeys helped GTY understand the user's needs, pain points, and decision-making process so they can have an optimized experience that will increase content consumption and drive conversions or business success.</dd>
                       </dl>
@@ -427,10 +427,10 @@ const page = () => {
                       </a>
                     </dd>
                     <dd>
-                      Wrote user stories to express requirements in GTY's Agile software development and to describe features told from the perspective of the person—usually a user or a stakeholder—who desires a feature on a website so that they would be easily understandable to both developers and stakeholders
+                      I wrote user stories to express requirements in GTY's Agile software development and to describe features told from the perspective of the person&mdash;usually a user or a stakeholder&mdash;who desires a feature on a website so that they would be easily understandable to both developers and stakeholders.
                       <dl>
                         <dd>
-                          <strong>Key Initiatives:</strong> These user stories were used as the basis for discussions, planning, and prioritization in GTY's agile development processes and as the basis for the project goals and principles.
+                          <strong>Key Initiatives:</strong> I used these user stories as the basis for discussions, planning, and prioritization in GTY's agile development processes and as the basis for the project goals and principles.
                           <a
                             href="/img/portfolio/gty9_user-stories.jpg"
                             className="cyril-project-figure cyril-mt-40 cyril-mb-40 w-70 mx-auto mfp-image"
@@ -445,7 +445,7 @@ const page = () => {
                           </a>
                         </dd>
                         <dd>
-                          <strong>Collaboration:</strong> Worked with the Senior Software Architect and the development team to write the project backlogs—a prioritized list of features and tasks based on their importance, value to the user base & stakeholders, and business goals—out of these user stories. The backlog acts as a tool for translating high-level visions into actionable details—MVP (Minimum Viable Product) list of user needs and stakeholder expectations, influencing the Senior Software Architect / Project Manager and the development team through the execution phase to achieve the project's goals efficiently.
+                          <strong>Collaboration:</strong> I worked with the Senior Software Architect and the development team to write the project backlogs—a prioritized list of features and tasks based on their importance, value to the user base & stakeholders, and business goals—out of these user stories. The backlog acts as a tool for translating high-level visions into actionable details—MVP &#40;Minimum Viable Product&#40; list of user needs and stakeholder expectations, influencing the Senior Software Architect / Project Manager and the development team through the execution phase to achieve the project's goals efficiently.
                           <a
                             href="/img/portfolio/gty9_mvp.jpg"
                             className="cyril-project-figure cyril-mt-40 cyril-mb-40 w-70 mx-auto mfp-image"
@@ -466,7 +466,7 @@ const page = () => {
                   <dl className="w-disc">
                     <dt>Ideation</dt>
                     <dd>
-                      Collaborated with the development team to identify UI elements that would make the development process more efficient and more aligned with the GTY's technology stack. This collaboration also prepared the project team for the creation and development of the GTY's style guide and design system
+                      I collaborated with the development team to identify UI elements that would make the development process more efficient and more aligned with the GTY's technology stack. This collaboration also prepared the project team for the creation and development of the GTY's style guide and design system.
                       <div className="row">
                         <div className="offset-md-2 col-md-8">
                           <a
@@ -513,14 +513,55 @@ const page = () => {
                       </div>                      
                     </dd>
                     <dd>
-                      Brainstormed solutions focusing on intuitive navigation, improved search functionality, and mobile-first / web app design approach. This led to 3 sets of homepage mockups &#40;with dark modes&#41; to facilitate collaboration and foster alignment with the development team and stakeholders to establish the design direction, especially in terms of color, typography, and layout
+                      I brainstormed and researched solutions focusing on intuitive navigation, improved search functionality, and mobile-first / progressive web application design approach where the mobile version of the site will look and feel like a native Apple or Android app. I then presented these ideas to the Senior Software Architect and the development team to validate my ideas.
+
+                      <figure className="cyril-video-container cyril-mt-20 cyril-mb-40">
+                        <video
+                          src="/img/portfolio/gty9_progressive-web-app.mp4"
+                          className="cyril-video" 
+                          width="100%" 
+                          // height="100%" 
+                          style={{ display: 'block' }} 
+                          controls 
+                          loop 
+                          autoPlay 
+                          muted 
+                          playsInline // Important for iOS inline playback
+                          controlsList="nodownload"
+                        >
+                          Your browser does not support the video tag.
+                        </video>
+                      </figure>
+
+                    </dd>
+                    <dd>
+                      Having clearer insights and strategies for information architecture, UI/UX, and technology stack, I then designed 3 sets of homepage mockups. These were aimed to facilitate collaboration and foster alignment with the development team and stakeholders&mdash;to establish the design direction, especially in terms of layout, typography, and color. This step was necessary to ensure that the design and development process were moving in the same direction, and also to prepare and avoid any misunderstandings from the stakeholders about the next process of creating low-fidelity wireframes and prototypes.                      
+
+                      <figure className="cyril-video-container cyril-mt-20 cyril-mb-40">
+                        <video
+                          src="/img/portfolio/gty9_hi-fi-mockups.mp4"
+                          className="cyril-video" 
+                          width="100%" 
+                          // height="100%" 
+                          style={{ display: 'block' }} 
+                          controls 
+                          loop 
+                          autoPlay 
+                          muted 
+                          playsInline // Important for iOS inline playback
+                          controlsList="nodownload"
+                        >
+                          Your browser does not support the video tag.
+                        </video>
+                      </figure>
+
                     </dd>
                   </dl>
 
                   <dl className="w-disc">
                     <dt>Wireframes</dt>
                     <dd>
-                      <strong>Collaboration:</strong> Worked closely with the Senior Software Architect and the development team to definine and organize UI elements, components, pages, journeys into wireframe requirements, preparing and serving as the basis for the further development of GTY's design system
+                      <strong>Collaboration:</strong> I worked closely with the Senior Software Architect and the development team to definine and organize UI elements, components, pages, journeys into wireframe requirements, preparing and serving as the basis for the further development of GTY's design system.
                       <figure className="cyril-video-container cyril-mt-20 cyril-mb-40">
                         <video
                           src="/img/portfolio/gty9_wireframes-requirements.mp4"
@@ -540,7 +581,7 @@ const page = () => {
                       </figure>
                     </dd>
                     <dd>
-                      Designed low-fidelity wireframes focusing on the structure, functionality, and placement of key content and elements without delving into visual details like colors, typography, or images. These wireframes served as blueprints for the design, helping the development team and stakeholders visualize the flow and hierarchy of content before moving into more detailed stages of providing mockups and prototypes
+                      I then designed low-fidelity wireframes focusing on the structure, functionality, and placement of key content and elements without delving into visual details like colors, typography, or images. These wireframes served as blueprints for the design, helping the development team and stakeholders visualize the flow and hierarchy of content before moving into more detailed stages of providing mockups and prototypes.
                       <figure className="cyril-video-container cyril-mt-20 cyril-mb-40">
                         <video
                           src="/img/portfolio/gty9_wireframes.mp4"
@@ -560,23 +601,23 @@ const page = () => {
                       </figure>
                     </dd>
                     <dd>
-                      <strong>Key Outcomes:</strong> The wireframes helped the development team and the stakeholders reach a common understanding by clearly communicating the prioritization and placement of specific resources and content and how UIs will function
+                      <strong>Key Outcomes:</strong> The wireframes helped the development team and the stakeholders reach a common understanding by clearly communicating the prioritization and placement of specific resources and content and how UIs will function.
                     </dd>
                   </dl>
 
                   <dl className="w-disc">
                     <dt>Prototyping</dt>
-                    <dd>Designed high-fidelity interactive prototypes for mobile, tablet, laptop/desktop screens using Axure RP to simulate user interactions, test usability, and refine designs before development
+                    <dd>After getting alignment from the stakeholders about the hierarchy and presentation of the content on the homepage and other important pages via the wireframes, I designed high-fidelity interactive prototypes for mobile, tablet, laptop/desktop screens using Axure RP to simulate user interactions, test usability, and refine designs before development.
                       <dl>
-                        <dd>These prototypes closely represented what would be the final version of the design, including detailed UI elements & functionality, typography, color schemes, and animations.</dd>
+                        <dd>These prototypes closely represented what would be the final version of the design, including detailed UI elements &amp; functionality, typography, color schemes, and animations.</dd>
                         <dd>Stakeholders then would be able to visualize the final project more clearly, which facilitated approvals and alignment.</dd>
                       </dl>
                     </dd>
                     <dd>
-                      <strong>Time and Resource:</strong> Creating high-fidelity prototypes required significantly more effort than low-fidelity wireframes. This caused specific stakeholders to misunderstand and underappreciate the importance of this stage of the UX process in terms of project completion and timeline. And so, the stakeholders set a new but tighter deadline. As a response, the Senior Software Architect thought of outsourcing the design and development of the e-commerce aspect of the site, and also decided to bypass the UX process and the UX Designer for some of the key homepage elements by having the Front-End Developer develop designs on the fly.
+                      <strong>Time and Resource:</strong> Creating high-fidelity prototypes required significantly more effort than low-fidelity wireframes. This caused specific stakeholders to misunderstand and underappreciate the importance of this stage of the UX process in terms of project completion and timeline. And so, the stakeholders set a new but tighter deadline. As a response, the Senior Software Architect thought of outsourcing the design and development of the e-commerce aspect of the site, and also decided to bypass the UX process and the UX Designer for some of the key homepage elements&mdash;like the media player with playlist functionality&mdash;by having the Front-End Developer develop the designs on the fly.
                     </dd>
                     <dd>
-                      <strong>Challenges:</strong> Balancing modern design with the traditional & clean aesthetic expected by GTY.org's core audience and stakeholders presented a challenge. Specific stakeholders wanted the simplicity and minimalism of the current site &#40;version 8&#41; to be carried over to this new version. To this UX Designer, this would be the best approach to the redesign project so as not to frustrate users when introduced to a newer site version. The Senior Software Architect, however, thought that the minimalistic direction looked like a low-fidelity design, and so decided to bypass the UX process and delegated the design to the Front-End developer Moreover, at this point in the design process, the ministry partnered with a creative agency that focused more on branding and aesthetics rather than usability and functionality. The agency functioned as the authority over the originally implemented UX process and agile project & development process.
+                      <strong>Challenges:</strong> Balancing modern design with the traditional & clean aesthetic expected by GTY.org's core audience and stakeholders presented a challenge. Specific stakeholders wanted the simplicity and minimalism of the current site &#40;version 8&#41; to be carried over to this new version. To this UX Designer, this would be the best approach to the redesign project so as not to frustrate users when introduced to a newer site version. The Senior Software Architect, however, thought that the minimalistic direction looked like a low-fidelity design, and so decided to bypass the UX process and delegated the design to the Front-End developer. Moreover, at this point in the design process, the ministry partnered with a creative agency that focused more on branding and aesthetics rather than usability and functionality. The agency functioned as the authority over the originally implemented UX process and agile project & development process.
                     </dd>
                   </dl>
 
@@ -589,16 +630,18 @@ const page = () => {
                     <dd>Time is a pivotal factor in UX design. Rushing or bypassing essential stages like prototyping and testing can lead to suboptimal outcomes. </dd>
                     <dd>When time is not managed effectively, design decisions may rely on assumptions rather than user data, resulting in usability issues that require costly post-launch fixes.</dd>
                     <dd>Investing time upfront in research, prototyping, and testing ensures that usability problems are identified early, reducing rework and improving the final product's quality.</dd>
-                  </dl>
+                  </dl>                                  
 
                   <dl className="w-disc">
-                    <dt>Consequences of Abandoning the UX Process</dt>
-                    <dd>Skipping critical UX steps—such as thorough prototyping and testing—can result in designs that fail to meet user needs or align with organizational goals.</dd>
-                    <dd>The case study illustrates how abandoning the UX process led to confusion, inefficiencies, and delays. For instance:
+                    <dt>Possible Consequences of Abandoning the UX Process</dt>
+                    <dd>Skipping critical UX steps—such as thorough prototyping and testing can result in designs that fail to meet user needs or align with organizational goals.</dd>
+                    <dd>This case study illustrates how abandoning the UX process led to confusion, inefficiencies, and delays. For instance:
                       <dl>
                         <dd>
                           The Senior Software Architect bypassed the UX designer's input, delegating design tasks directly to a Front-End developer.</dd>
-                        <dd>A creative agency prioritized branding over usability, disrupting the original UX process and Agile development framework.</dd>
+                        <dd>
+                          Another project member disrupting the workload and process of the rest of the team.
+                        </dd>                       
                       </dl>
                     </dd>
                     <dd>These decisions not only compromised the design's functionality but also strained team dynamics and timelines.</dd>
@@ -606,8 +649,8 @@ const page = () => {
 
                   <dl className="w-disc">
                     <dt>The Importance of a Dedicated Project Manager</dt>
-                    <dd>In this case, the absence of a project manager led to poor task prioritization and misaligned expectations. The Senior Software Architect and this UX Designer had to juggle project management responsibilities alongside their core tasks and providing support and solutions to various departments, which further strained resources.</dd>
-                    <dd>In fairness to the stakeholders, they tried to provide a project manager. However, it was one who was not technically and experientially qualified. And so this resulted in confusion and strain among the project team regarding what or which work gets prioritized.</dd>
+                    <dd>In this case, the absence of a project manager led to poor task prioritization and misaligned expectations. The Senior Software Architect and this UX Designer had to juggle project management responsibilities for the redesign alongside their core tasks and providing support and solutions to various departments, which further strained resources.</dd>
+                    <dd>In fairness to the stakeholders, they tried to provide a project manager / coordinator. However, the provision was not technically and experientially qualified. This resulted in confusion and strain among the project team regarding what or which work gets prioritized. Furthermore, another team member &#40;developer&#41; was causing disruption to the workflow and workload of the front-end devleoper by directly working with certain stakeholders to deliver mini projects instead of consulting with the Senior Software Architect first. This team member did not deliver because of overpromising, leaving the mini project to be re-assigned to the rest of the team. </dd>
                     <dd>The lack of clear leadership resulted in delays and ultimately led stakeholders to make reactive decisions, such as letting go of this UX Designer&mdash;someone had to bear the blame for the supposed “delay” of the completion of the project.</dd>
                   </dl>
 
