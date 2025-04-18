@@ -750,11 +750,12 @@ dl.w-disc {
 dl.w-disc dd {
   display: list-item;
   padding-left: 15px;
-  margin-left: 15px;
+  margin-left: 45px;
 }
 @media screen and (max-width: 768px) {
   dl.w-disc dd {
     padding-left: 5px;
+    margin-left: 15px;
   }
 }
 dl.w-disc dd dl {
@@ -771,7 +772,16 @@ dl.no-disc dd {
 }
 dl.no-disc dd dl.w-disc {
   margin-top: 30px;
-  margin-left: 15px;
+  margin-left: 45px;
+}
+@media screen and (max-width: 768px) {
+  dl.no-disc dd dl.w-disc {
+    margin-left: 0;
+  }
+  dl.no-disc dd dl.w-disc dd {
+    padding-left: 5px;
+    margin-left: 15px;
+  }
 }
 
 .cyril-built {
@@ -2487,7 +2497,6 @@ back to top
 }
 @media screen and (max-width: 768px) {
   .cyril-project-figure {
-    width: 75%;
     margin: 20px auto;
   }
 }
