@@ -38,7 +38,7 @@ const Background = ( { bgImage = "img/cyril-profile-w-a-smile.jpg" } ) => {
                   <li>delivering measurable business growth</li>
                 </ul>
                 <p className="cyril-mb-30">
-                  My career opportunities span roles at multimedia &amp; software companies, design agencies, entertainment industries, financial institutions, printing companies, and non-profit organizations. And with these opportunities, I have consistently and successfully led projects while collaborating cross-functionally to deliver <strong>usable</strong>, <strong>profitable</strong>, and <strong>high-quality</strong> creative solutions.
+                  My career opportunities span roles at non-profit organizations, multimedia &amp; software companies, design agencies, entertainment industries, financial institutions, and printing companies. And with these opportunities, I have consistently led successful projects while collaborating cross-functionally to deliver <strong>usable</strong>, <strong>profitable</strong>, and <strong>high-quality</strong> creative solutions.
                 </p>
               </div>
             </div>

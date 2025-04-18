@@ -166,7 +166,7 @@ const PortfolioIsotope = () => {
                   <img src="/img/portfolio/thumb_the-study-bible-app.jpg" alt="cover" />
                   <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link coming-soon">
-                    <span className="cyril-upper">Coming Soon</span>
+                    <span className="cyril-upper">App Launching Soon</span>
                   </div>
                 </div>
                 <div className="cyril-project-descr">
@@ -179,13 +179,13 @@ const PortfolioIsotope = () => {
 
           {/* long . gty v8 */}
           <div id="gty8" data-project="gty8"  className="cyril-grid-item fil-uix">
-            <Link legacyBehavior href="/portfolio/">
+            <Link legacyBehavior href="/portfolio/gty_v8">
               <div className="cyril-portfolio-item cyril-long-item cyril-mb-80">
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_gty8.jpg" alt="cover" />
                   <h3>Case<br />Study</h3>
-                  <div className="cyril-hover-link coming-soon">
-                    <span className="cyril-upper">Coming Soon</span>
+                  <div className="cyril-hover-link">
+                    <i className="fas fa-link" />
                   </div>
                 </div>
                 <div className="cyril-project-descr">

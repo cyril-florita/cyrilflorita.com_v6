@@ -34,7 +34,7 @@ const Experience = () => {
                   className="swiper-container cyril-timeline-slider-2"
                 >
 
-                  <SwiperSlide className="swiper-slide">
+                  {/* <SwiperSlide className="swiper-slide">
                     <div className="cyril-icon-box cyril-type-2">
                       <div className="cyril-box-text">
                         <p className="cyril-upper cyril-text-lg cyril-mb-15">Freelance</p>
@@ -43,6 +43,22 @@ const Experience = () => {
                         </p>
                         <p>
                           Exploring the market while experimenting with new AI tools and technologies.
+                        </p>
+                      </div>
+                    </div>
+                  </SwiperSlide> */}
+
+                  <SwiperSlide className="swiper-slide">
+                    <div className="cyril-icon-box cyril-type-2">
+                      <div className="cyril-box-text">
+                        <p className="cyril-upper cyril-text-lg cyril-mb-15">
+                          Web Developer
+                        </p>
+                        <p className="cyril-upper cyril-mb-30 cyril-text-normal">
+                          Apr 2025 &mdash; <span className="cyril-accent">Today</span>
+                        </p>
+                        <p>
+                          <a className="cyril-text-underline" href="https://childrenshungerfund.org" target="_blank"><strong>Children's Hunger Fund</strong></a>, a Christian non-profit ministry based in Sylmar, CA.
                         </p>
                       </div>
                     </div>
