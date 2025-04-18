@@ -2378,6 +2378,10 @@ portfolio
   padding-top: 35px;
   text-align: center;
 }
+.cyril-portfolio-item .cyril-project-descr h4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
 .cyril-portfolio-item:hover .cyril-cover::after {
   transform: scale(0.96);
 }

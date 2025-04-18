@@ -54,7 +54,7 @@ const page = () => {
 
                 <div className="cyril-divider cyril-mb-60" />
 
-                <h4 className="cyril-up cyril-mb-30 cyril-text-center">A Desktop Wallpaper</h4>
+                <h4 className="cyril-up cyril-text-center">A Desktop Wallpaper</h4>
 
                 <p>Most of the time, your creativity is sparked by your passion. Whatever grips your heart tends to bleed through the works of your hand. And so I designed this piece as a desktop wallpaper for my Illustration class. I was in a period of my life when I was coming to grips with the reality of the gospel of the Lord and Savior Jesus Christ.</p>
 

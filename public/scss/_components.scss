@@ -1781,6 +1781,11 @@ portfolio
     & .cyril-project-descr {
         padding-top: 35px;
         text-align: center;
+        
+        & h4 {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
     }
 
     &:hover {

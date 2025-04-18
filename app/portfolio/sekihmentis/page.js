@@ -53,7 +53,7 @@ const page = () => {
 
                 <div className="cyril-divider cyril-mb-60" />
 
-                <h4 className="cyril-up cyril-mb-30 cyril-text-center">A MySpace Profile Background Graphic</h4>
+                <h4 className="cyril-up cyril-text-center">A MySpace Profile Background Graphic</h4>
                 <p>MySpace? Yes, it's been a minute since MySpace dominated the social media scene. But MySpace crawled, so that Facebook, Twitter, etc. could walk and run. Back then, if you could customize your profile page and make it look geat, you can set yourself apart from the rest of the profiles. And customization showcases not only your uniqueness and your design ;&#41; skillz, but also your HTML, CSS, and JavaScript chops&mdash;even if it's just for run.</p>
                 <p className="cyril-mt-40">
                   So I designed this piece for my MySpace profile as the background graphic. "SekihMentis" was my screen name in those days, and being a big fan of Transformers and guns, I thought it would be cool to have a grungy "Transformers: Autobots Big Gun" theme. </p>

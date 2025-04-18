@@ -94,7 +94,7 @@ const page = () => {
 
                 <div className="cyril-divider cyril-mb-60" />
 
-                <h4 className="cyril-up cyril-mb-40 cyril-text-center">Project Overview</h4>
+                <h4 className="cyril-up cyril-text-center">Project Overview</h4>
                 <p>GTY.org is a Christian platform offering biblical resources for personal growth & discipleship, study & teaching materials, and pastoral & theological training. Despite its valuable resource offerings, the current website—version 8—faces usability and business challenges such as outdated design & UI elements, limited content internationalization features, less efficient search functionality, and lack of continuity in content & account management between the website and GTY's other platforms.
                 </p>
                 <p className="cyril-mt-40">
@@ -103,7 +103,7 @@ const page = () => {
 
                 <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
 
-                <h4 className="cyril-up cyril-mt-60 cyril-mb-40 cyril-text-center">Problem Statement</h4>
+                <h4 className="cyril-up cyril-text-center">Problem Statement</h4>
                 <p className="cyril-mb-20">The primary challenges identified for the redesign included:</p>
                 <dl className="w-disc">
                   <dd>Outdated visual design compared to modern web standards</dd>
@@ -137,7 +137,7 @@ const page = () => {
 
                 <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
 
-                <h4 className="cyril-up cyril-mt-60 cyril-mb-40 cyril-text-center">Research</h4>
+                <h4 className="cyril-up cyril-text-center">Research</h4>
 
                 <dl className="no-disc">
                   <dt>Business Insights</dt>
@@ -392,7 +392,7 @@ const page = () => {
 
                 <div className="cyril-divider cyril-mt-60 cyril-mb-60 clearfix" />
 
-                <h4 className="cyril-up cyril-mt-60 cyril-mb-40 cyril-text-center">Design Process</h4>
+                <h4 className="cyril-up cyril-text-center">Design Process</h4>
                 <dl className="w-disc">
                   <dt>User Personas, Journeys, and Stories</dt>
                   <dd>
@@ -626,7 +626,7 @@ const page = () => {
 
                 <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
 
-                <h4 className="cyril-up cyril-mt-60 cyril-mb-40 cyril-text-center">Reflection</h4>
+                <h4 className="cyril-up cyril-text-center">Reflection</h4>
 
                 <dl className="w-disc">
                   <dt>The Role of Time in UX Projects</dt>

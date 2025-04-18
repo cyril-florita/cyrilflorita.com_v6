@@ -95,7 +95,7 @@ const page = () => {
 
                   <div className="cyril-divider cyril-mb-60" />
 
-                  <h4 className="cyril-up cyril-mb-30 cyril-text-center">Project Overview</h4>
+                  <h4 className="cyril-up cyril-text-center">Project Overview</h4>
                   <p>
                     Grace Stream is a 24/7 online broadcasting platform created by Grace to You, featuring continuous teaching from John MacArthur's extensive library of sermons. Designed to provide uninterrupted access to biblically sound preaching, Grace Stream serves as a powerful resource for spiritual growth, encouragement, and discipleship. Whether you're tuning in during your morning commute, throughout your workday, or during quiet evening moments, Grace Stream delivers clear, uncompromising truth directly from God's Word&mdash;anytime, anywhere.
                   </p>
@@ -104,7 +104,7 @@ const page = () => {
 
                   <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
 
-                  <h4 className="cyril-up cyril-mt-60 cyril-mb-30 cyril-text-center">Concept, Branding, &amp; Visual Identity</h4>
+                  <h4 className="cyril-up cyril-text-center">Concept, Branding, &amp; Visual Identity</h4>
                   <p className="cyril-mt-40">
                     Grace Stream isn't just another media player—it's a 24/7 stream of John MacArthur's verse-by-verse teaching. That clarity and consistency inspired the branding approach: simple, strong, and steady. The Grace Stream wordmark is intentionally understated. It fits within the larger GTY brand ecosystem but has just enough of its own personality to stand on its own. It's designed to feel like a “channel” you can always trust. So for the logo, I knew I wanted to capture a sense of movement, peace, and spiritual depth — all while keeping things clean, modern, and versatile for both print and digital platforms. I then explored two options.
                   </p>
@@ -126,7 +126,7 @@ const page = () => {
                                
                   <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
 
-                  <h4 className="cyril-up cyril-mt-60 cyril-mb-30 cyril-text-center">UX/UI Design</h4>
+                  <h4 className="cyril-up cyril-text-center">UX/UI Design</h4>
                   <img className="float-right w-30" src="/img/portfolio/grace-stream_mobile-view.jpg" alt="cover" />
                   <p className="cyril-mt-40">
                     
@@ -135,7 +135,7 @@ const page = () => {
                   <p className="cyril-mt-40">
                     Everything is optimized to be mobile-first, since many users might tune in while driving, working, or doing other tasks. Every touchpoint&mdash;from the play button to the info modals&mdash;is streamlined for quick access and readability. The interface is built to load fast, get out of the way, and let the stream take center stage. I intentionally avoided heavy visuals or complex interactions. The “Stream Now” section gives users just enough context without overwhelming them, and the CTA is always accessible without being pushy.
                   </p>
-                  <h4 className="cyril-up cyril-mt-60 cyril-mb-30 cyril-text-center">Web Development, &amp; Integration of 24/7 Seamless Stream</h4>
+                  <h4 className="cyril-up cyril-text-center">Web Development, &amp; Integration of 24/7 Seamless Stream</h4>
                   <p className="cyril-mt-40">
                     This was a lean build, but a thoughtful one. Working with a Back-End Developer, I handled the front-end development, focusing on performance, responsiveness, and real-time functionality for the stream. We implemented logic to keep the stream information current, and made sure the media player behaves consistently across devices and browsers. Accessibility standards were a priority&mdash;every listener should have access, regardless of how they interact with the page.
                   </p>
@@ -158,6 +158,18 @@ const page = () => {
                   </p>
                   <p className="cyril-mt-40">
                     Check out how <a className="cyril-accent" href="https://www.gty.org/broadcasts/gracestream" target="_blank"><strong>Grace Stream</strong></a> offers continuous, scripture-rich content that's always available.                    
+                  </p>
+
+                  <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
+
+                  <h4 className="cyril-up cyril-text-center">Reflection</h4>
+
+                  <p className="cyril-mt-40">
+                    As the Product Designer & Web Developer for Grace Stream, I embraced the challenge of building a 24/7 online broadcasting platform that feels “quietly powerful”&mdash;not flashy or overdone, but a digital space where biblical truth streams without interruption and listeners can tune in without distraction. From the outset, I focused on delivering constant access to faithful Bible teaching, presented in a way that's clean, approachable, and timeless by crafting a minimal interface where every pixel was intentional, leveraging subtle gradients and soft neutrals to reinforce calm, focus, and trust—allowing the stream to take center stage and minimizing friction across devices and contexts.
+                  </p>
+
+                  <p className="cyril-mt-40">
+                    As a cross-functional parter to the Back-End Developer, Internet Ministry Coordinator, and Digital Platforms Director, I curated a looping playlist of John MacArthur's sermons and integrated a sett-and-forget-it live audio experience via Radio.co, customizing the embeddable player to match the GTY design language and dynamically update the “Now Playing” info. Grace Stream reinforced that effective product design isn't just about UI polish but about orchestrating technology, content, and mission-aligned strategy to deliver an experience that just works anytime, anywhere.
                   </p>
                   
                   {/* pagination */}

@@ -204,6 +204,7 @@ const PortfolioIsotope = () => {
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_truth-matters-podcast.jpg" alt="cover" />
+                  <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
                   </div>
@@ -222,6 +223,7 @@ const PortfolioIsotope = () => {
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_grace-stream.jpg" alt="cover" />
+                  <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
                   </div>
