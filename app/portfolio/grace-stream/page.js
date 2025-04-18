@@ -85,7 +85,7 @@ const page = () => {
                     </div>
                     <div className="col-md-6 cyril-mb-30">
                       <p className="cyril-upper cyril-mb-10">Start / Launch Date:</p>
-                      <p className="cyril-mt-20">May / June 2018</p>
+                      <p className="cyril-mt-20">June 2016 / Feb. 2017</p>
                     </div>
                     <div className="col-md-6 cyril-mb-30">
                       <p className="cyril-upper cyril-mb-10">Website:</p>

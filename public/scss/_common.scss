@@ -609,21 +609,22 @@ spaces
 }
 
 dl {
+    margin-top: 40px;
     margin-bottom: 30px;
 
     dt {
         font-weight: bold;
-        margin-bottom: 15px;
+        margin-bottom: 30px;
     }
 
     dd {
-        margin-bottom: 10px;
+        margin-bottom: 30px;
         margin-left: 40px;
     }
 
     &.w-disc {
         list-style-type: disc;
-
+        
         dd {
             display: list-item;
             padding-left: 15px;
@@ -635,13 +636,24 @@ dl {
 
             dl {
                 list-style-type: circle;
-                margin-top: 15px;
-                margin-bottom: 15px;
 
                 dd {
                     margin-left: 15px;
                 }
                 
+            }
+        }
+    }
+
+    &.no-disc {
+        list-style-type: none;
+        
+        dd {
+            margin-left: 0;
+
+            & dl.w-disc {
+                margin-top: 30px;
+                margin-left: 15px;
             }
         }
     }

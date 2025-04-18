@@ -82,514 +82,320 @@ const page = () => {
                     </div>
                     <div className="col-md-4 cyril-mb-30">
                       <p className="cyril-upper cyril-mb-10">Role:</p>
-                      <p className="cyril-mt-20">User Experience Designer</p>
+                      <p className="cyril-mt-20">Web Designer & Developer</p>
                     </div>
                     <div className="col-md-4 cyril-mb-30">
                       <p className="cyril-upper cyril-mb-10">Start / Launch Date:</p>
-                      <p className="cyril-mt-20">Nov. 2023 / May 2025</p>
+                      <p className="cyril-mt-20">Feb. 2015 / Feb. 2017</p>
                     </div>
                   </div>
 
                   <div className="cyril-divider cyril-mb-60" />
 
                   <h4 className="cyril-up cyril-mb-30 cyril-text-center">Project Overview</h4>
-                  <p>GTY.org is a Christian platform offering biblical resources for personal growth & discipleship, study & teaching materials, and pastoral & theological training.</p>
+                  <p>GTY.org &#40;Grace to You&#41; serves as the digital home for John MacArthur's teaching ministry, offering sermons, articles, and resources to a global audience. The ministry began in 1969 as a small tape ministry and has since evolved into a comprehensive media organization distributing biblical teaching through multiple channels.</p>
                   <p className="cyril-mt-40">
-                    Despite its valuable resource offerings, the current website—version 8—faces usability and business challenges such as outdated design & UI elements, limited content internationalization features, less efficient search functionality, and lack of continuity in content & account management between the website and GTY's other platforms.
+                    This case study examines the UX design and front-end development strategies that shaped version 8 of GTY's website. When I joined the organization, version 7 was content-rich but was visually dated, not mobile-responsive, and functionally fragmented across platforms. My job was to elevate the user experience and modernize its front-end architecture without compromising the trust and familiarity that long-time users valued while strengthening the ministry's mission of &ldquo;Unleashing God's Truth, One Verse at a Time.&ldquo;
                   </p>
-                  <p className="cyril-mt-40">
-                    This case study focuses on redesigning GTY.org to broaden audience reach and improve engagement & retention by creating a more accessible and unified digital experience while maintaining its core mission of delivering high-quality theological content.</p>
-                  <p className="cyril-text-sm cyril-accent cyril-mt-30"><strong>&#40;Screenshots of the processes and the designs will be supplied in the appropriate sections of this study once the project has launched.&#41;</strong></p>
 
                   <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
 
                   <h4 className="cyril-up cyril-mt-60 cyril-mb-30 cyril-text-center">Problem Statement</h4>
                   <dl className="w-disc">
-                    <dt>Current Issues</dt>
-                    <dd>Outdated visual design compared to modern web standards</dd>
-                    <dd>Restrictive search results filtering and sorting mechanism</dd>
+                    <dt>The primary challenges identified for the redesign included:</dt>
+                    <dd><strong>Creating a mobile-responsive platform</strong> to accommodate more than 50% of visitors accessing the site from mobile devices</dd>
+                    <dd><strong>Improving content organization, navigation, and search functionality</strong> to enhance the discoverability of thousands of sermons and resources, which includes providing a topical index of all resources and materials</dd>
                     <dd>
-                      Lack of continuity in experience, content presentation, and account management between GTY's website and its apps                      
-
-                      <figure className="cyril-video-container cyril-mt-20">
-                        <video
-                          src="/img/portfolio/gty9_problem-statement.mp4"
-                          className="cyril-video" 
-                          width="100%" 
-                          // height="100%" 
-                          style={{ display: 'block' }} 
-                          controls 
-                          loop 
-                          autoPlay 
-                          muted 
-                          playsInline // Important for iOS inline playback
-                          controlsList="nodownload"
-                        >
-                          Your browser does not support the video tag.
-                        </video>
-                      </figure>
-                      
+                      <strong>Developing a cross-device compatible media player with a playlist feature</strong> to replace an outdated Flash-based system, which would provide a seamless listening/watching experience even while navigating the site, and which would increase usage time and retention
+                    </dd>
+                    <dd>
+                      <strong>Providing a 24/7 continuous streaming</strong> of John MacArthur's verse-by-verse teaching through the New Testament so users can tune in whenever they want, and listen for as long as they want, which would also increase usage time and retention
+                    </dd>
+                    <dd>
+                      <strong>Designing a frictionless donation and product purchase process and experience</strong> that would increase customer satisfaction and ministry revenue
+                    </dd>
+                    <dd>
+                      <strong>Developing personalized features and an account management system</strong> that would provide ways to increase engagement and synchronization
                     </dd>
                   </dl>
-
-                  <dl className="w-disc">
-                    <dt>Business Need</dt>
-                    <dd>
-                      The new GTY website must broaden audience reach and improve engagement & retention by creating a more accessible and unified digital experience.
-                    </dd>
-                  </dl>                
                   
                   <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
 
                   <h4 className="cyril-up cyril-mt-60 cyril-mb-30 cyril-text-center">Research</h4>
 
-                  <dl className="w-disc">
-                    <dt>Business Insights</dt>
+                  <dl className="no-disc">
+                    <dt>Discovery & UX Strategy</dt>
                     <dd>
-                      <a
-                        href="/img/portfolio/gty9_redesign-overview..jpg"
-                        className="cyril-project-figure float-right w-30 mfp-image"
-                        data-effect="mfp-zoom-in"
-                      >                      
-                        <div className="cyril-cover">
-                          <img src="/img/portfolio/gty9_redesign-overview.jpg" alt="cover" />
-                          <div className="cyril-hover-link">
-                            <i className="fa fa-search-plus" />
-                          </div>
-                        </div>
-                      </a>
-                      Conducted stakeholder interviews to gather insight into the organization's goals, challenges, and priorities. This process:
-                      <dl>
-                        <dd>ensured the redesign aligns with broader organizational objectives while addressing specific departmental needs</dd>
-                        <dd>minimized guesswork and reduced the risk of designing solutions that fail to address key problems or meet expectations</dd>
-                        <dd>ensured the project is grounded in accurate data rather than assumptions</dd>
-                        <dd>fostered trust and collaboration between stakeholders and the project team</dd>
-                        <dd>and increased their engagement and buy-in for the redesign project</dd>
-                      </dl>
-                    </dd>
-                    <dd className="clearfix">
-
-                      <a
-                        href="/img/portfolio/gty9_project-requirements.jpg"
-                        className="cyril-project-figure float-right cyril-mt-40 w-30 mfp-image"
-                        data-effect="mfp-zoom-in"
-                      >                      
-                        <div className="cyril-cover">
-                          <img src="/img/portfolio/gty9_project-requirements.jpg" alt="cover" />
-                          <div className="cyril-hover-link">
-                            <i className="fa fa-search-plus" />
-                          </div>
-                        </div>
-                      </a>
-                      
-                      <strong>Key Findings</strong>: With these interviews, I convinced the stakeholders that redesigning a website is more than just changing its look and feel; the project should improve the site's status quo, provide solutions to the user's needs based on data & research, and accomplish business goals. Along with stakeholders and the development team, we then elevated the following needs to be of utmost importance for this project:
-
-                      <dl>
-                        <dd>applied user-centric design</dd>
-                        <dd>giving / business content priority</dd>
-                        <dd>more intuitive navigation</dd>
-                        <dd>simplified yet robust search functionality</dd>
-                        <dd>improved mobile experience</dd>
-                        <dd>improved content organization</dd>
-                        <dd>content optimization & internationalization (need for translating materials)</dd>
-                        <dd>refined and expanded global reach</dd>
-                        <dd>enhanced user onboarding, engagement, and direction</dd>
-                        <dd>clearer & more successful user journey</dd>
-                        <dd>more consistent branding</dd>
-                        <dd>increased speed and performance</dd>
-                        <dd>better accessibility compliance</dd>
-                        <dd>real-time support with chat services</dd>
-                        <dd>enhanced security & trust-factor features</dd>
-                        <dd>improved user data gathering</dd>
-                      </dl>
-                    </dd>
-                  </dl>
-                  <dl className="w-disc">
-                    <dt>User Insights</dt>
-                    <dd>
-                      Leveraged Google Analytics to gather quantitative data revealing user behavior patterns and website performance metrics
-                      <dl>
-                        <dd>
-                          Tracked activities such as user sessions, user uniqueness & frequency, user age & gender, user language, user location, page views, page ranks, average session duration, bounce rates, acquisition & navigation paths, devices used, etc.
-                          <figure className="cyril-video-container cyril-mt-20 cyril-mb-40">
-                            <video
-                              src="/img/portfolio/gty9_google-analytics.mp4"
-                              className="cyril-video"
-                              width="100%"
-                              // height="100%" 
-                              style={{ display: 'block' }}
-                              controls
-                              loop
-                              autoPlay
-                              muted
-                              playsInline // Important for iOS inline playback
-                              controlsList="nodownload"
-                            >
-                              Your browser does not support the video tag.
-                            </video>
-                          </figure>
-                        </dd>
-                      </dl>
-                    </dd>
-                    <dd>
-                      Conducted surveys with existing users and organization employees to gather qualitative data identifying pain points, user sentiment, satisfaction, and preferences
-                      <figure className="cyril-video-container cyril-mt-20 cyril-mb-40">
-                        <video
-                          src="/img/portfolio/gty9_interviews.mp4"
-                          className="cyril-video"
-                          width="100%"
-                          // height="100%" 
-                          style={{ display: 'block' }}
-                          controls
-                          loop
-                          autoPlay
-                          muted
-                          playsInline // Important for iOS inline playback
-                          controlsList="nodownload"
-                        >
-                          Your browser does not support the video tag.
-                        </video>
-                      </figure>
-                    </dd>
-                    <dd>
-                      <strong>Key Findings:</strong>
-                      <dl>
-                        <dd>Users struggled with finding specific sermons or resources due to unclear categorization and less efficient search functionality</dd>
-                        <dd>Users were frustrated with how search results were organized according to their types; there is a lack of a simplified sorting/filtering mechanism</dd>
-                        <dd>Users encountered friction in the giving/donation experience when asked about ministry exposure attribution—where they listen/watch GTY materials. The friction caused users to spend more time in the experience than needed and suggested that the attribution section be a part of another experience, e.g., account creation</dd>
+                      With the help of the Internet Ministry Coordinator, I started with a deep dive into user behavior—analyzing user demographics, traffic source & patterns, device usage, content consumption, bounce rates, and feedback from the support team. GTY has a loyal audience, many of whom aren't tech-savvy. That meant the new experience needed to feel intuitive, lightweight, and content-focused.<br /><br />
+                      Here's what I concentrated on during this phase:
+                      <dl className="w-disc">
+                        <dd><strong>Accessibility & Responsiveness:</strong> The previous experience wasn't WCAG-compliant, especially for elderly users. Moreover, it wasn't mobile-friendly.</dd>
+                        <dd><strong>Content Organization and Findability:</strong> With decades of sermons and resources, the information architecture needed a major overhaul.</dd>
+                        <dd><strong>Aesthetic Sophistication and Simplicity:</strong> The brand is built on depth and clarity—this had to extend to the interface</dd>
+                        <dd><strong>Performance:</strong> The previous site was sluggish, making streaming or reading difficult in low-bandwidth areas.</dd>
                       </dl>
                     </dd>
                   </dl>
 
-                  <dl className="w-disc">
+                  <dl className="no-disc">
                     <dt>Competitive Analysis</dt>
                     <dd>
-                      Benchmarked against similar platforms like Ligonier.org, DesiringGod.org, TruthForLife.org, etc., in terms of their content offerings, content & navigation structure, search functionality, audience engagement, UX, SEO, and technology stack
-                      <figure className="cyril-video-container cyril-mt-20 cyril-mb-40">
-                        <video
-                          src="/img/portfolio/gty9_tech-stack.mp4"
-                          className="cyril-video" 
-                          width="100%" 
-                          // height="100%" 
-                          style={{ display: 'block' }} 
-                          controls 
-                          loop 
-                          autoPlay 
-                          muted 
-                          playsInline // Important for iOS inline playback
-                          controlsList="nodownload"
-                        >
-                          Your browser does not support the video tag.
-                        </video>
-                      </figure>
+                      I benchmarked GTY.org against similar platforms like Ligonier.org, DesiringGod.org, TruthForLife.org, etc., in terms of their content offerings, content & navigation structure, search functionality, audience engagement, UX, SEO, and technology stack.
                     </dd>
                     <dd>
-                      Observed trends in clean UI design, robust search functionality, mobile-first approaches, and social media integration</dd>
-                    <dd>
-                      <strong>Key Findings:</strong>
-                      <dl>
-                        <dd><strong>Strengths:</strong> Deep sermon archive, loyal following, consistent theology</dd>
-                        <dd><strong>Opportunities:</strong> GTY could expand into interactive or visual content, enhance mobile user experience, and broaden appeal beyond the current core demographic</dd>
-                      </dl>
-                    </dd>
-
-                  </dl>
-
-                  <dl className="w-disc">
-                    <dt>Content Audit</dt>
-                    <dd>
-                      Implemented a systematic process of evaluating and analyzing the existing content on a website to assess its quality, relevance, performance, and effectiveness
-                    </dd>
-                    <dd>
-                      <strong>Key Initiatives:</strong> conducted and documented content inventory, site mapping, content evaluation, content performance & SEO analysis, content sorting & mapping & organization, content goals & alignment, content cleanup, content strategy planning
-                      <div className="row">
-                        <div className="col-md-6">
-                          <a
-                            href="/img/portfolio/gty9_content-inventory.jpg"
-                            className="cyril-project-figure cyril-mt-40 cyril-mb-40 mfp-image"
-                            data-effect="mfp-zoom-in"
-                          >
-                            <div className="cyril-cover">
-                              <img src="/img/portfolio/gty9_content-inventory.jpg" alt="cover" />
-                              <div className="cyril-hover-link">
-                                <i className="fa fa-search-plus" />
-                              </div>
-                            </div>
-                          </a>                  
-                        </div>
-                        <div className="col-md-6">
-                          <a
-                            href="/img/portfolio/gty9_sitemap.jpg"
-                            className="cyril-project-figure cyril-mt-40 cyril-mb-40 mfp-image"
-                            data-effect="mfp-zoom-in"
-                          >
-                            <div className="cyril-cover">
-                              <img src="/img/portfolio/gty9_sitemap.jpg" alt="cover" />
-                              <div className="cyril-hover-link">
-                                <i className="fa fa-search-plus" />
-                              </div>
-                            </div>
-                          </a>
-
-                        </div>
-
-                      </div>
-                    </dd>
-                    <dd>
-                      <strong>Collaboration:</strong> worked with the Editorial Director, Chief Information Officer, and the Senior Software Architect in accomplishing the initiatives above
-                    </dd>
-                    <dd>
-                      <strong>Key Outcomes:</strong> Identified areas for improvement, made informed decisions about content strategy, organization, & optimization, and defined a more simplified content, site, & navigation structure—Listen, Watch, Read, Study, Shop
-                    </dd>
-                  </dl>
-                  
-                  <div className="cyril-divider cyril-mt-60 cyril-mb-60 clearfix" />
-
-                  <h4 className="cyril-up cyril-mt-60 cyril-mb-30 cyril-text-center">Design Process</h4>
-                  <dl className="w-disc">
-                    <dt>User Personas, Journeys, and Stories</dt>
-                    <dd>
-                      Created user personas to represent the wants, needs, and behavior patterns of GTY's target audience
-                      <dl>
-                        <dd>These personas were used throughout the design and development process—from deciding on features to include in the design, to evaluating feature requirements—to ensure we're making intelligent, practical, and usable design and development solutions.</dd>
-                      </dl>
-                      <a
-                        href="/img/portfolio/gty9_user-personas.jpg"
-                        className="cyril-project-figure cyril-mt-40 cyril-mb-40 w-70 mx-auto mfp-image"
-                        data-effect="mfp-zoom-in"
-                      >
-                        <div className="cyril-cover">
-                          <img src="/img/portfolio/gty9_user-personas.jpg" alt="cover" />
-                          <div className="cyril-hover-link">
-                            <i className="fa fa-search-plus" />
-                          </div>
-                        </div>
-                      </a>
-                    </dd>
-                    <dd>
-                      Mapped user journeys to visualize the user's interactions across GTY's multiple platforms (apps, social media, etc.) and over an extended period of time, from initial awareness to post-purchase/donation engagement
-                      <dl>
-                        <dd>These journeys helped GTY understand the user's needs, pain points, and decision-making process so they can have an optimized experience that will increase content consumption and drive conversions or business success.</dd>
-                      </dl>
-                      <a
-                        href="/img/portfolio/gty9_user-journeys.jpg"
-                        className="cyril-project-figure cyril-mt-40 cyril-mb-40 w-70 mx-auto mfp-image"
-                        data-effect="mfp-zoom-in"
-                      >
-                        <div className="cyril-cover">
-                          <img src="/img/portfolio/gty9_user-journeys.jpg" alt="cover" />
-                          <div className="cyril-hover-link">
-                            <i className="fa fa-search-plus" />
-                          </div>
-                        </div>
-                      </a>
-                    </dd>
-                    <dd>
-                      Wrote user stories to express requirements in GTY's Agile software development and to describe features told from the perspective of the person—usually a user or a stakeholder—who desires a feature on a website so that they would be easily understandable to both developers and stakeholders
-                      <dl>
-                        <dd>
-                          <strong>Key Initiatives:</strong> These user stories were used as the basis for discussions, planning, and prioritization in GTY's agile development processes and as the basis for the project goals and principles.
-                          <a
-                            href="/img/portfolio/gty9_user-stories.jpg"
-                            className="cyril-project-figure cyril-mt-40 cyril-mb-40 w-70 mx-auto mfp-image"
-                            data-effect="mfp-zoom-in"
-                          >
-                            <div className="cyril-cover">
-                              <img src="/img/portfolio/gty9_user-stories.jpg" alt="cover" />
-                              <div className="cyril-hover-link">
-                                <i className="fa fa-search-plus" />
-                              </div>
-                            </div>
-                          </a>
-                        </dd>
-                        <dd>
-                          <strong>Collaboration:</strong> Worked with the Senior Software Architect and the development team to write the project backlogs—a prioritized list of features and tasks based on their importance, value to the user base & stakeholders, and business goals—out of these user stories. The backlog acts as a tool for translating high-level visions into actionable details—MVP (Minimum Viable Product) list of user needs and stakeholder expectations, influencing the Senior Software Architect / Project Manager and the development team through the execution phase to achieve the project's goals efficiently.
-                          <a
-                            href="/img/portfolio/gty9_mvp.jpg"
-                            className="cyril-project-figure cyril-mt-40 cyril-mb-40 w-70 mx-auto mfp-image"
-                            data-effect="mfp-zoom-in"
-                          >
-                            <div className="cyril-cover">
-                              <img src="/img/portfolio/gty9_mvp.jpg" alt="cover" />
-                              <div className="cyril-hover-link">
-                                <i className="fa fa-search-plus" />
-                              </div>
-                            </div>
-                          </a>
-                        </dd>
-                      </dl>
+                      I then observed that GTY.org needed a clean UI design, an accessible topical index, a robust search functionality, a mobile-first content presentation and experience, and better social media integration.
                     </dd>
                   </dl>
 
-                  <dl className="w-disc">
-                    <dt>Ideation</dt>
+                  <dl className="no-disc">
+                    <dt>Information Architecture</dt>
                     <dd>
-                      Collaborated with the development team to identify UI elements that would make the development process more efficient and more aligned with the GTY's technology stack. This collaboration also prepared the project team for the creation and development of the GTY's style guide and design system
-                      <div className="row">
-                        <div className="offset-md-2 col-md-8">
-                          <a
-                            href="/img/portfolio/gty9_homepage-components.jpg"
-                            className="cyril-project-figure cyril-mt-20 cyril-mb-20 w-80 mx-auto mfp-image"
-                            data-effect="mfp-zoom-in"
-                          >
-                            <div className="cyril-cover">
-                              <img src="/img/portfolio/gty9_homepage-components.jpg" alt="cover" />
-                              <div className="cyril-hover-link">
-                                <i className="fa fa-search-plus" />
-                              </div>
-                            </div>
-                          </a>
-                        </div>
-                        <div className="col-md-6">
-                          <a
-                            href="/img/portfolio/gty9_ui-inventory.jpg"
-                            className="cyril-project-figure cyril-mt-40 cyril-mb-20 mfp-image"
-                            data-effect="mfp-zoom-in"
-                          >
-                            <div className="cyril-cover">
-                              <img src="/img/portfolio/gty9_ui-inventory.jpg" alt="cover" />
-                              <div className="cyril-hover-link">
-                                <i className="fa fa-search-plus" />
-                              </div>
-                            </div>
-                          </a>
-                        </div>
-                        <div className="col-md-6">
-                          <a
-                            href="/img/portfolio/gty9_design-system.jpg"
-                            className="cyril-project-figure cyril-mt-40 cyril-mb-20 mfp-image"
-                            data-effect="mfp-zoom-in"
-                          >
-                            <div className="cyril-cover">
-                              <img src="/img/portfolio/gty9_design-system.jpg" alt="cover" />
-                              <div className="cyril-hover-link">
-                                <i className="fa fa-search-plus" />
-                              </div>
-                            </div>
-                          </a>
-                        </div>
-                      </div>                      
-                    </dd>
-                    <dd>
-                      Brainstormed solutions focusing on intuitive navigation, improved search functionality, and mobile-first / web app design approach. This led to 3 sets of homepage mockups &#40;with dark modes&#41; to facilitate collaboration and foster alignment with the development team and stakeholders to establish the design direction, especially in terms of color, typography, and layout
-                    </dd>
-                  </dl>
-
-                  <dl className="w-disc">
-                    <dt>Wireframes</dt>
-                    <dd>
-                      <strong>Collaboration:</strong> Worked closely with the Senior Software Architect and the development team to definine and organize UI elements, components, pages, journeys into wireframe requirements, preparing and serving as the basis for the further development of GTY's design system
-                      <figure className="cyril-video-container cyril-mt-20 cyril-mb-40">
-                        <video
-                          src="/img/portfolio/gty9_wireframes-requirements.mp4"
-                          className="cyril-video"
-                          width="100%"
-                          // height="100%" 
-                          style={{ display: 'block' }}
-                          controls
-                          loop
-                          autoPlay
-                          muted
-                          playsInline // Important for iOS inline playback
-                          controlsList="nodownload"
-                        >
-                          Your browser does not support the video tag.
-                        </video>
-                      </figure>
-                    </dd>
-                    <dd>
-                      Designed low-fidelity wireframes focusing on the structure, functionality, and placement of key content and elements without delving into visual details like colors, typography, or images. These wireframes served as blueprints for the design, helping the development team and stakeholders visualize the flow and hierarchy of content before moving into more detailed stages of providing mockups and prototypes
-                      <figure className="cyril-video-container cyril-mt-20 cyril-mb-40">
-                        <video
-                          src="/img/portfolio/gty9_wireframes.mp4"
-                          className="cyril-video"
-                          width="100%"
-                          // height="100%" 
-                          style={{ display: 'block' }}
-                          controls
-                          loop
-                          autoPlay
-                          muted
-                          playsInline // Important for iOS inline playback
-                          controlsList="nodownload"
-                        >
-                          Your browser does not support the video tag.
-                        </video>
-                      </figure>
-                    </dd>
-                    <dd>
-                      <strong>Key Outcomes:</strong> The wireframes helped the development team and the stakeholders reach a common understanding by clearly communicating the prioritization and placement of specific resources and content and how UIs will function
-                    </dd>
-                  </dl>
-
-                  <dl className="w-disc">
-                    <dt>Prototyping</dt>
-                    <dd>Designed high-fidelity interactive prototypes for mobile, tablet, laptop/desktop screens using Axure RP to simulate user interactions, test usability, and refine designs before development
-                      <dl>
-                        <dd>These prototypes closely represented what would be the final version of the design, including detailed UI elements & functionality, typography, color schemes, and animations.</dd>
-                        <dd>Stakeholders then would be able to visualize the final project more clearly, which facilitated approvals and alignment.</dd>
+                      Anchoring my efforts and decisions to analytics and user feedback, I worked with key stakeholders and the Internet Ministry Coordinator to clearly define the top-level navigation structure and content taxonomy:
+                      <dl className="w-disc">
+                        <dd><strong>About:</strong> Information about Grace to You, John MacArthur, offices, and contact information</dd>
+                        <dd><strong>Broadcasts:</strong> Radio and television content, including shorter radio features and podcasts</dd>
+                        <dd><strong>Resources:</strong> Free teaching materials available in video, audio, reading, and print formats</dd>
+                        <dd><strong>Store:</strong> Purchasable materials, including Bibles, books, commentaries, and CDs</dd>
+                        <dd><strong>Apps:</strong> other platforms to enjoy the consumption GTY content and resources</dd>
+                        <dd><strong>Blog:</strong> one of the most popular and engaging content on the site</dd>
+                        <dd><strong>Devotionals:</strong> the source of daily and consistent traffic</dd>
+                        <dd><strong>Sermons:</strong> the bread and butter of the site</dd>
+                        <dd><strong>Donate:</strong> makes giving readily accessible, like most ministries do</dd>
                       </dl>
                     </dd>
                     <dd>
-                      <strong>Time and Resource:</strong> Creating high-fidelity prototypes required significantly more effort than low-fidelity wireframes. This caused specific stakeholders to misunderstand and underappreciate the importance of this stage of the UX process in terms of project completion and timeline. And so, the stakeholders set a new but tighter deadline. As a response, the Senior Software Architect thought of outsourcing the design and development of the e-commerce aspect of the site, and also decided to bypass the UX process and the UX Designer for some of the key homepage elements by having the Front-End Developer develop designs on the fly.
-                    </dd>
-                    <dd>
-                      <strong>Challenges:</strong> Balancing modern design with the traditional & clean aesthetic expected by GTY.org's core audience and stakeholders presented a challenge. Specific stakeholders wanted the simplicity and minimalism of the current site &#40;version 8&#41; to be carried over to this new version. To this UX Designer, this would be the best approach to the redesign project so as not to frustrate users when introduced to a newer site version. The Senior Software Architect, however, thought that the minimalistic direction looked like a low-fidelity design, and so decided to bypass the UX process and delegated the design to the Front-End developer Moreover, at this point in the design process, the ministry partnered with a creative agency that focused more on branding and aesthetics rather than usability and functionality. The agency functioned as the authority over the originally implemented UX process and agile project & development process.
+                      This organization represents a strategic simplification, helping users quickly locate content based on their needs and interests.
                     </dd>
                   </dl>
 
                   <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
 
-                  <h4 className="cyril-up cyril-mt-60 cyril-mb-30 cyril-text-center">Reflection</h4>
+                  <h4 className="cyril-up cyril-mt-60 cyril-mb-30 cyril-text-center">Software Architecture and Feature Enhancements</h4>
+                  <p>
+                    As the web designer and developer, I played a key role in shaping the visual and functional aspects of GTY version 8. Working closely with the Internet Ministry Coordinator, I helped translate high-level business goals into clear technical requirements and user-centric design solutions. We collaborated to define feature scopes, prioritize enhancements, and ensure the user experience aligned with the overall project vision.
+                  </p>
+                  <p className="cyril-mt-40">
+                    On the technical side, I worked closely with the Software Engineer and the Software Developer to design a scalable and modular software architecture. While the Engineer and the Developer handled data modeling, API development, server-side logic, and programming, I focused on front-end implementation—ensuring seamless integration with back-end services through APIs and efficient state management.
+                  </p>
+                  <p className="cyril-mt-40">
+                    Together, we enhanced existing features and introduced new ones, iterating based on user feedback, performance metrics, and stakeholder decisions. Our joint effort ensured the platform was visually appealing, robust, maintainable, and future-proof.
+                  </p>
 
-                  <dl className="w-disc">
-                    <dt>The Role of Time in UX Projects</dt>
-                    <dd>Time is a pivotal factor in UX design. Rushing or bypassing essential stages like prototyping and testing can lead to suboptimal outcomes. </dd>
-                    <dd>When time is not managed effectively, design decisions may rely on assumptions rather than user data, resulting in usability issues that require costly post-launch fixes.</dd>
-                    <dd>Investing time upfront in research, prototyping, and testing ensures that usability problems are identified early, reducing rework and improving the final product's quality.</dd>
-                  </dl>
-
-                  <dl className="w-disc">
-                    <dt>Consequences of Abandoning the UX Process</dt>
-                    <dd>Skipping critical UX steps—such as thorough prototyping and testing—can result in designs that fail to meet user needs or align with organizational goals.</dd>
-                    <dd>The case study illustrates how abandoning the UX process led to confusion, inefficiencies, and delays. For instance:
-                      <dl>
-                        <dd>
-                          The Senior Software Architect bypassed the UX designer's input, delegating design tasks directly to a Front-End developer.</dd>
-                        <dd>A creative agency prioritized branding over usability, disrupting the original UX process and Agile development framework.</dd>
+                  <dl className="no-disc cyril-mt-40">
+                    <dt>Technology Stack</dt>
+                    <dd>
+                      The project team made informed decisions to use:
+                      <dl className="w-disc">
+                        <dd><strong>ASP.NET Core MVC (Model-View-Controller)</strong> as the application framework and solution that will enable GTY.org to be a modern, robust, and high-performing platform that it needs to be</dd>
+                        <dd><strong>Google's Material Design System</strong> which implements modern HTML5, CSS3, and JavaScript practices for SEO optimization, accessibility, mobile-friendly & responsive layouts, consistent & modern design, and customizable and reusable UI components with pleasing micro-interactions.</dd>
+                        <dd><strong>Modern JavaScript frameworks and libraries</strong> for interactive elements, particularly the custom media player</dd>
+                        <dd><strong>APIs</strong> for integrating with podcast systems and other distribution channels</dd>
                       </dl>
                     </dd>
-                    <dd>These decisions not only compromised the design's functionality but also strained team dynamics and timelines.</dd>
                   </dl>
 
-                  <dl className="w-disc">
-                    <dt>The Importance of a Dedicated Project Manager</dt>
-                    <dd>In this case, the absence of a project manager led to poor task prioritization and misaligned expectations. The Senior Software Architect and this UX Designer had to juggle project management responsibilities alongside their core tasks and providing support and solutions to various departments, which further strained resources.</dd>
-                    <dd>In fairness to the stakeholders, they tried to provide a project manager. However, it was one who was not technically and experientially qualified. And so this resulted in confusion and strain among the project team regarding what or which work gets prioritized.</dd>
-                    <dd>The lack of clear leadership resulted in delays and ultimately led stakeholders to make reactive decisions, such as letting go of this UX Designer&mdash;someone had to bear the blame for the supposed “delay” of the completion of the project.</dd>
-                  </dl>
-
-                  <dl className="w-disc">
-                    <dt>Balancing Stakeholder Expectations</dt>
-                    <dd>The project revealed tensions between modern design principles and stakeholder preferences for minimalism. Misunderstandings about design fidelity &#40;e.g., mistaking minimalism for low-fidelity work&#41; created friction that could have been mitigated through better communication and leadership.</dd>
-                  </dl>
-
-                  <dl className="w-disc">
-                    <dt>Broader Takeaways</dt>
+                  <dl className="no-disc">
+                    <dt>Mobile-First Responsive Design</dt>
                     <dd>
-                      <strong>Adherence to Process:</strong> Skipping or altering established UX processes can derail projects by introducing inefficiencies and compromising user-centered outcomes.
+                      Prior to the 2017 overhaul, more than 50% of visitors accessed the site via mobile devices despite lacking proper mobile optimization. As a team, we prioritized responsive web design principles, ensuring content rendering in beautiful harmony with the user's particular device and screen size. This technical achievement involved:
+                      <dl className="w-disc">
+                        <dd>Fluid grid layouts adapting to viewport dimensions</dd>
+                        <dd>Flexible images scaling proportionally across devices</dd>
+                        <dd>Media queries serving optimized CSS for different breakpoints</dd>
+                        <dd>Touch-friendly interface elements replacing desktop-centric controls</dd>
+                      </dl>
                     </dd>
                     <dd>
-                      <strong>Leadership Matters:</strong> A skilled project manager ensures that all team members remain aligned with goals and timelines while mitigating risks like scope creep or stakeholder interference.
+                      The responsive approach eliminated pinch-zooming and horizontal scrolling issues that previously hindered mobile users. By embracing mobile-first principles, the ministry acknowledged shifting user behavior patterns while maintaining full functionality for desktop visitors.
                     </dd>
-                    <dd>
-                      <strong>Time Management:</strong> A well-managed UX project ensures that resources are allocated efficiently, avoiding overburdening team members or delaying critical milestones.
-                    </dd>
-
                   </dl>
 
-                  <p className="cyril-mt-40 cyril-mb-100">
-                    This reflection emphasizes that successful UX projects depend on careful planning, adherence to process, effective time management, and strong leadership. When these elements are neglected or disrupted, it can lead to delays, suboptimal designs, and strained team dynamics. By investing in qualified personnel and respecting the UX process, organizations can achieve better outcomes while fostering a collaborative environment that prioritizes both user satisfaction and business goals.
+                  <dl className="no-disc">
+                    <dt>Custom Media Player with Smart Transcript</dt>
+                    <dd>
+                      One of this project's most significant technical achievements was the development of a custom-built media player to replace the previous Flash-based one. The new player offers:
+                      <dl className="w-disc">
+                        <dd><strong>Cross-device compatibility</strong> where iOS and Android devices would not be a problem</dd>
+                        <dd><strong>Background playback continuity</strong> where the playback of audio or video persists when navigating between pages or switching browser tabs</dd>
+                        <dd><strong>Playlist functionality</strong> allowing users to queue multiple sermons</dd>
+                        <dd><strong>Smart Transcript feature</strong>, which synchronizes transcripts with their corresponding audio, highlighting phrases as they are spoken. This allows users to easily read along while listening to the sermon. Users can also start the audio at any point in the transcript by clicking on any word.</dd>
+                        <dd><strong>YouTube and Podcast distribution systems</strong> integration</dd>
+                        <dd><strong>Sermon downloads</strong> in MP3 or MP4 format</dd>
+                      </dl>
+                    </dd>
+                    <dd>
+                      This player is a cornerstone feature, directly supporting the ministry's primary mission of distributing biblical teaching.
+                    </dd>
+                  </dl>
+
+                  <dl className="no-disc">
+                    <dt>Enhanced Content Search and Discoverability</dt>
+                    <dd>
+                      Beyond structural changes, we improved content retrieval through:
+                      <dl className="w-disc">
+                        <dd><strong>Predictive Search:</strong> Context-aware suggestions for biblical passages and topics</dd>
+                        <dd><strong>Featured Content Modules/Slides:</strong> Editorial curation of popular and current blog series, timely and free resources, discounted products, and important announcements</dd>
+                        <dd><strong>Taxonomic Filtering:</strong> Sermon browsing by book, chapter, verse, or topic</dd>
+                        <dd><strong>Related Content Suggestions:</strong> Curated recommendations based on current page context</dd>
+                      </dl>
+                    </dd>
+                    <dd>
+                      These features work synergistically to help both new visitors and longtime followers locate relevant materials efficiently. The search functionality particularly benefits users seeking specific exegetical studies, reflecting John MacArthur's verse-by-verse teaching methodology
+                    </dd>
+                  </dl>
+
+                  <dl className="no-disc">
+                    <dt>User Account Ecosystem</dt>
+                    <dd>
+                      To create more and new ways for engagement, we personalized the following features:
+                      <dl className="w-disc">
+                        <dd><strong>Progress Tracking:</strong> Resume playback across sessions via session and authenticated access</dd>
+                        <dd><strong>Content Playlists:</strong> User-specific sermon collections persisting across devices</dd>
+                        <dd><strong>Notification Preferences:</strong> Customizable alerts for new content releases</dd>
+                        <dd><strong>Cross-Device Synchronization:</strong> Seamless transition between web and mobile app experiences</dd>
+                      </dl>
+                    </dd>
+                    <dd>
+                      Account system development required secure OAuth implementation and GDPR-compliant data practices, including clear privacy policy disclosures and granular consent management, especially in the EU. These features foster long-term user engagement while respecting evolving data protection regulations.
+                    </dd>
+                  </dl>
+
+                  <dl className="no-disc">
+                    <dt>Accessibility and Compliance</dt>
+                    <dd>
+                      We addressed multiple accessibility concerns and requirements:
+                      <dl className="w-disc">
+                        <dd><strong>WCAG 2.1 Compliance:</strong> Improved contrast ratios and keyboard navigation support</dd>
+                        <dd><strong>GDPR Adherence:</strong> EU user data protections implemented ahead of 2018 deadlines</dd>
+                        <dd><strong>Semantic HTML:</strong> Proper heading hierarchies and ARIA labels for screen readers</dd>
+                        <dd><strong>Alternative Media Delivery:</strong> Transcript availability alongside audio/video content</dd>
+                      </dl>
+                    </dd>
+                    <dd>
+                      These considerations expanded the ministry's reach to users with disabilities while mitigating legal risks in international markets. The GDPR implementation involved substantial backend modifications, including data encryption at rest and in transit.
+                    </dd>
+                  </dl>
+
+                  <dl className="no-disc">
+                    <dt>Multimedia Resource Hub</dt>
+                    <dd>
+                      The website functions as a centralized distribution point for diverse content formats:
+                      <dl className="w-disc">
+                        <dd><strong>Sermon Archives:</strong> 50+ years of sermon recordings in downloadable MP3 and MP4 format</dd>
+                        <dd><strong>Video Library:</strong> Studio-quality productions of conference messages and Q&A sessions</dd>
+                        <dd><strong>Textual Resources:</strong> Printable PDF manuscripts and blog-style articles</dd>
+                        <dd><strong>Live Streaming:</strong> Real-time broadcast capabilities for special events</dd>
+                      </dl>
+                    </dd>
+                    <dd>
+                      Resource diversification accommodates varied learning preferences while maintaining consistent theological messaging. The technical infrastructure supports scalable media storage and content delivery network (CDN) integration for global performance.
+                    </dd>
+                  </dl>
+
+                  <dl className="no-disc">
+                    <dt>Integrated Content Ecosystem Strategy</dt>
+                    <dd>
+                      While primarily a web property, we designed and developed the platform to connect to broader ministry initiatives:
+                      <dl className="w-disc">
+                        <dd><strong>Mobile App Syncing:</strong> Shared authentication with iOS/Android applications</dd>
+                        <dd><strong>Podcast Distribution:</strong> RSS feed generation for third-party platform syndication</dd>
+                        <dd><strong>E-Commerce Integration:</strong> Secure checkout system for physical and digital product sales</dd>
+                        <dd><strong>Email Newsletter System:</strong> Content updates and devotional series delivery</dd>
+                        <dd><strong>Social Media Platforms Integration:</strong> Seamless content sharing and engagement through integrations with Facebook, Instagram, X (formerly Twitter), Vimeo, and YouTube</dd>
+                      </dl>
+                    </dd>
+                    <dd>
+                      This ecosystem approach creates multiple entry points for user engagement while maintaining centralized content management. The decision to sunset legacy apps and favor unified web technologies demonstrates an ongoing commitment to platform coherence.
+                    </dd>
+                  </dl>
+
+                  <dl className="no-disc">
+                    <dt>Performance Considerations</dt>
+                    <dd>
+                      Performance optimization was crucial for a content-rich site with extensive media resources. We then employed techniques such as:
+                      <dl className="w-disc">
+                        <dd>Lazy loading of images and media content</dd>
+                        <dd>Progressive enhancement for varying connection speeds</dd>
+                        <dd>Caching strategies for frequently accessed content</dd>
+                        <dd>Optimized media delivery formats</dd>
+                        <dd>Minified code by reducing CSS/JS payload sizes through build processes</dd>
+                      </dl>
+                    </dd>
+                    <dd>
+                      These techniques help maintain sub-3-second load times despite complex page compositions.
+                    </dd>
+                  </dl>
+
+                  <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
+
+                  <h4 className="cyril-up cyril-mt-60 cyril-mb-30 cyril-text-center">Design and Development Process</h4>
+                  
+                  <dl className="no-disc">
+                    <dt>Producing Mockups and Prototypes</dt>
+                    <dd>
+                      As the web designer and developer, creating mockups and prototypes were the most exciting and foundational stages of the project. It's where the team's carefully planned ideas began to take visual shape, and I ensured that design and function started working in harmony. Here's what I aimed for:
+                      <dl className="w-disc">
+                        <dd>
+                          <strong>Project Team and Stakeholder Alignment:</strong> By producing mockups, I prioritized alignment with the stakeholders—managers, content creators, and the engineering team. With the Internet Ministry Coordinator's supervision, I held collaborative sessions where we clarified the project's goals, user needs, and brand voice. This helped me avoid unnecessary revisions down the road, ensuring everyone felt seen and heard from the start.
+                        </dd>
+                        <dd>
+                          <strong>Clean, Minimal, yet Sophisticated Theming and Design:</strong> My design approach leaned heavily on simplicity without sacrificing depth and sophistication. I strived to design interfaces that felt intuitive and elegant—where every element had a purpose, and clutter was eliminated. To me, minimal design doesn't mean bland; it means the user's focus is guided exactly where it needs to be, with subtle layers of refinement that elevate the experience.
+                        </dd>
+                        <dd>
+                          <strong>Visual Direction—Font, Color, and Layout Choices:</strong> Working with GTY's design agency partner—WeKreative—I proposed font choices that they immediately loved and approved. Those fonts were carefully picked for legibility and clarity across platforms, whether on digital materials or print. For the serif font, I picked Google's Lora, which would be used for long-format content such as blog posts, articles, transcripts, and devotionals. And for the san-serif font, I picked Lato, which would be used for titles and short-format copy. For the color palette, WeKreative provided it so that the website would be aligned with GTY's brand, which had been consistent with the print materials that WeKreative had producing.
+                        </dd>
+                        <dd>
+                          <strong>Subtle, yet Pleasing UI Micro-interactions:</strong> This is where the experience really comes alive. I incorporated micro-interactions—like button animations, hover effects, and component and page transitions—to bring a joyful and pleasant experience to the user's journey on the website. These small touches may go unnoticed when done right, but they make the interface feel polished and professional. I always think about how these interactions to enhance usability while adding delight.
+                        </dd>
+                        <dd>
+                          <strong>Style Guide Preparation and Creation:</strong> Once the design language is solidified, I compile a detailed style guide to document all visual and functional components. This includes typography rules, color palette, spacing systems, and interaction patterns. It becomes the single source of truth for the entire team, ensuring consistency across pages, devices, and future iterations. It was a creative and strategic tool—crucial for scaling design efficiently.
+                        </dd>
+                      </dl>
+                    </dd>
+                  </dl>
+
+                  <dl className="no-disc">
+                    <dt>Designing on the Browser</dt>
+                    <dd>
+                      Due to resource and time constraints, and with the approval of the Digital Platforms Coordinator, I decided to design and develop the high-fidelity version of the pages on the browser.
+                    </dd>
+                    <dd>
+                      With defined information architecture, while leveraging <strong>Google's Material Design System</strong> and taking a <strong>mobile-first approach</strong>, I designed and developed the site's MVPs. With several windows in various screen sizes opened, I started <strong>code-designing</strong> the global components such as the navigation, footer, media player layer, search layer, cart and wishlist layer, and registration and sign-in layer.
+                    </dd>
+                    <dd>
+                      I then tackled the homepage, about pages, resource pages, giving pages, the store, product pages, checkout page, and account pages.
+                    </dd>
+                    <dd>
+                      I used HandlebarsJS to mock up and template the data and content so that I could freely and more efficiently design and develop without unnecessarily burdening and interfering with the back-end side of the development. This allowed the Software Engineer and the Software Developer to focus on the back-end side of the development at the same time as I would progress with cutting up the pages.
+                    </dd>
+                  </dl>
+
+                  <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
+
+                  <h4 className="cyril-up cyril-mt-60 cyril-mb-30 cyril-text-center">Results</h4>
+                  <p className="cyril-mb-20">
+                    The Grace to You website redesign successfully serves its loyal and new audience while perpetuating the ministry's 50+ year legacy through:
+                  </p>
+                  <dl className="w-disc">
+                    <dd><strong>Improved user engagement across devices</strong>, particularly a <strong>+38% increase</strong> for mobile users and a <strong>50% increase in usage time</strong> for desktop users</dd>
+                    <dd><strong>Monthly increase of ~25% in sermon plays and downloads</strong> through the enhanced media player since its launch</dd>
+                    <dd><strong>Greater exposure and accessibility of promoted and featured content</strong>, such as blog posts, free resource offers, and product sales, as evidenced by Google Analytics and heatmaps</dd>
+                    <dd><strong>User donation and product purchase experience and satisfaction are up</strong>, based on email feedback, calls, and support tickets</dd>
+                    <dd><strong>27% faster page loads</strong> across the board</dd>
+                    <dd><strong>Significantly improved accessibility scores</strong>, with Lighthouse ratings over 90</dd>
+                  </dl>
+                  <p className="cyril-mt-30">
+                    But more than metrics, the site now reflects the clarity, simplicity, quality, and timelessness of John MacArthur's preaching and teaching
+                  </p>
+
+                  <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
+
+                  <h4 className="cyril-up cyril-mt-60 cyril-mb-30 cyril-text-center">Reflection</h4>
+                  <p>
+                    Working on version 8 of GTY.org reminded me that the best UX isn't necessarily flashy—it's subtle and almost invisible. It gets out of the way so people can engage with the platform successfully and deeply, and that's exactly what we achieved here.
+                  </p>
+                  <p className="cyril-mt-40">
+                    I'm privileged to have contributed significantly to the craftsmanship, well-thought-out information architecture, user-centric decisions, and technological improvements that have made this platform more responsive, accessible, usable, and modern while staying true to the ministry's commitment of &ldquo;Unleashing God's Truth, One Verse at a Time.&rdquo;
                   </p>
 
                   {/* pagination */}
