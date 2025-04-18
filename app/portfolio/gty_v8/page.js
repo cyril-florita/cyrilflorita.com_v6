@@ -92,15 +92,57 @@ const page = () => {
 
                   <div className="cyril-divider cyril-mb-60" />
 
-                  <h4 className="cyril-up cyril-mb-30 cyril-text-center">Project Overview</h4>
-                  <p>GTY.org &#40;Grace to You&#41; serves as the digital home for John MacArthur's teaching ministry, offering sermons, articles, and resources to a global audience. The ministry began in 1969 as a small tape ministry and has since evolved into a comprehensive media organization distributing biblical teaching through multiple channels.</p>
-                  <p className="cyril-mt-40">
-                    This case study examines the UX design and front-end development strategies that shaped version 8 of GTY's website. When I joined the organization, version 7 was content-rich but was visually dated, not mobile-responsive, and functionally fragmented across platforms. My job was to elevate the user experience and modernize its front-end architecture without compromising the trust and familiarity that long-time users valued while strengthening the ministry's mission of &ldquo;Unleashing God's Truth, One Verse at a Time.&ldquo;
-                  </p>
+                  <h4 className="cyril-up cyril-text-center">Project Overview</h4>
+
+                  <dl className="no-disc">
+                    <dd>
+                      GTY.org &#40;Grace to You&#41; serves as the digital home for John MacArthur's teaching ministry, offering sermons, articles, and resources to a global audience. The ministry began in 1969 as a small tape ministry and has since evolved into a comprehensive media organization distributing biblical teaching through multiple channels.
+                    </dd>
+                    <dd>
+                      This case study examines the UX design and front-end development strategies that shaped version 8 of GTY's website. When I joined the organization, version 7 was content-rich but was visually dated, not mobile-responsive, and functionally fragmented across platforms. My job was to elevate the user experience and modernize its front-end architecture without compromising the trust and familiarity that long-time users valued while strengthening the ministry's mission of &ldquo;Unleashing God's Truth, One Verse at a Time.&ldquo;                      
+                    </dd>
+                  </dl>
+                  
+                  <div className="row">
+                    <div className="col-md-6 cyril-mt-10">
+                      <p className="cyril-upper cyril-text-sm cyril-mb-20 cyril-text-center">
+                        Before
+                      </p>
+                      <a
+                        href="/img/portfolio/gty7_screenshot.jpg"
+                        className="cyril-project-figure mfp-image"
+                        data-effect="mfp-zoom-in"
+                      >
+                        <div className="cyril-cover">
+                          <img src="/img/portfolio/gty7_screenshot.jpg" alt="cover" />
+                          <div className="cyril-hover-link">
+                            <i className="fa fa-search-plus" />
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                    <div className="col-md-6 cyril-mt-10">
+                      <p className="cyril-upper cyril-text-sm cyril-mb-20 cyril-text-center">
+                        After
+                      </p>
+                      <a
+                        href="/img/portfolio/gty8_screenshot.jpg"
+                        className="cyril-project-figure mfp-image"
+                        data-effect="mfp-zoom-in"
+                      >
+                        <div className="cyril-cover">
+                          <img src="/img/portfolio/gty8_screenshot.jpg" alt="cover" />
+                          <div className="cyril-hover-link">
+                            <i className="fa fa-search-plus" />
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
 
                   <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
 
-                  <h4 className="cyril-up cyril-mt-60 cyril-mb-30 cyril-text-center">Problem Statement</h4>
+                  <h4 className="cyril-up cyril-text-center">Problem Statement</h4>
                   <dl className="w-disc">
                     <dt>The primary challenges identified for the redesign included:</dt>
                     <dd><strong>Creating a mobile-responsive platform</strong> to accommodate more than 50% of visitors accessing the site from mobile devices</dd>
@@ -121,12 +163,12 @@ const page = () => {
                   
                   <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
 
-                  <h4 className="cyril-up cyril-mt-60 cyril-mb-30 cyril-text-center">Research</h4>
+                  <h4 className="cyril-up cyril-text-center">Research</h4>
 
                   <dl className="no-disc">
                     <dt>Discovery & UX Strategy</dt>
                     <dd>
-                      With the help of the Internet Ministry Coordinator, I started with a deep dive into user behavior—analyzing user demographics, traffic source & patterns, device usage, content consumption, bounce rates, and feedback from the support team. GTY has a loyal audience, many of whom aren't tech-savvy. That meant the new experience needed to feel intuitive, lightweight, and content-focused.<br /><br />
+                      With the leadership of the Internet Ministry Coordinator, I started with a deep dive into user behavior—analyzing user demographics, traffic source & patterns, device usage, content consumption, bounce rates, and feedback from the customer service team. GTY has a loyal audience, many of whom aren't tech-savvy. That meant the new experience needed to feel intuitive, lightweight, and content-focused.<br /><br />
                       Here's what I concentrated on during this phase:
                       <dl className="w-disc">
                         <dd><strong>Accessibility & Responsiveness:</strong> The previous experience wasn't WCAG-compliant, especially for elderly users. Moreover, it wasn't mobile-friendly.</dd>
@@ -143,7 +185,16 @@ const page = () => {
                       I benchmarked GTY.org against similar platforms like Ligonier.org, DesiringGod.org, TruthForLife.org, etc., in terms of their content offerings, content & navigation structure, search functionality, audience engagement, UX, SEO, and technology stack.
                     </dd>
                     <dd>
-                      I then observed that GTY.org needed a clean UI design, an accessible topical index, a robust search functionality, a mobile-first content presentation and experience, and better social media integration.
+                      I then observed that, compared to other ministries and to set itself apart, GTY.org needed: 
+                      <dl className="w-disc">
+                        <dd>a <strong>single-page app</strong> experience</dd>
+                        <dd>a <strong>mobile-first</strong> content presentation and experience</dd>
+                        <dd>a persistent <strong>media player</strong></dd>                       
+                        <dd>a <strong>clean UI</strong> design</dd>
+                        <dd>an accessible <strong>topical index</strong></dd>
+                        <dd>a <strong>robust search</strong> functionality</dd>                        
+                        <dd>and better <strong>social media integration</strong></dd>
+                      </dl>
                     </dd>
                   </dl>
 
@@ -170,26 +221,37 @@ const page = () => {
 
                   <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
 
-                  <h4 className="cyril-up cyril-mt-60 cyril-mb-30 cyril-text-center">Software Architecture and Feature Enhancements</h4>
-                  <p>
-                    As the web designer and developer, I played a key role in shaping the visual and functional aspects of GTY version 8. Working closely with the Internet Ministry Coordinator, I helped translate high-level business goals into clear technical requirements and user-centric design solutions. We collaborated to define feature scopes, prioritize enhancements, and ensure the user experience aligned with the overall project vision.
-                  </p>
-                  <p className="cyril-mt-40">
-                    On the technical side, I worked closely with the Software Engineer and the Software Developer to design a scalable and modular software architecture. While the Engineer and the Developer handled data modeling, API development, server-side logic, and programming, I focused on front-end implementation—ensuring seamless integration with back-end services through APIs and efficient state management.
-                  </p>
-                  <p className="cyril-mt-40">
-                    Together, we enhanced existing features and introduced new ones, iterating based on user feedback, performance metrics, and stakeholder decisions. Our joint effort ensured the platform was visually appealing, robust, maintainable, and future-proof.
-                  </p>
-
-                  <dl className="no-disc cyril-mt-40">
+                  <h4 className="cyril-up cyril-text-center">Software Architecture and Feature Enhancements</h4>
+                  
+                  <dl className="no-disc">
+                    <dd>
+                      As the web designer and developer, I played a key role in shaping the visual and functional aspects of GTY version 8. With the leadership of and working closely with the Internet Ministry Coordinator, I helped translate high-level business goals into clear technical requirements and user-centric design solutions. We collaborated to define feature scopes, prioritize enhancements, and ensure the user experience aligned with the overall vision for the project.
+                    </dd>
+                    <dd>
+                      On the technical side, I worked closely with the Software Engineer and the Software Developer to design a scalable and modular software architecture. While the Engineer and the Developer handled data modeling, API development, server-side logic, and programming, I focused on front-end web development&mdash;ensuring seamless integration of the UI with back-end services through APIs and efficient state management.                      
+                    </dd>
+                    <dd>
+                      Together, we enhanced existing features and introduced new ones, iterating based on user feedback, performance metrics, and stakeholder decisions. Our joint effort ensured the platform was visually appealing, robust, maintainable, and future-proof.
+                    </dd>
+                  </dl>
+                  
+                  <dl className="no-disc">
                     <dt>Technology Stack</dt>
                     <dd>
-                      The project team made informed decisions to use:
+                      The a development team, we made informed decisions to use:
                       <dl className="w-disc">
-                        <dd><strong>ASP.NET Core MVC (Model-View-Controller)</strong> as the application framework and solution that will enable GTY.org to be a modern, robust, and high-performing platform that it needs to be</dd>
-                        <dd><strong>Google's Material Design System</strong> which implements modern HTML5, CSS3, and JavaScript practices for SEO optimization, accessibility, mobile-friendly & responsive layouts, consistent & modern design, and customizable and reusable UI components with pleasing micro-interactions.</dd>
-                        <dd><strong>Modern JavaScript frameworks and libraries</strong> for interactive elements, particularly the custom media player</dd>
-                        <dd><strong>APIs</strong> for integrating with podcast systems and other distribution channels</dd>
+                        <dd>
+                          <strong>ASP.NET Core MVC (Model-View-Controller)</strong> as the application framework and solution that will enable GTY.org to be a modern, robust, and high-performing platform that it needs to be
+                        </dd>
+                        <dd>
+                          <strong>Google's Material Design System</strong> which implements modern HTML5, CSS3, and JavaScript practices for SEO optimization, accessibility, mobile-friendly & responsive layouts, consistent & modern design, and customizable and reusable UI components with pleasing micro-interactions
+                        </dd>
+                        <dd>
+                          <strong>Modern JavaScript frameworks and libraries</strong> for interactive elements, particularly the custom media player
+                        </dd>
+                        <dd>
+                          <strong>APIs</strong> for integrating with podcast systems and other distribution channels
+                        </dd>
                       </dl>
                     </dd>
                   </dl>
@@ -215,12 +277,24 @@ const page = () => {
                     <dd>
                       One of this project's most significant technical achievements was the development of a custom-built media player to replace the previous Flash-based one. The new player offers:
                       <dl className="w-disc">
-                        <dd><strong>Cross-device compatibility</strong> where iOS and Android devices would not be a problem</dd>
-                        <dd><strong>Background playback continuity</strong> where the playback of audio or video persists when navigating between pages or switching browser tabs</dd>
-                        <dd><strong>Playlist functionality</strong> allowing users to queue multiple sermons</dd>
-                        <dd><strong>Smart Transcript feature</strong>, which synchronizes transcripts with their corresponding audio, highlighting phrases as they are spoken. This allows users to easily read along while listening to the sermon. Users can also start the audio at any point in the transcript by clicking on any word.</dd>
-                        <dd><strong>YouTube and Podcast distribution systems</strong> integration</dd>
-                        <dd><strong>Sermon downloads</strong> in MP3 or MP4 format</dd>
+                        <dd>
+                          <strong>Cross-device compatibility</strong> where iOS and Android devices would not be a problem
+                        </dd>
+                        <dd>
+                          <strong>Background playback continuity</strong> where the playback of audio or video persists when navigating between pages or switching browser tabs
+                        </dd>
+                        <dd>
+                          <strong>Playlist functionality</strong> allowing users to queue multiple sermons
+                        </dd>
+                        <dd>
+                          <strong>Smart Transcript feature</strong>, which synchronizes transcripts with their corresponding audio, highlighting phrases as they are spoken. This allows users to easily read along while listening to the sermon. Users can also start the audio at any point in the transcript by clicking on any word.
+                        </dd>
+                        <dd>
+                          <strong>YouTube and Podcast distribution systems</strong> integration
+                        </dd>
+                        <dd>
+                          <strong>Sermon downloads</strong> in MP3 or MP4 format
+                        </dd>
                       </dl>
                     </dd>
                     <dd>
@@ -328,7 +402,7 @@ const page = () => {
 
                   <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
 
-                  <h4 className="cyril-up cyril-mt-60 cyril-mb-30 cyril-text-center">Design and Development Process</h4>
+                  <h4 className="cyril-up cyril-text-center">Design and Development Process</h4>
                   
                   <dl className="no-disc">
                     <dt>Producing Mockups and Prototypes</dt>
@@ -372,31 +446,37 @@ const page = () => {
 
                   <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
 
-                  <h4 className="cyril-up cyril-mt-60 cyril-mb-30 cyril-text-center">Results</h4>
-                  <p className="cyril-mb-20">
-                    The Grace to You website redesign successfully serves its loyal and new audience while perpetuating the ministry's 50+ year legacy through:
-                  </p>
-                  <dl className="w-disc">
-                    <dd><strong>Improved user engagement across devices</strong>, particularly a <strong>+38% increase</strong> for mobile users and a <strong>50% increase in usage time</strong> for desktop users</dd>
-                    <dd><strong>Monthly increase of ~25% in sermon plays and downloads</strong> through the enhanced media player since its launch</dd>
-                    <dd><strong>Greater exposure and accessibility of promoted and featured content</strong>, such as blog posts, free resource offers, and product sales, as evidenced by Google Analytics and heatmaps</dd>
-                    <dd><strong>User donation and product purchase experience and satisfaction are up</strong>, based on email feedback, calls, and support tickets</dd>
-                    <dd><strong>27% faster page loads</strong> across the board</dd>
-                    <dd><strong>Significantly improved accessibility scores</strong>, with Lighthouse ratings over 90</dd>
+                  <h4 className="cyril-up cyril-text-center">Results</h4>
+
+                  <dl className="no-disc">
+                    <dd>
+                      The Grace to You website redesign successfully serves its loyal and new audience while perpetuating the ministry's 50+ year legacy through:
+                      <dl className="w-disc">
+                        <dd><strong>Improved user engagement across devices</strong>, particularly a <strong>+38% increase</strong> for mobile users and a <strong>50% increase in usage time</strong> for desktop users</dd>
+                        <dd><strong>Monthly increase of ~25% in sermon plays and downloads</strong> through the enhanced media player since its launch</dd>
+                        <dd><strong>Greater exposure and accessibility of promoted and featured content</strong>, such as blog posts, free resource offers, and product sales, as evidenced by Google Analytics and heatmaps</dd>
+                        <dd><strong>User donation and product purchase experience and satisfaction are up</strong>, based on email feedback, calls, and support tickets</dd>
+                        <dd><strong>27% faster page loads</strong> across the board</dd>
+                        <dd><strong>Significantly improved accessibility scores</strong>, with Lighthouse ratings over 90</dd>
+                      </dl>
+                    </dd>
+                    <dd>
+                    But more than metrics, the site now reflects the clarity, simplicity, quality, and timelessness of John MacArthur's preaching and teaching. It's a testament to the ministry's commitment to providing high-quality, timeless content that resonates with the audience.
+                    </dd>
                   </dl>
-                  <p className="cyril-mt-30">
-                    But more than metrics, the site now reflects the clarity, simplicity, quality, and timelessness of John MacArthur's preaching and teaching
-                  </p>
 
                   <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
 
-                  <h4 className="cyril-up cyril-mt-60 cyril-mb-30 cyril-text-center">Reflection</h4>
-                  <p>
-                    Working on version 8 of GTY.org reminded me that the best UX isn't necessarily flashy—it's subtle and almost invisible. It gets out of the way so people can engage with the platform successfully and deeply, and that's exactly what we achieved here.
-                  </p>
-                  <p className="cyril-mt-40">
-                    I'm privileged to have contributed significantly to the craftsmanship, well-thought-out information architecture, user-centric decisions, and technological improvements that have made this platform more responsive, accessible, usable, and modern while staying true to the ministry's commitment of &ldquo;Unleashing God's Truth, One Verse at a Time.&rdquo;
-                  </p>
+                  <h4 className="cyril-up cyril-text-center">Reflection</h4>
+                  
+                  <dl className="no-disc">
+                    <dd>
+                      Working on version 8 of GTY.org reminded me that the best UX isn't necessarily flashy—it's subtle and almost invisible. It gets out of the way so people can engage with the platform successfully and deeply, and that's exactly what we achieved here.
+                    </dd>
+                    <dd>
+                      I'm privileged to have contributed significantly to the craftsmanship, well-thought-out information architecture, user-centric decisions, and technological improvements that have made this platform more responsive, accessible, usable, and modern while staying true to the ministry's commitment of &ldquo;Unleashing God's Truth, One Verse at a Time.&rdquo;
+                    </dd>
+                  </dl>
 
                   {/* pagination */}
                   <div className="cyril-pagination-panel cyril-mt-60">
@@ -404,6 +484,7 @@ const page = () => {
                       onClick={handleBackToPortfolio}
                       className="cyril-button cyril-type-2 cyril-mb-30"
                     >
+                      <svg className="cyril-prev" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
                       Back to Portfolio
                     </button>
                   </div>

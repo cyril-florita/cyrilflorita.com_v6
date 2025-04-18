@@ -320,6 +320,8 @@ h3 {
 h4 {
   line-height: 100%;
   font-size: 22px;
+  margin-top: 80px;
+  margin-bottom: 60px;
 }
 
 .cyril-text-sm {
@@ -601,6 +603,12 @@ button
   }
 }
 
+svg.cyril-prev {
+  transform: rotate(180deg);
+  margin-right: 15px;
+  margin-left: -10px;
+}
+
 /* -------------------------------------------
 
 spaces
@@ -733,12 +741,13 @@ spaces
 }
 
 dl {
-  margin-top: 40px;
+  margin-top: 60px;
   margin-bottom: 30px;
 }
 dl dt {
   font-weight: bold;
-  margin-bottom: 30px;
+  font-size: 1.15em;
+  margin-bottom: 40px;
 }
 dl dd {
   margin-bottom: 30px;
