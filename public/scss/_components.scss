@@ -895,8 +895,13 @@ footer
             }
         }
 
+        @media screen and (max-width: 1200px)  {
+            margin-left: 10px;
+        }
+
         @media screen and (max-width: 480px) {
             padding: 0 26px;
+            // margin-left: 10px;
 
             & i {
                 font-size: 1.2em;

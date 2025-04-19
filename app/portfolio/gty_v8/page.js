@@ -238,7 +238,7 @@ const page = () => {
                   <dl className="no-disc">
                     <dt>Technology Stack</dt>
                     <dd>
-                      The a development team, we made informed decisions to use:
+                      As the development team, we made informed decisions to use:
                       <dl className="w-disc">
                         <dd>
                           <strong>ASP.NET Core MVC (Model-View-Controller)</strong> as the application framework and solution that will enable GTY.org to be a modern, robust, and high-performing platform that it needs to be
@@ -259,7 +259,7 @@ const page = () => {
                   <dl className="no-disc">
                     <dt>Mobile-First Responsive Design</dt>
                     <dd>
-                      Prior to the 2017 overhaul, more than 50% of visitors accessed the site via mobile devices despite lacking proper mobile optimization. As a team, we prioritized responsive web design principles, ensuring content rendering in beautiful harmony with the user's particular device and screen size. This technical achievement involved:
+                      Prior to this version 8 overhaul, more than 50% of visitors accessed the site via mobile devices despite lacking proper mobile optimization. As a team, we prioritized responsive web design principles, ensuring content rendering in beautiful harmony with the user's particular device and screen size. This technical achievement involved:
                       <dl className="w-disc">
                         <dd>Fluid grid layouts adapting to viewport dimensions</dd>
                         <dd>Flexible images scaling proportionally across devices</dd>
@@ -407,7 +407,7 @@ const page = () => {
                   <dl className="no-disc">
                     <dt>Producing Mockups and Prototypes</dt>
                     <dd>
-                      As the web designer and developer, creating mockups and prototypes were the most exciting and foundational stages of the project. It's where the team's carefully planned ideas began to take visual shape, and I ensured that design and function started working in harmony. Here's what I aimed for:
+                      As the web designer and developer, creating mockups and prototypes were the most exciting and foundational stages of the project. It's where the team's carefully planned ideas began to take visual shape. I ensured that design and function started working in harmony. And here's what I aimed for:
                       <dl className="w-disc">
                         <dd>
                           <strong>Project Team and Stakeholder Alignment:</strong> By producing mockups, I prioritized alignment with the stakeholders—managers, content creators, and the engineering team. With the Internet Ministry Coordinator's supervision, I held collaborative sessions where we clarified the project's goals, user needs, and brand voice. This helped me avoid unnecessary revisions down the road, ensuring everyone felt seen and heard from the start.
@@ -474,7 +474,7 @@ const page = () => {
                       Working on version 8 of GTY.org reminded me that the best UX isn't necessarily flashy—it's subtle and almost invisible. It gets out of the way so people can engage with the platform successfully and deeply, and that's exactly what we achieved here.
                     </dd>
                     <dd>
-                      I'm privileged to have contributed significantly to the craftsmanship, well-thought-out information architecture, user-centric decisions, and technological improvements that have made this platform more responsive, accessible, usable, and modern while staying true to the ministry's commitment of &ldquo;Unleashing God's Truth, One Verse at a Time.&rdquo;
+                      Working with a small team, while we all juggle other projects and responsibilities, I'm privileged to have contributed significantly to the craftsmanship, well-thought-out information architecture, user-centric decisions, and technological improvements that have made this platform more responsive, accessible, usable, and modern while staying true to the ministry's commitment of &ldquo;Unleashing God's Truth, One Verse at a Time.&rdquo;
                     </dd>
                   </dl>
 

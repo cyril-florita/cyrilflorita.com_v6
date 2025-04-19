@@ -54,14 +54,14 @@ const page = () => {
                 <div className="cyril-divider cyril-mb-60" />
 
                 <h4 className="cyril-up cyril-text-center">A MySpace Profile Background Graphic</h4>
-                <p>MySpace? Yes, it's been a minute since MySpace dominated the social media scene. But MySpace crawled, so that Facebook, Twitter, etc. could walk and run. Back then, if you could customize your profile page and make it look geat, you can set yourself apart from the rest of the profiles. And customization showcases not only your uniqueness and your design ;&#41; skillz, but also your HTML, CSS, and JavaScript chops&mdash;even if it's just for run.</p>
+                <p>MySpace? Yes, it's been a minute since MySpace dominated the social media scene. But MySpace crawled, so that Facebook, Twitter, etc. could walk and run. Back then, if you could customize your profile page and make it look geat, you can set yourself apart from the rest of the profiles. And customization showcases not only your uniqueness and your design skillz ;&#41; ... but also your HTML, CSS, and JavaScript chops&mdash;even if it's just for run.</p>
                 <p className="cyril-mt-40">
-                  So I designed this piece for my MySpace profile as the background graphic. "SekihMentis" was my screen name in those days, and being a big fan of Transformers and guns, I thought it would be cool to have a grungy "Transformers: Autobots Big Gun" theme. </p>
+                  So I designed this piece for my MySpace profile as the background graphic. &ldquo;SekihMentis&rdquo; was my screen name in those days, and being a big fan of Transformers and guns, I thought it would be cool to have a grungy &ldquo;Transformers: Autobots Big Gun&rdquo; theme. </p>
                 <p className="cyril-mt-40">
                   I would always included this piece as part of my portfolio, even though it's not a professional one. It's a fun way to showcase my skills and creativity, especially when I was just a beginner learning layout, typography, color theory, and various design styles. It's also exhibits my ability to design using industry-standard tools&mdash;back then, Adobe Illustrator and Photoshop dominated the craft.
                 </p>
 
-                <img className="cyril-project-main-graphic" src="/img/portfolio/main_sekihmentis.jpg" alt="cover" />
+                <img className="cyril-project-main-graphic cyril-mt-60 cyril-mb-80" src="/img/portfolio/main_sekihmentis.jpg" alt="cover" />
 
                 {/* pagination */}
                 <div className="cyril-pagination-panel cyril-mt-60">

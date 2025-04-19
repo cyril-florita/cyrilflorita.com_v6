@@ -1592,6 +1592,11 @@ footer
   font-weight: bold;
   text-decoration: underline;
 }
+@media screen and (max-width: 1200px) {
+  .cyril-bottom-panel .cyril-footer {
+    margin-left: 10px;
+  }
+}
 @media screen and (max-width: 480px) {
   .cyril-bottom-panel .cyril-footer {
     padding: 0 26px;
