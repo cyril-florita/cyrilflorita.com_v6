@@ -4,7 +4,13 @@ import SiteLayout from "@/layout/SiteLayout";
 import { cyrilUtility } from "@/public/utility/index";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import ReactPlayer from "react-player";
+import dynamic from 'next/dynamic';
+
+const VideoFigure = dynamic(() => import('@/components/VideoFigure'), {
+  ssr: false,
+  // Optional: You can add a loading component here if needed
+  loading: () => <p>Loading video...</p> 
+});
 
 const page = () => {
 
@@ -111,25 +117,7 @@ const page = () => {
                   <dd>Restrictive search results filtering and sorting mechanism</dd>
                   <dd>
                     Lack of continuity in experience, content presentation, and account management between GTY's website and its apps
-                    <figure className="cyril-video-container cyril-mt-40">
-                      <ReactPlayer
-                        url="/img/portfolio/gty9_problem-statement.mp4"
-                        width="100%"
-                        height="auto"
-                        controls={true}
-                        playing={true}
-                        loop={true}
-                        muted={true}
-                        playsinline={true}
-                        config={{
-                          file: {
-                            attributes: {
-                              controlsList: "nodownload"
-                            }
-                          }
-                        }}
-                      />
-                    </figure>
+                    <VideoFigure url="/img/portfolio/gty9_problem-statement.mp4" />
                   </dd>
                 </dl>
 
@@ -209,48 +197,11 @@ const page = () => {
                     <dl className="w-disc">
                       <dd>
                         I tracked activities such as user sessions, user uniqueness &amp; frequency, user age & gender, user language, user location, page views, page ranks, average session duration, bounce rates, acquisition & navigation paths, devices used, etc.
-                        <figure className="cyril-video-container cyril-mt-40 cyril-mb-40">
-                          <ReactPlayer
-                            url="/img/portfolio/gty9_google-analytics.mp4"
-                            width="100%"
-                            height="auto"
-                            controls={true}
-                            playing={true}
-                            loop={true}
-                            muted={true}
-                            playsinline={true}
-                            config={{
-                              file: {
-                                attributes: {
-                                  controlsList: "nodownload"
-                                }
-                              }
-                            }}
-                          />
-                        </figure>
+                        <VideoFigure url="/img/portfolio/gty9_google-analytics.mp4" />
                       </dd>
                       <dd>
                         I conducted surveys with existing users and organization employees to gather qualitative data identifying pain points, user sentiment, satisfaction, and preferences.
-                        <figure className="cyril-video-container cyril-mt-40 cyril-mb-40">
-                          <ReactPlayer
-                            url="/img/portfolio/gty9_interviews.mp4"
-                            width="100%"
-                            height="auto"
-                            controls={true}
-                            playing={true}
-                            loop={true}
-                            muted={true}
-                            playsinline={true}
-                            config={{
-                              file: {
-                                attributes: {
-                                  controlsList: "nodownload"
-                                }
-                              }
-                            }}
-                          />
-                        </figure>
-
+                        <VideoFigure url="/img/portfolio/gty9_interviews.mp4" />
                       </dd>
                       <dd>
                         <strong>Key Findings:</strong>
@@ -271,25 +222,7 @@ const page = () => {
                   <dt>Competitive Analysis</dt>
                   <dd>
                     I benchmarked GTY.org against similar platforms like Ligonier.org, DesiringGod.org, TruthForLife.org, etc., in terms of their content offerings, content & navigation structure, search functionality, audience engagement, UX, SEO, and technology stack.
-                    <figure className="cyril-video-container cyril-mt-40 cyril-mb-40">
-                      <ReactPlayer
-                        url="/img/portfolio/gty9_tech-stack.mp4"
-                        width="100%"
-                        height="auto"
-                        controls={true}
-                        playing={true}
-                        loop={true}
-                        muted={true}
-                        playsinline={true}
-                        config={{
-                          file: {
-                            attributes: {
-                              controlsList: "nodownload"
-                            }
-                          }
-                        }}
-                      />
-                    </figure>
+                    <VideoFigure url="/img/portfolio/gty9_tech-stack.mp4" />
                   </dd>
                   <dd>
                     <dl className="w-disc">
@@ -527,49 +460,11 @@ const page = () => {
                   </dd>
                   <dd>
                     I brainstormed and researched solutions focusing on intuitive navigation, improved search functionality, and mobile-first / progressive web application design approach where the mobile version of the site will look and feel like a native Apple or Android app. I then presented these ideas to the Senior Software Architect and the development team to validate my ideas.
-                    <figure className="cyril-video-container cyril-mt-40 cyril-mb-40">
-                      <ReactPlayer
-                        url="/img/portfolio/gty9_progressive-web-app.mp4"
-                        width="100%"
-                        height="auto"
-                        controls={true}
-                        playing={true}
-                        loop={true}
-                        muted={true}
-                        playsinline={true}
-                        config={{
-                          file: {
-                            attributes: {
-                              controlsList: "nodownload"
-                            }
-                          }
-                        }}
-                      />
-                    </figure>
+                    <VideoFigure url="/img/portfolio/gty9_progressive-web-app.mp4" />
                   </dd>
                   <dd>
                     Having clearer insights and strategies for information architecture, UI/UX, and technology stack, I then designed 3 sets of homepage mockups. These were aimed to facilitate collaboration and foster alignment with the development team and stakeholders&mdash;to establish the design direction, especially in terms of layout, typography, and color. This step was necessary to ensure that the design and development process were moving in the same direction, and also to prepare and avoid any misunderstandings from the stakeholders about the next process of creating low-fidelity wireframes and prototypes.
-
-                    <figure className="cyril-video-container cyril-mt-40 cyril-mb-40">
-                      <ReactPlayer
-                        url="/img/portfolio/gty9_hi-fi-mockups.mp4"
-                        width="100%"
-                        height="auto"
-                        controls={true}
-                        playing={true}
-                        loop={true}
-                        muted={true}
-                        playsinline={true}
-                        config={{
-                          file: {
-                            attributes: {
-                              controlsList: "nodownload"
-                            }
-                          }
-                        }}
-                      />
-                    </figure>
-
+                    <VideoFigure url="/img/portfolio/gty9_hi-fi-mockups.mp4" />
                   </dd>
                 </dl>
 
@@ -577,45 +472,11 @@ const page = () => {
                   <dt>Wireframes</dt>
                   <dd>
                     <strong>Collaboration:</strong> I worked closely with the Senior Software Architect and the development team to definine and organize UI elements, components, pages, journeys into wireframe requirements, preparing and serving as the basis for the further development of GTY's design system.
-                    <figure className="cyril-video-container cyril-mt-40 cyril-mb-40">
-                      <ReactPlayer
-                        url="/img/portfolio/gty9_wireframes-requirements.mp4"
-                        width="100%"
-                        height="auto"
-                        controls={true}
-                        playing={true}
-                        loop={true}
-                        muted={true}
-                        playsinline={true}
-                        config={{
-                          file: {
-                            attributes: {
-                              controlsList: "nodownload"
-                            }
-                          }
-                        }}
-                      />
-                    </figure>
+                    <VideoFigure url="/img/portfolio/gty9_wireframes-requirements.mp4" />
                   </dd>
                   <dd>
                     I then designed low-fidelity wireframes focusing on the structure, functionality, and placement of key content and elements without delving into visual details like colors, typography, or images. These wireframes served as blueprints for the design, helping the development team and stakeholders visualize the flow and hierarchy of content before moving into more detailed stages of providing mockups and prototypes.
-                    <figure className="cyril-video-container cyril-mt-40 cyril-mb-40">
-                      <video
-                        src="/img/portfolio/gty9_wireframes.mp4"
-                        className="cyril-video"
-                        width="100%"
-                        // height="100%" 
-                        style={{ display: 'block' }}
-                        controls
-                        loop
-                        autoPlay
-                        muted
-                        playsInline // Important for iOS inline playback
-                        controlsList="nodownload"
-                      >
-                        Your browser does not support the video tag.
-                      </video>
-                    </figure>
+                    <VideoFigure url="/img/portfolio/gty9_wireframes.mp4" />
                   </dd>
                   <dd>
                     <strong>Key Outcomes:</strong> The wireframes helped the development team and the stakeholders reach a common understanding by clearly communicating the prioritization and placement of specific resources and content and how UIs will function.
