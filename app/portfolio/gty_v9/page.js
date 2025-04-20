@@ -4,6 +4,7 @@ import SiteLayout from "@/layout/SiteLayout";
 import { cyrilUtility } from "@/public/utility/index";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import ReactPlayer from "react-player";
 
 const page = () => {
 
@@ -111,23 +112,24 @@ const page = () => {
                   <dd>
                     Lack of continuity in experience, content presentation, and account management between GTY's website and its apps
                     <figure className="cyril-video-container cyril-mt-40">
-                      <video
-                        src="/img/portfolio/gty9_problem-statement.mp4"
-                        className="cyril-video"
+                      <ReactPlayer
+                        url="/img/portfolio/gty9_problem-statement.mp4"
                         width="100%"
-                        // height="100%" 
-                        style={{ display: 'block' }}
-                        controls
-                        loop
-                        autoPlay
-                        muted
-                        playsInline // Important for iOS inline playback
-                        controlsList="nodownload"
-                      >
-                        Your browser does not support the video tag.
-                      </video>
+                        height="auto"
+                        controls={true}
+                        playing={true}
+                        loop={true}
+                        muted={true}
+                        playsinline={true}
+                        config={{
+                          file: {
+                            attributes: {
+                              controlsList: "nodownload"
+                            }
+                          }
+                        }}
+                      />
                     </figure>
-
                   </dd>
                 </dl>
 
@@ -208,41 +210,45 @@ const page = () => {
                       <dd>
                         I tracked activities such as user sessions, user uniqueness &amp; frequency, user age & gender, user language, user location, page views, page ranks, average session duration, bounce rates, acquisition & navigation paths, devices used, etc.
                         <figure className="cyril-video-container cyril-mt-40 cyril-mb-40">
-                          <video
-                            src="/img/portfolio/gty9_google-analytics.mp4"
-                            className="cyril-video"
+                          <ReactPlayer
+                            url="/img/portfolio/gty9_google-analytics.mp4"
                             width="100%"
-                            // height="100%" 
-                            style={{ display: 'block' }}
-                            controls
-                            loop
-                            autoPlay
-                            muted
-                            playsInline // Important for iOS inline playback
-                            controlsList="nodownload"
-                          >
-                            Your browser does not support the video tag.
-                          </video>
+                            height="auto"
+                            controls={true}
+                            playing={true}
+                            loop={true}
+                            muted={true}
+                            playsinline={true}
+                            config={{
+                              file: {
+                                attributes: {
+                                  controlsList: "nodownload"
+                                }
+                              }
+                            }}
+                          />
                         </figure>
                       </dd>
                       <dd>
                         I conducted surveys with existing users and organization employees to gather qualitative data identifying pain points, user sentiment, satisfaction, and preferences.
                         <figure className="cyril-video-container cyril-mt-40 cyril-mb-40">
-                          <video
-                            src="/img/portfolio/gty9_interviews.mp4"
-                            className="cyril-video"
+                          <ReactPlayer
+                            url="/img/portfolio/gty9_interviews.mp4"
                             width="100%"
-                            // height="100%" 
-                            style={{ display: 'block' }}
-                            controls
-                            loop
-                            autoPlay
-                            muted
-                            playsInline // Important for iOS inline playback
-                            controlsList="nodownload"
-                          >
-                            Your browser does not support the video tag.
-                          </video>
+                            height="auto"
+                            controls={true}
+                            playing={true}
+                            loop={true}
+                            muted={true}
+                            playsinline={true}
+                            config={{
+                              file: {
+                                attributes: {
+                                  controlsList: "nodownload"
+                                }
+                              }
+                            }}
+                          />
                         </figure>
 
                       </dd>
@@ -266,21 +272,23 @@ const page = () => {
                   <dd>
                     I benchmarked GTY.org against similar platforms like Ligonier.org, DesiringGod.org, TruthForLife.org, etc., in terms of their content offerings, content & navigation structure, search functionality, audience engagement, UX, SEO, and technology stack.
                     <figure className="cyril-video-container cyril-mt-40 cyril-mb-40">
-                      <video
-                        src="/img/portfolio/gty9_tech-stack.mp4"
-                        className="cyril-video"
+                      <ReactPlayer
+                        url="/img/portfolio/gty9_tech-stack.mp4"
                         width="100%"
-                        // height="100%" 
-                        style={{ display: 'block' }}
-                        controls
-                        loop
-                        autoPlay
-                        muted
-                        playsInline // Important for iOS inline playback
-                        controlsList="nodownload"
-                      >
-                        Your browser does not support the video tag.
-                      </video>
+                        height="auto"
+                        controls={true}
+                        playing={true}
+                        loop={true}
+                        muted={true}
+                        playsinline={true}
+                        config={{
+                          file: {
+                            attributes: {
+                              controlsList: "nodownload"
+                            }
+                          }
+                        }}
+                      />
                     </figure>
                   </dd>
                   <dd>
@@ -520,42 +528,46 @@ const page = () => {
                   <dd>
                     I brainstormed and researched solutions focusing on intuitive navigation, improved search functionality, and mobile-first / progressive web application design approach where the mobile version of the site will look and feel like a native Apple or Android app. I then presented these ideas to the Senior Software Architect and the development team to validate my ideas.
                     <figure className="cyril-video-container cyril-mt-40 cyril-mb-40">
-                      <video
-                        src="/img/portfolio/gty9_progressive-web-app.mp4"
-                        className="cyril-video"
+                      <ReactPlayer
+                        url="/img/portfolio/gty9_progressive-web-app.mp4"
                         width="100%"
-                        // height="100%" 
-                        style={{ display: 'block' }}
-                        controls
-                        loop
-                        autoPlay
-                        muted
-                        playsInline // Important for iOS inline playback
-                        controlsList="nodownload"
-                      >
-                        Your browser does not support the video tag.
-                      </video>
+                        height="auto"
+                        controls={true}
+                        playing={true}
+                        loop={true}
+                        muted={true}
+                        playsinline={true}
+                        config={{
+                          file: {
+                            attributes: {
+                              controlsList: "nodownload"
+                            }
+                          }
+                        }}
+                      />
                     </figure>
                   </dd>
                   <dd>
                     Having clearer insights and strategies for information architecture, UI/UX, and technology stack, I then designed 3 sets of homepage mockups. These were aimed to facilitate collaboration and foster alignment with the development team and stakeholders&mdash;to establish the design direction, especially in terms of layout, typography, and color. This step was necessary to ensure that the design and development process were moving in the same direction, and also to prepare and avoid any misunderstandings from the stakeholders about the next process of creating low-fidelity wireframes and prototypes.
 
                     <figure className="cyril-video-container cyril-mt-40 cyril-mb-40">
-                      <video
-                        src="/img/portfolio/gty9_hi-fi-mockups.mp4"
-                        className="cyril-video"
+                      <ReactPlayer
+                        url="/img/portfolio/gty9_hi-fi-mockups.mp4"
                         width="100%"
-                        // height="100%" 
-                        style={{ display: 'block' }}
-                        controls
-                        loop
-                        autoPlay
-                        muted
-                        playsInline // Important for iOS inline playback
-                        controlsList="nodownload"
-                      >
-                        Your browser does not support the video tag.
-                      </video>
+                        height="auto"
+                        controls={true}
+                        playing={true}
+                        loop={true}
+                        muted={true}
+                        playsinline={true}
+                        config={{
+                          file: {
+                            attributes: {
+                              controlsList: "nodownload"
+                            }
+                          }
+                        }}
+                      />
                     </figure>
 
                   </dd>
@@ -566,21 +578,23 @@ const page = () => {
                   <dd>
                     <strong>Collaboration:</strong> I worked closely with the Senior Software Architect and the development team to definine and organize UI elements, components, pages, journeys into wireframe requirements, preparing and serving as the basis for the further development of GTY's design system.
                     <figure className="cyril-video-container cyril-mt-40 cyril-mb-40">
-                      <video
-                        src="/img/portfolio/gty9_wireframes-requirements.mp4"
-                        className="cyril-video"
+                      <ReactPlayer
+                        url="/img/portfolio/gty9_wireframes-requirements.mp4"
                         width="100%"
-                        // height="100%" 
-                        style={{ display: 'block' }}
-                        controls
-                        loop
-                        autoPlay
-                        muted
-                        playsInline // Important for iOS inline playback
-                        controlsList="nodownload"
-                      >
-                        Your browser does not support the video tag.
-                      </video>
+                        height="auto"
+                        controls={true}
+                        playing={true}
+                        loop={true}
+                        muted={true}
+                        playsinline={true}
+                        config={{
+                          file: {
+                            attributes: {
+                              controlsList: "nodownload"
+                            }
+                          }
+                        }}
+                      />
                     </figure>
                   </dd>
                   <dd>
@@ -686,7 +700,7 @@ const page = () => {
                     onClick={handleBackToPortfolio}
                     className="cyril-button cyril-type-2 cyril-mb-30"
                   >
-                    <svg className="cyril-prev" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    <svg className="cyril-prev" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
                     Back to Portfolio
                   </button>
                 </div>
