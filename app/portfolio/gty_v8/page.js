@@ -106,7 +106,7 @@ const page = () => {
                       GTY.org &#40;Grace to You&#41; serves as the digital home for John MacArthur's teaching ministry, offering sermons, articles, and resources to a global audience. The ministry began in 1969 as a small tape ministry and has since evolved into a comprehensive media organization distributing biblical teaching through multiple channels.
                     </dd>
                     <dd>
-                      This case study examines the UX design and front-end development strategies that shaped version 8 of GTY's website. When I joined the organization, version 7 was content-rich but was visually dated, not mobile-responsive, and functionally fragmented across platforms. My job was to elevate the user experience and modernize its front-end architecture without compromising the trust and familiarity that long-time users valued while strengthening the ministry's mission of &ldquo;Unleashing God's Truth, One Verse at a Time.&ldquo;                      
+                      Despite its valuable resource offerings, GTY's previous website&mdash;version 7&mdash;faced usability challenges such as outdated design & UI elements and not being mobile-friendly. My role was to enhance the user experience while maintaining the trust of long-time users and strengthening the ministry's mission of &ldquo;Unleashing God's Truth, One Verse at a Time.&rdquo; This case study then examines the UX design and front-end development strategies that shaped version 8 of GTY's website.                       
                     </dd>
                   </dl>
                   
@@ -175,7 +175,7 @@ const page = () => {
                   <dl className="no-disc">
                     <dt>Discovery & UX Strategy</dt>
                     <dd>
-                      With the leadership of the Internet Ministry Coordinator, I started with a deep dive into user behavior—analyzing user demographics, traffic source & patterns, device usage, content consumption, bounce rates, and feedback from the customer service team. GTY has a loyal audience, many of whom aren't tech-savvy. That meant the new experience needed to feel intuitive, lightweight, and content-focused.<br /><br />
+                      With the leadership of the Digital Platforms Coordinator, I started with a deep dive into user behavior—analyzing user demographics, traffic source & patterns, device usage, content consumption, bounce rates, and feedback from the customer service team. GTY has a loyal audience, many of whom aren't tech-savvy. That meant the new experience needed to feel intuitive, lightweight, and content-focused.<br /><br />
                       Here's what I concentrated on during this phase:
                       <dl className="w-disc">
                         <dd><strong>Accessibility & Responsiveness:</strong> The previous experience wasn't WCAG-compliant, especially for elderly users. Moreover, it wasn't mobile-friendly.</dd>
@@ -212,7 +212,7 @@ const page = () => {
                   <dl className="no-disc">
                     <dt>Site Nav</dt>
                     <dd>
-                      Anchoring my efforts and decisions to analytics and user feedback, I worked with key stakeholders and the Internet Ministry Coordinator to clearly define the top-level navigation structure and content taxonomy:
+                      Anchoring my efforts and decisions to analytics and user feedback, I worked with key stakeholders and the Digital Platforms Coordinator to clearly define the top-level navigation structure and content taxonomy:
                       <dl className="w-disc">
                         <dd><strong>About:</strong> Information about Grace to You, John MacArthur, offices, and contact information</dd>
                         <dd><strong>Broadcasts:</strong> Radio and television content, including shorter radio features and podcasts</dd>
@@ -359,7 +359,7 @@ const page = () => {
                   <dl className="no-disc">
                     <dt>User Stories</dt>
                     <dd>
-                      I grounded the entire GTY redesign process in user-centered thinking. Working with the Internet Ministry Coordinator, I gathered user stories to use as the tool real-world behaviors, goals, and contexts of our audience. These weren't hypothetical personas&mdash;they were distilled from actual usage data, support requests, and internal ministry insights.
+                      I grounded the entire GTY redesign process in user-centered thinking. Working with the Digital Platforms Coordinator, I gathered user stories to use as the tool real-world behaviors, goals, and contexts of our audience. These weren't hypothetical personas&mdash;they were distilled from actual usage data, support requests, and internal ministry insights.
                     </dd>
                     <dd>
                       GTY's audience is diverse: pastors, laypeople, new believers, long-time followers, Spanish speakers, students, and more. User stories helped unify that complexity into clear, actionable narratives that guided everything from page layouts to content hierarchy to UI components.
@@ -418,10 +418,11 @@ const page = () => {
                       As the web designer and developer, creating mockups was one of the most exciting and foundational stages of the project. It's where the team's carefully planned ideas began to take visual shape. I ensured that design and function started working in harmony. And here's what I aimed for:
                       <dl className="w-disc">
                         <dd>
-                          <strong>Project Team and Stakeholder Alignment:</strong> By producing mockups, I prioritized alignment with the stakeholders—managers, content creators, and the engineering team. With the Internet Ministry Coordinator's supervision, I held collaborative sessions where we clarified the project's goals, user needs, and brand voice. This helped me avoid unnecessary revisions down the road, ensuring everyone felt seen and heard from the start.
+                          <strong>Project Team and Stakeholder Alignment:</strong> By producing mockups, I prioritized alignment with the stakeholders—managers, content creators, and the engineering team. With the Digital Platforms Coordinator's supervision, I held collaborative sessions where we clarified the project's goals, user needs, and brand voice. This helped me avoid unnecessary revisions down the road, ensuring everyone felt seen and heard from the start.
                         </dd>
                         <dd>
-                          <strong>Clean, Minimal, yet Sophisticated Theming and Design:</strong> My design approach leaned heavily on simplicity without sacrificing depth and sophistication. I strived to design interfaces that felt intuitive and elegant—where every element had a purpose, and clutter was eliminated. To me, minimal design doesn't mean bland; it means the user's focus is guided exactly where it needs to be, with subtle layers of refinement that elevate the experience.
+                          <strong>
+                            Clean, Minimal, yet Sophisticated Theming and Design:</strong> I wanted the theme to communicate depth and sophistication. And so I designed the UI to feel intuitive and elegant. I wanted every element to have a purpose and so I eliminated any clutter. Though minimalistic in my approach, I didn't want the site to be bland. I wanted the user to focus on interacting with the content while subtly being guided the layout, navigation, and everything else in the platform.
 
                           <div className="cyril-mt-40 cyril-mb-80">
                             <p className="cyril-upper cyril-text-sm cyril-mb-20 cyril-text-center">
@@ -651,7 +652,7 @@ const page = () => {
                   
                   <dl className="no-disc">
                     <dd>
-                      As the web designer and developer, I played a key role in shaping the visual and functional aspects of GTY version 8. With the leadership of and working closely with the Internet Ministry Coordinator, I helped:
+                      As the web designer and developer, I played a key role in shaping the visual and functional aspects of GTY version 8. With the leadership of and working closely with the Digital Platforms Coordinator, I helped:
                       <dl className="w-disc">
                         <dd>translate high-level business goals into clear technical requirements and user-centric design solutions</dd>
                       </dl>
@@ -778,7 +779,7 @@ const page = () => {
                           I used HandlebarsJS to mock up and template the data and content so that I could freely and more efficiently design and develop without unnecessarily burdening and interfering with the back-end side of the development. This allowed the Software Engineer and the Software Developer to focus on the back-end side of the development at the same time as I would progress with cutting up the pages.
                         </dd>
                         <dd>
-                          <strong>Subtle, yet Pleasing UI Micro-interactions:</strong> This is where the experience really comes alive. I incorporated micro-interactions—like button animations, hover effects, and component and page transitions—to bring a joyful and pleasant experience to the user's journey on the website. These small touches may go unnoticed when done right, but they make the interface feel polished and professional. I always think about how these interactions to enhance usability while adding delight.
+                          <strong>Subtle, yet Pleasing UI Micro-interactions:</strong> To make the user's journey and experience more delightful, I added micro-interactions&mdash;elements such as button animations, hover effects, and component and page transitions.
 
                           <div className="cyril-mt-40 cyril-mb-80">
                             <VideoFigure url="/img/portfolio/gty8_micro-interactions.mp4" />
@@ -836,7 +837,7 @@ const page = () => {
                       </dl>
                     </dd>
                     <dd>
-                      These features work synergistically to help both new visitors and longtime followers locate relevant materials efficiently. The search functionality particularly benefits users seeking specific exegetical studies, reflecting John MacArthur's verse-by-verse teaching methodology
+                      These features work synergistically to help both new visitors and longtime followers locate relevant materials efficiently. The search functionality particularly benefits users seeking specific exegetical studies, reflecting John MacArthur's verse-by-verse teaching methodology.
                     </dd>
                   </dl>
 
