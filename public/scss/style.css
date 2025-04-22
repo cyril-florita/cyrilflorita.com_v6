@@ -397,7 +397,7 @@ h4 {
 .cyril-upper {
   font-family: var(--font-atkinson);
   font-size: 16px;
-  line-height: 100%;
+  line-height: 1.5em;
   text-transform: uppercase;
   font-weight: 600;
   color: #101010;
@@ -410,6 +410,13 @@ h4 {
 }
 .cyril-upper.cyril-upper-sm {
   font-size: 14px;
+}
+
+.cyril-lower {
+  font-family: var(--font-atkinson);
+  text-transform: lowercase;
+  font-weight: normal;
+  letter-spacing: 0.05em;
 }
 
 .cyril-accent {
@@ -1660,6 +1667,19 @@ banner
   padding-top: 120px;
   padding-bottom: 40px;
 }
+.cyril-top-banner h2 {
+  font-size: 100px;
+}
+@media screen and (max-width: 1400px) {
+  .cyril-top-banner h2 {
+    font-size: 48px;
+  }
+}
+@media screen and (max-width: 992px) {
+  .cyril-top-banner h2 {
+    font-size: 32px;
+  }
+}
 @media screen and (max-width: 1200px) {
   .cyril-top-banner {
     padding-top: 130px;
@@ -2036,7 +2056,6 @@ experience
 .cyril-filter ul li a {
   text-decoration: none;
   color: inherit;
-  font-size: 14px;
   line-height: 100%;
   text-transform: uppercase;
   font-weight: 600;
@@ -2058,20 +2077,27 @@ experience
   height: 15px;
   background-color: #101010;
 }
+@media screen and (max-width: 1024px) {
+  .cyril-filter ul li a {
+    font-size: 14px;
+  }
+}
 @media screen and (max-width: 768px) {
   .cyril-filter {
     margin: 0 12px;
   }
   .cyril-filter::before {
     width: 100%;
+    display: none;
   }
   .cyril-filter::after {
+    display: none;
     left: 7px;
     right: -7px;
     width: auto;
   }
   .cyril-filter ul {
-    padding: 30px 0;
+    padding: 0 0 30px;
     flex-direction: column;
     width: 100%;
   }
@@ -2408,7 +2434,7 @@ portfolio
   padding-bottom: 60%;
 }
 .cyril-portfolio-item .cyril-project-descr {
-  padding-top: 35px;
+  padding-top: 30px;
   text-align: center;
 }
 .cyril-portfolio-item .cyril-project-descr h4 {

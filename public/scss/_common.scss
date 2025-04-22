@@ -415,7 +415,7 @@ h4 {
 .cyril-upper {
     font-family: var(--font-atkinson);
     font-size: 16px;
-    line-height: 100%;
+    line-height: 1.5em;
     text-transform: uppercase;
     font-weight: 600;
     color: $dark;
@@ -430,6 +430,13 @@ h4 {
     &.cyril-upper-sm {
         font-size: 14px;
     }
+}
+
+.cyril-lower {
+    font-family: var(--font-atkinson);
+    text-transform: lowercase;
+    font-weight: normal;
+    letter-spacing: 0.05em;
 }
 
 .cyril-accent {

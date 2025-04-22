@@ -69,7 +69,7 @@ const page = () => {
               <img src="/img/portfolio/main_gty9.jpg" alt="cover" />
               <p className="cyril-text-sm cyril-accent"><strong>&#40;Earlier version of the design is used in this mockup since the project hasn't yet launched.&#41;</strong></p>
 
-              <h2 className="cyril-mt-60">Grace to You Website, v.9</h2>
+              <h2 className="cyril-mt-60">GTY Website, v.9</h2>
               <p className="cyril-upper cyril-mt-30 cyril-mb-40">
                 <span className="cyril-accent">UX Design</span>
               </p>

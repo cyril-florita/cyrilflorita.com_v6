@@ -10,7 +10,7 @@ const Skills = () => {
         style={{ bottom: "20%", left: "-5%", transform: "rotate(-25deg)" }}
       />
       <div className="container">
-        <p className="cyril-upper cyril-mb-20 subheader">
+        <p className="cyril-upper subheader">
         &#91; My <span className="cyril-accent">actual craft</span> &#93;
         </p>
         <h2 className="cyril-up cyril-mb-50">Skills</h2>

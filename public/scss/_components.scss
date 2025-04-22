@@ -216,7 +216,7 @@ page
         }
 
         & .cyril-top-banner {
-            padding-bottom: 20px;
+            padding-bottom: 20px;            
 
             & img {
                 width: 100%;
@@ -952,6 +952,18 @@ banner
     padding-top: 120px;
     padding-bottom: 40px;
 
+    & h2 {
+        font-size: 100px;
+
+        @media screen and (max-width: 1400px) {
+            font-size: 48px;
+        }
+    
+        @media screen and (max-width: 992px) {
+            font-size: 32px;
+        }
+    }
+
     @media screen and (max-width: 1200px) {
         padding-top: 130px;
         padding-bottom: 60px;
@@ -1357,7 +1369,6 @@ experience
             & a {
                 text-decoration: none;
                 color: inherit;
-                font-size: 14px;
                 line-height: 100%;
                 text-transform: uppercase;
                 font-weight: 600;
@@ -1381,6 +1392,11 @@ experience
                         background-color: $dark;
                     }
                 }
+
+                @media screen and (max-width: 1024px)  {
+                    font-size: 14px;
+                }
+
             }
         }
     }
@@ -1390,16 +1406,18 @@ experience
 
         &::before {
             width: 100%;
+            display: none;
         }
 
         &::after {
+            display: none;
             left: 7px;
             right: -7px;
             width: auto;
         }
 
         & ul {
-            padding: 30px 0;
+            padding: 0 0 30px;
             flex-direction: column;
             width: 100%;
 
@@ -1795,7 +1813,7 @@ portfolio
     }
 
     & .cyril-project-descr {
-        padding-top: 35px;
+        padding-top: 30px;
         text-align: center;
         
         & h4 {

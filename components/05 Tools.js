@@ -8,8 +8,8 @@ const Tools = () => {
       />
       <div className="container">
         <div>
-          <p className="cyril-upper cyril-mb-20 subheader">
-          &#91; My <span className="cyril-accent">valuable resources</span> in the craft &#93;
+          <p className="cyril-upper subheader">
+          &#91; My <span className="cyril-accent">valuable resources</span> <span className="cyril-lower">in</span> the craft &#93;
           </p>
           <h2 className="cyril-up cyril-mb-50">Tools &amp; Software</h2>
         </div>

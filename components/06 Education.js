@@ -8,27 +8,23 @@ const Education = () => {
       <div className="container">
 
         <div>
-          
-          <p className="cyril-upper cyril-mb-20 subheader">
-              &#91; My <span className="cyril-accent">Foundational Training</span> &#93;
-              </p>
-              <h2 className="cyril-up cyril-mb-30">Education</h2>
-        
-
+          <p className="cyril-upper subheader">
+            &#91; My <span className="cyril-accent">Foundational Training</span> &#93;
+          </p>
+          <h2 className="cyril-up cyril-mb-50">Education</h2>
         </div>
 
         <div className="row">
           <div className="offset-xl-1 col-xl-5 cyril-mb-30">
-
-            <div className="cyril-icon-box cyril-mt-40">
+            <div className="cyril-icon-box">
               <div className="cyril-text-icon">
               <i className="fa-solid fa-user-graduate"></i>
               </div>
               <div className="cyril-box-text">
-                <p className=" cyril-text-lg cyril-mb-15">
-                  <span className="cyril-upper cyril-accent">Bachelor</span> of <span className="cyril-upper cyril-accent">Arts</span> in <span className="cyril-upper">Web Design</span> &amp; <span className="cyril-upper">Multimedia</span>
+                <p className="cyril-upper cyril-text-lg cyril-mb-15">
+                  <span className="cyril-accent">Bachelor</span><span className="cyril-lower"> of </span><span className="cyril-accent">Arts</span> <span className="cyril-lower">in</span> Web Design<span className="cyril-lower"> &amp; </span>Multimedia
                 </p>
-                <p className="cyril-upper cyril-upper-sm cyril-text-normal cyril-mb-30">
+                <p className="cyril-upper cyril-text-normal cyril-mb-30">
                   <a className="cyril-text-underline" href="https://www.linkedin.com/school/westwood-college-los-angeles">Westwood College</a> &#40;2003 &mdash; 2006&#41;
                 </p>
                 <p>
@@ -36,21 +32,17 @@ const Education = () => {
                 </p>
               </div>
             </div>
-
           </div>
-          <div className="col-xl-6">
-
-            
-            
-            <div className="cyril-icon-box cyril-mt-40 cyril-mb-60">
+          <div className="col-xl-6">         
+            <div className="cyril-icon-box cyril-mb-60">
               <div className="cyril-text-icon">
               <i className="fa-solid fa-user-graduate"></i>
               </div>
               <div className="cyril-box-text">
-                <p className="cyril-text-lg cyril-mb-15">
-                  <span className="cyril-upper cyril-accent">Master</span> of <span className="cyril-upper">Divinity</span>
+                <p className="cyril-upper cyril-text-lg cyril-mb-15">
+                  <span className="cyril-accent">Master</span><span className="cyril-lower"> of </span>Divinity
                 </p>
-                <p className="cyril-upper cyril-upper-sm cyril-text-normal cyril-mb-30">
+                <p className="cyril-upper cyril-text-normal cyril-mb-30">
                   <a className="cyril-text-underline" href="https://www.tms.edu">The Master's Seminary</a>  &#40;2015 &mdash; 2024&#41;
                 </p>
                 <p>
@@ -58,7 +50,6 @@ const Education = () => {
                 </p>
               </div>
             </div>
-
           </div>
         </div>
       </div>

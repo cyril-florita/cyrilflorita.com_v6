@@ -25,7 +25,7 @@ const Background = ( { bgImage = "img/cyril-profile-w-a-smile.jpg" } ) => {
           <div className="col-xl-7">
             <div className="row">
               <div className="col-xl-12">
-                <p className="cyril-upper cyril-mb-20 subheader">
+                <p className="cyril-upper subheader">
                 &#91; My <span className="cyril-accent">story</span> &#93;
                 </p>
                 <h2 className="cyril-up cyril-mb-30">Background</h2>
