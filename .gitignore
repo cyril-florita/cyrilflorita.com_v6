@@ -15,8 +15,6 @@ npm-debug.log*
 # IDE
 .vscode/
 
-# vercel
-.vercel
 
 # typescript
 *.tsbuildinfo
@@ -28,12 +26,5 @@ next-env.d.ts
 # Optional eslint cache
 .eslintcache
 
-# Local Netlify folder
-.Netlify
-
 # Node Modules
 node_modules/
-
-#deploy JS
-deploy.js
-test-ftp.js
