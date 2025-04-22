@@ -135,6 +135,18 @@ page
 
     }
 
+    & h2 {
+        font-size: 100px;
+
+        @media screen and (max-width: 1400px) {
+            font-size: 48px;
+        }
+    
+        @media screen and (max-width: 992px) {
+            font-size: 32px;
+        }
+    }
+
     @media screen and (max-width: 1200px) {
         padding-bottom: 60px;
         opacity: 0;
@@ -1013,8 +1025,7 @@ banner
         & .cyril-banner-text {
             position: relative;
             text-align: left;
-            // padding: 0 10% 0 20%;
-            padding: 0 3% 0 22%;
+            padding: 0 3% 0 20%;
 
             @media screen and (max-width: 1200px) {
                 padding: 60px 30px;
@@ -1960,4 +1971,12 @@ back to top
     height: 100%;
     border: solid 2px $dark;
     box-shadow: 7px 7px 0px 0px rgba(16, 16, 16, 0.18);
+}
+
+.cyril-prototype-vid {
+
+    & p {
+        margin-bottom: -20px;
+    }
+
 }

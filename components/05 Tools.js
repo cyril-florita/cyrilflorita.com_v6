@@ -15,7 +15,7 @@ const Tools = () => {
         </div>
         <div className="row">
           <div className="col-xl-1" />
-          <div className="col-xl-11">
+          <div className="col-xl-11 cyril-mb-40">
             <div className="row">
               
               <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-30">

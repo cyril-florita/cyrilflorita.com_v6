@@ -16,10 +16,10 @@ const Banner = ( { bgImage = "img/cyril-profile-serious-lol.jpg" } ) => {
                   className="cyril-bg-title-boxed"
                   style={{ top: 0, left: "-82%" }}
                 />
-                <p className="cyril-upper cyril-mb-20 subheader">
-                <span className="cyril-accent">Hello!</span> I&apos;m 
+                <p className="cyril-upper cyril-mb-10 subheader">
+                  <span className="cyril-accent">Hello!</span> I&apos;m 
                 </p>
-                <h1 className="cyril-up cyril-mb-30" data-text="Cyril Florita">Cyril Florita</h1>
+                <h1 className="cyril-up cyril-mb-20" data-text="Cyril Florita">Cyril Florita</h1>
                 <div className="cyril-short intro">
                   <p className="cyril-mb-30">
                     A multidisciplinary <strong><span className="cyril-accent">Designer</span></strong> and <strong><span className="cyril-accent">Developer</span></strong> based in Santa Clarita, California

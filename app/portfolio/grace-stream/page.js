@@ -105,6 +105,7 @@ const page = () => {
                   <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
 
                   <h4 className="cyril-up cyril-text-center">Concept, Branding, &amp; Visual Identity</h4>
+                  
                   <p className="cyril-mt-40">
                     Grace Stream isn't just another media player—it's a 24/7 stream of John MacArthur's verse-by-verse teaching. That clarity and consistency inspired the branding approach: simple, strong, and steady. The Grace Stream wordmark is intentionally understated. It fits within the larger GTY brand ecosystem but has just enough of its own personality to stand on its own. It's designed to feel like a “channel” you can always trust. So for the logo, I knew I wanted to capture a sense of movement, peace, and spiritual depth — all while keeping things clean, modern, and versatile for both print and digital platforms. I then explored two options.
                   </p>

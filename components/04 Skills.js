@@ -16,7 +16,7 @@ const Skills = () => {
         <h2 className="cyril-up cyril-mb-50">Skills</h2>
         <div className="row">
           <div className="col-xl-1"></div>
-          <div className="col-xl-11">
+          <div className="col-xl-11 cyril-mb-20">
             <div className="row">
 
               <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-40">

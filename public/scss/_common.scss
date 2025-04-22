@@ -301,9 +301,18 @@ p {
 }
 
 h1 {
-    line-height: 100%;
-    font-size: 80px;
+    line-height: 0.85em;
+    font-size: 185px;
     text-shadow: 5px 5px 0px $soft;
+
+    @media screen and (max-width: 1400px) {
+        line-height: 100%;
+        font-size: 100px;
+    }
+
+    @media screen and (max-width: 1200px) {
+        font-size: 80px;
+    }
 
     @media screen and (max-width: 992px) {
         font-size: 40px;
@@ -765,6 +774,10 @@ spaces
         padding-top: 0;
         padding-bottom: 30px;
     }
+}
+
+.cyril-no-border {
+    border: none!important;
 }
 
 dl {

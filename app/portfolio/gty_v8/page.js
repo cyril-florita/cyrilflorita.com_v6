@@ -4,6 +4,13 @@ import SiteLayout from "@/layout/SiteLayout";
 import { cyrilUtility } from "@/public/utility/index";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import dynamic from 'next/dynamic';
+
+const VideoFigure = dynamic(() => import('@/components/VideoFigure'), {
+  ssr: false,
+  // Optional: You can add a loading component here if needed
+  loading: () => <p>Loading video...</p> 
+});
 
 const page = () => {
 
@@ -198,8 +205,12 @@ const page = () => {
                     </dd>
                   </dl>
 
+                  <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
+
+                  <h4 className="cyril-up cyril-text-center">Information Architecture</h4>
+
                   <dl className="no-disc">
-                    <dt>Information Architecture</dt>
+                    <dt>Site Nav</dt>
                     <dd>
                       Anchoring my efforts and decisions to analytics and user feedback, I worked with key stakeholders and the Internet Ministry Coordinator to clearly define the top-level navigation structure and content taxonomy:
                       <dl className="w-disc">
@@ -217,28 +228,476 @@ const page = () => {
                     <dd>
                       This organization represents a strategic simplification, helping users quickly locate content based on their needs and interests.
                     </dd>
+                    <dd>
+                      <a
+                        href="/img/portfolio/gty8_site-nav.jpg"
+                        className="cyril-project-figure w-80 mx-auto mfp-image"
+                        data-effect="mfp-zoom-in"
+                      >
+                        <div className="cyril-cover">
+                          <img src="/img/portfolio/gty8_site-nav.jpg" alt="cover" />
+                          <div className="cyril-hover-link">
+                            <i className="fa fa-search-plus" />
+                          </div>
+                        </div>
+                      </a>
+                    </dd>
+                  </dl>
+
+                  <dl className="no-disc">
+                    <dt>Site Tree</dt>
+                    <dd>
+                      Mapping out the site tree was one of the most critical steps in aligning content structure with user intent. My goal wasn't just to reorganize&mdash;I wanted to make the vast library of biblical resources from GTY to be intuitive and discoverable, especially for users who might not know exactly what they're looking for.
+                    </dd>
+                    <dd>
+                      GTY is content-rich: thousands of sermons, articles, Q&As, devotionals, books, and more. But without a clear and intuitive structure, even the best content can get buried. So I treated the site tree as a content strategy blueprint—where information architecture met user experience.
+                    </dd>
+                    <dd>
+                      <a
+                        href="/img/portfolio/gty8_site-tree.jpg"
+                        className="cyril-project-figure w-80 mx-auto mfp-image"
+                        data-effect="mfp-zoom-in"
+                      >
+                        <div className="cyril-cover">
+                          <img src="/img/portfolio/gty8_site-tree.jpg" alt="cover" />
+                          <div className="cyril-hover-link">
+                            <i className="fa fa-search-plus" />
+                          </div>
+                        </div>
+                      </a>
+                    </dd>
                   </dl>
 
                   <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
 
-                  <h4 className="cyril-up cyril-text-center">Software Architecture and Feature Enhancements</h4>
+                  <h4 className="cyril-up cyril-text-center">Design Process</h4>
+                  
+                  <dl className="no-disc">
+                    <dt>UI Inventory</dt>
+                    <dd>
+                      Based on the Site Nav and the Site Tree, I conducted a comprehensive UI inventory. This process was critical for understanding the existing interface landscape, identifying redundancies, and aligning our new design system with actual user needs and organizational goals. This was important before diving into wireframes or visual concepts, I wanted to make sure we had a complete grasp of what was already on the site.
+                    </dd>
+                    <dd>
+                      GTY had evolved over time with many departments contributing content, and as a result, the interface had grown organically—sometimes inconsistently. A UI inventory allowed me to take stock of every component, interaction, and user-facing feature currently in use.
+                    </dd>
+                    <dd>
+                      <div className="row">
+                        <div className="col-md-6 col-lg-4 cyril-mb-30">
+                          <a
+                            href="/img/portfolio/gty8_ui-inventory-1.jpg"
+                            className="cyril-project-figure mfp-image"
+                            data-effect="mfp-zoom-in"
+                          >
+                            <div className="cyril-cover">
+                              <img src="/img/portfolio/gty8_ui-inventory-1.jpg" alt="cover" />
+                              <div className="cyril-hover-link">
+                                <i className="fa fa-search-plus" />
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                        <div className="col-md-6 col-lg-4 cyril-mb-30">
+                          <a
+                            href="/img/portfolio/gty8_ui-inventory-2.jpg"
+                            className="cyril-project-figure mfp-image"
+                            data-effect="mfp-zoom-in"
+                          >
+                            <div className="cyril-cover">
+                              <img src="/img/portfolio/gty8_ui-inventory-2.jpg" alt="cover" />
+                              <div className="cyril-hover-link">
+                                <i className="fa fa-search-plus" />
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                        <div className="col-md-6 col-lg-4 cyril-mb-30">
+                          <a
+                            href="/img/portfolio/gty8_ui-inventory-3.jpg"
+                            className="cyril-project-figure mfp-image"
+                            data-effect="mfp-zoom-in"
+                          >
+                            <div className="cyril-cover">
+                              <img src="/img/portfolio/gty8_ui-inventory-3.jpg" alt="cover" />
+                              <div className="cyril-hover-link">
+                                <i className="fa fa-search-plus" />
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                        <div className="col-md-6 col-lg-4 cyril-mb-30">
+                          <a
+                            href="/img/portfolio/gty8_ui-inventory-4.jpg"
+                            className="cyril-project-figure mfp-image"
+                            data-effect="mfp-zoom-in"
+                          >
+                            <div className="cyril-cover">
+                              <img src="/img/portfolio/gty8_ui-inventory-4.jpg" alt="cover" />
+                              <div className="cyril-hover-link">
+                                <i className="fa fa-search-plus" />
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                        <div className="col-md-6 col-lg-4 cyril-mb-30">
+                          <a
+                            href="/img/portfolio/gty8_ui-inventory-5.jpg"
+                            className="cyril-project-figure mfp-image"
+                            data-effect="mfp-zoom-in"
+                          >
+                            <div className="cyril-cover">
+                              <img src="/img/portfolio/gty8_ui-inventory-5.jpg" alt="cover" />
+                              <div className="cyril-hover-link">
+                                <i className="fa fa-search-plus" />
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </dd>
+                  </dl>
+
+                  <dl className="no-disc">
+                    <dt>User Stories</dt>
+                    <dd>
+                      I grounded the entire GTY redesign process in user-centered thinking. Working with the Internet Ministry Coordinator, I gathered user stories to use as the tool real-world behaviors, goals, and contexts of our audience. These weren't hypothetical personas&mdash;they were distilled from actual usage data, support requests, and internal ministry insights.
+                    </dd>
+                    <dd>
+                      GTY's audience is diverse: pastors, laypeople, new believers, long-time followers, Spanish speakers, students, and more. User stories helped unify that complexity into clear, actionable narratives that guided everything from page layouts to content hierarchy to UI components.
+                    </dd>
+                    <dd>
+                      <div className="row">
+                        <div className="col-md-6 col-lg-4 cyril-mb-30">
+                          <a
+                            href="/img/portfolio/gty8_user-stories-1.jpg"
+                            className="cyril-project-figure mfp-image"
+                            data-effect="mfp-zoom-in"
+                          >
+                            <div className="cyril-cover">
+                              <img src="/img/portfolio/gty8_user-stories-1.jpg" alt="cover" />
+                              <div className="cyril-hover-link">
+                                <i className="fa fa-search-plus" />
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                        <div className="col-md-6 col-lg-4 cyril-mb-30">
+                          <a
+                            href="/img/portfolio/gty8_user-stories-2.jpg"
+                            className="cyril-project-figure mfp-image"
+                            data-effect="mfp-zoom-in"
+                          >
+                            <div className="cyril-cover">
+                              <img src="/img/portfolio/gty8_user-stories-2.jpg" alt="cover" />
+                              <div className="cyril-hover-link">
+                                <i className="fa fa-search-plus" />
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                        <div className="col-md-6 col-lg-4 cyril-mb-30">
+                          <a
+                            href="/img/portfolio/gty8_user-stories-3.jpg"
+                            className="cyril-project-figure mfp-image"
+                            data-effect="mfp-zoom-in"
+                          >
+                            <div className="cyril-cover">
+                              <img src="/img/portfolio/gty8_user-stories-3.jpg" alt="cover" />
+                              <div className="cyril-hover-link">
+                                <i className="fa fa-search-plus" />
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </dd>
+                  </dl>
+
+                  <dl className="no-disc">
+                    <dt>Producing Mockups</dt>
+                    <dd>
+                      As the web designer and developer, creating mockups was one of the most exciting and foundational stages of the project. It's where the team's carefully planned ideas began to take visual shape. I ensured that design and function started working in harmony. And here's what I aimed for:
+                      <dl className="w-disc">
+                        <dd>
+                          <strong>Project Team and Stakeholder Alignment:</strong> By producing mockups, I prioritized alignment with the stakeholders—managers, content creators, and the engineering team. With the Internet Ministry Coordinator's supervision, I held collaborative sessions where we clarified the project's goals, user needs, and brand voice. This helped me avoid unnecessary revisions down the road, ensuring everyone felt seen and heard from the start.
+                        </dd>
+                        <dd>
+                          <strong>Clean, Minimal, yet Sophisticated Theming and Design:</strong> My design approach leaned heavily on simplicity without sacrificing depth and sophistication. I strived to design interfaces that felt intuitive and elegant—where every element had a purpose, and clutter was eliminated. To me, minimal design doesn't mean bland; it means the user's focus is guided exactly where it needs to be, with subtle layers of refinement that elevate the experience.
+
+                          <div className="cyril-mt-40 cyril-mb-80">
+                            <p className="cyril-upper cyril-text-sm cyril-mb-20 cyril-text-center">
+                              INITIAL MOCKUPS
+                            </p>
+                            <a
+                              href="/img/portfolio/gty8_design_0 - init.gif"
+                              className="cyril-project-figure mfp-image"
+                              data-effect="mfp-zoom-in"
+                            >
+                              <div className="cyril-cover">
+                                <img src="/img/portfolio/gty8_design_0 - init.gif" alt="cover" />
+                                <div className="cyril-hover-link">
+                                  <i className="fa fa-search-plus" />
+                                </div>
+                              </div>
+                            </a>
+                          </div>
+
+                          <div className="cyril-mt-40 cyril-mb-80">
+                            <p className="cyril-upper cyril-text-sm cyril-mb-20 cyril-text-center">
+                              REVISION #1
+                            </p>
+                            <a
+                              href="/img/portfolio/gty8_design_rev-1.gif"
+                              className="cyril-project-figure mfp-image"
+                              data-effect="mfp-zoom-in"
+                            >
+                              <div className="cyril-cover">
+                                <img src="/img/portfolio/gty8_design_rev-1.gif" alt="cover" />
+                                <div className="cyril-hover-link">
+                                  <i className="fa fa-search-plus" />
+                                </div>
+                              </div>
+                            </a>
+                          </div>
+
+                          <div className="cyril-prototype-vid cyril-mt-40 cyril-mb-80">
+                            <p className="cyril-upper cyril-text-sm cyril-mb-20 cyril-text-center">
+                              REVISION #2
+                            </p>
+                            <VideoFigure url="/img/portfolio/gty8_design_rev-2.mp4" />
+                          </div>
+
+                          <div className="cyril-prototype-vid cyril-mt-40 cyril-mb-80">
+                            <p className="cyril-upper cyril-text-sm cyril-mb-20 cyril-text-center">
+                              REVISION #3
+                            </p>
+                            <VideoFigure url="/img/portfolio/gty8_design_rev-3.mp4" />
+                          </div>
+                          
+                          <div className="cyril-mt-40 cyril-mb-80">
+                              <p className="cyril-upper cyril-text-sm cyril-mb-20 cyril-text-center">
+                                REVISION #4
+                              </p>
+                            <div className="row">
+                              <div className="col-md-6">
+                                <a
+                                  href="/img/portfolio/gty8_design_rev-4_1.jpg"
+                                  className="cyril-project-figure mfp-image"
+                                  data-effect="mfp-zoom-in"
+                                >
+                                  <div className="cyril-cover">
+                                    <img src="/img/portfolio/gty8_design_rev-4_1.jpg" alt="cover" />
+                                    <div className="cyril-hover-link">
+                                      <i className="fa fa-search-plus" />
+                                    </div>
+                                  </div>
+                                </a>
+                              </div>
+                              <div className="col-md-6">
+                                <a
+                                  href="/img/portfolio/gty8_design_rev-4_2.jpg"
+                                  className="cyril-project-figure mfp-image"
+                                  data-effect="mfp-zoom-in"
+                                >
+                                  <div className="cyril-cover">
+                                    <img src="/img/portfolio/gty8_design_rev-4_2.jpg" alt="cover" />
+                                    <div className="cyril-hover-link">
+                                      <i className="fa fa-search-plus" />
+                                    </div>
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+
+                        <div className="cyril-mt-40 cyril-mb-80">
+                          <p className="cyril-upper cyril-text-sm cyril-mb-20 cyril-text-center">
+                            REVISION #6
+                          </p>
+                          <div className="row">
+                            <div className="col-md-6 cyril-mb-40">
+                              <a
+                                href="/img/portfolio/gty8_design_rev-6_1.jpg"
+                                className="cyril-project-figure mfp-image"
+                                data-effect="mfp-zoom-in"
+                              >
+                                <div className="cyril-cover">
+                                  <img src="/img/portfolio/gty8_design_rev-6_1.jpg" alt="cover" />
+                                  <div className="cyril-hover-link">
+                                    <i className="fa fa-search-plus" />
+                                  </div>
+                                </div>
+                              </a>
+                            </div>
+                            <div className="col-md-6 cyril-mb-40">
+                              <a
+                                href="/img/portfolio/gty8_design_rev-6_2.jpg"
+                                className="cyril-project-figure mfp-image"
+                                data-effect="mfp-zoom-in"
+                              >
+                                <div className="cyril-cover">
+                                  <img src="/img/portfolio/gty8_design_rev-6_2.jpg" alt="cover" />
+                                  <div className="cyril-hover-link">
+                                    <i className="fa fa-search-plus" />
+                                  </div>
+                                </div>
+                              </a>
+                            </div>
+                            <div className="col-md-6 cyril-mb-40">
+                              <a
+                                href="/img/portfolio/gty8_design_rev-6_3.jpg"
+                                className="cyril-project-figure mfp-image"
+                                data-effect="mfp-zoom-in"
+                              >
+                                <div className="cyril-cover">
+                                  <img src="/img/portfolio/gty8_design_rev-6_3.jpg" alt="cover" />
+                                  <div className="cyril-hover-link">
+                                    <i className="fa fa-search-plus" />
+                                  </div>
+                                </div>
+                              </a>
+                            </div>
+                            <div className="col-md-6 cyril-mb-40">
+                              <a
+                                href="/img/portfolio/gty8_design_rev-6_4.jpg"
+                                className="cyril-project-figure mfp-image"
+                                data-effect="mfp-zoom-in"
+                              >
+                                <div className="cyril-cover">
+                                  <img src="/img/portfolio/gty8_design_rev-6_4.jpg" alt="cover" />
+                                  <div className="cyril-hover-link">
+                                    <i className="fa fa-search-plus" />
+                                  </div>
+                                </div>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+
+                        </dd>                
+                        
+                      </dl>
+                    </dd>
+                  </dl>
+
+                  <dl className="no-disc">
+                    <dt>Visual Direction—Font, Color, and Layout Choices</dt>
+                    <dd>
+                      Working with GTY's design agency partner—WeKreative—I proposed font choices that they immediately loved and approved. Those fonts were carefully picked for legibility and clarity across platforms, whether on digital materials or print. For the serif font, I picked Google's Lora, which would be used for long-format content such as blog posts, articles, transcripts, and devotionals. And for the san-serif font, I picked Lato, which would be used for titles and short-format copy. For the color palette, WeKreative provided it so that the website would be aligned with GTY's brand, which had been consistent with the print materials that WeKreative had producing.
+                    </dd>
+                    <dd>
+                      <div className="cyril-mt-40 cyril-mb-80">
+                        <div className="row">
+                          <div className="col-md-6">
+                            <p className="cyril-upper cyril-text-sm cyril-mb-20 cyril-text-center">
+                              FONTS
+                            </p>
+                            <a
+                              href="/img/portfolio/gty8_fonts.jpg"
+                              className="cyril-project-figure mfp-image"
+                              data-effect="mfp-zoom-in"
+                            >
+                              <div className="cyril-cover">
+                                <img src="/img/portfolio/gty8_fonts.jpg" alt="cover" />
+                                <div className="cyril-hover-link">
+                                  <i className="fa fa-search-plus" />
+                                </div>
+                              </div>
+                            </a>
+                          </div>
+                          <div className="col-md-6">
+                            <p className="cyril-upper cyril-text-sm cyril-mb-20 cyril-text-center">
+                              COLORS
+                            </p>
+                            <a
+                              href="/img/portfolio/gty8_colors.jpg.jpg"
+                              className="cyril-project-figure mfp-image"
+                              data-effect="mfp-zoom-in"
+                            >
+                              <div className="cyril-cover">
+                                <img src="/img/portfolio/gty8_colors.jpg" alt="cover" />
+                                <div className="cyril-hover-link">
+                                  <i className="fa fa-search-plus" />
+                                </div>
+                              </div>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </dd>
+                  </dl>
+
+                  <dl className="no-disc">
+                    <dt>Style Guide Preparation and Creation</dt>
+                    <dd>
+                      Once the design language is solidified, I compile a detailed style guide to document all visual and functional components. This includes typography rules, color palette, spacing systems, and interaction patterns. It becomes the single source of truth for the entire team, ensuring consistency across pages, devices, and future iterations. It was a creative and strategic tool—crucial for scaling design efficiently.
+                      <a
+                        href="/img/portfolio/gty8_style-guide-creation.jpg"
+                        className="cyril-project-figure w-80 mx-auto cyril-mt-40 cyril-mb-40 mfp-image"
+                        data-effect="mfp-zoom-in"
+                      >
+                        <div className="cyril-cover">
+                          <img src="/img/portfolio/gty8_style-guide-creation.jpg" alt="cover" />
+                          <div className="cyril-hover-link">
+                            <i className="fa fa-search-plus" />
+                          </div>
+                        </div>
+                      </a>
+                    </dd>
+                  </dl>
+
+                  <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
+
+                  <h4 className="cyril-up cyril-text-center">Software Architecture and Development Process</h4>
                   
                   <dl className="no-disc">
                     <dd>
-                      As the web designer and developer, I played a key role in shaping the visual and functional aspects of GTY version 8. With the leadership of and working closely with the Internet Ministry Coordinator, I helped translate high-level business goals into clear technical requirements and user-centric design solutions. We collaborated to define feature scopes, prioritize enhancements, and ensure the user experience aligned with the overall vision for the project.
+                      As the web designer and developer, I played a key role in shaping the visual and functional aspects of GTY version 8. With the leadership of and working closely with the Internet Ministry Coordinator, I helped:
+                      <dl className="w-disc">
+                        <dd>translate high-level business goals into clear technical requirements and user-centric design solutions</dd>
+                      </dl>
+
+                      We collaborated to:
+
+                      <dl className="w-disc">
+                        <dd>to define feature scopes</dd>
+                        <dd>prioritize enhancements</dd>
+                        <dd>ensure the user experience aligned with the overall vision for the project</dd>
+                      </dl>
+
                     </dd>
                     <dd>
-                      On the technical side, I worked closely with the Software Engineer and the Software Developer to design a scalable and modular software architecture. While the Engineer and the Developer handled data modeling, API development, server-side logic, and programming, I focused on front-end web development&mdash;ensuring seamless integration of the UI with back-end services through APIs and efficient state management.                      
+                      On the technical side, I worked closely with the Software Engineer and the Software Developer to design a scalable and modular software architecture. While the Engineer and the Developer handled data modeling, API development, server-side logic, and programming, I focused on:
+                      
+                      <dl className="w-disc">
+                        <dd>front-end web development&mdash;ensuring seamless integration of the UI with back-end services through APIs and efficient state management</dd>
+                      </dl>
+
                     </dd>
                     <dd>
                       Together, we enhanced existing features and introduced new ones, iterating based on user feedback, performance metrics, and stakeholder decisions. Our joint effort ensured the platform was visually appealing, robust, maintainable, and future-proof.
+                    </dd>
+                  </dl>
+
+                  <dl className="no-disc">
+                    <dt>Mobile-First Responsive Design &amp; Development Principles</dt>
+                    <dd>
+                      Prior to this version 8 overhaul, more than 50% of visitors accessed the site via mobile devices despite lacking proper mobile optimization. As a team, we prioritized responsive web design principles, ensuring content rendering in beautiful harmony with the user's particular device and screen size. This technical achievement involved:
+                      <dl className="w-disc">
+                        <dd>fluid grid layouts adapting to viewport dimensions</dd>
+                        <dd>flexible images scaling proportionally across devices</dd>
+                        <dd>Media queries serving optimized CSS for different breakpoints</dd>
+                        <dd>touch-friendly interface elements replacing desktop-centric controls</dd>
+                      </dl>
+                    </dd>
+                    <dd>
+                      The responsive approach eliminated pinch-zooming and horizontal scrolling issues that previously hindered mobile users. By embracing mobile-first principles, the ministry acknowledged shifting user behavior patterns while maintaining full functionality for desktop visitors.
                     </dd>
                   </dl>
                   
                   <dl className="no-disc">
                     <dt>Technology Stack</dt>
                     <dd>
-                      As the development team, we made informed decisions to use:
+                      As the development team, we wanted to ensure the website would be a modern, high-performing platform. We wanted to use an application that would offer scalability and robust architecture. We wanted it to be a responsive, accessible, and SEO-friendly website with reusable UI components. And so we made informed decisions to use:
                       <dl className="w-disc">
                         <dd>
                           <strong>ASP.NET Core MVC (Model-View-Controller)</strong> as the application framework and solution that will enable GTY.org to be a modern, robust, and high-performing platform that it needs to be
@@ -257,20 +716,83 @@ const page = () => {
                   </dl>
 
                   <dl className="no-disc">
-                    <dt>Mobile-First Responsive Design</dt>
+                    <dt>Code Prototyping</dt>
                     <dd>
-                      Prior to this version 8 overhaul, more than 50% of visitors accessed the site via mobile devices despite lacking proper mobile optimization. As a team, we prioritized responsive web design principles, ensuring content rendering in beautiful harmony with the user's particular device and screen size. This technical achievement involved:
+                      Due to resource and time constraints, and with the approval of the Digital Platforms Coordinator, I decided to design the high-fidelity prototypes on the browser by coding in Visual Studio Code, making the the protypes production-ready. Because we already had a defined information architecture, I leveraged on <strong>Google's Material Design System</strong> and started prototyping the site's MVPs on the browser. 
                       <dl className="w-disc">
-                        <dd>Fluid grid layouts adapting to viewport dimensions</dd>
-                        <dd>Flexible images scaling proportionally across devices</dd>
-                        <dd>Media queries serving optimized CSS for different breakpoints</dd>
-                        <dd>Touch-friendly interface elements replacing desktop-centric controls</dd>
+                        <dd>
+                          With several windows in various screen sizes opened, I started <strong>code-designing</strong> the global components such as the navigation, footer, media player layer, search layer, cart and wishlist layer, and registration and sign-in layer.
+                          <div className="row">
+                            <div className="offset-md-4 col-md-4">
+                              <VideoFigure className="w-50" url="/img/portfolio/gty8_code-prototyping_mobile.mp4" />
+                            </div>
+                          </div>
+                        </dd>
+                        <dd>
+                          I then tackled the homepage, about pages, resource pages, giving pages, the store, product pages, checkout page, and account pages.
+
+                          <div className="cyril-prototype-vid cyril-mt-40 cyril-mb-80">
+                            <p className="cyril-upper cyril-text-sm cyril-text-center">
+                              HOMEPAGE
+                            </p>
+                            <VideoFigure url="/img/portfolio/gty8_homepage.mp4" />
+                          </div>
+
+                          <div className="cyril-prototype-vid cyril-mt-40 cyril-mb-80">
+                            <p className="cyril-upper cyril-text-sm cyril-mb-20 cyril-text-center">
+                              ABOUT PAGES
+                            </p>
+                            <VideoFigure url="/img/portfolio/gty8_about.mp4" />
+                          </div>
+
+                          <div className="cyril-prototype-vid cyril-mt-40 cyril-mb-80">
+                            <p className="cyril-upper cyril-text-sm cyril-mb-20 cyril-text-center">
+                              RESOURCE PAGES
+                            </p>
+                            <VideoFigure url="/img/portfolio/gty8_resources.mp4" />
+                          </div>
+
+                          <div className="cyril-prototype-vid cyril-mt-40 cyril-mb-80">
+                            <p className="cyril-upper cyril-text-sm cyril-mb-20 cyril-text-center">
+                              GIVING PAGES
+                            </p>
+                            <VideoFigure url="/img/portfolio/gty8_giving.mp4" />
+                          </div>
+
+                          <div className="cyril-prototype-vid cyril-mt-40 cyril-mb-80">
+                            <p className="cyril-upper cyril-text-sm cyril-mb-20 cyril-text-center">
+                              STORE, PRODUCT &amp; CHECKOUT PAGES
+                            </p>
+                            <VideoFigure url="/img/portfolio/gty8_store.mp4" />
+                          </div>
+
+                          <div className="cyril-prototype-vid cyril-mt-40 cyril-mb-80">
+                            <p className="cyril-upper cyril-text-sm cyril-mb-20 cyril-text-center">
+                              ACCOUNT PAGES
+                            </p>
+                            <VideoFigure url="/img/portfolio/gty8_account.mp4" />
+                          </div>
+
+                        </dd>
+                        <dd>
+                          I used HandlebarsJS to mock up and template the data and content so that I could freely and more efficiently design and develop without unnecessarily burdening and interfering with the back-end side of the development. This allowed the Software Engineer and the Software Developer to focus on the back-end side of the development at the same time as I would progress with cutting up the pages.
+                        </dd>
+                        <dd>
+                          <strong>Subtle, yet Pleasing UI Micro-interactions:</strong> This is where the experience really comes alive. I incorporated micro-interactions—like button animations, hover effects, and component and page transitions—to bring a joyful and pleasant experience to the user's journey on the website. These small touches may go unnoticed when done right, but they make the interface feel polished and professional. I always think about how these interactions to enhance usability while adding delight.
+
+                          <div className="cyril-mt-40 cyril-mb-80">
+                            <VideoFigure url="/img/portfolio/gty8_micro-interactions.mp4" />
+                          </div>
+                        </dd>
+
                       </dl>
                     </dd>
-                    <dd>
-                      The responsive approach eliminated pinch-zooming and horizontal scrolling issues that previously hindered mobile users. By embracing mobile-first principles, the ministry acknowledged shifting user behavior patterns while maintaining full functionality for desktop visitors.
-                    </dd>
+                    
                   </dl>
+
+                  <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
+
+                  <h4 className="cyril-up cyril-text-center">Feature Enhancements</h4>
 
                   <dl className="no-disc">
                     <dt>Custom Media Player with Smart Transcript</dt>
@@ -402,50 +924,6 @@ const page = () => {
 
                   <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
 
-                  <h4 className="cyril-up cyril-text-center">Design and Development Process</h4>
-                  
-                  <dl className="no-disc">
-                    <dt>Producing Mockups and Prototypes</dt>
-                    <dd>
-                      As the web designer and developer, creating mockups and prototypes were the most exciting and foundational stages of the project. It's where the team's carefully planned ideas began to take visual shape. I ensured that design and function started working in harmony. And here's what I aimed for:
-                      <dl className="w-disc">
-                        <dd>
-                          <strong>Project Team and Stakeholder Alignment:</strong> By producing mockups, I prioritized alignment with the stakeholders—managers, content creators, and the engineering team. With the Internet Ministry Coordinator's supervision, I held collaborative sessions where we clarified the project's goals, user needs, and brand voice. This helped me avoid unnecessary revisions down the road, ensuring everyone felt seen and heard from the start.
-                        </dd>
-                        <dd>
-                          <strong>Clean, Minimal, yet Sophisticated Theming and Design:</strong> My design approach leaned heavily on simplicity without sacrificing depth and sophistication. I strived to design interfaces that felt intuitive and elegant—where every element had a purpose, and clutter was eliminated. To me, minimal design doesn't mean bland; it means the user's focus is guided exactly where it needs to be, with subtle layers of refinement that elevate the experience.
-                        </dd>
-                        <dd>
-                          <strong>Visual Direction—Font, Color, and Layout Choices:</strong> Working with GTY's design agency partner—WeKreative—I proposed font choices that they immediately loved and approved. Those fonts were carefully picked for legibility and clarity across platforms, whether on digital materials or print. For the serif font, I picked Google's Lora, which would be used for long-format content such as blog posts, articles, transcripts, and devotionals. And for the san-serif font, I picked Lato, which would be used for titles and short-format copy. For the color palette, WeKreative provided it so that the website would be aligned with GTY's brand, which had been consistent with the print materials that WeKreative had producing.
-                        </dd>
-                        <dd>
-                          <strong>Subtle, yet Pleasing UI Micro-interactions:</strong> This is where the experience really comes alive. I incorporated micro-interactions—like button animations, hover effects, and component and page transitions—to bring a joyful and pleasant experience to the user's journey on the website. These small touches may go unnoticed when done right, but they make the interface feel polished and professional. I always think about how these interactions to enhance usability while adding delight.
-                        </dd>
-                        <dd>
-                          <strong>Style Guide Preparation and Creation:</strong> Once the design language is solidified, I compile a detailed style guide to document all visual and functional components. This includes typography rules, color palette, spacing systems, and interaction patterns. It becomes the single source of truth for the entire team, ensuring consistency across pages, devices, and future iterations. It was a creative and strategic tool—crucial for scaling design efficiently.
-                        </dd>
-                      </dl>
-                    </dd>
-                  </dl>
-
-                  <dl className="no-disc">
-                    <dt>Designing on the Browser</dt>
-                    <dd>
-                      Due to resource and time constraints, and with the approval of the Digital Platforms Coordinator, I decided to design and develop the high-fidelity version of the pages on the browser.
-                    </dd>
-                    <dd>
-                      With defined information architecture, while leveraging <strong>Google's Material Design System</strong> and taking a <strong>mobile-first approach</strong>, I designed and developed the site's MVPs. With several windows in various screen sizes opened, I started <strong>code-designing</strong> the global components such as the navigation, footer, media player layer, search layer, cart and wishlist layer, and registration and sign-in layer.
-                    </dd>
-                    <dd>
-                      I then tackled the homepage, about pages, resource pages, giving pages, the store, product pages, checkout page, and account pages.
-                    </dd>
-                    <dd>
-                      I used HandlebarsJS to mock up and template the data and content so that I could freely and more efficiently design and develop without unnecessarily burdening and interfering with the back-end side of the development. This allowed the Software Engineer and the Software Developer to focus on the back-end side of the development at the same time as I would progress with cutting up the pages.
-                    </dd>
-                  </dl>
-
-                  <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
-
                   <h4 className="cyril-up cyril-text-center">Results</h4>
 
                   <dl className="no-disc">
@@ -461,7 +939,8 @@ const page = () => {
                       </dl>
                     </dd>
                     <dd>
-                    But more than metrics, the site now reflects the clarity, simplicity, quality, and timelessness of John MacArthur's preaching and teaching. It's a testament to the ministry's commitment to providing high-quality, timeless content that resonates with the audience.
+                      But more than metrics, the site now reflects the clarity, simplicity, quality, and timelessness of John MacArthur's preaching and teaching. It's a testament to the ministry's commitment to providing high-quality, timeless content that resonates with the audience.
+                      <img className="w-100 d-block cyril-no-border cyril-mt-40 cyril-mb-40" src="/img/portfolio/main_gty8.jpg" alt="cover" />
                     </dd>
                   </dl>
 
