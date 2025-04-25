@@ -1681,6 +1681,10 @@ banner
     font-size: 32px;
   }
 }
+.cyril-top-banner h2 span {
+  font-size: 0.5em;
+  display: block;
+}
 @media screen and (max-width: 1200px) {
   .cyril-top-banner {
     padding-top: 130px;

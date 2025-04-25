@@ -962,6 +962,11 @@ banner
         @media screen and (max-width: 992px) {
             font-size: 32px;
         }
+
+        & span {
+           font-size: 0.5em;
+           display: block;
+        }
     }
 
     @media screen and (max-width: 1200px) {
