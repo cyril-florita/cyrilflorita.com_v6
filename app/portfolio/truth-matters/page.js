@@ -58,8 +58,7 @@ const page = () => {
           <div className="container">
 
             {/* top banner */}
-            <div className="cyril-top-banner cyril-text-center">
-              <img src="/img/portfolio/main_truth-matters-podcast.jpg" alt="cover" />              
+            <div className="cyril-top-banner cyril-text-center">                           
               <h2 className="cyril-mt-60">Truth Matters Podcast</h2>
               <p className="cyril-upper cyril-mt-30 cyril-mb-40">
                 <span className="cyril-accent">Branding, UX Design, and Front-End Development</span>
@@ -110,6 +109,9 @@ const page = () => {
                   </p>
 
                   <div className="row cyril-mt-40">
+                    <div className="col-md-12 cyril-mb-30">
+                      <img src="/img/portfolio/main_truth-matters-podcast.jpg" alt="cover" /> 
+                    </div>
                     <div className="col-md-6 cyril-mb-30">
                       <img src="/img/portfolio/truth-matters_logo.jpg" alt="cover" />
                     </div>
