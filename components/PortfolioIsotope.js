@@ -238,16 +238,16 @@ const PortfolioIsotope = () => {
 
           {/* square . (branding) study bible app */}
           <div id="thestudybiblelogo" data-project="thestudybiblelogo" className="cyril-grid-item fil-branding">
-            <Link legacyBehavior href="/portfolio">
+            <Link legacyBehavior href="/portfolio/the-study-bible-logo">
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_study-bible-app-logo.jpg" alt="cover" />
-                  <div className="cyril-hover-link coming-soon">
-                    <span className="cyril-upper">Coming Soon</span>
+                  <div className="cyril-hover-link">
+                    <i className="fas fa-link" />
                   </div>
                 </div>
                 <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Branding</p>
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Logo/Branding</p>
                   <h4 className="cyril-up">The Study Bible App</h4>
                 </div>
               </div>
