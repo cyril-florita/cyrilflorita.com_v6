@@ -110,16 +110,16 @@ const page = () => {
 
                   <div className="row cyril-mt-40">
                     <div className="col-md-12 cyril-mb-30">
-                      <img src="/img/portfolio/main_truth-matters-podcast.jpg" alt="cover" /> 
+                      <img src="/img/portfolio/main_truth-matters-podcast.jpg" alt="Truth Matters Podcast Wide" /> 
                     </div>
                     <div className="col-md-6 cyril-mb-30">
-                      <img src="/img/portfolio/truth-matters_logo.jpg" alt="cover" />
+                      <img src="/img/portfolio/truth-matters_logo.jpg" alt="Truth Matters Podcast Logo" />
                     </div>
                     <div className="col-md-6 cyril-mb-30">
-                      <img src="/img/portfolio/truth-matters_icon.jpg" alt="cover" />
+                      <img src="/img/portfolio/truth-matters_icon.jpg" alt="Truth Matters Podcast Icon" />
                     </div>
                     <div className="offset-md-3 col-md-6 cyril-mb-30">
-                      <img src="/img/portfolio/truth-matters_mug.jpg" alt="cover" />
+                      <img src="/img/portfolio/truth-matters_mug.jpg" alt="Truth Matters Podcast Mug" />
                     </div>
                   </div>
 
@@ -133,19 +133,19 @@ const page = () => {
                   
                   <div className="row cyril-mt-40">
                     <div className="col-md-6 cyril-mb-30">
-                      <img src="/img/portfolio/truth-matters_youtube-thumb-1.jpg" alt="cover" />
+                      <img src="/img/portfolio/truth-matters_youtube-thumb-1.jpg" alt="Truth Matters Podcast YouTube Thumb 1" />
                     </div>
                     <div className="col-md-6 cyril-mb-30">
-                      <img src="/img/portfolio/truth-matters_youtube-thumb-2.jpg" alt="cover" />
+                      <img src="/img/portfolio/truth-matters_youtube-thumb-2.jpg" alt="Truth Matters Podcast YouTube Thumb 2" />
                     </div>
                     <div className="col-md-6 cyril-mb-30">
-                      <img src="/img/portfolio/truth-matters_episode-artwork-1.jpg" alt="cover" />
+                      <img src="/img/portfolio/truth-matters_episode-artwork-1.jpg" alt="Truth Matters Podcast Episode Artwork 1" />
                     </div>
                     <div className="col-md-6 cyril-mb-30">
-                      <img src="/img/portfolio/truth-matters_episode-artwork-2.jpg" alt="cover" />
+                      <img src="/img/portfolio/truth-matters_episode-artwork-2.jpg" alt="Truth Matters Podcast Episode Artwork 2" />
                     </div>
                     <div className="offset-md-3 col-md-6 cyril-mb-30">
-                      <img src="/img/portfolio/truth-matters_apple-podacast.png" alt="cover" />
+                      <img src="/img/portfolio/truth-matters_apple-podacast.png" alt="Truth Matters Apple Podcast" />
                     </div>
                   </div>
 
@@ -162,7 +162,7 @@ const page = () => {
 
                   <div className="row cyril-mt-40">                  
                     <div className="cyril-mb-30">
-                      <img src="/img/portfolio/truth-matters_website.png" alt="cover" />
+                      <img src="/img/portfolio/truth-matters_website.png" alt="Truth Matters Podcast Website" />
                     </div>
                   </div>
 

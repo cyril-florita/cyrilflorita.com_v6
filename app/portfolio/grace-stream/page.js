@@ -59,7 +59,7 @@ const page = () => {
 
             {/* top banner */}
             <div className="cyril-top-banner cyril-text-center">
-              <img className="w-border" src="/img/portfolio/main_grace-stream.jpg" alt="cover" />              
+              <img className="w-border" src="/img/portfolio/main_grace-stream.jpg" alt="Main Image for Grace Stream" />              
               <h2 className="cyril-mt-60">Grace Stream</h2>
               <p className="cyril-upper cyril-mt-30 cyril-mb-40">
                 <span className="cyril-accent">Branding, UX Design, and Front-End Development</span>
@@ -111,24 +111,24 @@ const page = () => {
                   </p>
 
                   <p className="cyril-mt-40">
-                    <img className="d-block w-40 float-left" src="/img/portfolio/grace-stream_logo-1.jpg" alt="cover" />
+                    <img className="d-block w-40 float-left" src="/img/portfolio/grace-stream_logo-1.jpg" alt="Grace Stream Logo 1" />
                     <strong>Logo, version 1 &mdash; The Arrows Design:</strong> This one was about continuous movement. I wanted to create a more digital-forward feel, something that would look great on an app icon or loading screen. The open circle with arrows suggests ongoing flow, continuity, and even interactivity. It also plays into the concept of streaming itself — content that's never-ending, always accessible, always looping back in meaningful ways. The typography here was intentional to keep a strong, consistent identity across different logo uses. But visually, this one has a more tech-savvy, dynamic energy. It feels like it could sit comfortably in a UI alongside modern apps, and still carry that deeper meaning of grace moving through life.
                   </p>
 
                   <p className="cyril-mt-40">
-                    <img className="d-block w-40 float-right" src="/img/portfolio/grace-stream_logo-2.jpg" alt="cover" />
+                    <img className="d-block w-40 float-right" src="/img/portfolio/grace-stream_logo-2.jpg" alt="Grace Stream Logo 2" />
                     <strong>Logo, version 2 &mdash; The Wave Design:</strong> With this one, I started with a circle because it represents wholeness, unity, and continuity — which seemed really aligned with the core message of grace. Inside that circle, I used three flowing wave lines to symbolize the idea of a stream — something constantly moving, refreshing, and full of life. It felt like a natural metaphor for grace itself: not static, but always in motion, always available. I chose a deep blue because it brings calm and trust — it also hints at water and depth without being too literal. For the typography, I went with a bold sans-serif for “GRACE” to give it presence and strength, and a lighter type for “STREAM” to complement it without competing. I love how this version feels grounded and serene — perfect for contexts where the objective, yet emotional tone needs to capture people's attention.
                   </p>
 
                   <p className="cyril-mt-40">
                     Both of these logos were built as part of a broader visual identity system, where the goal is to have flexibility: one logo feels more grounded and organic, the other more dynamic and functional. Yet only one would represent the brand. And so the ministry decided on the Wave logo, which I then used for all digital and print assets. Depending on where Grace Stream shows up&mdash;whether it's a worship service, the GTY app, a podcast, a digital community, or at a conference — the brand can show up consistently but appropriately tailored. 
-                    <img className="d-block mx-auto w-50 cyril-mt-40" src="/img/portfolio/grace-stream_logo.jpg" alt="cover" />
+                    <img className="d-block mx-auto w-50 cyril-mt-40" src="/img/portfolio/grace-stream_logo.jpg" alt="Grace Stream Logo" />
                   </p>
                                
                   <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
 
                   <h4 className="cyril-up cyril-text-center">UX/UI Design</h4>
-                  <img className="float-right w-30" src="/img/portfolio/grace-stream_mobile-view.jpg" alt="cover" />
+                  <img className="float-right w-30" src="/img/portfolio/grace-stream_mobile-view.jpg" alt="Grace Stream Mobile View" />
                   <p className="cyril-mt-40">
                     
                     The user experience was all about minimizing friction. Even though this is a minimal page, every pixel was intentional. From the background textures to the soft lighting around the player module, I wanted the visuals to reinforce a sense of calm, focus, and trust. The background photo I picked captures the essence of the brand. I leaned into subtle gradients and soft neutrals, avoiding any overly trendy styles so that the experience stays classic and enduring, just like the content. It's a design that gets out of the way but still feels polished and complete. This page is about listening, not browsing.
@@ -155,7 +155,7 @@ const page = () => {
 
                   <p className="cyril-mt-40">
                     Because Grace Stream is meant to be &#8220;always on,&#8221; uptime and performance were non-negotiable. The Back-end Engineer and I implemented fallback behaviors for the player and ensured smooth cross-browser playback, even on mobile and lower-powered devices. Everything had to feel instant and reliable. Press play, and it just works—whether you're on your phone in traffic or at your desk looking for background teaching. The end result is an experience that feels as seamless and stable as a traditional radio station, but with all the benefits of modern streaming and a web-native design. 
-                    <img className="cyril-mt-40" src="/img/portfolio/grace-stream_website.jpg" alt="cover" />
+                    <img className="cyril-mt-40" src="/img/portfolio/grace-stream_website.jpg" alt="Grace Stream Website" />
                   </p>
                   <p className="cyril-mt-40">
                     Check out how <a className="cyril-accent" href="https://www.gty.org/broadcasts/gracestream" target="_blank"><strong>Grace Stream</strong></a> offers continuous, scripture-rich content that's always available.                    

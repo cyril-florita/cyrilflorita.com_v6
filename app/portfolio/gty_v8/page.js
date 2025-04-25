@@ -121,7 +121,7 @@ const page = () => {
                         data-effect="mfp-zoom-in"
                       >
                         <div className="cyril-cover">
-                          <img src="/img/portfolio/gty7_screenshot.jpg" alt="cover" />
+                          <img src="/img/portfolio/gty7_screenshot.jpg" alt="GTY 7 Screenshot" />
                           <div className="cyril-hover-link">
                             <i className="fa fa-search-plus" />
                           </div>
@@ -138,7 +138,7 @@ const page = () => {
                         data-effect="mfp-zoom-in"
                       >
                         <div className="cyril-cover">
-                          <img src="/img/portfolio/gty8_screenshot.jpg" alt="cover" />
+                          <img src="/img/portfolio/gty8_screenshot.jpg" alt="GTY 8 Screenshot" />
                           <div className="cyril-hover-link">
                             <i className="fa fa-search-plus" />
                           </div>
@@ -235,7 +235,7 @@ const page = () => {
                         data-effect="mfp-zoom-in"
                       >
                         <div className="cyril-cover">
-                          <img src="/img/portfolio/gty8_site-nav.jpg" alt="cover" />
+                          <img src="/img/portfolio/gty8_site-nav.jpg" alt="GTY 8 Site Nav" />
                           <div className="cyril-hover-link">
                             <i className="fa fa-search-plus" />
                           </div>
@@ -259,7 +259,7 @@ const page = () => {
                         data-effect="mfp-zoom-in"
                       >
                         <div className="cyril-cover">
-                          <img src="/img/portfolio/gty8_site-tree.jpg" alt="cover" />
+                          <img src="/img/portfolio/gty8_site-tree.jpg" alt="GTY 8 Site Tree" />
                           <div className="cyril-hover-link">
                             <i className="fa fa-search-plus" />
                           </div>
@@ -289,7 +289,7 @@ const page = () => {
                             data-effect="mfp-zoom-in"
                           >
                             <div className="cyril-cover">
-                              <img src="/img/portfolio/gty8_ui-inventory-1.jpg" alt="cover" />
+                              <img src="/img/portfolio/gty8_ui-inventory-1.jpg" alt="GTY 8 UI Inventory" />
                               <div className="cyril-hover-link">
                                 <i className="fa fa-search-plus" />
                               </div>
@@ -303,7 +303,7 @@ const page = () => {
                             data-effect="mfp-zoom-in"
                           >
                             <div className="cyril-cover">
-                              <img src="/img/portfolio/gty8_ui-inventory-2.jpg" alt="cover" />
+                              <img src="/img/portfolio/gty8_ui-inventory-2.jpg" alt="GTY 8 UI Invetory 2" />
                               <div className="cyril-hover-link">
                                 <i className="fa fa-search-plus" />
                               </div>
@@ -317,7 +317,7 @@ const page = () => {
                             data-effect="mfp-zoom-in"
                           >
                             <div className="cyril-cover">
-                              <img src="/img/portfolio/gty8_ui-inventory-3.jpg" alt="cover" />
+                              <img src="/img/portfolio/gty8_ui-inventory-3.jpg" alt="GTY 8 UI Inventory 3" />
                               <div className="cyril-hover-link">
                                 <i className="fa fa-search-plus" />
                               </div>
@@ -331,7 +331,7 @@ const page = () => {
                             data-effect="mfp-zoom-in"
                           >
                             <div className="cyril-cover">
-                              <img src="/img/portfolio/gty8_ui-inventory-4.jpg" alt="cover" />
+                              <img src="/img/portfolio/gty8_ui-inventory-4.jpg" alt="GTY 8 UI Inventory 4" />
                               <div className="cyril-hover-link">
                                 <i className="fa fa-search-plus" />
                               </div>
@@ -345,7 +345,7 @@ const page = () => {
                             data-effect="mfp-zoom-in"
                           >
                             <div className="cyril-cover">
-                              <img src="/img/portfolio/gty8_ui-inventory-5.jpg" alt="cover" />
+                              <img src="/img/portfolio/gty8_ui-inventory-5.jpg" alt="GTY 8 UI Inventory 5" />
                               <div className="cyril-hover-link">
                                 <i className="fa fa-search-plus" />
                               </div>
@@ -373,7 +373,7 @@ const page = () => {
                             data-effect="mfp-zoom-in"
                           >
                             <div className="cyril-cover">
-                              <img src="/img/portfolio/gty8_user-stories-1.jpg" alt="cover" />
+                              <img src="/img/portfolio/gty8_user-stories-1.jpg" alt="GTY 8 User Stories 1" />
                               <div className="cyril-hover-link">
                                 <i className="fa fa-search-plus" />
                               </div>
@@ -387,7 +387,7 @@ const page = () => {
                             data-effect="mfp-zoom-in"
                           >
                             <div className="cyril-cover">
-                              <img src="/img/portfolio/gty8_user-stories-2.jpg" alt="cover" />
+                              <img src="/img/portfolio/gty8_user-stories-2.jpg" alt="GTY 8 User Stories 2" />
                               <div className="cyril-hover-link">
                                 <i className="fa fa-search-plus" />
                               </div>
@@ -401,7 +401,7 @@ const page = () => {
                             data-effect="mfp-zoom-in"
                           >
                             <div className="cyril-cover">
-                              <img src="/img/portfolio/gty8_user-stories-3.jpg" alt="cover" />
+                              <img src="/img/portfolio/gty8_user-stories-3.jpg" alt="GTY 8 User Stories 3" />
                               <div className="cyril-hover-link">
                                 <i className="fa fa-search-plus" />
                               </div>
@@ -434,7 +434,7 @@ const page = () => {
                               data-effect="mfp-zoom-in"
                             >
                               <div className="cyril-cover">
-                                <img src="/img/portfolio/gty8_design_0 - init.gif" alt="cover" />
+                                <img src="/img/portfolio/gty8_design_0 - init.gif" alt="GTY 8 Initial Mockups" />
                                 <div className="cyril-hover-link">
                                   <i className="fa fa-search-plus" />
                                 </div>
@@ -452,7 +452,7 @@ const page = () => {
                               data-effect="mfp-zoom-in"
                             >
                               <div className="cyril-cover">
-                                <img src="/img/portfolio/gty8_design_rev-1.gif" alt="cover" />
+                                <img src="/img/portfolio/gty8_design_rev-1.gif" alt="GTY 8 Revision 1" />
                                 <div className="cyril-hover-link">
                                   <i className="fa fa-search-plus" />
                                 </div>
@@ -486,7 +486,7 @@ const page = () => {
                                   data-effect="mfp-zoom-in"
                                 >
                                   <div className="cyril-cover">
-                                    <img src="/img/portfolio/gty8_design_rev-4_1.jpg" alt="cover" />
+                                    <img src="/img/portfolio/gty8_design_rev-4_1.jpg" alt="GTY 8 Revision 4.1" />
                                     <div className="cyril-hover-link">
                                       <i className="fa fa-search-plus" />
                                     </div>
@@ -500,7 +500,7 @@ const page = () => {
                                   data-effect="mfp-zoom-in"
                                 >
                                   <div className="cyril-cover">
-                                    <img src="/img/portfolio/gty8_design_rev-4_2.jpg" alt="cover" />
+                                    <img src="/img/portfolio/gty8_design_rev-4_2.jpg" alt="GTY 8 Revision 4.2" />
                                     <div className="cyril-hover-link">
                                       <i className="fa fa-search-plus" />
                                     </div>
@@ -522,7 +522,7 @@ const page = () => {
                                 data-effect="mfp-zoom-in"
                               >
                                 <div className="cyril-cover">
-                                  <img src="/img/portfolio/gty8_design_rev-6_1.jpg" alt="cover" />
+                                  <img src="/img/portfolio/gty8_design_rev-6_1.jpg" alt="GTY 8 Revision 6.1" />
                                   <div className="cyril-hover-link">
                                     <i className="fa fa-search-plus" />
                                   </div>
@@ -536,7 +536,7 @@ const page = () => {
                                 data-effect="mfp-zoom-in"
                               >
                                 <div className="cyril-cover">
-                                  <img src="/img/portfolio/gty8_design_rev-6_2.jpg" alt="cover" />
+                                  <img src="/img/portfolio/gty8_design_rev-6_2.jpg" alt="GTY 8 Revision 6.2" />
                                   <div className="cyril-hover-link">
                                     <i className="fa fa-search-plus" />
                                   </div>
@@ -550,7 +550,7 @@ const page = () => {
                                 data-effect="mfp-zoom-in"
                               >
                                 <div className="cyril-cover">
-                                  <img src="/img/portfolio/gty8_design_rev-6_3.jpg" alt="cover" />
+                                  <img src="/img/portfolio/gty8_design_rev-6_3.jpg" alt="GTY 8 Revision 6.3" />
                                   <div className="cyril-hover-link">
                                     <i className="fa fa-search-plus" />
                                   </div>
@@ -564,7 +564,7 @@ const page = () => {
                                 data-effect="mfp-zoom-in"
                               >
                                 <div className="cyril-cover">
-                                  <img src="/img/portfolio/gty8_design_rev-6_4.jpg" alt="cover" />
+                                  <img src="/img/portfolio/gty8_design_rev-6_4.jpg" alt="GTY 8 Revision 6.4" />
                                   <div className="cyril-hover-link">
                                     <i className="fa fa-search-plus" />
                                   </div>
@@ -598,7 +598,7 @@ const page = () => {
                               data-effect="mfp-zoom-in"
                             >
                               <div className="cyril-cover">
-                                <img src="/img/portfolio/gty8_fonts.jpg" alt="cover" />
+                                <img src="/img/portfolio/gty8_fonts.jpg" alt="GTY 8 Fonts" />
                                 <div className="cyril-hover-link">
                                   <i className="fa fa-search-plus" />
                                 </div>
@@ -615,7 +615,7 @@ const page = () => {
                               data-effect="mfp-zoom-in"
                             >
                               <div className="cyril-cover">
-                                <img src="/img/portfolio/gty8_colors.jpg" alt="cover" />
+                                <img src="/img/portfolio/gty8_colors.jpg" alt="GTY 8 Colors" />
                                 <div className="cyril-hover-link">
                                   <i className="fa fa-search-plus" />
                                 </div>
@@ -637,7 +637,7 @@ const page = () => {
                         data-effect="mfp-zoom-in"
                       >
                         <div className="cyril-cover">
-                          <img src="/img/portfolio/gty8_style-guide-creation.jpg" alt="cover" />
+                          <img src="/img/portfolio/gty8_style-guide-creation.jpg" alt="GTY 8 Style Guide Creation" />
                           <div className="cyril-hover-link">
                             <i className="fa fa-search-plus" />
                           </div>
@@ -941,7 +941,7 @@ const page = () => {
                     </dd>
                     <dd>
                       But more than metrics, the site now reflects the clarity, simplicity, quality, and timelessness of John MacArthur's preaching and teaching. It's a testament to the ministry's commitment to providing high-quality, timeless content that resonates with the audience.
-                      <img className="w-100 d-block cyril-no-border cyril-mt-40 cyril-mb-40" src="/img/portfolio/main_gty8.jpg" alt="cover" />
+                      <img className="w-100 d-block cyril-no-border cyril-mt-40 cyril-mb-40" src="/img/portfolio/main_gty8.jpg" alt="GTY 8 Main Project Image" />
                     </dd>
                   </dl>
 

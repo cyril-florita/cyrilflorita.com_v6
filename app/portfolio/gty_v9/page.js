@@ -66,7 +66,7 @@ const page = () => {
 
             {/* top banner */}
             <div className="cyril-top-banner cyril-text-center">
-              <img src="/img/portfolio/main_gty9.jpg" alt="cover" />
+              <img src="/img/portfolio/main_gty9.jpg" alt="Main Image for GTY v9" />
               <p className="cyril-text-sm cyril-accent"><strong>&#40;Earlier version of the design is used in this mockup since the project hasn't yet launched.&#41;</strong></p>
 
               <h2 className="cyril-mt-60">GTY Website, v.9</h2>

@@ -141,7 +141,7 @@ const PortfolioIsotope = () => {
             <Link legacyBehavior href="/portfolio/gty_v9">
               <div className="cyril-portfolio-item cyril-long-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_gty9.jpg" alt="cover" />
+                  <img src="/img/portfolio/thumb_gty9.jpg" alt="Thumb - GTY Website, v.9" />
                   <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
@@ -163,7 +163,7 @@ const PortfolioIsotope = () => {
             <Link legacyBehavior href="/portfolio">
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover case-study-coming-soon">
-                  <img src="/img/portfolio/thumb_the-study-bible-app.jpg" alt="cover" />
+                  <img src="/img/portfolio/thumb_the-study-bible-app.jpg" alt="Thumb - The Study Bible App" />
                   <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link coming-soon">
                     <span className="cyril-upper">App Launching Soon</span>
@@ -182,7 +182,7 @@ const PortfolioIsotope = () => {
             <Link legacyBehavior href="/portfolio/gty_v8">
               <div className="cyril-portfolio-item cyril-long-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_gty8.jpg" alt="cover" />
+                  <img src="/img/portfolio/thumb_gty8.jpg" alt="Thumb - GTY Website, v.8" />
                   <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
@@ -203,7 +203,7 @@ const PortfolioIsotope = () => {
             <Link legacyBehavior href="/portfolio/truth-matters">
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover truth-matters">
-                  <img src="/img/portfolio/thumb_truth-matters-podcast-2.jpg" alt="cover" />
+                  <img src="/img/portfolio/thumb_truth-matters-podcast-2.jpg" alt="Thumb - Truth Matters Podcast" />
                   <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
@@ -222,7 +222,7 @@ const PortfolioIsotope = () => {
             <Link legacyBehavior href="/portfolio/grace-stream">
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_grace-stream.jpg" alt="cover" />
+                  <img src="/img/portfolio/thumb_grace-stream.jpg" alt="Thumb - Grace Stream" />
                   <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
@@ -241,7 +241,7 @@ const PortfolioIsotope = () => {
             <Link legacyBehavior href="/portfolio/the-study-bible-logo">
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_study-bible-app-logo-2.jpg" alt="cover" />
+                  <img src="/img/portfolio/thumb_study-bible-app-logo-2.jpg" alt="Thumb - The Study Bible App Logo" />
                   <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
@@ -260,7 +260,7 @@ const PortfolioIsotope = () => {
             <Link legacyBehavior href="/portfolio/sekihmentis">
               <div className="cyril-portfolio-item cyril-long-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_sekihmentis.jpg" alt="cover" />
+                  <img src="/img/portfolio/thumb_sekihmentis.jpg" alt="Thumb - SekihMentis" />
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
                   </div>
@@ -278,7 +278,7 @@ const PortfolioIsotope = () => {
             <Link legacyBehavior href="/portfolio/gty-dashboard">
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_gty-dashboard.jpg" alt="cover" />
+                  <img src="/img/portfolio/thumb_gty-dashboard.jpg" alt="Thumb - GTY Dashboard" />
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
                   </div>
@@ -296,7 +296,7 @@ const PortfolioIsotope = () => {
             <Link legacyBehavior href="/portfolio">
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_gty-app-landing.jpg" alt="cover" />
+                  <img src="/img/portfolio/thumb_gty-app-landing.jpg" alt="Thumb - GTY App Landing Page" />
                   <div className="cyril-hover-link coming-soon">
                     <span className="cyril-upper">Coming Soon</span>
                   </div>
@@ -314,7 +314,7 @@ const PortfolioIsotope = () => {
             <Link legacyBehavior href="/portfolio/he-took-my-place">
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_he-took-my-place.jpg" alt="cover" />
+                  <img src="/img/portfolio/thumb_he-took-my-place.jpg" alt="Thumb - He Took My Place" />
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
                   </div>
@@ -338,7 +338,7 @@ const PortfolioIsotope = () => {
             <Link legacyBehavior href="/portfolio">
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_gty-blog.jpg" alt="cover" />
+                  <img src="/img/portfolio/thumb_gty-blog.jpg" alt="Thumb - GTY Blog Graphics" />
                   <div className="cyril-hover-link coming-soon">
                     <span className="cyril-upper">Coming Soon</span>
                   </div>
@@ -356,7 +356,7 @@ const PortfolioIsotope = () => {
             <Link legacyBehavior href="/portfolio">
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_gty-resources.jpg" alt="cover" />
+                  <img src="/img/portfolio/thumb_gty-resources.jpg" alt="Thumb - GTY Resources" />
                   <div className="cyril-hover-link coming-soon">
                     <span className="cyril-upper">Coming Soon</span>
                   </div>
@@ -374,7 +374,7 @@ const PortfolioIsotope = () => {
             <Link legacyBehavior href="/portfolio">
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_gty-social-media.jpg" alt="cover" />
+                  <img src="/img/portfolio/thumb_gty-social-media.jpg" alt="Thumb - GTY Social Media Graphics" />
                   <div className="cyril-hover-link coming-soon">
                     <span className="cyril-upper">Coming Soon</span>
                   </div>
@@ -392,7 +392,7 @@ const PortfolioIsotope = () => {
             <Link legacyBehavior href="/portfolio">
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_patricia-macarthur-pastoral-fund.jpg" alt="cover" />
+                  <img src="/img/portfolio/thumb_patricia-macarthur-pastoral-fund.jpg" alt="Thumb - The Patricia MacArthur Pastoral Care Fund Logo" />
                   <div className="cyril-hover-link coming-soon">
                     <span className="cyril-upper">Coming Soon</span>
                   </div>
