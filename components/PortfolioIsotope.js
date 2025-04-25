@@ -335,12 +335,12 @@ const PortfolioIsotope = () => {
 
           {/* wide . marketing . blog graphics */}
           <div id="gtyblog" data-project="gtyblog" className="cyril-grid-item fil-marketing">
-            <Link legacyBehavior href="/portfolio">
+            <Link legacyBehavior href="/portfolio/gty-blog-graphics">
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_gty-blog.jpg" alt="Thumb - GTY Blog Graphics" />
-                  <div className="cyril-hover-link coming-soon">
-                    <span className="cyril-upper">Coming Soon</span>
+                  <div className="cyril-hover-link">
+                    <i className="fas fa-link" />
                   </div>
                 </div>
                 <div className="cyril-project-descr">
