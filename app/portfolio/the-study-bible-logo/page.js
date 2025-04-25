@@ -76,14 +76,24 @@ const page = () => {
 
                 <div className="cyril-divider cyril-mb-60" />
 
-                <h4 className="cyril-up cyril-text-center">Crafting a Logo for the Source of Truth</h4>
+                <h4 className="cyril-up cyril-text-center">Project Overview</h4>
                 <dl className="no-disc">
+                  <dt></dt>
                   <dd>
                     As a designer at Grace to You, I was tasked with creating a visual identity for The Study Bible app. The goal was to design a logo that communicates usability, clarity, and a sense of illumination, while remaining simple and versatile for digital use.
                   </dd>
+                </dl>
+
+                <h4 className="cyril-up cyril-text-center">Research and Concept Development</h4>
+
+                <dl className="no-disc">
                   <dd>
                     I began by researching existing Bible and study-related app logos to identify common visual themes—open books, crosses, rays of light, and bookmarks. My aim was to create a design that felt familiar yet distinct, balancing tradition with modern minimalism.
                   </dd>
+                </dl>
+
+                <h4 className="cyril-up cyril-text-center">Ideation and Exploration</h4>
+                <dl className="no-disc">
                   <dd>
                     I sketched multiple concepts, focusing on the core idea of an open book, which universally symbolizes learning and accessibility. I experimented with different elements:
                   </dd>
@@ -94,6 +104,10 @@ const page = () => {
                       <dd>Bookmarks and pens to represent study and engagement</dd>
                     </dl>
                   </dd>
+                </dl>
+
+                <h4 className="cyril-up cyril-text-center">Design Iterations</h4>
+                <dl className="no-disc">
                   <dd>
                     I then developed a grid of logo variations. Each icon was tested for clarity at small sizes and adaptability across backgrounds. I explored different compositions, such as:
                   </dd>
@@ -107,6 +121,10 @@ const page = () => {
                   <dd>
                     <img className="cyril-project-main-graphic" src="/img/portfolio/the-study-bible-logo-iterations.jpg" alt="The Study Bible Logo Iterations" />
                   </dd>
+                </dl>
+
+                <h4 className="cyril-up cyril-text-center">Final Design Selection</h4>
+                <dl className="no-disc">
                   <dd>
                     After reviewing the options with the Digital Platforms Coordinator and stakeholders, we agreed on the final design. This logo features:
                   </dd>
@@ -118,13 +136,26 @@ const page = () => {
                     </dl>
                   </dd>
                   <dd>
-                    The color palette is a muted blue, chosen for its calm, trustworthy, and timeless qualities. And for the wordmark, I selected a clean, sans-serif font. The hierarchy emphasizes "STUDY BIBLE" in bold, with "THE" in a lighter weight above, ensuring readability and balance.                    
-                  </dd>
-                  <dd>
                     <img className="cyril-project-main-graphic" src="/img/portfolio/the-study-bible-logo.jpg" alt="The Study Bible Logo" />
                   </dd>
                 </dl>
-                
+
+                <h4 className="cyril-up cyril-text-center">Color Palette &amp; Typography</h4>
+                <dl className="no-disc">
+                  <dd>
+                    The color palette is a muted blue, chosen for its calm, trustworthy, and timeless qualities. And for the wordmark, I selected a clean, sans-serif font. The hierarchy emphasizes "STUDY BIBLE" in bold, with "THE" in a lighter weight above, ensuring readability and balance.
+                  </dd>
+                </dl>
+                <h4 className="cyril-up cyril-text-center">Outcome and Reflection</h4>
+                <dl className="no-disc">
+                  <dd>
+                    The final logo is simple, memorable, and effective across the mobile platforms. The combination of book, pen, and rising sun encapsulates the app's mission: to encourage a deeper study with the digital version of the MacArthur Bible. The iterative process, from broad exploration to focused refinement, ensured that the final mark met both the user's needs and the brand's vision.
+                  </dd>
+                  <dd>
+                    <img className="cyril-project-main-graphic" src="/img/portfolio/the-study-bible-main.jpg" alt="The Study Bible Logo" />
+                  </dd>
+                </dl>
+
 
                 {/* pagination */}
                 <div className="cyril-pagination-panel cyril-mt-60">

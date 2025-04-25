@@ -1681,6 +1681,12 @@ portfolio
             }
         }
 
+        &.truth-matters {
+            & img {
+                filter: grayscale(0) brightness(100%) contrast(100%);
+            }
+        }
+
         & h3 {
             position: absolute;
             top: 30px;
@@ -1703,6 +1709,12 @@ portfolio
             z-index: 1;
             // transform: scale(1), translate(0,0);
             transition: $tr;
+        }
+
+        &.case-study-coming-soon {
+            & h3 {
+                background-color: $dark;
+            }
         }
 
         &:hover {

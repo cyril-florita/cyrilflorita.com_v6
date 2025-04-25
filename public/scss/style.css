@@ -2329,6 +2329,9 @@ portfolio
     filter: grayscale(0) brightness(100%) contrast(100%);
   }
 }
+.cyril-portfolio-item .cyril-cover.truth-matters img {
+  filter: grayscale(0) brightness(100%) contrast(100%);
+}
 .cyril-portfolio-item .cyril-cover h3 {
   position: absolute;
   top: 30px;
@@ -2350,6 +2353,9 @@ portfolio
   text-shadow: none;
   z-index: 1;
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
+}
+.cyril-portfolio-item .cyril-cover.case-study-coming-soon h3 {
+  background-color: #101010;
 }
 .cyril-portfolio-item .cyril-cover:hover img {
   filter: grayscale(0) brightness(100%) contrast(100%);
