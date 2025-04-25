@@ -791,6 +791,7 @@ dl.w-disc dd {
 }
 dl.w-disc dd dl {
   list-style-type: circle;
+  margin-top: 40px;
 }
 dl.w-disc dd dl dd {
   margin-left: 15px;

@@ -95,7 +95,7 @@ const page = () => {
                   </div>
                   <div className="col-md-4 cyril-mb-30">
                     <p className="cyril-upper cyril-mb-10">Start / Launch Date:</p>
-                    <p className="cyril-mt-20">Nov. 2023 / May 2025</p>
+                    <p className="cyril-mt-20">Nov. 2023 / TBD</p>
                   </div>
                 </div>
 
@@ -133,12 +133,12 @@ const page = () => {
                   <dt>Business Insights</dt>
                   <dd>
                     <a
-                      href="/img/portfolio/gty9_redesign-overview..jpg"
+                      href="/img/portfolio/gty9_redesign-overview.jpg"
                       className="cyril-project-figure float-right w-30 mfp-image"
                       data-effect="mfp-zoom-in"
                     >
                       <div className="cyril-cover">
-                        <img src="/img/portfolio/gty9_redesign-overview.jpg" alt="cover" />
+                        <img src="/img/portfolio/gty9_redesign-overview.jpg" alt="redesign overview" />
                         <div className="cyril-hover-link">
                           <i className="fa fa-search-plus" />
                         </div>
@@ -158,7 +158,7 @@ const page = () => {
                           data-effect="mfp-zoom-in"
                         >
                           <div className="cyril-cover">
-                            <img src="/img/portfolio/gty9_project-requirements.jpg" alt="cover" />
+                            <img src="/img/portfolio/gty9_project-requirements.jpg" alt="project requirements" />
                             <div className="cyril-hover-link">
                               <i className="fa fa-search-plus" />
                             </div>
@@ -197,11 +197,34 @@ const page = () => {
                     <dl className="w-disc">
                       <dd>
                         I tracked activities such as user sessions, user uniqueness &amp; frequency, user age & gender, user language, user location, page views, page ranks, average session duration, bounce rates, acquisition & navigation paths, devices used, etc.
-                        <VideoFigure url="/img/portfolio/gty9_google-analytics.mp4" />
+                        
+                        <a
+                          href="/img/portfolio/gty9_analytics.jpg"
+                          className="clearfix cyril-project-figure cyril-mt-40 mfp-image"
+                          data-effect="mfp-zoom-in"
+                        >
+                          <div className="cyril-cover">
+                            <img src="/img/portfolio/gty9_analytics.jpg" alt="analytics" />
+                            <div className="cyril-hover-link">
+                              <i className="fa fa-search-plus" />
+                            </div>
+                          </div>
+                        </a>
                       </dd>
                       <dd>
                         I conducted surveys with existing users and organization employees to gather qualitative data identifying pain points, user sentiment, satisfaction, and preferences.
-                        <VideoFigure url="/img/portfolio/gty9_interviews.mp4" />
+                        <a
+                          href="/img/portfolio/gty9_interviews.jpge"
+                          className="clearfix cyril-project-figure cyril-mt-40 mfp-image"
+                          data-effect="mfp-zoom-in"
+                        >
+                          <div className="cyril-cover">
+                            <img src="/img/portfolio/gty9_interviews.jpg" alt="interviews" />
+                            <div className="cyril-hover-link">
+                              <i className="fa fa-search-plus" />
+                            </div>
+                          </div>
+                        </a>
                       </dd>
                       <dd>
                         <strong>Key Findings:</strong>
@@ -257,7 +280,7 @@ const page = () => {
                           data-effect="mfp-zoom-in"
                         >
                           <div className="cyril-cover">
-                            <img src="/img/portfolio/gty9_content-inventory.jpg" alt="cover" />
+                            <img src="/img/portfolio/gty9_content-inventory.jpg" alt="content inventory" />
                             <div className="cyril-hover-link">
                               <i className="fa fa-search-plus" />
                             </div>
@@ -269,7 +292,7 @@ const page = () => {
                           data-effect="mfp-zoom-in"
                         >
                           <div className="cyril-cover">
-                            <img src="/img/portfolio/gty9_v8-sitemap.jpg" alt="cover" />
+                            <img src="/img/portfolio/gty9_v8-sitemap.jpg" alt="sitemap" />
                             <div className="cyril-hover-link">
                               <i className="fa fa-search-plus" />
                             </div>
@@ -281,7 +304,7 @@ const page = () => {
                     <strong>Evaluating Content Through a UX Lens:</strong> From there, I assessed each piece of content for clarity, relevance, and engagement. Was it still accurate? Was it performing well? Did it actually meet user needs?
                     <dl>
                       <dd>
-                        <strong>Collaboration:</strong> After I conducted an SEO Analysis, I worked with the Chief Information Officer and the Editorial Manager to determine what should be updated, merged, archived, or even removed. This wasn't just a cleanup exercise—it was about aligning content with the mental models of real users and supporting their journeys through the site.<br /><br />
+                        <strong>Collaboration:</strong> After I conducted an SEO Analysis, I worked with key stakeholders to determine what should be updated, merged, archived, or even removed. This wasn't just a cleanup exercise—it was about aligning content with the mental models of real users and supporting their journeys through the site.<br /><br />
                         I laid the groundwork for ongoing content governance. I proposed a system where content could be regularly reviewed and restructured as needed, with IA guiding the progressive development of site content alongside user needs.<br /><br />
                         My goal was to create a content ecosystem that was not only clean and accessible now but could adapt and scale with the ministry's growth over time.
                         <a
@@ -290,7 +313,7 @@ const page = () => {
                           data-effect="mfp-zoom-in"
                         >
                           <div className="cyril-cover">
-                            <img src="/img/portfolio/gty9_content-audit-meeting.jpg" alt="cover" />
+                            <img src="/img/portfolio/gty9_content-audit-meeting.jpg" alt="content audit" />
                             <div className="cyril-hover-link">
                               <i className="fa fa-search-plus" />
                             </div>
@@ -311,7 +334,7 @@ const page = () => {
                       data-effect="mfp-zoom-in"
                     >
                       <div className="cyril-cover">
-                        <img src="/img/portfolio/gty9_site-and-component-map.jpg" alt="cover" />
+                        <img src="/img/portfolio/gty9_site-and-component-map.jpg" alt="site and component map" />
                         <div className="cyril-hover-link">
                           <i className="fa fa-search-plus" />
                         </div>
@@ -347,7 +370,7 @@ const page = () => {
                       data-effect="mfp-zoom-in"
                     >
                       <div className="cyril-cover">
-                        <img src="/img/portfolio/gty9_user-personas.jpg" alt="cover" />
+                        <img src="/img/portfolio/gty9_user-personas.jpg" alt="user personas" />
                         <div className="cyril-hover-link">
                           <i className="fa fa-search-plus" />
                         </div>
@@ -365,7 +388,7 @@ const page = () => {
                       data-effect="mfp-zoom-in"
                     >
                       <div className="cyril-cover">
-                        <img src="/img/portfolio/gty9_user-journeys.jpg" alt="cover" />
+                        <img src="/img/portfolio/gty9_user-journeys.jpg" alt="user journeys" />
                         <div className="cyril-hover-link">
                           <i className="fa fa-search-plus" />
                         </div>
@@ -383,7 +406,7 @@ const page = () => {
                           data-effect="mfp-zoom-in"
                         >
                           <div className="cyril-cover">
-                            <img src="/img/portfolio/gty9_user-stories.jpg" alt="cover" />
+                            <img src="/img/portfolio/gty9_user-stories.jpg" alt="user stories" />
                             <div className="cyril-hover-link">
                               <i className="fa fa-search-plus" />
                             </div>
@@ -391,14 +414,14 @@ const page = () => {
                         </a>
                       </dd>
                       <dd>
-                        <strong>Collaboration:</strong> I worked with the Senior Software Architect and the development team to write the project backlogs—a prioritized list of features and tasks based on their importance, value to the user base & stakeholders, and business goals—out of these user stories. The backlog acts as a tool for translating high-level visions into actionable details—MVP &#40;Minimum Viable Product&#40; list of user needs and stakeholder expectations, influencing the Senior Software Architect / Project Manager and the development team through the execution phase to achieve the project's goals efficiently.
+                        <strong>Collaboration:</strong> I worked with the Senior Software Architect and the development team to write the project backlogs—a prioritized list of features and tasks based on their importance, value to the user base & stakeholders, and business goals—out of these user stories. The backlog acts as a tool for translating high-level visions into actionable details—MVP &#40;Minimum Viable Product&#41; list of user needs and stakeholder expectations, influencing the team through the execution phase to achieve the project's goals efficiently.
                         <a
                           href="/img/portfolio/gty9_mvp.jpg"
                           className="cyril-project-figure cyril-mt-40 cyril-mb-40 w-70 mx-auto mfp-image"
                           data-effect="mfp-zoom-in"
                         >
                           <div className="cyril-cover">
-                            <img src="/img/portfolio/gty9_mvp.jpg" alt="cover" />
+                            <img src="/img/portfolio/gty9_mvp.jpg" alt="project mvp" />
                             <div className="cyril-hover-link">
                               <i className="fa fa-search-plus" />
                             </div>
@@ -421,7 +444,7 @@ const page = () => {
                           data-effect="mfp-zoom-in"
                         >
                           <div className="cyril-cover">
-                            <img src="/img/portfolio/gty9_homepage-components.jpg" alt="cover" />
+                            <img src="/img/portfolio/gty9_homepage-components.jpg" alt="homepage components" />
                             <div className="cyril-hover-link">
                               <i className="fa fa-search-plus" />
                             </div>
@@ -435,7 +458,7 @@ const page = () => {
                           data-effect="mfp-zoom-in"
                         >
                           <div className="cyril-cover">
-                            <img src="/img/portfolio/gty9_ui-inventory.jpg" alt="cover" />
+                            <img src="/img/portfolio/gty9_ui-inventory.jpg" alt="ui inventory" />
                             <div className="cyril-hover-link">
                               <i className="fa fa-search-plus" />
                             </div>
@@ -449,7 +472,7 @@ const page = () => {
                           data-effect="mfp-zoom-in"
                         >
                           <div className="cyril-cover">
-                            <img src="/img/portfolio/gty9_design-system.jpg" alt="cover" />
+                            <img src="/img/portfolio/gty9_design-system.jpg" alt="design system" />
                             <div className="cyril-hover-link">
                               <i className="fa fa-search-plus" />
                             </div>
@@ -472,7 +495,18 @@ const page = () => {
                   <dt>Wireframes</dt>
                   <dd>
                     <strong>Collaboration:</strong> I worked closely with the Senior Software Architect and the development team to definine and organize UI elements, components, pages, journeys into wireframe requirements, preparing and serving as the basis for the further development of GTY's design system.
-                    <VideoFigure url="/img/portfolio/gty9_wireframes-requirements.mp4" />
+                    <a
+                      href="/img/portfolio/gty9_wireframe-requirements.jpg"
+                      className="cyril-project-figure cyril-mt-40 mfp-image"
+                      data-effect="mfp-zoom-in"
+                    >
+                      <div className="cyril-cover">
+                        <img src="/img/portfolio/gty9_wireframe-requirements.jpg" alt="wireframe requirements" />
+                        <div className="cyril-hover-link">
+                          <i className="fa fa-search-plus" />
+                        </div>
+                      </div>
+                    </a>                   
                   </dd>
                   <dd>
                     I then designed low-fidelity wireframes focusing on the structure, functionality, and placement of key content and elements without delving into visual details like colors, typography, or images. These wireframes served as blueprints for the design, helping the development team and stakeholders visualize the flow and hierarchy of content before moving into more detailed stages of providing mockups and prototypes.
@@ -488,73 +522,52 @@ const page = () => {
                   <dd>After getting alignment from the stakeholders about the hierarchy and presentation of the content on the homepage and other important pages via the wireframes, I designed high-fidelity interactive prototypes for mobile, tablet, laptop/desktop screens using Axure RP to simulate user interactions, test usability, and refine designs before development.
                     <dl>
                       <dd>These prototypes closely represented what would be the final version of the design, including detailed UI elements &amp; functionality, typography, color schemes, and animations.</dd>
-                      <dd>Stakeholders then would be able to visualize the final project more clearly, which facilitated approvals and alignment.</dd>
+                      <dd>
+                        Stakeholders then would be able to visualize the final project more clearly, which facilitated approvals and alignment.                        
+                      </dd>
                     </dl>
                   </dd>
                   <dd>
-                    <strong>Time and Resource:</strong> Creating high-fidelity prototypes required significantly more effort than low-fidelity wireframes. This caused specific stakeholders to misunderstand and underappreciate the importance of this stage of the UX process in terms of project completion and timeline. And so, the stakeholders set a new but tighter deadline. As a response, the Senior Software Architect thought of outsourcing the design and development of the e-commerce aspect of the site, and also decided to bypass the UX process and the UX Designer for some of the key homepage elements&mdash;like the media player with playlist functionality&mdash;by having the Front-End Developer develop the designs on the fly.
+                    <strong>Challenges:</strong> Balancing modern design with the traditional & clean aesthetic expected by GTY.org's core audience and stakeholders presented a challenge. Specific stakeholders wanted the simplicity and minimalism of the current site &#40;version 8&#41; to be carried over to this new version. To this UX Designer, this would be the best approach to the redesign project so as not to frustrate users when introduced to a newer site version.
                   </dd>
                   <dd>
-                    <strong>Challenges:</strong> Balancing modern design with the traditional & clean aesthetic expected by GTY.org's core audience and stakeholders presented a challenge. Specific stakeholders wanted the simplicity and minimalism of the current site &#40;version 8&#41; to be carried over to this new version. To this UX Designer, this would be the best approach to the redesign project so as not to frustrate users when introduced to a newer site version. The Senior Software Architect, however, thought that the minimalistic direction looked like a low-fidelity design, and so decided to bypass the UX process and delegated the design to the Front-End developer. Moreover, at this point in the design process, the ministry partnered with a creative agency that focused more on branding and aesthetics rather than usability and functionality. The agency functioned as the authority over the originally implemented UX process and agile project & development process.
+                    <strong>Design Handoff:</strong> Working closely with the Senior Software Architect, and as the stakeholders would approve of the high-fidelity prototypes&mdash;each screen, interaction, and animation closely mirroring the intended GTY v9 experience&mdash I would hand them off to development team to ensure a smooth transition to the development phase of our Agile process.
                   </dd>
                 </dl>
+
+                <p className="cyril-text-sm cyril-accent"><strong>&#40;Video/screenshots of the high-fidelity prototypes will provided once the project launches.&#41;</strong></p>
 
                 <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
 
                 <h4 className="cyril-up cyril-text-center">Reflection</h4>
 
-                <dl className="w-disc">
-                  <dt>The Role of Time in UX Projects</dt>
-                  <dd>Time is a pivotal factor in UX design. Rushing or bypassing essential stages like prototyping and testing can lead to suboptimal outcomes. </dd>
-                  <dd>When time is not managed effectively, design decisions may rely on assumptions rather than user data, resulting in usability issues that require costly post-launch fixes.</dd>
-                  <dd>Investing time upfront in research, prototyping, and testing ensures that usability problems are identified early, reducing rework and improving the final product's quality.</dd>
-                </dl>
-
-                <dl className="w-disc">
-                  <dt>Possible Consequences of Abandoning the UX Process</dt>
-                  <dd>Skipping critical UX steps—such as thorough prototyping and testing can result in designs that fail to meet user needs or align with organizational goals.</dd>
-                  <dd>This case study illustrates how abandoning the UX process led to confusion, inefficiencies, and delays. For instance:
-                    <dl>
+                <dl className="no-disc">
+                  <dd>As the UX designer for GTY v9, I've learned that rigorously following a structured UX process isn't just a &ldquo;nice to have&rdquo;&mdash;it's the very foundations of delivering design solutions that truly resonate with the users and the organization's business goals:
+                    <dl className="w-disc">
                       <dd>
-                        The Senior Software Architect bypassed the UX designer's input, delegating design tasks directly to a Front-End developer.</dd>
+                        <strong>It Ensures User-Centered Clarity: </strong> By starting every project with discovery &#40;user research, competitive audits, stakeholder interviews&#41;, I grounded decisions in real needs rather than assumptions. This kept the team focused on solving the right problems from day one.
+                      </dd>
                       <dd>
-                        Another project member disrupting the workload and process of the rest of the team.
+                        <strong>It Reduces Risk and Rework:</strong> Iterative validation—through wireframes, prototypes, and usability testing—catches misunderstandings long before development begins. That early feedback loop prevents costly late-stage pivots and scope creep.
+                      </dd>
+                      <dd>
+                        <strong>It Aligns Cross-Functional Teams:</strong> A well-documented process &#40;personas, journey maps, annotated prototypes&#41; creates a shared language among stakeholders and the development team. Handoffs become seamless when everyone sees the “why” behind UI and content interactions, and expectations stay realistic.
+                      </dd>
+                      <dd>
+                        <strong>It Drives Consistency at Scale:</strong> Producing and maintaining a design system and a style guide within the UX process means components, patterns, and behaviors remain uniform across features and platforms. That consistency builds user trust and simplifies future enhancements.
+                      </dd>
+                      <dd>
+                        <strong>It Delivers Measurable Impact: </strong>Embedding analytics and success metrics into every phase—from validating problem statements to post-launch monitoring—ensures we can prove how design changes improve key KPIs &#40;engagement, retention, conversion&#41;. It turns UX from an art into a data-backed investment.
                       </dd>
                     </dl>
-                  </dd>
-                  <dd>These decisions not only compromised the design's functionality but also strained team dynamics and timelines.</dd>
-                </dl>
 
-                <dl className="w-disc">
-                  <dt>The Importance of a Dedicated Project Manager</dt>
-                  <dd>In this case, the absence of a project manager led to poor task prioritization and misaligned expectations. The Senior Software Architect and this UX Designer had to juggle project management responsibilities for the redesign alongside their core tasks and providing support and solutions to various departments, which further strained resources.</dd>
-                  <dd>In fairness to the stakeholders, they tried to provide a project manager / coordinator. However, the provision was not technically and experientially qualified. This resulted in confusion and strain among the project team regarding what or which work gets prioritized. Furthermore, another team member &#40;developer&#41; was causing disruption to the workflow and workload of the front-end devleoper by directly working with certain stakeholders to deliver mini projects instead of consulting with the Senior Software Architect first. This team member did not deliver because of overpromising, leaving the mini project to be re-assigned to the rest of the team. </dd>
-                  <dd>The lack of clear leadership resulted in delays and ultimately led stakeholders to make reactive decisions, such as letting go of this UX Designer&mdash;someone had to bear the blame for the supposed “delay” of the completion of the project.</dd>
-                </dl>
-
-                <dl className="w-disc">
-                  <dt>Balancing Stakeholder Expectations</dt>
-                  <dd>The project revealed tensions between modern design principles and stakeholder preferences for minimalism. Misunderstandings about design fidelity &#40;e.g., mistaking minimalism for low-fidelity work&#41; created friction that could have been mitigated through better communication and leadership.</dd>
-                </dl>
-
-                <dl className="w-disc">
-                  <dt>Broader Takeaways</dt>
-                  <dd>
-                    <strong>Adherence to Process:</strong> Skipping or altering established UX processes can derail projects by introducing inefficiencies and compromising user-centered outcomes.
                   </dd>
                   <dd>
-                    <strong>Leadership Matters:</strong> A skilled project manager ensures that all team members remain aligned with goals and timelines while mitigating risks like scope creep or stakeholder interference.
+                    By adhering to this process end-to-end, I not only championed better experiences for GTY users but also helped the team to work more efficiently, innovate confidently, and ultimately deliver design solutions that drive real project value. More importantly, every wireframe, prototype, and interaction was purposely built to present biblical content in clear and engaging ways&mdash;staying true to the ministry's commitment of &ldquo;Unleashing God's Truth, One Verse at a Time.&rdquo;
                   </dd>
-                  <dd>
-                    <strong>Time Management:</strong> A well-managed UX project ensures that resources are allocated efficiently, avoiding overburdening team members or delaying critical milestones.
-                  </dd>
-
                 </dl>
 
-                <p className="cyril-mt-40 cyril-mb-100">
-                  This reflection emphasizes that successful UX projects depend on careful planning, adherence to process, effective time management, and strong leadership. When these elements are neglected or disrupted, it can lead to delays, suboptimal designs, and strained team dynamics. By investing in qualified personnel and respecting the UX process, organizations can achieve better outcomes while fostering a collaborative environment that prioritizes both user satisfaction and business goals.
-                </p>
-
+                
                 {/* pagination */}
                 <div className="cyril-pagination-panel cyril-mt-60">
                   <button
