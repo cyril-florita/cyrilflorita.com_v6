@@ -98,34 +98,18 @@ const Experience = () => {
                     <div className="cyril-icon-box cyril-type-2">
                       <div className="cyril-box-text">
                         <p className="cyril-upper cyril-text-lg cyril-mb-15">
-                          Web Designer &amp; Developer
+                          Senior Web Designer &amp; Developer
                         </p>
                         <p className="cyril-upper cyril-mb-30 cyril-text-normal">
-                          Jan. 2011 &mdash; Oct. 2014 &#40;<span className="cyril-accent">3 years</span>&#41;
+                          Aug 2011 &mdash; Oct 2014 &#40;<span className="cyril-accent">3 years</span>&#41;
                         </p>
                         <p>
-                          <a className="cyril-text-underline" href="https://www.digitalroominc.com" target="_blank"><strong>Digital Room, Inc.</strong></a>, a printing company in Van Nuys, CA.
+                          <a className="cyril-text-underline" href="https://www.digitalroominc.com" target="_blank"><strong>PrintRunner / Digital Room, Inc.</strong></a>, a printing solutions company in Van Nuys, CA.
                         </p>
                       </div>
                     </div>
                   </SwiperSlide>
-
-                  <SwiperSlide className="swiper-slide">
-                    <div className="cyril-icon-box cyril-type-2">
-                      <div className="cyril-box-text">
-                        <p className="cyril-upper cyril-text-lg cyril-mb-15">
-                          Senior Web Designer
-                        </p>
-                        <p className="cyril-upper cyril-mb-30 cyril-text-normal">
-                          Aug 2011 &mdash; Dec 2011  &#40;<span className="cyril-accent">4 months</span>&#41;
-                        </p>
-                        <p>
-                          <a className="cyril-text-underline" href="https://www.printrunner.com" target="_blank"><strong>PrintRunner</strong></a>, a printing company in Van Nuys, CA.
-                        </p>
-                      </div>
-                    </div>
-                  </SwiperSlide>
-
+                 
                   <SwiperSlide className="swiper-slide">
                     <div className="cyril-icon-box cyril-type-2">
                       <div className="cyril-box-text">
