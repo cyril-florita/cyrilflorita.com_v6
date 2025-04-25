@@ -62,7 +62,7 @@ const page = () => {
                   2 Corithians 5:21 states, &#8220;He [God the Father] made Him [Christ] who knew no sin to be sin on our behalf, so that we might become the righteousness of God [the Father] in Him [Christ].&#8221; This means that on the cross, Christ&mdash;though he was sinless, guiltless, and perfect&mdash;died the death that sinners deserve because of their sins. So in a personal way, Christ died in my place&mdash;<strong>He took my place</strong>. God accounts Christ's death on my behalf as righteousness so I can be made right with God.
                 </p>
 
-                <img className="cyril-project-main-graphic cyril-mt-60 cyril-mb-60" src="/img/portfolio/main_he-took-my-place.jpg" alt="cover" />
+                <img className="cyril-project-main-graphic cyril-mt-60 cyril-mb-60" src="/img/portfolio/main_he-took-my-place.jpg" alt="He Took My Place Illustration" />
 
                 <p className="cyril-mt-40 cyril-mb-60">
                   I would always included this piece as part of my portfolio, even though it's not a professional one. It's a great way to showcase my skills and creativity, especially when I was just a beginner learning layout, typography, color theory, and various design styles. It's also exhibits my ability to design using industry-standard tools&mdash;and back then, Adobe Illustrator and Photoshop dominated the craft.

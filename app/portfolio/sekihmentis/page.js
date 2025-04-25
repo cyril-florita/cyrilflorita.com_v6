@@ -61,7 +61,7 @@ const page = () => {
                   I would always included this piece as part of my portfolio, even though it's not a professional one. It's a fun way to showcase my skills and creativity, especially when I was just a beginner learning layout, typography, color theory, and various design styles. It's also exhibits my ability to design using industry-standard tools&mdash;back then, Adobe Illustrator and Photoshop dominated the craft.
                 </p>
 
-                <img className="cyril-project-main-graphic cyril-mt-60 cyril-mb-80" src="/img/portfolio/main_sekihmentis.jpg" alt="cover" />
+                <img className="cyril-project-main-graphic cyril-mt-60 cyril-mb-80" src="/img/portfolio/main_sekihmentis.jpg" alt="SekihMentis Myspace Profile Background Illustration" />
 
                 {/* pagination */}
                 <div className="cyril-pagination-panel cyril-mt-60">

@@ -274,12 +274,12 @@ const PortfolioIsotope = () => {
 
           {/* wide . gty dashboard */}
           <div id="gtydashboard" data-project="gtydashboard" className="cyril-grid-item fil-uix">
-            <Link legacyBehavior href="/portfolio">
+            <Link legacyBehavior href="/portfolio/gty-dashboard">
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_gty-dashboard.jpg" alt="cover" />
-                  <div className="cyril-hover-link coming-soon">
-                    <span className="cyril-upper">Coming Soon</span>
+                  <div className="cyril-hover-link">
+                    <i className="fas fa-link" />
                   </div>
                 </div>
                 <div className="cyril-project-descr">
@@ -387,7 +387,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* square . patricia macarthur */}
-          <div id="patriciamacarthur" data-project="patriciamacarthur" className="cyril-grid-item fil-branding">
+          <div id="patriciamacarthur" data-project="patriciamacarthur" className="cyril-grid-item fil-branding fil-illustration">
             <Link legacyBehavior href="/portfolio">
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -397,7 +397,7 @@ const PortfolioIsotope = () => {
                   </div>
                 </div>
                 <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Branding</p>
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Illustration/Branding</p>
                   <h4 className="cyril-up">The Patricia MacArthur Pastoral Care Fund</h4>
                 </div>
               </div>
