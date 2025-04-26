@@ -68,7 +68,7 @@ const page = () => {
 
                 <div className="cyril-divider cyril-mb-60" />
 
-                <h4 className="cyril-up cyril-text-center">Visually Communicating Truth</h4>
+                <h4 className="cyril-up cyril-text-center">Visually Driving Engagement</h4>
                 <p>
                   These graphics are effective tools for driving engagement and directing traffic back to the Grace to You website. The consistent branding, with the &ldquo;Grace to You&rdquo; logo and the GTY.org URL prominently displayed, reinforces brand recognition. Each design clearly credits John MacArthur and specifies the source material, which is crucial for maintaining credibility and encouraging viewers to explore the original context of the quotes. The visual elements, such as the contrasting fonts and carefully selected photographs, are designed to capture attention and make the content easily digestible. The fonts are consistent with GTY's style guide, ensuring consistency and readability.                
                 </p>
