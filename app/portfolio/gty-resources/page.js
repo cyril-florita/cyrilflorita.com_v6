@@ -21,7 +21,7 @@ const page = () => {
   // Function to handle back navigation and save scroll position
   const handleBackToPortfolio = () => {
     // Get the project ID or identifier
-    const projectId = 'gtyblog'; // This is the current project
+    const projectId = 'gtyresources'; // This is the current project
 
     // Save the project ID for the portfolio page to use
     sessionStorage.setItem('returnToProject', projectId);
@@ -38,7 +38,7 @@ const page = () => {
             {/* top banner */}
             <div className="cyril-top-banner cyril-text-center">
               <h2 className="cyril-mt-60">
-                GTY Blog Graphics
+                GTY Resources
               </h2>
               <h2 className="cyril-upper"></h2>
               <p className="cyril-upper cyril-mt-30 cyril-mb-40">
@@ -72,21 +72,6 @@ const page = () => {
                 <p>
                   When I designed blog graphics for Grace to You, I would always start by considering the core theme and title of each post, as these elements would guide my visual choices. For example, for a post titled &ldquo;A Church Not Forsaken,&rdquo; I selected a serene image of a church bathed in warm light, evoking a sense of hope and steadfastness that matches the message. The font I chose is bold and classic, ensuring the title stands out and immediately communicates the gravity and reassurance of the topic. The overall composition is uncluttered, allowing the viewer's attention to be drawn to both the image and the text without distraction, which is crucial for making a strong first impression.
                 </p>
-
-                <div className="offset-md-3 col-md-6 cyril-mt-40">
-                  <a
-                    href="/img/portfolio/gty-blog_a-church-not-forsaken.jpg"
-                    className="cyril-project-figure mfp-image"
-                    data-effect="mfp-zoom-in"
-                  >
-                    <div className="cyril-cover">
-                      <img src="/img/portfolio/gty-blog_a-church-not-forsaken.jpg" alt="gty-blog_a-church-not-forsaken.jpg" />
-                      <div className="cyril-hover-link">
-                        <i className="fa fa-search-plus" />
-                      </div>
-                    </div>
-                  </a>
-                </div>
 
                 <p className="cyril-mt-40">
                   Similarly, for posts like &ldquo;Christ Gives the Gospel&rdquo; and &ldquo;Inerrancy and Evangelical Syncretism,&rdquo; I carefully pair imagery and typography to reinforce the post's subject. For the former, I use a dynamic split design with an illustration of Christ, combined with a modern, bold font for the word &ldquo;CHRIST&rdquo; to highlight its importance and draw the reader in. For the latter, I opt for a conceptual image&mdash;a jar with separated liquids&mdash;to visually represent the idea of syncretism, paired with clean, contemporary type to convey clarity and seriousness.

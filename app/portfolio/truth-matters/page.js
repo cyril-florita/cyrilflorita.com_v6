@@ -61,7 +61,7 @@ const page = () => {
             <div className="cyril-top-banner cyril-text-center">                           
               <h2 className="cyril-mt-60">Truth Matters Podcast</h2>
               <p className="cyril-upper cyril-mt-30 cyril-mb-40">
-                <span className="cyril-accent">Branding, UX Design, and Front-End Development</span>
+                <span className="cyril-accent">Branding / UI/UX Design / Web Development</span>
               </p>
 
             </div>

@@ -68,7 +68,7 @@ const page = () => {
               <img src="/img/portfolio/main_gty8.jpg" alt="GTY Website, v8" />
               <h2 className="cyril-mt-60">GTY Website, v.8</h2>
               <p className="cyril-upper cyril-mt-30 cyril-mb-40">
-                <span className="cyril-accent">UX Design & Front-End Development</span>
+                <span className="cyril-accent">UX Design & Web Development</span>
               </p>
 
             </div>

@@ -189,7 +189,7 @@ const PortfolioIsotope = () => {
                   </div>
                 </div>
                 <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Web Design & Front-End</p>
+                  <p className="cyril-upper cyril-accent cyril-mb-10">UX Design &amp; Web Development</p>
                   <h4 className="cyril-up">GTY Website, v.8</h4>
                 </div>
               </div>
@@ -248,7 +248,7 @@ const PortfolioIsotope = () => {
                   </div>
                 </div>
                 <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Logo Design/Branding</p>
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Branding</p>
                   <h4 className="cyril-up">The Study Bible App</h4>
                 </div>
               </div>
@@ -353,12 +353,12 @@ const PortfolioIsotope = () => {
 
           {/* wide . gty resources */}
           <div id="gtyresources" data-project="gtyresources" className="cyril-grid-item fil-marketing">
-            <Link legacyBehavior href="/portfolio">
+            <Link legacyBehavior href="/portfolio/gty-resources">
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_gty-resources.jpg" alt="Thumb - GTY Resources" />
-                  <div className="cyril-hover-link coming-soon">
-                    <span className="cyril-upper">Coming Soon</span>
+                  <div className="cyril-hover-link">
+                    <i className="fas fa-link" />
                   </div>
                 </div>
                 <div className="cyril-project-descr">
