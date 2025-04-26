@@ -70,23 +70,23 @@ const page = () => {
 
                 <h4 className="cyril-up cyril-text-center">Visually Communicating Truth</h4>
                 <p>
-                  When I designed blog graphics for Grace to You, I would always start by considering the core theme and title of each post, as these elements would guide my visual choices. For example, for a post titled &ldquo;A Church Not Forsaken,&rdquo; I selected a serene image of a church bathed in warm light, evoking a sense of hope and steadfastness that matches the message. The font I chose is bold and classic, ensuring the title stands out and immediately communicates the gravity and reassurance of the topic. The overall composition is uncluttered, allowing the viewer's attention to be drawn to both the image and the text without distraction, which is crucial for making a strong first impression.
-                </p>
-
-                <p className="cyril-mt-40">
-                  Similarly, for posts like &ldquo;Christ Gives the Gospel&rdquo; and &ldquo;Inerrancy and Evangelical Syncretism,&rdquo; I carefully pair imagery and typography to reinforce the post's subject. For the former, I use a dynamic split design with an illustration of Christ, combined with a modern, bold font for the word &ldquo;CHRIST&rdquo; to highlight its importance and draw the reader in. For the latter, I opt for a conceptual image&mdash;a jar with separated liquids&mdash;to visually represent the idea of syncretism, paired with clean, contemporary type to convey clarity and seriousness.
+                As a designer at Grace to You, I focused on creating visuals that immediately grabbed attention and clearly communicated value. I would used a clean, modern aesthetic to highlight products that were being promoted, offered for free, or sold at a discount. My main objective is ensuring each graphic effectively promotes its intended offer. I concentrate on clarity and appeal to transform viewer interest into action by visually showcasing the benefits of each product, guaranteeing our audience recognizes the value they're receiving.
                 </p>
 
                 <div className="row">
 
+                  <p className="cyril-upper cyril-text-sm cyril-mt-60 cyril-text-center">
+                    Sales
+                  </p>
+
                   <div className="col-md-6 cyril-mt-40">
                     <a
-                      href="/img/portfolio/gty-blog_Christ-gives-the-gospel.jpg"
+                      href="/img/portfolio/gty-resource_Autumn-Sale-2017.jpg"
                       className="cyril-project-figure mfp-image"
                       data-effect="mfp-zoom-in"
                     >
                       <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_Christ-gives-the-gospel.jpg" alt="gty-blog_Christ-gives-the-gospel.jpg" />
+                        <img src="/img/portfolio/gty-resource_Autumn-Sale-2017.jpg" alt="gty-resource_Autumn-Sale-2017" />
                         <div className="cyril-hover-link">
                           <i className="fa fa-search-plus" />
                         </div>
@@ -96,12 +96,323 @@ const page = () => {
 
                   <div className="col-md-6 cyril-mt-40">
                     <a
-                      href="/img/portfolio/gty-blog_inerrancy-and-evangelical-syncretism.jpg"
+                      href="/img/portfolio/gty-resource_Autumn-Sale-2018-20.jpg"
                       className="cyril-project-figure mfp-image"
                       data-effect="mfp-zoom-in"
                     >
                       <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_inerrancy-and-evangelical-syncretism.jpg" alt="gty-blog_inerrancy-and-evangelical-syncretism.jpg" />
+                        <img src="/img/portfolio/gty-resource_Autumn-Sale-2018-20.jpg" alt="gty-resource_Autumn-Sale-2018-20" />
+                        <div className="cyril-hover-link">
+                          <i className="fa fa-search-plus" />
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div className="col-md-6 cyril-mt-40">
+                    <a
+                      href="/img/portfolio/gty-resource_Autumn-Sale-2021-22.jpg"
+                      className="cyril-project-figure mfp-image"
+                      data-effect="mfp-zoom-in"
+                    >
+                      <div className="cyril-cover">
+                        <img src="/img/portfolio/gty-resource_Autumn-Sale-2021-22.jpg" alt="gty-resource_Autumn-Sale-2021-22" />
+                        <div className="cyril-hover-link">
+                          <i className="fa fa-search-plus" />
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div className="col-md-6 cyril-mt-40">
+                    <a
+                      href="/img/portfolio/gty-resource_Summer-Sale-2017.jpg"
+                      className="cyril-project-figure mfp-image"
+                      data-effect="mfp-zoom-in"
+                    >
+                      <div className="cyril-cover">
+                        <img src="/img/portfolio/gty-resource_Summer-Sale-2017.jpg" alt="gty-resource_Summer-Sale-2017" />
+                        <div className="cyril-hover-link">
+                          <i className="fa fa-search-plus" />
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div className="col-md-6 cyril-mt-40">
+                    <a
+                      href="/img/portfolio/gty-resource_Summer-Sale-2018.jpg"
+                      className="cyril-project-figure mfp-image"
+                      data-effect="mfp-zoom-in"
+                    >
+                      <div className="cyril-cover">
+                        <img src="/img/portfolio/gty-resource_Summer-Sale-2018.jpg" alt="gty-resource_Summer-Sale-2018" />
+                        <div className="cyril-hover-link">
+                          <i className="fa fa-search-plus" />
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div className="col-md-6 cyril-mt-40">
+                    <a
+                      href="/img/portfolio/gty-resource_Summer-Sale-2019---Go.jpg"
+                      className="cyril-project-figure mfp-image"
+                      data-effect="mfp-zoom-in"
+                    >
+                      <div className="cyril-cover">
+                        <img src="/img/portfolio/gty-resource_Summer-Sale-2019---Go.jpg" alt="gty-resource_Summer-Sale-2019---Go" />
+                        <div className="cyril-hover-link">
+                          <i className="fa fa-search-plus" />
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+
+
+
+                </div>
+
+                <div className="row">
+
+                  <p className="cyril-upper cyril-text-sm cyril-mt-60 cyril-text-center">
+                    Free Product Offers
+                  </p>
+
+                  <div className="col-md-6 cyril-mt-40">
+                    <a
+                      href="/img/portfolio/gty-resource_44NASMDBL.jpg"
+                      className="cyril-project-figure mfp-image"
+                      data-effect="mfp-zoom-in"
+                    >
+                      <div className="cyril-cover">
+                        <img src="/img/portfolio/gty-resource_44NASMDBL.jpg" alt="gty-resource_44NASMDBL" />
+                        <div className="cyril-hover-link">
+                          <i className="fa fa-search-plus" />
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div className="col-md-6 cyril-mt-40">
+                    <a
+                      href="/img/portfolio/gty-resource_A-Jet-Tour-Through-Revelation.jpg"
+                      className="cyril-project-figure mfp-image"
+                      data-effect="mfp-zoom-in"
+                    >
+                      <div className="cyril-cover">
+                        <img src="/img/portfolio/gty-resource_A-Jet-Tour-Through-Revelation.jpg" alt="gty-resource_A-Jet-Tour-Through-Revelation" />
+                        <div className="cyril-hover-link">
+                          <i className="fa fa-search-plus" />
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div className="col-md-6 cyril-mt-40">
+                    <a
+                      href="/img/portfolio/gty-resource_Alone-with-God.jpg"
+                      className="cyril-project-figure mfp-image"
+                      data-effect="mfp-zoom-in"
+                    >
+                      <div className="cyril-cover">
+                        <img src="/img/portfolio/gty-resource_Alone-with-God.jpg" alt="gty-resource_Alone-with-God" />
+                        <div className="cyril-hover-link">
+                          <i className="fa fa-search-plus" />
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div className="col-md-6 cyril-mt-40">
+                    <a
+                      href="/img/portfolio/gty-resource_Book---Anxious-for-Nothing.jpg"
+                      className="cyril-project-figure mfp-image"
+                      data-effect="mfp-zoom-in"
+                    >
+                      <div className="cyril-cover">
+                        <img src="/img/portfolio/gty-resource_Book---Anxious-for-Nothing.jpg" alt="gty-resource_Book---Anxious-for-Nothing" />
+                        <div className="cyril-hover-link">
+                          <i className="fa fa-search-plus" />
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div className="col-md-6 cyril-mt-40">
+                    <a
+                      href="/img/portfolio/gty-resource_Book---Good-News,-The-Gospel-of-Jesus-Christ.jpg"
+                      className="cyril-project-figure mfp-image"
+                      data-effect="mfp-zoom-in"
+                    >
+                      <div className="cyril-cover">
+                        <img src="/img/portfolio/gty-resource_Book---Good-News,-The-Gospel-of-Jesus-Christ.jpg" alt="gty-resource_Book---Good-News,-The-Gospel-of-Jesus-Christ" />
+                        <div className="cyril-hover-link">
+                          <i className="fa fa-search-plus" />
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div className="col-md-6 cyril-mt-40">
+                    <a
+                      href="/img/portfolio/gty-resource_book---Standing-Strong.jpg"
+                      className="cyril-project-figure mfp-image"
+                      data-effect="mfp-zoom-in"
+                    >
+                      <div className="cyril-cover">
+                        <img src="/img/portfolio/gty-resource_book---Standing-Strong.jpg" alt="gty-resource_book---Standing-Strong" />
+                        <div className="cyril-hover-link">
+                          <i className="fa fa-search-plus" />
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div className="col-md-6 cyril-mt-40">
+                    <a
+                      href="/img/portfolio/gty-resource_Booklet---Freedom-From-Sin.jpg"
+                      className="cyril-project-figure mfp-image"
+                      data-effect="mfp-zoom-in"
+                    >
+                      <div className="cyril-cover">
+                        <img src="/img/portfolio/gty-resource_Booklet---Freedom-From-Sin.jpg" alt="gty-resource_Booklet---Freedom-From-Sin" />
+                        <div className="cyril-hover-link">
+                          <i className="fa fa-search-plus" />
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div className="col-md-6 cyril-mt-40">
+                    <a
+                      href="/img/portfolio/gty-resource_Divine-Design.jpg"
+                      className="cyril-project-figure mfp-image"
+                      data-effect="mfp-zoom-in"
+                    >
+                      <div className="cyril-cover">
+                        <img src="/img/portfolio/gty-resource_Divine-Design.jpg" alt="gty-resource_Divine-Design" />
+                        <div className="cyril-hover-link">
+                          <i className="fa fa-search-plus" />
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div className="col-md-6 cyril-mt-40">
+                    <a
+                      href="/img/portfolio/gty-resource_Examine-Yourself-Free-1st-Time-Callers.jpg"
+                      className="cyril-project-figure mfp-image"
+                      data-effect="mfp-zoom-in"
+                    >
+                      <div className="cyril-cover">
+                        <img src="/img/portfolio/gty-resource_Examine-Yourself-Free-1st-Time-Callers.jpg" alt="gty-resource_Examine-Yourself-Free-1st-Time-Callers" />
+                        <div className="cyril-hover-link">
+                          <i className="fa fa-search-plus" />
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div className="col-md-6 cyril-mt-40">
+                    <a
+                      href="/img/portfolio/gty-resource_How-to-Study-Your-Bible.jpg"
+                      className="cyril-project-figure mfp-image"
+                      data-effect="mfp-zoom-in"
+                    >
+                      <div className="cyril-cover">
+                        <img src="/img/portfolio/gty-resource_How-to-Study-Your-Bible.jpg" alt="gty-resource_How-to-Study-Your-Bible" />
+                        <div className="cyril-hover-link">
+                          <i className="fa fa-search-plus" />
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div className="col-md-6 cyril-mt-40">
+                    <a
+                      href="/img/portfolio/gty-resource_Radio-Offer---CD-The-Freedom-and-Power-of-Forgiveness---1st-Time-Callers-copy.jpg"
+                      className="cyril-project-figure mfp-image"
+                      data-effect="mfp-zoom-in"
+                    >
+                      <div className="cyril-cover">
+                        <img src="/img/portfolio/gty-resource_Radio-Offer---CD-The-Freedom-and-Power-of-Forgiveness---1st-Time-Callers-copy.jpg" alt="gty-resource_Radio-Offer---CD-The-Freedom-and-Power-of-Forgiveness---1st-Time-Callers-copy" />
+                        <div className="cyril-hover-link">
+                          <i className="fa fa-search-plus" />
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div className="col-md-6 cyril-mt-40">
+                    <a
+                      href="/img/portfolio/gty-resource_Remember-and-Return-with-MacArthur-Study-Bible-Purchase-r1.jpg"
+                      className="cyril-project-figure mfp-image"
+                      data-effect="mfp-zoom-in"
+                    >
+                      <div className="cyril-cover">
+                        <img src="/img/portfolio/gty-resource_Remember-and-Return-with-MacArthur-Study-Bible-Purchase-r1.jpg" alt="gty-resource_Remember-and-Return-with-MacArthur-Study-Bible-Purchase-r1" />
+                        <div className="cyril-hover-link">
+                          <i className="fa fa-search-plus" />
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div className="col-md-6 cyril-mt-40">
+                    <a
+                      href="/img/portfolio/gty-resource_saved-without-a-doubt.jpg"
+                      className="cyril-project-figure mfp-image"
+                      data-effect="mfp-zoom-in"
+                    >
+                      <div className="cyril-cover">
+                        <img src="/img/portfolio/gty-resource_saved-without-a-doubt.jpg" alt="gty-resource_saved-without-a-doubt" />
+                        <div className="cyril-hover-link">
+                          <i className="fa fa-search-plus" />
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div className="col-md-6 cyril-mt-40">
+                    <a
+                      href="/img/portfolio/gty-resource_Store-Offer---Drawing-Near-with-MacArthur-Study-Bible-Purchase.jpg"
+                      className="cyril-project-figure mfp-image"
+                      data-effect="mfp-zoom-in"
+                    >
+                      <div className="cyril-cover">
+                        <img src="/img/portfolio/gty-resource_Store-Offer---Drawing-Near-with-MacArthur-Study-Bible-Purchase.jpg" alt="gty-resource_Store-Offer---Drawing-Near-with-MacArthur-Study-Bible-Purchase" />
+                        <div className="cyril-hover-link">
+                          <i className="fa fa-search-plus" />
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div className="col-md-6 cyril-mt-40">
+                    <a
+                      href="/img/portfolio/gty-resource_Store-Offer---One-Foundation-with-MSB-Purchase-2.jpg"
+                      className="cyril-project-figure mfp-image"
+                      data-effect="mfp-zoom-in"
+                    >
+                      <div className="cyril-cover">
+                        <img src="/img/portfolio/gty-resource_Store-Offer---One-Foundation-with-MSB-Purchase-2.jpg" alt="gty-resource_Store-Offer---One-Foundation-with-MSB-Purchase-2" />
+                        <div className="cyril-hover-link">
+                          <i className="fa fa-search-plus" />
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div className="col-md-6 cyril-mt-40">
+                    <a
+                      href="/img/portfolio/gty-resource_Study-Bible-and-Lord-Teach-Me-to-Pray.jpg"
+                      className="cyril-project-figure mfp-image"
+                      data-effect="mfp-zoom-in"
+                    >
+                      <div className="cyril-cover">
+                        <img src="/img/portfolio/gty-resource_Study-Bible-and-Lord-Teach-Me-to-Pray.jpg" alt="gty-resource_Study-Bible-and-Lord-Teach-Me-to-Pray" />
                         <div className="cyril-hover-link">
                           <i className="fa fa-search-plus" />
                         </div>
@@ -111,20 +422,21 @@ const page = () => {
 
                 </div>
 
-                <p className="cyril-mt-40">
-                  In every case, my goal is to create graphics that not only attract attention but also visually encapsulate the essence of the blog post, making the content inviting and memorable for readers.
-                </p>
-
+                
                 <div className="row">
 
+                  <p className="cyril-upper cyril-text-sm cyril-mt-60 cyril-text-center">
+                    Product Promos
+                  </p>
+
                   <div className="col-md-6 cyril-mt-40">
                     <a
-                      href="/img/portfolio/gty-blog_a-world-gone-mad.jpg"
+                      href="/img/portfolio/gty-resource_2---Designed-with-preachers-in-mind-copy.jpg"
                       className="cyril-project-figure mfp-image"
                       data-effect="mfp-zoom-in"
                     >
                       <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_a-world-gone-mad.jpg" alt="gty-blog_a-world-gone-mad.jpg" />
+                        <img src="/img/portfolio/gty-resource_2---Designed-with-preachers-in-mind-copy.jpg" alt="gty-resource_2---Designed-with-preachers-in-mind-copy" />
                         <div className="cyril-hover-link">
                           <i className="fa fa-search-plus" />
                         </div>
@@ -134,12 +446,12 @@ const page = () => {
 
                   <div className="col-md-6 cyril-mt-40">
                     <a
-                      href="/img/portfolio/gty-blog_and-His-Name-shall-be-called.jpg"
+                      href="/img/portfolio/gty-resource_3---John-MacArthur-was-asked-copy.jpg"
                       className="cyril-project-figure mfp-image"
                       data-effect="mfp-zoom-in"
                     >
                       <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_and-His-Name-shall-be-called.jpg" alt="gty-blog_and-His-Name-shall-be-called.jpg" />
+                        <img src="/img/portfolio/gty-resource_3---John-MacArthur-was-asked-copy.jpg" alt="gty-resource_3---John-MacArthur-was-asked-copy" />
                         <div className="cyril-hover-link">
                           <i className="fa fa-search-plus" />
                         </div>
@@ -149,12 +461,12 @@ const page = () => {
 
                   <div className="col-md-6 cyril-mt-40">
                     <a
-                      href="/img/portfolio/gty-blog_answering-tough-questions-about-forgiveness.jpg"
+                      href="/img/portfolio/gty-resource_4---The-most-important-feature-is-the-text-itself-copy.jpg"
                       className="cyril-project-figure mfp-image"
                       data-effect="mfp-zoom-in"
                     >
                       <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_answering-tough-questions-about-forgiveness.jpg" alt="gty-blog_answering-tough-questions-about-forgiveness.jpg" />
+                        <img src="/img/portfolio/gty-resource_4---The-most-important-feature-is-the-text-itself-copy.jpg" alt="gty-resource_4---The-most-important-feature-is-the-text-itself-copy" />
                         <div className="cyril-hover-link">
                           <i className="fa fa-search-plus" />
                         </div>
@@ -164,12 +476,12 @@ const page = () => {
 
                   <div className="col-md-6 cyril-mt-40">
                     <a
-                      href="/img/portfolio/gty-blog_assaulting-the-nature-of-truth.jpg"
+                      href="/img/portfolio/gty-resource_12---Text-and-binding..jpg"
                       className="cyril-project-figure mfp-image"
                       data-effect="mfp-zoom-in"
                     >
                       <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_assaulting-the-nature-of-truth.jpg" alt="gty-blog_assaulting-the-nature-of-truth.jpg" />
+                        <img src="/img/portfolio/gty-resource_12---Text-and-binding..jpg" alt="gty-resource_12---Text-and-binding." />
                         <div className="cyril-hover-link">
                           <i className="fa fa-search-plus" />
                         </div>
@@ -179,12 +491,12 @@ const page = () => {
 
                   <div className="col-md-6 cyril-mt-40">
                     <a
-                      href="/img/portfolio/gty-blog_commendation-of-a-persecuted-church.jpg"
+                      href="/img/portfolio/gty-resource_16---Lays-flat.jpg"
                       className="cyril-project-figure mfp-image"
                       data-effect="mfp-zoom-in"
                     >
                       <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_commendation-of-a-persecuted-church.jpg" alt="gty-blog_commendation-of-a-persecuted-church.jpg" />
+                        <img src="/img/portfolio/gty-resource_16---Lays-flat.jpg" alt="gty-resource_16---Lays-flat" />
                         <div className="cyril-hover-link">
                           <i className="fa fa-search-plus" />
                         </div>
@@ -194,12 +506,12 @@ const page = () => {
 
                   <div className="col-md-6 cyril-mt-40">
                     <a
-                      href="/img/portfolio/gty-blog_contentment-and-providence.jpg"
+                      href="/img/portfolio/gty-resource_17---Crafted-for-faithful-workmen.jpg"
                       className="cyril-project-figure mfp-image"
                       data-effect="mfp-zoom-in"
                     >
                       <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_contentment-and-providence.jpg" alt="gty-blog_contentment-and-providence.jpg" />
+                        <img src="/img/portfolio/gty-resource_17---Crafted-for-faithful-workmen.jpg" alt="gty-resource_17---Crafted-for-faithful-workmen" />
                         <div className="cyril-hover-link">
                           <i className="fa fa-search-plus" />
                         </div>
@@ -209,12 +521,12 @@ const page = () => {
 
                   <div className="col-md-6 cyril-mt-40">
                     <a
-                      href="/img/portfolio/gty-blog_courageous-Christianity.jpg"
+                      href="/img/portfolio/gty-resource_19---Smyth-sewn.jpg"
                       className="cyril-project-figure mfp-image"
                       data-effect="mfp-zoom-in"
                     >
                       <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_courageous-Christianity.jpg" alt="gty-blog_courageous-Christianity.jpg" />
+                        <img src="/img/portfolio/gty-resource_19---Smyth-sewn.jpg" alt="gty-resource_19---Smyth-sewn" />
                         <div className="cyril-hover-link">
                           <i className="fa fa-search-plus" />
                         </div>
@@ -224,12 +536,12 @@ const page = () => {
 
                   <div className="col-md-6 cyril-mt-40">
                     <a
-                      href="/img/portfolio/gty-blog_dethroning-the-Judge.jpg"
+                      href="/img/portfolio/gty-resource_21---NASB-ver2.jpg"
                       className="cyril-project-figure mfp-image"
                       data-effect="mfp-zoom-in"
                     >
                       <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_dethroning-the-Judge.jpg" alt="gty-blog_dethroning-the-Judge.jpg" />
+                        <img src="/img/portfolio/gty-resource_21---NASB-ver2.jpg" alt="gty-resource_21---NASB-ver2" />
                         <div className="cyril-hover-link">
                           <i className="fa fa-search-plus" />
                         </div>
@@ -239,12 +551,12 @@ const page = () => {
 
                   <div className="col-md-6 cyril-mt-40">
                     <a
-                      href="/img/portfolio/gty-blog_digital-disrupters.jpg"
+                      href="/img/portfolio/gty-resource_22---Today-ver1.jpg"
                       className="cyril-project-figure mfp-image"
                       data-effect="mfp-zoom-in"
                     >
                       <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_digital-disrupters.jpg" alt="gty-blog_digital-disrupters.jpg" />
+                        <img src="/img/portfolio/gty-resource_22---Today-ver1.jpg" alt="gty-resource_22---Today-ver1" />
                         <div className="cyril-hover-link">
                           <i className="fa fa-search-plus" />
                         </div>
@@ -254,12 +566,12 @@ const page = () => {
 
                   <div className="col-md-6 cyril-mt-40">
                     <a
-                      href="/img/portfolio/gty-blog_election-and-Christ.jpg"
+                      href="/img/portfolio/gty-resource_22---Today-ver2.jpg"
                       className="cyril-project-figure mfp-image"
                       data-effect="mfp-zoom-in"
                     >
                       <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_election-and-Christ.jpg" alt="gty-blog_election-and-Christ.jpg" />
+                        <img src="/img/portfolio/gty-resource_22---Today-ver2.jpg" alt="gty-resource_22---Today-ver2" />
                         <div className="cyril-hover-link">
                           <i className="fa fa-search-plus" />
                         </div>
@@ -269,12 +581,12 @@ const page = () => {
 
                   <div className="col-md-6 cyril-mt-40">
                     <a
-                      href="/img/portfolio/gty-blog_engaging-without-embibing.jpg"
+                      href="/img/portfolio/gty-resource_Legacy-Standard-Bible---NT-and-Psalms.jpg"
                       className="cyril-project-figure mfp-image"
                       data-effect="mfp-zoom-in"
                     >
                       <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_engaging-without-embibing.jpg" alt="gty-blog_engaging-without-embibing.jpg" />
+                        <img src="/img/portfolio/gty-resource_Legacy-Standard-Bible---NT-and-Psalms.jpg" alt="gty-resource_Legacy-Standard-Bible---NT-and-Psalms" />
                         <div className="cyril-hover-link">
                           <i className="fa fa-search-plus" />
                         </div>
@@ -284,12 +596,12 @@ const page = () => {
 
                   <div className="col-md-6 cyril-mt-40">
                     <a
-                      href="/img/portfolio/gty-blog_faith-as-Christ-defined-it.jpg"
+                      href="/img/portfolio/gty-resource_The-MacArthur-Study-Bible---2nd-Edition-r2.jpg"
                       className="cyril-project-figure mfp-image"
                       data-effect="mfp-zoom-in"
                     >
                       <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_faith-as-Christ-defined-it.jpg" alt="gty-blog_faith-as-Christ-defined-it.jpg" />
+                        <img src="/img/portfolio/gty-resource_The-MacArthur-Study-Bible---2nd-Edition-r2.jpg" alt="gty-resource_The-MacArthur-Study-Bible---2nd-Edition-r2" />
                         <div className="cyril-hover-link">
                           <i className="fa fa-search-plus" />
                         </div>
@@ -299,12 +611,12 @@ const page = () => {
 
                   <div className="col-md-6 cyril-mt-40">
                     <a
-                      href="/img/portfolio/gty-blog_false-Gods-fake-images.jpg"
+                      href="/img/portfolio/gty-resource_The-MacArthur-Study-Bible---2nd-Edition.jpg"
                       className="cyril-project-figure mfp-image"
                       data-effect="mfp-zoom-in"
                     >
                       <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_false-Gods-fake-images.jpg" alt="gty-blog_false-Gods-fake-images.jpg" />
+                        <img src="/img/portfolio/gty-resource_The-MacArthur-Study-Bible---2nd-Edition.jpg" alt="gty-resource_The-MacArthur-Study-Bible---2nd-Edition" />
                         <div className="cyril-hover-link">
                           <i className="fa fa-search-plus" />
                         </div>
@@ -314,12 +626,12 @@ const page = () => {
 
                   <div className="col-md-6 cyril-mt-40">
                     <a
-                      href="/img/portfolio/gty-blog_Gods-unimpeachable-sovereignty.jpg"
+                      href="/img/portfolio/gty-resource_the-macarthur-study-bible.jpg"
                       className="cyril-project-figure mfp-image"
                       data-effect="mfp-zoom-in"
                     >
                       <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_Gods-unimpeachable-sovereignty.jpg" alt="gty-blog_Gods-unimpeachable-sovereignty.jpg" />
+                        <img src="/img/portfolio/gty-resource_the-macarthur-study-bible.jpg" alt="gty-resource_the-macarthur-study-bible" />
                         <div className="cyril-hover-link">
                           <i className="fa fa-search-plus" />
                         </div>
@@ -329,12 +641,12 @@ const page = () => {
 
                   <div className="col-md-6 cyril-mt-40">
                     <a
-                      href="/img/portfolio/gty-blog_He-loved-them-to-the-end.jpg"
+                      href="/img/portfolio/gty-resource_The-Preachers-Bible-v1.jpg"
                       className="cyril-project-figure mfp-image"
                       data-effect="mfp-zoom-in"
                     >
                       <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_He-loved-them-to-the-end.jpg" alt="gty-blog_He-loved-them-to-the-end.jpg" />
+                        <img src="/img/portfolio/gty-resource_The-Preachers-Bible-v1.jpg" alt="gty-resource_The-Preachers-Bible-v1" />
                         <div className="cyril-hover-link">
                           <i className="fa fa-search-plus" />
                         </div>
@@ -344,12 +656,12 @@ const page = () => {
 
                   <div className="col-md-6 cyril-mt-40">
                     <a
-                      href="/img/portfolio/gty-blog_in-the-world-but-not-of-it.jpg"
+                      href="/img/portfolio/gty-resource_The-Preachers-Bible-v2.jpg"
                       className="cyril-project-figure mfp-image"
                       data-effect="mfp-zoom-in"
                     >
                       <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_in-the-world-but-not-of-it.jpg" alt="gty-blog_in-the-world-but-not-of-it.jpg" />
+                        <img src="/img/portfolio/gty-resource_The-Preachers-Bible-v2.jpg" alt="gty-resource_The-Preachers-Bible-v2" />
                         <div className="cyril-hover-link">
                           <i className="fa fa-search-plus" />
                         </div>
@@ -359,12 +671,12 @@ const page = () => {
 
                   <div className="col-md-6 cyril-mt-40">
                     <a
-                      href="/img/portfolio/gty-blog_inerrancy-and-evangelical-syncretism.jpg"
+                      href="/img/portfolio/gty-resource_The-Preachers-Bible-v3.jpg"
                       className="cyril-project-figure mfp-image"
                       data-effect="mfp-zoom-in"
                     >
                       <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_inerrancy-and-evangelical-syncretism.jpg" alt="gty-blog_inerrancy-and-evangelical-syncretism.jpg" />
+                        <img src="/img/portfolio/gty-resource_The-Preachers-Bible-v3.jpg" alt="gty-resource_The-Preachers-Bible-v3" />
                         <div className="cyril-hover-link">
                           <i className="fa fa-search-plus" />
                         </div>
@@ -372,672 +684,12 @@ const page = () => {
                     </a>
                   </div>
 
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_is-there-a-temple-in-heaven.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_is-there-a-temple-in-heaven.jpg" alt="gty-blog_is-there-a-temple-in-heaven.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_legalism-and-assurance.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_legalism-and-assurance.jpg" alt="gty-blog_legalism-and-assurance.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_limitless-love.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_limitless-love.jpg" alt="gty-blog_limitless-love.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_looking-for-truth-in-the-wrong-places.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_looking-for-truth-in-the-wrong-places.jpg" alt="gty-blog_looking-for-truth-in-the-wrong-places.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_loving-the-local-church.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_loving-the-local-church.jpg" alt="gty-blog_loving-the-local-church.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_no-other-gospel.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_no-other-gospel.jpg" alt="gty-blog_no-other-gospel.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_not-all-that-glitters-is-gold.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_not-all-that-glitters-is-gold.jpg" alt="gty-blog_not-all-that-glitters-is-gold.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_one-race-one-remedy.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_one-race-one-remedy.jpg" alt="gty-blog_one-race-one-remedy.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_pauls-gospel-essential.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_pauls-gospel-essential.jpg" alt="gty-blog_pauls-gospel-essential.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_people-who-missed-Christmas.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_people-who-missed-Christmas.jpg" alt="gty-blog_people-who-missed-Christmas.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_purpose-of-the-parable-of-the-vineyard.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_purpose-of-the-parable-of-the-vineyard.jpg" alt="gty-blog_purpose-of-the-parable-of-the-vineyard.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_reconciled-in-Christ.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_reconciled-in-Christ.jpg" alt="gty-blog_reconciled-in-Christ.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_replacing-worry-with-the-right-focus.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_replacing-worry-with-the-right-focus.jpg" alt="gty-blog_replacing-worry-with-the-right-focus.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_seduced-by-mysticism.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_seduced-by-mysticism.jpg" alt="gty-blog_seduced-by-mysticism.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_social-injustice-and-the-gospel.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_social-injustice-and-the-gospel.jpg" alt="gty-blog_social-injustice-and-the-gospel.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_soteriology-of-the-thief.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_soteriology-of-the-thief.jpg" alt="gty-blog_soteriology-of-the-thief.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_stop-complaining.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_stop-complaining.jpg" alt="gty-blog_stop-complaining.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_takeaway-from-the-shepcon-qna-session.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_takeaway-from-the-shepcon-qna-session.jpg" alt="gty-blog_takeaway-from-the-shepcon-qna-session.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_teach-the-word.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_teach-the-word.jpg" alt="gty-blog_teach-the-word.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_the-assault-on-the-virgin-birth-of-Christ.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_the-assault-on-the-virgin-birth-of-Christ.jpg" alt="gty-blog_the-assault-on-the-virgin-birth-of-Christ.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_the-Bible-is-timeless-truth.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_the-Bible-is-timeless-truth.jpg" alt="gty-blog_the-Bible-is-timeless-truth.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_the-centraility-of-man-in-creation.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_the-centraility-of-man-in-creation.jpg" alt="gty-blog_the-centraility-of-man-in-creation.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_the-coming-Messiah.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_the-coming-Messiah.jpg" alt="gty-blog_the-coming-Messiah.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_the-condemnation-in-Gods-love.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_the-condemnation-in-Gods-love.jpg" alt="gty-blog_the-condemnation-in-Gods-love.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_the-danger-of-calling-the-church-to-repent.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_the-danger-of-calling-the-church-to-repent.jpg" alt="gty-blog_the-danger-of-calling-the-church-to-repent.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_the-fear-of-man.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_the-fear-of-man.jpg" alt="gty-blog_the-fear-of-man.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_the-fertile-ground.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_the-fertile-ground.jpg" alt="gty-blog_the-fertile-ground.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_the-great-exchange.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_the-great-exchange.jpg" alt="gty-blog_the-great-exchange.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_the-illegitimacy-of-the-pope.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_the-illegitimacy-of-the-pope.jpg" alt="gty-blog_the-illegitimacy-of-the-pope.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_the-inescapable-truth-about-God.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_the-inescapable-truth-about-God.jpg" alt="gty-blog_the-inescapable-truth-about-God.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_the-Lord-told-me.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_the-Lord-told-me.jpg" alt="gty-blog_the-Lord-told-me.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_the-problem-of-evil.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_the-problem-of-evil.jpg" alt="gty-blog_the-problem-of-evil.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_the-right-kind-of-hunger.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_the-right-kind-of-hunger.jpg" alt="gty-blog_the-right-kind-of-hunger.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_the-sovereign-Savior.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_the-sovereign-Savior.jpg" alt="gty-blog_the-sovereign-Savior.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_the-subtlety-of-idolatry.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_the-subtlety-of-idolatry.jpg" alt="gty-blog_the-subtlety-of-idolatry.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_the-totality-of-depravity.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_the-totality-of-depravity.jpg" alt="gty-blog_the-totality-of-depravity.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_the-truth-about-man.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_the-truth-about-man.jpg" alt="gty-blog_the-truth-about-man.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_ultimate-expression-divine-compassion.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_ultimate-expression-divine-compassion.jpg" alt="gty-blog_ultimate-expression-divine-compassion.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_unqualified-not-worthy.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_unqualified-not-worthy.jpg" alt="gty-blog_unqualified-not-worthy.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_untangling-the-Lords-lineage.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_untangling-the-Lords-lineage.jpg" alt="gty-blog_untangling-the-Lords-lineage.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_watching-your-spiritual-diet.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_watching-your-spiritual-diet.jpg" alt="gty-blog_watching-your-spiritual-diet.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_what-is-the-eye-of-a-needle.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_what-is-the-eye-of-a-needle.jpg" alt="gty-blog_what-is-the-eye-of-a-needle.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/gty-blog_when-truth-is-stranger-than-fiction.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/gty-blog_when-truth-is-stranger-than-fiction.jpg" alt="gty-blog_when-truth-is-stranger-than-fiction.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-
-                  {/*
-                  
-                  <div className="col-md-6 cyril-mt-40">
-                    <a
-                      href="/img/portfolio/IMAGE_HERE.jpg"
-                      className="cyril-project-figure mfp-image"
-                      data-effect="mfp-zoom-in"
-                    >
-                      <div className="cyril-cover">
-                        <img src="/img/portfolio/IMAGE_HERE.jpg" alt="IMAGE_HERE.jpg" />
-                        <div className="cyril-hover-link">
-                          <i className="fa fa-search-plus" />
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                  
-                  */}
 
                 </div>
+
+
+
+
                 {/* end of .row */}
 
                 {/* pagination */}
