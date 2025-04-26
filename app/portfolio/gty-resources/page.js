@@ -68,7 +68,7 @@ const page = () => {
 
                 <div className="cyril-divider cyril-mb-60" />
 
-                <h4 className="cyril-up cyril-text-center">Visually Communicating Truth</h4>
+                <h4 className="cyril-up cyril-text-center">Visually Elevating Resource Value</h4>
                 <p>
                 As a designer at Grace to You, I focused on creating visuals that immediately grabbed attention and clearly communicated value. I would used a clean, modern aesthetic to highlight products that were being promoted, offered for free, or sold at a discount. My main objective is ensuring each graphic effectively promotes its intended offer. I concentrate on clarity and appeal to transform viewer interest into action by visually showcasing the benefits of each product, guaranteeing our audience recognizes the value they're receiving.
                 </p>
