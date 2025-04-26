@@ -2,7 +2,7 @@
 
 import SiteLayout from "@/layout/SiteLayout";
 import { cyrilUtility } from "@/public/utility/index";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 const page = () => {

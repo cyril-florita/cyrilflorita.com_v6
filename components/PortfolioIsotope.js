@@ -370,13 +370,13 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* square . social media graphics */}
-          <div id="gtysocial" data-project="gtysocial" className="cyril-grid-item fil-marketing">
-            <Link legacyBehavior href="/portfolio">
+          <div id="gtysocialmedia" data-project="gtysocialmedia" className="cyril-grid-item fil-marketing">
+            <Link legacyBehavior href="/portfolio/gty-social-media-graphics">
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_gty-social-media.jpg" alt="Thumb - GTY Social Media Graphics" />
-                  <div className="cyril-hover-link coming-soon">
-                    <span className="cyril-upper">Coming Soon</span>
+                  <div className="cyril-hover-link">
+                    <i className="fas fa-link" />
                   </div>
                 </div>
                 <div className="cyril-project-descr">

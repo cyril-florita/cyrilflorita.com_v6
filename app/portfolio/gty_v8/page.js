@@ -8,7 +8,6 @@ import dynamic from 'next/dynamic';
 
 const VideoFigure = dynamic(() => import('@/components/VideoFigure'), {
   ssr: false,
-  // Optional: You can add a loading component here if needed
   loading: () => <p>Loading video...</p> 
 });
 

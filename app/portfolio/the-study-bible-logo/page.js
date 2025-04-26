@@ -2,15 +2,8 @@
 
 import SiteLayout from "@/layout/SiteLayout";
 import { cyrilUtility } from "@/public/utility/index";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import dynamic from 'next/dynamic';
-
-const VideoFigure = dynamic(() => import('@/components/VideoFigure'), {
-  ssr: false,
-  // Optional: You can add a loading component here if needed
-  loading: () => <p>Loading video...</p>
-});
 
 const page = () => {
   const router = useRouter();
