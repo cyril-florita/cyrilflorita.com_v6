@@ -58,7 +58,7 @@ const page = () => {
                 <div className="row cyril-mb-20">
                   <div className="col-md-8 cyril-mb-30">
                     <p className="cyril-upper cyril-mb-10">Employer:</p>
-                    <p className="cyril-mt-20"><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Non-Profit Media Organization</p>
+                    <p className="cyril-mt-20"><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Media Organization</p>
                   </div>
                   <div className="col-md-4 cyril-mb-30">
                     <p className="cyril-upper cyril-mb-10">Role:</p>

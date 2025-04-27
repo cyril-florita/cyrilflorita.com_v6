@@ -59,7 +59,7 @@ const page = () => {
 
             {/* top banner */}
             <div className="cyril-top-banner cyril-text-center">
-              <img className="w-border" src="/img/portfolio/main_grace-stream.jpg" alt="Main Image for Grace Stream" />              
+              <img src="/img/portfolio/main_grace-stream.jpg" alt="Main Image for Grace Stream" />              
               <h2 className="cyril-mt-60">Grace Stream</h2>
               <p className="cyril-upper cyril-mt-30 cyril-mb-40">
                 <span className="cyril-accent">Branding / UI/UX Design / Web Development</span>
@@ -77,7 +77,7 @@ const page = () => {
                   <div className="row cyril-mb-20">
                     <div className="col-md-6 cyril-mb-30">
                       <p className="cyril-upper cyril-mb-10">Employer:</p>
-                      <p className="cyril-mt-20"><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Non-Profit Media Organization</p>
+                      <p className="cyril-mt-20"><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Media Organization</p>
                     </div>
                     <div className="col-md-6 cyril-mb-30">
                       <p className="cyril-upper cyril-mb-10">Role:</p>

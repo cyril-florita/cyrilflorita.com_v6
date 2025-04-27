@@ -159,14 +159,14 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* wide . the study bible app */}
-          <div id="thestudybible" data-project="thestudybible" className="cyril-grid-item fil-uix">
-            <Link legacyBehavior href="/portfolio">
+          <div id="thestudybibleapp" data-project="thestudybibleapp" className="cyril-grid-item fil-uix">
+            <Link legacyBehavior href="/portfolio/the-study-bible-app">
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover case-study-coming-soon">
                   <img src="/img/portfolio/thumb_the-study-bible-app.jpg" alt="Thumb - The Study Bible App" />
                   <h3>Case<br />Study</h3>
-                  <div className="cyril-hover-link coming-soon">
-                    <span className="cyril-upper">App Launching Soon</span>
+                  <div className="cyril-hover-link">
+                    <i className="fas fa-link" />
                   </div>
                 </div>
                 <div className="cyril-project-descr">
@@ -237,8 +237,8 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* square . (branding) study bible app */}
-          <div id="thestudybiblelogo" data-project="thestudybiblelogo" className="cyril-grid-item fil-branding">
-            <Link legacyBehavior href="/portfolio/the-study-bible-logo">
+          <div id="thestudybibleapplogo" data-project="thestudybibleapplogo" className="cyril-grid-item fil-branding">
+            <Link legacyBehavior href="/portfolio/the-study-bible-app-logo">
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_study-bible-app-logo-2.jpg" alt="Thumb - The Study Bible App Logo" />
@@ -249,7 +249,7 @@ const PortfolioIsotope = () => {
                 </div>
                 <div className="cyril-project-descr">
                   <p className="cyril-upper cyril-accent cyril-mb-10">Branding</p>
-                  <h4 className="cyril-up">The Study Bible App</h4>
+                  <h4 className="cyril-up">The Study Bible App Logo</h4>
                 </div>
               </div>
             </Link>

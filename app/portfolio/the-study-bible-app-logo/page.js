@@ -21,7 +21,7 @@ const page = () => {
   // Function to handle back navigation and save scroll position
   const handleBackToPortfolio = () => {
     // Get the project ID or identifier
-    const projectId = 'thestudybiblelogo'; // This is the current project
+    const projectId = 'thestudybibleapplogo'; // This is the current project
 
     // Save the project ID for the portfolio page to use
     sessionStorage.setItem('returnToProject', projectId);
@@ -37,7 +37,8 @@ const page = () => {
 
             {/* top banner */}
             <div className="cyril-top-banner cyril-text-center">
-              <h2 className="cyril-mt-60">The Study Bible App</h2>
+              <img className="cyril-project-main-graphic" src="/img/portfolio/main_the-study-bible-app-logo.jpg" alt="The Study Bible App Logo - Main" />
+              <h2 className="cyril-mt-60">The Study Bible App Logo</h2>
               <p className="cyril-upper cyril-mt-30 cyril-mb-40">
                 <span className="cyril-accent">Branding</span>
               </p>
@@ -55,7 +56,7 @@ const page = () => {
                 <div className="row cyril-mb-20">
                   <div className="col-md-4 cyril-mb-30">
                     <p className="cyril-upper cyril-mb-10">Employer:</p>
-                    <p className="cyril-mt-20"><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Non-Profit Media Organization</p>
+                    <p className="cyril-mt-20"><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Media Organization</p>
                   </div>
                   <div className="col-md-4 cyril-mb-30">
                     <p className="cyril-upper cyril-mb-10">Role:</p>
@@ -129,7 +130,7 @@ const page = () => {
                     </dl>
                   </dd>
                   <dd>
-                    <img className="cyril-project-main-graphic" src="/img/portfolio/the-study-bible-logo.jpg" alt="The Study Bible Logo" />
+                    <img className="cyril-project-main-graphic" src="/img/portfolio/the-study-bible-app-logo.jpg" alt="The Study Bible Logo" />
                   </dd>
                 </dl>
 
@@ -145,7 +146,7 @@ const page = () => {
                     The final logo is simple, memorable, and effective across the mobile platforms. The combination of book, pen, and rising sun encapsulates the app's mission: to encourage a deeper study with the digital version of the MacArthur Bible. The iterative process, from broad exploration to focused refinement, ensured that the final mark met both the user's needs and the brand's vision.
                   </dd>
                   <dd>
-                    <img className="cyril-project-main-graphic" src="/img/portfolio/the-study-bible-main.jpg" alt="The Study Bible Logo" />
+                    <img className="cyril-project-main-graphic" src="/img/portfolio/the-study-bible-app-logo_on-gty-homepage.jpg" alt="The Study Bible App Logo" />
                   </dd>
                 </dl>
 
