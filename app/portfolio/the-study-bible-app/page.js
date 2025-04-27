@@ -59,7 +59,7 @@ const page = () => {
 
             {/* top banner */}
             <div className="cyril-top-banner cyril-text-center">
-              <img src="/img/portfolio/main_the-study-Bible-app.jpg" alt="The Study Bible App - Main" />
+              <img src="/img/portfolio/main_the-study-bible-app.jpg" alt="The Study Bible App - Main" />
               <h2 className="cyril-mt-60">The Study Bible App</h2>
               <p className="cyril-upper cyril-mt-30 cyril-mb-40">
                 <span className="cyril-accent">App Design</span>
@@ -98,7 +98,7 @@ const page = () => {
                     As a UX designer at Grace to You, I had the opportunity to lead the redesign of The Study Bible app&mdash;a rich digital resource for Bible readers, students, and teachers who rely on the faithful teaching of and commentary from John MacArthur. While the legacy app offered unparalleled theological depth and matches the physical MacArthur Study Bible, it is froth critical usability issues.
                   </dd>
                   <dd>
-                    This project is not just about addressing the usability issues the legacy app, but also about building something quite more powerful. Not flashy. Not overdone. Just something that users can expect to do with the physical MacArthur Study Bible, but more and better with this digital platform. And so I set out to create an experience that reflects the heart of what this Bible app offers&mdash;convenient access to faithful Bible teaching&mdash;presented in a way that's simple, clean, yet delightful.
+                    This project is not just about addressing the usability issues of the legacy app, but also about building something quite more powerful. Not flashy. Not overdone. Just something that users can expect to do with the physical MacArthur Study Bible, but more and better with this digital platform. And so I set out to create an experience that reflects the heart of what this Bible app offers&mdash;convenient access to faithful Bible teaching&mdash;presented in a way that's simple, clean, yet delightful.
                   </dd>
                   <dd>
                     <p className="cyril-text-sm cyril-accent">
@@ -113,7 +113,7 @@ const page = () => {
 
                 <dl className="no-disc">
                   <dd>
-                    The Study Bible app was packed with powerful features:
+                    The legacy Study Bible app was packed with powerful features:
                     <dl className="w-disc">
                       <dd>
                         Access to full ESV and NASB Bible translations
@@ -189,19 +189,19 @@ const page = () => {
 
                 <dl className="no-disc">
                   <dd>
-                    To address these issues, I outlined three core UX goals:
+                    To address the issues and concerns above, I outlined three core UX goals:
                     <dl className="w-disc">
                       <dd>
-                        <strong>Streamlined Navigation:</strong> Ensure users could easily access the search function, change books and chapters of the Bible, change translations, play the audio Bible, set bookmarks, change text settings, access John's notes, set & access highlights, set & access favorites, write & access personal notes, and access more features and materials in just a tap or two.
+                        <strong>Streamlined Navigation:</strong> Ensure users could easily access the search function, change books and chapters of the Bible, change translations, play the audio Bible, set bookmarks, change text settings, access John's notes, set & access highlights, set & access favorites, write & access personal notes, and access more features &amp; materials in just a tap or two.
                       </dd>
                       <dd>
-                        <strong>Enhanced Reading &amp; Study Experience:</strong>Improve the reading interface with better text layout, less distractions especially when scrolling down through the text, and easy access to John's notes.
+                        <strong>Enhanced Reading &amp; Study Experience:</strong> Improve the reading interface with better text layout, less distractions especially when scrolling down through the text, and easy access to John's notes.
                       </dd>
                       <dd>
-                        <strong>More Intituive Access to Tools &amp; Features:</strong> Make the note-taking, highlight, favorite, and bookmark features more user-friendly with a long-press interaction.
+                        <strong>More Intituive Access to Tools &amp; Features:</strong> Make the note-taking, highlight, favorite, and bookmark features more user-friendly with a tap on the verse or a long-press interaction.
                       </dd>
                       <dd>
-                        <strong>Seamless Syncing &amp; Personalization:</strong> With GTY's effort to improve in all their platforms, ensure that the content management experience is consistent with the GTY website and the GTY app.
+                        <strong>Seamless Syncing &amp; Personalization:</strong> In line with GTY's effort to improve user experience consistency and continuity in all their platforms, ensure that the content management experience is consistent with the GTY website and the GTY app.
                       </dd>
                     </dl>
                   </dd>
@@ -222,7 +222,7 @@ const page = () => {
 
                 <dl className="no-disc">
                   <dd>
-                    Once the high-fidelity prototype was validated through user testing, I shifted focus toward setting up a smooth development handoff. From the start, my goal was to minimize ambiguity, accelerate build time, and reduce rework cycles. And so with the guidance of the Senior Software Architect, I set up prototype walkthroughs with the developers and provided them with the prototype itself and with a style guide they could use as references.
+                    Once the high-fidelity prototype was validated through user testing, I shifted focus toward setting up a smooth development handoff. From the start, my goal was to minimize ambiguity, accelerate build time, and reduce rework cycles. And so with the guidance of the Senior Software Architect, I set up prototype walkthroughs with the developers. I also provided them with a style guide and the prototype itself to use as references.
                   </dd>
                 </dl>
 
