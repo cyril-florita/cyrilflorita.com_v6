@@ -162,7 +162,7 @@ const PortfolioIsotope = () => {
           <div id="thestudybibleapp" data-project="thestudybibleapp" className="cyril-grid-item fil-uix">
             <Link legacyBehavior href="/portfolio/the-study-bible-app">
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
-                <div className="cyril-cover case-study-coming-soon">
+                <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_the-study-bible-app.jpg" alt="Thumb - The Study Bible App" />
                   <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
