@@ -169,5 +169,39 @@ export const cyrilUtility = {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
+  },
+
+  swiperSliderSameHeight() {
+    const setEqualHeight = () => {
+      const experienceSection = document.querySelector('#experience');
+      if (experienceSection) {
+        const slides = experienceSection.querySelectorAll('.swiper-slide');
+        if (slides.length > 0) {
+          let maxHeight = 0;
+          // Reset heights to auto to get the natural height
+          slides.forEach(slide => {
+            slide.style.height = 'auto';
+          });
+
+          // Find the max height
+          slides.forEach(slide => {
+            if (slide.offsetHeight > maxHeight) {
+              maxHeight = slide.offsetHeight;
+            }
+          });
+
+          // Set all slides to the max height
+          slides.forEach(slide => {
+            slide.style.height = `${maxHeight}px`;
+          });
+        }
+      }
+    };
+
+    window.addEventListener('load', setEqualHeight);
+    window.addEventListener('resize', setEqualHeight);
+
+    // Initial call
+    setEqualHeight();
   }
 };

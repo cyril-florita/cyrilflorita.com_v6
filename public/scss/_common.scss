@@ -296,7 +296,11 @@ p {
 
     &.subheader {
         font-size: 20px;
-        ;
+        @media screen and (max-width: 450px) {
+            font-size: 16px;
+            line-height: normal;
+            margin-bottom: 15px;
+        }
     }
 }
 
@@ -317,6 +321,11 @@ h1 {
     @media screen and (max-width: 992px) {
         font-size: 40px;
     }
+
+    @media screen and (max-width: 450px) {
+        font-size: 34px;
+    }
+
 }
 
 h2 {
@@ -495,6 +504,11 @@ h4 {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @media screen and (max-width: 450px) {
+        justify-content: flex-start;
+        gap: 20px;
+    }
 }
 
 .cyril-icon-row {
@@ -589,7 +603,8 @@ button
 
         & .cyril-button {
             margin-right: 0;
-            width: 70%;
+            width: 55%;
+            height: 45px;;
             align-self: center;
         }
     }

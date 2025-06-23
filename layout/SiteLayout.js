@@ -20,6 +20,7 @@ const SiteLayout = ({ children, header, footer, noFooter }) => {
     cyrilUtility.topBarActive();
     cyrilUtility.backToTop();
     cyrilUtility.builtTextVisibility();
+    cyrilUtility.swiperSliderSameHeight();
   }, []);
 
   return (

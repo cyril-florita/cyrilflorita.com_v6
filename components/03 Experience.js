@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 const Experience = () => {
   return (
-    <div className="cyril-section cyril-op-space-90">
+    <div id="experience" className="cyril-section cyril-op-space-90">
       <div
         className="cyril-bg-item"
         style={{ top: 0, right: "15%", transform: "rotate(-25deg)" }}
