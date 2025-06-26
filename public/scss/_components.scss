@@ -895,6 +895,8 @@ footer
                     transition: $tr;
                     line-height: 0;
                     pointer-events: all;
+                    padding: 10px 15px;
+                    line-height: normal;
 
                     & svg {
                         width: 20px;

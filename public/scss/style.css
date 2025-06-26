@@ -1694,6 +1694,8 @@ footer
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
   line-height: 0;
   pointer-events: all;
+  padding: 10px 15px;
+  line-height: normal;
 }
 .cyril-bottom-panel .cyril-footer ul li a svg {
   width: 20px;
