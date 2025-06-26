@@ -1301,7 +1301,7 @@ pagination
 .cyril-bg-title-boxed {
   opacity: 0.35;
   width: 100%;
-  height: 150px;
+  height: 295px;
   position: absolute;
   z-index: -1;
   --dot-size: 2px;
@@ -1612,7 +1612,7 @@ social panel
     top: auto;
     bottom: 0;
     right: 0;
-    border-top: solid 2px var(--color-black);
+    border-top: solid 2px var(--color-text);
     border-bottom: none;
   }
   .cyril-theme-toggle::after {
@@ -1681,7 +1681,6 @@ footer
 }
 .cyril-bottom-panel .cyril-footer ul li {
   list-style-type: none;
-  margin-right: 25px;
   height: 80px;
   display: flex;
   align-items: center;
@@ -1731,7 +1730,7 @@ footer
 }
 @media screen and (max-width: 480px) {
   .cyril-bottom-panel .cyril-footer {
-    padding: 0 26px;
+    padding: 0 0;
   }
   .cyril-bottom-panel .cyril-footer ul li {
     font-size: 18px;
