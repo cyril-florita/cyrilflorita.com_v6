@@ -22,7 +22,13 @@ const Tools = () => {
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
                     <div className="cyril-text-icon no-textured">
-                      <img src="img/tools/ai-generator.png" width="35" height="35"/>
+                      <img
+                        src="img/tools/ai-generator.png"
+                        className="theme-aware-image"
+                        data-light-src="img/tools/ai-generator.png"
+                        data-dark-src="img/tools/ai-generator_white.png"
+                        width="35" height="35"
+                      />
                     </div>
                   </div>
                   <div className="cyril-progress-inline">
@@ -34,8 +40,14 @@ const Tools = () => {
               <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-30">
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
-                    <div className="cyril-text-icon no-textured">
-                      <img src="img/tools/creative-suite.png" width="35" height="35"/>
+                    <div className="cyril-text-icon no-textured">                      
+                      <img
+                        src="img/tools/creative-suite.png"
+                        className="theme-aware-image"
+                        data-light-src="img/tools/creative-suite.png"
+                        data-dark-src="img/tools/creative-suite_white.png"
+                        width="35" height="35"
+                      />
                     </div>
                   </div>
                   <div className="cyril-progress-inline">
@@ -48,7 +60,13 @@ const Tools = () => {
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
                     <div className="cyril-text-icon no-textured">
-                      <img src="img/tools/axure.png" width="35" height="35"/>
+                      <img
+                        src="img/tools/axure.png"
+                        className="theme-aware-image"
+                        data-light-src="img/tools/axure.png"
+                        data-dark-src="img/tools/axure_white.png"
+                        width="35" height="35"
+                      />                      
                     </div>
                   </div>
                   <div className="cyril-progress-inline">
@@ -74,7 +92,13 @@ const Tools = () => {
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
                     <div className="cyril-text-icon no-textured">
-                      <img src="img/tools/miro.png" width="35" height="35"/>
+                      <img
+                        src="img/tools/miro.png"
+                        className="theme-aware-image"
+                        data-light-src="img/tools/miro.png"
+                        data-dark-src="img/tools/miro_white.png"
+                        width="35" height="35"
+                      />
                     </div>
                   </div>
                   <div className="cyril-progress-inline">
@@ -87,7 +111,13 @@ const Tools = () => {
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
                     <div className="cyril-text-icon no-textured">
-                      <img src="img/tools/framer.png" width="35" height="35"/>
+                      <img
+                        src="img/tools/framer.png"
+                        className="theme-aware-image"
+                        data-light-src="img/tools/framer.png"
+                        data-dark-src="img/tools/framer_white.png"
+                        width="35" height="35"
+                      />
                     </div>
                   </div>
                   <div className="cyril-progress-inline">

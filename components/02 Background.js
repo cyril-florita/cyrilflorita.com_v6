@@ -32,10 +32,10 @@ const Background = ( { bgImage = "img/cyril-profile-w-a-smile.jpg" } ) => {
                 <p className="cyril-mb-10">
                   With <strong><span className="cyril-accent">almost 2 decades of industry experience</span></strong>, and through my <strong>thoughtfully-</strong>, <strong>carefully-</strong>, <strong>and-beautifully-crafted</strong> projects, I have established myself as a versatile Designer and Developer with a proven track record of:
                 </p>
-                <ul className="cyril-left-offset cyril-mt-20 cyril-mb-20">
-                  <li>enhancing product value</li>
-                  <li>driving marketing success</li>
-                  <li>delivering measurable business growth</li>
+                <ul className="no-disc w-icon cyril-ml-40 cyril-mt-20 cyril-mb-20 cyril-accent">
+                  <li><i class="fa-solid fa-diamond"></i> enhancing product value</li>
+                  <li><i class="fa-solid fa-diamond"></i> driving marketing success</li>
+                  <li><i class="fa-solid fa-diamond"></i> delivering measurable business growth</li>
                 </ul>
                 <p className="cyril-mb-30">
                   My career opportunities span roles at non-profit organizations, multimedia &amp; software companies, design agencies, entertainment industries, financial institutions, and printing companies. And with these opportunities, I have consistently led successful projects while collaborating cross-functionally to deliver <strong>usable</strong>, <strong>profitable</strong>, and <strong>high-quality</strong> creative solutions.

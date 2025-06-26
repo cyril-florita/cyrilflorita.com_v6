@@ -7,7 +7,7 @@ import { cyrilUtility } from "@/public/utility/index";
 const Header = () => {
   const pathname = usePathname();
   const [isIntroActive, setIsIntroActive] = useState(false);
-
+  
   // Initial check on mount
   useEffect(() => {
     if (pathname === '/') {
@@ -80,7 +80,9 @@ const Header = () => {
         <a href="/" className={`cyril-logo ${isIntroActive ? 'cyril-disabled' : ''}`} onClick={handleIntroClick}>
           <strong>C<span>yril</span></strong>
         </a>
-        <Nav />
+        <div className="cyril-nav-controls">
+          <Nav />
+        </div>
       </div>
     </div>
   );

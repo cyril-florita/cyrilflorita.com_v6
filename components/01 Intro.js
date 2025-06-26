@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const Banner = ( { bgImage = "img/cyril-profile-serious-lol.jpg" } ) => {
+const Banner = ( { bgImage = "img/cyril-profile-serious-lol.png" } ) => {
   return (
     <div className="cyril-section cyril-banner cyril-banner-right" id="intro">
       <div className="container-full">

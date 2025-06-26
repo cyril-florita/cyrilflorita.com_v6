@@ -41,10 +41,14 @@ export const metadata = {
   }
 };
 
+import { ClientThemeProvider } from '../components/ClientThemeProvider';
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${space_grotest.variable} ${atkinson.variable}`}>
-      <body className="cyril-custom-scroll">{children}</body>
+      <body className="cyril-custom-scroll">
+        <ClientThemeProvider>{children}</ClientThemeProvider>
+      </body>
     </html>
   );
 }

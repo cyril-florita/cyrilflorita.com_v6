@@ -1,10 +1,41 @@
-$dark: #101010;
-$gray: #202020;
-$soft: rgba(16, 16, 16, 0.18);
-$light: rgba(255, 255, 255, 1);
-$light-gray: #e4e4e4;
-$accent: #fa4729;
-$accent-light: rgba(250, 71, 41, 0.18);
-$black: #010101;
+// Theme colors
+:root {
+    --color-dark: #101010;
+    --color-gray: #202020;
+    --color-soft: rgba(16, 16, 16, 0.18);
+    --color-softer: rgba(16, 16, 16, 0.18);
+    --color-light: rgba(255, 255, 255, 1);
+    --color-light-gray: #e4e4e4;
+    --color-accent: #fa4729;
+    --color-accent-light: rgba(250, 71, 41, 0.18);
+    --color-black: #010101;
+    --color-bg: var(--color-light);
+    --color-text: var(--color-dark);
+    --color-border: var(--color-soft);
+}
+
+// Dark theme colors
+[data-theme="dark"] {
+    --color-dark: #e4e4e4;
+    --color-gray: #d0d0d0;
+    --color-soft: rgba(255, 255, 255, 0.18);
+    --color-softer: rgba(255, 255, 255, 0.1);
+    --color-light: #101010;
+    --color-light-gray: #202020;
+    --color-bg: var(--color-black);
+    --color-text: var(--color-dark);
+    --color-border: var(--color-soft);
+}
+
+// SCSS variables (for backward compatibility)
+$dark: var(--color-dark);
+$gray: var(--color-gray);
+$soft: var(--color-soft);
+$softer: var(--color-softer);
+$light: var(--color-light);
+$light-gray: var(--color-light-gray);
+$accent: var(--color-accent);
+$accent-light: var(--color-accent-light);
+$black: var(--color-black);
 
 $tr: .4s cubic-bezier(0, 0, 0.3642, 1);

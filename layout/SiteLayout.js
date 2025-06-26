@@ -6,7 +6,7 @@ import ImageView from "@/components/popup/ImageView";
 import { Fragment, useEffect } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
-import Social from "./Social";
+import ThemeToggle from "./ThemeToggle";
 import { cyrilUtility } from "@/public/utility/index";
 
 const SiteLayout = ({ children, header, footer, noFooter }) => {
@@ -28,7 +28,7 @@ const SiteLayout = ({ children, header, footer, noFooter }) => {
       <ImageView />
       <ImageGallery />
       <div className="cyril-frame">
-        <Social />
+        <ThemeToggle />
         <Header header={header} />
         {!noFooter && <Footer footer={footer} />}
       </div>
