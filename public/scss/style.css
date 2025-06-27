@@ -994,7 +994,7 @@ frame
 }
 @media screen and (max-width: 740px) {
   .cyril-frame.hide .cyril-theme-toggle {
-    transform: translateY(80px);
+    transform: translateY(78px);
   }
 }
 .cyril-frame.hide .cyril-bottom-panel {
@@ -1515,8 +1515,8 @@ top panel
 }
 @media screen and (max-width: 520px) {
   .cyril-top-panel nav {
-    padding-left: 40px;
-    padding-right: 40px;
+    padding-left: 35px;
+    padding-right: 35px;
   }
 }
 @media screen and (max-width: 1200px) {
@@ -1618,11 +1618,15 @@ social panel
   .cyril-theme-toggle::after {
     top: 5px;
     border-top: 2px solid var(--color-soft);
+    border-right: 2px solid var(--color-soft);
+    width: 100%;
   }
 }
 @media screen and (max-width: 480px) {
   .cyril-theme-toggle {
-    padding: 0 30px;
+    padding: 0 25px;
+    border: solid 2px var(--color-text);
+    border-width: 2px 2px 2px 0;
   }
 }
 
@@ -1730,12 +1734,28 @@ footer
     margin-left: 10px;
   }
 }
+@media screen and (max-width: 1024px) {
+  .cyril-bottom-panel .cyril-footer {
+    border: solid 2px var(--color-text);
+    border-width: 2px 0 2px 2px;
+  }
+  .cyril-bottom-panel .cyril-footer::before {
+    border: solid 2px var(--color-soft);
+    border-width: 2px 0 0 2px;
+    height: 100%;
+    left: 5px;
+  }
+}
 @media screen and (max-width: 480px) {
   .cyril-bottom-panel .cyril-footer {
-    padding: 0 0;
+    padding: 0 10px;
   }
   .cyril-bottom-panel .cyril-footer ul li {
     font-size: 18px;
+  }
+  .cyril-bottom-panel .cyril-footer ul li a {
+    padding-left: 17px;
+    padding-right: 17px;
   }
   .cyril-bottom-panel .cyril-footer i {
     font-size: 1.2em;
@@ -1743,6 +1763,12 @@ footer
   }
   .cyril-bottom-panel .cyril-footer span {
     display: none;
+  }
+}
+@media screen and (max-width: 390px) {
+  .cyril-bottom-panel .cyril-footer ul li a {
+    padding-left: 14px;
+    padding-right: 14px;
   }
 }
 @media screen and (max-width: 1200px) {
@@ -2275,7 +2301,7 @@ experience
     margin-right: 5px;
   }
   .cyril-filter ul li a {
-    border: solid 2px var(--color-black);
+    border: solid 2px var(--color-border);
     padding: 3px 15px;
   }
   .cyril-filter ul li a.cyril-current {
