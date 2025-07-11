@@ -21,6 +21,7 @@ const Social = () => {
       aria-label="Toggle dark mode"
     >
       {isDarkMode ? <i className="fa-solid fa-sun"></i> : <i className="fa-solid fa-moon"></i>}
+
     </button>
   );
 };

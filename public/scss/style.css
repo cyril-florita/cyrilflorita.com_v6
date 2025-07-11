@@ -275,7 +275,10 @@ body:after {
   width: 100%;
   height: 100%;
   background-image: url(../img/bg-static.png);
-  opacity: 0.23;
+  opacity: var(--bg-static-opacity, 0.23);
+}
+[data-theme=dark] body:after {
+  opacity: 0.15;
 }
 body.page-exit {
   animation: fadeOut 0.4s cubic-bezier(0.4, 0, 0.4, 1) forwards;

@@ -273,7 +273,10 @@ body {
         width: 100%;
         height: 100%;
         background-image: url(../img/bg-static.png);
-        opacity: .23; // 0.27
+        opacity: var(--bg-static-opacity, .23);
+        [data-theme="dark"] & {
+            opacity: .15;
+        };
     }
 
     &.page-exit {
