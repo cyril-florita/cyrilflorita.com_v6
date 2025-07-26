@@ -14,7 +14,7 @@ const Experience = () => {
       />
       <div className="container">
         <p className="cyril-upper subheader">
-        &#91; My <span className="cyril-accent">career</span> <span className="cyril-lower">in</span> <span className="cyril-accent">18 years</span> &#93;
+        &#91; My <span className="cyril-accent">career</span> &#93;
         </p>
         <h2 className="cyril-up">Experience</h2>
 

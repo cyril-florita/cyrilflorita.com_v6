@@ -66,8 +66,6 @@ const page = () => {
             {/* top banner */}
             <div className="cyril-top-banner cyril-text-center">
               <img src="/img/portfolio/main_gty9.png" alt="Main Image for GTY v9" />
-              <p className="cyril-text-sm cyril-accent"><strong>&#40;Earlier version of the design is used in this mockup since the project hasn't yet launched.&#41;</strong></p>
-
               <h2 className="cyril-mt-60">GTY Website, v.9</h2>
               <p className="cyril-upper cyril-mt-30 cyril-mb-40">
                 <span className="cyril-accent">UX Design</span>
@@ -105,7 +103,6 @@ const page = () => {
                 </p>
                 <p className="cyril-mt-40">
                   This case study focuses on redesigning GTY.org &#40;version 9&#41; to broaden audience reach and improve engagement & retention by creating a more accessible and unified digital experience while maintaining its core mission of delivering high-quality theological content.</p>
-                <p className="cyril-text-sm cyril-accent cyril-mt-30"><strong>&#40;Screenshots of the processes and the designs will be supplied in the appropriate sections of this study once the project has launched.&#41;</strong></p>
 
                 <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
 

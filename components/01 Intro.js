@@ -22,7 +22,7 @@ const Banner = ( { bgImage = "img/cyril-profile-serious-lol.png" } ) => {
                 <h1 className="cyril-up cyril-mb-20" data-text="Cyril Florita">Cyril Florita</h1>
                 <div className="cyril-short intro">
                   <p className="cyril-mb-30">
-                    A multidisciplinary <strong><span className="cyril-accent">Designer</span></strong> and <strong><span className="cyril-accent">Developer</span></strong> based in Santa Clarita, California
+                    Generalist <strong><span className="cyril-accent">Designer</span></strong> and <strong><span className="cyril-accent">Developer</span></strong>
                   </p>
                   <div className="cyril-buttons-frame">
                     <a 

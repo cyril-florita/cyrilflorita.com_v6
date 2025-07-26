@@ -318,7 +318,7 @@ p.subheader {
 
 h1 {
   line-height: 0.85em;
-  font-size: 185px;
+  font-size: 160px;
   text-shadow: 5px 5px 0px var(--color-soft);
 }
 @media screen and (max-width: 1400px) {
@@ -1886,7 +1886,6 @@ banner
 .cyril-banner .cyril-short p {
   font-size: 1.25em;
   line-height: 1.55em;
-  margin-bottom: 40px;
 }
 .cyril-banner .cyril-short.intro {
   padding-left: 60px;
