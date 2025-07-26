@@ -22,7 +22,7 @@ const Footer = () => {
 
           <ul>
             <li>
-              <a href="mailto:cyril.florita@pm.me">
+              <a href="mailto:cyril.florita@pm.me" aria-label="Email">
                 <i className="fa-solid fa-envelope" />
               </a>
             </li>
@@ -31,6 +31,7 @@ const Footer = () => {
                 href="https://www.behance.net/cyrilflorita"
                 target="_blank"
                 className="social-icon"
+                aria-label="Behance"
               >
                 <i className="fab fa-behance" />
               </a>
@@ -40,6 +41,7 @@ const Footer = () => {
                 href="https://github.com/cyril-florita"
                 target="_blank"
                 className="social-icon"
+                aria-label="GitHub"
               >
                 <i className="fab fa-github"></i>
               </a>
@@ -49,6 +51,7 @@ const Footer = () => {
                 href="https://www.linkedin.com/in/cyrilflorita"
                 target="_blank"
                 className="social-icon"
+                aria-label="LinkedIn"
               >
                 <i className="fab fa-linkedin-in" />
               </a>
@@ -58,6 +61,7 @@ const Footer = () => {
                 href="https://x.com/CyrilFlorita"
                 target="_blank"
                 className="social-icon"
+                aria-label="Twitter/X"
               >
                 <i className="fab fa-x-twitter" />
               </a>

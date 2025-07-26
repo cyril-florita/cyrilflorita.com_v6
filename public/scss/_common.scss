@@ -644,10 +644,10 @@ button
     cursor: pointer;
 
     &.cyril-type-2 {
-        border-color: $dark;
+        border-color: var(--color-frame);
         background-color: $light;
         color: $dark;
-        box-shadow: 7px 7px 0px 0px $soft;
+        box-shadow: 7px 7px 0px 0px var(--color-frameshadow);
 
         &:hover {
             box-shadow: 0px 0px 0px 0px $soft;

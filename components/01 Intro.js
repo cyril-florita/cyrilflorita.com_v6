@@ -27,7 +27,7 @@ const Banner = ( { bgImage = "img/cyril-profile-serious-lol.png" } ) => {
                   <div className="cyril-buttons-frame">
                     <a 
                       href="/portfolio" 
-                      className="cyril-button cyril-type-3" 
+                      className="cyril-button" 
                       onClick={(e) => {
                         e.preventDefault();
                         document.body.classList.add('page-exit');
@@ -39,7 +39,7 @@ const Banner = ( { bgImage = "img/cyril-profile-serious-lol.png" } ) => {
                       See My Work
                     </a>
                     <Link legacyBehavior href="mailto:cyril.florita@pm.me">
-                      <a className="cyril-button">Email Me</a>
+                      <a className="cyril-button cyril-type-3">Email Me</a>
                     </Link>
                   </div>
                 </div>

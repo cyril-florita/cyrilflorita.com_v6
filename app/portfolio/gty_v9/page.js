@@ -94,7 +94,7 @@ const page = () => {
                   </div>
                   <div className="col-md-4 cyril-mb-30">
                     <p className="cyril-upper cyril-mb-10">Start / Launch Date:</p>
-                    <p className="cyril-mt-20">Nov. 2023 / Soon</p>
+                    <p className="cyril-mt-20">Nov. 2023 / Jun. 2025 </p>
                   </div>
                 </div>
 

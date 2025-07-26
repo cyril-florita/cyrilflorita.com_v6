@@ -4,6 +4,7 @@
     --color-gray: #202020;
     --color-soft: rgba(16, 16, 16, 0.18);
     --color-softer: rgba(16, 16, 16, 0.18);
+    --color-softest: rgba(16, 16, 16, 0.1);
     --color-light: rgba(255, 255, 255, 1);
     --color-light-gray: #e4e4e4;
     --color-accent: #fa4729;
@@ -11,6 +12,8 @@
     --color-black: #010101;
     --color-bg: var(--color-light);
     --color-text: var(--color-dark);
+    --color-frame: var(--color-dark);
+    --color-frameshadow: var(--color-soft);
     --color-border: var(--color-soft);
 }
 
@@ -20,10 +23,13 @@
     --color-gray: #d0d0d0;
     --color-soft: rgba(255, 255, 255, 0.18);
     --color-softer: rgba(255, 255, 255, 0.1);
+    --color-softest: rgba(255, 255, 255, 0.07);
     --color-light: #101010;
     --color-light-gray: #202020;
     --color-bg: var(--color-black);
     --color-text: var(--color-dark);
+    --color-frame: var(--color-soft);
+    --color-frameshadow: var(--color-softest);
     --color-border: var(--color-soft);
 }
 
@@ -32,6 +38,7 @@ $dark: var(--color-dark);
 $gray: var(--color-gray);
 $soft: var(--color-soft);
 $softer: var(--color-softer);
+$softest: var(--color-softest);
 $light: var(--color-light);
 $light-gray: var(--color-light-gray);
 $accent: var(--color-accent);

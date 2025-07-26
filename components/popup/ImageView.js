@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
 import useClickOutside from "../../public/utility/useClickOutside";
 
-const ImgViews = ({ close, src }) => {
+const ImgViews = ({ close, src, alt }) => {
   let domNode = useClickOutside(() => {
     close(false);
   });
@@ -35,7 +35,7 @@ const ImgViews = ({ close, src }) => {
         >
           <div className="mfp-content" ref={domNode}>
             <div className="mfp-iframe-scaler" style={{ paddingTop: 0, height: "auto" }}>
-              <img className="mfp-img" src={src} style={{ position: "static", top: "auto", transform: "none" }} />
+              <img className="mfp-img" src={src} alt={alt || "Enlarged view"} style={{ position: "static", top: "auto", transform: "none" }} />
             </div>
             <button
               title="Close (Esc)"
@@ -83,7 +83,7 @@ const ImageView = () => {
   }, []);
   return (
     <Fragment>
-      {img && <ImgViews close={() => setImg(false)} src={imgValue} />}
+      {img && <ImgViews close={() => setImg(false)} src={imgValue} alt="Enlarged portfolio image" />}
     </Fragment>
   );
 };

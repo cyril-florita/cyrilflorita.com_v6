@@ -28,6 +28,7 @@ const Tools = () => {
                         data-light-src="img/tools/ai-generator.png"
                         data-dark-src="img/tools/ai-generator_white.png"
                         width="35" height="35"
+                        alt="AI Image Generator"
                       />
                     </div>
                   </div>
@@ -47,6 +48,7 @@ const Tools = () => {
                         data-light-src="img/tools/creative-suite.png"
                         data-dark-src="img/tools/creative-suite_white.png"
                         width="35" height="35"
+                        alt="Creative Suite"
                       />
                     </div>
                   </div>
@@ -66,6 +68,7 @@ const Tools = () => {
                         data-light-src="img/tools/axure.png"
                         data-dark-src="img/tools/axure_white.png"
                         width="35" height="35"
+                        alt="Axure RP"
                       />                      
                     </div>
                   </div>
@@ -98,6 +101,7 @@ const Tools = () => {
                         data-light-src="img/tools/miro.png"
                         data-dark-src="img/tools/miro_white.png"
                         width="35" height="35"
+                        alt="Miro"
                       />
                     </div>
                   </div>
@@ -117,6 +121,7 @@ const Tools = () => {
                         data-light-src="img/tools/framer.png"
                         data-dark-src="img/tools/framer_white.png"
                         width="35" height="35"
+                        alt="Framer"
                       />
                     </div>
                   </div>

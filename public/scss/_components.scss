@@ -22,11 +22,11 @@ frame
         right: -7px;
         top: 7px;
         bottom: -7px;
-        border: 2px solid var(--color-soft);
+        border: 2px solid var(--color-frameshadow);
     }
 
     &:after {
-        border: 2px solid var(--color-text);
+        border: 2px solid var(--color-frame);
         left: 0;
         top: 0;
         right: 0;
@@ -53,7 +53,7 @@ frame
 
         & .cyril-theme-toggle {
             transform: translateY(-78px);
-            color: var(--color-text);
+            color: var(--color-frame);
 
             @media screen and (max-width: 740px) {
                 transform: translateY(78px);
@@ -216,7 +216,7 @@ page
         & img {
             display: block;
             width: 100%;
-            border: solid 2px var(--color-dark);
+            border: solid 2px var(--color-frame);
             padding: 10px;
         }
 
@@ -527,8 +527,8 @@ top panel
         text-decoration: none;
         text-align: center;
         color: var(--color-text);
-        border-bottom: solid 2px var(--color-text);
-        border-right: solid 2px var(--color-text);
+        border-bottom: solid 2px var(--color-frame);
+        border-right: solid 2px var(--color-frame);
         text-shadow: 3px 3px 0px $soft;
         transition: $tr;
 
@@ -539,14 +539,14 @@ top panel
             left: 9px;
             right: -9px;
             bottom: -9px;
-            border-bottom: solid 2px $soft;
+            border-bottom: solid 2px var(--color-frameshadow);
         }
 
         &::after {
             left: auto;
             top: 8px;
             bottom: -7px;
-            border-right: solid 2px $soft;
+            border-right: solid 2px var(--color-frameshadow);
             border-bottom: none;
         }
 
@@ -591,7 +591,7 @@ top panel
     & nav {
         position: relative;
         border-top: none;
-        border-bottom: solid 2px var(--color-text);
+        border-bottom: solid 2px var(--color-frame);
         padding: 0 50px 0 50px;
 
         &::after {
@@ -600,7 +600,7 @@ top panel
             left: 7px;
             bottom: -9px;
             right: -5px;
-            border-bottom: 2px solid $soft;
+            border-bottom: 2px solid var(--color-frameshadow);
         }
 
         & ul {
@@ -650,7 +650,7 @@ top panel
                         left: calc(50% - 1px);
                         width: 2px;
                         height: 10px;
-                        background-color: var(--color-text);
+                        background-color: var(--color-frame);
                     }
                 }
 
@@ -771,7 +771,7 @@ social panel
     right: 0;
     height: 80px;
     padding: 0 50px;
-    border: solid 2px var(--color-text);
+    border: solid 2px var(--color-frame);
     border-width: 0 0 2px 0;
     transition: $tr;
     pointer-events: all;
@@ -785,7 +785,7 @@ social panel
         left: 9px;
         bottom: -9px;
         right: -5px;
-        border-bottom: 2px solid $soft;
+        border-bottom: 2px solid var(--color-frameshadow);
     }
 
     i {
@@ -802,7 +802,7 @@ social panel
         top: auto;
         bottom: 0;
         right: 0;
-        border-top: solid 2px var(--color-text);
+        border-top: solid 2px var(--color-frame);
         border-bottom: none;
 
         &::after {
@@ -815,7 +815,7 @@ social panel
 
     @media screen and (max-width: 480px) {
         padding: 0 25px;
-        border: solid 2px var(--color-text);
+        border: solid 2px var(--color-frame);
         border-width: 2px 2px 2px 0;
     }
 
@@ -865,7 +865,7 @@ footer
         align-items: center;
         padding: 0 35px;
         pointer-events: all;
-        border-top: 2px solid $dark;
+        border-top: 2px solid var(--color-frame);
 
         &::before {
             content: "";
@@ -873,7 +873,7 @@ footer
             left: 9px;
             top: 5px;
             right: -9px;
-            border-bottom: 2px solid $soft;
+            border-bottom: 2px solid var(--color-frameshadow);
         }
 
         & ul {
@@ -944,11 +944,11 @@ footer
 
         @media screen and (max-width: 1024px) {
             
-            border: solid 2px var(--color-text);
+            border: solid 2px var(--color-frame);
             border-width: 2px 0 2px 2px;
 
             &::before {
-                border: solid 2px $soft;
+                border: solid 2px var(--color-frameshadow);
                 border-width: 2px 0 0 2px;
                 height: 100%;
                 left: 5px;
@@ -1151,7 +1151,7 @@ about
         top: 12px;
         right: -12px;
         bottom: -12px;
-        border: 2px solid $dark;
+        border: 2px solid var(--color-frame);
     }
 
     & .cyril-avatar {
@@ -1247,7 +1247,7 @@ iconbox
         position: relative;
         width: 70px;
         height: 70px;
-        border: solid 2px $dark;
+        border: solid 2px var(--color-frame);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -1384,7 +1384,7 @@ experience
 
 .cyril-divider {
     position: relative;
-    background-color: $dark;
+    background-color: var(--color-frame);
     height: 2px;
     width: 100%;
 
@@ -1394,7 +1394,7 @@ experience
         left: 7px;
         top: 7px;
         right: -5px;
-        border-bottom: 2px solid $soft;
+        border-bottom: 2px solid var(--color-frameshadow);
     }
 }
 
@@ -1406,12 +1406,12 @@ experience
         cursor: pointer;
         width: 60px;
         height: 60px;
-        border: solid 2px $dark;
+        border: solid 2px var(--color-frame);
         display: flex;
         color: $dark;
         justify-content: center;
         align-items: center;
-        box-shadow: 6px 6px 0 0 var(--color-soft);
+        box-shadow: 6px 6px 0 0 var(--color-frameshadow);
         transition: $tr;
 
         &.swiper-button-disabled {
@@ -1451,7 +1451,7 @@ experience
         top: 0;
         right: 0;
         width: 70%;
-        border-bottom: 2px solid $dark;
+        border-bottom: 2px solid var(--color-frame);
 
         @media screen and (max-width: 1024px) {
             width: 100%;
@@ -1464,7 +1464,7 @@ experience
         top: 7px;
         right: -5px;
         width: 70%;
-        border-bottom: 2px solid $soft;
+        border-bottom: 2px solid var(--color-frameshadow);
 
         @media screen and (max-width: 1024px) {
             width: 100%;
@@ -1511,7 +1511,7 @@ experience
                         left: calc(50% - 1px);
                         width: 2px;
                         height: 15px;
-                        background-color: $dark;
+                        background-color: var(--color-frame);
                     }
                 }
 
@@ -1590,7 +1590,7 @@ experience
     font-family: var(--font-atkinson);
     position: relative;
     padding: 90px 0 130px;
-    border-top: solid 2px $dark;
+    border-top: solid 2px var(--color-frame);
     display: flex;
     justify-content: space-between;
 
@@ -1600,7 +1600,7 @@ experience
         top: 5px;
         right: -5px;
         left: 5px;
-        border-bottom: 2px solid $soft;
+        border-bottom: 2px solid var(--color-frameshadow);
     }
 
     & .cyril-pagination-numbers {
@@ -1791,7 +1791,7 @@ portfolio
             top: 12px;
             right: -12px;
             bottom: -12px;
-            border: 2px solid $dark;
+            border: 2px solid var(--color-frame);
             pointer-events: none;
             transform: scale(1);
             transition: $tr;
@@ -1997,7 +1997,7 @@ portfolio
 
     & .cyril-icon-box {
         padding: 40px;
-        border: solid 2px $dark;
+        border: solid 2px var(--color-frame);
         margin-top: -2px;
         margin-left: -2px;
         display: table;
@@ -2030,12 +2030,12 @@ back to top
     cursor: pointer;
     width: 60px;
     height: 60px;
-    border: solid 2px $dark;
+    border: solid 2px var(--color-frame);
     display: flex;
     color: $dark;
     justify-content: center;
     align-items: center;
-    box-shadow: 6px 6px 0 0 $soft;
+    box-shadow: 6px 6px 0 0 var(--color-frameshadow);
     transition: $tr;
     opacity: 0;
     visibility: hidden;

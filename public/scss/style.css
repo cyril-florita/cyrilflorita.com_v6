@@ -3,6 +3,7 @@
   --color-gray: #202020;
   --color-soft: rgba(16, 16, 16, 0.18);
   --color-softer: rgba(16, 16, 16, 0.18);
+  --color-softest: rgba(16, 16, 16, 0.1);
   --color-light: rgba(255, 255, 255, 1);
   --color-light-gray: #e4e4e4;
   --color-accent: #fa4729;
@@ -10,6 +11,8 @@
   --color-black: #010101;
   --color-bg: var(--color-light);
   --color-text: var(--color-dark);
+  --color-frame: var(--color-dark);
+  --color-frameshadow: var(--color-soft);
   --color-border: var(--color-soft);
 }
 
@@ -18,10 +21,13 @@
   --color-gray: #d0d0d0;
   --color-soft: rgba(255, 255, 255, 0.18);
   --color-softer: rgba(255, 255, 255, 0.1);
+  --color-softest: rgba(255, 255, 255, 0.07);
   --color-light: #101010;
   --color-light-gray: #202020;
   --color-bg: var(--color-black);
   --color-text: var(--color-dark);
+  --color-frame: var(--color-soft);
+  --color-frameshadow: var(--color-softest);
   --color-border: var(--color-soft);
 }
 
@@ -648,10 +654,10 @@ button
   cursor: pointer;
 }
 .cyril-button.cyril-type-2 {
-  border-color: var(--color-dark);
+  border-color: var(--color-frame);
   background-color: var(--color-light);
   color: var(--color-dark);
-  box-shadow: 7px 7px 0px 0px var(--color-soft);
+  box-shadow: 7px 7px 0px 0px var(--color-frameshadow);
 }
 .cyril-button.cyril-type-2:hover {
   box-shadow: 0px 0px 0px 0px var(--color-soft);
@@ -965,10 +971,10 @@ frame
   right: -7px;
   top: 7px;
   bottom: -7px;
-  border: 2px solid var(--color-soft);
+  border: 2px solid var(--color-frameshadow);
 }
 .cyril-frame:after {
-  border: 2px solid var(--color-text);
+  border: 2px solid var(--color-frame);
   left: 0;
   top: 0;
   right: 0;
@@ -993,7 +999,7 @@ frame
 }
 .cyril-frame.hide .cyril-theme-toggle {
   transform: translateY(-78px);
-  color: var(--color-text);
+  color: var(--color-frame);
 }
 @media screen and (max-width: 740px) {
   .cyril-frame.hide .cyril-theme-toggle {
@@ -1122,7 +1128,7 @@ page
 .cyril-page.cyril-project-page img {
   display: block;
   width: 100%;
-  border: solid 2px var(--color-dark);
+  border: solid 2px var(--color-frame);
   padding: 10px;
 }
 .cyril-page.cyril-project-page .cyril-top-banner {
@@ -1377,8 +1383,8 @@ top panel
   text-decoration: none;
   text-align: center;
   color: var(--color-text);
-  border-bottom: solid 2px var(--color-text);
-  border-right: solid 2px var(--color-text);
+  border-bottom: solid 2px var(--color-frame);
+  border-right: solid 2px var(--color-frame);
   text-shadow: 3px 3px 0px var(--color-soft);
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
 }
@@ -1388,13 +1394,13 @@ top panel
   left: 9px;
   right: -9px;
   bottom: -9px;
-  border-bottom: solid 2px var(--color-soft);
+  border-bottom: solid 2px var(--color-frameshadow);
 }
 .cyril-top-panel .cyril-logo::after {
   left: auto;
   top: 8px;
   bottom: -7px;
-  border-right: solid 2px var(--color-soft);
+  border-right: solid 2px var(--color-frameshadow);
   border-bottom: none;
 }
 .cyril-top-panel .cyril-logo:hover {
@@ -1428,7 +1434,7 @@ top panel
 .cyril-top-panel nav {
   position: relative;
   border-top: none;
-  border-bottom: solid 2px var(--color-text);
+  border-bottom: solid 2px var(--color-frame);
   padding: 0 50px 0 50px;
 }
 .cyril-top-panel nav::after {
@@ -1437,7 +1443,7 @@ top panel
   left: 7px;
   bottom: -9px;
   right: -5px;
-  border-bottom: 2px solid var(--color-soft);
+  border-bottom: 2px solid var(--color-frameshadow);
 }
 .cyril-top-panel nav ul {
   display: flex;
@@ -1482,7 +1488,7 @@ top panel
   left: calc(50% - 1px);
   width: 2px;
   height: 10px;
-  background-color: var(--color-text);
+  background-color: var(--color-frame);
 }
 .cyril-top-panel nav ul li ul {
   pointer-events: none;
@@ -1585,7 +1591,7 @@ social panel
   right: 0;
   height: 80px;
   padding: 0 50px;
-  border: solid 2px var(--color-text);
+  border: solid 2px var(--color-frame);
   border-width: 0 0 2px 0;
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
   pointer-events: all;
@@ -1599,7 +1605,7 @@ social panel
   left: 9px;
   bottom: -9px;
   right: -5px;
-  border-bottom: 2px solid var(--color-soft);
+  border-bottom: 2px solid var(--color-frameshadow);
 }
 .cyril-theme-toggle i {
   display: block;
@@ -1615,7 +1621,7 @@ social panel
     top: auto;
     bottom: 0;
     right: 0;
-    border-top: solid 2px var(--color-text);
+    border-top: solid 2px var(--color-frame);
     border-bottom: none;
   }
   .cyril-theme-toggle::after {
@@ -1628,7 +1634,7 @@ social panel
 @media screen and (max-width: 480px) {
   .cyril-theme-toggle {
     padding: 0 25px;
-    border: solid 2px var(--color-text);
+    border: solid 2px var(--color-frame);
     border-width: 2px 2px 2px 0;
   }
 }
@@ -1671,7 +1677,7 @@ footer
   align-items: center;
   padding: 0 35px;
   pointer-events: all;
-  border-top: 2px solid var(--color-dark);
+  border-top: 2px solid var(--color-frame);
 }
 .cyril-bottom-panel .cyril-footer::before {
   content: "";
@@ -1679,7 +1685,7 @@ footer
   left: 9px;
   top: 5px;
   right: -9px;
-  border-bottom: 2px solid var(--color-soft);
+  border-bottom: 2px solid var(--color-frameshadow);
 }
 .cyril-bottom-panel .cyril-footer ul {
   display: flex;
@@ -1739,11 +1745,11 @@ footer
 }
 @media screen and (max-width: 1024px) {
   .cyril-bottom-panel .cyril-footer {
-    border: solid 2px var(--color-text);
+    border: solid 2px var(--color-frame);
     border-width: 2px 0 2px 2px;
   }
   .cyril-bottom-panel .cyril-footer::before {
-    border: solid 2px var(--color-soft);
+    border: solid 2px var(--color-frameshadow);
     border-width: 2px 0 0 2px;
     height: 100%;
     left: 5px;
@@ -1924,7 +1930,7 @@ about
   top: 12px;
   right: -12px;
   bottom: -12px;
-  border: 2px solid var(--color-dark);
+  border: 2px solid var(--color-frame);
 }
 .cyril-about-person .cyril-avatar {
   width: 100%;
@@ -2018,7 +2024,7 @@ iconbox
   position: relative;
   width: 70px;
   height: 70px;
-  border: solid 2px var(--color-dark);
+  border: solid 2px var(--color-frame);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2137,7 +2143,7 @@ experience
 
 .cyril-divider {
   position: relative;
-  background-color: var(--color-dark);
+  background-color: var(--color-frame);
   height: 2px;
   width: 100%;
 }
@@ -2147,7 +2153,7 @@ experience
   left: 7px;
   top: 7px;
   right: -5px;
-  border-bottom: 2px solid var(--color-soft);
+  border-bottom: 2px solid var(--color-frameshadow);
 }
 
 .cyril-slider-nav {
@@ -2157,12 +2163,12 @@ experience
   cursor: pointer;
   width: 60px;
   height: 60px;
-  border: solid 2px var(--color-dark);
+  border: solid 2px var(--color-frame);
   display: flex;
   color: var(--color-dark);
   justify-content: center;
   align-items: center;
-  box-shadow: 6px 6px 0 0 var(--color-soft);
+  box-shadow: 6px 6px 0 0 var(--color-frameshadow);
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
 }
 .cyril-slider-nav .cyril-prev.swiper-button-disabled, .cyril-slider-nav .cyril-next.swiper-button-disabled {
@@ -2197,7 +2203,7 @@ experience
   top: 0;
   right: 0;
   width: 70%;
-  border-bottom: 2px solid var(--color-dark);
+  border-bottom: 2px solid var(--color-frame);
 }
 @media screen and (max-width: 1024px) {
   .cyril-filter::before {
@@ -2210,7 +2216,7 @@ experience
   top: 7px;
   right: -5px;
   width: 70%;
-  border-bottom: 2px solid var(--color-soft);
+  border-bottom: 2px solid var(--color-frameshadow);
 }
 @media screen and (max-width: 1024px) {
   .cyril-filter::after {
@@ -2255,7 +2261,7 @@ experience
   left: calc(50% - 1px);
   width: 2px;
   height: 15px;
-  background-color: var(--color-dark);
+  background-color: var(--color-frame);
 }
 @media screen and (max-width: 1024px) {
   .cyril-filter ul li a {
@@ -2319,7 +2325,7 @@ experience
   font-family: var(--font-atkinson);
   position: relative;
   padding: 90px 0 130px;
-  border-top: solid 2px var(--color-dark);
+  border-top: solid 2px var(--color-frame);
   display: flex;
   justify-content: space-between;
 }
@@ -2329,7 +2335,7 @@ experience
   top: 5px;
   right: -5px;
   left: 5px;
-  border-bottom: 2px solid var(--color-soft);
+  border-bottom: 2px solid var(--color-frameshadow);
 }
 .cyril-pagination-panel .cyril-pagination-numbers {
   display: flex;
@@ -2495,7 +2501,7 @@ portfolio
   top: 12px;
   right: -12px;
   bottom: -12px;
-  border: 2px solid var(--color-dark);
+  border: 2px solid var(--color-frame);
   pointer-events: none;
   transform: scale(1);
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
@@ -2657,7 +2663,7 @@ portfolio
 }
 .swiper-slide .cyril-icon-box {
   padding: 40px;
-  border: solid 2px var(--color-dark);
+  border: solid 2px var(--color-frame);
   margin-top: -2px;
   margin-left: -2px;
   display: table;
@@ -2687,12 +2693,12 @@ back to top
   cursor: pointer;
   width: 60px;
   height: 60px;
-  border: solid 2px var(--color-dark);
+  border: solid 2px var(--color-frame);
   display: flex;
   color: var(--color-dark);
   justify-content: center;
   align-items: center;
-  box-shadow: 6px 6px 0 0 var(--color-soft);
+  box-shadow: 6px 6px 0 0 var(--color-frameshadow);
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
   opacity: 0;
   visibility: hidden;
