@@ -1864,21 +1864,22 @@ portfolio
             position: absolute;
             top: 50%;
             left: 50%;
-            background-color: $light;
-            border: solid 2px $dark;
+            background-color: var(--color-accent);
+            // border: solid 2px var(--color-frame);
             width: 60px;
             height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 6px 6px 0 0 $soft;
+            box-shadow: 6px 6px 0 0 var(--color-accent-light);
             transition: $tr;
             transform: translate(-50%, -50%);
 
             & svg,
             & i {
                 opacity: 0;
-                stroke: $dark;
+                color: var(--color-light);
+                stroke: var(--color-light);
                 transform: translateY(10px) scale(.6);
                 transition: $tr;
             }
@@ -2095,8 +2096,8 @@ back to top
         position: absolute;
         top: 50%;
         left: 50%;
-        background-color: $light;
-        border: solid 2px $dark;
+        background-color: var(--color-accent);
+        border: solid 2px var(--color-frame);
         width: 60px;
         height: 60px;
         display: flex;
@@ -2108,8 +2109,8 @@ back to top
 
         & svg,
         & i {
-            stroke: $dark;
-            color: $dark;
+            stroke: var(--color-light);
+            color: var(--color-light);
         }
 
     }

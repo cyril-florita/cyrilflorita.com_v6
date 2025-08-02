@@ -898,9 +898,16 @@ ul {
         list-style-type: none;
 
         &.w-icon {
+            li {
+                display: flex;
+                align-items: baseline;
+                margin-bottom: 10px;
+            }
             i {
-                display: inline-block;
                 margin-right: 10px;
+            }
+            span {
+                margin-left: 5px;
             }
         }
     }

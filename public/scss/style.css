@@ -895,9 +895,16 @@ dl.no-disc dd dl.w-disc {
 ul.no-disc {
   list-style-type: none;
 }
+ul.no-disc.w-icon li {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 10px;
+}
 ul.no-disc.w-icon i {
-  display: inline-block;
   margin-right: 10px;
+}
+ul.no-disc.w-icon span {
+  margin-left: 5px;
 }
 
 .cyril-built {
@@ -2563,20 +2570,20 @@ portfolio
   position: absolute;
   top: 50%;
   left: 50%;
-  background-color: var(--color-light);
-  border: solid 2px var(--color-dark);
+  background-color: var(--color-accent);
   width: 60px;
   height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 6px 6px 0 0 var(--color-soft);
+  box-shadow: 6px 6px 0 0 var(--color-accent-light);
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
   transform: translate(-50%, -50%);
 }
 .cyril-portfolio-item .cyril-cover .cyril-hover-link svg, .cyril-portfolio-item .cyril-cover .cyril-hover-link i {
   opacity: 0;
-  stroke: var(--color-dark);
+  color: var(--color-light);
+  stroke: var(--color-light);
   transform: translateY(10px) scale(0.6);
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
 }
@@ -2750,8 +2757,8 @@ back to top
   position: absolute;
   top: 50%;
   left: 50%;
-  background-color: var(--color-light);
-  border: solid 2px var(--color-dark);
+  background-color: var(--color-accent);
+  border: solid 2px var(--color-frame);
   width: 60px;
   height: 60px;
   display: flex;
@@ -2762,8 +2769,8 @@ back to top
   transform: translate(-50%, -50%);
 }
 .cyril-project-figure .cyril-hover-link svg, .cyril-project-figure .cyril-hover-link i {
-  stroke: var(--color-dark);
-  color: var(--color-dark);
+  stroke: var(--color-light);
+  color: var(--color-light);
 }
 .cyril-project-figure:hover {
   cursor: pointer;
