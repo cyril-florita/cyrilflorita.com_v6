@@ -609,7 +609,7 @@ const page = () => {
                               COLORS
                             </p>
                             <a
-                              href="/img/portfolio/gty8_colors.jpg.jpg"
+                              href="/img/portfolio/gty8_colors.jpg"
                               className="cyril-project-figure mfp-image"
                               data-effect="mfp-zoom-in"
                             >
