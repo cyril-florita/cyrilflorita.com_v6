@@ -22,7 +22,7 @@ const Banner = ( { bgImage = "img/cyril-profile-serious-lol.png" } ) => {
                 <h1 className="cyril-up cyril-mb-20" data-text="Cyril Florita">Cyril Florita</h1>
                 <div className="cyril-short intro">
                   <p className="cyril-mb-30">
-                    Generalist <strong><span className="cyril-accent">Designer</span></strong> and <strong><span className="cyril-accent">Developer</span></strong>
+                    <strong><span className="cyril-accent">Designer</span></strong> and <strong><span className="cyril-accent">Developer</span></strong>
                   </p>
                   <div className="cyril-buttons-frame">
                     <a 

@@ -30,7 +30,7 @@ const Background = ( { bgImage = "img/cyril-profile-w-a-smile.jpg" } ) => {
                 </p>
                 <h2 className="cyril-up cyril-mb-30">Background</h2>
                 <p className="cyril-mb-10">
-                  With <strong><span className="cyril-accent">almost 2 decades of industry experience</span></strong>, and through my <strong>thoughtfully-</strong>, <strong>carefully-</strong>, <strong>and-beautifully-crafted</strong> projects, I have established myself as a versatile Designer and Developer with a proven track record of:
+                  With <strong><span className="cyril-accent">almost 2 decades of industry experience</span></strong>, and through my <strong>thoughtfully-</strong>, <strong>carefully-</strong>, <strong>and-beautifully-crafted</strong> digital experiences, I have established myself as a versatile Designer and Developer with a proven track record of:
                 </p>
                 <ul className="no-disc w-icon cyril-ml-40 cyril-mt-20 cyril-mb-20 cyril-accent">
                   <li><i class="fa-solid fa-diamond"></i> <span>enhancing product value</span></li>
