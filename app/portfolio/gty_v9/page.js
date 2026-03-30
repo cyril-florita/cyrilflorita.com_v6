@@ -214,6 +214,7 @@ const page = () => {
                           className="clearfix cyril-project-figure cyril-mt-40 mfp-image"
                           data-effect="mfp-zoom-in"
                         >
+                          
                           <div className="cyril-cover">
                             <img src="/img/portfolio/gty9_interviews.jpg" alt="interviews" />
                             <div className="cyril-hover-link">
