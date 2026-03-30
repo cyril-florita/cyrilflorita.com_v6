@@ -6,7 +6,7 @@ export function ClientThemeProvider({ children }) {
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+    const initialTheme = savedTheme || 'light';
     
     document.documentElement.setAttribute('data-theme', initialTheme);
 
@@ -23,7 +23,7 @@ export function ClientThemeProvider({ children }) {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = (e) => {
       if (!localStorage.getItem('theme')) {
-        const newTheme = e.matches ? 'dark' : 'light';
+        const newTheme = 'light';
         document.documentElement.setAttribute('data-theme', newTheme);
         updateThemeAwareImages(newTheme);
       }

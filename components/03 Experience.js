@@ -136,7 +136,7 @@ const Experience = () => {
                           June 2008 &mdash; Dec 2008  &#40;<span className="cyril-accent">6 months</span>&#41;
                         </p>
                         <p>
-                          <a className="cyril-text-underline" href="https://www.crunchbase.com/organization/eqal" target="_blank"><strong>EQAL, Inc.</strong></a>, an entertainment company in Sherman Oaks, CA.
+                          <a className="cyril-text-underline" href="https://en.wikipedia.org/wiki/EQAL" target="_blank"><strong>EQAL, Inc.</strong></a>, an entertainment company in Sherman Oaks, CA.
                         </p>
                       </div>
                     </div>
@@ -152,7 +152,7 @@ const Experience = () => {
                           June 2007 &mdash; June 2008  &#40;<span className="cyril-accent">1 year</span>&#41;
                         </p>
                         <p>
-                          <a className="cyril-text-underline" href="https://www.linkedin.com/company/whittmanhart-interactive" target="_blank"><strong>Whittman-Hart Interactive</strong></a>, a design agency in Century City, CA.
+                          <a className="cyril-text-underline" href="https://en.wikipedia.org/wiki/Whittman-Hart" target="_blank"><strong>Whittman-Hart Interactive</strong></a>, a design agency in Century City, CA.
                         </p>
                       </div>
                     </div>

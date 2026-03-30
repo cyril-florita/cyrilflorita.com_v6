@@ -8,7 +8,7 @@ const Footer = () => {
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+    const initialTheme = savedTheme || 'light';
 
     setIsDarkMode(initialTheme === 'dark');
     document.documentElement.setAttribute('data-theme', initialTheme);

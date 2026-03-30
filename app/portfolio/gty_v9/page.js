@@ -210,7 +210,7 @@ const page = () => {
                       <dd>
                         I conducted surveys with existing users and organization employees to gather qualitative data identifying pain points, user sentiment, satisfaction, and preferences.
                         <a
-                          href="/img/portfolio/gty9_interviews.jpge"
+                          href="/img/portfolio/gty9_interviews.jpg"
                           className="clearfix cyril-project-figure cyril-mt-40 mfp-image"
                           data-effect="mfp-zoom-in"
                         >
