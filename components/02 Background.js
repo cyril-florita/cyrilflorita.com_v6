@@ -28,7 +28,7 @@ const Background = ( { bgImage = "img/cyril-profile-w-a-smile.jpg" } ) => {
                 <p className="cyril-upper subheader">
                 &#91; My <span className="cyril-accent">story</span> &#93;
                 </p>
-                <h2 className="cyril-up cyril-mb-30">Background</h2>
+                <h2 className="cyril-up cyril-mb-30 glitch" data-text="Background">Background</h2>
                 <p className="cyril-mb-10">
                   With <strong><span className="cyril-accent">almost 2 decades of industry experience</span></strong>, and through my <strong>thoughtfully-</strong>, <strong>carefully-</strong>, <strong>and-beautifully-crafted</strong> digital experiences, I have established myself as a versatile Designer and Developer with a proven track record of:
                 </p>

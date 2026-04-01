@@ -37,7 +37,7 @@ const page = () => {
 
             {/* top banner */}
             <div className="cyril-top-banner cyril-text-center">
-              <h2 className="cyril-mt-60">
+              <h2 className="cyril-mt-60 glitch" data-text="GTY Blog Graphics">
                 GTY Blog Graphics
               </h2>
               <h2 className="cyril-upper"></h2>

@@ -11,7 +11,7 @@ const Tools = () => {
           <p className="cyril-upper subheader">
           &#91; My <span className="cyril-accent">resources</span> &#93;
           </p>
-          <h2 className="cyril-up cyril-mb-50">Tools &amp; Software</h2>
+          <h2 className="cyril-up cyril-mb-50 glitch" data-text="Tools &amp; Software">Tools &amp; Software</h2>
         </div>
         <div className="row">
           <div className="col-xl-1" />

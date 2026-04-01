@@ -43,7 +43,7 @@ const page = () => {
 
             {/* top banner */}
             <div className="cyril-top-banner cyril-text-center">
-              <h2 className="cyril-mt-60">GTY Dashboard</h2>
+              <h2 className="cyril-mt-60 glitch" data-text="GTY Dashboard">GTY Dashboard</h2>
               <p className="cyril-upper cyril-mt-30 cyril-mb-40">
                 <span className="cyril-accent">UI Design &amp; Front-End</span>
               </p>

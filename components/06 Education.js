@@ -11,8 +11,10 @@ const Education = () => {
           <p className="cyril-upper subheader">
             &#91; My <span className="cyril-accent">Training</span> &#93;
           </p>
-          <h2 className="cyril-up cyril-mb-50">Education</h2>
+          <h2 className="cyril-up cyril-mb-50 glitch" data-text="Education">Education</h2>
         </div>
+
+
 
         <div className="row">
           <div className="offset-xl-1 col-xl-5 cyril-mb-30">

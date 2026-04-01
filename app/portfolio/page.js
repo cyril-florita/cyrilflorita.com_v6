@@ -59,7 +59,7 @@ const PortfolioPage = () => {
               <p className="cyril-upper subheader">
                 &#91; My <span className="cyril-accent">select projects</span> &#93;
               </p>
-              <h2 className="cyril-up cyril-mb-20">Portfolio</h2>
+              <h2 className="cyril-up cyril-mb-20 glitch" data-text="Portfolio">Portfolio</h2>
               <p className="cyril-left-offset">
                 A selection of my projects to showcase my experience and skills.
               </p>

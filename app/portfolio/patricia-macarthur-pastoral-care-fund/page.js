@@ -38,7 +38,7 @@ const page = () => {
             {/* top banner */}
             <div className="cyril-top-banner cyril-text-center">
               <h2 className="cyril-mt-60">
-                <span>The</span> Patricia MacArthur <span>Pastoral Care Fund</span>               
+                <span>The</span> <i style={{fontStyle: 'normal'}} className="glitch" data-text="Patricia MacArthur">Patricia MacArthur</i> <span>Pastoral Care Fund</span>               
               </h2>
               <h2 className="cyril-upper"></h2>
               <p className="cyril-upper cyril-mt-30 cyril-mb-40">

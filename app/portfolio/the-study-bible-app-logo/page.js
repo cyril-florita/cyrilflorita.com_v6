@@ -38,7 +38,7 @@ const page = () => {
             {/* top banner */}
             <div className="cyril-top-banner cyril-text-center">
               <img className="cyril-project-main-graphic" src="/img/portfolio/main_the-study-bible-app-logo.jpg" alt="The Study Bible App Logo - Main" />
-              <h2 className="cyril-mt-60">The Study Bible App Logo</h2>
+              <h2 className="cyril-mt-60 glitch" data-text="The Study Bible App Logo">The Study Bible App Logo</h2>
               <p className="cyril-upper cyril-mt-30 cyril-mb-40">
                 <span className="cyril-accent">Branding</span>
               </p>

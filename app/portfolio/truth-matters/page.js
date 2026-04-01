@@ -60,7 +60,7 @@ const page = () => {
             {/* top banner */}
             <div className="cyril-top-banner cyril-text-center">
               <img src="/img/portfolio/main_truth-matters-podcast.jpg" alt="Truth Matters Podcast Wide" />                           
-              <h2 className="cyril-mt-60">Truth Matters Podcast</h2>
+              <h2 className="cyril-mt-60 glitch" data-text="Truth Matters Podcast">Truth Matters Podcast</h2>
               <p className="cyril-upper cyril-mt-30 cyril-mb-40">
                 <span className="cyril-accent">Branding / UI/UX Design / Web Development</span>
               </p>
