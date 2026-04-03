@@ -29,7 +29,18 @@ const Background = ( { bgImage = "img/cyril-profile-w-a-smile.jpg" } ) => {
                 &#91; My <span className="cyril-accent">story</span> &#93;
                 </p>
                 <h2 className="cyril-up cyril-mb-30 glitch" data-text="Background">Background</h2>
-                <p className="cyril-mb-10">
+                <p className="cyril-mb-20">
+                  
+                  I've built a reputation as a versatile Designer and Developer who crafts thoughtful, beautiful, and functional digital experiences.
+                </p>
+                <p className="cyril-mb-20">
+                  I've consistently <strong className="cyril-accent">enhanced product value</strong>, <strong className="cyril-accent">driven marketing success</strong>, and <strong className="cyril-accent">delivered measurable business growth</strong> through cross-functional collaboration and creative problem-solving. 
+                </p>
+                <p>
+                  And I've done so across non-profits, software firms, design agencies, printing companies, and entertainment industries.
+                </p>
+                
+                {/* <p className="cyril-mb-10">                
                   With <strong><span className="cyril-accent">almost 2 decades of industry experience</span></strong>, and through my <strong>thoughtfully-</strong>, <strong>carefully-</strong>, <strong>and-beautifully-crafted</strong> digital experiences, I have established myself as a versatile Designer and Developer with a proven track record of:
                 </p>
                 <ul className="no-disc w-icon cyril-ml-40 cyril-mt-20 cyril-mb-20 cyril-accent">
@@ -39,7 +50,7 @@ const Background = ( { bgImage = "img/cyril-profile-w-a-smile.jpg" } ) => {
                 </ul>
                 <p className="cyril-mb-30">
                   My career opportunities span roles at non-profit organizations, multimedia &amp; software companies, design agencies, entertainment industries, financial institutions, and printing companies. And with these opportunities, I have consistently led successful projects while collaborating cross-functionally to deliver <strong>usable</strong>, <strong>profitable</strong>, and <strong>high-quality</strong> creative solutions.
-                </p>
+                </p> */}
               </div>
             </div>
           </div>

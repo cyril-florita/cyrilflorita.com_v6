@@ -277,9 +277,9 @@ body {
         background: transparent url(../img/bg-static.png) repeat 0 0;       
         background-repeat: repeat;
         animation: bg-animation .2s infinite;
-        opacity: var(--bg-static-opacity, 0.27);
+        opacity: var(--bg-static-opacity, 0.21);
         [data-theme="dark"] & {
-            opacity: 0.23;
+            opacity: 0.2;
         };
         visibility: visible;
     }

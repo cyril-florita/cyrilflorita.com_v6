@@ -51,14 +51,14 @@ const Experience = () => {
                   <SwiperSlide className="swiper-slide">
                     <div className="cyril-icon-box cyril-type-2">
                       <div className="cyril-box-text">
-                        <p className="cyril-upper cyril-text-lg cyril-mb-15">
+                        <p className="cyril-upper cyril-text-lg cyril-mb-15 cyril-accent">
                           Web Developer
                         </p>
                         <p className="cyril-upper cyril-mb-30 cyril-text-normal">
-                          Apr 2025 &mdash; <span className="cyril-accent">Today</span>
+                          Apr 2025 &mdash; <span>Today</span> &#40;<span>1 year</span>&#41;
                         </p>
                         <p>
-                          <a className="cyril-text-underline" href="https://childrenshungerfund.org" target="_blank"><strong>Children's Hunger Fund</strong></a>, a Christian non-profit ministry based in Sylmar, CA.
+                          <a className="cyril-upper cyril-text-normal cyril-text-underline" href="https://childrenshungerfund.org" target="_blank">Children's Hunger Fund</a>, a Christian non-profit ministry based in Sylmar, CA.
                         </p>
                       </div>
                     </div>
@@ -67,14 +67,14 @@ const Experience = () => {
                   <SwiperSlide className="swiper-slide">
                     <div className="cyril-icon-box cyril-type-2">
                       <div className="cyril-box-text">
-                        <p className="cyril-upper cyril-text-lg cyril-mb-15">
+                        <p className="cyril-upper cyril-text-lg cyril-mb-15 cyril-accent">
                           UX Designer &amp; Web Developer
                         </p>
                         <p className="cyril-upper cyril-mb-30 cyril-text-normal">
-                          Dec 2014 &mdash; Feb 2024 &#40;<span className="cyril-accent">10 years</span>&#41;
+                          Dec 2014 &mdash; Feb 2024 &#40;<span>10 years</span>&#41;
                         </p>
                         <p>
-                          <a className="cyril-text-underline" href="https://www.gty.org" target="_blank"><strong>Grace to You</strong></a>, a Christian multimedia ministry in Santa Clarita, CA.
+                          <a className="cyril-upper cyril-text-normal cyril-text-underline" href="https://www.gty.org" target="_blank">Grace to You</a>, a Christian multimedia ministry in Santa Clarita, CA.
                         </p>
                       </div>
                     </div>
@@ -83,12 +83,12 @@ const Experience = () => {
                   <SwiperSlide className="swiper-slide">
                     <div className="cyril-icon-box cyril-type-2">
                       <div className="cyril-box-text">
-                        <p className="cyril-upper cyril-text-lg cyril-mb-15">Product Designer</p>
+                        <p className="cyril-upper cyril-text-lg cyril-mb-15 cyril-accent">Product Designer</p>
                         <p className="cyril-upper cyril-mb-30 cyril-text-normal">
-                          Oct 2014 &mdash; Nov 2014 &#40;<span className="cyril-accent">2 months</span>&#41;
+                          Oct 2014 &mdash; Nov 2014 &#40;<span>2 months</span>&#41;
                         </p>
                         <p>
-                          <a className="cyril-text-underline" href="https://www.scorpion.co" target="_blank"><strong>Scorpion Design</strong></a>, a design and marketing agency in Santa Clarita, CA.
+                          <a className="cyril-upper cyril-text-normal cyril-text-underline" href="https://www.scorpion.co" target="_blank">Scorpion Design</a>, a design and marketing agency in Santa Clarita, CA.
                         </p>
                       </div>
                     </div>
@@ -97,14 +97,14 @@ const Experience = () => {
                   <SwiperSlide className="swiper-slide">
                     <div className="cyril-icon-box cyril-type-2">
                       <div className="cyril-box-text">
-                        <p className="cyril-upper cyril-text-lg cyril-mb-15">
+                        <p className="cyril-upper cyril-text-lg cyril-mb-15 cyril-accent">
                           Senior Web Designer &amp; Developer
                         </p>
                         <p className="cyril-upper cyril-mb-30 cyril-text-normal">
-                          Aug 2011 &mdash; Oct 2014 &#40;<span className="cyril-accent">3 years</span>&#41;
+                          Aug 2011 &mdash; Oct 2014 &#40;<span>3 years</span>&#41;
                         </p>
                         <p>
-                          <a className="cyril-text-underline" href="https://www.digitalroominc.com" target="_blank"><strong>PrintRunner / Digital Room, Inc.</strong></a>, a printing solutions company in Van Nuys, CA.
+                          <a className="cyril-upper cyril-text-normal cyril-text-underline" href="https://www.digitalroominc.com" target="_blank">PrintRunner / Digital Room, Inc.</a>, a printing solutions company in Van Nuys, CA.
                         </p>
                       </div>
                     </div>
@@ -113,14 +113,14 @@ const Experience = () => {
                   <SwiperSlide className="swiper-slide">
                     <div className="cyril-icon-box cyril-type-2">
                       <div className="cyril-box-text">
-                        <p className="cyril-upper cyril-text-lg cyril-mb-15">
+                        <p className="cyril-upper cyril-text-lg cyril-mb-15 cyril-accent">
                           Web Designer
                         </p>
                         <p className="cyril-upper cyril-mb-30 cyril-text-normal">
-                          Apr 2009 &mdash; June 2011 &#40;<span className="cyril-accent">2 years</span>&#41;
+                          Apr 2009 &mdash; June 2011 &#40;<span>2 years</span>&#41;
                         </p>
                         <p>
-                          <a className="cyril-text-underline" href="https://www.latimes.com/archives/la-xpm-2010-sep-22-la-fi-mighty-net-20100922-story.html" target="_blank"><strong>Mighty Net, Inc.</strong></a> &#40;now <a className="cyril-text-underline" href="https://www.experian.com/" target="_blank"><strong>Experian</strong></a>&#41;, a financial institution in Calabasas, CA.
+                          <a className="cyril-upper cyril-text-normal cyril-text-underline" href="https://www.latimes.com/archives/la-xpm-2010-sep-22-la-fi-mighty-net-20100922-story.html" target="_blank">Mighty Net, Inc.</a> &#40;now <a className="cyril-text-underline" href="https://www.experian.com/" target="_blank"><strong>Experian</strong></a>&#41;, a financial institution in Calabasas, CA.
                         </p>
                       </div>
                     </div>
@@ -129,14 +129,14 @@ const Experience = () => {
                   <SwiperSlide className="swiper-slide">
                     <div className="cyril-icon-box cyril-type-2">
                       <div className="cyril-box-text">
-                        <p className="cyril-upper cyril-text-lg cyril-mb-15">
+                        <p className="cyril-upper cyril-text-lg cyril-mb-15 cyril-accent">
                           Junior Web Designer
                         </p>
                         <p className="cyril-upper cyril-mb-30 cyril-text-normal">
-                          June 2008 &mdash; Dec 2008  &#40;<span className="cyril-accent">6 months</span>&#41;
+                          June 2008 &mdash; Dec 2008  &#40;<span>6 months</span>&#41;
                         </p>
                         <p>
-                          <a className="cyril-text-underline" href="https://en.wikipedia.org/wiki/EQAL" target="_blank"><strong>EQAL, Inc.</strong></a>, an entertainment company in Sherman Oaks, CA.
+                          <a className="cyril-upper cyril-text-normal cyril-text-underline" href="https://en.wikipedia.org/wiki/EQAL" target="_blank">EQAL, Inc.</a>, an entertainment company in Sherman Oaks, CA.
                         </p>
                       </div>
                     </div>
@@ -145,14 +145,14 @@ const Experience = () => {
                   <SwiperSlide className="swiper-slide">
                     <div className="cyril-icon-box cyril-type-2">
                       <div className="cyril-box-text">
-                        <p className="cyril-upper cyril-text-lg cyril-mb-15">
+                        <p className="cyril-upper cyril-text-lg cyril-mb-15 cyril-accent">
                           Junior Front-End Developer
                         </p>
                         <p className="cyril-upper cyril-mb-30 cyril-text-normal">
-                          June 2007 &mdash; June 2008  &#40;<span className="cyril-accent">1 year</span>&#41;
+                          June 2007 &mdash; June 2008  &#40;<span>1 year</span>&#41;
                         </p>
                         <p>
-                          <a className="cyril-text-underline" href="https://en.wikipedia.org/wiki/Whittman-Hart" target="_blank"><strong>Whittman-Hart Interactive</strong></a>, a design agency in Century City, CA.
+                          <a className="cyril-upper cyril-text-normal cyril-text-underline" href="https://en.wikipedia.org/wiki/Whittman-Hart" target="_blank">Whittman-Hart Interactive</a>, a design agency in Century City, CA.
                         </p>
                       </div>
                     </div>
@@ -161,14 +161,14 @@ const Experience = () => {
                   <SwiperSlide className="swiper-slide">
                     <div className="cyril-icon-box cyril-type-2">
                       <div className="cyril-box-text">
-                        <p className="cyril-upper cyril-text-lg cyril-mb-15">
+                        <p className="cyril-upper cyril-text-lg cyril-mb-15 cyril-accent">
                           Junior Web Designer
                         </p>
                         <p className="cyril-upper cyril-mb-30 cyril-text-normal">
-                          Oct 2006 &mdash; May 2007  &#40;<span className="cyril-accent">7 months</span>&#41;
+                          Oct 2006 &mdash; May 2007  &#40;<span>7 months</span>&#41;
                         </p>
                         <p>
-                          <a className="cyril-text-underline" href="https://studiosystem.com" target="_blank"><strong>Baseline Studio System</strong></a>, an entertainment industry database company in Santa Monica, CA.
+                          <a className="cyril-upper cyril-text-normal cyril-text-underline" href="https://studiosystem.com" target="_blank">Baseline Studio System</a>, an entertainment industry database company in Santa Monica, CA.
                         </p>
                       </div>
                     </div>
@@ -177,14 +177,14 @@ const Experience = () => {
                   <SwiperSlide className="swiper-slide">
                     <div className="cyril-icon-box cyril-type-2">
                       <div className="cyril-box-text">
-                        <p className="cyril-upper cyril-text-lg cyril-mb-15">
+                        <p className="cyril-upper cyril-text-lg cyril-mb-15 cyril-accent">
                         Quality Assurance Tester &amp; Graphic Designer
                         </p>
                         <p className="cyril-upper cyril-mb-30 cyril-text-normal">
-                          Mar 2006 &mdash; Oct 2006  &#40;<span className="cyril-accent">7 months</span>&#41;
+                          Mar 2006 &mdash; Oct 2006  &#40;<span>7 months</span>&#41;
                         </p>
                         <p>
-                          <a className="cyril-text-underline" href="https://www.linkedin.com/company/infospace" target="_blank"><strong>Infospace, Inc.</strong></a>, a multimedia company in Santa Monica, CA.
+                          <a className="cyril-upper cyril-text-normal cyril-text-underline" href="https://www.linkedin.com/company/infospace" target="_blank">Infospace, Inc.</a>, a multimedia company in Santa Monica, CA.
                         </p>
                       </div>
                     </div>
