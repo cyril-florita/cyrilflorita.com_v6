@@ -161,7 +161,7 @@ page
         -webkit-transform: translateY(90px) scale(0.95);
         transform: translateY(90px) scale(0.95);
         -webkit-transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
-        transition: 0.4s cubic-bezier(0, 0, 0.3642, 1); // test
+        transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
 
         &.loaded {
             opacity: 1;
