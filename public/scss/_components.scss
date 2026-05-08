@@ -1,3 +1,6 @@
+@use "sass:math";
+@use 'variables';
+
 /* -------------------------------------------
 
 frame
@@ -158,7 +161,7 @@ page
         -webkit-transform: translateY(90px) scale(0.95);
         transform: translateY(90px) scale(0.95);
         -webkit-transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
-        transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
+        transition: 0.4s cubic-bezier(0, 0, 0.3642, 1); // test
 
         &.loaded {
             opacity: 1;
@@ -194,7 +197,7 @@ page
     margin: 20px;
     transform: translateY(90px) scale(0.95);
     opacity: 0;
-    transition: $tr;
+    transition: variables.$tr;
     min-height: calc(var(--vh, 1vh) * 100);
     overscroll-behavior-y: contain;
 
@@ -231,7 +234,7 @@ page
                 border: none;
 
                 &.w-border {
-                    border: solid 2px $dark;
+                    border: solid 2px variables.$dark;
                     padding: 10px;
                     width: 77%;
 
@@ -253,7 +256,7 @@ page
                 width: 100%;
                 // margin: 60px auto 100px;
                 padding: 10px;
-                border: solid 2px $dark;
+                border: solid 2px variables.$dark;
             }
 
             @media screen and (min-width: 1440px) {
@@ -346,7 +349,7 @@ pagination
 
             &:after {
                 border-color: var(--color-accent);
-                background: $light;
+                background: variables.$light;
             }
         }
 
@@ -355,7 +358,7 @@ pagination
             cursor: default;
 
             &::after {
-                border-color: $accent;
+                border-color: variables.$accent;
                 background: var(--color-accent);
                 animation: throb 3s ease-in-out infinite;
             }
@@ -405,10 +408,12 @@ pagination
     transform: rotate(30deg);
     --dot-size: 2px;
     --dot-space: 10px;
-    background:
-        linear-gradient(90deg, $light calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
-        linear-gradient($light calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
-        $dark;
+    background-image:
+                linear-gradient(90deg, variables.$light calc(var(--dot-space) - var(--dot-size)), transparent 1%),
+                linear-gradient(variables.$light calc(var(--dot-space) - var(--dot-size)), transparent 1%);
+    background-position: center, center;
+    background-size: var(--dot-space) var(--dot-space), var(--dot-space) var(--dot-space);
+    background-color: variables.$dark;
 
     &:before {
         content: '';
@@ -419,10 +424,12 @@ pagination
         left: -100px;
         --dot-size: 2px;
         --dot-space: 10px;
-        background:
-            linear-gradient(90deg, $light calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
-            linear-gradient($light calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
-            $dark;
+        background-image:
+            linear-gradient(90deg, variables.$light calc(var(--dot-space) - var(--dot-size)), transparent 1%),
+            linear-gradient(variables.$light calc(var(--dot-space) - var(--dot-size)), transparent 1%);
+        background-position: center, center;
+        background-size: var(--dot-space) var(--dot-space), var(--dot-space) var(--dot-space);
+        background-color: variables.$dark;
     }
 
     &.cyril-bg-item-large {
@@ -447,10 +454,12 @@ pagination
     z-index: -1;
     --dot-size: 2px;
     --dot-space: 10px;
-    background:
-        linear-gradient(90deg, $light calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
-        linear-gradient($light calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
-        $dark;
+    background-image:
+        linear-gradient(90deg, variables.$light calc(var(--dot-space) - var(--dot-size)), transparent 1%),
+        linear-gradient(variables.$light calc(var(--dot-space) - var(--dot-size)), transparent 1%);
+    background-position: center, center;
+    background-size: var(--dot-space) var(--dot-space), var(--dot-space) var(--dot-space);
+    background-color: variables.$dark;
 
     &:before {
         content: '';
@@ -460,10 +469,12 @@ pagination
         left: 150%;
         --dot-size: 2px;
         --dot-space: 10px;
-        background:
-            linear-gradient(90deg, $light calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
-            linear-gradient($light calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
-            $dark;
+        background-image:
+            linear-gradient(90deg, variables.$light calc(var(--dot-space) - var(--dot-size)), transparent 1%),
+            linear-gradient(variables.$light calc(var(--dot-space) - var(--dot-size)), transparent 1%);
+        background-position: center, center;
+        background-size: var(--dot-space) var(--dot-space), var(--dot-space) var(--dot-space);
+        background-color: variables.$dark;
     }
 
     @media screen and (max-width: 1200px) {
@@ -483,11 +494,11 @@ top panel
     align-items: center;
     justify-content: space-between;
     height: 80px;
-    transition: $tr;
+    transition: variables.$tr;
     transition-delay: 0s;
 
     &.cyril-tp-inner {
-        background: $light;
+        background: variables.$light;
 
         &::before,
         &::after {
@@ -497,7 +508,7 @@ top panel
             right: 0;
             top: -20px;
             height: 20px;
-            background: $light;
+            background: variables.$light;
             z-index: -1;
         }
 
@@ -529,8 +540,8 @@ top panel
         color: var(--color-text);
         border-bottom: solid 2px var(--color-frame);
         border-right: solid 2px var(--color-frame);
-        text-shadow: 3px 3px 0px $soft;
-        transition: $tr;
+        text-shadow: 3px 3px 0px variables.$soft;
+        transition: variables.$tr;
 
         &::before,
         &::after {
@@ -551,7 +562,7 @@ top panel
         }
 
         &:hover {
-            color: $accent;
+            color: variables.$accent;
         }
 
         // Disabled state
@@ -625,20 +636,20 @@ top panel
                     font-weight: 700;
                     text-transform: uppercase;
                     white-space: nowrap;
-                    transition: $tr;
+                    transition: variables.$tr;
 
                     @media screen and (max-width: 768px) {
                         font-size: 14px;
                     }
 
                     &:hover {
-                        color: $accent;
+                        color: variables.$accent;
                     }
                 }
 
                 &.cyril-active {
                     &>a {
-                        color: $accent;
+                        color: variables.$accent;
                         cursor: default;
                     }
 
@@ -666,7 +677,7 @@ top panel
                     flex-direction: column;
                     border: solid 2px var(--color-soft);
                     background-color: var(--color-light);
-                    transition: $tr;
+                    transition: variables.$tr;
 
                     & li {
                         margin: 0;
@@ -701,10 +712,10 @@ top panel
     }
 
     @media screen and (max-width: 1200px) {
-        background-color: $light;
+        background-color: variables.$light;
 
         &.cyril-active {
-            background-color: $light;
+            background-color: variables.$light;
             box-shadow: 0 20px 20px 0 var(--color-light);
             box-shadow: none;
         }
@@ -726,7 +737,7 @@ social panel
     align-items: center;
     height: 80px;
     padding: 0 30px;
-    border-top: solid 2px $dark;
+    border-top: solid 2px variables.$dark;
 
     &::after {
         content: '';
@@ -734,7 +745,7 @@ social panel
         left: 7px;
         top: 5px;
         right: -5px;
-        border-bottom: 2px solid $soft;
+        border-bottom: 2px solid variables.$soft;
     }
 
     & ul {
@@ -754,10 +765,10 @@ social panel
                 text-transform: uppercase;
                 text-decoration: none;
                 color: var(--color-text);
-                transition: $tr;
+                transition: variables.$tr;
 
                 &:hover {
-                    color: $accent;
+                    color: variables.$accent;
                 }
             }
         }
@@ -773,7 +784,7 @@ social panel
     padding: 0 50px;
     border: solid 2px var(--color-frame);
     border-width: 0 0 2px 0;
-    transition: $tr;
+    transition: variables.$tr;
     pointer-events: all;
     z-index: 101;
     background: none;
@@ -794,7 +805,7 @@ social panel
         font-size: 20px;
         width: 30px;
         color: var(--color-text);
-        transition: $tr;
+        transition: variables.$tr;
         text-align: center;
     }
 
@@ -807,8 +818,8 @@ social panel
 
         &::after {
             top: 5px;
-            border-top: 2px solid $soft;
-            border-right: 2px solid $soft;
+            border-top: 2px solid variables.$soft;
+            border-right: 2px solid variables.$soft;
             width: 100%;
         }
     }
@@ -834,7 +845,7 @@ footer
     display: flex;
     align-items: center;
     justify-content: space-between;
-    transition: $tr;
+    transition: variables.$tr;
 
     &.cyril-bp-inner {
 
@@ -846,7 +857,7 @@ footer
             bottom: -20px;
             top: auto;
             height: 20px;
-            background: $light;
+            background: variables.$light;
             z-index: -1;
         }
     }
@@ -894,8 +905,8 @@ footer
 
                 & a {
                     text-decoration: none;
-                    color: $dark;
-                    transition: $tr;
+                    color: variables.$dark;
+                    transition: variables.$tr;
                     line-height: 0;
                     pointer-events: all;
                     padding: 10px 15px;
@@ -906,7 +917,7 @@ footer
                     }
 
                     &:hover {
-                        color: $accent;
+                        color: variables.$accent;
                     }
                 }
             }
@@ -915,14 +926,14 @@ footer
         & a {
             text-decoration: none;
             font-size: 16px;
-            color: $dark;
-            transition: $tr;
-            background: $light;
+            color: variables.$dark;
+            transition: variables.$tr;
+            background: variables.$light;
             display: inline-block;
             padding: 0 15px;
 
             &:hover {
-                color: $accent;
+                color: variables.$accent;
             }
 
             & i {
@@ -996,7 +1007,7 @@ footer
 
     @media screen and (max-width: 1200px) {
         position: fixed;
-        background: $light;
+        background: variables.$light;
         width: 100%;
         overscroll-behavior: none;
         -webkit-overflow-scrolling: auto;
@@ -1208,7 +1219,7 @@ skills
 }
 
 .cyril-progress-track {
-    border-bottom: solid 2px $soft;
+    border-bottom: solid 2px variables.$soft;
     padding: 5px 0;
     margin-left: 7px;
 
@@ -1216,8 +1227,8 @@ skills
         position: relative;
         left: -7px;
         height: 10px;
-        border-bottom: solid 2px $accent;
-        border-right: solid 2px $accent;
+        border-bottom: solid 2px variables.$accent;
+        border-right: solid 2px variables.$accent;
 
         & .cyril-upper {
             position: absolute;
@@ -1239,7 +1250,7 @@ iconbox
 
     a {
         text-decoration: none;
-        color: $dark;
+        color: variables.$dark;
     }
 
     & .cyril-text-icon {
@@ -1258,7 +1269,7 @@ iconbox
             position: absolute;
             left: -10px;
             top: -10px;
-            background: $softer;
+            background: variables.$softer;
             width: 100%;
             height: 100%;
             z-index: -2;
@@ -1279,10 +1290,12 @@ iconbox
             right: -20px;
             --dot-size: 2px;
             --dot-space: 10px;
-            background:
-                linear-gradient(90deg, $light calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
-                linear-gradient($light calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
-                $dark;
+            background-image:
+                linear-gradient(90deg, variables.$light calc(var(--dot-space) - var(--dot-size)), transparent 1%),
+                linear-gradient(variables.$light calc(var(--dot-space) - var(--dot-size)), transparent 1%);
+            background-position: center, center;
+            background-size: var(--dot-space) var(--dot-space), var(--dot-space) var(--dot-space);
+            background-color: variables.$dark;
             opacity: 0.3;
         }
 
@@ -1333,7 +1346,7 @@ experience
 .cyril-timeline-nav {
     position: relative;
     padding: 60px 0 60px 60px;
-    border-left: solid 2px $dark;
+    border-left: solid 2px variables.$dark;
 
     &::after {
         content: '';
@@ -1341,13 +1354,13 @@ experience
         top: 7px;
         bottom: -5px;
         left: 5px;
-        border-left: 2px solid $soft;
+        border-left: 2px solid variables.$soft;
     }
 
     @media screen and (max-width: 1200px) {
         margin-top: 30px;
         border: none;
-        border-top: solid 2px $dark;
+        border-top: solid 2px variables.$dark;
         padding: 0;
         padding-top: 30px;
         display: flex;
@@ -1407,18 +1420,18 @@ experience
         height: 60px;
         border: solid 2px var(--color-frame);
         display: flex;
-        color: $dark;
+        color: variables.$dark;
         justify-content: center;
         align-items: center;
         box-shadow: 6px 6px 0 0 var(--color-frameshadow);
-        transition: $tr;
+        transition: variables.$tr;
 
         &.swiper-button-disabled {
             opacity: .2;
         }
 
         &:hover {
-            box-shadow: 0px 0px 0 0 $soft;
+            box-shadow: 0px 0px 0 0 variables.$soft;
         }
 
         @media screen and (max-width: 450px) {
@@ -1493,14 +1506,14 @@ experience
                 line-height: 100%;
                 text-transform: uppercase;
                 font-weight: 600;
-                transition: $tr;
+                transition: variables.$tr;
 
                 &:hover {
-                    color: $accent;
+                    color: variables.$accent;
                 }
 
                 &.cyril-current {
-                    color: $accent;
+                    color: variables.$accent;
 
                     &::after {
                         content: '';
@@ -1573,7 +1586,7 @@ experience
                     padding: 3px 15px;
 
                     &.cyril-current {
-                        border-color: $accent;
+                        border-color: variables.$accent;
 
                         &:after {
                             display: none;
@@ -1618,26 +1631,26 @@ experience
                 cursor: pointer;
                 width: 60px;
                 height: 60px;
-                border: solid 2px $dark;
+                border: solid 2px variables.$dark;
                 font-weight: 600;
                 font-size: 14px;
-                color: $dark;
+                color: variables.$dark;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                box-shadow: 6px 6px 0 0 $soft;
-                transition: $tr;
+                box-shadow: 6px 6px 0 0 variables.$soft;
+                transition: variables.$tr;
 
                 &:hover {
-                    box-shadow: 0px 0px 0 0 $soft;
+                    box-shadow: 0px 0px 0 0 variables.$soft;
                 }
             }
 
             &.cyril-active {
                 & a {
-                    background-color: $accent;
-                    color: $light;
-                    border-color: $accent;
+                    background-color: variables.$accent;
+                    color: variables.$light;
+                    border-color: variables.$accent;
                 }
             }
         }
@@ -1673,10 +1686,10 @@ experience
         top: 12px;
         right: -12px;
         bottom: -12px;
-        border: 2px solid $dark;
+        border: 2px solid variables.$dark;
         pointer-events: none;
         transform: scale(1);
-        transition: $tr;
+        transition: variables.$tr;
     }
 
     & img {
@@ -1703,10 +1716,10 @@ experience
         & a {
             text-decoration: none;
             color: inherit;
-            transition: $tr;
+            transition: variables.$tr;
 
             &:hover {
-                color: $accent;
+                color: variables.$accent;
             }
         }
     }
@@ -1746,6 +1759,9 @@ portfolio
 
         &.cyril-25 {
             width: 25%;
+        }
+        a {
+            text-decoration: none;
         }
     }
 
@@ -1793,7 +1809,7 @@ portfolio
             border: 2px solid var(--color-frame);
             pointer-events: none;
             transform: scale(1);
-            transition: $tr;
+            transition: variables.$tr;
         }
 
         & img {
@@ -1805,7 +1821,7 @@ portfolio
             object-fit: cover;
             object-position: center;
             transform: scale(1);
-            transition: $tr;
+            transition: variables.$tr;
             filter: grayscale(100%) brightness(180%) contrast(120%);
 
             @media screen and (max-width: 1200px) {
@@ -1831,21 +1847,21 @@ portfolio
             width: 80px;
             height: 80px;
             margin: 0 0 10px;
-            background-color: $accent;
+            background-color: variables.$accent;
             border-radius: 50%;
-            color: $light;
+            color: variables.$light;
             font-family: var(--font-atkinson);
             font-size: 12px;
             text-transform: uppercase;
             text-shadow: none;
             z-index: 1;
             // transform: scale(1), translate(0,0);
-            transition: $tr;
+            transition: variables.$tr;
         }
 
         &.case-study-coming-soon {
             & h3 {
-                background-color: $dark;
+                background-color: variables.$dark;
             }
         }
 
@@ -1872,7 +1888,7 @@ portfolio
             align-items: center;
             justify-content: center;
             box-shadow: 6px 6px 0 0 var(--color-accent-light);
-            transition: $tr;
+            transition: variables.$tr;
             transform: translate(-50%, -50%);
 
             & svg,
@@ -1881,11 +1897,11 @@ portfolio
                 color: var(--color-light);
                 stroke: var(--color-light);
                 transform: translateY(10px) scale(.6);
-                transition: $tr;
+                transition: variables.$tr;
             }
 
             &:hover {
-                box-shadow: 0 0 0 0 $soft;
+                box-shadow: 0 0 0 0 variables.$soft;
             }
 
             @media screen and (max-width: 1200px) {
@@ -1911,7 +1927,7 @@ portfolio
                     font-weight: 600;
                     letter-spacing: 0.5px;
                     line-height: 1.25;
-                    color: $accent;
+                    color: variables.$accent;
                 }
 
                 @media screen and (max-width: 1200px) {
@@ -1965,6 +1981,7 @@ portfolio
         & h4 {
             margin-top: 0;
             margin-bottom: 0;
+            color: variables.$dark;
         }
     }
 
@@ -2009,7 +2026,7 @@ portfolio
             position: absolute;
             left: -12px;
             top: -12px;
-            background-color: $softer;
+            background-color: variables.$softer;
             width: 100%;
             height: 100%;
             z-index: -2;
@@ -2032,15 +2049,15 @@ back to top
     height: 60px;
     border: solid 2px var(--color-frame);
     display: flex;
-    color: $dark;
+    color: variables.$dark;
     justify-content: center;
     align-items: center;
     box-shadow: 6px 6px 0 0 var(--color-frameshadow);
-    transition: $tr;
+    transition: variables.$tr;
     opacity: 0;
     visibility: hidden;
     z-index: 999;
-    background: $light;
+    background: variables.$light;
     pointer-events: all;
 
     &.visible {
@@ -2060,7 +2077,7 @@ back to top
     }
 
     &:hover {
-        box-shadow: 0px 0px 0 0 $soft;
+        box-shadow: 0px 0px 0 0 variables.$soft;
     }
 
     @media screen and (max-width: 768px) {
@@ -2081,7 +2098,7 @@ back to top
     // padding: 10px;
     box-shadow: 7px 7px 0px 0px rgba(16, 16, 16, 0.18);
     // border: solid 2px #101010;
-    transition: box-shadow $tr;
+    transition: box-shadow variables.$tr;
 
     img {
         width: 100%;
@@ -2103,8 +2120,8 @@ back to top
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 6px 6px 0 0 $soft;
-        transition: $tr;
+        box-shadow: 6px 6px 0 0 variables.$soft;
+        transition: variables.$tr;
         transform: translate(-50%, -50%);
 
         & svg,
@@ -2117,11 +2134,11 @@ back to top
 
     &:hover {
         cursor: pointer;
-        box-shadow: 0 0 0 0 $soft;
+        box-shadow: 0 0 0 0 variables.$soft;
 
         & .cyril-hover-link {
             cursor: pointer;
-            box-shadow: 0 0 0 0 $soft;
+            box-shadow: 0 0 0 0 variables.$soft;
         }
     }
 
@@ -2140,7 +2157,7 @@ back to top
 .cyril-video {
     width: 100%;
     height: 100%;
-    border: solid 2px $dark;
+    border: solid 2px variables.$dark;
     box-shadow: 7px 7px 0px 0px rgba(16, 16, 16, 0.18);
 }
 
@@ -2151,3 +2168,5 @@ back to top
     }
 
 }
+
+// 05/07

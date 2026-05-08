@@ -1,3 +1,6 @@
+@use "sass:math";
+@use 'variables';
+
 .cyril-pagination {
     z-index: 999;
 }
@@ -170,24 +173,24 @@ main
 @keyframes fadeIn {
     from {
         opacity: 0;
-        background-color: $light-gray;
+        background-color: variables.$light-gray;
     }
 
     to {
         opacity: 1;
-        background-color: $light;
+        background-color: variables.$light;
     }
 }
 
 @keyframes fadeOut {
     from {
         opacity: 1;
-        background-color: $light;
+        background-color: variables.$light;
     }
 
     to {
         opacity: 0;
-        background-color: $light-gray;
+        background-color: variables.$light-gray;
     }
 }
 
@@ -228,11 +231,11 @@ main
 }
 
 ::-webkit-scrollbar-track {
-    background: $soft;
+    background: variables.$soft;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: $accent;
+    background: variables.$accent;
 }
 
 .container-full {
@@ -254,12 +257,12 @@ body {
     font-size: 18px;
     font-weight: 400;
     line-height: 170%;
-    color: $dark;
+    color: variables.$dark;
     overscroll-behavior: none;
     -webkit-font-smoothing: antialiased;
     -webkit-text-size-adjust: 100%;
     -webkit-overflow-scrolling: touch; // for iOS smooth scrolling
-    background-color: $light;
+    background-color: variables.$light;
     opacity: 0;
     animation: fadeIn 1s cubic-bezier(0.4, 0, 0.4, 1) forwards;
 
@@ -331,7 +334,7 @@ body {
 }
 
 p {
-    color: $gray;
+    color: variables.$gray;
 
     &.subheader {
         font-size: 20px;
@@ -347,7 +350,7 @@ p {
 h1 {
     line-height: 0.85em;
     font-size: 160px;
-    text-shadow: 5px 5px 0px $soft;
+    text-shadow: 5px 5px 0px variables.$soft;
 
     @media screen and (max-width: 1400px) {
         line-height: 100%;
@@ -372,7 +375,7 @@ h2 {
     font-family: var(--font-atkinson);
     font-size: 58px;
     text-transform: uppercase;
-    text-shadow: 5px 5px 0px $soft;
+    text-shadow: 5px 5px 0px variables.$soft;
     line-height: 100%;
 
     @media screen and (max-width: 1400px) {
@@ -387,7 +390,7 @@ h2 {
 h3 {
     line-height: 100%;
     font-size: 40px;
-    text-shadow: 5px 5px 0px $soft;
+    text-shadow: 5px 5px 0px variables.$soft;
 
     @media screen and (max-width: 1400px) {
         font-size: 30px;
@@ -467,7 +470,7 @@ h4 {
     line-height: 1.5em;
     text-transform: uppercase;
     font-weight: 600;
-    color: $dark;
+    color: variables.$dark;
 
     i {
         margin-right: 10px;
@@ -489,11 +492,11 @@ h4 {
 }
 
 .cyril-accent {
-    color: $accent;
+    color: variables.$accent;
 }
 
 .cyril-dark {
-    color: $dark;
+    color: variables.$dark;
 }
 
 .cyril-left-offset {
@@ -563,7 +566,7 @@ h4 {
         justify-content: flex-start;
         align-items: center;
         margin-bottom: 10px;
-        color: $gray;
+        color: variables.$gray;
 
         &:before {
             content: '';
@@ -571,7 +574,7 @@ h4 {
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background-color: $accent;
+            background-color: variables.$accent;
             margin-right: 15px;
         }
     }
@@ -579,7 +582,7 @@ h4 {
 
 blockquote {
     font-style: italic;
-    color: $gray;
+    color: variables.$gray;
     display: flex;
     align-items: flex-start;
 
@@ -590,7 +593,7 @@ blockquote {
         margin-right: 30px;
         font-size: 36px;
         font-weight: 600;
-        color: $accent;
+        color: variables.$accent;
     }
 }
 
@@ -663,7 +666,7 @@ button
     white-space: nowrap;
     width: auto;
     display: inline-flex;
-    background-color: $accent;
+    background-color: variables.$accent;
     height: 60px;
     padding: 0 40px;
     align-items: center;
@@ -672,32 +675,32 @@ button
     font-weight: 700;
     font-size: 16px;
     text-decoration: none;
-    border: solid 2px $accent;
-    color: $light;
-    box-shadow: 7px 7px 0px 0px $accent-light;
-    transition: $tr;
+    border: solid 2px variables.$accent;
+    color: variables.$light;
+    box-shadow: 7px 7px 0px 0px variables.$accent-light;
+    transition: variables.$tr;
     cursor: pointer;
 
     &.cyril-type-2 {
         border-color: var(--color-frame);
-        background-color: $light;
-        color: $dark;
+        background-color: variables.$light;
+        color: variables.$dark;
         box-shadow: 7px 7px 0px 0px var(--color-frameshadow);
 
         &:hover {
-            box-shadow: 0px 0px 0px 0px $soft;
+            box-shadow: 0px 0px 0px 0px variables.$soft;
         }
     }
 
     &.cyril-type-3 {
-        background-color: $dark;
-        border-color: $dark;
-        color: $light;
-        box-shadow: 7px 7px 0px 0px $soft;
+        background-color: variables.$dark;
+        border-color: variables.$dark;
+        color: variables.$light;
+        box-shadow: 7px 7px 0px 0px variables.$soft;
     }
 
     &:hover {
-        box-shadow: 0px 0px 0px 0px $accent-light;
+        box-shadow: 0px 0px 0px 0px variables.$accent-light;
     }
 
     @media screen and (max-width: 768px) {
@@ -960,7 +963,7 @@ ul {
     font-family: var(--font-atkinson);
     font-size: 13px;
     font-weight: 900;
-    background: $light;
+    background: variables.$light;
 
     &.show {
         opacity: 1;
@@ -972,7 +975,7 @@ ul {
         padding: 2px 15px;
 
         & .fa-heart {
-            color: $accent;
+            color: variables.$accent;
             position: relative;
             top: 1px;
             display: inline-block;
@@ -1022,7 +1025,7 @@ text set in the data-text attribute. */
 		// Scoots text slightly to the left for the color offset.
 		left: 2px;
 		// Creates the color 'shadow' that happens on the glitch.
-		text-shadow: -2px 0 $accent;
+		text-shadow: -2px 0 variables.$accent;
 		/* Creates an initial clip for our glitch. This works in
 		a typical top,right,bottom,left fashion and creates a mask
 		to only show a certain part of the glitch at a time. */
@@ -1036,7 +1039,7 @@ text set in the data-text attribute. */
 	&::after {
 		@include glitchCopy;
 		left: -2px;
-		text-shadow: -2px 0 #00fff9, 2px 2px $accent;
+		text-shadow: -2px 0 #00fff9, 2px 2px variables.$accent;
 		animation: glitch-anim2 1s infinite linear alternate-reverse;
 	}
 }
@@ -1048,9 +1051,9 @@ skew to change the 'thickness' of the glitch.*/
 @keyframes glitch-anim {
   $steps: 20;
   @for $i from 0 through $steps {
-    #{percentage($i*(1/$steps))} {
-      clip: rect(random(400)+px, 9999px, random(400)+px, 0);
-			transform: skew((random(100) / 100) + deg);
+    #{math.percentage(math.div($i, $steps))} {
+      clip: rect(math.random(400)+px, 9999px, math.random(400)+px, 0);
+			transform: skew(math.div(math.random(100), 100) + deg);
     }
   }
 }
@@ -1059,9 +1062,11 @@ skew to change the 'thickness' of the glitch.*/
 @keyframes glitch-anim2 {
   $steps: 20;
   @for $i from 0 through $steps {
-    #{percentage($i*(1/$steps))} {
-      clip: rect(random(100)+px, 9999px, random(100)+px, 0);
-			transform: skew((random(100) / 100) + deg);
+    #{math.percentage(math.div($i, $steps))} {
+      clip: rect(math.random(100)+px, 9999px, math.random(100)+px, 0);
+			transform: skew(math.div(math.random(100), 100) + deg);
     }
   }
 }
+
+// 05/07
