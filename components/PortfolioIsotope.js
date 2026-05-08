@@ -138,7 +138,7 @@ const PortfolioIsotope = () => {
 
           {/* long . gty v.9 */}
           <div id="gty9" data-project="gty9" className="cyril-grid-item fil-uix">
-            <Link legacyBehavior href="/portfolio/gty_v9">
+            <Link href="/portfolio/gty_v9">
               <div className="cyril-portfolio-item cyril-long-item cyril-mb-80">
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_gty9.jpg" alt="Thumb - GTY Website, v.9" />
@@ -160,7 +160,7 @@ const PortfolioIsotope = () => {
 
           {/* wide . the study bible app */}
           <div id="thestudybibleapp" data-project="thestudybibleapp" className="cyril-grid-item fil-uix">
-            <Link legacyBehavior href="/portfolio/the-study-bible-app">
+            <Link href="/portfolio/the-study-bible-app">
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_the-study-bible-app.jpg" alt="Thumb - The Study Bible App" />
@@ -179,7 +179,7 @@ const PortfolioIsotope = () => {
 
           {/* long . gty v8 */}
           <div id="gty8" data-project="gty8"  className="cyril-grid-item fil-uix">
-            <Link legacyBehavior href="/portfolio/gty_v8">
+            <Link href="/portfolio/gty_v8">
               <div className="cyril-portfolio-item cyril-long-item cyril-mb-80">
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_gty8.jpg" alt="Thumb - GTY Website, v.8" />
@@ -200,7 +200,7 @@ const PortfolioIsotope = () => {
 
           {/* square . truth matters podcast */}
           <div id="truthmatters" data-project="truthmatters" className="cyril-grid-item fil-branding fil-uix">
-            <Link legacyBehavior href="/portfolio/truth-matters">
+            <Link href="/portfolio/truth-matters">
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover truth-matters">
                   <img src="/img/portfolio/thumb_truth-matters-podcast-2.jpg" alt="Thumb - Truth Matters Podcast" />
@@ -219,7 +219,7 @@ const PortfolioIsotope = () => {
 
           {/* square . gracestream */}
           <div id="gracestream" data-project="gracestream" className="cyril-grid-item fil-branding fil-uix">
-            <Link legacyBehavior href="/portfolio/grace-stream">
+            <Link href="/portfolio/grace-stream">
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_grace-stream.jpg" alt="Thumb - Grace Stream" />
@@ -238,7 +238,7 @@ const PortfolioIsotope = () => {
 
           {/* square . (branding) study bible app */}
           <div id="thestudybibleapplogo" data-project="thestudybibleapplogo" className="cyril-grid-item fil-branding">
-            <Link legacyBehavior href="/portfolio/the-study-bible-app-logo">
+            <Link href="/portfolio/the-study-bible-app-logo">
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_study-bible-app-logo-2.jpg" alt="Thumb - The Study Bible App Logo" />
@@ -257,7 +257,7 @@ const PortfolioIsotope = () => {
 
           {/* long . sekihmentis */}
           <div id="sekihmentis" data-project="sekihmentis" className="cyril-grid-item fil-illustration">
-            <Link legacyBehavior href="/portfolio/sekihmentis">
+            <Link href="/portfolio/sekihmentis">
               <div className="cyril-portfolio-item cyril-long-item cyril-mb-80">
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_sekihmentis.jpg" alt="Thumb - SekihMentis" />
@@ -275,7 +275,7 @@ const PortfolioIsotope = () => {
 
           {/* wide . gty dashboard */}
           <div id="gtydashboard" data-project="gtydashboard" className="cyril-grid-item fil-uix">
-            <Link legacyBehavior href="/portfolio/gty-dashboard">
+            <Link href="/portfolio/gty-dashboard">
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_gty-dashboard.jpg" alt="Thumb - GTY Dashboard" />
@@ -293,7 +293,7 @@ const PortfolioIsotope = () => {
 
           {/* wide . gty app . */}
           <div id="gtyapplanding" data-project="gtyapplanding" className="cyril-grid-item fil-uix">
-            <Link legacyBehavior href="/portfolio/gty-app-landing">
+            <Link href="/portfolio/gty-app-landing">
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_gty-app-landing.jpg" alt="Thumb - GTY App Landing Page" />
@@ -311,7 +311,7 @@ const PortfolioIsotope = () => {
 
           {/* square . illustration . he took my place */}
           <div id="hetookmyplace" data-project="hetookmyplace"  className="cyril-grid-item fil-illustration">
-            <Link legacyBehavior href="/portfolio/he-took-my-place">
+            <Link href="/portfolio/he-took-my-place">
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_he-took-my-place.jpg" alt="Thumb - He Took My Place" />
@@ -335,7 +335,7 @@ const PortfolioIsotope = () => {
 
           {/* wide . marketing . blog graphics */}
           <div id="gtyblog" data-project="gtyblog" className="cyril-grid-item fil-marketing">
-            <Link legacyBehavior href="/portfolio/gty-blog-graphics">
+            <Link href="/portfolio/gty-blog-graphics">
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_gty-blog.jpg" alt="Thumb - GTY Blog Graphics" />
@@ -353,7 +353,7 @@ const PortfolioIsotope = () => {
 
           {/* wide . gty resources */}
           <div id="gtyresources" data-project="gtyresources" className="cyril-grid-item fil-marketing">
-            <Link legacyBehavior href="/portfolio/gty-resources">
+            <Link href="/portfolio/gty-resources">
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_gty-resources.jpg" alt="Thumb - GTY Resources" />
@@ -371,7 +371,7 @@ const PortfolioIsotope = () => {
 
           {/* square . social media graphics */}
           <div id="gtysocialmedia" data-project="gtysocialmedia" className="cyril-grid-item fil-marketing">
-            <Link legacyBehavior href="/portfolio/gty-social-media-graphics">
+            <Link href="/portfolio/gty-social-media-graphics">
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_gty-social-media.jpg" alt="Thumb - GTY Social Media Graphics" />
@@ -389,7 +389,7 @@ const PortfolioIsotope = () => {
 
           {/* square . patricia macarthur */}
           <div id="patriciamacarthur" data-project="patriciamacarthur" className="cyril-grid-item fil-branding fil-illustration">
-            <Link legacyBehavior href="/portfolio/patricia-macarthur-pastoral-care-fund">
+            <Link href="/portfolio/patricia-macarthur-pastoral-care-fund">
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
                   <img src="/img/portfolio/thumb_patricia-macarthur-pastoral-fund.jpg" alt="Thumb - The Patricia MacArthur Pastoral Care Fund Logo" />

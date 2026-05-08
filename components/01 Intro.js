@@ -25,21 +25,17 @@ const Banner = ( { bgImage = "img/cyril-profile-serious-lol.png" } ) => {
                     <strong><span className="cyril-accent">Designer</span></strong> and <strong><span className="cyril-accent">Developer</span></strong>
                   </p>
                   <div className="cyril-buttons-frame">
-                    <a 
-                      href="/portfolio" 
-                      className="cyril-button" 
-                      onClick={(e) => {
+                    <Link href="/portfolio" className="cyril-button" onClick={(e) => {
                         e.preventDefault();
                         document.body.classList.add('page-exit');
                         setTimeout(() => {
                           window.location.href = '/portfolio';
                         }, 400);
-                      }}
-                    >
+                      }}>
                       See My Work
-                    </a>
-                    <Link legacyBehavior href="mailto:cyril.florita@pm.me">
-                      <a className="cyril-button cyril-type-3">Email Me</a>
+                    </Link>
+                    <Link href="mailto:cyril.florita@pm.me" className="cyril-button cyril-type-3">
+                      Email Me
                     </Link>
                   </div>
                 </div>
