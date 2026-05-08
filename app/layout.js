@@ -1,5 +1,6 @@
 import "@css/plugins/bootstrap-grid.css";
 import { Atkinson_Hyperlegible, Space_Grotesk } from "next/font/google";
+import Script from "next/script";
 
 import "@css/plugins/magnific-popup.css";
 import "@css/plugins/swiper.min.css";
@@ -47,6 +48,23 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${space_grotest.variable} ${atkinson.variable}`} suppressHydrationWarning={true}>
       <body className="cyril-custom-scroll" suppressHydrationWarning={true}>
+        {/* Google Analytics */}
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=G-QQM967TF9Z"
+        />
+        <Script
+          id="google-analytics-script"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-QQM967TF9Z');
+            `,
+          }}
+        />
         <ClientThemeProvider>{children}</ClientThemeProvider>
       </body>
     </html>
