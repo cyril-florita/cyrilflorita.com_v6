@@ -14,7 +14,7 @@ const Experience = () => {
       />
       <div className="container">
         <p className="cyril-upper subheader">
-        &#91; My <span className="cyril-accent">career</span> &#93;
+          &#91; My <span className="cyril-accent">career</span> &#93;
         </p>
         <h2 className="cyril-up glitch" data-text="Experience">Experience</h2>
 
@@ -109,7 +109,7 @@ const Experience = () => {
                       </div>
                     </div>
                   </SwiperSlide>
-                 
+
                   <SwiperSlide className="swiper-slide">
                     <div className="cyril-icon-box cyril-type-2">
                       <div className="cyril-box-text">
@@ -178,7 +178,7 @@ const Experience = () => {
                     <div className="cyril-icon-box cyril-type-2">
                       <div className="cyril-box-text">
                         <p className="cyril-upper cyril-text-lg cyril-mb-15 cyril-accent">
-                        Quality Assurance Tester &amp; Graphic Designer
+                          Quality Assurance Tester &amp; Graphic Designer
                         </p>
                         <p className="cyril-upper cyril-mb-30 cyril-text-normal">
                           Mar 2006 &mdash; Oct 2006  &#40;<span>7 months</span>&#41;
@@ -241,7 +241,7 @@ const Experience = () => {
             </div>
           </div>
         </div>
-        
+
       </div>
     </div>
   );

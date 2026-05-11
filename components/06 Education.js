@@ -14,8 +14,6 @@ const Education = () => {
           <h2 className="cyril-up cyril-mb-50 glitch" data-text="Education">Education</h2>
         </div>
 
-
-
         <div className="row">
           <div className="offset-xl-1 col-xl-5 cyril-mb-30">
             <div className="cyril-icon-box">

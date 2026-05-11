@@ -197,11 +197,8 @@ export const cyrilUtility = {
         }
       }
     };
-
     window.addEventListener('load', setEqualHeight);
     window.addEventListener('resize', setEqualHeight);
-
-    // Initial call
-    setEqualHeight();
+    setEqualHeight(); // Initial call
   }
 };

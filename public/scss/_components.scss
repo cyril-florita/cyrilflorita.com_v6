@@ -2,9 +2,7 @@
 @use 'variables';
 
 /* -------------------------------------------
-
 frame
-
 ------------------------------------------- */
 .cyril-frame {
     margin: 10px;
@@ -409,8 +407,8 @@ pagination
     --dot-size: 2px;
     --dot-space: 10px;
     background-image:
-                linear-gradient(90deg, variables.$light calc(var(--dot-space) - var(--dot-size)), transparent 1%),
-                linear-gradient(variables.$light calc(var(--dot-space) - var(--dot-size)), transparent 1%);
+        linear-gradient(90deg, variables.$light calc(var(--dot-space) - var(--dot-size)), transparent 1%),
+        linear-gradient(variables.$light calc(var(--dot-space) - var(--dot-size)), transparent 1%);
     background-position: center, center;
     background-size: var(--dot-space) var(--dot-space), var(--dot-space) var(--dot-space);
     background-color: variables.$dark;
@@ -954,7 +952,7 @@ footer
         }
 
         @media screen and (max-width: 1024px) {
-            
+
             border: solid 2px var(--color-frame);
             border-width: 2px 0 2px 2px;
 
@@ -973,12 +971,14 @@ footer
             ul {
                 li {
                     font-size: 18px;
+
                     a {
                         padding-left: 17px;
-                        padding-right: 17px; 
+                        padding-right: 17px;
                     }
                 }
             }
+
             // margin-left: 10px;
 
             & i {
@@ -992,7 +992,7 @@ footer
         }
 
         @media screen and (max-width: 390px) {
-            
+
             ul {
                 li {
                     a {
@@ -1760,6 +1760,7 @@ portfolio
         &.cyril-25 {
             width: 25%;
         }
+
         a {
             text-decoration: none;
         }
@@ -2095,9 +2096,7 @@ back to top
 
 .cyril-project-figure {
     display: block;
-    // padding: 10px;
     box-shadow: 7px 7px 0px 0px rgba(16, 16, 16, 0.18);
-    // border: solid 2px #101010;
     transition: box-shadow variables.$tr;
 
     img {
@@ -2143,7 +2142,6 @@ back to top
     }
 
     @media screen and (max-width: 768px) {
-        // width: 75%;
         margin: 20px auto;
     }
 }
@@ -2151,7 +2149,6 @@ back to top
 .cyril-video-container {
     position: relative;
     width: 100%;
-    // padding-bottom: 56.25%; /* 16:9 */
 }
 
 .cyril-video {
@@ -2168,5 +2165,3 @@ back to top
     }
 
 }
-
-// 05/07 v.1

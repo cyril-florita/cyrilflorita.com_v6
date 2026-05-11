@@ -20,13 +20,13 @@ const Nav = () => {
   // Update handleIntroClick to match Header.js behavior
   const handleIntroClick = async (e) => {
     e.preventDefault();
-    
+
     if (pathname !== '/') {
-        await cyrilUtility.handlePageTransition();
-        window.location.href = '/';
-        return;
+      await cyrilUtility.handlePageTransition();
+      window.location.href = '/';
+      return;
     }
-    
+
     const sections = document.querySelectorAll(".cyril-section");
     const introSection = document.querySelector("#intro");
 
@@ -73,8 +73,6 @@ const Nav = () => {
     }
   }, [pathname]);
 
-  // Remove handleAboutClick function as it's redundant
-
   return (
     <Fragment>
       <nav>
@@ -89,8 +87,8 @@ const Nav = () => {
             </a>
           </li>
           <li className={pathname == "/portfolio" ? "cyril-active" : ""}>
-            <a 
-              href="/portfolio" 
+            <a
+              href="/portfolio"
               onClick={async (e) => {
                 e.preventDefault();
                 await cyrilUtility.handlePageTransition();

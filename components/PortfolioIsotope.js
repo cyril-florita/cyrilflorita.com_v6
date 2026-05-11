@@ -10,46 +10,45 @@ const PortfolioIsotope = () => {
   const isotope = useRef();
   const [filterKey, setFilterKey] = useState("*");
 
-    useEffect(() => {
-      const grid = document.querySelector(".cyril-portfolio-grid");
-      if (!grid) return;
+  useEffect(() => {
+    const grid = document.querySelector(".cyril-portfolio-grid");
+    if (!grid) return;
 
-      isotope.current = new Isotope(".cyril-portfolio-grid", {
-        itemSelector: ".cyril-grid-item",
-        percentPosition: true,
-        masonry: {
-          columnWidth: ".cyril-grid-item",
-        },
-        animationOptions: {
-          duration: 750,
-          easing: "linear",
-          queue: false,
-        },
-        initLayout: false,
+    isotope.current = new Isotope(".cyril-portfolio-grid", {
+      itemSelector: ".cyril-grid-item",
+      percentPosition: true,
+      masonry: {
+        columnWidth: ".cyril-grid-item",
+      },
+      animationOptions: {
+        duration: 750,
+        easing: "linear",
+        queue: false,
+      },
+      initLayout: false,
+    });
+
+    // Error handling for imagesLoaded
+    imagesLoaded(".cyril-portfolio-grid")
+      .on('done', function () {
+        isotope.current.layout();
+      })
+      .on('fail', function () {
+        console.error('Some images failed to load');
+        isotope.current.layout(); // Layout anyway
       });
 
-      // Error handling for imagesLoaded
-      imagesLoaded(".cyril-portfolio-grid")
-        .on('done', function() {
-          isotope.current.layout();
-        })
-        .on('fail', function() {
-          console.error('Some images failed to load');
-          isotope.current.layout(); // Layout anyway
-        });
-
-      // Cleanup
-      return () => {
-        if (isotope.current) {
-          isotope.current.destroy();
-        }
-      };
-    }, []);
- 
+    // Cleanup
+    return () => {
+      if (isotope.current) {
+        isotope.current.destroy();
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (!isotope.current) return;
-    
+
     try {
       const filter = filterKey === "*" ? "*" : `.${filterKey}`;
       isotope.current.arrange({ filter });
@@ -81,8 +80,6 @@ const PortfolioIsotope = () => {
                 All
               </a>
             </li>
-
-            
 
             <li>
               <a
@@ -178,7 +175,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* long . gty v8 */}
-          <div id="gty8" data-project="gty8"  className="cyril-grid-item fil-uix">
+          <div id="gty8" data-project="gty8" className="cyril-grid-item fil-uix">
             <Link href="/portfolio/gty_v8">
               <div className="cyril-portfolio-item cyril-long-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -195,8 +192,6 @@ const PortfolioIsotope = () => {
               </div>
             </Link>
           </div>
-
-          
 
           {/* square . truth matters podcast */}
           <div id="truthmatters" data-project="truthmatters" className="cyril-grid-item fil-branding fil-uix">
@@ -310,7 +305,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* square . illustration . he took my place */}
-          <div id="hetookmyplace" data-project="hetookmyplace"  className="cyril-grid-item fil-illustration">
+          <div id="hetookmyplace" data-project="hetookmyplace" className="cyril-grid-item fil-illustration">
             <Link href="/portfolio/he-took-my-place">
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -326,12 +321,6 @@ const PortfolioIsotope = () => {
               </div>
             </Link>
           </div>
-        
-          
-          
-          
-
-          
 
           {/* wide . marketing . blog graphics */}
           <div id="gtyblog" data-project="gtyblog" className="cyril-grid-item fil-marketing">
@@ -406,6 +395,7 @@ const PortfolioIsotope = () => {
           </div>
 
         </div>{/* end of .cyril-portfolio-grid */}
+
       </div>{/* end of .container */}
 
     </Fragment>
