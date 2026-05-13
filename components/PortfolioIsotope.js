@@ -50,7 +50,10 @@ const PortfolioIsotope = () => {
     if (!isotope.current) return;
 
     try {
-      const filter = filterKey === "*" ? "*" : `.${filterKey}`;
+      let filter;
+      if (filterKey === "*") filter = "*";
+      else if (filterKey === "fil-branding-marketing-illustration") filter = ".fil-branding, .fil-marketing, .fil-illustration";
+      else filter = `.${filterKey}`;
       isotope.current.arrange({ filter });
     } catch (error) {
       console.error('Error filtering items:', error);
@@ -84,17 +87,6 @@ const PortfolioIsotope = () => {
             <li>
               <a
                 href="#"
-                data-filter=".fil-branding"
-                className={`c-pointer ${activeBtn("fil-branding")}`}
-                onClick={handleFilterKeyChange("fil-branding")}
-              >
-                Branding
-              </a>
-            </li>
-
-            <li>
-              <a
-                href="#"
                 data-filter=".fil-uix"
                 className={`c-pointer ${activeBtn("fil-uix")}`}
                 onClick={handleFilterKeyChange("fil-uix")}
@@ -106,22 +98,11 @@ const PortfolioIsotope = () => {
             <li>
               <a
                 href="#"
-                data-filter=".fil-marketing"
-                className={`c-pointer ${activeBtn("fil-marketing")}`}
-                onClick={handleFilterKeyChange("fil-marketing")}
+                data-filter=".fil-branding-marketing-illustration"
+                className={`c-pointer ${activeBtn("fil-branding-marketing-illustration")}`}
+                onClick={handleFilterKeyChange("fil-branding-marketing-illustration")}
               >
-                Marketing
-              </a>
-            </li>
-
-            <li>
-              <a
-                href="#"
-                data-filter=".fil-illustration"
-                className={`c-pointer ${activeBtn("fil-illustration")}`}
-                onClick={handleFilterKeyChange("fil-illustration")}
-              >
-                Illustration
+                Branding, Marketing, &amp; Illustration
               </a>
             </li>
           </ul>
@@ -150,6 +131,43 @@ const PortfolioIsotope = () => {
                 <div className="cyril-project-descr">
                   <p className="cyril-upper cyril-accent cyril-mb-10">UX Design</p>
                   <h4 className="cyril-up">GTY Website, v.9</h4>
+                </div>
+              </div>
+            </Link>
+          </div>
+
+          {/* square . (branding) study bible app */}
+          <div id="thestudybibleapplogo" data-project="thestudybibleapplogo" className="cyril-grid-item fil-branding">
+            <Link href="/portfolio/the-study-bible-app-logo">
+              <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
+                <div className="cyril-cover">
+                  <img src="/img/portfolio/thumb_study-bible-app-logo-2.jpg" alt="Thumb - The Study Bible App Logo" />
+                  <h3>Case<br />Study</h3>
+                  <div className="cyril-hover-link">
+                    <i className="fas fa-link" />
+                  </div>
+                </div>
+                <div className="cyril-project-descr">
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Branding</p>
+                  <h4 className="cyril-up">The Study Bible App Logo</h4>
+                </div>
+              </div>
+            </Link>
+          </div>
+
+          {/* long . sekihmentis */}
+          <div id="sekihmentis" data-project="sekihmentis" className="cyril-grid-item fil-illustration">
+            <Link href="/portfolio/sekihmentis">
+              <div className="cyril-portfolio-item cyril-long-item cyril-mb-80">
+                <div className="cyril-cover">
+                  <img src="/img/portfolio/thumb_sekihmentis.jpg" alt="Thumb - SekihMentis" />
+                  <div className="cyril-hover-link">
+                    <i className="fas fa-link" />
+                  </div>
+                </div>
+                <div className="cyril-project-descr">
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Illustration</p>
+                  <h4 className="cyril-up">SekihMentis</h4>
                 </div>
               </div>
             </Link>
@@ -193,6 +211,24 @@ const PortfolioIsotope = () => {
             </Link>
           </div>
 
+          {/* square . illustration . he took my place */}
+          <div id="hetookmyplace" data-project="hetookmyplace" className="cyril-grid-item fil-illustration">
+            <Link href="/portfolio/he-took-my-place">
+              <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
+                <div className="cyril-cover">
+                  <img src="/img/portfolio/thumb_he-took-my-place.jpg" alt="Thumb - He Took My Place" />
+                  <div className="cyril-hover-link">
+                    <i className="fas fa-link" />
+                  </div>
+                </div>
+                <div className="cyril-project-descr">
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Illustration</p>
+                  <h4 className="cyril-up">He Took My Place</h4>
+                </div>
+              </div>
+            </Link>
+          </div>
+
           {/* square . truth matters podcast */}
           <div id="truthmatters" data-project="truthmatters" className="cyril-grid-item fil-branding fil-uix">
             <Link href="/portfolio/truth-matters">
@@ -231,38 +267,19 @@ const PortfolioIsotope = () => {
             </Link>
           </div>
 
-          {/* square . (branding) study bible app */}
-          <div id="thestudybibleapplogo" data-project="thestudybibleapplogo" className="cyril-grid-item fil-branding">
-            <Link href="/portfolio/the-study-bible-app-logo">
-              <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
+          {/* wide . marketing . blog graphics */}
+          <div id="gtyblog" data-project="gtyblog" className="cyril-grid-item fil-marketing">
+            <Link href="/portfolio/gty-blog-graphics">
+              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_study-bible-app-logo-2.jpg" alt="Thumb - The Study Bible App Logo" />
-                  <h3>Case<br />Study</h3>
+                  <img src="/img/portfolio/thumb_gty-blog.jpg" alt="Thumb - GTY Blog Graphics" />
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
                   </div>
                 </div>
                 <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Branding</p>
-                  <h4 className="cyril-up">The Study Bible App Logo</h4>
-                </div>
-              </div>
-            </Link>
-          </div>
-
-          {/* long . sekihmentis */}
-          <div id="sekihmentis" data-project="sekihmentis" className="cyril-grid-item fil-illustration">
-            <Link href="/portfolio/sekihmentis">
-              <div className="cyril-portfolio-item cyril-long-item cyril-mb-80">
-                <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_sekihmentis.jpg" alt="Thumb - SekihMentis" />
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
-                </div>
-                <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Illustration</p>
-                  <h4 className="cyril-up">SekihMentis</h4>
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Marketing</p>
+                  <h4 className="cyril-up">GTY Blog Graphics</h4>
                 </div>
               </div>
             </Link>
@@ -286,6 +303,24 @@ const PortfolioIsotope = () => {
             </Link>
           </div>
 
+          {/* square . patricia macarthur */}
+          <div id="patriciamacarthur" data-project="patriciamacarthur" className="cyril-grid-item fil-branding fil-illustration">
+            <Link href="/portfolio/patricia-macarthur-pastoral-care-fund">
+              <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
+                <div className="cyril-cover">
+                  <img src="/img/portfolio/thumb_patricia-macarthur-pastoral-fund.jpg" alt="Thumb - The Patricia MacArthur Pastoral Care Fund Logo" />
+                  <div className="cyril-hover-link">
+                    <i className="fas fa-link" />
+                  </div>
+                </div>
+                <div className="cyril-project-descr">
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Illustration/Branding</p>
+                  <h4 className="cyril-up">The Patricia MacArthur Pastoral Care Fund</h4>
+                </div>
+              </div>
+            </Link>
+          </div>
+
           {/* wide . gty app . */}
           <div id="gtyapplanding" data-project="gtyapplanding" className="cyril-grid-item fil-uix">
             <Link href="/portfolio/gty-app-landing">
@@ -299,42 +334,6 @@ const PortfolioIsotope = () => {
                 <div className="cyril-project-descr">
                   <p className="cyril-upper cyril-accent cyril-mb-10">Web Design &amp; Front-End</p>
                   <h4 className="cyril-up">GTY App Landing Page</h4>
-                </div>
-              </div>
-            </Link>
-          </div>
-
-          {/* square . illustration . he took my place */}
-          <div id="hetookmyplace" data-project="hetookmyplace" className="cyril-grid-item fil-illustration">
-            <Link href="/portfolio/he-took-my-place">
-              <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
-                <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_he-took-my-place.jpg" alt="Thumb - He Took My Place" />
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
-                </div>
-                <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Illustration</p>
-                  <h4 className="cyril-up">He Took My Place</h4>
-                </div>
-              </div>
-            </Link>
-          </div>
-
-          {/* wide . marketing . blog graphics */}
-          <div id="gtyblog" data-project="gtyblog" className="cyril-grid-item fil-marketing">
-            <Link href="/portfolio/gty-blog-graphics">
-              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
-                <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_gty-blog.jpg" alt="Thumb - GTY Blog Graphics" />
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
-                </div>
-                <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Marketing</p>
-                  <h4 className="cyril-up">GTY Blog Graphics</h4>
                 </div>
               </div>
             </Link>
@@ -371,24 +370,6 @@ const PortfolioIsotope = () => {
                 <div className="cyril-project-descr">
                   <p className="cyril-upper cyril-accent cyril-mb-10">Marketing</p>
                   <h4 className="cyril-up">GTY Social Media Graphics</h4>
-                </div>
-              </div>
-            </Link>
-          </div>
-
-          {/* square . patricia macarthur */}
-          <div id="patriciamacarthur" data-project="patriciamacarthur" className="cyril-grid-item fil-branding fil-illustration">
-            <Link href="/portfolio/patricia-macarthur-pastoral-care-fund">
-              <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
-                <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_patricia-macarthur-pastoral-fund.jpg" alt="Thumb - The Patricia MacArthur Pastoral Care Fund Logo" />
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
-                </div>
-                <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Illustration/Branding</p>
-                  <h4 className="cyril-up">The Patricia MacArthur Pastoral Care Fund</h4>
                 </div>
               </div>
             </Link>
