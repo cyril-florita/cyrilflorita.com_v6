@@ -1,6 +1,6 @@
 "use client";
 
-import ReactPlayer from "react-player";
+
 
 const VideoFigure = ({ 
   url, 
@@ -19,31 +19,15 @@ const VideoFigure = ({
 
   return (
     <figure className={figureClasses}>
-      <ReactPlayer
-        url={url}
+      <video
+        src={url}
         width={width}
         height={height}
         controls={controls}
-        playing={playing}
+        autoPlay={playing}
         loop={loop}
         muted={muted}
-        playsinline={playsinline}
-        config={{
-          file: {
-            attributes: {
-              controlsList: "nodownload" 
-            }
-          },          
-          youtube: {
-            playerVars: { 
-              showinfo: 0,
-              rel: 0,
-              modestbranding: 1 
-            }
-          }
-        }}
-        // Add wrapper for YouTube aspect ratio if needed
-        // style={url.includes('youtube.com') || url.includes('youtu.be') ? { position: 'absolute', top: 0, left: 0 } : {}}
+        playsInline={playsinline}
       />
       {/* Optional: Add wrapper div for YouTube aspect ratio if needed */}
       {/* { (url.includes('youtube.com') || url.includes('youtu.be')) && <div style={{ position: 'relative', paddingTop: '56.25%' }}></div> } */}
