@@ -3,10 +3,12 @@ RewriteEngine On
 # Redirect trailing slashes
 RewriteRule ^(.*)/$ /$1 [L,R=301]
 
-# Specific rule for portfolio listing page
-RewriteRule ^portfolio/?$ /portfolio.html [L]
+# Serve .html files for clean URLs (handles all static Next.js pages)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+)$ /$1.html [L]
 
-# Handle Next.js pages
+# Handle Next.js pages (fallback)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI} !^/api/
