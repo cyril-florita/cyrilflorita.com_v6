@@ -1,22 +1,4 @@
-RewriteEngine On
-
-# Redirect trailing slashes
-RewriteRule ^(.*)/$ /$1 [L,R=301]
-
-# Serve .html files for clean URLs (handles all static Next.js pages)
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME}.html -f
-RewriteRule ^(.+)$ /$1.html [L]
-
-# Handle Next.js pages (fallback)
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_URI} !^/api/
-RewriteRule ^(.*)$ /index.html [L]
-
-# Prevent directory listing
 Options -Indexes
 
-# Handle errors
 ErrorDocument 403 /index.html
 ErrorDocument 404 /404.html
