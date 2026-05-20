@@ -17,7 +17,7 @@ const Banner = ( { bgImage = "img/cyril-profile-serious-lol.png" } ) => {
                   style={{ top: 0, left: "-82%" }}
                 />
                 <p className="cyril-upper cyril-mb-10 subheader">
-                  <span className="cyril-accent">Hello!</span> I&apos;m 
+                  <span className="cyril-accent">Hello!</span>&nbsp;I&apos;m 
                 </p>
                 <h1 className="cyril-up cyril-mb-20 glitch" data-text="Cyril Florita">Cyril Florita</h1>
                 <div className="cyril-short intro">
