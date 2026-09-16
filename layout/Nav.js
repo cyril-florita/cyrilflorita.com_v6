@@ -86,7 +86,7 @@ const Nav = () => {
               About Me
             </a>
           </li>
-          <li className={pathname == "/portfolio" ? "cyril-active" : ""}>
+          <li className={pathname.startsWith("/portfolio") ? "cyril-active" : ""}>
             <a
               href="/portfolio"
               onClick={async (e) => {
