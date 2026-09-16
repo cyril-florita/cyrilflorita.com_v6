@@ -1764,6 +1764,12 @@ portfolio
         a {
             text-decoration: none;
         }
+
+        transition: opacity 0.25s ease;
+    }
+
+    &.cyril-is-filtering .cyril-grid-item {
+        opacity: 0.25;
     }
 
     @media screen and (min-width: 768px) and (max-width: 1200px) {
@@ -1945,6 +1951,21 @@ portfolio
 
 
 
+        }
+
+        &:has(h3) .cyril-hover-link {
+            @media screen and (max-width: 1200px) {
+                display: none;
+            }
+        }
+
+        &:not(:has(h3)) .cyril-hover-link {
+            @media screen and (max-width: 1200px) {
+                top: 30px;
+                left: auto;
+                right: 10px;
+                transform: none;
+            }
         }
     }
 

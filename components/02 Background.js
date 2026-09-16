@@ -26,7 +26,7 @@ const Background = ( { bgImage = "img/cyril-profile-w-a-smile.jpg" } ) => {
             <div className="row">
               <div className="col-xl-12">
                 <p className="cyril-upper subheader">
-                &#91; My <span className="cyril-accent">story</span> &#93;
+                &#91; My <span className="cyril-accent">story</span> &nbsp;&#93;
                 </p>
                 <h2 className="cyril-up cyril-mb-30 glitch" data-text="Background">Background</h2>
                 <p className="cyril-mb-20">

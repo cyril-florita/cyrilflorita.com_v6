@@ -1,6 +1,16 @@
 import { sliderProps } from "@/public/utility/sliderProps";
 import { Swiper, SwiperSlide } from "swiper/react";
 
+const CHF_START_DATE = new Date(2025, 3, 1); // Apr 2025
+
+const getYearsSince = (startDate) => {
+  const now = new Date();
+  const months =
+    (now.getFullYear() - startDate.getFullYear()) * 12 +
+    (now.getMonth() - startDate.getMonth());
+  return (months / 12).toFixed(1);
+};
+
 const Experience = () => {
   return (
     <div id="experience" className="cyril-section cyril-op-space-90">
@@ -14,7 +24,7 @@ const Experience = () => {
       />
       <div className="container">
         <p className="cyril-upper subheader">
-          &#91; My <span className="cyril-accent">career</span> &#93;
+          &#91; My <span className="cyril-accent">career</span> &nbsp;&#93;
         </p>
         <h2 className="cyril-up glitch" data-text="Experience">Experience</h2>
 
@@ -52,10 +62,10 @@ const Experience = () => {
                     <div className="cyril-icon-box cyril-type-2">
                       <div className="cyril-box-text">
                         <p className="cyril-upper cyril-text-lg cyril-mb-15 cyril-accent">
-                          Web Developer
+                          Marketing Web Developer
                         </p>
                         <p className="cyril-upper cyril-mb-30 cyril-text-normal">
-                          Apr 2025 &mdash; <span>Today</span> &#40;<span>1 year</span>&#41;
+                          Apr 2025 &mdash; <span>Today</span> &#40;<span suppressHydrationWarning>{getYearsSince(CHF_START_DATE)} Years</span>&#41;
                         </p>
                         <p>
                           <a className="cyril-upper cyril-text-normal cyril-text-underline" href="https://childrenshungerfund.org" target="_blank">Children's Hunger Fund</a>, a Christian non-profit ministry based in Sylmar, CA.

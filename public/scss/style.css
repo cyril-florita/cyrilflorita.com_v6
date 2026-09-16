@@ -2743,6 +2743,12 @@ portfolio
 .cyril-portfolio-grid .cyril-grid-item a {
   text-decoration: none;
 }
+.cyril-portfolio-grid .cyril-grid-item {
+  transition: opacity 0.25s ease;
+}
+.cyril-portfolio-grid.cyril-is-filtering .cyril-grid-item {
+  opacity: 0.25;
+}
 @media screen and (min-width: 768px) and (max-width: 1200px) {
   .cyril-portfolio-grid .grid-sizer, .cyril-portfolio-grid .cyril-grid-item {
     width: 50% !important;
@@ -2891,6 +2897,19 @@ portfolio
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .cyril-portfolio-item .cyril-cover:has(h3) .cyril-hover-link {
+    display: none;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .cyril-portfolio-item .cyril-cover:not(:has(h3)) .cyril-hover-link {
+    top: 30px;
+    left: auto;
+    right: 10px;
+    transform: none;
   }
 }
 .cyril-portfolio-item.cyril-square-item {

@@ -47,6 +47,21 @@ import { ClientThemeProvider } from '../components/ClientThemeProvider';
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${space_grotest.variable} ${atkinson.variable}`} suppressHydrationWarning={true}>
+      <head>
+        {/* Set theme before first paint to avoid a light-mode flash on navigation */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function () {
+                try {
+                  var theme = localStorage.getItem('theme') || 'light';
+                  document.documentElement.setAttribute('data-theme', theme);
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
       <body className="cyril-custom-scroll" suppressHydrationWarning={true}>
         {/* Google Analytics */}
         <Script

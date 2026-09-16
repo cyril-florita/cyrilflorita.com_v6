@@ -9,7 +9,7 @@ const Tools = () => {
       <div className="container">
         <div>
           <p className="cyril-upper subheader">
-          &#91; My <span className="cyril-accent">resources</span> &#93;
+          &#91; My <span className="cyril-accent">resources</span> &nbsp;&#93;
           </p>
           <h2 className="cyril-up cyril-mb-50 glitch" data-text="Tools &amp; Software">Tools &amp; Software</h2>
         </div>

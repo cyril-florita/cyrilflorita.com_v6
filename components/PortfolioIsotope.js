@@ -8,6 +8,7 @@ const PortfolioIsotope = () => {
 
   // Isotope
   const isotope = useRef();
+  const isFirstFilter = useRef(true);
   const [filterKey, setFilterKey] = useState("*");
 
   useEffect(() => {
@@ -19,6 +20,9 @@ const PortfolioIsotope = () => {
       percentPosition: true,
       masonry: {
         columnWidth: ".cyril-grid-item",
+      },
+      getSortData: {
+        orderUix: (itemElem) => parseInt(itemElem.getAttribute("data-order-uix"), 10) || 999,
       },
       animationOptions: {
         duration: 750,
@@ -49,12 +53,23 @@ const PortfolioIsotope = () => {
   useEffect(() => {
     if (!isotope.current) return;
 
+    const grid = document.querySelector(".cyril-portfolio-grid");
+    const skipFlash = isFirstFilter.current;
+    isFirstFilter.current = false;
+
     try {
       let filter;
       if (filterKey === "*") filter = "*";
       else if (filterKey === "fil-branding-marketing-illustration") filter = ".fil-branding, .fil-marketing, .fil-illustration";
       else filter = `.${filterKey}`;
-      isotope.current.arrange({ filter });
+
+      const sortBy = filterKey === "fil-uix" ? "orderUix" : "original-order";
+
+      if (grid && !skipFlash) grid.classList.add("cyril-is-filtering");
+      isotope.current.arrange({ filter, sortBy });
+      if (grid && !skipFlash) {
+        window.setTimeout(() => grid.classList.remove("cyril-is-filtering"), 250);
+      }
     } catch (error) {
       console.error('Error filtering items:', error);
     }
@@ -115,7 +130,7 @@ const PortfolioIsotope = () => {
           <div className="grid-sizer" />
 
           {/* long . gty v.9 */}
-          <div id="gty9" data-project="gty9" className="cyril-grid-item fil-uix">
+          <div id="gty9" data-project="gty9" data-order-uix="7" className="cyril-grid-item fil-uix">
             <Link href="/portfolio/gty_v9">
               <div className="cyril-portfolio-item cyril-long-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -131,6 +146,118 @@ const PortfolioIsotope = () => {
                 <div className="cyril-project-descr">
                   <p className="cyril-upper cyril-accent cyril-mb-10">UX Design</p>
                   <h4 className="cyril-up">GTY Website, v.9</h4>
+                </div>
+              </div>
+            </Link>
+          </div>
+
+          {/* wide . the study bible app */}
+          <div id="thestudybibleapp" data-project="thestudybibleapp" data-order-uix="6" className="cyril-grid-item fil-uix">
+            <Link href="/portfolio/the-study-bible-app">
+              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
+                <div className="cyril-cover">
+                  <img src="/img/portfolio/thumb_the-study-bible-app.jpg" alt="Thumb - The Study Bible App" />
+                  <h3>Case<br />Study</h3>
+                  <div className="cyril-hover-link">
+                    <i className="fas fa-link" />
+                  </div>
+                </div>
+                <div className="cyril-project-descr">
+                  <p className="cyril-upper cyril-accent cyril-mb-10">App Design</p>
+                  <h4 className="cyril-up">The Study Bible App</h4>
+                </div>
+              </div>
+            </Link>
+          </div>
+
+          {/* long . gty v8 */}
+          <div id="gty8" data-project="gty8" data-order-uix="5" className="cyril-grid-item fil-uix">
+            <Link href="/portfolio/gty_v8">
+              <div className="cyril-portfolio-item cyril-long-item cyril-mb-80">
+                <div className="cyril-cover">
+                  <img src="/img/portfolio/thumb_gty8.jpg" alt="Thumb - GTY Website, v.8" />
+                  <h3>Case<br />Study</h3>
+                  <div className="cyril-hover-link">
+                    <i className="fas fa-link" />
+                  </div>
+                </div>
+                <div className="cyril-project-descr">
+                  <p className="cyril-upper cyril-accent cyril-mb-10">UX Design &amp; Web Development</p>
+                  <h4 className="cyril-up">GTY Website, v.8</h4>
+                </div>
+              </div>
+            </Link>
+          </div>
+
+          {/* square . truth matters podcast */}
+          <div id="truthmatters" data-project="truthmatters" data-order-uix="4" className="cyril-grid-item fil-branding fil-uix">
+            <Link href="/portfolio/truth-matters">
+              <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
+                <div className="cyril-cover truth-matters">
+                  <img src="/img/portfolio/thumb_truth-matters-podcast-2.jpg" alt="Thumb - Truth Matters Podcast" />
+                  <h3>Case<br />Study</h3>
+                  <div className="cyril-hover-link">
+                    <i className="fas fa-link" />
+                  </div>
+                </div>
+                <div className="cyril-project-descr">
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Branding/UI/UX/Web</p>
+                  <h4 className="cyril-up">Truth Matters Podcast</h4>
+                </div>
+              </div>
+            </Link>
+          </div>
+
+          {/* square . gracestream */}
+          <div id="gracestream" data-project="gracestream" data-order-uix="3" className="cyril-grid-item fil-branding fil-uix">
+            <Link href="/portfolio/grace-stream">
+              <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
+                <div className="cyril-cover">
+                  <img src="/img/portfolio/thumb_grace-stream.jpg" alt="Thumb - Grace Stream" />
+                  <h3>Case<br />Study</h3>
+                  <div className="cyril-hover-link">
+                    <i className="fas fa-link" />
+                  </div>
+                </div>
+                <div className="cyril-project-descr">
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Branding/UI/UX/Web</p>
+                  <h4 className="cyril-up">Grace Stream</h4>
+                </div>
+              </div>
+            </Link>
+          </div>
+
+          {/* wide . gty dashboard */}
+          <div id="gtydashboard" data-project="gtydashboard" data-order-uix="2" className="cyril-grid-item fil-uix">
+            <Link href="/portfolio/gty-dashboard">
+              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
+                <div className="cyril-cover">
+                  <img src="/img/portfolio/thumb_gty-dashboard.jpg" alt="Thumb - GTY Dashboard" />
+                  <div className="cyril-hover-link">
+                    <i className="fas fa-link" />
+                  </div>
+                </div>
+                <div className="cyril-project-descr">
+                  <p className="cyril-upper cyril-accent cyril-mb-10">UI Design &amp; Front-End</p>
+                  <h4 className="cyril-up">GTY Dashboard</h4>
+                </div>
+              </div>
+            </Link>
+          </div>
+
+          {/* wide . gty app . */}
+          <div id="gtyapplanding" data-project="gtyapplanding" data-order-uix="1" className="cyril-grid-item fil-uix">
+            <Link href="/portfolio/gty-app-landing">
+              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
+                <div className="cyril-cover">
+                  <img src="/img/portfolio/thumb_gty-app-landing.jpg" alt="Thumb - GTY App Landing Page" />
+                  <div className="cyril-hover-link">
+                    <i className="fas fa-link" />
+                  </div>
+                </div>
+                <div className="cyril-project-descr">
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Web Design &amp; Front-End</p>
+                  <h4 className="cyril-up">GTY App Landing Page</h4>
                 </div>
               </div>
             </Link>
@@ -173,44 +300,6 @@ const PortfolioIsotope = () => {
             </Link>
           </div>
 
-          {/* wide . the study bible app */}
-          <div id="thestudybibleapp" data-project="thestudybibleapp" className="cyril-grid-item fil-uix">
-            <Link href="/portfolio/the-study-bible-app">
-              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
-                <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_the-study-bible-app.jpg" alt="Thumb - The Study Bible App" />
-                  <h3>Case<br />Study</h3>
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
-                </div>
-                <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">App Design</p>
-                  <h4 className="cyril-up">The Study Bible App</h4>
-                </div>
-              </div>
-            </Link>
-          </div>
-
-          {/* long . gty v8 */}
-          <div id="gty8" data-project="gty8" className="cyril-grid-item fil-uix">
-            <Link href="/portfolio/gty_v8">
-              <div className="cyril-portfolio-item cyril-long-item cyril-mb-80">
-                <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_gty8.jpg" alt="Thumb - GTY Website, v.8" />
-                  <h3>Case<br />Study</h3>
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
-                </div>
-                <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">UX Design &amp; Web Development</p>
-                  <h4 className="cyril-up">GTY Website, v.8</h4>
-                </div>
-              </div>
-            </Link>
-          </div>
-
           {/* square . illustration . he took my place */}
           <div id="hetookmyplace" data-project="hetookmyplace" className="cyril-grid-item fil-illustration">
             <Link href="/portfolio/he-took-my-place">
@@ -224,44 +313,6 @@ const PortfolioIsotope = () => {
                 <div className="cyril-project-descr">
                   <p className="cyril-upper cyril-accent cyril-mb-10">Illustration</p>
                   <h4 className="cyril-up">He Took My Place</h4>
-                </div>
-              </div>
-            </Link>
-          </div>
-
-          {/* square . truth matters podcast */}
-          <div id="truthmatters" data-project="truthmatters" className="cyril-grid-item fil-branding fil-uix">
-            <Link href="/portfolio/truth-matters">
-              <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
-                <div className="cyril-cover truth-matters">
-                  <img src="/img/portfolio/thumb_truth-matters-podcast-2.jpg" alt="Thumb - Truth Matters Podcast" />
-                  <h3>Case<br />Study</h3>
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
-                </div>
-                <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Branding/UI/UX/Web</p>
-                  <h4 className="cyril-up">Truth Matters Podcast</h4>
-                </div>
-              </div>
-            </Link>
-          </div>
-
-          {/* square . gracestream */}
-          <div id="gracestream" data-project="gracestream" className="cyril-grid-item fil-branding fil-uix">
-            <Link href="/portfolio/grace-stream">
-              <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
-                <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_grace-stream.jpg" alt="Thumb - Grace Stream" />
-                  <h3>Case<br />Study</h3>
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
-                </div>
-                <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Branding/UI/UX/Web</p>
-                  <h4 className="cyril-up">Grace Stream</h4>
                 </div>
               </div>
             </Link>
@@ -285,24 +336,6 @@ const PortfolioIsotope = () => {
             </Link>
           </div>
 
-          {/* wide . gty dashboard */}
-          <div id="gtydashboard" data-project="gtydashboard" className="cyril-grid-item fil-uix">
-            <Link href="/portfolio/gty-dashboard">
-              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
-                <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_gty-dashboard.jpg" alt="Thumb - GTY Dashboard" />
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
-                </div>
-                <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">UI Design &amp; Front-End</p>
-                  <h4 className="cyril-up">GTY Dashboard</h4>
-                </div>
-              </div>
-            </Link>
-          </div>
-
           {/* square . patricia macarthur */}
           <div id="patriciamacarthur" data-project="patriciamacarthur" className="cyril-grid-item fil-branding fil-illustration">
             <Link href="/portfolio/patricia-macarthur-pastoral-care-fund">
@@ -316,24 +349,6 @@ const PortfolioIsotope = () => {
                 <div className="cyril-project-descr">
                   <p className="cyril-upper cyril-accent cyril-mb-10">Illustration/Branding</p>
                   <h4 className="cyril-up">The Patricia MacArthur Pastoral Care Fund</h4>
-                </div>
-              </div>
-            </Link>
-          </div>
-
-          {/* wide . gty app . */}
-          <div id="gtyapplanding" data-project="gtyapplanding" className="cyril-grid-item fil-uix">
-            <Link href="/portfolio/gty-app-landing">
-              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
-                <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_gty-app-landing.jpg" alt="Thumb - GTY App Landing Page" />
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
-                </div>
-                <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Web Design &amp; Front-End</p>
-                  <h4 className="cyril-up">GTY App Landing Page</h4>
                 </div>
               </div>
             </Link>
