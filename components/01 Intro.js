@@ -60,7 +60,7 @@ const Banner = ( { bgImage = "/img/cyril-profile-serious-lolz.png" } ) => {
               className="cyril-banner-image"
             />
             <div className="cyril-about-person cyril-hero-mobile-photo cyril-mb-30">
-              <img src="/img/cyril-profile-w-a-smile.jpg" alt="Cyril Florita" className="cyril-avatar" />
+              <img src="/img/cyril-profile-serious-lolz.png" alt="Cyril Florita" className="cyril-avatar" />
             </div>
           </div>
         </div>

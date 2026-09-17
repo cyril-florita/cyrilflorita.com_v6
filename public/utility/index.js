@@ -25,13 +25,40 @@ export const cyrilUtility = {
     const body = document.body;
     let settleTimer;
 
-    window.addEventListener('scroll', () => {
+    const pause = () => {
       body.classList.add('cyril-scrolling');
       clearTimeout(settleTimer);
       settleTimer = window.setTimeout(() => {
         body.classList.remove('cyril-scrolling');
       }, 150);
-    }, { passive: true });
+    };
+
+    // Covers real user scrolling (wheel/touch).
+    window.addEventListener('scroll', pause, { passive: true });
+
+    // Covers programmatic scrolls (Back to Top, My Work, the logo, etc.).
+    // Waiting for the 'scroll' listener above to catch these has a lag —
+    // those clicks often also toggle other classes/reflow the page in the
+    // same tick, and the animation was still running unpaused for that
+    // first moment. Patching scrollTo/scrollIntoView once pauses it the
+    // instant a scroll is requested, with no gap. Guarded so navigating
+    // between pages (client-side, without a full reload) doesn't wrap it
+    // again on every mount.
+    if (!window.__cyrilScrollPatched) {
+      window.__cyrilScrollPatched = true;
+
+      const nativeScrollTo = window.scrollTo.bind(window);
+      window.scrollTo = (...args) => {
+        pause();
+        nativeScrollTo(...args);
+      };
+
+      const nativeScrollIntoView = Element.prototype.scrollIntoView;
+      Element.prototype.scrollIntoView = function (...args) {
+        pause();
+        return nativeScrollIntoView.apply(this, args);
+      };
+    }
 
     window.setTimeout(() => {
       body.classList.add('cyril-static-ready');
