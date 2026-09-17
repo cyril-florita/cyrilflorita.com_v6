@@ -24,38 +24,50 @@ export const cyrilUtility = {
   pauseBgStaticOnScroll() {
     const body = document.body;
     let settleTimer;
+    let releaseAt = 0;
 
-    const pause = () => {
+    // `duration` is how long to stay paused *after this call*, not how long
+    // a scroll takes. releaseAt only ever moves later (never earlier) — a
+    // short reactive 150ms call arriving after a long proactive 700ms one
+    // (e.g. a real scroll happening alongside a click that also requested
+    // scrollTo) must not shrink the window back down and resume the
+    // animation mid-transition.
+    const pause = (duration = 150) => {
       body.classList.add('cyril-scrolling');
+      releaseAt = Math.max(releaseAt, Date.now() + duration);
+
       clearTimeout(settleTimer);
       settleTimer = window.setTimeout(() => {
         body.classList.remove('cyril-scrolling');
-      }, 150);
+      }, releaseAt - Date.now());
     };
 
-    // Covers real user scrolling (wheel/touch).
-    window.addEventListener('scroll', pause, { passive: true });
+    // Covers real user scrolling (wheel/touch): 150ms after the last
+    // 'scroll' event is enough since those keep firing throughout.
+    window.addEventListener('scroll', () => pause(), { passive: true });
 
     // Covers programmatic scrolls (Back to Top, My Work, the logo, etc.).
-    // Waiting for the 'scroll' listener above to catch these has a lag —
-    // those clicks often also toggle other classes/reflow the page in the
-    // same tick, and the animation was still running unpaused for that
-    // first moment. Patching scrollTo/scrollIntoView once pauses it the
-    // instant a scroll is requested, with no gap. Guarded so navigating
-    // between pages (client-side, without a full reload) doesn't wrap it
-    // again on every mount.
+    // These need a longer window than natural scrolling: they often also
+    // trigger their own ~0.4-0.5s CSS transition (hero reveal, page fade)
+    // alongside a scroll that may cover very little distance or none at
+    // all, so there aren't enough native 'scroll' events to keep extending
+    // a short pause — it would resume mid-transition and still flicker.
+    // Patching scrollTo/scrollIntoView once pauses it the instant a scroll
+    // is requested, with no gap. Guarded so navigating between pages
+    // (client-side, without a full reload) doesn't wrap it again on every
+    // mount.
     if (!window.__cyrilScrollPatched) {
       window.__cyrilScrollPatched = true;
 
       const nativeScrollTo = window.scrollTo.bind(window);
       window.scrollTo = (...args) => {
-        pause();
+        pause(700);
         nativeScrollTo(...args);
       };
 
       const nativeScrollIntoView = Element.prototype.scrollIntoView;
       Element.prototype.scrollIntoView = function (...args) {
-        pause();
+        pause(700);
         return nativeScrollIntoView.apply(this, args);
       };
     }
