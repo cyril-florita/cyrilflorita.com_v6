@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const Banner = ( { bgImage = "/img/cyril-profile-serious-lolz.png" } ) => {
+const Banner = ( { bgImage = "/img/cyril-florita-profile.png" } ) => {
   const pathname = usePathname();
   return (
     <div className="cyril-section cyril-banner cyril-banner-right" id="intro">
@@ -60,7 +60,7 @@ const Banner = ( { bgImage = "/img/cyril-profile-serious-lolz.png" } ) => {
               className="cyril-banner-image"
             />
             <div className="cyril-about-person cyril-hero-mobile-photo cyril-mb-30">
-              <img src="/img/cyril-profile-serious-lolz.png" alt="Cyril Florita" className="cyril-avatar" />
+              <img src="/img/cyril-florita-profile.png" alt="Cyril Florita" className="cyril-avatar" />
             </div>
           </div>
         </div>
