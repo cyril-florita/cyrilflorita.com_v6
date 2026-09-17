@@ -4,7 +4,7 @@ const ImgView = ({ close, imgs }) => {
   const images =
     imgs.length > 0
       ? imgs
-      : ["img/portfolio/2.jpg", "img/portfolio/3.jpg", "img/portfolio/4.jpg"];
+      : ["/img/portfolio/2.jpg", "/img/portfolio/3.jpg", "/img/portfolio/4.jpg"];
   const [photoIndex, setPhotoIndex] = useState(0);
 
   return (

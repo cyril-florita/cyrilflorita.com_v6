@@ -10,7 +10,12 @@ import ThemeToggle from "./ThemeToggle";
 import { cyrilUtility } from "@/public/utility/index";
 
 const SiteLayout = ({ children, header, footer, noFooter }) => {
-  const pathname = usePathname();
+  // next.config.js sets trailingSlash: true, so on the exported site
+  // usePathname() returns e.g. "/about-me/" rather than "/about-me" — strip
+  // it so cyrilUtility.handleBackToTop's pathname === '/about-me' check
+  // below actually matches (root "/" never gets a trailing slash).
+  const rawPathname = usePathname();
+  const pathname = rawPathname.length > 1 ? rawPathname.replace(/\/$/, '') : rawPathname;
 
   useEffect(() => {
     if (document.querySelector("body").classList.contains("cyril-custom-scroll")) {

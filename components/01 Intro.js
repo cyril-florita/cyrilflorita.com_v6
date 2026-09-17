@@ -1,6 +1,9 @@
+"use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-const Banner = ( { bgImage = "img/cyril-profile-serious-lol.png" } ) => {
+const Banner = ( { bgImage = "/img/cyril-profile-serious-lolz.png" } ) => {
+  const pathname = usePathname();
   return (
     <div className="cyril-section cyril-banner cyril-banner-right" id="intro">
       <div className="container-full">
@@ -25,11 +28,19 @@ const Banner = ( { bgImage = "img/cyril-profile-serious-lol.png" } ) => {
                     <strong><span className="cyril-accent">Designer</span></strong> and <strong><span className="cyril-accent">Developer</span></strong>
                   </p>
                   <div className="cyril-buttons-frame">
-                    <Link href="/portfolio" className="cyril-button" onClick={(e) => {
+                    <Link href="/" className="cyril-button" onClick={(e) => {
                         e.preventDefault();
+
+                        if (pathname === '/') {
+                          document.getElementById('intro')?.classList.add('cyril-hero-exit');
+                          document.getElementById('portfolio-start')?.scrollIntoView({ behavior: 'smooth' });
+                          return;
+                        }
+
                         document.body.classList.add('page-exit');
+                        sessionStorage.setItem('scrollToPortfolio', 'true');
                         setTimeout(() => {
-                          window.location.href = '/portfolio';
+                          window.location.href = '/';
                         }, 400);
                       }}>
                       See My Work

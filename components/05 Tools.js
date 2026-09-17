@@ -23,10 +23,10 @@ const Tools = () => {
                   <div className="cyril-icon-box">
                     <div className="cyril-text-icon no-textured">
                       <img
-                        src="img/tools/ai-generator.png"
+                        src="/img/tools/ai-generator.png"
                         className="theme-aware-image"
-                        data-light-src="img/tools/ai-generator.png"
-                        data-dark-src="img/tools/ai-generator_white.png"
+                        data-light-src="/img/tools/ai-generator.png"
+                        data-dark-src="/img/tools/ai-generator_white.png"
                         width="35" height="35"
                         alt="AI Image Generator"
                       />
@@ -43,10 +43,10 @@ const Tools = () => {
                   <div className="cyril-icon-box">
                     <div className="cyril-text-icon no-textured">                      
                       <img
-                        src="img/tools/creative-suite.png"
+                        src="/img/tools/creative-suite.png"
                         className="theme-aware-image"
-                        data-light-src="img/tools/creative-suite.png"
-                        data-dark-src="img/tools/creative-suite_white.png"
+                        data-light-src="/img/tools/creative-suite.png"
+                        data-dark-src="/img/tools/creative-suite_white.png"
                         width="35" height="35"
                         alt="Creative Suite"
                       />
@@ -63,10 +63,10 @@ const Tools = () => {
                   <div className="cyril-icon-box">
                     <div className="cyril-text-icon no-textured">
                       <img
-                        src="img/tools/axure.png"
+                        src="/img/tools/axure.png"
                         className="theme-aware-image"
-                        data-light-src="img/tools/axure.png"
-                        data-dark-src="img/tools/axure_white.png"
+                        data-light-src="/img/tools/axure.png"
+                        data-dark-src="/img/tools/axure_white.png"
                         width="35" height="35"
                         alt="Axure RP"
                       />                      
@@ -96,10 +96,10 @@ const Tools = () => {
                   <div className="cyril-icon-box">
                     <div className="cyril-text-icon no-textured">
                       <img
-                        src="img/tools/miro.png"
+                        src="/img/tools/miro.png"
                         className="theme-aware-image"
-                        data-light-src="img/tools/miro.png"
-                        data-dark-src="img/tools/miro_white.png"
+                        data-light-src="/img/tools/miro.png"
+                        data-dark-src="/img/tools/miro_white.png"
                         width="35" height="35"
                         alt="Miro"
                       />
@@ -116,10 +116,10 @@ const Tools = () => {
                   <div className="cyril-icon-box">
                     <div className="cyril-text-icon no-textured">
                       <img
-                        src="img/tools/framer.png"
+                        src="/img/tools/framer.png"
                         className="theme-aware-image"
-                        data-light-src="img/tools/framer.png"
-                        data-dark-src="img/tools/framer_white.png"
+                        data-light-src="/img/tools/framer.png"
+                        data-dark-src="/img/tools/framer_white.png"
                         width="35" height="35"
                         alt="Framer"
                       />

@@ -13,6 +13,10 @@ const page = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
+    // Mark which project to scroll back to whenever the user leaves this
+    // page — including via the browser's own back button, not just the
+    // "Back to Portfolio" button below.
+    sessionStorage.setItem('returnToProject', 'thestudybibleapp');
     cyrilUtility.tpInner();
     setTimeout(() => {
       const pageElement = document.querySelector('.cyril-page');
@@ -29,11 +33,11 @@ const page = () => {
   // Function to handle back navigation and save scroll position
   const handleBackToPortfolio = () => {
     // Get the project ID or identifier
-    const projectId = 'thestudyBibleapp'; // This is the current project
+    const projectId = 'thestudybibleapp'; // This is the current project
 
     // Save the project ID for the portfolio page to use
     sessionStorage.setItem('returnToProject', projectId);
-    router.push('/portfolio');
+    router.push('/');
   };
 
   return (

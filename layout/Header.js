@@ -1,83 +1,68 @@
 "use client";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Nav from "./Nav";
 import { cyrilUtility } from "@/public/utility/index";
 
 const Header = () => {
   const pathname = usePathname();
-  const [isIntroActive, setIsIntroActive] = useState(false);
-  
-  // Initial check on mount
-  useEffect(() => {
-    if (pathname === '/') {
-      const introSection = document.querySelector("#intro");
-      if (introSection) {
-        setIsIntroActive(introSection.classList.contains('cyril-active'));
-      }
-    }
-  }, []);
+  const [isAtHeroTop, setIsAtHeroTop] = useState(false);
 
-  // Existing scroll effect
+  // Disable the logo link whenever we're on "/" and already at the hero
+  // (the very top) — clicking it there would be a no-op anyway.
   useEffect(() => {
-    const checkIntroActive = () => {
-      if (pathname === '/') {
-        const introSection = document.querySelector("#intro");
-        setIsIntroActive(introSection?.classList.contains('cyril-active'));
-      } else {
-        setIsIntroActive(false);
-      }
+    if (pathname !== '/') {
+      setIsAtHeroTop(false);
+      return;
+    }
+
+    const hero = document.getElementById('intro');
+    if (!hero) return;
+
+    const checkAtTop = () => {
+      setIsAtHeroTop(!hero.classList.contains('cyril-hero-exit'));
     };
 
-    checkIntroActive();
+    checkAtTop();
 
-    if (pathname === '/') {
-      window.addEventListener('scroll', checkIntroActive);
-      return () => window.removeEventListener('scroll', checkIntroActive);
-    }
+    const observer = new MutationObserver(checkAtTop);
+    observer.observe(hero, { attributes: true, attributeFilter: ['class'] });
+    return () => observer.disconnect();
   }, [pathname]);
 
   const handleIntroClick = async (e) => {
     e.preventDefault();
-    
+
     if (pathname !== '/') {
       await cyrilUtility.handlePageTransition();
       window.location.href = '/';
       return;
     }
-    
-    const sections = document.querySelectorAll(".cyril-section");
+
     const introSection = document.querySelector("#intro");
-    
-    // Don't do anything if we're on home page and intro is active
-    if (pathname === '/' && introSection?.classList.contains('cyril-active')) {
+
+    // Don't do anything if we're already on the hero
+    if (introSection && !introSection.classList.contains('cyril-hero-exit')) {
       return;
     }
-    
-    if (pathname === '/') {
-      const dots = document.querySelectorAll(".cyril-dot");
-      const introIndex = Array.from(sections).findIndex(section => section.id === 'intro');
-      if (introIndex !== -1) {
-        window.scrollTo({
-          top: introIndex * window.innerHeight,
-          behavior: "smooth",
-        });
-        sections.forEach((section, sectionIndex) => {
-          section.classList.toggle("cyril-active", sectionIndex === introIndex);
-        });
-        dots.forEach((dot, dotIndex) => {
-          dot.classList.toggle("cyril-active", dotIndex === introIndex);
-        });
-      }
-    } else {
-      window.location.href = '/';
-    }
+
+    // Bring it back into layout first (in case it's collapsed), forcing a
+    // reflow before removing cyril-hero-exit so the fade-in actually animates.
+    cyrilUtility.keepFrameVisible();
+    introSection?.classList.remove('cyril-hero-collapsed');
+    void introSection?.offsetHeight;
+    introSection?.classList.remove('cyril-hero-exit');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
     <div className="cyril-top-panel cyril-tp-2">
       <div className="cyril-tp-frame">
-        <a href="/" className={`cyril-logo ${isIntroActive ? 'cyril-disabled' : ''}`} onClick={handleIntroClick}>
+        <a
+          href="/"
+          className={`cyril-logo ${isAtHeroTop ? 'cyril-disabled' : ''}`}
+          onClick={handleIntroClick}
+        >
           <strong>C<span>yril</span></strong>
         </a>
         <div className="cyril-nav-controls">

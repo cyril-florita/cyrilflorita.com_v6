@@ -15,6 +15,10 @@ const page = () => {
   const router = useRouter();
 
   useEffect(() => {
+    // Mark which project to scroll back to whenever the user leaves this
+    // page — including via the browser's own back button, not just the
+    // "Back to Portfolio" button below.
+    sessionStorage.setItem('returnToProject', 'gtydashboard');
     cyrilUtility.tpInner();
     setTimeout(() => {
       const pageElement = document.querySelector('.cyril-page');
@@ -31,7 +35,7 @@ const page = () => {
 
     // Save the project ID for the portfolio page to use
     sessionStorage.setItem('returnToProject', projectId);
-    router.push('/portfolio');
+    router.push('/');
   };
 
   return (

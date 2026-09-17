@@ -56,7 +56,7 @@ frame
             transform: translateY(-78px);
             color: var(--color-frame);
 
-            @media screen and (max-width: 740px) {
+            @media screen and (max-width: 1200px) {
                 transform: translateY(78px);
             }
         }
@@ -65,6 +65,16 @@ frame
             transform: translateY(78px);
         }
 
+    }
+
+    // Overrides .hide above during a programmatic scroll (e.g. the My Work
+    // nav transition) so the chrome stays put instead of sliding away.
+    &.cyril-keep-visible {
+        & .cyril-top-panel,
+        & .cyril-theme-toggle,
+        & .cyril-bottom-panel {
+            transform: none !important;
+        }
     }
 }
 
@@ -169,6 +179,7 @@ page
 
         & .cyril-section {
             height: auto;
+            padding-top: 120px;
 
             & .container {
                 opacity: 1;
@@ -202,6 +213,17 @@ page
     &.cyril-active {
         opacity: 1;
         transform: translateY(0) scale(1);
+    }
+
+    // Used when the page is landing already scrolled to a specific section
+    // (e.g. My Work via nav) so the reveal is a plain fade, with no
+    // slide/scale motion that could peek the content above the fold.
+    &.cyril-fade-only {
+        transform: none;
+
+        &.cyril-active {
+            transform: none;
+        }
     }
 
     @media screen and (max-width: 1200px) {
@@ -398,7 +420,7 @@ pagination
 
 .cyril-bg-item {
     opacity: .35;
-    width: 340px;
+    width: 420px;
     height: 420px;
     position: absolute;
     z-index: -1;
@@ -415,11 +437,11 @@ pagination
 
     &:before {
         content: '';
-        width: 100px;
+        width: 150px;
         height: 150px;
         border-radius: 50%;
         position: absolute;
-        left: -100px;
+        left: -170px;
         --dot-size: 2px;
         --dot-space: 10px;
         background-image:
@@ -431,8 +453,8 @@ pagination
     }
 
     &.cyril-bg-item-large {
-        width: 400px;
-        height: 460px;
+        width: 700px;
+        height: 700px;
 
         &::before {
             display: none;
@@ -807,7 +829,7 @@ social panel
         text-align: center;
     }
 
-    @media screen and (max-width: 740px) {
+    @media screen and (max-width: 1200px) {
         top: auto;
         bottom: 0;
         right: 0;
@@ -1027,7 +1049,7 @@ banner
 ------------------------------------------- */
 
 .cyril-top-banner {
-    padding-top: 120px;
+    padding-top: 200px;
     padding-bottom: 40px;
 
     & h2 {
@@ -1076,19 +1098,29 @@ banner
     }
 
     & .cyril-banner-image {
-        // width: 100%;
         position: relative;
-        left: -17%;
-        width: 120%;
+        left: -22%;
+        width: 140%;
         height: 100vh;
         -o-object-fit: cover;
         object-fit: cover;
-        -o-object-position: center;
-        object-position: center;
+        -o-object-position: left center;
+        object-position: left center;
         vertical-align: top;
 
         @media screen and (max-width: 1200px) {
-            display: none;
+
+            width: 85%;
+            object-position: center;
+            height: auto;
+            left: 7%;
+            bottom: 0;
+
+        }
+
+        @media screen and (max-width: 768px) {
+            width: 100%;
+            left: auto;
         }
     }
 
@@ -1098,8 +1130,16 @@ banner
         padding: 0 20% 0 10%;
 
         @media screen and (max-width: 1200px) {
-            padding: 60px 30px;
+            padding: 20px 30px;
+            position: absolute;
+            top: 14%;
+            width: 100%;
             text-align: center;
+        }
+
+         @media screen and (max-width: 768px) {
+            padding: 20px 30px;
+            position: static;
         }
 
     }
@@ -1140,6 +1180,40 @@ banner
                 padding: 30px 30px;
             }
 
+        }
+    }
+}
+
+// hero on the "/" page: force the intro to fill the first viewport
+// and keep the photo visible at every breakpoint (it's normally hidden below 1200px)
+.cyril-main-page {
+    #intro.cyril-banner {
+        display: flex;
+        align-items: center;
+        min-height: 100vh;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+
+        &.cyril-hero-exit {
+            opacity: 0;
+            transform: translateY(-80px);
+            pointer-events: none;
+        }
+
+        // Used only when landing directly on My Work (nav / deep link): fully
+        // removes the hero from layout so My Work sits at the very top with
+        // no scroll-position math needed, instead of just hiding it in place.
+        &.cyril-hero-collapsed {
+            display: none !important;
+        }
+
+        // The base padding-top: 90px was sized for the About Me one-pager,
+        // where this section isn't flex-centered. Here it just stacks with
+        // .cyril-banner-text's own top padding, pushing the text way down
+        // from the nav — flex centering already keeps it clear of the
+        // fixed header, so only a small buffer is needed on mobile (tablet
+        // below positions the text absolutely, so it doesn't need this).
+        @media screen and (max-width: 768px) {
+            padding-top: 70px;
         }
     }
 }

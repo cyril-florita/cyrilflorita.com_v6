@@ -1,9 +1,9 @@
-const Background = ( { bgImage = "img/cyril-profile-w-a-smile.jpg" } ) => {
+const Background = ( { bgImage = "/img/cyril-profile-w-a-smile.jpg" } ) => {
   return (
-    <div className="cyril-section cyril-op-space-90">
+    <div className="cyril-section cyril-op-space-90" id="background">
       <div
         className="cyril-bg-item cyril-bg-item-large"
-        style={{ top: "-40%", right: "32%", transform: "rotate(-35deg)" }}
+        style={{ top: "-15%", right: "3%", transform: "rotate(-35deg)" }}
       />
       <div
         className="cyril-bg-item"
@@ -26,9 +26,9 @@ const Background = ( { bgImage = "img/cyril-profile-w-a-smile.jpg" } ) => {
             <div className="row">
               <div className="col-xl-12">
                 <p className="cyril-upper subheader">
-                &#91; My <span className="cyril-accent">story</span> &nbsp;&#93;
+                &#91; My <span className="cyril-accent">background</span> &nbsp;&#93;
                 </p>
-                <h2 className="cyril-up cyril-mb-30 glitch" data-text="Background">Background</h2>
+                <h2 className="cyril-up cyril-mb-30 glitch" data-text="About Me">About Me</h2>
                 <p className="cyril-mb-20">
                   
                   I've built a reputation as a versatile Designer and Developer who crafts thoughtful, beautiful, and functional digital experiences.

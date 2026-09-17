@@ -9,6 +9,43 @@ export const cyrilUtility = {
     }
   },
 
+  // Keeps the top/bottom chrome visible through a programmatic scroll (e.g.
+  // landing on or jumping to My Work) instead of letting the normal
+  // hide-on-scroll-down behavior hide it. Rather than guessing how long a
+  // smooth scroll takes, it clears itself shortly after scrolling actually
+  // stops — `maxDuration` is just a safety net in case no scroll ever fires.
+  keepFrameVisible(maxDuration = 2000) {
+    const frame = document.querySelector(".cyril-frame");
+    if (!frame) return;
+
+    frame.classList.add("cyril-keep-visible");
+
+    let settleTimer;
+    let maxTimer;
+
+    const release = () => {
+      clearTimeout(settleTimer);
+      clearTimeout(maxTimer);
+      window.removeEventListener('scroll', onScroll);
+      frame.classList.remove("cyril-keep-visible");
+      // topBarActive()'s own scroll listener sets "hide" on every
+      // scroll-down tick, so it's still sitting there from the scroll we
+      // just suppressed — clear it too, or the chrome would hide the
+      // instant our override lifts, right as the transition finishes.
+      frame.classList.remove("hide");
+    };
+
+    const onScroll = () => {
+      clearTimeout(settleTimer);
+      settleTimer = window.setTimeout(release, 150);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    // In case scroll never fires (e.g. already at the target), or the
+    // animation runs long, don't hold the chrome visible forever.
+    maxTimer = window.setTimeout(release, maxDuration);
+  },
+
   topBarActive() {
     var cyrilFrame = document.querySelector(".cyril-frame");
     let lastScrollTop = 0;
@@ -56,26 +93,32 @@ export const cyrilUtility = {
   },
 
   handleBackToTop(pathname) {
-    if (pathname === '/') {
+    if (pathname === '/about-me') {
       const sections = document.querySelectorAll(".cyril-section");
       const dots = document.querySelectorAll(".cyril-dot");
       if (!sections.length || !dots.length) return;
 
-      const introIndex = Array.from(sections).findIndex(section => section.id === 'intro');
-      if (introIndex !== -1) {
+      const topIndex = Array.from(sections).findIndex(section => section.id === 'background');
+      if (topIndex !== -1) {
         window.scrollTo({
-          top: introIndex * window.innerHeight,
+          top: topIndex * window.innerHeight,
           behavior: 'smooth'
         });
 
         sections.forEach((section, sectionIndex) => {
-          section.classList.toggle("cyril-active", sectionIndex === introIndex);
+          section.classList.toggle("cyril-active", sectionIndex === topIndex);
         });
 
         dots.forEach((dot, dotIndex) => {
-          dot.classList.toggle("cyril-active", dotIndex === introIndex);
+          dot.classList.toggle("cyril-active", dotIndex === topIndex);
         });
       }
+    } else if (pathname === '/') {
+      document.getElementById('intro')?.classList.remove('cyril-hero-exit');
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
     } else {
       window.scrollTo({
         top: 0,
