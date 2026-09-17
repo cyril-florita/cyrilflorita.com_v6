@@ -267,39 +267,14 @@ body {
         background: transparent url(../img/bg-static.png) repeat 0 0;
         background-repeat: repeat;
         animation: bg-animation .2s infinite;
-        // Hidden by default until ready/settled — see .cyril-static-ready
-        // and .cyril-scrolling below. The animation itself always keeps
-        // running continuously and is never paused/resumed: toggling
-        // animation-play-state on a very fast (.2s), infinitely-looping
-        // animation is a known Safari bug where resuming causes a visible
-        // jump in the animation's position — which turned out to be exactly
-        // the "flicker"/jump this was meant to fix, just relocated to
-        // whenever we paused and un-paused it. Hiding with opacity instead
-        // never stops the animation's own clock, so there's nothing to jump.
-        opacity: 0;
-        will-change: transform, opacity;
-        -webkit-backface-visibility: hidden;
-        backface-visibility: hidden;
-        visibility: visible;
-    }
-
-    // Turns the layer on once cyrilUtility.pauseBgStaticOnScroll (called
-    // once in SiteLayout, so it covers every page) confirms the initial
-    // load has settled.
-    &.cyril-static-ready:after {
         opacity: var(--bg-static-opacity, 0.21);
 
         [data-theme="dark"] & {
             opacity: 0.2;
         }
-    }
 
-    // ...and hides it again for the duration of any later scroll or
-    // programmatic scroll/transition, showing it again once that settles.
-    // Must come after .cyril-static-ready above so "hidden" wins when both
-    // classes are present (equal specificity, later rule wins).
-    &.cyril-scrolling:after {
-        opacity: 0;
+        ;
+        visibility: visible;
     }
 
     &.page-exit {
@@ -1074,6 +1049,22 @@ text set in the data-text attribute. */
         left: -2px;
         text-shadow: -2px 0 #00fff9, 2px 2px variables.$accent;
         animation: glitch-anim2 1s infinite linear alternate-reverse;
+    }
+
+    // ::before/::after animate the legacy `clip: rect(...)` property with
+    // random values every ~50-250ms. Unlike transform/opacity, `clip` isn't
+    // GPU-composited — every change forces a full repaint — and several
+    // headings on a page can be running this at once. Suspected as the real
+    // source of the mobile flicker (the noise-bg overlay was fine on its
+    // own before this effect was introduced). Disabling on tablet/mobile as
+    // an experiment: content: none removes the pseudo-elements entirely
+    // rather than just freezing them, so there's no repaint cost at all.
+    @media screen and (max-width: 1200px) {
+        &::before,
+        &::after {
+            content: none;
+            animation: none;
+        }
     }
 }
 

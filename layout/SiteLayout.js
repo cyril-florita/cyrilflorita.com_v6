@@ -26,7 +26,6 @@ const SiteLayout = ({ children, header, footer, noFooter }) => {
     cyrilUtility.backToTop();
     cyrilUtility.builtTextVisibility();
     cyrilUtility.swiperSliderSameHeight();
-    cyrilUtility.pauseBgStaticOnScroll();
   }, []);
 
   return (
