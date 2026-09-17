@@ -284,7 +284,6 @@ body:after {
   animation-play-state: paused;
   opacity: var(--bg-static-opacity, 0.21);
   will-change: transform;
-  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
 [data-theme=dark] body:after {
@@ -1045,174 +1044,174 @@ box to be used for the random glitch effect. Also adds a very subtle
 skew to change the 'thickness' of the glitch.*/
 @keyframes glitch-anim {
   0% {
-    clip: rect(219px, 9999px, 282px, 0);
-    transform: skew(0.27deg);
+    clip: rect(308px, 9999px, 335px, 0);
+    transform: skew(0.06deg);
   }
   5% {
-    clip: rect(2px, 9999px, 16px, 0);
-    transform: skew(0.28deg);
+    clip: rect(232px, 9999px, 309px, 0);
+    transform: skew(0.94deg);
   }
   10% {
-    clip: rect(308px, 9999px, 309px, 0);
-    transform: skew(0.6deg);
-  }
-  15% {
-    clip: rect(65px, 9999px, 155px, 0);
-    transform: skew(0.41deg);
-  }
-  20% {
-    clip: rect(349px, 9999px, 18px, 0);
-    transform: skew(0.34deg);
-  }
-  25% {
-    clip: rect(281px, 9999px, 190px, 0);
+    clip: rect(22px, 9999px, 222px, 0);
     transform: skew(0.96deg);
   }
+  15% {
+    clip: rect(99px, 9999px, 38px, 0);
+    transform: skew(0.87deg);
+  }
+  20% {
+    clip: rect(9px, 9999px, 309px, 0);
+    transform: skew(0.08deg);
+  }
+  25% {
+    clip: rect(364px, 9999px, 236px, 0);
+    transform: skew(0.7deg);
+  }
   30% {
-    clip: rect(221px, 9999px, 181px, 0);
-    transform: skew(0.63deg);
-  }
-  35% {
-    clip: rect(50px, 9999px, 16px, 0);
-    transform: skew(0.84deg);
-  }
-  40% {
-    clip: rect(142px, 9999px, 271px, 0);
+    clip: rect(361px, 9999px, 311px, 0);
     transform: skew(0.99deg);
   }
+  35% {
+    clip: rect(352px, 9999px, 143px, 0);
+    transform: skew(0.35deg);
+  }
+  40% {
+    clip: rect(166px, 9999px, 40px, 0);
+    transform: skew(0.83deg);
+  }
   45% {
-    clip: rect(347px, 9999px, 397px, 0);
-    transform: skew(1deg);
+    clip: rect(114px, 9999px, 75px, 0);
+    transform: skew(0.25deg);
   }
   50% {
-    clip: rect(248px, 9999px, 17px, 0);
-    transform: skew(0.27deg);
+    clip: rect(6px, 9999px, 55px, 0);
+    transform: skew(0.33deg);
   }
   55% {
-    clip: rect(368px, 9999px, 170px, 0);
-    transform: skew(0.21deg);
+    clip: rect(227px, 9999px, 255px, 0);
+    transform: skew(0.33deg);
   }
   60% {
-    clip: rect(162px, 9999px, 215px, 0);
-    transform: skew(0.4deg);
+    clip: rect(300px, 9999px, 390px, 0);
+    transform: skew(0.66deg);
   }
   65% {
-    clip: rect(67px, 9999px, 395px, 0);
-    transform: skew(0.97deg);
+    clip: rect(327px, 9999px, 151px, 0);
+    transform: skew(0.18deg);
   }
   70% {
-    clip: rect(238px, 9999px, 311px, 0);
-    transform: skew(0.93deg);
+    clip: rect(3px, 9999px, 139px, 0);
+    transform: skew(0.29deg);
   }
   75% {
-    clip: rect(235px, 9999px, 10px, 0);
-    transform: skew(0.76deg);
+    clip: rect(63px, 9999px, 28px, 0);
+    transform: skew(0.59deg);
   }
   80% {
-    clip: rect(91px, 9999px, 199px, 0);
-    transform: skew(0.36deg);
+    clip: rect(83px, 9999px, 375px, 0);
+    transform: skew(0.28deg);
   }
   85% {
-    clip: rect(200px, 9999px, 208px, 0);
-    transform: skew(0.02deg);
+    clip: rect(306px, 9999px, 292px, 0);
+    transform: skew(0.64deg);
   }
   90% {
-    clip: rect(344px, 9999px, 79px, 0);
-    transform: skew(0.16deg);
+    clip: rect(300px, 9999px, 362px, 0);
+    transform: skew(0.64deg);
   }
   95% {
-    clip: rect(212px, 9999px, 301px, 0);
-    transform: skew(0.65deg);
+    clip: rect(345px, 9999px, 238px, 0);
+    transform: skew(0.01deg);
   }
   100% {
-    clip: rect(25px, 9999px, 33px, 0);
-    transform: skew(0.46deg);
+    clip: rect(204px, 9999px, 218px, 0);
+    transform: skew(0.13deg);
   }
 }
 @keyframes glitch-anim2 {
   0% {
-    clip: rect(89px, 9999px, 55px, 0);
-    transform: skew(0.84deg);
+    clip: rect(69px, 9999px, 99px, 0);
+    transform: skew(0.38deg);
   }
   5% {
-    clip: rect(72px, 9999px, 97px, 0);
-    transform: skew(0.57deg);
+    clip: rect(39px, 9999px, 37px, 0);
+    transform: skew(0.59deg);
   }
   10% {
-    clip: rect(48px, 9999px, 94px, 0);
-    transform: skew(0.49deg);
+    clip: rect(46px, 9999px, 14px, 0);
+    transform: skew(0.61deg);
   }
   15% {
-    clip: rect(90px, 9999px, 31px, 0);
-    transform: skew(0.5deg);
+    clip: rect(94px, 9999px, 72px, 0);
+    transform: skew(0.49deg);
   }
   20% {
-    clip: rect(69px, 9999px, 58px, 0);
-    transform: skew(0.73deg);
+    clip: rect(52px, 9999px, 13px, 0);
+    transform: skew(0.35deg);
   }
   25% {
-    clip: rect(14px, 9999px, 57px, 0);
-    transform: skew(0.06deg);
+    clip: rect(6px, 9999px, 75px, 0);
+    transform: skew(0.39deg);
   }
   30% {
-    clip: rect(60px, 9999px, 32px, 0);
-    transform: skew(0.29deg);
+    clip: rect(44px, 9999px, 97px, 0);
+    transform: skew(0.39deg);
   }
   35% {
-    clip: rect(72px, 9999px, 20px, 0);
-    transform: skew(0.88deg);
+    clip: rect(81px, 9999px, 23px, 0);
+    transform: skew(0.07deg);
   }
   40% {
-    clip: rect(34px, 9999px, 95px, 0);
-    transform: skew(0.52deg);
-  }
-  45% {
-    clip: rect(86px, 9999px, 42px, 0);
-    transform: skew(0.63deg);
-  }
-  50% {
-    clip: rect(7px, 9999px, 86px, 0);
-    transform: skew(0.95deg);
-  }
-  55% {
-    clip: rect(10px, 9999px, 37px, 0);
-    transform: skew(0.7deg);
-  }
-  60% {
-    clip: rect(46px, 9999px, 60px, 0);
-    transform: skew(0.25deg);
-  }
-  65% {
-    clip: rect(10px, 9999px, 3px, 0);
-    transform: skew(0.51deg);
-  }
-  70% {
-    clip: rect(22px, 9999px, 52px, 0);
+    clip: rect(2px, 9999px, 35px, 0);
     transform: skew(0.27deg);
   }
-  75% {
-    clip: rect(82px, 9999px, 36px, 0);
-    transform: skew(0.37deg);
+  45% {
+    clip: rect(98px, 9999px, 19px, 0);
+    transform: skew(0.39deg);
   }
-  80% {
-    clip: rect(14px, 9999px, 53px, 0);
+  50% {
+    clip: rect(10px, 9999px, 68px, 0);
+    transform: skew(0.4deg);
+  }
+  55% {
+    clip: rect(92px, 9999px, 66px, 0);
+    transform: skew(0.93deg);
+  }
+  60% {
+    clip: rect(36px, 9999px, 36px, 0);
     transform: skew(0.32deg);
   }
+  65% {
+    clip: rect(34px, 9999px, 15px, 0);
+    transform: skew(0.59deg);
+  }
+  70% {
+    clip: rect(9px, 9999px, 95px, 0);
+    transform: skew(0.62deg);
+  }
+  75% {
+    clip: rect(65px, 9999px, 71px, 0);
+    transform: skew(0.08deg);
+  }
+  80% {
+    clip: rect(83px, 9999px, 15px, 0);
+    transform: skew(0.83deg);
+  }
   85% {
-    clip: rect(30px, 9999px, 76px, 0);
-    transform: skew(0.78deg);
+    clip: rect(55px, 9999px, 53px, 0);
+    transform: skew(0.52deg);
   }
   90% {
-    clip: rect(73px, 9999px, 82px, 0);
-    transform: skew(0.89deg);
+    clip: rect(78px, 9999px, 14px, 0);
+    transform: skew(0.81deg);
   }
   95% {
-    clip: rect(55px, 9999px, 41px, 0);
-    transform: skew(0.42deg);
+    clip: rect(44px, 9999px, 44px, 0);
+    transform: skew(0.86deg);
   }
   100% {
-    clip: rect(89px, 9999px, 81px, 0);
-    transform: skew(0.61deg);
+    clip: rect(6px, 9999px, 4px, 0);
+    transform: skew(0.08deg);
   }
 }
 /* -------------------------------------------
@@ -1290,28 +1289,18 @@ page
   position: relative;
   height: 100vh;
   width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
   justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
 }
 .cyril-onepage .cyril-section .container, .cyril-onepage .cyril-section .no-gutters {
-  -webkit-transform: translateY(90px) scale(0.95);
   transform: translateY(90px) scale(0.95);
   opacity: 0;
-  -webkit-transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
-  -webkit-transition-delay: 0s;
   transition-delay: 0s;
 }
 .cyril-onepage .cyril-section.cyril-active .container, .cyril-onepage .cyril-section.cyril-active .no-gutters {
   opacity: 1;
-  -webkit-transform: translateY(0) scale(1);
   transform: translateY(0) scale(1);
 }
 @media screen and (max-width: 1200px) {
@@ -1352,14 +1341,11 @@ page
   .cyril-onepage {
     padding-bottom: 60px;
     opacity: 0;
-    -webkit-transform: translateY(90px) scale(0.95);
     transform: translateY(90px) scale(0.95);
-    -webkit-transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
     transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
   }
   .cyril-onepage.loaded {
     opacity: 1;
-    -webkit-transform: translateY(0) scale(1);
     transform: translateY(0) scale(1);
   }
   .cyril-onepage .cyril-section {
@@ -2170,11 +2156,13 @@ banner
 @media screen and (max-width: 1200px) {
   .cyril-banner .cyril-hero-mobile-photo {
     display: block;
+    margin-top: 50px;
   }
 }
 @media screen and (max-width: 1200px) {
   .cyril-banner .col-xl-5 {
     order: -1;
+    padding: 0 45px;
   }
 }
 .cyril-banner .cyril-banner-text {
@@ -2248,6 +2236,11 @@ banner
 .cyril-main-page #intro.cyril-banner.cyril-hero-collapsed {
   display: none !important;
 }
+@media screen and (max-width: 1200px) {
+  .cyril-main-page #intro.cyril-banner {
+    align-items: flex-start;
+  }
+}
 @media screen and (max-width: 768px) {
   .cyril-main-page #intro.cyril-banner {
     padding-top: 70px;
@@ -2275,8 +2268,10 @@ about
 }
 .cyril-about-person .cyril-avatar {
   width: 100%;
-  object-fit: cover;
-  object-position: center;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
   margin-right: 60px;
 }
 @media screen and (max-width: 1200px) {
@@ -2295,8 +2290,10 @@ about
 .cyril-about-person-2 .cyril-avatar {
   width: 160px;
   height: 160px;
-  object-fit: cover;
-  object-position: top;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: top;
+     object-position: top;
   border-radius: 50%;
 }
 @media screen and (max-width: 1200px) {
@@ -2752,8 +2749,10 @@ experience
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
 }
 
 .cyril-tags {
@@ -2859,8 +2858,10 @@ portfolio
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
   transform: scale(1);
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
   filter: grayscale(100%) brightness(180%) contrast(120%);
@@ -3153,4 +3154,4 @@ back to top
 
 .cyril-prototype-vid p {
   margin-bottom: -20px;
-}
+}/*# sourceMappingURL=style.css.map */

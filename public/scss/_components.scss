@@ -1121,6 +1121,7 @@ banner
 
         @media screen and (max-width: 1200px) {
             display: block;
+            margin-top: 50px;
         }
     }
 
@@ -1130,6 +1131,15 @@ banner
     & .col-xl-5 {
         @media screen and (max-width: 1200px) {
             order: -1;
+
+            // The hero sits in a full-bleed .container-full + no-gutters row
+            // (no 30px container padding, no 15px column padding), unlike
+            // About Me's Background section (plain .container + row), so
+            // .cyril-about-person's percentage width would render noticeably
+            // bigger here than there for the exact same 50%/70% value. Add
+            // back that same 45px (30 + 15) inset so it renders at the same
+            // size.
+            padding: 0 45px;
         }
     }
 
@@ -1213,6 +1223,16 @@ banner
         // no scroll-position math needed, instead of just hiding it in place.
         &.cyril-hero-collapsed {
             display: none !important;
+        }
+
+        // .cyril-banner-text is positioned absolutely at this width (see
+        // below), so align-items only actually affects the avatar (the one
+        // remaining normal-flow child) — center would otherwise vertically
+        // center it in the full 100vh box, unlike About Me's Background
+        // section where the same avatar just sits near the top of normal
+        // document flow. flex-start matches that positioning here too.
+        @media screen and (max-width: 1200px) {
+            align-items: flex-start;
         }
 
         // The base padding-top: 90px was sized for the About Me one-pager,
