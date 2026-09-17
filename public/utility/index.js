@@ -9,6 +9,26 @@ export const cyrilUtility = {
     }
   },
 
+  // The body::after noise-static overlay flickers on mobile while its own
+  // animation keeps running during a scroll (a fixed-position + animation
+  // repaint conflict on mobile Safari/Chrome that GPU-layer hints alone
+  // didn't fully fix). Pausing the animation for the duration of the scroll
+  // and resuming once it settles avoids the conflict without giving up the
+  // effect. Call once per page load (SiteLayout does this, so it covers
+  // every page) — it attaches a single listener for the page's lifetime.
+  pauseBgStaticOnScroll() {
+    const body = document.body;
+    let settleTimer;
+
+    window.addEventListener('scroll', () => {
+      body.classList.add('cyril-scrolling');
+      clearTimeout(settleTimer);
+      settleTimer = window.setTimeout(() => {
+        body.classList.remove('cyril-scrolling');
+      }, 150);
+    }, { passive: true });
+  },
+
   // Keeps the top/bottom chrome visible through a programmatic scroll (e.g.
   // landing on or jumping to My Work) instead of letting the normal
   // hide-on-scroll-down behavior hide it. Rather than guessing how long a

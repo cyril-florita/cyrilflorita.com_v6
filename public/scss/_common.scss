@@ -284,6 +284,16 @@ body {
         visibility: visible;
     }
 
+    // The will-change/backface-visibility hints above weren't enough on
+    // their own on mobile — this pauses the noise animation for the
+    // duration of an active scroll (toggled by cyrilUtility.pauseBgStaticOnScroll,
+    // called once in SiteLayout so it covers every page) and resumes it the
+    // moment scrolling stops, avoiding the repaint conflict entirely instead
+    // of trying to make it cheap enough to survive.
+    &.cyril-scrolling:after {
+        animation-play-state: paused;
+    }
+
     &.page-exit {
         animation: fadeOut 0.4s cubic-bezier(0.4, 0, 0.4, 1) forwards;
     }
