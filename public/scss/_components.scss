@@ -1109,18 +1109,27 @@ banner
         vertical-align: top;
 
         @media screen and (max-width: 1200px) {
-
-            width: 85%;
-            object-position: center;
-            height: auto;
-            left: 7%;
-            bottom: 0;
-
+            display: none;
         }
+    }
 
-        @media screen and (max-width: 768px) {
-            width: 100%;
-            left: auto;
+    // On tablet/mobile, swap the hero photo for the same avatar treatment
+    // used in the About Me "Background" section, instead of the bleed-style
+    // banner image (shown/hidden above).
+    & .cyril-hero-mobile-photo {
+        display: none;
+
+        @media screen and (max-width: 1200px) {
+            display: block;
+        }
+    }
+
+    // The photo column normally comes after the text column in the markup
+    // (desktop layout has text on the left, photo on the right) — reorder it
+    // to appear first on tablet/mobile, ahead of the text.
+    & .col-xl-5 {
+        @media screen and (max-width: 1200px) {
+            order: -1;
         }
     }
 
