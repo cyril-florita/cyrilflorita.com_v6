@@ -9,29 +9,33 @@ export const cyrilUtility = {
     }
   },
 
-  // The body::after noise-static overlay flickers on mobile while its own
-  // animation keeps running during a scroll (a fixed-position + animation
-  // repaint conflict on mobile Safari/Chrome that GPU-layer hints alone
-  // didn't fully fix). Pausing the animation for the duration of the scroll
-  // and resuming once it settles avoids the conflict without giving up the
-  // effect. Call once per page load (SiteLayout does this, so it covers
-  // every page) — it attaches a single listener for the page's lifetime.
-  //
-  // The same conflict happens on initial load too — the body's own 1s
-  // fade-in, images/fonts settling, and other mount effects all reflow at
-  // once, so the CSS starts the animation paused (see _common.scss) and
-  // this only turns it on after that busy window has passed.
+  // The body::after noise-static overlay flickers/jumps on mobile Safari.
+  // Current theory: iOS Safari's rubber-band bounce at the very top/bottom
+  // of the page keeps nudging position:fixed elements for a few hundred ms
+  // after native scroll events stop, and separately, the page's own initial
+  // load (body fade-in, images/fonts settling, mount effects) is a similar
+  // burst of reflow activity. Hiding the layer (opacity, not
+  // animation-play-state — see _common.scss for why) during those windows
+  // avoids showing the glitch without ever stopping the animation. Call
+  // once per page load (SiteLayout does this, so it covers every page) —
+  // it attaches listeners/patches for the page's lifetime.
   pauseBgStaticOnScroll() {
     const body = document.body;
     let settleTimer;
     let releaseAt = 0;
 
-    // `duration` is how long to stay paused *after this call*, not how long
+    const isNearBoundary = () => {
+      const doc = document.documentElement;
+      const atTop = window.scrollY <= 5;
+      const atBottom = window.scrollY + window.innerHeight >= doc.scrollHeight - 5;
+      return atTop || atBottom;
+    };
+
+    // `duration` is how long to stay hidden *after this call*, not how long
     // a scroll takes. releaseAt only ever moves later (never earlier) — a
-    // short reactive 150ms call arriving after a long proactive 700ms one
-    // (e.g. a real scroll happening alongside a click that also requested
-    // scrollTo) must not shrink the window back down and resume the
-    // animation mid-transition.
+    // short reactive call arriving after a longer one (e.g. a real scroll
+    // happening alongside a click that also requested scrollTo) must not
+    // shrink the window back down and reveal it mid-transition.
     const pause = (duration = 150) => {
       body.classList.add('cyril-scrolling');
       releaseAt = Math.max(releaseAt, Date.now() + duration);
@@ -42,20 +46,20 @@ export const cyrilUtility = {
       }, releaseAt - Date.now());
     };
 
-    // Covers real user scrolling (wheel/touch): 150ms after the last
-    // 'scroll' event is enough since those keep firing throughout.
-    window.addEventListener('scroll', () => pause(), { passive: true });
+    // Real user scrolling: 150ms after the last 'scroll' event is normally
+    // enough, but hold longer whenever we're at (or land on) the top/bottom
+    // edge, since that's where the rubber-band bounce happens.
+    window.addEventListener('scroll', () => pause(isNearBoundary() ? 600 : 150), { passive: true });
 
-    // Covers programmatic scrolls (Back to Top, My Work, the logo, etc.).
-    // These need a longer window than natural scrolling: they often also
-    // trigger their own ~0.4-0.5s CSS transition (hero reveal, page fade)
-    // alongside a scroll that may cover very little distance or none at
-    // all, so there aren't enough native 'scroll' events to keep extending
-    // a short pause — it would resume mid-transition and still flicker.
-    // Patching scrollTo/scrollIntoView once pauses it the instant a scroll
-    // is requested, with no gap. Guarded so navigating between pages
-    // (client-side, without a full reload) doesn't wrap it again on every
-    // mount.
+    // Programmatic scrolls (Back to Top, My Work, the logo, etc.) — these
+    // usually land exactly at an edge (top of the page, or a specific grid
+    // item), and also trigger their own ~0.4-0.5s CSS transition (hero
+    // reveal, page fade) alongside a scroll that may cover very little
+    // distance, so there aren't enough native 'scroll' events to keep
+    // extending a short pause on their own. Patching scrollTo/scrollIntoView
+    // once hides it the instant a scroll is requested, with no gap. Guarded
+    // so navigating between pages (client-side, without a full reload)
+    // doesn't wrap it again on every mount.
     if (!window.__cyrilScrollPatched) {
       window.__cyrilScrollPatched = true;
 
