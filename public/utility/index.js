@@ -16,6 +16,11 @@ export const cyrilUtility = {
   // and resuming once it settles avoids the conflict without giving up the
   // effect. Call once per page load (SiteLayout does this, so it covers
   // every page) — it attaches a single listener for the page's lifetime.
+  //
+  // The same conflict happens on initial load too — the body's own 1s
+  // fade-in, images/fonts settling, and other mount effects all reflow at
+  // once, so the CSS starts the animation paused (see _common.scss) and
+  // this only turns it on after that busy window has passed.
   pauseBgStaticOnScroll() {
     const body = document.body;
     let settleTimer;
@@ -27,6 +32,10 @@ export const cyrilUtility = {
         body.classList.remove('cyril-scrolling');
       }, 150);
     }, { passive: true });
+
+    window.setTimeout(() => {
+      body.classList.add('cyril-static-ready');
+    }, 1200);
   },
 
   // Keeps the top/bottom chrome visible through a programmatic scroll (e.g.

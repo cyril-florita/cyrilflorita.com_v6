@@ -267,6 +267,11 @@ body {
         background: transparent url(../img/bg-static.png) repeat 0 0;
         background-repeat: repeat;
         animation: bg-animation .2s infinite;
+        // Starts paused: the initial load has its own burst of repaints
+        // (body's fade-in, images/fonts settling, other mount effects) that
+        // this animation conflicts with just as badly as scrolling does.
+        // cyrilUtility.pauseBgStaticOnScroll turns it on once that settles.
+        animation-play-state: paused;
         opacity: var(--bg-static-opacity, 0.21);
         // Promotes this to its own GPU compositing layer — without this, a
         // fixed-position element animated this rapidly repaints on every
@@ -285,11 +290,18 @@ body {
     }
 
     // The will-change/backface-visibility hints above weren't enough on
-    // their own on mobile — this pauses the noise animation for the
-    // duration of an active scroll (toggled by cyrilUtility.pauseBgStaticOnScroll,
-    // called once in SiteLayout so it covers every page) and resumes it the
-    // moment scrolling stops, avoiding the repaint conflict entirely instead
-    // of trying to make it cheap enough to survive.
+    // their own on mobile — the animation starts paused (above) and only
+    // turns on once cyrilUtility.pauseBgStaticOnScroll (called once in
+    // SiteLayout, so it covers every page) confirms the initial load has
+    // settled.
+    &.cyril-static-ready:after {
+        animation-play-state: running;
+    }
+
+    // ...and it pauses again for the duration of any later scroll, resuming
+    // once that settles too — same repaint conflict, same fix. Must come
+    // after .cyril-static-ready above so "paused" wins when both classes are
+    // present (equal specificity, later rule wins).
     &.cyril-scrolling:after {
         animation-play-state: paused;
     }
