@@ -2,6 +2,116 @@
 @use 'variables';
 
 /* -------------------------------------------
+preloader
+------------------------------------------- */
+.cyril-preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    background: var(--color-bg);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+    overflow: hidden;
+    transition: opacity 0.5s cubic-bezier(0, 0, 0.3642, 1), visibility 0s linear 0s;
+
+    &.cyril-preloader-hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.5s cubic-bezier(0, 0, 0.3642, 1), visibility 0s linear 0.5s;
+    }
+
+    // Same noise texture + animation as body::after — animated on desktop,
+    // static (visible, not moving) on tablet/mobile, same as there, so this
+    // brief reuse doesn't reopen the mobile flicker issue that rule exists
+    // to avoid.
+    &::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        right: -50%;
+        bottom: -50%;
+        width: 200%;
+        height: 200%;
+        background: transparent url(../img/bg-static.png) repeat 0 0;
+        background-repeat: repeat;
+        animation: bg-animation .2s infinite;
+        opacity: var(--bg-static-opacity, 0.21);
+        pointer-events: none;
+
+        [data-theme="dark"] & {
+            opacity: 0.2;
+        }
+
+        @media screen and (max-width: 1200px) {
+            animation: none;
+        }
+    }
+
+    & .cyril-preloader-mark,
+    & .cyril-preloader-bar {
+        position: relative;
+        z-index: 1;
+    }
+
+    & .cyril-preloader-mark {
+        font-family: var(--font-atkinson);
+        font-size: 28px;
+        font-weight: bolder;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--color-text);
+        text-shadow: 3px 3px 0px variables.$soft;
+
+        & strong {
+            font-weight: inherit;
+        }
+
+        // Unlike the header logo (which shortens to just "C" at this width
+        // to save space in a persistent bar), the preloader has the whole
+        // screen and is a one-time moment — show the full wordmark always.
+    }
+
+    & .cyril-preloader-bar {
+        position: relative;
+        width: 140px;
+        height: 2px;
+        background: var(--color-soft);
+        overflow: hidden;
+
+        & span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40%;
+            height: 100%;
+            background: var(--color-accent);
+            animation: cyril-preloader-sweep 1.1s ease-in-out infinite;
+        }
+    }
+}
+
+@keyframes cyril-preloader-sweep {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(350%);
+    }
+}
+
+/* -------------------------------------------
 frame
 ------------------------------------------- */
 .cyril-frame {
@@ -190,6 +300,14 @@ page
 
     @media screen and (max-width: 768px) {
         padding-bottom: 20px;
+
+        & .cyril-section {
+            
+            padding-top: 30px;
+            padding-bottom: 30px;
+
+        }
+
     }
 }
 
@@ -1082,7 +1200,7 @@ banner
         }
     }
 
-    @media screen and (max-width: 450px) {
+    @media screen and (max-width: 768px) {
         padding-top: 120px;
         padding-bottom: 20px;
     }
@@ -1256,6 +1374,7 @@ banner
         // below positions the text absolutely, so it doesn't need this).
         @media screen and (max-width: 768px) {
             padding-top: 70px;
+            min-height: auto;
         }
     }
 }
@@ -1295,6 +1414,7 @@ about
 
     @media screen and (max-width: 768px) {
         width: 70%;
+        margin-top: 90px;
     }
 
 }

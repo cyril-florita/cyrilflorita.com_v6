@@ -3,6 +3,7 @@ import Isotope from "isotope-layout";
 import Link from "next/link";
 import { Fragment, useEffect, useRef, useState } from "react";
 import imagesLoaded from 'imagesloaded';
+import { showPreloader } from './Preloader';
 
 const PortfolioIsotope = () => {
 
@@ -33,6 +34,10 @@ const PortfolioIsotope = () => {
     try {
       sessionStorage.setItem("portfolioFilter", filterKey);
     } catch {}
+    // These are next/link client-side transitions, not full page reloads,
+    // so the preloader's own "wait for window.load" logic never fires for
+    // them — show it explicitly instead.
+    showPreloader();
   };
 
   useEffect(() => {

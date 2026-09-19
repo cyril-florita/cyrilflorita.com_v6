@@ -2,6 +2,7 @@
 
 import SiteLayout from "@/layout/SiteLayout";
 import { cyrilUtility } from "@/public/utility/index";
+import { onPreloaderHidden } from "@/components/Preloader";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import dynamic from 'next/dynamic';
@@ -24,16 +25,20 @@ const page = () => {
     // "Back to Portfolio" button below.
     sessionStorage.setItem('returnToProject', 'gty9');
     cyrilUtility.tpInner();
-    setTimeout(() => {
+    // Wait for the preloader to actually finish hiding before starting this
+    // page's own reveal, instead of racing it on a separate fixed timer.
+    const unsubscribePreloader = onPreloaderHidden(() => {
       const pageElement = document.querySelector('.cyril-page');
       if (pageElement) {
         pageElement.classList.add('cyril-active');
       }
-    }, 100);
+    });
 
     // Scroll Tracking
     cyrilUtility.trackScrollProgress(setScrollProgress);
 
+
+    return () => unsubscribePreloader();
   }, []);
 
   // Function to handle back navigation and save scroll position

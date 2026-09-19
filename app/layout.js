@@ -43,6 +43,7 @@ export const metadata = {
 };
 
 import { ClientThemeProvider } from '../components/ClientThemeProvider';
+import Preloader from '../components/Preloader';
 
 export default function RootLayout({ children }) {
   return (
@@ -63,6 +64,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="cyril-custom-scroll" suppressHydrationWarning={true}>
+        <Preloader />
         {/* Google Analytics */}
         <Script
           strategy="afterInteractive"

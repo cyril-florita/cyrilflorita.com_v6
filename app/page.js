@@ -113,6 +113,10 @@ const Index = () => {
   // Nav.js, or Header.js did to the hero.
   useEffect(() => {
     const handleWheel = (event) => {
+      // Desktop only — on tablet/mobile, scrolling to My Work should just
+      // be a normal scroll, not this hijacked hero <-> My Work hand-off.
+      if (window.innerWidth < 1200) return;
+
       if (transitioningRef.current) {
         event.preventDefault();
         return;
