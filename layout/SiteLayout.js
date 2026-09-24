@@ -34,6 +34,8 @@ const SiteLayout = ({ children, header, footer, noFooter }) => {
 
   return (
     <Fragment>
+      {/* First Tab stop: jump past the header/nav straight to the page. */}
+      <a className="cyril-skip-link" href="#main">Skip to content</a>
       <MotionEffects />
       {isProjectPage && <ScrollProgress />}
       <ZoomViewer />
@@ -42,7 +44,9 @@ const SiteLayout = ({ children, header, footer, noFooter }) => {
         <Header header={header} />
         {!noFooter && <Footer footer={footer} />}
       </div>
-      {children}
+      <main id="main" tabIndex={-1}>
+        {children}
+      </main>
       <div className="cyril-built">
         <p>Built with React, NextJS, &amp; some cool JS libraries &amp; plugins, in collaboration with <a className="cyril-dark" href="https://www.trae.ai" target="_blank">TRAE</a>, and with lots of <i className="fa fa-heart"></i></p>
       </div>

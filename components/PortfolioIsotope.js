@@ -200,38 +200,39 @@ const PortfolioIsotope = () => {
 
       <div className="cyril-filter">
         <div className="container">
-          <ul className="cyril-filter-links cyril-mb-30">
+          <ul className="cyril-filter-links cyril-mb-30" aria-label="Filter projects">
 
             <li>
-              <a
-                href="#"
-                className={`c-pointer ${activeBtn("*")}`}
+              <button
+                type="button"
+                className={activeBtn("*")}
+                aria-pressed={filterKey === "*"}
                 onClick={handleFilterKeyChange("*")}
               >
                 All
-              </a>
+              </button>
             </li>
 
             <li>
-              <a
-                href="#"
-                data-filter=".fil-uix"
-                className={`c-pointer ${activeBtn("fil-uix")}`}
+              <button
+                type="button"
+                className={activeBtn("fil-uix")}
+                aria-pressed={filterKey === "fil-uix"}
                 onClick={handleFilterKeyChange("fil-uix")}
               >
                 App/Web/UI/UX
-              </a>
+              </button>
             </li>
 
             <li>
-              <a
-                href="#"
-                data-filter=".fil-branding-marketing-illustration"
-                className={`c-pointer ${activeBtn("fil-branding-marketing-illustration")}`}
+              <button
+                type="button"
+                className={activeBtn("fil-branding-marketing-illustration")}
+                aria-pressed={filterKey === "fil-branding-marketing-illustration"}
                 onClick={handleFilterKeyChange("fil-branding-marketing-illustration")}
               >
                 Branding, Marketing, &amp; Illustration
-              </a>
+              </button>
             </li>
           </ul>
         </div>

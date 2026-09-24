@@ -160,7 +160,7 @@ const PARALLAX_LAYERS = [
 
 // Section titles that type in letter by letter (the hero headline does the
 // same, driven by playHeroIntro in app/page.js).
-const TITLE_SELECTOR = '#portfolio-start h2.glitch, .cyril-onepage .cyril-section h2.glitch, .cyril-case-title';
+const TITLE_SELECTOR = '#portfolio-start h2.glitch, .cyril-onepage .cyril-section h2.glitch, .cyril-case-title, .cyril-contact-title, .cyril-not-found-title';
 
 // Dotted background circles: how much further than their section they
 // travel while it scrolls (fraction of the section's offset from the top of
@@ -181,6 +181,84 @@ const hasFinePointer = () =>
 const MotionEffects = () => {
   const dotRef = useRef(null);
   const ringRef = useRef(null);
+
+  // Smooth mouse-wheel scrolling: each wheel notch glides to its target
+  // instead of jumping. Mouse wheels only (trackpads already have native
+  // momentum), desktop only, never with reduced motion. Stays out of the way
+  // of everything that owns the wheel: the hero↔My Work hand-off in
+  // app/page.js and the viewer (both preventDefault first — this listener is
+  // registered after them, so it sees that), and About Me's snapping.
+  useEffect(() => {
+    if (prefersReducedMotion() || !hasFinePointer()) return;
+
+    let target = window.scrollY;
+    let current = window.scrollY;
+    let rafId = null;
+
+    const stop = () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = null;
+    };
+
+    const step = () => {
+      // Someone else moved the page (keys, scrollbar, "to top", a jump) —
+      // let them have it.
+      if (Math.abs(window.scrollY - Math.round(current)) > 2) {
+        stop();
+        return;
+      }
+      current += (target - current) * 0.12;
+      if (Math.abs(target - current) < 0.5) {
+        current = target;
+        rafId = null;
+      } else {
+        rafId = requestAnimationFrame(step);
+      }
+      // 'instant' — app/page.js sets scroll-behavior: smooth on <html>,
+      // which would otherwise animate every frame of this glide.
+      window.scrollTo({ top: current, behavior: 'instant' });
+    };
+
+    const onWheel = (e) => {
+      if (e.defaultPrevented) {
+        stop();
+        return;
+      }
+      if (e.ctrlKey || e.deltaX || document.body.classList.contains('cyril-custom-scroll') ||
+          document.querySelector('.cyril-zoom')) return;
+      const byLine = e.deltaMode === 1;
+      if (!byLine && Math.abs(e.deltaY) < 50) return; // trackpad — leave it native
+      e.preventDefault();
+      if (!rafId) {
+        current = window.scrollY;
+        target = current;
+      }
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      target = Math.max(0, Math.min(max, target + (byLine ? e.deltaY * 40 : e.deltaY)));
+      if (!rafId) rafId = requestAnimationFrame(step);
+    };
+
+    // Registered on the next tick so it runs after the page's own wheel
+    // handlers (same target/phase → registration order).
+    const timer = setTimeout(() => window.addEventListener('wheel', onWheel, { passive: false }), 0);
+    window.addEventListener('keydown', stop);
+    window.addEventListener('pointerdown', stop);
+    return () => {
+      clearTimeout(timer);
+      stop();
+      window.removeEventListener('wheel', onWheel);
+      window.removeEventListener('keydown', stop);
+      window.removeEventListener('pointerdown', stop);
+    };
+  }, []);
+
+  // Pause the background noise animation while the tab is hidden.
+  useEffect(() => {
+    const sync = () => document.documentElement.classList.toggle('cyril-tab-hidden', document.hidden);
+    sync();
+    document.addEventListener('visibilitychange', sync);
+    return () => document.removeEventListener('visibilitychange', sync);
+  }, []);
 
   // Subheader scramble — once per element, as it scrolls into view.
   useEffect(() => {

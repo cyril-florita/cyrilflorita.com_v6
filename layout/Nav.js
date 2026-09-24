@@ -13,10 +13,13 @@ const Nav = () => {
   const [isTopSectionActive, setIsTopSectionActive] = useState(false);
   const [isPortfolioActive, setIsPortfolioActive] = useState(false);
 
-  // Every route besides "/" and "/about-me" is a My Work project page (they
-  // no longer live under a shared "/portfolio" prefix), so "My Work" should
-  // be active there regardless of the hero/scroll state that governs "/".
-  const isProjectPage = pathname !== '/' && pathname !== '/about-me';
+  // Project (Work) pages are the ones using the case-study layout — checked
+  // on the page itself rather than by URL, so other routes (e.g. the 404
+  // page, served at any missing URL) don't light up "My Work".
+  const [isProjectPage, setIsProjectPage] = useState(false);
+  useEffect(() => {
+    setIsProjectPage(!!document.querySelector('.cyril-case-page'));
+  }, [pathname]);
 
   // Track whether the hero has been exited on "/", so "My Work" only lights
   // up once the user has actually scrolled/clicked their way to it — never
@@ -109,6 +112,7 @@ const Nav = () => {
         <ul>
           <li className={(isPortfolioActive || isProjectPage) ? "cyril-active" : ""}>
             <a
+              aria-current={(isPortfolioActive || isProjectPage) ? "page" : undefined}
               href="/"
               onClick={async (e) => {
                 e.preventDefault();
@@ -130,6 +134,7 @@ const Nav = () => {
           </li>
           <li className={pathname.startsWith("/about-me") ? "cyril-active" : ""}>
             <a
+              aria-current={pathname.startsWith("/about-me") ? "page" : undefined}
               href="/about-me"
               className={isTopSectionActive ? 'cyril-disabled' : ''}
               onClick={handleIntroClick}

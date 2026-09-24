@@ -1,6 +1,7 @@
 "use client";
 import Intro from "@/components/01 Intro";
 import SiteLayout from "@/layout/SiteLayout";
+import ContactBand from "@/components/ContactBand";
 import dynamic from "next/dynamic";
 import { applyHiddenState, cyrilUtility, hideSplitTitle, scrambleInTitle } from "@/public/utility/index";
 import { onPreloaderHidden } from "@/components/Preloader";
@@ -233,6 +234,7 @@ const Index = () => {
             />
           </div>
           <PortfolioIsotope />
+          <ContactBand />
         </div>
       </div>
     </SiteLayout>

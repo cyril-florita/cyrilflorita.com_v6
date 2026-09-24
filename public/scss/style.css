@@ -15,6 +15,7 @@
   --color-frame: var(--color-dark);
   --color-frameshadow: var(--color-soft);
   --color-border: var(--color-soft);
+  --tracking-caps: 0.08em;
 }
 
 [data-theme=dark] {
@@ -34,56 +35,6 @@
 
 .cyril-pagination {
   z-index: 999;
-}
-
-.mfp-container {
-  padding: 0;
-}
-
-.mfp-content {
-  vertical-align: top;
-  padding: 80px 20px 20px;
-  max-width: 1200px;
-}
-.mfp-figure {
-  position: relative;
-  margin: 0 auto;
-}
-
-/* image popup */
-img.mfp-img {
-  position: absolute;
-  width: 100%;
-  padding: 0 !important;
-}
-
-.mfp-bottom-bar {
-  top: unset;
-  bottom: 14px;
-  right: 0;
-}
-
-.mfp-wrap {
-  position: unset;
-}
-
-.mfp-gallery-container {
-  position: fixed;
-  z-index: 9999;
-  height: 100%;
-  width: 100%;
-}
-
-.mfp-gallery-container .mfp-wrap {
-  position: unset;
-}
-
-.content_popup_warp.mfp-wrap.popup-box-inline {
-  margin: auto;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 .float-right {
@@ -240,6 +191,37 @@ main
   background: var(--color-accent);
 }
 
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+main:focus {
+  outline: none;
+}
+
+.cyril-skip-link {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 100002;
+  padding: 12px 20px;
+  font-family: var(--font-atkinson);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--color-light);
+  background-color: var(--color-accent);
+  transform: translateY(-200%);
+  transition: transform 0.2s ease;
+}
+.cyril-skip-link:focus-visible {
+  transform: none;
+  outline-offset: 2px;
+}
+
 .container-full {
   width: 100%;
 }
@@ -280,7 +262,16 @@ body:after {
   background: transparent url(../img/bg-static.png) repeat 0 0;
   background-repeat: repeat;
   animation: bg-animation 0.2s infinite;
+  will-change: transform;
   opacity: var(--bg-static-opacity, 0.21);
+}
+html.cyril-tab-hidden body:after {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  body:after {
+    animation: none;
+  }
 }
 [data-theme=dark] body:after {
   opacity: 0.2;
@@ -1029,6 +1020,11 @@ text set in the data-text attribute. */
   text-shadow: -2px 0 #00fff9, 2px 2px var(--color-accent);
   animation: glitch-anim2 1s infinite linear alternate-reverse;
 }
+@media (prefers-reduced-motion: reduce) {
+  .glitch::before, .glitch::after {
+    display: none;
+  }
+}
 
 /* Creates an animation with 20 steaps. For each step, it calculates 
 a percentage for the specific step. It then generates a random clip
@@ -1036,174 +1032,174 @@ box to be used for the random glitch effect. Also adds a very subtle
 skew to change the 'thickness' of the glitch.*/
 @keyframes glitch-anim {
   0% {
-    clip: rect(256px, 9999px, 380px, 0);
-    transform: skew(0.43deg);
+    clip: rect(266px, 9999px, 49px, 0);
+    transform: skew(0.2deg);
   }
   5% {
-    clip: rect(92px, 9999px, 369px, 0);
-    transform: skew(0.33deg);
+    clip: rect(336px, 9999px, 114px, 0);
+    transform: skew(0.08deg);
   }
   10% {
-    clip: rect(51px, 9999px, 237px, 0);
-    transform: skew(0.51deg);
+    clip: rect(72px, 9999px, 336px, 0);
+    transform: skew(0.58deg);
   }
   15% {
-    clip: rect(105px, 9999px, 367px, 0);
-    transform: skew(0.35deg);
+    clip: rect(77px, 9999px, 232px, 0);
+    transform: skew(0.63deg);
   }
   20% {
-    clip: rect(195px, 9999px, 360px, 0);
-    transform: skew(0.31deg);
+    clip: rect(226px, 9999px, 103px, 0);
+    transform: skew(0.6deg);
   }
   25% {
-    clip: rect(238px, 9999px, 88px, 0);
-    transform: skew(0.14deg);
+    clip: rect(333px, 9999px, 64px, 0);
+    transform: skew(0.2deg);
   }
   30% {
-    clip: rect(55px, 9999px, 305px, 0);
-    transform: skew(0.49deg);
+    clip: rect(377px, 9999px, 141px, 0);
+    transform: skew(0.38deg);
   }
   35% {
-    clip: rect(333px, 9999px, 360px, 0);
-    transform: skew(0.43deg);
+    clip: rect(158px, 9999px, 149px, 0);
+    transform: skew(0.95deg);
   }
   40% {
-    clip: rect(145px, 9999px, 359px, 0);
-    transform: skew(0.33deg);
+    clip: rect(24px, 9999px, 279px, 0);
+    transform: skew(0.52deg);
   }
   45% {
-    clip: rect(232px, 9999px, 278px, 0);
-    transform: skew(0.79deg);
+    clip: rect(35px, 9999px, 167px, 0);
+    transform: skew(0.65deg);
   }
   50% {
-    clip: rect(225px, 9999px, 173px, 0);
-    transform: skew(0.3deg);
+    clip: rect(353px, 9999px, 86px, 0);
+    transform: skew(0.46deg);
   }
   55% {
-    clip: rect(126px, 9999px, 342px, 0);
-    transform: skew(0.4deg);
+    clip: rect(338px, 9999px, 218px, 0);
+    transform: skew(0.34deg);
   }
   60% {
-    clip: rect(124px, 9999px, 124px, 0);
-    transform: skew(0.8deg);
+    clip: rect(346px, 9999px, 100px, 0);
+    transform: skew(0.11deg);
   }
   65% {
-    clip: rect(158px, 9999px, 182px, 0);
-    transform: skew(0.72deg);
+    clip: rect(243px, 9999px, 104px, 0);
+    transform: skew(0.65deg);
   }
   70% {
-    clip: rect(329px, 9999px, 28px, 0);
-    transform: skew(0.64deg);
+    clip: rect(136px, 9999px, 136px, 0);
+    transform: skew(0.09deg);
   }
   75% {
-    clip: rect(351px, 9999px, 199px, 0);
+    clip: rect(57px, 9999px, 265px, 0);
     transform: skew(0.15deg);
   }
   80% {
-    clip: rect(63px, 9999px, 328px, 0);
-    transform: skew(0.08deg);
+    clip: rect(344px, 9999px, 20px, 0);
+    transform: skew(0.22deg);
   }
   85% {
-    clip: rect(349px, 9999px, 129px, 0);
-    transform: skew(0.32deg);
+    clip: rect(367px, 9999px, 193px, 0);
+    transform: skew(0.78deg);
   }
   90% {
-    clip: rect(235px, 9999px, 178px, 0);
-    transform: skew(0.56deg);
+    clip: rect(315px, 9999px, 205px, 0);
+    transform: skew(0.52deg);
   }
   95% {
-    clip: rect(206px, 9999px, 140px, 0);
-    transform: skew(0.2deg);
+    clip: rect(78px, 9999px, 291px, 0);
+    transform: skew(0.43deg);
   }
   100% {
-    clip: rect(124px, 9999px, 332px, 0);
-    transform: skew(0.02deg);
+    clip: rect(216px, 9999px, 107px, 0);
+    transform: skew(0.09deg);
   }
 }
 @keyframes glitch-anim2 {
   0% {
-    clip: rect(58px, 9999px, 15px, 0);
-    transform: skew(0.16deg);
+    clip: rect(81px, 9999px, 71px, 0);
+    transform: skew(0.62deg);
   }
   5% {
-    clip: rect(78px, 9999px, 62px, 0);
-    transform: skew(0.39deg);
+    clip: rect(16px, 9999px, 92px, 0);
+    transform: skew(0.37deg);
   }
   10% {
-    clip: rect(7px, 9999px, 34px, 0);
-    transform: skew(0.55deg);
+    clip: rect(39px, 9999px, 31px, 0);
+    transform: skew(0.05deg);
   }
   15% {
-    clip: rect(10px, 9999px, 64px, 0);
-    transform: skew(0.9deg);
+    clip: rect(48px, 9999px, 29px, 0);
+    transform: skew(0.6deg);
   }
   20% {
-    clip: rect(72px, 9999px, 91px, 0);
-    transform: skew(0.22deg);
+    clip: rect(45px, 9999px, 26px, 0);
+    transform: skew(0.97deg);
   }
   25% {
-    clip: rect(28px, 9999px, 69px, 0);
-    transform: skew(0.53deg);
+    clip: rect(65px, 9999px, 19px, 0);
+    transform: skew(0.72deg);
   }
   30% {
-    clip: rect(44px, 9999px, 98px, 0);
-    transform: skew(0.58deg);
+    clip: rect(25px, 9999px, 92px, 0);
+    transform: skew(0.01deg);
   }
   35% {
-    clip: rect(65px, 9999px, 68px, 0);
-    transform: skew(0.56deg);
+    clip: rect(59px, 9999px, 51px, 0);
+    transform: skew(0.07deg);
   }
   40% {
-    clip: rect(25px, 9999px, 48px, 0);
-    transform: skew(0.24deg);
-  }
-  45% {
-    clip: rect(79px, 9999px, 62px, 0);
+    clip: rect(25px, 9999px, 20px, 0);
     transform: skew(0.31deg);
   }
+  45% {
+    clip: rect(91px, 9999px, 11px, 0);
+    transform: skew(0.11deg);
+  }
   50% {
-    clip: rect(26px, 9999px, 48px, 0);
-    transform: skew(0.02deg);
+    clip: rect(69px, 9999px, 72px, 0);
+    transform: skew(0.97deg);
   }
   55% {
-    clip: rect(8px, 9999px, 42px, 0);
-    transform: skew(0.22deg);
+    clip: rect(35px, 9999px, 45px, 0);
+    transform: skew(0.82deg);
   }
   60% {
-    clip: rect(85px, 9999px, 2px, 0);
-    transform: skew(0.68deg);
-  }
-  65% {
-    clip: rect(77px, 9999px, 97px, 0);
-    transform: skew(0.15deg);
-  }
-  70% {
-    clip: rect(66px, 9999px, 10px, 0);
-    transform: skew(0.4deg);
-  }
-  75% {
-    clip: rect(2px, 9999px, 30px, 0);
-    transform: skew(1deg);
-  }
-  80% {
-    clip: rect(1px, 9999px, 83px, 0);
+    clip: rect(61px, 9999px, 15px, 0);
     transform: skew(0.3deg);
   }
+  65% {
+    clip: rect(32px, 9999px, 41px, 0);
+    transform: skew(0.37deg);
+  }
+  70% {
+    clip: rect(5px, 9999px, 44px, 0);
+    transform: skew(0.43deg);
+  }
+  75% {
+    clip: rect(83px, 9999px, 80px, 0);
+    transform: skew(0.47deg);
+  }
+  80% {
+    clip: rect(66px, 9999px, 70px, 0);
+    transform: skew(0.83deg);
+  }
   85% {
-    clip: rect(80px, 9999px, 40px, 0);
-    transform: skew(0.48deg);
+    clip: rect(56px, 9999px, 14px, 0);
+    transform: skew(0.52deg);
   }
   90% {
-    clip: rect(79px, 9999px, 53px, 0);
-    transform: skew(0.36deg);
+    clip: rect(18px, 9999px, 24px, 0);
+    transform: skew(0.95deg);
   }
   95% {
-    clip: rect(53px, 9999px, 15px, 0);
-    transform: skew(0.42deg);
+    clip: rect(47px, 9999px, 27px, 0);
+    transform: skew(0.64deg);
   }
   100% {
-    clip: rect(1px, 9999px, 73px, 0);
-    transform: skew(0.11deg);
+    clip: rect(32px, 9999px, 72px, 0);
+    transform: skew(0.4deg);
   }
 }
 /* -------------------------------------------
@@ -1265,6 +1261,13 @@ preloader
   background: transparent url(../img/bg-static.png) repeat 0 0;
   background-repeat: repeat;
   animation: bg-animation 0.2s infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cyril-preloader::before {
+    animation: none;
+  }
+}
+.cyril-preloader::before {
   opacity: var(--bg-static-opacity, 0.21);
   pointer-events: none;
 }
@@ -1735,47 +1738,6 @@ page
 @media screen and (max-width: 1200px) {
   .cyril-page {
     margin: 0;
-  }
-}
-.cyril-page.cyril-project-page ul {
-  margin-left: 60px;
-}
-.cyril-page.cyril-project-page img {
-  display: block;
-  width: 100%;
-  border: solid 2px var(--color-frame);
-  padding: 10px;
-}
-.cyril-page.cyril-project-page .cyril-top-banner {
-  padding-bottom: 20px;
-}
-.cyril-page.cyril-project-page .cyril-top-banner img {
-  width: 100%;
-  max-width: 1240px;
-  display: block;
-  margin: 0 auto 0;
-  border: none;
-}
-.cyril-page.cyril-project-page .cyril-top-banner img.w-border {
-  border: solid 2px var(--color-dark);
-  padding: 10px;
-  width: 77%;
-}
-@media screen and (max-width: 768px) {
-  .cyril-page.cyril-project-page .cyril-top-banner img.w-border {
-    width: 100%;
-  }
-}
-.cyril-page.cyril-project-page .cyril-project-content .cyril-project-main-graphic {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  border: solid 2px var(--color-dark);
-}
-@media screen and (min-width: 1440px) {
-  .cyril-page.cyril-project-page .cyril-project-content {
-    width: 77%;
-    margin: 0 auto;
   }
 }
 
@@ -2945,7 +2907,13 @@ experience
 .cyril-filter ul li:last-child {
   margin-right: 30px;
 }
-.cyril-filter ul li a {
+.cyril-filter ul li a, .cyril-filter ul li button {
+  font: inherit;
+  letter-spacing: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
   text-decoration: none;
   color: inherit;
   line-height: 100%;
@@ -2953,13 +2921,13 @@ experience
   font-weight: 600;
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
 }
-.cyril-filter ul li a:hover {
+.cyril-filter ul li a:hover, .cyril-filter ul li button:hover {
   color: var(--color-accent);
 }
-.cyril-filter ul li a.cyril-current {
+.cyril-filter ul li a.cyril-current, .cyril-filter ul li button.cyril-current {
   color: var(--color-accent);
 }
-.cyril-filter ul li a.cyril-current::after {
+.cyril-filter ul li a.cyril-current::after, .cyril-filter ul li button.cyril-current::after {
   content: "";
   display: block;
   position: absolute;
@@ -2970,7 +2938,7 @@ experience
   background-color: var(--color-accent);
 }
 @media screen and (max-width: 1024px) {
-  .cyril-filter ul li a {
+  .cyril-filter ul li a, .cyril-filter ul li button {
     font-size: 14px;
   }
 }
@@ -3015,74 +2983,18 @@ experience
   .cyril-filter ul li:last-child {
     margin-right: 5px;
   }
-  .cyril-filter ul li a {
+  .cyril-filter ul li a,
+  .cyril-filter ul li button {
     border: solid 2px var(--color-border);
     padding: 3px 15px;
   }
-  .cyril-filter ul li a.cyril-current {
+  .cyril-filter ul li a.cyril-current,
+  .cyril-filter ul li button.cyril-current {
     border-color: var(--color-accent);
   }
-  .cyril-filter ul li a.cyril-current:after {
+  .cyril-filter ul li a.cyril-current:after,
+  .cyril-filter ul li button.cyril-current:after {
     display: none;
-  }
-}
-
-.cyril-pagination-panel {
-  font-family: var(--font-atkinson);
-  position: relative;
-  padding: 90px 0 130px;
-  border-top: solid 2px var(--color-frame);
-  display: flex;
-  justify-content: space-between;
-}
-.cyril-pagination-panel::before {
-  content: "";
-  position: absolute;
-  top: 5px;
-  right: -5px;
-  left: 5px;
-  border-bottom: 2px solid var(--color-frameshadow);
-}
-.cyril-pagination-panel .cyril-pagination-numbers {
-  display: flex;
-}
-.cyril-pagination-panel .cyril-pagination-numbers li {
-  list-style-type: none;
-  margin-right: 15px;
-}
-.cyril-pagination-panel .cyril-pagination-numbers li:last-child {
-  margin-right: 0;
-}
-.cyril-pagination-panel .cyril-pagination-numbers li a {
-  text-decoration: none;
-  cursor: pointer;
-  width: 60px;
-  height: 60px;
-  border: solid 2px var(--color-dark);
-  font-weight: 600;
-  font-size: 14px;
-  color: var(--color-dark);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 6px 6px 0 0 var(--color-soft);
-  transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
-}
-.cyril-pagination-panel .cyril-pagination-numbers li a:hover {
-  box-shadow: 0px 0px 0 0 var(--color-soft);
-}
-.cyril-pagination-panel .cyril-pagination-numbers li.cyril-active a {
-  background-color: var(--color-accent);
-  color: var(--color-light);
-  border-color: var(--color-accent);
-}
-@media screen and (max-width: 767px) {
-  .cyril-pagination-panel {
-    flex-direction: column;
-    align-items: center;
-  }
-  .cyril-pagination-panel .cyril-pagination-numbers {
-    margin-bottom: 15px;
   }
 }
 
@@ -3545,17 +3457,6 @@ back to top
   width: 100%;
 }
 
-.cyril-video {
-  width: 100%;
-  height: 100%;
-  border: solid 2px var(--color-dark);
-  box-shadow: 7px 7px 0px 0px rgba(16, 16, 16, 0.18);
-}
-
-.cyril-prototype-vid p {
-  margin-bottom: -20px;
-}
-
 @media screen and (min-width: 1201px) {
   .cyril-main-page .container {
     max-width: none;
@@ -3563,6 +3464,134 @@ back to top
     padding-right: 60px;
   }
 }
+/* -------------------------------------------
+
+404 (app/not-found.js)
+
+------------------------------------------- */
+.cyril-not-found {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  padding: 160px 0 120px;
+}
+.cyril-not-found .cyril-not-found-title {
+  margin: 10px 0 30px;
+  font-size: clamp(120px, 22vw, 320px);
+  line-height: 0.85;
+}
+
+.cyril-not-found-lede {
+  max-width: 34ch;
+  margin: 0 0 50px;
+  font-size: 22px;
+  line-height: 1.5;
+}
+@media screen and (max-width: 768px) {
+  .cyril-not-found-lede {
+    font-size: 18px;
+  }
+}
+
+/* -------------------------------------------
+
+contact band (components/ContactBand.js)
+
+------------------------------------------- */
+.cyril-contact {
+  position: relative;
+  padding: 160px 0 170px;
+}
+.cyril-main-page .cyril-contact {
+  border-top: 2px solid var(--color-frame);
+}
+.cyril-main-page .cyril-contact::before {
+  content: "";
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  right: -5px;
+  border-top: 2px solid var(--color-frameshadow);
+}
+.cyril-onepage .cyril-contact {
+  width: 100%;
+  padding: 0;
+}
+@media screen and (max-width: 768px) {
+  .cyril-contact {
+    padding: 100px 0 110px;
+  }
+}
+
+.cyril-contact .cyril-contact-title {
+  margin: 0 0 30px;
+  font-size: clamp(44px, 7vw, 120px);
+  line-height: 0.95;
+}
+
+.cyril-contact-lede {
+  max-width: 34ch;
+  margin: 0 0 50px;
+  font-size: 22px;
+  line-height: 1.5;
+}
+@media screen and (max-width: 768px) {
+  .cyril-contact-lede {
+    font-size: 18px;
+  }
+}
+
+.cyril-contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 30px;
+  margin-bottom: 60px;
+}
+
+.cyril-contact-email {
+  margin: 0 0 30px;
+  font-family: var(--font-atkinson);
+  font-size: clamp(22px, 3vw, 40px);
+  font-weight: 700;
+}
+.cyril-contact-email a {
+  color: inherit;
+  text-decoration: none;
+  background-image: linear-gradient(var(--color-accent), var(--color-accent));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 3px;
+  transition: background-size 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+}
+.cyril-contact-email a:hover {
+  color: var(--color-accent);
+  background-size: 100% 3px;
+}
+
+.cyril-contact-profiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 34px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.cyril-contact-profiles a {
+  font-family: var(--font-atkinson);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  text-decoration: none;
+  color: inherit;
+  opacity: 0.75;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+.cyril-contact-profiles a:hover {
+  opacity: 1;
+  color: var(--color-accent);
+}
+
 /* -------------------------------------------
 
 case study (components/case/CaseStudy.js)
@@ -3610,7 +3639,7 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
   align-items: center;
   gap: 16px;
   margin-bottom: 30px;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--tracking-caps);
 }
 
 .cyril-case-eyebrow-sep {
@@ -3677,7 +3706,7 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
   margin: 0 0 10px;
   font-size: 13px;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: var(--tracking-caps);
   opacity: 0.6;
 }
 .cyril-case-fact dd {
@@ -3741,11 +3770,11 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
   font-family: var(--font-atkinson);
   font-size: 14px;
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: var(--tracking-caps);
   text-transform: uppercase;
   text-decoration: none;
   color: inherit;
-  opacity: 0.45;
+  opacity: 0.6;
   transition: opacity 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 .cyril-case-toc a:hover {
@@ -3796,7 +3825,7 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
 .cyril-case-section-num {
   font-size: 14px;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: var(--tracking-caps);
   color: var(--color-accent);
 }
 
@@ -3892,7 +3921,7 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
 .cyril-case-figure figcaption {
   margin-top: 16px;
   font-size: 13px;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--tracking-caps);
   opacity: 0.75;
 }
 .cyril-case-figure figcaption::before {
@@ -3992,7 +4021,7 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
   margin: 14px 0 0;
   font-size: 13px;
   line-height: 1.5;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--tracking-caps);
   opacity: 0.75;
 }
 
@@ -4019,7 +4048,7 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
   margin-top: 20px;
   font-size: 13px;
   font-style: normal;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--tracking-caps);
   opacity: 0.7;
 }
 @media screen and (max-width: 768px) {
@@ -4060,7 +4089,7 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
   z-index: 1;
   margin-bottom: 20px;
   font-size: 14px;
-  letter-spacing: 0.1em;
+  letter-spacing: var(--tracking-caps);
   opacity: 0.7;
 }
 
@@ -4248,7 +4277,7 @@ zoom viewer (components/ZoomViewer.js)
   justify-content: center;
   gap: 18px;
   font-size: 14px;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--tracking-caps);
   text-align: center;
   color: var(--color-text);
   opacity: 0;

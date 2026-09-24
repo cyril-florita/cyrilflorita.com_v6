@@ -10,6 +10,7 @@ const Pagination = ({ direction }) => {
       <div className="cyril-dot" data-index={2} data-name="Skills" />
       <div className="cyril-dot" data-index={3} data-name="Tools" />
       <div className="cyril-dot" data-index={4} data-name="Education" />
+      <div className="cyril-dot" data-index={5} data-name="Contact" />
     </div>
   );
 };

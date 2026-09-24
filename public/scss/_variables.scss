@@ -15,6 +15,9 @@
     --color-frame: var(--color-dark);
     --color-frameshadow: var(--color-soft);
     --color-border: var(--color-soft);
+    // Letter-spacing for small uppercase labels (captions, eyebrows, facts,
+    // index items). Headline-sized uppercase stays tighter.
+    --tracking-caps: 0.08em;
 }
 
 // Dark theme colors

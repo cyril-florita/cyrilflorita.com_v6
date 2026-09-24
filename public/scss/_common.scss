@@ -5,61 +5,6 @@
     z-index: 999;
 }
 
-.mfp-container {
-    padding: 0;
-}
-
-.mfp-content {
-    vertical-align: top;
-    padding: 80px 20px 20px;
-    max-width: 1200px;
-
-    @media screen and (min-width: 1200px) {}
-
-    @media screen and (max-width: 768px) {}
-}
-
-.mfp-figure {
-    position: relative;
-    margin: 0 auto;
-}
-
-/* image popup */
-img.mfp-img {
-    position: absolute;
-    width: 100%;
-    padding: 0 !important;
-}
-
-.mfp-bottom-bar {
-    top: unset;
-    bottom: 14px;
-    right: 0;
-}
-
-.mfp-wrap {
-    position: unset;
-}
-
-.mfp-gallery-container {
-    position: fixed;
-    z-index: 9999;
-    height: 100%;
-    width: 100%;
-}
-
-.mfp-gallery-container .mfp-wrap {
-    position: unset;
-}
-
-.content_popup_warp.mfp-wrap.popup-box-inline {
-    margin: auto;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
 .float-right {
     float: right !important;
     margin: 0 0 40px 40px;
@@ -226,6 +171,42 @@ main
     background: variables.$accent;
 }
 
+// Keyboard focus: a clear orange ring (the custom cursor gives keyboard users
+// nothing to follow). :focus-visible, so mouse clicks don't show it.
+:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+}
+
+// The <main> landmark is a skip-link target, not an interactive element.
+main:focus {
+    outline: none;
+}
+
+// "Skip to content" — off-screen until focused (first Tab on any page).
+.cyril-skip-link {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 100002;
+    padding: 12px 20px;
+    font-family: var(--font-atkinson);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--color-light);
+    background-color: var(--color-accent);
+    transform: translateY(-200%);
+    transition: transform 0.2s ease;
+
+    &:focus-visible {
+        transform: none;
+        outline-offset: 2px;
+    }
+}
+
 .container-full {
     width: 100%;
 }
@@ -269,7 +250,20 @@ body {
         background: transparent url(../img/bg-static.png) repeat 0 0;
         background-repeat: repeat;
         animation: bg-animation .2s infinite;
+        // Its own GPU layer, so the jitter never repaints the page.
+        will-change: transform;
         opacity: var(--bg-static-opacity, 0.21);
+
+        // No point animating while the tab isn't visible (class toggled in
+        // MotionEffects.js), or for people who asked for less motion — the
+        // texture stays, it just stops moving.
+        html.cyril-tab-hidden & {
+            animation-play-state: paused;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            animation: none;
+        }
 
         [data-theme="dark"] & {
             opacity: 0.2;
@@ -1054,6 +1048,14 @@ text set in the data-text attribute. */
         left: -2px;
         text-shadow: -2px 0 #00fff9, 2px 2px variables.$accent;
         animation: glitch-anim2 1s infinite linear alternate-reverse;
+    }
+
+    // The glitch is pure motion — drop it for people who asked for less.
+    @media (prefers-reduced-motion: reduce) {
+        &::before,
+        &::after {
+            display: none;
+        }
     }
 }
 

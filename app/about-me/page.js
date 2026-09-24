@@ -5,6 +5,7 @@ import Experience from "@/components/03 Experience";
 import Skills from "@/components/04 Skills";
 import Tools from "@/components/05 Tools";
 import Education from "@/components/06 Education";
+import ContactBand from "@/components/ContactBand";
 import Pagination from "@/layout/Pagination";
 import SiteLayout from "@/layout/SiteLayout";
 import { onepage } from "@/public/utility/onepage";
@@ -42,6 +43,11 @@ const AboutMe = () => {
         {/* 06 education */}
         <Education />
         {/* 06 education end */}
+
+        {/* 07 contact */}
+        <div className="cyril-section cyril-op-space-90" id="contact">
+          <ContactBand />
+        </div>
 
       </div>
 

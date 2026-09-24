@@ -112,8 +112,52 @@ export const onepage = () => {
     }
   }
 
+  // Keyboard equivalents of the wheel snapping. Normal scrolling is off on
+  // desktop (body overflow: hidden), so without these, keyboard users could
+  // never get past the first section.
+  const KEYS_NEXT = ["ArrowDown", "PageDown"];
+  const KEYS_PREV = ["ArrowUp", "PageUp"];
+  function handleKey(event) {
+    if (window.innerWidth < 1200 || scrolling || !body.classList.contains('cyril-custom-scroll')) return;
+    if (event.altKey || event.ctrlKey || event.metaKey) return;
+    if (document.querySelector('.cyril-zoom')) return; // image viewer has the keyboard
+    const tag = event.target?.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || event.target?.isContentEditable) return;
+
+    let index = getCurrentIndex();
+    const isSpace = event.key === ' ' && tag !== 'BUTTON' && tag !== 'A';
+    if (KEYS_NEXT.includes(event.key) || (isSpace && !event.shiftKey)) index++;
+    else if (KEYS_PREV.includes(event.key) || (isSpace && event.shiftKey)) index--;
+    else if (event.key === 'Home') index = 0;
+    else if (event.key === 'End') index = sections.length - 1;
+    else return;
+
+    event.preventDefault();
+    index = Math.max(0, Math.min(sections.length - 1, index));
+    if (index === getCurrentIndex()) return;
+    scrollToSection(index);
+    setTimeout(function () {
+      scrolling = false;
+    }, 1200);
+  }
+
+  // Tabbing onto something in a section that isn't showing: bring that
+  // section in (its contents are faded out until it's active).
+  function handleFocus(event) {
+    if (window.innerWidth < 1200 || !body.classList.contains('cyril-custom-scroll')) return;
+    const section = event.target?.closest?.('.cyril-section');
+    const index = Array.from(sections).indexOf(section);
+    if (index === -1 || index === getCurrentIndex()) return;
+    scrollToSection(index);
+    setTimeout(function () {
+      scrolling = false;
+    }, 1200);
+  }
+
   if (body.classList.contains('cyril-custom-scroll')) {
     window.addEventListener("wheel", handleWheel, { passive: false });
+    window.addEventListener("keydown", handleKey);
+    document.addEventListener("focusin", handleFocus);
   }
 
   // Set the initial scroll position to the top of the document after a short delay

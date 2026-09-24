@@ -4,7 +4,6 @@ import { onPreloaderHidden, wipeThen } from "@/components/Preloader";
 // .cyril-grid-item (Isotope positions those with its own transforms) or
 // About Me's sections (onepage.js already animates those on desktop).
 const REVEAL_SELECTORS = [
-  '.cyril-project-content > *',
   // Case-study layout (components/case/CaseStudy.js). Stats and grids are
   // revealed piece by piece rather than as one block.
   '.cyril-case-eyebrow',
@@ -17,6 +16,9 @@ const REVEAL_SELECTORS = [
   '.cyril-case-stat',
   '.cyril-case-grid > *',
   '.cyril-case-end > *',
+  // Contact band on the home page (on About Me it's a snap section and
+  // staggers with the rest).
+  '.cyril-main-page .cyril-contact .container > *',
   '#portfolio-start .cyril-top-banner',
   '.cyril-filter',
   '.cyril-portfolio-item',
@@ -29,7 +31,7 @@ const REVEAL_SELECTORS = [
 // slide — the slide's own class list is owned by Swiper);
 // .cyril-text-row = a Skills/Tools entry (icon + label together);
 // .cyril-text-icon = an Education icon, whose texts then fade separately.
-const SECTION_REVEAL_SELECTORS = '.subheader, h2, p, .cyril-about-person, .cyril-slide-inner, .cyril-timeline-nav-2, .cyril-text-row, .cyril-text-icon';
+const SECTION_REVEAL_SELECTORS = '.subheader, h2, p, .cyril-about-person, .cyril-slide-inner, .cyril-timeline-nav-2, .cyril-text-row, .cyril-text-icon, .cyril-contact-actions, .cyril-contact-profiles';
 
 export const getSectionRevealElements = (section) => {
   const matched = Array.from(section.querySelectorAll(SECTION_REVEAL_SELECTORS));
