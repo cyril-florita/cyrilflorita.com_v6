@@ -16,9 +16,14 @@ const REVEAL_SELECTORS = [
   '.cyril-case-stat',
   '.cyril-case-grid > *',
   '.cyril-case-end > *',
-  // Contact band on the home page (on About Me it's a snap section and
-  // staggers with the rest).
-  '.cyril-main-page .cyril-contact .container > *',
+  // Contact band on the home page, piece by piece (on About Me it's a snap
+  // section and staggers with the rest).
+  '.cyril-main-page .cyril-contact .subheader',
+  '.cyril-main-page .cyril-contact-title',
+  '.cyril-main-page .cyril-contact-lede',
+  '.cyril-main-page .cyril-contact-actions > *',
+  '.cyril-main-page .cyril-contact-email',
+  '.cyril-main-page .cyril-contact-profiles li',
   '#portfolio-start .cyril-top-banner',
   '.cyril-filter',
   '.cyril-portfolio-item',
@@ -31,7 +36,7 @@ const REVEAL_SELECTORS = [
 // slide — the slide's own class list is owned by Swiper);
 // .cyril-text-row = a Skills/Tools entry (icon + label together);
 // .cyril-text-icon = an Education icon, whose texts then fade separately.
-const SECTION_REVEAL_SELECTORS = '.subheader, h2, p, .cyril-about-person, .cyril-slide-inner, .cyril-timeline-nav-2, .cyril-text-row, .cyril-text-icon, .cyril-contact-actions, .cyril-contact-profiles';
+const SECTION_REVEAL_SELECTORS = '.subheader, h2, p, .cyril-about-person, .cyril-slide-inner, .cyril-timeline-nav-2, .cyril-text-row, .cyril-text-icon, .cyril-contact-actions > *, .cyril-contact-profiles li';
 
 export const getSectionRevealElements = (section) => {
   const matched = Array.from(section.querySelectorAll(SECTION_REVEAL_SELECTORS));
@@ -205,9 +210,19 @@ const getRevealObserver = () => {
       if (!entry.isIntersecting) return;
       const el = entry.target;
       // Stagger siblings that enter together, capped so nothing waits long.
-      // About Me's first section gets the slower, hero-style cadence.
-      const step = el.closest('#background') ? 180 : 80;
-      el.style.transitionDelay = `${Math.min(batchIndex * step, step * 5)}ms`;
+      // About Me's first section and the contact band get the slower,
+      // hero-style cadence (and the bigger rise — see _components.scss).
+      const dramatic = el.closest('#background, .cyril-contact');
+      const step = dramatic ? 180 : 80;
+      const delay = Math.min(batchIndex * step, dramatic ? 1400 : 400);
+      el.style.transitionDelay = `${delay}ms`;
+      // Once it has landed, drop the reveal classes (no visual change at that
+      // point) so the element gets its own transitions back — e.g. a
+      // button's hover easing.
+      setTimeout(() => {
+        el.classList.remove('cyril-reveal', 'cyril-revealed');
+        el.style.transitionDelay = '';
+      }, delay + (dramatic ? 1300 : 700));
       batchIndex++;
       el.classList.add('cyril-revealed');
       revealObserver.unobserve(el);

@@ -5,11 +5,15 @@
 // a résumé download button. Styles: "contact band" in _components.scss.
 const EMAIL = "cyril.florita@pm.me";
 
+const LINKEDIN = "https://www.linkedin.com/in/cyrilflorita";
+
+// Same links, order, and icons as the footer (layout/Footer.js), minus
+// email — the band already has an email button and address.
 const PROFILES = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/cyrilflorita" },
-  { label: "Behance", href: "https://www.behance.net/cyrilflorita" },
-  { label: "GitHub", href: "https://github.com/cyril-florita" },
-  { label: "X", href: "https://x.com/CyrilFlorita" },
+  { label: "Behance", href: "https://www.behance.net/cyrilflorita", icon: "fab fa-behance" },
+  { label: "GitHub", href: "https://github.com/cyril-florita", icon: "fab fa-github" },
+  { label: "LinkedIn", href: LINKEDIN, icon: "fab fa-linkedin-in" },
+  { label: "Twitter/X", href: "https://x.com/CyrilFlorita", icon: "fab fa-x-twitter" },
 ];
 
 const ContactBand = ({ resume }) => (
@@ -26,7 +30,7 @@ const ContactBand = ({ resume }) => (
       </p>
       <div className="cyril-contact-actions">
         <a className="cyril-button" href={`mailto:${EMAIL}`}>Email Me</a>
-        <a className="cyril-button cyril-type-2" href={PROFILES[0].href} target="_blank" rel="noopener noreferrer">
+        <a className="cyril-button cyril-type-2" href={LINKEDIN} target="_blank" rel="noopener noreferrer">
           LinkedIn
         </a>
         {resume && (
@@ -39,9 +43,11 @@ const ContactBand = ({ resume }) => (
         <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
       </p>
       <ul className="cyril-contact-profiles" aria-label="Profiles">
-        {PROFILES.map(({ label, href }) => (
+        {PROFILES.map(({ label, href, icon }) => (
           <li key={label}>
-            <a href={href} target="_blank" rel="noopener noreferrer">{label}</a>
+            <a href={href} aria-label={label} target="_blank" rel="noopener noreferrer">
+              <i className={icon} aria-hidden="true" />
+            </a>
           </li>
         ))}
       </ul>

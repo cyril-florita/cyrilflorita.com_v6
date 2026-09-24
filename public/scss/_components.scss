@@ -558,11 +558,13 @@ page
 // with a longer stagger (onepage.js / revealOnScroll space the delays out).
 // It still exits fast on desktop via the base .cyril-stagger rule.
 @media screen and (min-width: 1201px) {
-    .cyril-onepage #background .cyril-stagger {
+    .cyril-onepage #background .cyril-stagger,
+    .cyril-onepage #contact .cyril-stagger {
         transform: translateY(80px);
     }
 
-    .cyril-onepage #background.cyril-active .cyril-stagger {
+    .cyril-onepage #background.cyril-active .cyril-stagger,
+    .cyril-onepage #contact.cyril-active .cyril-stagger {
         transform: none;
         transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         // The shorthand above resets the delay — restore the per-piece stagger.
@@ -593,7 +595,10 @@ page
     }
 }
 
-#background .cyril-reveal {
+// (Also the contact band — end of "/" and About Me's #contact — which
+// closes the pages the way the hero opens them.)
+#background .cyril-reveal,
+.cyril-contact .cyril-reveal {
     transform: translateY(80px);
     transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 
@@ -605,7 +610,10 @@ page
 @media (prefers-reduced-motion: reduce) {
     .cyril-onepage #background .cyril-stagger,
     .cyril-onepage #background.cyril-active .cyril-stagger,
-    #background .cyril-reveal {
+    .cyril-onepage #contact .cyril-stagger,
+    .cyril-onepage #contact.cyril-active .cyril-stagger,
+    #background .cyril-reveal,
+    .cyril-contact .cyril-reveal {
         opacity: 1;
         transform: none;
         transition: none;
@@ -2745,10 +2753,17 @@ contact band (components/ContactBand.js)
     margin: 0 0 30px;
     font-size: clamp(44px, 7vw, 120px);
     line-height: 0.95;
+
+    // Desktop: always two lines — "Let's work" / "together". In em so it
+    // scales with the clamp: "Let's work" is ~5.8em wide, the whole title
+    // ~11.3em, so 7em fits the first two words but never all three.
+    @media screen and (min-width: 1201px) {
+        max-width: 7em;
+    }
 }
 
 .cyril-contact-lede {
-    max-width: 34ch;
+    max-width: 40ch;
     margin: 0 0 50px;
     font-size: 22px;
     line-height: 1.5;
@@ -2790,20 +2805,22 @@ contact band (components/ContactBand.js)
 .cyril-contact-profiles {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px 34px;
-    margin: 0;
+    gap: 8px 14px;
+    margin: 0 0 0 -12px; // align the first icon's glyph with the text above
     padding: 0;
     list-style: none;
 
+    // Icon links, like the footer's: 44px touch targets.
     & a {
-        font-family: var(--font-atkinson);
-        font-size: 14px;
-        font-weight: 600;
-        letter-spacing: var(--tracking-caps);
-        text-transform: uppercase;
-        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        font-size: 20px;
         color: inherit;
-        opacity: 0.75;
+        text-decoration: none;
+        opacity: 0.8;
         transition: opacity 0.3s ease, color 0.3s ease;
 
         &:hover {
