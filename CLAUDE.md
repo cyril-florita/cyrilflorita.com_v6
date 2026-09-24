@@ -14,8 +14,13 @@ npm run build    # next build — produces the static export in out/
 npm run start    # next start (rarely useful since the site is statically exported)
 npm run lint     # next lint
 npm run deploy   # next build && node deploy.js — builds, then SFTP-uploads out/ using SFTP_HOST/SFTP_PORT/SFTP_USERNAME/SFTP_PASSWORD from .env
-npm run thumbs   # regenerate WebP thumbnails + size manifest for public/img/portfolio (run after adding/replacing images)
+npm run thumbs   # WebP thumbnails + size manifest for public/img/portfolio
+npm run og       # 1200×630 share images (public/og/) + app icons
 ```
+
+`npm run build` runs both first (`prebuild`; they skip unchanged files), and `npm run deploy` goes through `npm run build`. Running `npx next build` directly skips them.
+
+Font Awesome is subset to the icons actually used: `scripts/subset-icons.py` (needs `pip install fonttools brotli`) writes `public/fonts/font-awesome/css/fa-subset.css` + `webfonts/fa-*-subset.woff2`, which `app/layout.js` imports instead of `all.min.css`. **Re-run it after using a new `fa-*` icon**, or the new icon renders blank.
 
 ### Images: thumbnails + lazy loading
 
@@ -79,6 +84,22 @@ Individual graphics in the My Work grid (no pages of their own, `fil-marketing`,
 - `layout/ScrollProgress.js`: accent progress bar on project pages.
 - Theme switch cross-fade: `.cyril-theme-switching` on `<html>`, added briefly by `ThemeToggle.js`.
 - All of it respects `prefers-reduced-motion`. Avoid continuously running animations on tablet/mobile (see the bg noise flicker history).
+
+### Accessibility conventions
+
+- Keyboard: About Me's desktop snap scroller also responds to ↓/↑, PageDown/PageUp, Space/Shift+Space, Home/End, and snaps to a section when focus moves into it (`onepage.js`). Keep that parity if the snapping changes.
+- `:focus-visible` shows an orange outline site-wide; `SiteLayout` renders a "Skip to content" link targeting `<main id="main">`.
+- Portfolio filters are `<button aria-pressed>`; the active nav link has `aria-current="page"` (project pages detected by `.cyril-case-page`, so the 404 page doesn't light up "My Work").
+- Motion: every animation must respect `prefers-reduced-motion` (the bg noise, preloader texture and glitch copies are disabled under it).
+
+### Other pieces
+
+- `components/ContactBand.js`: "Let's work together" band at the end of `/` and as About Me's last snap section (`#contact`, 6th pagination dot). Pass `resume="/path.pdf"` to show a résumé button.
+- `app/not-found.js` → `out/404.html` (Apache: `ErrorDocument 404 /404.html` in `public/.htaccess`).
+- `components/VideoFigure.js`: `preload="none"` + poster (`public/img/thumbs/portfolio/<name>-poster.webp`, sizes in `components/data/videoSizes.json`, grabbed from each mp4 via headless Chrome — there's no ffmpeg); plays only while ≥40% visible.
+- Smooth mouse-wheel glide (desktop, mouse wheels only, not trackpads) lives in `MotionEffects.js`; it yields to any wheel handler that calls `preventDefault()` first (hero hand-off, viewer) and to About Me's snapping.
+- SEO: per-route server `layout.js` files hold each page's `metadata` (pages themselves are client components); `app/sitemap.js`, `app/robots.js`, `app/manifest.js`; Person JSON-LD in `app/layout.js`.
+- Small uppercase labels use `letter-spacing: var(--tracking-caps)` (0.08em, `_variables.scss`).
 
 ### Path aliases
 
