@@ -162,7 +162,7 @@ export const CaseFigure = ({ src, alt, caption, ratio, size = "full" }) => {
   const hint = SIZES_HINT[layout === "offset" ? "two" : layout || size];
   return (
   <figure className={`cyril-case-figure cyril-case-figure-${size}`}>
-    <a href={src} className="cyril-project-figure mfp-image" data-effect="mfp-zoom-in">
+    <a href={src} className="cyril-project-figure">
       <div className="cyril-cover" style={ratio ? { aspectRatio: ratio } : undefined}>
         <img {...imageProps(src, hint)} alt={alt} loading="lazy" decoding="async" className={ratio ? "cyril-case-cropped" : undefined} />
         <div className="cyril-hover-link">

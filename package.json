@@ -4,16 +4,16 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/make-thumbs.mjs && node scripts/make-og.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "next build && node deploy.js",
+    "deploy": "npm run build && node deploy.js",
     "thumbs": "node scripts/make-thumbs.mjs",
     "og": "node scripts/make-og.mjs"
   },
   "dependencies": {
     "dotenv": "^17.4.2",
-    "imagesloaded": "^5.0.0",
     "isotope-layout": "^3.0.6",
     "next": "^16.2.6",
     "react": "^19.2.6",

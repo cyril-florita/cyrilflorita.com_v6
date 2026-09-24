@@ -2,9 +2,9 @@ import "@css/plugins/bootstrap-grid.css";
 import { Atkinson_Hyperlegible, Space_Grotesk } from "next/font/google";
 import Script from "next/script";
 
-import "@css/plugins/magnific-popup.css";
 import "@css/plugins/swiper.min.css";
-import "@fonts/font-awesome/css/all.min.css";
+// Only the icons the site uses — regenerate with scripts/subset-icons.py.
+import "@fonts/font-awesome/css/fa-subset.css";
 
 import "@scss/style.css";
 

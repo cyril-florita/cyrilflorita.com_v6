@@ -6,7 +6,8 @@ import { Fragment } from "react";
 
 const HEADLINE = "Cyril Florita";
 
-const Banner = ( { bgImage = "/img/cyril-florita-profile.png" } ) => {
+// WebP (82 KB, keeps the transparency) instead of the 686 KB PNG original.
+const Banner = ( { bgImage = "/img/cyril-florita-profile.webp" } ) => {
   const pathname = usePathname();
   return (
     <div className="cyril-section cyril-banner cyril-banner-right" id="intro">
@@ -73,11 +74,12 @@ const Banner = ( { bgImage = "/img/cyril-florita-profile.png" } ) => {
           <div className="col-xl-5">
             <img
               src={bgImage}
-              alt="face"
+              fetchPriority="high"
+              alt="Cyril Florita"
               className="cyril-banner-image"
             />
             <div className="cyril-about-person cyril-hero-mobile-photo cyril-mb-30">
-              <img src="/img/cyril-florita-profile.png" alt="Cyril Florita" className="cyril-avatar" />
+              <img src={bgImage} alt="Cyril Florita" className="cyril-avatar" fetchPriority="high" />
             </div>
           </div>
         </div>
