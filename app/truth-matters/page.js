@@ -3,7 +3,7 @@
 import SiteLayout from "@/layout/SiteLayout";
 import { cyrilUtility } from "@/public/utility/index";
 import { onPreloaderHidden } from "@/components/Preloader";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 const page = () => {
@@ -11,7 +11,6 @@ const page = () => {
   const router = useRouter();
 
   // Scroll Progress
-  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     // Mark which project to scroll back to whenever the user leaves this
@@ -29,7 +28,6 @@ const page = () => {
     });
 
     // Scroll Tracking
-    cyrilUtility.trackScrollProgress(setScrollProgress);
 
 
     return () => unsubscribePreloader();
@@ -47,19 +45,6 @@ const page = () => {
 
   return (
     <SiteLayout>
-      {/* Progress Bar */}
-      <div
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          height: '7px',
-          width: `${scrollProgress}%`,
-          backgroundColor: '#fa4729',
-          zIndex: 1000,
-          transition: 'width 0.1s ease-out'
-        }}
-      />
       <div>
         <div className="cyril-page cyril-project-page">
 

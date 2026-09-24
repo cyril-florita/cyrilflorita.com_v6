@@ -1,4 +1,241 @@
+import { onPreloaderHidden } from "@/components/Preloader";
+
+// Elements that fade/slide in as they scroll into view. Deliberately not
+// .cyril-grid-item (Isotope positions those with its own transforms) or
+// About Me's sections (onepage.js already animates those on desktop).
+const REVEAL_SELECTORS = [
+  '.cyril-project-content > *',
+  '#portfolio-start .cyril-top-banner',
+  '.cyril-filter',
+  '.cyril-portfolio-item',
+];
+
+// About Me: the individual pieces inside a section that fade in one by one.
+// Anything nested inside another match is dropped (e.g. the <p>s inside an
+// Experience card), so each card fades as one unit instead of twice.
+// .cyril-slide-inner = an Experience card (the wrapper inside each Swiper
+// slide — the slide's own class list is owned by Swiper);
+// .cyril-text-row = a Skills/Tools entry (icon + label together);
+// .cyril-text-icon = an Education icon, whose texts then fade separately.
+const SECTION_REVEAL_SELECTORS = '.subheader, h2, p, .cyril-about-person, .cyril-slide-inner, .cyril-timeline-nav-2, .cyril-text-row, .cyril-text-icon';
+
+export const getSectionRevealElements = (section) => {
+  const matched = Array.from(section.querySelectorAll(SECTION_REVEAL_SELECTORS));
+  const set = new Set(matched);
+  return matched.filter((el) => {
+    for (let p = el.parentElement; p && p !== section; p = p.parentElement) {
+      if (set.has(p)) return false;
+    }
+    return true;
+  });
+};
+
+const SCRAMBLE_CHARS = '!<>-_\\/[]{}=+*^?#01';
+const randomGlyph = () => SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+
+const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+// A random letter in the same case as `char`.
+const randomLetter = (char) => {
+  const letter = LETTERS[Math.floor(Math.random() * LETTERS.length)];
+  return char === char.toLowerCase() ? letter.toLowerCase() : letter;
+};
+
+// Scrambles every text node under `el` through random glyphs, resolving
+// left to right, without touching the markup (so nested accent spans keep
+// their styling). Used for subheaders (layout/MotionEffects.js).
+export const scrambleText = (el, duration = 800) => {
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+  const nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+
+  const originals = nodes.map((n) => n.textContent);
+  const total = originals.join('').length;
+  if (!total) return;
+
+  const start = performance.now();
+  const frame = (now) => {
+    const progress = Math.min((now - start) / duration, 1);
+    let index = 0;
+    nodes.forEach((node, i) => {
+      node.textContent = originals[i].split('').map((char) => {
+        const resolved = index++ / total < progress;
+        if (resolved || !char.trim()) return char;
+        return randomGlyph();
+      }).join('');
+    });
+    if (progress < 1) requestAnimationFrame(frame);
+    else nodes.forEach((node, i) => { node.textContent = originals[i]; });
+  };
+  requestAnimationFrame(frame);
+};
+
+// Types in pre-split letter elements (hidden by CSS until they get
+// cyril-char-on) one after another, each flickering through random letters
+// before settling on its real one. Each letter's width is pinned to its
+// final width meanwhile so wider/narrower letters don't jostle the line.
+// Returns a cancel function that snaps every letter back to its real text.
+export const scrambleInChars = (chars, { step = 30, settle = 225, onDone } = {}) => {
+  const items = chars.map((el) => {
+    el.dataset.char = el.dataset.char ?? el.textContent;
+    el.textContent = el.dataset.char;
+    el.style.width = '';
+    return { el, final: el.dataset.char, width: el.getBoundingClientRect().width };
+  });
+  items.forEach(({ el, width }) => {
+    el.style.width = `${width}px`;
+    el.style.textAlign = 'center';
+  });
+
+  const settleItem = (item) => {
+    item.el.textContent = item.final;
+    item.el.style.width = '';
+    item.el.style.textAlign = '';
+    item.settled = true;
+  };
+
+  let rafId;
+  const start = performance.now();
+  const frame = (now) => {
+    const elapsed = now - start;
+    let done = true;
+    items.forEach((item, i) => {
+      if (item.settled) return;
+      const t = elapsed - i * step;
+      if (t < 0) { done = false; return; }
+      item.el.classList.add('cyril-char-on');
+      if (t >= settle) {
+        settleItem(item);
+      } else {
+        item.el.textContent = randomLetter(item.final);
+        done = false;
+      }
+    });
+    if (done) onDone?.();
+    else rafId = requestAnimationFrame(frame);
+  };
+  rafId = requestAnimationFrame(frame);
+
+  return () => {
+    cancelAnimationFrame(rafId);
+    items.forEach((item) => { if (!item.settled) settleItem(item); });
+  };
+};
+
+// Splits a plain-text element into .cyril-word > .cyril-char spans (words
+// stay unbreakable inline-blocks so it only wraps between them) for
+// scrambleInTitle. Idempotent. The hero h1 is split in its JSX instead.
+export const splitChars = (el) => {
+  if (el.classList.contains('cyril-split')) return;
+  const text = el.textContent.trim();
+  el.classList.add('cyril-split');
+  el.setAttribute('aria-label', text);
+  el.textContent = '';
+  text.split(/\s+/).forEach((word, w) => {
+    if (w > 0) el.appendChild(document.createTextNode(' '));
+    const wordEl = document.createElement('span');
+    wordEl.className = 'cyril-word';
+    wordEl.setAttribute('aria-hidden', 'true');
+    word.split('').forEach((char) => {
+      const charEl = document.createElement('span');
+      charEl.className = 'cyril-char';
+      charEl.textContent = char;
+      wordEl.appendChild(charEl);
+    });
+    el.appendChild(wordEl);
+  });
+};
+
+// Hides a split title's letters (and its glitch copies — see
+// .cyril-split-hidden) until scrambleInTitle types them in.
+export const hideSplitTitle = (el) => {
+  el._cyrilScrambleCancel?.();
+  el.classList.add('cyril-split-hidden');
+  el.querySelectorAll('.cyril-char').forEach((c) => c.classList.remove('cyril-char-on'));
+};
+
+// Types a split title in letter by letter (restarting if already running),
+// then reveals it fully, glitch effect included.
+export const scrambleInTitle = (el, options = {}) => {
+  hideSplitTitle(el);
+  el._cyrilScrambleCancel = scrambleInChars(Array.from(el.querySelectorAll('.cyril-char')), {
+    ...options,
+    onDone: () => {
+      el._cyrilScrambleCancel = null;
+      el.classList.remove('cyril-split-hidden');
+      options.onDone?.();
+    },
+  });
+};
+
+// Puts elements into an entrance's hidden starting state (by adding
+// `className`) instantly. Just adding the class would *transition* them from
+// visible to hidden, and if the entrance starts before that finishes it
+// reverses from nearly visible — i.e. no visible entrance at all.
+export const applyHiddenState = (els, className) => {
+  els.forEach((el) => {
+    el.style.transition = 'none';
+    el.classList.add(className);
+  });
+  void document.body.offsetHeight;
+  els.forEach((el) => { el.style.transition = ''; });
+};
+
+let revealObserver;
+
+const getRevealObserver = () => {
+  if (revealObserver) return revealObserver;
+
+  revealObserver = new IntersectionObserver((entries) => {
+    let batchIndex = 0;
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      // Stagger siblings that enter together, capped so nothing waits long.
+      // About Me's first section gets the slower, hero-style cadence.
+      const step = el.closest('#background') ? 180 : 80;
+      el.style.transitionDelay = `${Math.min(batchIndex * step, step * 5)}ms`;
+      batchIndex++;
+      el.classList.add('cyril-revealed');
+      revealObserver.unobserve(el);
+    });
+  }, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
+
+  return revealObserver;
+};
+
 export const cyrilUtility = {
+
+  // Tags matching elements right away (while the page/preloader still hides
+  // them, so nothing visibly blinks out), then starts watching them only once
+  // the preloader is gone, so anything already in view animates in visibly.
+  // Idempotent — safe to call again when late content mounts (e.g. the
+  // dynamically-imported portfolio grid).
+  revealOnScroll() {
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) return;
+
+    const candidates = Array.from(document.querySelectorAll(REVEAL_SELECTORS.join(',')));
+
+    // About Me on tablet/mobile scrolls normally (no snapping), so its pieces
+    // reveal on scroll like everything else. On desktop, onepage.js staggers
+    // them per section instead — don't double up there.
+    if (window.innerWidth <= 1200) {
+      document.querySelectorAll('.cyril-onepage .cyril-section').forEach((section) => {
+        candidates.push(...getSectionRevealElements(section));
+      });
+    }
+
+    const els = candidates.filter((el) => !el.dataset.reveal);
+
+    els.forEach((el) => { el.dataset.reveal = 'pending'; });
+    applyHiddenState(els, 'cyril-reveal');
+
+    onPreloaderHidden(() => {
+      const observer = getRevealObserver();
+      els.forEach((el) => {
+        if (el.isConnected) observer.observe(el);
+      });
+    });
+  },
 
   tpInner() {
     var topPanel = document.querySelector(".cyril-top-panel");
@@ -199,21 +436,6 @@ export const cyrilUtility = {
     });
   },
   
-  trackScrollProgress(setProgressCallback) {
-    const handleScroll = () => {
-      const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const progress = (window.scrollY / totalHeight) * 100;
-      setProgressCallback(progress);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    
-    // Return cleanup function
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  },
-
   swiperSliderSameHeight() {
     const setEqualHeight = () => {
       const experienceSection = document.querySelector('#experience');

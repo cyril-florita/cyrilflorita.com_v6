@@ -3,11 +3,11 @@ const Skills = () => {
     <div className="cyril-section cyril-op-space-90">
       <div
         className="cyril-bg-item cyril-bg-item-large"
-        style={{ top: "-10%", right: "20%", transform: "rotate(-25deg)" }}
+        style={{ top: "8%", right: "18%" }}
       />
       <div
         className="cyril-bg-item"
-        style={{ bottom: "20%", left: "-5%", transform: "rotate(-25deg)" }}
+        style={{ bottom: "10%", left: "8%", transform: "rotate(150deg)" }}
       />
       <div className="container">
         <p className="cyril-upper subheader">

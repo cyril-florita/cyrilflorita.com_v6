@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Fragment, useEffect, useRef, useState } from "react";
 import imagesLoaded from 'imagesloaded';
 import { showPreloader } from './Preloader';
+import { cyrilUtility } from "@/public/utility/index";
 
 const PortfolioIsotope = () => {
 
@@ -43,6 +44,10 @@ const PortfolioIsotope = () => {
   useEffect(() => {
     const grid = document.querySelector(".cyril-portfolio-grid");
     if (!grid) return;
+
+    // This component is dynamically imported, so its items didn't exist yet
+    // when SiteLayout first tagged the page — tag them now.
+    cyrilUtility.revealOnScroll();
 
     isotope.current = new Isotope(".cyril-portfolio-grid", {
       itemSelector: ".cyril-grid-item",

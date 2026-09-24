@@ -11,16 +11,27 @@ const getYearsSince = (startDate) => {
   return (months / 12).toFixed(1);
 };
 
+// While slides move, soft-fade both edges (see .cyril-timeline-slider-2 in
+// _components.scss). Set as CSS variables rather than a class, since the
+// Swiper component owns its className too.
+const EDGE_FADE = '80px';
+const setEdges = (swiper, width) => {
+  swiper.el.style.setProperty('--cyril-edge-left', width);
+  swiper.el.style.setProperty('--cyril-edge-right', width);
+};
+const fadeEdges = (swiper) => setEdges(swiper, EDGE_FADE);
+const unfadeEdges = (swiper) => setEdges(swiper, '0px');
+
 const Experience = () => {
   return (
     <div id="experience" className="cyril-section cyril-op-space-90">
       <div
         className="cyril-bg-item"
-        style={{ top: 0, right: "15%", transform: "rotate(-25deg)" }}
+        style={{ top: "12%", right: "10%", transform: "rotate(5deg)" }}
       />
       <div
         className="cyril-bg-item"
-        style={{ bottom: "15%", left: "-5%", transform: "rotate(-25deg)" }}
+        style={{ bottom: "10%", left: "12%", transform: "rotate(105deg)" }}
       />
       <div className="container">
         <p className="cyril-upper subheader">
@@ -39,12 +50,19 @@ const Experience = () => {
             <div className="row cyril-mb-10">
 
               <div className="col-xl-12">
+                {/* Slides are animated through .cyril-slide-inner, not the
+                    slide itself — SwiperSlide rewrites its own className on
+                    every update, wiping any class added from outside. */}
                 <Swiper
                   {...sliderProps.experienceSlider}
                   className="swiper-container cyril-timeline-slider-2"
+                  onSlideChangeTransitionStart={fadeEdges}
+                  onSliderMove={fadeEdges}
+                  onTransitionEnd={unfadeEdges}
                 >
 
                   {/* <SwiperSlide className="swiper-slide">
+                    <div className="cyril-slide-inner">
                     <div className="cyril-icon-box cyril-type-2">
                       <div className="cyril-box-text">
                         <p className="cyril-upper cyril-text-lg cyril-mb-15">Freelance</p>
@@ -56,9 +74,11 @@ const Experience = () => {
                         </p>
                       </div>
                     </div>
+                  </div>
                   </SwiperSlide> */}
 
                   <SwiperSlide className="swiper-slide">
+                    <div className="cyril-slide-inner">
                     <div className="cyril-icon-box cyril-type-2">
                       <div className="cyril-box-text">
                         <p className="cyril-upper cyril-text-lg cyril-mb-15 cyril-accent">
@@ -72,9 +92,11 @@ const Experience = () => {
                         </p>
                       </div>
                     </div>
+                  </div>
                   </SwiperSlide>
 
                   <SwiperSlide className="swiper-slide">
+                    <div className="cyril-slide-inner">
                     <div className="cyril-icon-box cyril-type-2">
                       <div className="cyril-box-text">
                         <p className="cyril-upper cyril-text-lg cyril-mb-15 cyril-accent">
@@ -88,9 +110,11 @@ const Experience = () => {
                         </p>
                       </div>
                     </div>
+                  </div>
                   </SwiperSlide>
 
                   <SwiperSlide className="swiper-slide">
+                    <div className="cyril-slide-inner">
                     <div className="cyril-icon-box cyril-type-2">
                       <div className="cyril-box-text">
                         <p className="cyril-upper cyril-text-lg cyril-mb-15 cyril-accent">Product Designer</p>
@@ -102,9 +126,11 @@ const Experience = () => {
                         </p>
                       </div>
                     </div>
+                  </div>
                   </SwiperSlide>
 
                   <SwiperSlide className="swiper-slide">
+                    <div className="cyril-slide-inner">
                     <div className="cyril-icon-box cyril-type-2">
                       <div className="cyril-box-text">
                         <p className="cyril-upper cyril-text-lg cyril-mb-15 cyril-accent">
@@ -118,9 +144,11 @@ const Experience = () => {
                         </p>
                       </div>
                     </div>
+                  </div>
                   </SwiperSlide>
 
                   <SwiperSlide className="swiper-slide">
+                    <div className="cyril-slide-inner">
                     <div className="cyril-icon-box cyril-type-2">
                       <div className="cyril-box-text">
                         <p className="cyril-upper cyril-text-lg cyril-mb-15 cyril-accent">
@@ -134,9 +162,11 @@ const Experience = () => {
                         </p>
                       </div>
                     </div>
+                  </div>
                   </SwiperSlide>
 
                   <SwiperSlide className="swiper-slide">
+                    <div className="cyril-slide-inner">
                     <div className="cyril-icon-box cyril-type-2">
                       <div className="cyril-box-text">
                         <p className="cyril-upper cyril-text-lg cyril-mb-15 cyril-accent">
@@ -150,9 +180,11 @@ const Experience = () => {
                         </p>
                       </div>
                     </div>
+                  </div>
                   </SwiperSlide>
 
                   <SwiperSlide className="swiper-slide">
+                    <div className="cyril-slide-inner">
                     <div className="cyril-icon-box cyril-type-2">
                       <div className="cyril-box-text">
                         <p className="cyril-upper cyril-text-lg cyril-mb-15 cyril-accent">
@@ -166,9 +198,11 @@ const Experience = () => {
                         </p>
                       </div>
                     </div>
+                  </div>
                   </SwiperSlide>
 
                   <SwiperSlide className="swiper-slide">
+                    <div className="cyril-slide-inner">
                     <div className="cyril-icon-box cyril-type-2">
                       <div className="cyril-box-text">
                         <p className="cyril-upper cyril-text-lg cyril-mb-15 cyril-accent">
@@ -182,9 +216,11 @@ const Experience = () => {
                         </p>
                       </div>
                     </div>
+                  </div>
                   </SwiperSlide>
 
                   <SwiperSlide className="swiper-slide">
+                    <div className="cyril-slide-inner">
                     <div className="cyril-icon-box cyril-type-2">
                       <div className="cyril-box-text">
                         <p className="cyril-upper cyril-text-lg cyril-mb-15 cyril-accent">
@@ -198,6 +234,7 @@ const Experience = () => {
                         </p>
                       </div>
                     </div>
+                  </div>
                   </SwiperSlide>
 
                 </Swiper>

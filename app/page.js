@@ -2,7 +2,8 @@
 import Intro from "@/components/01 Intro";
 import SiteLayout from "@/layout/SiteLayout";
 import dynamic from "next/dynamic";
-import { cyrilUtility } from "@/public/utility/index";
+import { applyHiddenState, cyrilUtility, hideSplitTitle, scrambleInTitle } from "@/public/utility/index";
+import { onPreloaderHidden } from "@/components/Preloader";
 import { useEffect, useRef } from "react";
 
 const PortfolioIsotope = dynamic(
@@ -13,6 +14,55 @@ const PortfolioIsotope = dynamic(
 );
 
 const TRANSITION_MS = 500;
+
+// First-load hero entrance: each piece rises in, top to bottom, once the
+// preloader is gone — see .cyril-hero-piece in _components.scss. Ordered by
+// on-screen position (not DOM order) since tablet/mobile move the photo above
+// the text. Only plays when the hero is actually the landing view, not when
+// arriving straight at My Work.
+const HERO_STEP_MS = 180;
+// Matches the 1.2s .cyril-hero-piece transition, plus a little slack.
+const HERO_ENTRANCE_MS = 1300;
+
+const playHeroIntro = () => {
+  const hero = document.getElementById('intro');
+  if (!hero) return;
+
+  const pieces = Array.from(hero.querySelectorAll(
+    '.cyril-banner-text > .subheader, .cyril-banner-text > h1, .cyril-short > p, .cyril-buttons-frame > .cyril-button, .cyril-banner-image, .cyril-hero-mobile-photo'
+  ))
+    .map((el) => ({ el, rect: el.getBoundingClientRect() }))
+    // Skip whichever photo is display:none at this width.
+    .filter(({ rect }) => rect.width > 0 && rect.height > 0)
+    .sort((a, b) => (a.rect.top - b.rect.top) || (a.rect.left - b.rect.left));
+
+  let headlineDelay = 0;
+  pieces.forEach(({ el }, i) => {
+    el.style.setProperty('--hero-delay', `${i * HERO_STEP_MS}ms`);
+    if (el.tagName === 'H1') headlineDelay = i * HERO_STEP_MS;
+  });
+  applyHiddenState(pieces.map(({ el }) => el), 'cyril-hero-piece');
+
+  // The headline doesn't rise with the rest — its letters type in through
+  // a letter scramble (scrambleInTitle), then the glitch switches on.
+  const headline = hero.querySelector('h1.cyril-hero-piece');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (headline && !reduceMotion) hideSplitTitle(headline);
+
+  onPreloaderHidden(() => {
+    hero.classList.add('cyril-hero-in');
+    if (headline && !reduceMotion) {
+      setTimeout(() => scrambleInTitle(headline), headlineDelay);
+    }
+
+    // Once everything has landed, drop the entrance class (no visual change
+    // at that point) so the pieces get their own transitions back — e.g.
+    // the buttons' hover easing and magnetic pull.
+    setTimeout(() => {
+      pieces.forEach(({ el }) => el.classList.remove('cyril-hero-piece'));
+    }, pieces.length * HERO_STEP_MS + HERO_ENTRANCE_MS);
+  });
+};
 
 const Index = () => {
   const transitioningRef = useRef(false);
@@ -92,6 +142,7 @@ const Index = () => {
       }, 900);
     } else {
       window.scrollTo(0, 0);
+      playHeroIntro();
     }
 
     cyrilUtility.tpInner();

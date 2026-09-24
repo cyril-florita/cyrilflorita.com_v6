@@ -112,6 +112,216 @@ preloader
 }
 
 /* -------------------------------------------
+scroll reveal (see cyrilUtility.revealOnScroll)
+------------------------------------------- */
+.cyril-reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.6s cubic-bezier(0, 0, 0.3642, 1), transform 0.6s cubic-bezier(0, 0, 0.3642, 1);
+
+    &.cyril-revealed {
+        opacity: 1;
+        transform: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+/* -------------------------------------------
+hero first-load entrance (see playHeroIntro in app/page.js)
+------------------------------------------- */
+#intro .cyril-hero-piece {
+    opacity: 0;
+    transform: translateY(80px);
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--hero-delay, 0ms);
+}
+
+#intro.cyril-hero-in .cyril-hero-piece {
+    opacity: 1;
+    transform: none;
+}
+
+// The headline doesn't rise with the rest; its letters type in instead
+// (see split titles below).
+#intro h1.cyril-hero-piece {
+    opacity: 1;
+    transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #intro .cyril-hero-piece {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+/* -------------------------------------------
+split titles (splitChars / scrambleInTitle in public/utility/index.js)
+Hero headline, My Work and About Me section titles: letters type in one
+by one through a letter scramble. While .cyril-split-hidden is on, letters
+stay invisible until each gets .cyril-char-on, and the glitch copies are
+hidden too, or they'd show the full text over the half-typed title.
+------------------------------------------- */
+.cyril-split {
+    // font-size: inherit guards against older "h2 span" rules (e.g.
+    // .cyril-top-banner h2 span, meant for a subtitle span) catching the
+    // letter spans and shrinking the title.
+    & .cyril-word,
+    & .cyril-char {
+        display: inline-block;
+        font-size: inherit;
+    }
+
+    &.cyril-split-hidden {
+        & .cyril-char:not(.cyril-char-on) {
+            opacity: 0;
+        }
+
+        &::before,
+        &::after {
+            opacity: 0;
+        }
+    }
+
+    &::before,
+    &::after {
+        transition: opacity 0.3s ease;
+    }
+}
+
+/* -------------------------------------------
+theme switch fade (see ThemeToggle.js)
+Only applied for the moment of the switch, so it never slows other
+transitions down.
+------------------------------------------- */
+html.cyril-theme-switching,
+html.cyril-theme-switching *,
+html.cyril-theme-switching *::before,
+html.cyril-theme-switching *::after {
+    transition: background-color 0.45s ease, color 0.45s ease, border-color 0.45s ease, fill 0.45s ease, stroke 0.45s ease, box-shadow 0.45s ease, opacity 0.45s ease !important;
+    transition-delay: 0s !important;
+}
+
+/* -------------------------------------------
+custom cursor (see layout/MotionEffects.js)
+Desktop + mouse only; the native cursor is hidden only once the custom
+one is running (cyril-has-cursor on <html>).
+------------------------------------------- */
+html.cyril-has-cursor,
+html.cyril-has-cursor * {
+    cursor: none !important;
+}
+
+.cyril-cursor-dot,
+.cyril-cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100001;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    html.cyril-has-cursor.cyril-cursor-visible & {
+        opacity: 1;
+    }
+}
+
+.cyril-cursor-dot {
+    width: 6px;
+    height: 6px;
+    margin: -3px 0 0 -3px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+}
+
+// The ring is a diamond: a square rotated 45deg. The JS-driven position
+// transform lives on .cyril-cursor-ring itself, so the rotation/scaling
+// happens on the inner shape and never fights it.
+.cyril-cursor-ring {
+    width: 39px;
+    height: 39px;
+    margin: -19.5px 0 0 -19.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & .cyril-cursor-ring-inner {
+        position: absolute;
+        inset: 0;
+        border: 1.5px solid var(--color-accent);
+        transform: rotate(45deg) scale(1);
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.35s ease, border-color 0.35s ease;
+    }
+
+    // A sibling of the rotated shape (not inside it) so it stays upright,
+    // centered by the ring's flexbox.
+    & .cyril-cursor-label {
+        position: relative;
+        line-height: 1;
+        white-space: nowrap;
+        font-family: var(--font-atkinson);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        // Balances the trailing letter-spacing so the word sits dead center.
+        padding-left: 0.08em;
+        text-transform: uppercase;
+        color: var(--color-light);
+        opacity: 0;
+        transition: opacity 0.2s ease;
+    }
+
+    &.cyril-cursor-link .cyril-cursor-ring-inner {
+        transform: rotate(45deg) scale(1.6);
+        background-color: var(--color-accent-light);
+    }
+
+    &.cyril-cursor-view .cyril-cursor-ring-inner {
+        transform: rotate(45deg) scale(2.6);
+        background-color: var(--color-accent);
+    }
+
+    &.cyril-cursor-view .cyril-cursor-label {
+        opacity: 1;
+    }
+
+    &.cyril-cursor-down .cyril-cursor-ring-inner {
+        transform: rotate(45deg) scale(0.8);
+    }
+
+    &.cyril-cursor-down.cyril-cursor-link .cyril-cursor-ring-inner {
+        transform: rotate(45deg) scale(1.3);
+    }
+
+    &.cyril-cursor-down.cyril-cursor-view .cyril-cursor-ring-inner {
+        transform: rotate(45deg) scale(2.3);
+    }
+}
+
+/* -------------------------------------------
+scroll progress (see layout/ScrollProgress.js)
+------------------------------------------- */
+.cyril-scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 7px;
+    z-index: 1000;
+    background-color: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: left center;
+    pointer-events: none;
+}
+
+/* -------------------------------------------
 frame
 ------------------------------------------- */
 .cyril-frame {
@@ -210,29 +420,32 @@ page
         -ms-flex-align: center;
         align-items: center;
 
-        & .container,
-        & .no-gutters {
-            -webkit-transform: translateY(90px) scale(0.95);
-            transform: translateY(90px) scale(0.95);
-            opacity: 0;
-            -webkit-transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
-            transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
-            -webkit-transition-delay: 0s;
-            transition-delay: 0s;
-        }
+        // Desktop: each piece (tagged + ordered by onepage.js) fades in top
+        // to bottom when its section becomes active, and fades back out fast
+        // with no stagger when you leave, so it replays on return. Tablet/
+        // mobile scrolls normally instead — see cyrilUtility.revealOnScroll.
+        @media screen and (min-width: 1201px) {
+            & .cyril-stagger {
+                opacity: 0;
+                transform: translateY(12px);
+                transition: opacity 0.25s ease, transform 0.25s ease;
+                transition-delay: 0s;
+            }
 
-        &.cyril-active {
-
-            & .container,
-            & .no-gutters {
+            &.cyril-active .cyril-stagger {
                 opacity: 1;
-                -webkit-transform: translateY(0) scale(1);
-                transform: translateY(0) scale(1);
+                transform: none;
+                transition: opacity 0.6s cubic-bezier(0, 0, 0.3642, 1), transform 0.6s cubic-bezier(0, 0, 0.3642, 1);
+                transition-delay: var(--stagger-delay, 0ms);
+            }
 
-                @media screen and (max-width: 1200px) {
+            @media (prefers-reduced-motion: reduce) {
+                & .cyril-stagger,
+                &.cyril-active .cyril-stagger {
+                    opacity: 1;
+                    transform: none;
                     transition: none;
                 }
-
             }
         }
 
@@ -275,26 +488,10 @@ page
 
     @media screen and (max-width: 1200px) {
         padding-bottom: 60px;
-        opacity: 0;
-        -webkit-transform: translateY(90px) scale(0.95);
-        transform: translateY(90px) scale(0.95);
-        -webkit-transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
-        transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
-
-        &.loaded {
-            opacity: 1;
-            -webkit-transform: translateY(0) scale(1);
-            transform: translateY(0) scale(1);
-        }
 
         & .cyril-section {
             height: auto;
             padding-top: 120px;
-
-            & .container {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
         }
     }
 
@@ -308,6 +505,64 @@ page
 
         }
 
+    }
+}
+
+// About Me's first section enters like the home hero: further, slower and
+// with a longer stagger (onepage.js / revealOnScroll space the delays out).
+// It still exits fast on desktop via the base .cyril-stagger rule.
+@media screen and (min-width: 1201px) {
+    .cyril-onepage #background .cyril-stagger {
+        transform: translateY(80px);
+    }
+
+    .cyril-onepage #background.cyril-active .cyril-stagger {
+        transform: none;
+        transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        // The shorthand above resets the delay — restore the per-piece stagger.
+        transition-delay: var(--stagger-delay, 0ms);
+    }
+}
+
+// Experience cards: a bigger rise and longer fade than regular pieces, so
+// they read as arriving one by one, left to right (onepage.js also spaces
+// their delays further apart).
+@media screen and (min-width: 1201px) {
+    .cyril-onepage .cyril-section .cyril-slide-inner.cyril-stagger {
+        transform: translateY(40px);
+    }
+
+    .cyril-onepage .cyril-section.cyril-active .cyril-slide-inner.cyril-stagger {
+        transform: none;
+        transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        transition-delay: var(--stagger-delay, 0ms);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .cyril-onepage .cyril-section .cyril-slide-inner.cyril-stagger,
+        .cyril-onepage .cyril-section.cyril-active .cyril-slide-inner.cyril-stagger {
+            transform: none;
+            transition: none;
+        }
+    }
+}
+
+#background .cyril-reveal {
+    transform: translateY(80px);
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+
+    &.cyril-revealed {
+        transform: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cyril-onepage #background .cyril-stagger,
+    .cyril-onepage #background.cyril-active .cyril-stagger,
+    #background .cyril-reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
     }
 }
 
@@ -581,6 +836,28 @@ pagination
 
     @media screen and (max-width: 1200px) {
         display: none;
+    }
+}
+
+// About Me: circles sized off the viewport height so each one (satellite
+// included) always fits whole on screen inside its 100vh section. The
+// inline positions/rotations in the About Me components were laid out
+// against these sizes to keep every circle fully visible and apart from
+// the others — resize them together.
+.cyril-onepage .cyril-bg-item {
+    width: 30vh;
+    height: 30vh;
+
+    &::before {
+        width: 10vh;
+        height: 10vh;
+        top: 0;
+        left: -13vh;
+    }
+
+    &.cyril-bg-item-large {
+        width: 52vh;
+        height: 52vh;
     }
 }
 
@@ -2265,6 +2542,37 @@ portfolio
             }
         }
     }
+}
+
+// Experience cards: the wrapper inside each slide that the About Me
+// fade-in animates (the slide itself can't take outside classes). Keeps the
+// equal-height chain from swiperSliderSameHeight intact.
+.cyril-slide-inner {
+    height: 100%;
+}
+
+// Experience slider: while slides move, both edges soft-fade.
+// --cyril-edge-left/right are set from Experience.js on Swiper's transition
+// events (kept as two so each side can be tuned); registering them lets the
+// mask ease in/out instead of snapping.
+@property --cyril-edge-left {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 0px;
+}
+
+@property --cyril-edge-right {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 0px;
+}
+
+.cyril-timeline-slider-2 {
+    --cyril-edge-left: 0px;
+    --cyril-edge-right: 0px;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 var(--cyril-edge-left), #000 calc(100% - var(--cyril-edge-right)), transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, #000 var(--cyril-edge-left), #000 calc(100% - var(--cyril-edge-right)), transparent 100%);
+    transition: --cyril-edge-left 0.35s ease, --cyril-edge-right 0.35s ease;
 }
 
 .swiper-slide {

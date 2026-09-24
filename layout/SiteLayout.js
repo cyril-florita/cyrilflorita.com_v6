@@ -7,6 +7,8 @@ import { Fragment, useEffect } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 import ThemeToggle from "./ThemeToggle";
+import MotionEffects from "./MotionEffects";
+import ScrollProgress from "./ScrollProgress";
 import { cyrilUtility } from "@/public/utility/index";
 
 const SiteLayout = ({ children, header, footer, noFooter }) => {
@@ -16,6 +18,8 @@ const SiteLayout = ({ children, header, footer, noFooter }) => {
   // below actually matches (root "/" never gets a trailing slash).
   const rawPathname = usePathname();
   const pathname = rawPathname.length > 1 ? rawPathname.replace(/\/$/, '') : rawPathname;
+  // Every route besides "/" and "/about-me" is a project page.
+  const isProjectPage = pathname !== '/' && pathname !== '/about-me';
 
   useEffect(() => {
     if (document.querySelector("body").classList.contains("cyril-custom-scroll")) {
@@ -26,10 +30,13 @@ const SiteLayout = ({ children, header, footer, noFooter }) => {
     cyrilUtility.backToTop();
     cyrilUtility.builtTextVisibility();
     cyrilUtility.swiperSliderSameHeight();
+    cyrilUtility.revealOnScroll();
   }, []);
 
   return (
     <Fragment>
+      <MotionEffects />
+      {isProjectPage && <ScrollProgress />}
       <ImageView />
       <ImageGallery />
       <div className="cyril-frame">

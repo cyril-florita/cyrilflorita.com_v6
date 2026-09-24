@@ -15,9 +15,6 @@ const AboutMe = () => {
   useEffect(() => {
     document.querySelector("body").classList.add("cyril-custom-scroll");
     onepage();
-    setTimeout(() => {
-      document.querySelector('.cyril-onepage')?.classList.add('loaded');
-    }, 100);
   }, []);
 
   return (

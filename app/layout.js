@@ -47,15 +47,15 @@ import Preloader from '../components/Preloader';
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${space_grotest.variable} ${atkinson.variable}`} suppressHydrationWarning={true}>
+    <html lang="en" data-theme="dark" className={`${space_grotest.variable} ${atkinson.variable}`} suppressHydrationWarning={true}>
       <head>
-        {/* Set theme before first paint to avoid a light-mode flash on navigation */}
+        {/* Set theme before first paint (default dark) to avoid a flash on navigation */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
               (function () {
                 try {
-                  var theme = localStorage.getItem('theme') || 'light';
+                  var theme = localStorage.getItem('theme') || 'dark';
                   document.documentElement.setAttribute('data-theme', theme);
                 } catch (e) {}
               })();

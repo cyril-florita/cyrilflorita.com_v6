@@ -1,6 +1,9 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Fragment } from "react";
+
+const HEADLINE = "Cyril Florita";
 
 const Banner = ( { bgImage = "/img/cyril-florita-profile.png" } ) => {
   const pathname = usePathname();
@@ -22,7 +25,21 @@ const Banner = ( { bgImage = "/img/cyril-florita-profile.png" } ) => {
                 <p className="cyril-upper cyril-mb-10 subheader">
                   <span className="cyril-accent">Hello!</span>&nbsp;I&apos;m 
                 </p>
-                <h1 className="cyril-up cyril-mb-20 glitch" data-text="Cyril Florita">Cyril Florita</h1>
+                {/* Pre-split into letters (the same markup splitChars()
+                    builds for other titles) so the first-load entrance can
+                    type it in — see scrambleInTitle / .cyril-split. */}
+                <h1 className="cyril-up cyril-mb-20 glitch cyril-split" data-text={HEADLINE} aria-label={HEADLINE}>
+                  {HEADLINE.split(' ').map((word, w, words) => (
+                    <Fragment key={w}>
+                      <span className="cyril-word" aria-hidden="true">
+                        {word.split('').map((char, c) => (
+                          <span key={c} className="cyril-char">{char}</span>
+                        ))}
+                      </span>
+                      {w < words.length - 1 && ' '}
+                    </Fragment>
+                  ))}
+                </h1>
                 <div className="cyril-short intro">
                   <p className="cyril-mb-30">
                     <strong><span className="cyril-accent">Designer</span></strong> and <strong><span className="cyril-accent">Developer</span></strong>

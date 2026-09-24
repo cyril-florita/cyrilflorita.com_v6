@@ -3,11 +3,11 @@ const Background = ( { bgImage = "/img/cyril-profile-w-a-smile.jpg" } ) => {
     <div className="cyril-section cyril-op-space-90" id="background">
       <div
         className="cyril-bg-item cyril-bg-item-large"
-        style={{ top: "-15%", right: "3%", transform: "rotate(-35deg)" }}
+        style={{ top: "8%", right: "4%" }}
       />
       <div
         className="cyril-bg-item"
-        style={{ bottom: "-10%", right: "-10%", transform: "rotate(-25deg)" }}
+        style={{ bottom: "8%", right: "34%", transform: "rotate(0deg)" }}
       />
       <div className="container">
         <div className="row justify-content-between align-items-center">

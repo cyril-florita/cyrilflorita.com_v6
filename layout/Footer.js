@@ -2,13 +2,13 @@ import { useState, useEffect } from "react";
 
 const Footer = () => {
 
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
   // Initialize theme from localStorage
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const initialTheme = savedTheme || 'light';
+    const initialTheme = savedTheme || 'dark';
 
     setIsDarkMode(initialTheme === 'dark');
     document.documentElement.setAttribute('data-theme', initialTheme);

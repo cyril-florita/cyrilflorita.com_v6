@@ -3,7 +3,7 @@ const Education = () => {
     <div className="cyril-section cyril-education cyril-op-space-90">
       <div
         className="cyril-bg-item"
-        style={{ top: "0%", right: "14%", transform: "rotate(124deg)" }}
+        style={{ top: "12%", right: "12%", transform: "rotate(5deg)" }}
       />
       <div className="container">
 

@@ -1,10 +1,10 @@
 const Tools = () => {
   return (
     <div className="cyril-section cyril-op-space-90">
-      <div className="cyril-bg-item" style={{ bottom: "15%", left: "7%" }} />
+      <div className="cyril-bg-item" style={{ bottom: "10%", left: "12%", transform: "rotate(105deg)" }} />
       <div
         className="cyril-bg-item cyril-bg-item-large"
-        style={{ top: "-15%", right: "25%", transform: "rotate(-35deg)" }}
+        style={{ top: "8%", right: "10%" }}
       />
       <div className="container">
         <div>
