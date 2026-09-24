@@ -1,10 +1,22 @@
-import { onPreloaderHidden } from "@/components/Preloader";
+import { onPreloaderHidden, wipeThen } from "@/components/Preloader";
 
 // Elements that fade/slide in as they scroll into view. Deliberately not
 // .cyril-grid-item (Isotope positions those with its own transforms) or
 // About Me's sections (onepage.js already animates those on desktop).
 const REVEAL_SELECTORS = [
   '.cyril-project-content > *',
+  // Case-study layout (components/case/CaseStudy.js). Stats and grids are
+  // revealed piece by piece rather than as one block.
+  '.cyril-case-eyebrow',
+  '.cyril-case-summary',
+  '.cyril-case-fact',
+  '.cyril-case-bleed',
+  '.cyril-case-toc',
+  '.cyril-case-section-head',
+  '.cyril-case-content > :not(.cyril-case-stats):not(.cyril-case-grid)',
+  '.cyril-case-stat',
+  '.cyril-case-grid > *',
+  '.cyril-case-end > *',
   '#portfolio-start .cyril-top-banner',
   '.cyril-filter',
   '.cyril-portfolio-item',
@@ -391,13 +403,10 @@ export const cyrilUtility = {
     }
   },
 
+  // Covers the page with the preloader panel before a hard navigation
+  // (resolves once it's covering; see wipeThen in components/Preloader.js).
   handlePageTransition() {
-    return new Promise(resolve => {
-      document.body.classList.add('page-exit');
-      setTimeout(() => {
-        resolve();
-      }, 400);
-    });
+    return new Promise(resolve => wipeThen(resolve));
   },
 
   builtTextVisibility: () => {

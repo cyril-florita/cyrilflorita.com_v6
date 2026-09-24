@@ -2,11 +2,24 @@
 
 import SiteLayout from "@/layout/SiteLayout";
 import { cyrilUtility } from "@/public/utility/index";
-import { onPreloaderHidden } from "@/components/Preloader";
+import { onPreloaderHidden, wipeThen } from "@/components/Preloader";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import {
+  CaseHero,
+  CaseLayout,
+  CaseSection,
+  CaseFigure,
+  CaseQuote,
+  CaseNext,
+} from "@/components/case/CaseStudy";
+
+const SECTIONS = [
+  { id: "desktop-wallpaper", label: "Desktop Wallpaper" },
+];
 
 const page = () => {
+
   const router = useRouter();
 
   useEffect(() => {
@@ -34,70 +47,47 @@ const page = () => {
 
     // Save the project ID for the portfolio page to use
     sessionStorage.setItem('returnToProject', projectId);
-    router.push('/');
+    wipeThen(() => router.push('/'));
   };
 
   return (
     <SiteLayout>
       <div>
-        <div className="cyril-page cyril-project-page">
+        <div className="cyril-page cyril-project-page cyril-case-page">
 
-          {/* .container */}
-          <div className="container">
+          <CaseHero
+            category="Illustration"
+            detail="Desktop Wallpaper"
+            title="He Took My Place"
+            summary="A desktop wallpaper designed for my Illustration class, sparked by coming to grips with the reality of the gospel."
+            facts={[
+              { label: "Deliverables", value: "Desktop Wallpaper" },
+              { label: "Tools", value: "Adobe Illustrator, Photoshop" },
+            ]}
+          />
 
-            {/* top banner */}
-            <div className="cyril-top-banner cyril-text-center">
+          <CaseLayout sections={SECTIONS}>
 
-              <h2 className="cyril-mt-60 glitch" data-text="He Took My Place">He Took My Place</h2>
-              <p className="cyril-upper cyril-mt-30 cyril-mb-40">
-                <span className="cyril-accent">Illustration</span>
-              </p>
+            {/* 01 — A Desktop Wallpaper */}
+            <CaseSection id="desktop-wallpaper" number={1} title="A Desktop Wallpaper">
+              <p>Most of the time, your creativity is sparked by your passion. Whatever grips your heart tends to bleed through the works of your hand. And so I designed this piece as a desktop wallpaper for my Illustration class. I was in a period of my life when I was coming to grips with the reality of the gospel of the Lord and Savior Jesus Christ.</p>
+              <CaseQuote>
+                Whatever grips your heart tends to bleed through the works of your hand.
+              </CaseQuote>
+              <p>2 Corinthians 5:21 states, &#8220;He [God the Father] made Him [Christ] who knew no sin to be sin on our behalf, so that we might become the righteousness of God [the Father] in Him [Christ].&#8221; This means that on the cross, Christ&mdash;though He was sinless, guiltless, and perfect&mdash;died the death that sinners deserve because of their sins. So in a personal way, Christ died in my place&mdash;<strong>He took my place</strong>. God accounts Christ's death on my behalf as righteousness so I can be made right with God.</p>
+              <CaseFigure src="/img/portfolio/main_he-took-my-place.jpg" alt="He Took My Place Illustration" caption="He Took My Place Illustration" />
+              <p>I would always include this piece as part of my portfolio, even though it's not a professional one. It's a great way to showcase my skills and creativity, especially when I was just a beginner learning layout, typography, color theory, and various design styles. It also exhibits my ability to design using industry-standard tools&mdash;and back then, Adobe Illustrator and Photoshop dominated the craft.</p>
+            </CaseSection>
 
-            </div>
-            {/* dend of top banner */}
+          </CaseLayout>
 
-            {/* main content */}
-            <div className="row cyril-mb-60">
-
-              <div className="cyril-project-content">
-
-                <div className="cyril-divider cyril-mb-60" />
-
-                <h4 className="cyril-up cyril-text-center">A Desktop Wallpaper</h4>
-
-                <p>Most of the time, your creativity is sparked by your passion. Whatever grips your heart tends to bleed through the works of your hand. And so I designed this piece as a desktop wallpaper for my Illustration class. I was in a period of my life when I was coming to grips with the reality of the gospel of the Lord and Savior Jesus Christ.</p>
-
-                <p className="cyril-mt-40">
-                  2 Corithians 5:21 states, &#8220;He [God the Father] made Him [Christ] who knew no sin to be sin on our behalf, so that we might become the righteousness of God [the Father] in Him [Christ].&#8221; This means that on the cross, Christ&mdash;though he was sinless, guiltless, and perfect&mdash;died the death that sinners deserve because of their sins. So in a personal way, Christ died in my place&mdash;<strong>He took my place</strong>. God accounts Christ's death on my behalf as righteousness so I can be made right with God.
-                </p>
-
-                <img className="cyril-project-main-graphic cyril-mt-60 cyril-mb-60" src="/img/portfolio/main_he-took-my-place.jpg" alt="He Took My Place Illustration" />
-
-                <p className="cyril-mt-40 cyril-mb-60">
-                  I would always included this piece as part of my portfolio, even though it's not a professional one. It's a great way to showcase my skills and creativity, especially when I was just a beginner learning layout, typography, color theory, and various design styles. It's also exhibits my ability to design using industry-standard tools&mdash;and back then, Adobe Illustrator and Photoshop dominated the craft.
-                </p>
-
-                {/* pagination */}
-                <div className="cyril-pagination-panel cyril-mt-60">
-                  <button
-                    onClick={handleBackToPortfolio}
-                    className="cyril-button cyril-type-2 cyril-mb-30"
-                  >
-                    <svg className="cyril-prev" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                    Back to Portfolio
-                  </button>
-                </div>
-                {/* end of pagination */}
-
-              </div>
-              {/* end of <div className="offset-lg-1-custom col-lg-9"> */}
-
-            </div>
-            {/* end of .row */}
-            {/* end of main content */}
-
-          </div>
-          {/* end of .container */}
+          <CaseNext
+            href="/gty-blog-graphics"
+            title="GTY Blog Graphics"
+            category="Marketing"
+            image="/img/portfolio/thumb_gty-blog.jpg"
+            onBack={handleBackToPortfolio}
+          />
 
         </div>
       </div>

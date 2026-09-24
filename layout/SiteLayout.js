@@ -1,8 +1,7 @@
 "use client";
 import { usePathname } from "next/navigation";
 
-import ImageGallery from "@/components/popup/ImageGallery";
-import ImageView from "@/components/popup/ImageView";
+import ZoomViewer from "@/components/ZoomViewer";
 import { Fragment, useEffect } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -37,8 +36,7 @@ const SiteLayout = ({ children, header, footer, noFooter }) => {
     <Fragment>
       <MotionEffects />
       {isProjectPage && <ScrollProgress />}
-      <ImageView />
-      <ImageGallery />
+      <ZoomViewer />
       <div className="cyril-frame">
         <ThemeToggle />
         <Header header={header} />

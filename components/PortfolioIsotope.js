@@ -2,11 +2,91 @@
 import Isotope from "isotope-layout";
 import Link from "next/link";
 import { Fragment, useEffect, useRef, useState } from "react";
-import imagesLoaded from 'imagesloaded';
-import { showPreloader } from './Preloader';
+import { SOCIAL_GRAPHICS } from "@/components/data/socialGraphics";
+import { BLOG_GRAPHICS } from "@/components/data/blogGraphics";
+import { RESOURCE_GRAPHICS } from "@/components/data/resourceGraphics";
+import { imageProps, SIZES_HINT } from "@/components/imageProps";
+import { wipeThen } from './Preloader';
+import { useRouter } from "next/navigation";
 import { cyrilUtility } from "@/public/utility/index";
 
+// A single graphic as its own grid item (Marketing filter). It links to the
+// original image, which the zoom viewer opens; `group` keeps prev/next
+// within its set. `shape` picks the cover ratio: "square" or "banner"
+// (the ~2:1 blog header size). No hover icon — the cursor's "View" says it.
+const GraphicItem = ({ id, src, caption, group, label, shape }) => (
+  <div id={id} className="cyril-grid-item fil-marketing">
+    <a href={src} data-zoom-group={group} data-zoom-id={id} data-zoom-caption={caption}>
+      <div className={`cyril-portfolio-item cyril-${shape}-item cyril-mb-80`}>
+        <div className="cyril-cover">
+          <img {...imageProps(src, SIZES_HINT.gridTile)} alt={caption} loading="lazy" decoding="async" />
+        </div>
+        <div className="cyril-project-descr">
+          <p className="cyril-upper cyril-accent cyril-mb-10">{label}</p>
+          <h4 className="cyril-up">{caption}</h4>
+        </div>
+      </div>
+    </a>
+  </div>
+);
+
+const GRAPHIC_SETS = [
+  ...SOCIAL_GRAPHICS.map((g) => ({ ...g, group: "social", label: "Social Media Graphic", shape: "square" })),
+  ...BLOG_GRAPHICS.map((g) => ({ ...g, group: "blog", label: "Blog Graphic", shape: "banner" })),
+  ...RESOURCE_GRAPHICS.map((g) => ({ ...g, group: "resources" })),
+];
+
+// Fisher–Yates shuffle (returns a new array).
+const shuffled = (items) => {
+  const a = [...items];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+};
+
+// "Spread-out" shuffle: random, but avoids placing two graphics from the same
+// set (social / blog / resources) next to each other. Pure randomness clumps
+// (runs of 3–4 blog banners), which looks less random, and mixing sets also
+// mixes tile shapes so the masonry columns grow evenly. Each step picks a set
+// other than the previous one, weighted by how many it has left — except when
+// the largest set would otherwise outnumber everything else left (then it must
+// go next, or it would end up piled together at the end).
+const spreadShuffled = (items) => {
+  const pools = new Map();
+  shuffled(items).forEach((item) => {
+    if (!pools.has(item.group)) pools.set(item.group, []);
+    pools.get(item.group).push(item);
+  });
+  const out = [];
+  let last = null;
+  while (out.length < items.length) {
+    const remaining = [...pools.entries()].filter(([, list]) => list.length);
+    const left = remaining.reduce((n, [, list]) => n + list.length, 0);
+    const [bigGroup, bigList] = remaining.reduce((a, b) => (b[1].length > a[1].length ? b : a));
+    let choices = remaining.filter(([g]) => g !== last);
+    if (bigGroup !== last && bigList.length > left - bigList.length) choices = [[bigGroup, bigList]];
+    // Only the previous set has items left — no choice but to repeat it.
+    if (!choices.length) choices = remaining;
+    const total = choices.reduce((n, [, list]) => n + list.length, 0);
+    let pick = Math.random() * total;
+    const [group, list] = choices.find(([, l]) => (pick -= l.length) < 0) || choices[choices.length - 1];
+    out.push(list.pop());
+    last = group;
+  }
+  return out;
+};
+
 const PortfolioIsotope = () => {
+  // Case studies (items with a page) stay first, in their set order; the
+  // individual graphics follow in a fresh spread-out random order on each
+  // visit. Fixed for the life of the page so filtering doesn't reshuffle
+  // them; safe to randomize during render because this component is
+  // client-only (ssr: false in app/page.js).
+  const [graphics] = useState(() => spreadShuffled(GRAPHIC_SETS));
+  const router = useRouter();
+
 
   // Isotope
   const isotope = useRef();
@@ -31,14 +111,16 @@ const PortfolioIsotope = () => {
     } catch {}
   }, []);
 
-  const saveFilterOnNavigate = () => {
+  // Project links: remember the filter (restored on the way back), then
+  // wipe the transition panel in before the client-side route change.
+  const saveFilterOnNavigate = (e) => {
     try {
       sessionStorage.setItem("portfolioFilter", filterKey);
     } catch {}
-    // These are next/link client-side transitions, not full page reloads,
-    // so the preloader's own "wait for window.load" logic never fires for
-    // them — show it explicitly instead.
-    showPreloader();
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return; // new tab etc.
+    e.preventDefault();
+    const href = e.currentTarget.getAttribute("href");
+    wipeThen(() => router.push(href));
   };
 
   useEffect(() => {
@@ -66,15 +148,12 @@ const PortfolioIsotope = () => {
       initLayout: false,
     });
 
-    // Error handling for imagesLoaded
-    imagesLoaded(".cyril-portfolio-grid")
-      .on('done', function () {
-        isotope.current.layout();
-      })
-      .on('fail', function () {
-        console.error('Some images failed to load');
-        isotope.current.layout(); // Layout anyway
-      });
+    // Every tile's cover has a fixed aspect ratio (square/long/wide), so the
+    // layout doesn't depend on its image — lay out now instead of waiting for
+    // images (which are lazy-loaded and may not load until scrolled to).
+    // Re-run once web fonts settle, since titles set each tile's height.
+    isotope.current.layout();
+    document.fonts?.ready.then(() => isotope.current?.layout());
 
     // Cleanup
     return () => {
@@ -168,7 +247,7 @@ const PortfolioIsotope = () => {
             <Link href="/gty_v9" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-long-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_gty9.jpg" alt="Thumb - GTY Website, v.9" />
+                  <img {...imageProps("/img/portfolio/thumb_gty9.jpg", SIZES_HINT.gridTile)} alt="Thumb - GTY Website, v.9" loading="lazy" decoding="async" />
                   <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
@@ -190,7 +269,7 @@ const PortfolioIsotope = () => {
             <Link href="/the-study-bible-app" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_the-study-bible-app.jpg" alt="Thumb - The Study Bible App" />
+                  <img {...imageProps("/img/portfolio/thumb_the-study-bible-app.jpg", SIZES_HINT.gridTile)} alt="Thumb - The Study Bible App" loading="lazy" decoding="async" />
                   <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
@@ -209,7 +288,7 @@ const PortfolioIsotope = () => {
             <Link href="/gty_v8" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-long-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_gty8.jpg" alt="Thumb - GTY Website, v.8" />
+                  <img {...imageProps("/img/portfolio/thumb_gty8.jpg", SIZES_HINT.gridTile)} alt="Thumb - GTY Website, v.8" loading="lazy" decoding="async" />
                   <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
@@ -228,7 +307,7 @@ const PortfolioIsotope = () => {
             <Link href="/truth-matters" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover truth-matters">
-                  <img src="/img/portfolio/thumb_truth-matters-podcast-2.jpg" alt="Thumb - Truth Matters Podcast" />
+                  <img {...imageProps("/img/portfolio/thumb_truth-matters-podcast-2.jpg", SIZES_HINT.gridTile)} alt="Thumb - Truth Matters Podcast" loading="lazy" decoding="async" />
                   <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
@@ -247,7 +326,7 @@ const PortfolioIsotope = () => {
             <Link href="/grace-stream" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_grace-stream.jpg" alt="Thumb - Grace Stream" />
+                  <img {...imageProps("/img/portfolio/thumb_grace-stream.jpg", SIZES_HINT.gridTile)} alt="Thumb - Grace Stream" loading="lazy" decoding="async" />
                   <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
@@ -266,7 +345,7 @@ const PortfolioIsotope = () => {
             <Link href="/gty-dashboard" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_gty-dashboard.jpg" alt="Thumb - GTY Dashboard" />
+                  <img {...imageProps("/img/portfolio/thumb_gty-dashboard.jpg", SIZES_HINT.gridTile)} alt="Thumb - GTY Dashboard" loading="lazy" decoding="async" />
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
                   </div>
@@ -284,7 +363,7 @@ const PortfolioIsotope = () => {
             <Link href="/gty-app-landing" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_gty-app-landing.jpg" alt="Thumb - GTY App Landing Page" />
+                  <img {...imageProps("/img/portfolio/thumb_gty-app-landing.jpg", SIZES_HINT.gridTile)} alt="Thumb - GTY App Landing Page" loading="lazy" decoding="async" />
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
                   </div>
@@ -302,7 +381,7 @@ const PortfolioIsotope = () => {
             <Link href="/the-study-bible-app-logo" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_study-bible-app-logo-2.jpg" alt="Thumb - The Study Bible App Logo" />
+                  <img {...imageProps("/img/portfolio/thumb_study-bible-app-logo-2.jpg", SIZES_HINT.gridTile)} alt="Thumb - The Study Bible App Logo" loading="lazy" decoding="async" />
                   <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
@@ -321,7 +400,7 @@ const PortfolioIsotope = () => {
             <Link href="/sekihmentis" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-long-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_sekihmentis.jpg" alt="Thumb - SekihMentis" />
+                  <img {...imageProps("/img/portfolio/thumb_sekihmentis.jpg", SIZES_HINT.gridTile)} alt="Thumb - SekihMentis" loading="lazy" decoding="async" />
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
                   </div>
@@ -339,7 +418,7 @@ const PortfolioIsotope = () => {
             <Link href="/he-took-my-place" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_he-took-my-place.jpg" alt="Thumb - He Took My Place" />
+                  <img {...imageProps("/img/portfolio/thumb_he-took-my-place.jpg", SIZES_HINT.gridTile)} alt="Thumb - He Took My Place" loading="lazy" decoding="async" />
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
                   </div>
@@ -357,7 +436,7 @@ const PortfolioIsotope = () => {
             <Link href="/gty-blog-graphics" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_gty-blog.jpg" alt="Thumb - GTY Blog Graphics" />
+                  <img {...imageProps("/img/portfolio/thumb_gty-blog.jpg", SIZES_HINT.gridTile)} alt="Thumb - GTY Blog Graphics" loading="lazy" decoding="async" />
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
                   </div>
@@ -375,7 +454,7 @@ const PortfolioIsotope = () => {
             <Link href="/patricia-macarthur-pastoral-care-fund" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_patricia-macarthur-pastoral-fund.jpg" alt="Thumb - The Patricia MacArthur Pastoral Care Fund Logo" />
+                  <img {...imageProps("/img/portfolio/thumb_patricia-macarthur-pastoral-fund.jpg", SIZES_HINT.gridTile)} alt="Thumb - The Patricia MacArthur Pastoral Care Fund Logo" loading="lazy" decoding="async" />
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
                   </div>
@@ -393,7 +472,7 @@ const PortfolioIsotope = () => {
             <Link href="/gty-resources" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_gty-resources.jpg" alt="Thumb - GTY Resources" />
+                  <img {...imageProps("/img/portfolio/thumb_gty-resources.jpg", SIZES_HINT.gridTile)} alt="Thumb - GTY Resources" loading="lazy" decoding="async" />
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
                   </div>
@@ -411,7 +490,7 @@ const PortfolioIsotope = () => {
             <Link href="/gty-social-media-graphics" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <img src="/img/portfolio/thumb_gty-social-media.jpg" alt="Thumb - GTY Social Media Graphics" />
+                  <img {...imageProps("/img/portfolio/thumb_gty-social-media.jpg", SIZES_HINT.gridTile)} alt="Thumb - GTY Social Media Graphics" loading="lazy" decoding="async" />
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
                   </div>
@@ -423,6 +502,10 @@ const PortfolioIsotope = () => {
               </div>
             </Link>
           </div>
+
+          {/* individual graphics — no pages; each opens in the zoom viewer
+              (components/ZoomViewer.js), browsable within its own set */}
+          {graphics.map((g) => <GraphicItem key={g.id} {...g} />)}
 
         </div>{/* end of .cyril-portfolio-grid */}
 

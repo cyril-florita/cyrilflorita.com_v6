@@ -1,5 +1,6 @@
 import { sliderProps } from "@/public/utility/sliderProps";
 import { Swiper, SwiperSlide } from "swiper/react";
+import CountUp from "@/components/CountUp";
 
 const CHF_START_DATE = new Date(2025, 3, 1); // Apr 2025
 
@@ -85,7 +86,7 @@ const Experience = () => {
                           Marketing Web Developer
                         </p>
                         <p className="cyril-upper cyril-mb-30 cyril-text-normal">
-                          Apr 2025 &mdash; <span>Today</span> &#40;<span suppressHydrationWarning>{getYearsSince(CHF_START_DATE)} Years</span>&#41;
+                          Apr 2025 &mdash; <span>Today</span> &#40;<CountUp value={`${getYearsSince(CHF_START_DATE)} Years`} />&#41;
                         </p>
                         <p>
                           <a className="cyril-upper cyril-text-normal cyril-text-underline" href="https://childrenshungerfund.org" target="_blank">Children's Hunger Fund</a>, a Christian non-profit ministry based in Sylmar, CA.

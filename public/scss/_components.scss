@@ -17,17 +17,42 @@ preloader
     justify-content: center;
     gap: 24px;
     background: var(--color-bg);
-    opacity: 1;
     visibility: visible;
     pointer-events: all;
     overflow: hidden;
-    transition: opacity 0.5s cubic-bezier(0, 0, 0.3642, 1), visibility 0s linear 0s;
+    // Doubles as the page-transition panel (components/Preloader.js): covers
+    // by sliding up from below, reveals by sliding up and away. 0.65s must
+    // match WIPE_MS there.
+    transform: translateY(0);
+    transition: transform 0.65s cubic-bezier(0.77, 0, 0.18, 1), visibility 0s linear 0s;
 
     &.cyril-preloader-hidden {
-        opacity: 0;
+        transform: translateY(-100%);
         visibility: hidden;
         pointer-events: none;
-        transition: opacity 0.5s cubic-bezier(0, 0, 0.3642, 1), visibility 0s linear 0.5s;
+        transition: transform 0.65s cubic-bezier(0.77, 0, 0.18, 1), visibility 0s linear 0.65s;
+    }
+
+    // Starting point for covering: parked just below the screen, no transition.
+    &.cyril-preloader-below {
+        transform: translateY(100%);
+        transition: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        transform: none;
+        transition: opacity 0.3s ease, visibility 0s linear 0s;
+
+        &.cyril-preloader-hidden {
+            transform: none;
+            opacity: 0;
+            transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+        }
+
+        &.cyril-preloader-below {
+            transform: none;
+            opacity: 0;
+        }
     }
 
     // Same noise texture + animation as body::after — animated on desktop,
@@ -85,7 +110,8 @@ preloader
     & .cyril-preloader-bar {
         position: relative;
         width: 140px;
-        height: 2px;
+        // Matches the 12px scrollbar / scroll-progress bar.
+        height: 12px;
         background: var(--color-soft);
         overflow: hidden;
 
@@ -231,14 +257,29 @@ html.cyril-has-cursor * {
     html.cyril-has-cursor.cyril-cursor-visible & {
         opacity: 1;
     }
+
+    // Hidden over the square icon buttons and the visible pixels of the home
+    // hero photo (see ICON_BUTTON_SELECTOR / MAIN_IMAGE_SELECTOR in MotionEffects.js).
+    html.cyril-has-cursor.cyril-cursor-visible.cyril-cursor-hide & {
+        opacity: 0;
+    }
 }
 
 .cyril-cursor-dot {
     width: 6px;
     height: 6px;
     margin: -3px 0 0 -3px;
-    border-radius: 50%;
-    background-color: var(--color-accent);
+
+    // A small solid diamond, drawn on a pseudo-element because the element
+    // itself is positioned by a JS-set transform (which would drop a rotate).
+
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-color: var(--color-accent);
+        transform: rotate(45deg);
+    }
 }
 
 // The ring is a diamond: a square rotated 45deg. The JS-driven position
@@ -255,7 +296,8 @@ html.cyril-has-cursor * {
     & .cyril-cursor-ring-inner {
         position: absolute;
         inset: 0;
-        border: 1.5px solid var(--color-accent);
+        // Same weight as the unselected .cyril-dot diamond.
+        border: 4px solid var(--color-accent);
         transform: rotate(45deg) scale(1);
         transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.35s ease, border-color 0.35s ease;
     }
@@ -284,7 +326,7 @@ html.cyril-has-cursor * {
     }
 
     &.cyril-cursor-view .cyril-cursor-ring-inner {
-        transform: rotate(45deg) scale(2.6);
+        transform: rotate(45deg) scale(2);
         background-color: var(--color-accent);
     }
 
@@ -301,7 +343,7 @@ html.cyril-has-cursor * {
     }
 
     &.cyril-cursor-down.cyril-cursor-view .cyril-cursor-ring-inner {
-        transform: rotate(45deg) scale(2.3);
+        transform: rotate(45deg) scale(1.8);
     }
 }
 
@@ -313,7 +355,7 @@ scroll progress (see layout/ScrollProgress.js)
     top: 0;
     left: 0;
     width: 100%;
-    height: 7px;
+    height: 12px;
     z-index: 1000;
     background-color: var(--color-accent);
     transform: scaleX(0);
@@ -1945,7 +1987,10 @@ experience
 
         &:hover {
             box-shadow: 0px 0px 0 0 variables.$soft;
-        }
+        background-color: var(--color-accent);
+        border-color: var(--color-accent);
+        color: var(--color-light);
+    }
 
         @media screen and (max-width: 450px) {
             width: 45px;
@@ -1976,7 +2021,9 @@ experience
         top: 0;
         right: 0;
         width: 70%;
-        border-bottom: 2px solid var(--color-frame);
+        // Orange, so the selected filter's orange tick (a.cyril-current::after)
+        // reads as hanging from it.
+        border-bottom: 2px solid var(--color-accent);
 
         @media screen and (max-width: 1024px) {
             width: 100%;
@@ -2036,7 +2083,7 @@ experience
                         left: calc(50% - 1px);
                         width: 2px;
                         height: 15px;
-                        background-color: var(--color-frame);
+                        background-color: var(--color-accent);
                     }
                 }
 
@@ -2342,7 +2389,7 @@ portfolio
             object-position: center;
             transform: scale(1);
             transition: variables.$tr;
-            filter: grayscale(100%) brightness(180%) contrast(120%);
+            filter: grayscale(100%) brightness(110%) contrast(180%);
 
             @media screen and (max-width: 1200px) {
                 filter: grayscale(0) brightness(100%) contrast(100%);
@@ -2398,8 +2445,8 @@ portfolio
         & .cyril-hover-link {
             opacity: 0;
             position: absolute;
-            top: 50%;
-            left: 50%;
+            bottom: 30px;
+            left: 30px;
             background-color: var(--color-accent);
             // border: solid 2px var(--color-frame);
             width: 60px;
@@ -2409,7 +2456,6 @@ portfolio
             justify-content: center;
             box-shadow: 6px 6px 0 0 var(--color-accent-light);
             transition: variables.$tr;
-            transform: translate(-50%, -50%);
 
             & svg,
             & i {
@@ -2475,6 +2521,7 @@ portfolio
         &:not(:has(h3)) .cyril-hover-link {
             @media screen and (max-width: 1200px) {
                 top: 30px;
+                bottom: auto;
                 left: auto;
                 right: 10px;
                 transform: none;
@@ -2507,6 +2554,22 @@ portfolio
             padding-bottom: 60%;
 
         }
+    }
+
+    // Blog header graphics (1600×782).
+    &.cyril-banner-item {
+        width: 100%;
+
+        & .cyril-cover {
+            padding-bottom: 48.875%;
+        }
+    }
+
+    // My Work grid labels (category line) are lighter and smaller than the
+    // site-wide .cyril-upper.
+    & .cyril-project-descr .cyril-upper {
+        font-size: 14px;
+        font-weight: normal;
     }
 
     & .cyril-project-descr {
@@ -2644,6 +2707,9 @@ back to top
 
     &:hover {
         box-shadow: 0px 0px 0 0 variables.$soft;
+        background-color: var(--color-accent);
+        border-color: var(--color-accent);
+        color: var(--color-light);
     }
 
     @media screen and (max-width: 768px) {
@@ -2729,4 +2795,780 @@ back to top
         margin-bottom: -20px;
     }
 
+}
+// My Work on "/" (heading, filters, grid) runs wider than the site's
+// 1320px container on desktop: ~80px from each edge of the window
+// (60px padding + the page's 20px margin). The hero uses .container-full,
+// so it's unaffected.
+@media screen and (min-width: 1201px) {
+    .cyril-main-page .container {
+        max-width: none;
+        padding-left: 60px;
+        padding-right: 60px;
+    }
+}
+
+/* -------------------------------------------
+
+case study (components/case/CaseStudy.js)
+Editorial layout for project pages — piloted on /gty_v9. Everything is
+scoped to .cyril-case-* so the other project pages keep their old layout.
+
+------------------------------------------- */
+.cyril-case-page {
+    counter-reset: cyril-fig;
+
+    // Keep content clear of the site frame lines on phones.
+    @media screen and (max-width: 768px) {
+        & .container {
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+    }
+}
+
+// hero
+.cyril-case-hero {
+    padding-top: 200px;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 30px;
+
+    & > * {
+        grid-column: 1 / -1;
+    }
+
+    @media screen and (max-width: 1200px) {
+        padding-top: 130px;
+    }
+
+    // Below this the 12-column grid's gaps no longer fit — just stack.
+    @media screen and (max-width: 992px) {
+        display: block;
+    }
+
+    @media screen and (max-width: 768px) {
+        padding-top: 110px;
+    }
+}
+
+.cyril-case-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 30px;
+    letter-spacing: 0.08em;
+}
+
+.cyril-case-eyebrow-sep {
+    display: inline-block;
+    width: 40px;
+    height: 2px;
+    background-color: var(--color-frame);
+}
+
+.cyril-case-hero .cyril-case-title {
+    grid-column: 1 / 11;
+    margin: 0;
+    font-size: clamp(48px, 7.2vw, 132px);
+    line-height: 0.92;
+    text-shadow: 5px 5px 0 var(--color-soft);
+
+    @media screen and (max-width: 992px) {
+        grid-column: 1 / -1;
+    }
+}
+
+.cyril-case-hero .cyril-case-summary {
+    grid-column: 7 / -1;
+    margin: 50px 0 0;
+    max-width: 34ch;
+    font-size: 22px;
+    line-height: 1.5;
+
+    @media screen and (max-width: 992px) {
+        grid-column: 1 / -1;
+        font-size: 18px;
+    }
+}
+
+// facts row — a spec sheet under the title
+.cyril-case-facts {
+    margin: 80px 0 0;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    border-top: 2px solid var(--color-frame);
+
+    @media screen and (max-width: 992px) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        row-gap: 10px;
+    }
+
+    @media screen and (max-width: 576px) {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+.cyril-case-fact {
+    padding: 24px 20px 0;
+    border-left: 1px solid var(--color-soft);
+
+    &:first-child {
+        padding-left: 0;
+        border-left: 0;
+    }
+
+    & dt {
+        margin: 0 0 10px;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        opacity: 0.6;
+    }
+
+    & dd {
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
+    @media screen and (max-width: 992px) {
+        padding-left: 0;
+        border-left: 0;
+    }
+}
+
+// full-bleed hero image (settles from a slight zoom — see CaseHero)
+.cyril-case-bleed {
+    max-width: 1760px;
+    margin: 90px auto 0;
+    overflow: hidden;
+}
+
+.cyril-page.cyril-case-page .cyril-case-bleed img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 0;
+    padding: 0;
+    scale: 1.08;
+    transform-origin: center;
+}
+
+// body: sticky section index + content
+.cyril-case-body {
+    display: grid;
+    grid-template-columns: 200px minmax(0, 1fr);
+    column-gap: 80px;
+    padding-top: 120px;
+
+    @media screen and (max-width: 1200px) {
+        grid-template-columns: minmax(0, 1fr);
+        padding-top: 80px;
+    }
+}
+
+.cyril-case-toc {
+    position: sticky;
+    top: 150px;
+    align-self: start;
+
+    & ol {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        border-left: 2px solid var(--color-soft);
+    }
+
+    & a {
+        display: flex;
+        gap: 12px;
+        margin-left: -2px;
+        padding: 10px 0 10px 20px;
+        border-left: 2px solid transparent;
+        font-family: var(--font-atkinson);
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: inherit;
+        opacity: 0.45;
+        transition: opacity 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    & .cyril-active a {
+        opacity: 1;
+        color: var(--color-accent);
+        border-left-color: var(--color-accent);
+    }
+
+    & .cyril-case-toc-num {
+        font-variant-numeric: tabular-nums;
+    }
+
+    @media screen and (max-width: 1200px) {
+        display: none;
+    }
+}
+
+.cyril-case-section {
+    scroll-margin-top: 130px;
+    padding-bottom: 110px;
+
+    & + .cyril-case-section {
+        padding-top: 90px;
+        border-top: 1px solid var(--color-soft);
+    }
+
+    @media screen and (max-width: 768px) {
+        padding-bottom: 70px;
+
+        & + .cyril-case-section {
+            padding-top: 60px;
+        }
+    }
+}
+
+.cyril-case-section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 24px;
+    margin-bottom: 50px;
+}
+
+// Pages too short for the section index (see CaseLayout) don't number their
+// one or two sections either — a lone "01" reads oddly.
+.cyril-case-body:not(:has(.cyril-case-toc)) .cyril-case-section-num {
+    display: none;
+}
+
+.cyril-case-section-num {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+}
+
+.cyril-case-section-head .cyril-case-heading {
+    margin: 0;
+    font-size: clamp(32px, 4vw, 58px);
+}
+
+.cyril-case-content {
+    font-size: 18px;
+    line-height: 1.75;
+
+    & > p,
+    & > ul,
+    & > .cyril-case-subheading {
+        max-width: 68ch;
+    }
+
+    & > p {
+        margin: 0 0 24px;
+    }
+
+    @media screen and (max-width: 768px) {
+        font-size: 16px;
+    }
+}
+
+.cyril-case-content .cyril-case-subheading {
+    margin: 80px 0 24px;
+    font-family: var(--font-atkinson);
+    font-size: 20px;
+    line-height: 1.3;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-shadow: none;
+
+    &:first-child {
+        margin-top: 0;
+    }
+}
+
+.cyril-page.cyril-case-page .cyril-case-list {
+    margin: 0 0 28px;
+    padding-left: 0;
+    list-style: none;
+
+    & li {
+        position: relative;
+        padding-left: 28px;
+        margin-bottom: 10px;
+
+        &::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.85em;
+            width: 12px;
+            height: 2px;
+            background-color: var(--color-accent);
+        }
+    }
+
+    &.cyril-case-list-columns {
+        max-width: none;
+        columns: 2;
+        column-gap: 50px;
+
+        & li {
+            break-inside: avoid;
+        }
+
+        @media screen and (max-width: 768px) {
+            columns: 1;
+        }
+    }
+}
+
+// figures — clean framed images/videos with numbered captions
+.cyril-case-figure {
+    margin: 50px 0;
+    counter-increment: cyril-fig;
+
+    &.cyril-case-figure-text {
+        max-width: 68ch;
+    }
+
+    & .cyril-cover,
+    & .cyril-video-container {
+        overflow: hidden;
+        border: 2px solid var(--color-frame);
+    }
+
+    & .cyril-video-container {
+        margin: 0;
+    }
+
+    & video {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    & img,
+    & video {
+        transition: scale 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    & figcaption {
+        margin-top: 16px;
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        opacity: 0.75;
+
+        &::before {
+            content: "Fig. " counter(cyril-fig, decimal-leading-zero) " \2014\00a0";
+            color: var(--color-accent);
+        }
+    }
+}
+
+// Zoom icon only on hover with a mouse; always shown on touch screens.
+@media (hover: hover) and (min-width: 1201px) {
+    .cyril-case-figure .cyril-hover-link {
+        opacity: 0;
+        transition: opacity 0.3s ease, box-shadow 0.4s cubic-bezier(0, 0, 0.3642, 1);
+    }
+
+    .cyril-case-figure .cyril-project-figure:hover .cyril-hover-link {
+        opacity: 1;
+    }
+}
+
+.cyril-page.cyril-case-page .cyril-case-figure img {
+    display: block;
+    width: 100%;
+    // The img carries its intrinsic width/height (to reserve space while it
+    // lazy-loads), so let the height follow the width.
+    height: auto;
+    border: 0;
+    padding: 0;
+
+    // Very tall images show a framed crop from the top; the lightbox
+    // still opens the whole image.
+    &.cyril-case-cropped {
+        height: 100%;
+        object-fit: cover;
+        object-position: top;
+    }
+}
+
+// Scale-and-fade as figures scroll in (the fade itself is .cyril-reveal).
+.cyril-case-figure.cyril-reveal:not(.cyril-revealed) img,
+.cyril-case-figure.cyril-reveal:not(.cyril-revealed) video {
+    scale: 1.06;
+}
+
+.cyril-case-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 40px;
+    margin: 50px 0;
+    align-items: start;
+
+    & .cyril-case-figure {
+        margin: 0;
+    }
+
+    &.cyril-case-grid-offset > :nth-child(2) {
+        margin-top: 120px;
+    }
+
+    &.cyril-case-grid-three {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 30px;
+
+        @media screen and (max-width: 992px) {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        grid-template-columns: minmax(0, 1fr);
+
+        &.cyril-case-grid-offset > :nth-child(2) {
+            margin-top: 0;
+        }
+    }
+
+    @media screen and (max-width: 576px) {
+        &.cyril-case-grid-three {
+            grid-template-columns: minmax(0, 1fr);
+        }
+    }
+}
+
+// big-number pull-outs
+.cyril-case-stats {
+    margin: 70px 0 20px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-top: 2px solid var(--color-frame);
+
+    @media screen and (max-width: 768px) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        row-gap: 20px;
+    }
+}
+
+.cyril-case-stat {
+    padding: 30px 20px 0 0;
+
+    & dt {
+        margin: 0;
+        font-family: var(--font-atkinson);
+        font-size: clamp(48px, 5vw, 88px);
+        font-weight: 700;
+        line-height: 1;
+        color: var(--color-accent);
+        text-shadow: 5px 5px 0 var(--color-soft);
+    }
+
+    & dd {
+        margin: 14px 0 0;
+        font-size: 13px;
+        line-height: 1.5;
+        letter-spacing: 0.08em;
+        opacity: 0.75;
+    }
+}
+
+// pull quote (overrides the site's base blockquote: flex row, italic,
+// leading quote glyph)
+.cyril-case-quote {
+    display: block;
+    margin: 70px 0;
+    padding-left: 40px;
+    border-left: 4px solid var(--color-accent);
+    max-width: 24em;
+    font-style: normal;
+    color: inherit;
+
+    &::before {
+        display: none;
+    }
+
+    & p {
+        margin: 0;
+        font-family: var(--font-atkinson);
+        font-size: clamp(26px, 3vw, 42px);
+        line-height: 1.2;
+    }
+
+    & cite {
+        display: block;
+        margin-top: 20px;
+        font-size: 13px;
+        font-style: normal;
+        letter-spacing: 0.08em;
+        opacity: 0.7;
+    }
+
+    @media screen and (max-width: 768px) {
+        padding-left: 24px;
+    }
+}
+
+// closing band: back link + next project
+.cyril-case-end {
+    padding: 20px 0 140px;
+
+    @media screen and (max-width: 768px) {
+        padding-bottom: 90px;
+    }
+}
+
+.cyril-case-back {
+    margin-bottom: 60px;
+}
+
+.cyril-case-next {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 70px 0;
+    border-top: 2px solid var(--color-frame);
+    border-bottom: 2px solid var(--color-frame);
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+        color: inherit;
+    }
+}
+
+.cyril-case-next-eyebrow {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 20px;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+}
+
+.cyril-case-next-title {
+    position: relative;
+    z-index: 1;
+    display: block;
+    max-width: 60%;
+    font-weight: 700;
+    font-size: clamp(40px, 6vw, 110px);
+    line-height: 0.95;
+    text-shadow: 5px 5px 0 var(--color-soft);
+    transition: color 0.4s ease;
+
+    @media screen and (max-width: 1200px) {
+        max-width: none;
+    }
+}
+
+.cyril-case-next-arrow {
+    display: inline-block;
+    width: 0.6em;
+    height: 0.6em;
+    margin-left: 0.25em;
+    vertical-align: middle;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cyril-case-next-category {
+    position: relative;
+    z-index: 1;
+    margin-top: 24px;
+}
+
+.cyril-case-next-image {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 40%;
+    aspect-ratio: 16 / 9;
+    translate: 0 -50%;
+    opacity: 0;
+    scale: 1.06;
+    pointer-events: none;
+    transition: opacity 0.6s ease, scale 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+
+    @media screen and (max-width: 1200px) {
+        position: relative;
+        top: auto;
+        width: 100%;
+        order: 4;
+        margin-top: 40px;
+        translate: none;
+        opacity: 1;
+        scale: 1;
+    }
+}
+
+.cyril-page.cyril-case-page .cyril-case-next-image img {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    object-fit: cover;
+    border: 2px solid var(--color-frame);
+}
+
+.cyril-case-next:hover {
+    & .cyril-case-next-image {
+        opacity: 1;
+        scale: 1;
+    }
+
+    & .cyril-case-next-title {
+        color: var(--color-accent);
+    }
+
+    & .cyril-case-next-arrow {
+        transform: translateX(12px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cyril-page.cyril-case-page .cyril-case-bleed img,
+    .cyril-case-figure.cyril-reveal:not(.cyril-revealed) img,
+    .cyril-case-figure.cyril-reveal:not(.cyril-revealed) video {
+        scale: 1;
+    }
+}
+
+/* -------------------------------------------
+
+zoom viewer (components/ZoomViewer.js)
+
+------------------------------------------- */
+.cyril-zoom {
+    position: fixed;
+    inset: 0;
+    z-index: 99990;
+    // Gestures (swipe, pinch, swipe-down) are handled in JS.
+    touch-action: none;
+}
+
+.cyril-zoom-backdrop {
+    position: absolute;
+    inset: 0;
+    background-color: var(--color-bg);
+    opacity: 0;
+    transition: opacity 0.45s ease;
+
+    .cyril-zoom-open & {
+        opacity: calc(0.96 * var(--cyril-zoom-drag, 1));
+    }
+}
+
+.cyril-zoom-img {
+    position: fixed;
+    max-width: none;
+    object-fit: cover;
+    user-select: none;
+    -webkit-user-drag: none;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+    will-change: left, top, width, height, transform;
+
+    .cyril-zoom-zoomed & {
+        box-shadow: none;
+    }
+}
+
+.cyril-zoom-btn {
+    position: fixed;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 54px;
+    height: 54px;
+    padding: 0;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    border: 2px solid var(--color-frame);
+    box-shadow: 6px 6px 0 0 var(--color-soft);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease 0.15s, box-shadow 0.4s cubic-bezier(0, 0, 0.3642, 1), color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+
+    & svg {
+        width: 22px;
+        height: 22px;
+    }
+
+    &:hover {
+        color: var(--color-light);
+        background-color: var(--color-accent);
+        border-color: var(--color-accent);
+        box-shadow: 0 0 0 0 var(--color-soft);
+    }
+
+    .cyril-zoom-open & {
+        opacity: 1;
+    }
+}
+
+.cyril-zoom-close {
+    top: 24px;
+    right: 24px;
+}
+
+.cyril-zoom-prev,
+.cyril-zoom-next {
+    top: 50%;
+    margin-top: -27px;
+
+    // Touch screens swipe instead.
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
+}
+
+.cyril-zoom-prev {
+    left: 24px;
+}
+
+.cyril-zoom-next {
+    right: 24px;
+}
+
+.cyril-zoom-caption {
+    position: fixed;
+    left: 16px;
+    right: 16px;
+    bottom: 34px;
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    text-align: center;
+    color: var(--color-text);
+    opacity: 0;
+    transition: opacity 0.3s ease 0.2s;
+
+    .cyril-zoom-open & {
+        opacity: 1;
+    }
+
+    .cyril-zoom-zoomed & {
+        opacity: 0;
+    }
+
+    @media screen and (max-width: 768px) {
+        bottom: 24px;
+        flex-direction: column;
+        gap: 6px;
+        font-size: 13px;
+    }
+}
+
+.cyril-zoom-count {
+    color: var(--color-accent);
+    font-variant-numeric: tabular-nums;
 }

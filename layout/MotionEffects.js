@@ -13,8 +13,86 @@ import { scrambleText, splitChars, hideSplitTitle, scrambleInTitle } from "@/pub
 // works without re-binding.
 
 const CLICKABLE_SELECTOR = 'a, button, [role="button"], .cyril-dot, .cyril-prev, .cyril-next';
-const MAGNETIC_STRENGTH = 0.3;
+// The pull is based on where the pointer is *relative to the element's size*
+// (centre = 0, edge = full pull), not on raw pixel distance — otherwise small
+// targets like the "All" filter or icons could barely move, since the pointer
+// can never get far from their centre.
 const MAGNETIC_MAX_PX = 12;
+
+// The custom cursor steps aside over:
+// - square outlined icon buttons (they fill orange on hover — feedback enough)
+// - the home hero photo, but only over its visible pixels: the transparent
+//   areas of the PNG still show the cursor.
+const ICON_BUTTON_SELECTOR = '.cyril-slider-nav .cyril-prev, .cyril-slider-nav .cyril-next, .cyril-back-to-top, .cyril-zoom-btn';
+const MAIN_IMAGE_SELECTOR = '.cyril-banner-image';
+const ALPHA_SAMPLE_WIDTH = 400; // px — resolution of the hit-test copy
+const ALPHA_THRESHOLD = 24; // 0–255
+// Hide a little *before* the pointer reaches the photo: any visible pixel
+// within this many screen px of the pointer counts.
+const HIDE_MARGIN_PX = 24;
+// Probe offsets: the pointer itself plus two rings (full and half margin).
+const PROBES = [[0, 0]];
+for (let k = 0; k < 12; k++) {
+  const a = (k / 12) * Math.PI * 2;
+  PROBES.push([Math.cos(a), Math.sin(a)], [Math.cos(a) / 2, Math.sin(a) / 2]);
+}
+
+// Per image: a small copy of its alpha channel, read once (same-origin, so
+// the canvas isn't tainted). Rebuilt if the displayed source changes.
+const alphaMaps = new WeakMap();
+
+const alphaMapFor = (img) => {
+  let map = alphaMaps.get(img);
+  if (map && map.src === img.currentSrc) return map;
+  const scale = Math.min(1, ALPHA_SAMPLE_WIDTH / img.naturalWidth);
+  const w = Math.max(1, Math.round(img.naturalWidth * scale));
+  const h = Math.max(1, Math.round(img.naturalHeight * scale));
+  map = { src: img.currentSrc, w, h, data: null };
+  try {
+    const canvas = document.createElement('canvas');
+    canvas.width = w;
+    canvas.height = h;
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    ctx.drawImage(img, 0, 0, w, h);
+    map.data = ctx.getImageData(0, 0, w, h).data;
+  } catch (e) {
+    // Unreadable (shouldn't happen for same-origin) — treat as fully solid.
+  }
+  alphaMaps.set(img, map);
+  return map;
+};
+
+// Is the pointer over — or within HIDE_MARGIN_PX of — a visible
+// (non-transparent) pixel of this image? Honours object-fit/object-position
+// and any transform (via the rect).
+const isOverVisiblePixel = (img, x, y) => {
+  if (!img.complete || !img.naturalWidth) return false;
+  const map = alphaMapFor(img);
+  if (!map.data) return true;
+  const r = img.getBoundingClientRect();
+  const cs = getComputedStyle(img);
+  const nw = img.naturalWidth;
+  const nh = img.naturalHeight;
+  let cw = r.width;
+  let ch = r.height;
+  let ox = 0;
+  let oy = 0;
+  if (cs.objectFit === 'cover' || cs.objectFit === 'contain') {
+    const s = cs.objectFit === 'cover' ? Math.max(r.width / nw, r.height / nh) : Math.min(r.width / nw, r.height / nh);
+    cw = nw * s;
+    ch = nh * s;
+    const [px, py] = cs.objectPosition.split(' ').map((v) => parseFloat(v) / 100);
+    ox = (r.width - cw) * (Number.isNaN(px) ? 0.5 : px);
+    oy = (r.height - ch) * (Number.isNaN(py) ? 0.5 : py);
+  }
+  return PROBES.some(([dx, dy]) => {
+    const u = (x + dx * HIDE_MARGIN_PX - r.left - ox) / cw;
+    const v = (y + dy * HIDE_MARGIN_PX - r.top - oy) / ch;
+    if (u < 0 || u >= 1 || v < 0 || v >= 1) return false;
+    const i = (Math.floor(v * map.h) * map.w + Math.floor(u * map.w)) * 4 + 3;
+    return map.data[i] > ALPHA_THRESHOLD;
+  });
+};
 // Anything this tall or this big in area (portfolio cards, lightbox image
 // links) isn't pulled — it's a block, not a control. Checked by height/area
 // rather than width, so long one-line labels (e.g. the "Branding,
@@ -82,7 +160,7 @@ const PARALLAX_LAYERS = [
 
 // Section titles that type in letter by letter (the hero headline does the
 // same, driven by playHeroIntro in app/page.js).
-const TITLE_SELECTOR = '#portfolio-start h2.glitch, .cyril-onepage .cyril-section h2.glitch';
+const TITLE_SELECTOR = '#portfolio-start h2.glitch, .cyril-onepage .cyril-section h2.glitch, .cyril-case-title';
 
 // Dotted background circles: how much further than their section they
 // travel while it scrolls (fraction of the section's offset from the top of
@@ -345,6 +423,10 @@ const MotionEffects = () => {
       const link = target?.closest(CLICKABLE_SELECTOR);
       ring.classList.toggle('cyril-cursor-view', !!card);
       ring.classList.toggle('cyril-cursor-link', !card && !!link);
+      // Hide over icon buttons and the visible pixels of the hero photo.
+      const mainImage = target?.closest(MAIN_IMAGE_SELECTOR);
+      root.classList.toggle('cyril-cursor-hide',
+        !!target?.closest(ICON_BUTTON_SELECTOR) || (!!mainImage && isOverVisiblePixel(mainImage, mouseX, mouseY)));
 
       // Magnetic pull
       const magnetic = findMagnetic(target);
@@ -352,10 +434,18 @@ const MotionEffects = () => {
       if (magnetic) {
         prepMagnetic(magnetic);
         magneticEl = magnetic;
-        const rect = magnetic.getBoundingClientRect();
-        const clamp = (v) => Math.max(-MAGNETIC_MAX_PX, Math.min(MAGNETIC_MAX_PX, v));
-        const dx = clamp((mouseX - (rect.left + rect.width / 2)) * MAGNETIC_STRENGTH);
-        const dy = clamp((mouseY - (rect.top + rect.height / 2)) * MAGNETIC_STRENGTH);
+        // Measure against the link actually under the pointer (for filter
+        // links the moving host is the taller <li>), at its resting position:
+        // subtract the pull currently applied, or the element chasing the
+        // pointer would keep shrinking its own pull and jitter.
+        const hit = (link || magnetic).getBoundingClientRect();
+        const [offX = 0, offY = 0] = (getComputedStyle(magnetic).translate || '')
+          .split(' ').map((v) => parseFloat(v) || 0);
+        const cx = hit.left - offX + hit.width / 2;
+        const cy = hit.top - offY + hit.height / 2;
+        const unit = (v) => Math.max(-1, Math.min(1, v));
+        const dx = unit((mouseX - cx) / (hit.width / 2)) * MAGNETIC_MAX_PX;
+        const dy = unit((mouseY - cy) / (hit.height / 2)) * MAGNETIC_MAX_PX;
         magnetic.style.translate = `${dx}px ${dy}px`;
       }
 
@@ -396,7 +486,7 @@ const MotionEffects = () => {
       releaseMagnetic();
       releaseTilt();
       parallax.forEach((layer) => { layer.el.style.translate = ''; });
-      root.classList.remove('cyril-has-cursor', 'cyril-cursor-visible');
+      root.classList.remove('cyril-has-cursor', 'cyril-cursor-visible', 'cyril-cursor-hide');
     };
   }, []);
 

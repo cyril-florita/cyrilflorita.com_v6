@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { cyrilUtility } from "@/public/utility/index";
 import { Fragment } from "react";
 
 const HEADLINE = "Cyril Florita";
@@ -54,11 +55,10 @@ const Banner = ( { bgImage = "/img/cyril-florita-profile.png" } ) => {
                           return;
                         }
 
-                        document.body.classList.add('page-exit');
                         sessionStorage.setItem('scrollToPortfolio', 'true');
-                        setTimeout(() => {
+                        cyrilUtility.handlePageTransition().then(() => {
                           window.location.href = '/';
-                        }, 400);
+                        });
                       }}>
                       See My Work
                     </Link>

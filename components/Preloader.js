@@ -1,40 +1,45 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 
-// Shown immediately (it's part of the static HTML, so it's visible before
-// any JS runs) and hidden once the page has actually finished loading.
-// MIN_DISPLAY_MS is there so our own fade-out transition starts only after
-// body's separate 1s opacity fade-in (see _common.scss) has settled —
-// starting it earlier would visually compound with that animation instead
-// of transitioning cleanly.
-const MIN_DISPLAY_MS = 1300;
-const FALLBACK_MS = 4000;
+// The preloader doubles as the page-transition panel:
+// - First paint: it's part of the static HTML, so it already covers the page
+//   before any JS runs, and slides up and away once the page has loaded.
+// - Navigating: wipeThen(go) slides it up from the bottom to cover the
+//   current page, calls go() (a hard navigation or a client-side route
+//   change), and — for client-side changes, where this component stays
+//   mounted — slides it away again once the new page is in. Hard navigations
+//   land on a new document whose preloader is already covering, so the two
+//   read as one continuous wipe.
+// Modifier classes are toggled on the element directly (not via React state)
+// so the "start below the screen, then slide in" step can force a reflow in
+// between. Styles: .cyril-preloader in _components.scss.
+const MIN_DISPLAY_MS = 900; // first load: keep the mark up at least this long
+const FALLBACK_MS = 4000; // don't block the page forever if 'load' never fires
+const WIPE_MS = 650; // must match the slide duration in the CSS
+const CLIENT_HOLD_MS = 350; // after a client-side route change, before revealing
 
-// Project (Work) pages are reached via next/link (a client-side transition,
-// not a full document reload — see PortfolioIsotope.js), so there's no
-// window 'load' event to hang a second appearance off of. Callers dispatch
-// this event (see showPreloader() below) right as the link is clicked, and
-// the effect below re-shows/re-hides using the same timing as the initial
-// load.
-const SHOW_EVENT = 'cyril:preloader-show';
+const WIPE_EVENT = 'cyril:preloader-wipe';
 const HIDDEN_EVENT = 'cyril:preloader-hidden';
 
 // Module-level (not React state) so onPreloaderHidden below can check the
 // current status synchronously from outside the component.
 const preloaderState = { hidden: false };
 
-export const showPreloader = () => {
-  if (typeof window !== 'undefined') {
-    window.dispatchEvent(new CustomEvent(SHOW_EVENT));
+// Cover the page with the panel, then run `go` (e.g. change the URL).
+export const wipeThen = (go) => {
+  if (typeof window === 'undefined') return;
+  if (!document.getElementById('cyril-preloader')) {
+    go();
+    return;
   }
+  window.dispatchEvent(new CustomEvent(WIPE_EVENT, { detail: { go } }));
 };
 
 // Runs `callback` once the preloader has actually finished hiding —
 // immediately if it already has, otherwise the next time it does. Lets a
-// page's own reveal animation (e.g. its top banner fading in) wait for the
-// preloader instead of running on its own fixed timer and racing it,
-// covering both a fresh page load and a client-side transition into a
-// project page. Returns an unsubscribe function.
+// page's own entrance animations wait for the reveal instead of racing it,
+// on a fresh load and after a client-side transition alike. Returns an
+// unsubscribe function.
 export const onPreloaderHidden = (callback) => {
   if (typeof window === 'undefined') return () => {};
 
@@ -48,74 +53,64 @@ export const onPreloaderHidden = (callback) => {
   return () => window.removeEventListener(HIDDEN_EVENT, handler);
 };
 
-const markHidden = () => {
-  preloaderState.hidden = true;
-  if (typeof window !== 'undefined') {
-    window.dispatchEvent(new CustomEvent(HIDDEN_EVENT));
-  }
-};
-
 const Preloader = () => {
-  const [hidden, setHidden] = useState(false);
+  const ref = useRef(null);
 
-  // Initial page load.
   useEffect(() => {
-    let hideTimer;
-    let fallbackTimer;
+    const el = ref.current;
+    let timers = [];
+    const later = (fn, ms) => timers.push(window.setTimeout(fn, ms));
+    const clearTimers = () => { timers.forEach(clearTimeout); timers = []; };
 
     const hide = () => {
-      setHidden(true);
-      markHidden();
-      clearTimeout(fallbackTimer);
+      clearTimers();
+      el.classList.add('cyril-preloader-hidden');
+      preloaderState.hidden = true;
+      window.dispatchEvent(new CustomEvent(HIDDEN_EVENT));
     };
 
-    const scheduleHide = () => {
-      hideTimer = window.setTimeout(hide, MIN_DISPLAY_MS);
-    };
+    // First load.
+    const scheduleHide = () => later(hide, MIN_DISPLAY_MS);
+    if (document.readyState === 'complete') scheduleHide();
+    else window.addEventListener('load', scheduleHide, { once: true });
+    later(hide, FALLBACK_MS);
 
-    if (document.readyState === 'complete') {
-      scheduleHide();
-    } else {
-      window.addEventListener('load', scheduleHide, { once: true });
-    }
-
-    // In case 'load' never fires for some reason, don't block the page forever.
-    fallbackTimer = window.setTimeout(hide, FALLBACK_MS);
-
-    return () => {
-      window.removeEventListener('load', scheduleHide);
-      clearTimeout(hideTimer);
-      clearTimeout(fallbackTimer);
-    };
-  }, []);
-
-  // Later, client-side transitions into a Work/project page.
-  useEffect(() => {
-    let hideTimer;
-
-    const onShow = () => {
-      clearTimeout(hideTimer);
+    // Transitions out of this page.
+    const onWipe = (e) => {
+      clearTimers();
       preloaderState.hidden = false;
-      setHidden(false);
-      hideTimer = window.setTimeout(() => {
-        setHidden(true);
-        markHidden();
-      }, MIN_DISPLAY_MS);
+      // Jump below the screen with no transition, then slide up to cover.
+      el.classList.remove('cyril-preloader-hidden');
+      el.classList.add('cyril-preloader-below');
+      void el.offsetHeight;
+      el.classList.remove('cyril-preloader-below');
+      later(() => {
+        e.detail.go();
+        // Client-side route changes keep this component mounted; reveal the
+        // new page once it's had a moment to render. (Hard navigations never
+        // get here — the page is gone.)
+        later(hide, CLIENT_HOLD_MS);
+      }, WIPE_MS);
     };
 
-    window.addEventListener(SHOW_EVENT, onShow);
+    // Coming back via the browser's back/forward cache restores the page as
+    // it was left — covered. Reveal it.
+    const onPageShow = (e) => {
+      if (e.persisted) hide();
+    };
+
+    window.addEventListener(WIPE_EVENT, onWipe);
+    window.addEventListener('pageshow', onPageShow);
     return () => {
-      window.removeEventListener(SHOW_EVENT, onShow);
-      clearTimeout(hideTimer);
+      clearTimers();
+      window.removeEventListener('load', scheduleHide);
+      window.removeEventListener(WIPE_EVENT, onWipe);
+      window.removeEventListener('pageshow', onPageShow);
     };
   }, []);
 
   return (
-    <div
-      id="cyril-preloader"
-      className={`cyril-preloader${hidden ? ' cyril-preloader-hidden' : ''}`}
-      aria-hidden="true"
-    >
+    <div ref={ref} id="cyril-preloader" className="cyril-preloader" aria-hidden="true">
       <div className="cyril-preloader-mark">
         <strong>C<span>yril</span></strong>
       </div>

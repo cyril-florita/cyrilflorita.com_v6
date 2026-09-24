@@ -36,9 +36,9 @@ export const metadata = {
   title: "Cyril Florita - Designer and Developer",
   description: "Cyril Florita's professional website showcasing his background, skills, experience, and projects as a designer and developer.",
   icons: {
-    icon: './favicon.ico',
-    shortcut: './favicon.ico',
-    apple: './apple-touch-icon.png',
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
   }
 };
 

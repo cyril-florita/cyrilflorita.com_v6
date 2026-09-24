@@ -213,8 +213,9 @@ main
     }
 }
 
+// Matches the 12px scroll-progress bar on project pages.
 ::-webkit-scrollbar {
-    width: 4px;
+    width: 12px;
 }
 
 ::-webkit-scrollbar-track {
@@ -250,8 +251,9 @@ body {
     -webkit-text-size-adjust: 100%;
     -webkit-overflow-scrolling: touch; // for iOS smooth scrolling
     background-color: variables.$light;
-    opacity: 0;
-    animation: fadeIn 1s cubic-bezier(0.4, 0, 0.4, 1) forwards;
+    // (No body fade-in: the preloader covers first paint and slides away to
+    // reveal the page — see components/Preloader.js. A body fade would also
+    // fade the preloader itself, since it lives inside <body>.)
 
     &:after {
         content: '';
@@ -282,10 +284,6 @@ body {
         @media screen and (max-width: 1200px) {
             animation: none;
         }
-    }
-
-    &.page-exit {
-        animation: fadeOut 0.4s cubic-bezier(0.4, 0, 0.4, 1) forwards;
     }
 
     @media screen and (max-width: 1200px) {

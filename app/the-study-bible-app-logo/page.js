@@ -2,11 +2,30 @@
 
 import SiteLayout from "@/layout/SiteLayout";
 import { cyrilUtility } from "@/public/utility/index";
-import { onPreloaderHidden } from "@/components/Preloader";
+import { onPreloaderHidden, wipeThen } from "@/components/Preloader";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import {
+  CaseHero,
+  CaseLayout,
+  CaseSection,
+  CaseFigure,
+  CaseQuote,
+  CaseNext,
+} from "@/components/case/CaseStudy";
+
+const SECTIONS = [
+  { id: "overview", label: "Overview" },
+  { id: "research", label: "Research" },
+  { id: "ideation", label: "Ideation" },
+  { id: "iterations", label: "Iterations" },
+  { id: "final-design", label: "Final Design" },
+  { id: "color-typography", label: "Color & Type" },
+  { id: "outcome", label: "Outcome" },
+];
 
 const page = () => {
+
   const router = useRouter();
 
   useEffect(() => {
@@ -34,154 +53,95 @@ const page = () => {
 
     // Save the project ID for the portfolio page to use
     sessionStorage.setItem('returnToProject', projectId);
-    router.push('/');
+    wipeThen(() => router.push('/'));
   };
 
   return (
     <SiteLayout>
       <div>
-        <div className="cyril-page cyril-project-page">
-          {/* .container */}
-          <div className="container">
+        <div className="cyril-page cyril-project-page cyril-case-page">
 
-            {/* top banner */}
-            <div className="cyril-top-banner cyril-text-center">
-              <img className="cyril-project-main-graphic" src="/img/portfolio/main_the-study-bible-app-logo.jpg" alt="The Study Bible App Logo - Main" />
-              <h2 className="cyril-mt-60 glitch" data-text="The Study Bible App Logo">The Study Bible App Logo</h2>
-              <p className="cyril-upper cyril-mt-30 cyril-mb-40">
-                <span className="cyril-accent">Branding</span>
-              </p>
+          <CaseHero
+            category="Branding"
+            detail="Visual Identity"
+            title="The Study Bible App Logo"
+            summary="Creating a visual identity for The Study Bible app: a simple, versatile logo that communicates usability, clarity, and a sense of illumination."
+            facts={[
+              { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Media Organization</> },
+              { label: "Role", value: "Logo/Brand Designer" },
+              { label: "Deliverables", value: "Logo & Wordmark" },
+            ]}
+            image="/img/portfolio/main_the-study-bible-app-logo.jpg"
+            imageAlt="The Study Bible App Logo - Main"
+          />
 
-            </div>
-            {/* dend of top banner */}
+          <CaseLayout sections={SECTIONS}>
 
-            {/* main content */}
-            <div className="row cyril-mb-60">
+            {/* 01 — Overview */}
+            <CaseSection id="overview" number={1} title="Project Overview">
+              <p>As a designer at Grace to You, I was tasked with creating a visual identity for The Study Bible app. The goal was to design a logo that communicates usability, clarity, and a sense of illumination, while remaining simple and versatile for digital use.</p>
+            </CaseSection>
 
-              <div className="cyril-project-content">
+            {/* 02 — Research */}
+            <CaseSection id="research" number={2} title="Research and Concept Development">
+              <p>I began by researching existing Bible and study-related app logos to identify common visual themes—open books, crosses, rays of light, and bookmarks. My aim was to create a design that felt familiar yet distinct, balancing tradition with modern minimalism.</p>
+            </CaseSection>
 
-                <div className="cyril-divider cyril-mb-60" />
+            {/* 03 — Ideation */}
+            <CaseSection id="ideation" number={3} title="Ideation and Exploration">
+              <p>I sketched multiple concepts, focusing on the core idea of an open book, which universally symbolizes learning and accessibility. I experimented with different elements:</p>
+              <ul className="cyril-case-list">
+                <li>Rays of light to suggest inspiration and enlightenment</li>
+                <li>Crosses to signify faith in Christ</li>
+                <li>Bookmarks and pens to represent study and engagement</li>
+              </ul>
+            </CaseSection>
 
-                <div className="row cyril-mb-20">
-                  <div className="col-md-4 cyril-mb-30">
-                    <p className="cyril-upper cyril-mb-10">Employer:</p>
-                    <p className="cyril-mt-20"><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Media Organization</p>
-                  </div>
-                  <div className="col-md-4 cyril-mb-30">
-                    <p className="cyril-upper cyril-mb-10">Role:</p>
-                    <p className="cyril-mt-20">Logo/Brand Designer</p>
-                  </div>
-                  <div className="col-md-4 cyril-mb-30">
-                    <p className="cyril-upper cyril-mb-10">Start / Finish Date:</p>
-                    <p className="cyril-mt-20">Jan 2016</p>
-                  </div>
-                </div>
+            {/* 04 — Design Iterations */}
+            <CaseSection id="iterations" number={4} title="Design Iterations">
+              <p>I then developed a grid of logo variations. Each icon was tested for clarity at small sizes and adaptability across backgrounds. I explored different compositions, such as:</p>
+              <ul className="cyril-case-list">
+                <li>Books with radiating lines for a sense of revelation</li>
+                <li>Closed and open Bibles to convey both authority and approachability</li>
+                <li>Integrated crosses and bookmarks for subtle devotional cues</li>
+              </ul>
+              <CaseFigure src="/img/portfolio/the-study-bible-logo-iterations.jpg" alt="The Study Bible Logo Iterations" caption="Logo Iterations" />
+            </CaseSection>
 
-                <div className="cyril-divider cyril-mb-60" />
+            {/* 05 — Final Design Selection */}
+            <CaseSection id="final-design" number={5} title="Final Design Selection">
+              <p>After reviewing the options with the Digital Platforms Coordinator and stakeholders, we agreed on the final design. This logo features:</p>
+              <ul className="cyril-case-list">
+                <li>The Bible, the source of truth</li>
+                <li>A pen in the center, reinforcing the idea of active engagement and personal growth</li>
+                <li>A semi-circle backdrop, evoking a rising sun, which suggests light and illumination</li>
+              </ul>
+              <CaseFigure src="/img/portfolio/the-study-bible-app-logo.jpg" alt="The Study Bible Logo" caption="The Study Bible Logo" />
+            </CaseSection>
 
-                <h4 className="cyril-up cyril-text-center">Project Overview</h4>
-                <dl className="no-disc">
-                  <dt></dt>
-                  <dd>
-                    As a designer at Grace to You, I was tasked with creating a visual identity for The Study Bible app. The goal was to design a logo that communicates usability, clarity, and a sense of illumination, while remaining simple and versatile for digital use.
-                  </dd>
-                </dl>
+            {/* 06 — Color Palette & Typography */}
+            <CaseSection id="color-typography" number={6} title="Color Palette & Typography">
+              <p>The color palette is a muted blue, chosen for its calm, trustworthy, and timeless qualities. And for the wordmark, I selected a clean, sans-serif font. The hierarchy emphasizes "STUDY BIBLE" in bold, with "THE" in a lighter weight above, ensuring readability and balance.</p>
+            </CaseSection>
 
-                <h4 className="cyril-up cyril-text-center">Research and Concept Development</h4>
+            {/* 07 — Outcome and Reflection */}
+            <CaseSection id="outcome" number={7} title="Outcome and Reflection">
+              <CaseQuote>
+                The combination of book, pen, and rising sun encapsulates the app&apos;s mission: to encourage a deeper study with the digital version of the MacArthur Bible.
+              </CaseQuote>
+              <p>The final logo is simple, memorable, and effective across the mobile platforms. The combination of book, pen, and rising sun encapsulates the app's mission: to encourage a deeper study with the digital version of the MacArthur Bible. The iterative process, from broad exploration to focused refinement, ensured that the final mark met both the user's needs and the brand's vision.</p>
+              <CaseFigure src="/img/portfolio/the-study-bible-app-logo_on-gty-homepage.jpg" alt="The Study Bible App Logo" caption="Logo on GTY Homepage" />
+            </CaseSection>
 
-                <dl className="no-disc">
-                  <dd>
-                    I began by researching existing Bible and study-related app logos to identify common visual themes—open books, crosses, rays of light, and bookmarks. My aim was to create a design that felt familiar yet distinct, balancing tradition with modern minimalism.
-                  </dd>
-                </dl>
+          </CaseLayout>
 
-                <h4 className="cyril-up cyril-text-center">Ideation and Exploration</h4>
-                <dl className="no-disc">
-                  <dd>
-                    I sketched multiple concepts, focusing on the core idea of an open book, which universally symbolizes learning and accessibility. I experimented with different elements:
-                  </dd>
-                  <dd>
-                    <dl className="w-disc">
-                      <dd>Rays of light to suggest inspiration and enlightenment</dd>
-                      <dd>Crosses to signify faith in Christ</dd>
-                      <dd>Bookmarks and pens to represent study and engagement</dd>
-                    </dl>
-                  </dd>
-                </dl>
-
-                <h4 className="cyril-up cyril-text-center">Design Iterations</h4>
-                <dl className="no-disc">
-                  <dd>
-                    I then developed a grid of logo variations. Each icon was tested for clarity at small sizes and adaptability across backgrounds. I explored different compositions, such as:
-                  </dd>
-                  <dd>
-                    <dl className="w-disc">
-                      <dd>Books with radiating lines for a sense of revelation</dd>
-                      <dd>Closed and open Bibles to convey both authority and approachability</dd>
-                      <dd>Integrated crosses and bookmarks for subtle devetional cues</dd>
-                    </dl>
-                  </dd>
-                  <dd>
-                    <img className="cyril-project-main-graphic" src="/img/portfolio/the-study-bible-logo-iterations.jpg" alt="The Study Bible Logo Iterations" />
-                  </dd>
-                </dl>
-
-                <h4 className="cyril-up cyril-text-center">Final Design Selection</h4>
-                <dl className="no-disc">
-                  <dd>
-                    After reviewing the options with the Digital Platforms Coordinator and stakeholders, we agreed on the final design. This logo features:
-                  </dd>
-                  <dd>
-                    <dl className="w-disc">
-                      <dd>The Bible, the source of truth</dd>
-                      <dd>A pen in the center, reinforcing the idea of active engagement and personal growth</dd>
-                      <dd>A semi-circle backdrop, evoking a rising sun, which suggests light and illumination</dd>
-                    </dl>
-                  </dd>
-                  <dd>
-                    <img className="cyril-project-main-graphic" src="/img/portfolio/the-study-bible-app-logo.jpg" alt="The Study Bible Logo" />
-                  </dd>
-                </dl>
-
-                <h4 className="cyril-up cyril-text-center">Color Palette &amp; Typography</h4>
-                <dl className="no-disc">
-                  <dd>
-                    The color palette is a muted blue, chosen for its calm, trustworthy, and timeless qualities. And for the wordmark, I selected a clean, sans-serif font. The hierarchy emphasizes "STUDY BIBLE" in bold, with "THE" in a lighter weight above, ensuring readability and balance.
-                  </dd>
-                </dl>
-                <h4 className="cyril-up cyril-text-center">Outcome and Reflection</h4>
-                <dl className="no-disc">
-                  <dd>
-                    The final logo is simple, memorable, and effective across the mobile platforms. The combination of book, pen, and rising sun encapsulates the app's mission: to encourage a deeper study with the digital version of the MacArthur Bible. The iterative process, from broad exploration to focused refinement, ensured that the final mark met both the user's needs and the brand's vision.
-                  </dd>
-                  <dd>
-                    <img className="cyril-project-main-graphic" src="/img/portfolio/the-study-bible-app-logo_on-gty-homepage.jpg" alt="The Study Bible App Logo" />
-                  </dd>
-                </dl>
-
-
-                {/* pagination */}
-                <div className="cyril-pagination-panel cyril-mt-60">
-                  <button
-                    onClick={handleBackToPortfolio}
-                    className="cyril-button cyril-type-2 cyril-mb-30"
-                  >
-                    <svg className="cyril-prev" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                    Back to Portfolio
-                  </button>
-                </div>
-                {/* end of pagination */}
-
-              </div>
-              {/* end of <div className="offset-lg-1-custom col-lg-9"> */}
-
-            </div>
-            {/* end of .row */}
-
-            {/* end of main content */}
-
-          </div>
-          {/* end of .container */}
+          <CaseNext
+            href="/sekihmentis"
+            title="SekihMentis"
+            category="Illustration"
+            image="/img/portfolio/main_sekihmentis.jpg"
+            onBack={handleBackToPortfolio}
+          />
 
         </div>
       </div>

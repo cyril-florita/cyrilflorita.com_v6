@@ -2,15 +2,30 @@
 
 import SiteLayout from "@/layout/SiteLayout";
 import { cyrilUtility } from "@/public/utility/index";
-import { onPreloaderHidden } from "@/components/Preloader";
+import { onPreloaderHidden, wipeThen } from "@/components/Preloader";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import {
+  CaseHero,
+  CaseLayout,
+  CaseSection,
+  CaseFigure,
+  CaseGrid,
+  CaseQuote,
+  CaseNext,
+} from "@/components/case/CaseStudy";
+
+const SECTIONS = [
+  { id: "overview", label: "Overview" },
+  { id: "branding", label: "Branding" },
+  { id: "graphics", label: "Graphics & Media" },
+  { id: "ux-web", label: "UX & Web" },
+  { id: "reflection", label: "Reflection" },
+];
 
 const page = () => {
 
   const router = useRouter();
-
-  // Scroll Progress
 
   useEffect(() => {
     // Mark which project to scroll back to whenever the user leaves this
@@ -27,9 +42,6 @@ const page = () => {
       }
     });
 
-    // Scroll Tracking
-
-
     return () => unsubscribePreloader();
   }, []);
 
@@ -40,164 +52,88 @@ const page = () => {
 
     // Save the project ID for the portfolio page to use
     sessionStorage.setItem('returnToProject', projectId);
-    router.push('/');
+    wipeThen(() => router.push('/'));
   };
 
   return (
     <SiteLayout>
       <div>
-        <div className="cyril-page cyril-project-page">
+        <div className="cyril-page cyril-project-page cyril-case-page">
 
-          {/* .container */}
-          <div className="container">
+          <CaseHero
+            category="Branding/UI/UX/Web"
+            detail="Podcast Brand & Website"
+            title="Truth Matters Podcast"
+            summary="Creating the brand, UX/UI design, and website for Grace to You's Truth Matters Podcast—a digital experience as grounded and compelling as the content itself."
+            facts={[
+              { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Media Organization</> },
+              { label: "Role", value: "Product Designer & Web Developer" },
+              { label: "Website", value: <a className="cyril-dark" href="https://truthmatterspodcast.gty.org" target="_blank">truthmatterspodcast.gty.org</a> },
+              { label: "Platform", value: "WordPress" },
+            ]}
+            image="/img/portfolio/main_truth-matters-podcast.jpg"
+            imageAlt="Truth Matters Podcast Wide"
+          />
 
-            {/* top banner */}
-            <div className="cyril-top-banner cyril-text-center">
-              <img src="/img/portfolio/main_truth-matters-podcast.jpg" alt="Truth Matters Podcast Wide" />                           
-              <h2 className="cyril-mt-60 glitch" data-text="Truth Matters Podcast">Truth Matters Podcast</h2>
-              <p className="cyril-upper cyril-mt-30 cyril-mb-40">
-                <span className="cyril-accent">Branding / UI/UX Design / Web Development</span>
-              </p>
+          <CaseLayout sections={SECTIONS}>
 
-            </div>
-            {/* dend of top banner */}
+            {/* 01 — Overview */}
+            <CaseSection id="overview" number={1} title="Project Overview">
+              <p>The Truth Matters Podcast is a media production by Grace to You. In each episode, host Darrell Harrison welcomes a guest to explore a featured resource from the Grace to You collection—whether it's a book, sermon, or blog series by John MacArthur. Together, they dive into the inspiration behind the resource, its core message, and why it still matters for the church today.</p>
+              <p>As the Product Designer and Developer behind the Truth Matters Podcast, my goal was to create a digital experience that felt as grounded and compelling as the content itself. This project was one of those many projects for Grace to You where I got to wear many hats and ensure every touchpoint—from the logo to the episode pages—told a consistent story. It brought together three core roles I love: branding, UX/UI design, and front-end development.</p>
+            </CaseSection>
 
-            {/* main content */}
-            <div className="row cyril-mb-60">
+            {/* 02 — Branding */}
+            <CaseSection id="branding" number={2} title="Branding &amp; Visual Identity">
+              <p>From the start, I wanted the branding to echo the tone of the podcast—casual, yet theologically serious, thoughtful, and grounded in biblical truth. The logo is minimal yet strong, designed to reflect clarity and conviction that you would expect from Grace to You. I stuck to a muted, sophisticated color palette (deep charcoal, soft neutrals) to reinforce the show's tone: no hype, just truth. Typography was critical too&mdash;consistent with Grace to You's style, sharp, readable fonts that convey authority without being loud.</p>
+              <CaseQuote>
+                No hype, just truth.
+              </CaseQuote>
+              <CaseFigure src="/img/portfolio/main_truth-matters-podcast.jpg" alt="Truth Matters Podcast Wide" caption="Truth Matters Podcast" />
+              <CaseGrid layout="two">
+                <CaseFigure src="/img/portfolio/truth-matters_logo.jpg" alt="Truth Matters Podcast Logo" caption="Logo" />
+                <CaseFigure src="/img/portfolio/truth-matters_icon.jpg" alt="Truth Matters Podcast Icon" caption="Icon" />
+              </CaseGrid>
+              <CaseFigure src="/img/portfolio/truth-matters_mug.jpg" alt="Truth Matters Podcast Mug" caption="Mug" size="text" />
+            </CaseSection>
 
-                <div className="cyril-project-content">
+            {/* 03 — Graphics & Supporting Media */}
+            <CaseSection id="graphics" number={3} title="Graphics &amp; Supporting Media">
+              <p>Each podcast episode has its own hero product/imagery and thematic layout, designed to reflect the subject matter while staying true to the brand system. I created all the assets in-house, including episode thumbnails, podcast artwork, website banners, and social share images. These were crafted to feel cohesive yet distinctive, giving each episode a unique identity within the larger Truth Matters Podcast brand.</p>
+              <CaseGrid layout="two">
+                <CaseFigure src="/img/portfolio/truth-matters_youtube-thumb-1.jpg" alt="Truth Matters Podcast YouTube Thumb 1" caption="YouTube Thumbnail 1" />
+                <CaseFigure src="/img/portfolio/truth-matters_youtube-thumb-2.jpg" alt="Truth Matters Podcast YouTube Thumb 2" caption="YouTube Thumbnail 2" />
+              </CaseGrid>
+              <CaseGrid layout="offset">
+                <CaseFigure src="/img/portfolio/truth-matters_episode-artwork-1.jpg" alt="Truth Matters Podcast Episode Artwork 1" caption="Episode Artwork 1" />
+                <CaseFigure src="/img/portfolio/truth-matters_episode-artwork-2.jpg" alt="Truth Matters Podcast Episode Artwork 2" caption="Episode Artwork 2" />
+              </CaseGrid>
+              <CaseFigure src="/img/portfolio/truth-matters_apple-podacast.png" alt="Truth Matters Apple Podcast" caption="Apple Podcast" ratio="3 / 4" size="text" />
+            </CaseSection>
 
-                  <div className="cyril-divider cyril-mb-60" />
+            {/* 04 — UX Design, Web Development, & Podcast Integration */}
+            <CaseSection id="ux-web" number={4} title="UX Design, Web Development, &amp; Podcast Integration">
+              <p>The user journey was my next focus. With leadership from the Digital Platforms Director and collaboration with the Senior Software Architect, I developed the site using WordPress for a more practical content publication and management. I designed the site to be clean, minimal, content-first, and easy to navigate. It's built with a focus on SEO and accessibility, ensuring that the podcast is easily discoverable, playable, and engaging for all audiences. I kept the UI minimal so the podcast episodes and visuals could shine. There's the ability for the user to engage by leaving a comment or sharing the episode on social media. I also built a fully responsive experience that works seamlessly on mobile—because I knew a lot of listeners would be discovering this on the go.</p>
+              <p>The homepage showcases the most recent episodes with a global media player for immediate listening/watching, and one that does not get interrupted while trying to navigate the website. The media player keeps visitors focused on the main task of consuming great content. Anywhere in the site, there is the straightforward access to episodes, with a sidebar menu and clear CTAs &#40;&ldquo;Listen/Play,&rdquo; &ldquo;Share,&rdquo; and &ldquo;Subscribe&rdquo;&#41;.</p>
+              <CaseFigure src="/img/portfolio/truth-matters_website.png" alt="Truth Matters Podcast Website" caption="Website" ratio="3 / 4" size="text" />
+            </CaseSection>
 
-                  <div className="row cyril-mb-20">
-                    <div className="col-md-6 cyril-mb-30">
-                      <p className="cyril-upper cyril-mb-10">Employer:</p>
-                      <p className="cyril-mt-20"><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Media Organization</p>
-                    </div>
-                    <div className="col-md-6 cyril-mb-30">
-                      <p className="cyril-upper cyril-mb-10">Role:</p>
-                      <p className="cyril-mt-20">Product Designer &amp; Web Developer</p>
-                    </div>
-                    <div className="col-md-6 cyril-mb-30">
-                      <p className="cyril-upper cyril-mb-10">Start / Launch Date:</p>
-                      <p className="cyril-mt-20">Jan. / Apr. 2021</p>
-                    </div>
-                    <div className="col-md-6 cyril-mb-30">
-                      <p className="cyril-upper cyril-mb-10">Website:</p>
-                      <p className="cyril-mt-20"><a className="cyril-dark" href="https://truthmatterspodcast.gty.org" target="_blank">truthmatterspodcast.gty.org</a></p>
-                    </div>
-                  </div>
+            {/* 05 — Reflection */}
+            <CaseSection id="reflection" number={5} title="Reflection">
+              <p>As the Product Designer & Web Developer behind the Truth Matters Podcast, I embraced the challenge of creating a digital experience that felt as grounded and compelling as the content itself. My goal was to ensure every touchpoint&mdash;from the logo to the episode pages—told a consistent story, uniting branding, UX/UI design, and front-end development into a cohesive whole.</p>
+              <p>In crafting the brand's visual identity, I leaned into a casual, yet theologically serious, thoughtful, and grounded in biblical truth tone. The minimal yet strong logo, paired with a muted, sophisticated color palette &#40;deep charcoal, soft neutrals&#41;, reinforced clarity and conviction. I selected sharp, readable fonts that convey authority without being loud, ensuring that the design echoed both the podcast's purpose and Grace to You's style guidelines.</p>
+              <p>On the UX and development front, I designed a clean, minimal, content-first interface built on WordPress with a focus on SEO and accessibility. I implemented a global media player that doesn't interrupt playback when navigating, along with clear CTAs &#40;&ldquo;Listen/Play,&rdquo; &ldquo;Share,&rdquo; and &ldquo;Subscribe&rdquo;&#41; and responsive layouts for seamless mobile discovery. This approach kept the audience engaged with the content and empowered them to interact, share, and subscribe without friction.</p>
+            </CaseSection>
 
-                  <div className="cyril-divider cyril-mb-60" />
+          </CaseLayout>
 
-                  <h4 className="cyril-up cyril-text-center">Project Overview</h4>
-                  <p>The Truth Matters Podcast is a media production by Grace to You. In each episode, host Darrell Harrison welcomes a guest to explore a featured resource from the Grace to You collection—whether it's a book, sermon, or blog series by John MacArthur. Together, they dive into the inspiration behind the resource, its core message, and why it still matters for the church today.</p>
-                  <p className="cyril-mt-40">
-                  As the Product Designer and Developer behind the Truth Matters Podcast, my goal was to create a digital experience that felt as grounded and compelling as the content itself. This project was one of those many projects for Grace to You where I got to wear many hats and ensure every touchpoint—from the logo to the episode pages—told a consistent story. It brought together three core roles I love: branding, UX/UI design, and front-end development.</p>
-
-                  <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
-
-                  <h4 className="cyril-up cyril-text-center">Branding &amp; Visual Identity</h4>
-
-                  <p className="cyril-mt-40">
-                    From the start, I wanted the branding to echo the tone of the podcast—casual, yet theologically serious, thoughtful, and grounded in biblical truth. The logo is minimal yet strong, designed to reflect clarity and conviction that you would expect from Grace to You. I stuck to a muted, sophisticated color palette (deep charcoal, soft neutrals) to reinforce the show's tone: no hype, just truth. Typography was critical too&mdash;consistent with Grace to You's style, sharp, readable fonts that convey authority without being loud.
-                  </p>
-
-                  <div className="row cyril-mt-40">
-                    <div className="col-md-12 cyril-mb-30">
-                      <img src="/img/portfolio/main_truth-matters-podcast.jpg" alt="Truth Matters Podcast Wide" /> 
-                    </div>
-                    <div className="col-md-6 cyril-mb-30">
-                      <img src="/img/portfolio/truth-matters_logo.jpg" alt="Truth Matters Podcast Logo" />
-                    </div>
-                    <div className="col-md-6 cyril-mb-30">
-                      <img src="/img/portfolio/truth-matters_icon.jpg" alt="Truth Matters Podcast Icon" />
-                    </div>
-                    <div className="offset-md-3 col-md-6 cyril-mb-30">
-                      <img src="/img/portfolio/truth-matters_mug.jpg" alt="Truth Matters Podcast Mug" />
-                    </div>
-                  </div>
-
-                  <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
-
-                  <h4 className="cyril-up cyril-text-center">Graphics &amp; Supporting Media</h4>
-
-                  <p className="cyril-mt-40">
-                    Each podcast episode has its own hero product/imagery and thematic layout, designed to reflect the subject matter while staying true to the brand system. I created all the assets in-house, including episode thumbnail, podcast artwork, website banners, and social share images. These were crafted to feel cohesive yet distinctive, giving each episode a unique identity within the larger Truth Matters Podcast brand.
-                  </p>
-                  
-                  <div className="row cyril-mt-40">
-                    <div className="col-md-6 cyril-mb-30">
-                      <img src="/img/portfolio/truth-matters_youtube-thumb-1.jpg" alt="Truth Matters Podcast YouTube Thumb 1" />
-                    </div>
-                    <div className="col-md-6 cyril-mb-30">
-                      <img src="/img/portfolio/truth-matters_youtube-thumb-2.jpg" alt="Truth Matters Podcast YouTube Thumb 2" />
-                    </div>
-                    <div className="col-md-6 cyril-mb-30">
-                      <img src="/img/portfolio/truth-matters_episode-artwork-1.jpg" alt="Truth Matters Podcast Episode Artwork 1" />
-                    </div>
-                    <div className="col-md-6 cyril-mb-30">
-                      <img src="/img/portfolio/truth-matters_episode-artwork-2.jpg" alt="Truth Matters Podcast Episode Artwork 2" />
-                    </div>
-                    <div className="offset-md-3 col-md-6 cyril-mb-30">
-                      <img src="/img/portfolio/truth-matters_apple-podacast.png" alt="Truth Matters Apple Podcast" />
-                    </div>
-                  </div>
-
-                  <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
-
-                  <h4 className="cyril-up cyril-text-center">UX Design, Web Development, &amp; Podcast Integration</h4>
-
-                  <p className="cyril-mt-40">
-                    The user journey was my next focus. With leadership from the Digital Platforms Director and collaboration with the Senior Software Architect, I developed the site using WordPress for a more practical content publication and management. I designed the site to be clean, minimal, content-first, and easy to navigate. It's built with a focus on SEO and accessibility, ensuring that the podcast is easily discoverable, playable, and engaging for all audience. I kept the UI minimal so the podcast episodes and visuals could shine. There's the ability for the user to engage by leaving a comment or sharing the episode on social media. I also built a fully responsive experience that works seamlessly on mobile—because I knew a lot of listeners would be discovering this on the go.
-                  </p>
-                  <p className="cyril-mt-40">
-                     The homepage showcases the most recent episodes with a global media player for immediate listening/watching, and one that does not get interrupted while trying to navigate the website. The media player keeps visitors focused on the main task of consuming great content. Any where in the site, there is the straightforward access to episodes, with a sidebar menu and clear CTAs &#40;&ldquo;Listen/Play,&rdquo; &ldquo;Share,&rdquo; and &ldquo;Subscribe&rdquo;&#41;.
-                  </p>
-
-                  <div className="row cyril-mt-40">                  
-                    <div className="cyril-mb-30">
-                      <img src="/img/portfolio/truth-matters_website.png" alt="Truth Matters Podcast Website" />
-                    </div>
-                  </div>
-
-                  <div className="cyril-divider cyril-mt-60 cyril-mb-60" />
-
-                  <h4 className="cyril-up cyril-text-center">Reflection</h4>
-
-                  <p className="cyril-mt-40">
-                    As the Product Designer & Web Developer behind the Truth Matters Podcast, I embraced the challenge of creating a digital experience that felt as grounded and compelling as the content itself. My goal was to ensure every touchpoint&mdash;from the logo to the episode pages—told a consistent story, uniting branding, UX/UI design, and front-end development into a cohesive whole.
-                  </p>
-
-                  <p className="cyril-mt-40">
-                    In crafting the brand's visual identity, I leaned into a casual, yet theologically serious, thoughtful, and grounded in biblical truth tone. The minimal yet strong logo, paired with a muted, sophisticated color palette &#40;deep charcoal, soft neutrals&#41;, reinforced clarity and conviction. I selected sharp, readable fonts that convey authority without being loud, ensuring that the design echoed both the podcast's purpose and Grace to You's style guidelines.
-                  </p>
-
-                  <p className="cyril-mt-40">
-                    On the UX and development front, I designed a clean, minimal, content-first interface built on WordPress with a focus on SEO and accessibility. I implemented a global media player that doesn't interrupt playback when navigating, along with clear CTAs &#40;&ldquo;Listen/Play,&rdquo; &ldquo;Share,&rdquo; and &ldquo;Subscribe&rdquo;&#41; and responsive layouts for seamless mobile discovery. This approach kept the audience engaged with the content and empowered them to interact, share, and subscribe without friction
-                  </p>
-              
-                  {/* pagination */}
-                  <div className="cyril-pagination-panel cyril-mt-60">
-                    <button
-                      onClick={handleBackToPortfolio}
-                      className="cyril-button cyril-type-2 cyril-mb-30"
-                    >
-                      
-                      Back to Portfolio
-                    </button>
-                  </div>
-                  {/* end of pagination */}
-
-                </div>
-                {/* end of <div className="offset-lg-1-custom col-lg-9"> */}
-
-              </div>
-              {/* end of .row */}
-            {/* end of main content */}
-
-          </div>
-          {/* end of .container */}
+          <CaseNext
+            href="/grace-stream"
+            title="Grace Stream"
+            category="Branding/UI/UX/Web"
+            image="/img/portfolio/main_grace-stream.jpg"
+            onBack={handleBackToPortfolio}
+          />
 
         </div>
       </div>

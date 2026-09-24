@@ -1,0 +1,36 @@
+// GTY social media quote graphics — shown as individual items in the My Work
+// grid (components/PortfolioIsotope.js, opened in the zoom viewer) and as the
+// gallery on app/gty-social-media-graphics/page.js. Order = display order.
+// `id` doubles as the zoom viewer's shareable hash (#zoom-<id>).
+export const SOCIAL_GRAPHICS = [
+  { id: "social-none-good-enough-none-so-evil", src: "/img/portfolio/gty-social_black-frame---None-Good-Enough,-None-So-Evil.jpg", caption: "None Good Enough, None So Evil" },
+  { id: "social-obedience-is-the-hallmark", src: "/img/portfolio/gty-social_black-frame---Obedience-is-the-Hallmark.jpg", caption: "Obedience Is the Hallmark" },
+  { id: "social-descent-into-apostasy", src: "/img/portfolio/gty-social_masked-slant---Descent-Into-Apostasy.jpg", caption: "Descent into Apostasy" },
+  { id: "social-scriptures-absolute-inerrant-authority", src: "/img/portfolio/gty-social_masked-slant---Scriptures-Absolute,-Inerrant-Authority.jpg", caption: "Scripture's Absolute, Inerrant Authority" },
+  { id: "social-genuine-worship", src: "/img/portfolio/gty-social_semicursor---Genuine-Worship.jpg", caption: "Genuine Worship" },
+  { id: "social-shun-false-teaching", src: "/img/portfolio/gty-social_semicursor---Shun-False-Teaching.jpg", caption: "Shun False Teaching" },
+  { id: "social-advancing-his-kingdom", src: "/img/portfolio/gty-social_slant---Advancing-His-Kingdom.jpg", caption: "Advancing His Kingdom" },
+  { id: "social-christian-husband", src: "/img/portfolio/gty-social_slant---Christian-Husband.jpg", caption: "Christian Husband" },
+  { id: "social-humility-vs-pride", src: "/img/portfolio/gty-social_sparrow---Humility-vs.-Pride.jpg", caption: "Humility vs. Pride" },
+  { id: "social-sinners-vs-self-sufficient", src: "/img/portfolio/gty-social_sparrow---Sinners-vs.-Self-Sufficient.jpg", caption: "Sinners vs. Self-Sufficient" },
+  { id: "social-light-of-gods-truth", src: "/img/portfolio/gty-social_train-tracks---Light-of-God's-Truth.jpg", caption: "Light of God's Truth" },
+  { id: "social-worry-reveals", src: "/img/portfolio/gty-social_train-tracks---Worry-Reveals.jpg", caption: "Worry Reveals" },
+  { id: "social-only-message-with-the-power-to-save", src: "/img/portfolio/gty-social_wooden-frame---Only-Message-with-the-Power-to-Save.jpg", caption: "Only Message with the Power to Save" },
+  { id: "social-universe-and-god", src: "/img/portfolio/gty-social_wooden-frame---Universe-and-God.jpg", caption: "Universe and God" },
+  { id: "social-peoples-deepest-need", src: "/img/portfolio/gty-social_asian---Peoples-Deepest-Need.jpg", caption: "People's Deepest Need" },
+  { id: "social-true-worship", src: "/img/portfolio/gty-social_asian---True-Worship.jpg", caption: "True Worship" },
+  { id: "social-to-tell-the-truth", src: "/img/portfolio/gty-social_california---To-Tell-the-Truth.jpg", caption: "To Tell the Truth" },
+  { id: "social-worry-is-the-sin", src: "/img/portfolio/gty-social_california---Worry-is-the-Sin.jpg", caption: "Worry Is the Sin" },
+  { id: "social-free-offer-of-the-gospel", src: "/img/portfolio/gty-social_circle---Free-Offer-of-the-Gospel.jpg", caption: "Free Offer of the Gospel" },
+  { id: "social-unity-at-the-expense-of-truth", src: "/img/portfolio/gty-social_circle---Unity-at-the-Expense-of-Truth.jpg", caption: "Unity at the Expense of Truth" },
+  { id: "social-glory-of-god", src: "/img/portfolio/gty-social_clippers---Glory-of-God.jpg", caption: "Glory of God" },
+  { id: "social-sons-of-the-king", src: "/img/portfolio/gty-social_clippers---Sons-of-the-King.jpg", caption: "Sons of the King" },
+  { id: "social-justification-and-sanctification", src: "/img/portfolio/gty-social_hexagon---Justification-and-Sanctification.jpg", caption: "Justification and Sanctification" },
+  { id: "social-know-christ-as-lord", src: "/img/portfolio/gty-social_hexagon---Know-Christ-As-Lord.jpg", caption: "Know Christ as Lord" },
+  { id: "social-christ-is-lord", src: "/img/portfolio/gty-social_layers---Christ-Is-Lord.jpg", caption: "Christ Is Lord" },
+  { id: "social-provides-for-what-he-demands", src: "/img/portfolio/gty-social_layers---Provides-for-What-He-Demands.jpg", caption: "Provides for What He Demands" },
+  { id: "social-call-to-glory", src: "/img/portfolio/gty-social_stairs---Call-to-Glory.jpg", caption: "Call to Glory" },
+  { id: "social-lordship-of-christ", src: "/img/portfolio/gty-social_stairs---Lordship-of-Christ.jpg", caption: "Lordship of Christ" },
+  { id: "social-truly-christlike-character", src: "/img/portfolio/gty-social_tabbed---Truly-Christlike-Character.jpg", caption: "Truly Christlike Character" },
+  { id: "social-slavery-to-christ", src: "/img/portfolio/gty-social_tabbed--Slavery-to-Christ.jpg", caption: "Slavery to Christ" },
+];
