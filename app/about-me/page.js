@@ -15,7 +15,7 @@ const AboutMe = () => {
 
   useEffect(() => {
     document.querySelector("body").classList.add("cyril-custom-scroll");
-    onepage();
+    return onepage();
   }, []);
 
   return (

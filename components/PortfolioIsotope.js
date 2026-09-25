@@ -347,6 +347,7 @@ const PortfolioIsotope = () => {
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
                   <img {...imageProps("/img/portfolio/thumb_gty-dashboard.jpg", SIZES_HINT.gridTile)} alt="Thumb - GTY Dashboard" loading="lazy" decoding="async" />
+                  <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
                   </div>
@@ -365,6 +366,7 @@ const PortfolioIsotope = () => {
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
                   <img {...imageProps("/img/portfolio/thumb_gty-app-landing.jpg", SIZES_HINT.gridTile)} alt="Thumb - GTY App Landing Page" loading="lazy" decoding="async" />
+                  <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
                   </div>
@@ -438,6 +440,7 @@ const PortfolioIsotope = () => {
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
                   <img {...imageProps("/img/portfolio/thumb_gty-blog.jpg", SIZES_HINT.gridTile)} alt="Thumb - GTY Blog Graphics" loading="lazy" decoding="async" />
+                  <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
                   </div>
@@ -456,6 +459,7 @@ const PortfolioIsotope = () => {
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
                   <img {...imageProps("/img/portfolio/thumb_patricia-macarthur-pastoral-fund.jpg", SIZES_HINT.gridTile)} alt="Thumb - The Patricia MacArthur Pastoral Care Fund Logo" loading="lazy" decoding="async" />
+                  <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
                   </div>
@@ -474,6 +478,7 @@ const PortfolioIsotope = () => {
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
                   <img {...imageProps("/img/portfolio/thumb_gty-resources.jpg", SIZES_HINT.gridTile)} alt="Thumb - GTY Resources" loading="lazy" decoding="async" />
+                  <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
                   </div>
@@ -492,6 +497,7 @@ const PortfolioIsotope = () => {
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
                   <img {...imageProps("/img/portfolio/thumb_gty-social-media.jpg", SIZES_HINT.gridTile)} alt="Thumb - GTY Social Media Graphics" loading="lazy" decoding="async" />
+                  <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
                   </div>

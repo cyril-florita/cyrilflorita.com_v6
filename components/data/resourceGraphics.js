@@ -10,7 +10,7 @@ export const RESOURCE_GRAPHICS = [
   { id: "resource-summer-sale-version-1", src: "/img/portfolio/gty-resource_Summer-Sale-2017.jpg", caption: "Summer Sale, Version 1", label: "Sale Graphic", shape: "banner" },
   { id: "resource-summer-sale-version-2", src: "/img/portfolio/gty-resource_Summer-Sale-2018.jpg", caption: "Summer Sale, Version 2", label: "Sale Graphic", shape: "banner" },
   { id: "resource-summer-sale-go", src: "/img/portfolio/gty-resource_Summer-Sale-2019---Go.jpg", caption: "Summer Sale \u2014 Go", label: "Sale Graphic", shape: "banner" },
-  { id: "resource-44nasmdbl", src: "/img/portfolio/gty-resource_44NASMDBL.jpg", caption: "44NASMDBL", label: "Free Offer Graphic", shape: "banner" },
+  { id: "resource-44nasmdbl", src: "/img/portfolio/gty-resource_44NASMDBL.jpg", caption: "New to Grace to You? \u2014 The MacArthur Daily Bible", label: "Free Offer Graphic", shape: "banner" },
   { id: "resource-a-jet-tour-through-revelation", src: "/img/portfolio/gty-resource_A-Jet-Tour-Through-Revelation.jpg", caption: "A Jet Tour Through Revelation", label: "Free Offer Graphic", shape: "banner" },
   { id: "resource-alone-with-god", src: "/img/portfolio/gty-resource_Alone-with-God.jpg", caption: "Alone with God", label: "Free Offer Graphic", shape: "banner" },
   { id: "resource-book-anxious-for-nothing", src: "/img/portfolio/gty-resource_Book---Anxious-for-Nothing.jpg", caption: "Book \u2014 Anxious for Nothing", label: "Free Offer Graphic", shape: "banner" },

@@ -10,11 +10,12 @@ const REVEAL_SELECTORS = [
   '.cyril-case-summary',
   '.cyril-case-fact',
   '.cyril-case-bleed',
-  '.cyril-case-toc',
+  '.cyril-case-rail',
   '.cyril-case-section-head',
-  '.cyril-case-content > :not(.cyril-case-stats):not(.cyril-case-grid)',
+  '.cyril-case-content > :not(.cyril-case-stats):not(.cyril-case-grid):not(.cyril-brand-grid)',
   '.cyril-case-stat',
   '.cyril-case-grid > *',
+  '.cyril-brand-grid > *',
   '.cyril-case-end > *',
   // Contact band on the home page, piece by piece (on About Me it's a snap
   // section and staggers with the rest).

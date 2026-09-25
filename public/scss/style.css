@@ -1032,174 +1032,174 @@ box to be used for the random glitch effect. Also adds a very subtle
 skew to change the 'thickness' of the glitch.*/
 @keyframes glitch-anim {
   0% {
-    clip: rect(368px, 9999px, 354px, 0);
-    transform: skew(0.81deg);
-  }
-  5% {
-    clip: rect(248px, 9999px, 5px, 0);
-    transform: skew(0.61deg);
-  }
-  10% {
-    clip: rect(68px, 9999px, 315px, 0);
-    transform: skew(0.87deg);
-  }
-  15% {
-    clip: rect(140px, 9999px, 305px, 0);
-    transform: skew(0.95deg);
-  }
-  20% {
-    clip: rect(106px, 9999px, 201px, 0);
-    transform: skew(0.56deg);
-  }
-  25% {
-    clip: rect(325px, 9999px, 269px, 0);
-    transform: skew(0.69deg);
-  }
-  30% {
-    clip: rect(218px, 9999px, 50px, 0);
-    transform: skew(0.2deg);
-  }
-  35% {
-    clip: rect(180px, 9999px, 194px, 0);
-    transform: skew(0.46deg);
-  }
-  40% {
-    clip: rect(29px, 9999px, 31px, 0);
-    transform: skew(0.86deg);
-  }
-  45% {
-    clip: rect(214px, 9999px, 305px, 0);
-    transform: skew(0.97deg);
-  }
-  50% {
-    clip: rect(53px, 9999px, 78px, 0);
-    transform: skew(0.72deg);
-  }
-  55% {
-    clip: rect(363px, 9999px, 25px, 0);
-    transform: skew(0.77deg);
-  }
-  60% {
-    clip: rect(186px, 9999px, 106px, 0);
-    transform: skew(0.4deg);
-  }
-  65% {
-    clip: rect(350px, 9999px, 4px, 0);
+    clip: rect(87px, 9999px, 183px, 0);
     transform: skew(0.19deg);
   }
-  70% {
-    clip: rect(180px, 9999px, 332px, 0);
-    transform: skew(0.71deg);
+  5% {
+    clip: rect(198px, 9999px, 389px, 0);
+    transform: skew(0.27deg);
   }
-  75% {
-    clip: rect(238px, 9999px, 375px, 0);
-    transform: skew(0.38deg);
+  10% {
+    clip: rect(303px, 9999px, 364px, 0);
+    transform: skew(0.63deg);
   }
-  80% {
-    clip: rect(137px, 9999px, 272px, 0);
-    transform: skew(0.91deg);
-  }
-  85% {
-    clip: rect(135px, 9999px, 131px, 0);
-    transform: skew(0.54deg);
-  }
-  90% {
-    clip: rect(248px, 9999px, 261px, 0);
-    transform: skew(0.22deg);
-  }
-  95% {
-    clip: rect(97px, 9999px, 95px, 0);
+  15% {
+    clip: rect(36px, 9999px, 217px, 0);
     transform: skew(0.49deg);
   }
+  20% {
+    clip: rect(307px, 9999px, 240px, 0);
+    transform: skew(0.92deg);
+  }
+  25% {
+    clip: rect(158px, 9999px, 310px, 0);
+    transform: skew(0.23deg);
+  }
+  30% {
+    clip: rect(74px, 9999px, 95px, 0);
+    transform: skew(0.77deg);
+  }
+  35% {
+    clip: rect(340px, 9999px, 278px, 0);
+    transform: skew(0.94deg);
+  }
+  40% {
+    clip: rect(49px, 9999px, 348px, 0);
+    transform: skew(0.38deg);
+  }
+  45% {
+    clip: rect(51px, 9999px, 65px, 0);
+    transform: skew(0.87deg);
+  }
+  50% {
+    clip: rect(297px, 9999px, 34px, 0);
+    transform: skew(0.26deg);
+  }
+  55% {
+    clip: rect(225px, 9999px, 119px, 0);
+    transform: skew(0.75deg);
+  }
+  60% {
+    clip: rect(81px, 9999px, 190px, 0);
+    transform: skew(0.75deg);
+  }
+  65% {
+    clip: rect(258px, 9999px, 195px, 0);
+    transform: skew(0.53deg);
+  }
+  70% {
+    clip: rect(72px, 9999px, 222px, 0);
+    transform: skew(0.26deg);
+  }
+  75% {
+    clip: rect(90px, 9999px, 48px, 0);
+    transform: skew(0.77deg);
+  }
+  80% {
+    clip: rect(370px, 9999px, 379px, 0);
+    transform: skew(0.23deg);
+  }
+  85% {
+    clip: rect(277px, 9999px, 201px, 0);
+    transform: skew(0.15deg);
+  }
+  90% {
+    clip: rect(14px, 9999px, 370px, 0);
+    transform: skew(0.32deg);
+  }
+  95% {
+    clip: rect(379px, 9999px, 12px, 0);
+    transform: skew(0.59deg);
+  }
   100% {
-    clip: rect(363px, 9999px, 153px, 0);
+    clip: rect(223px, 9999px, 313px, 0);
     transform: skew(0.1deg);
   }
 }
 @keyframes glitch-anim2 {
   0% {
-    clip: rect(9px, 9999px, 15px, 0);
-    transform: skew(0.76deg);
+    clip: rect(37px, 9999px, 83px, 0);
+    transform: skew(0.49deg);
   }
   5% {
-    clip: rect(34px, 9999px, 72px, 0);
-    transform: skew(0.69deg);
+    clip: rect(9px, 9999px, 32px, 0);
+    transform: skew(0.07deg);
   }
   10% {
-    clip: rect(96px, 9999px, 8px, 0);
-    transform: skew(0.63deg);
+    clip: rect(31px, 9999px, 37px, 0);
+    transform: skew(0.11deg);
   }
   15% {
-    clip: rect(31px, 9999px, 16px, 0);
-    transform: skew(0.88deg);
+    clip: rect(78px, 9999px, 61px, 0);
+    transform: skew(0.18deg);
   }
   20% {
-    clip: rect(53px, 9999px, 52px, 0);
-    transform: skew(0.68deg);
+    clip: rect(99px, 9999px, 77px, 0);
+    transform: skew(0.41deg);
   }
   25% {
-    clip: rect(99px, 9999px, 18px, 0);
-    transform: skew(0.06deg);
+    clip: rect(7px, 9999px, 6px, 0);
+    transform: skew(0.51deg);
   }
   30% {
-    clip: rect(29px, 9999px, 29px, 0);
-    transform: skew(0.85deg);
+    clip: rect(87px, 9999px, 42px, 0);
+    transform: skew(0.41deg);
   }
   35% {
-    clip: rect(94px, 9999px, 66px, 0);
-    transform: skew(0.71deg);
+    clip: rect(69px, 9999px, 48px, 0);
+    transform: skew(0.6deg);
   }
   40% {
-    clip: rect(61px, 9999px, 92px, 0);
-    transform: skew(0.1deg);
+    clip: rect(60px, 9999px, 29px, 0);
+    transform: skew(0.02deg);
   }
   45% {
-    clip: rect(24px, 9999px, 14px, 0);
-    transform: skew(0.43deg);
+    clip: rect(14px, 9999px, 42px, 0);
+    transform: skew(0.49deg);
   }
   50% {
-    clip: rect(67px, 9999px, 69px, 0);
-    transform: skew(0.91deg);
+    clip: rect(9px, 9999px, 91px, 0);
+    transform: skew(0.2deg);
   }
   55% {
-    clip: rect(62px, 9999px, 84px, 0);
-    transform: skew(0.81deg);
+    clip: rect(96px, 9999px, 27px, 0);
+    transform: skew(0.38deg);
   }
   60% {
-    clip: rect(75px, 9999px, 25px, 0);
-    transform: skew(0.04deg);
+    clip: rect(94px, 9999px, 39px, 0);
+    transform: skew(0.99deg);
   }
   65% {
-    clip: rect(95px, 9999px, 48px, 0);
-    transform: skew(0.5deg);
+    clip: rect(64px, 9999px, 96px, 0);
+    transform: skew(0.54deg);
   }
   70% {
-    clip: rect(84px, 9999px, 84px, 0);
-    transform: skew(0.19deg);
+    clip: rect(69px, 9999px, 49px, 0);
+    transform: skew(0.51deg);
   }
   75% {
-    clip: rect(15px, 9999px, 39px, 0);
-    transform: skew(0.27deg);
+    clip: rect(40px, 9999px, 28px, 0);
+    transform: skew(0.94deg);
   }
   80% {
-    clip: rect(50px, 9999px, 34px, 0);
+    clip: rect(1px, 9999px, 54px, 0);
     transform: skew(0.89deg);
   }
   85% {
-    clip: rect(77px, 9999px, 10px, 0);
-    transform: skew(0.72deg);
+    clip: rect(68px, 9999px, 36px, 0);
+    transform: skew(0.25deg);
   }
   90% {
-    clip: rect(16px, 9999px, 44px, 0);
-    transform: skew(0.84deg);
+    clip: rect(52px, 9999px, 2px, 0);
+    transform: skew(0.91deg);
   }
   95% {
-    clip: rect(49px, 9999px, 65px, 0);
-    transform: skew(0.17deg);
+    clip: rect(6px, 9999px, 95px, 0);
+    transform: skew(0.1deg);
   }
   100% {
-    clip: rect(76px, 9999px, 30px, 0);
-    transform: skew(0.01deg);
+    clip: rect(79px, 9999px, 19px, 0);
+    transform: skew(0.35deg);
   }
 }
 /* -------------------------------------------
@@ -1725,7 +1725,6 @@ page
 
 .cyril-page {
   position: relative;
-  margin: 20px;
   transform: translateY(90px) scale(0.95);
   opacity: 0;
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
@@ -1741,11 +1740,6 @@ page
 }
 .cyril-page.cyril-fade-only.cyril-active {
   transform: none;
-}
-@media screen and (max-width: 1200px) {
-  .cyril-page {
-    margin: 0;
-  }
 }
 
 /* -------------------------------------------
@@ -2454,6 +2448,10 @@ banner
   position: relative;
   overflow: hidden;
 }
+.cyril-banner > .container-full > .row {
+  margin-left: 0;
+  margin-right: 0;
+}
 @media screen and (max-width: 1200px) {
   .cyril-banner {
     padding-top: 90px;
@@ -2510,6 +2508,11 @@ banner
   .cyril-banner .cyril-banner-text {
     padding: 20px 30px;
     position: static;
+  }
+}
+@media screen and (min-width: 1401px) {
+  .cyril-banner h1 {
+    font-size: min(9.5vw, 160px);
   }
 }
 .cyril-banner .cyril-short {
@@ -2889,13 +2892,13 @@ experience
   content: "";
   position: absolute;
   top: 7px;
-  right: -5px;
-  width: 70%;
+  right: 0;
+  width: calc(70% - 5px);
   border-bottom: 2px solid var(--color-frameshadow);
 }
 @media screen and (max-width: 1024px) {
   .cyril-filter::after {
-    width: 100%;
+    width: calc(100% - 5px);
   }
 }
 .cyril-filter ul {
@@ -3467,8 +3470,8 @@ back to top
 @media screen and (min-width: 1201px) {
   .cyril-main-page .container {
     max-width: none;
-    padding-left: 60px;
-    padding-right: 60px;
+    padding-left: 80px;
+    padding-right: 80px;
   }
 }
 /* -------------------------------------------
@@ -3517,7 +3520,7 @@ contact band (components/ContactBand.js)
   position: absolute;
   top: 7px;
   left: 7px;
-  right: -5px;
+  right: 0;
   border-top: 2px solid var(--color-frameshadow);
 }
 .cyril-onepage .cyril-contact {
@@ -3692,7 +3695,7 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
 .cyril-case-facts {
   margin: 80px 0 0;
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(var(--fact-count, 5), minmax(0, 1fr));
   border-top: 2px solid var(--color-frame);
 }
 @media screen and (max-width: 992px) {
@@ -3726,6 +3729,7 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
   margin: 0;
   font-size: 16px;
   line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 @media screen and (max-width: 992px) {
   .cyril-case-fact {
@@ -3763,11 +3767,35 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
   }
 }
 
-.cyril-case-toc {
+.cyril-case-rail {
   position: sticky;
   top: 150px;
   align-self: start;
 }
+@media screen and (max-width: 1200px) {
+  .cyril-case-rail {
+    display: none;
+  }
+}
+
+.cyril-button.cyril-case-rail-back {
+  gap: 6px;
+  width: 100%;
+  height: 48px;
+  padding: 0 12px 0 8px;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+.cyril-button.cyril-case-rail-back svg {
+  flex: none;
+  width: 18px;
+  height: 18px;
+}
+
+.cyril-case-toc + .cyril-case-rail-back {
+  margin-top: 40px;
+}
+
 .cyril-case-toc ol {
   list-style: none;
   margin: 0;
@@ -4008,7 +4036,7 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
 .cyril-case-stats {
   margin: 70px 0 20px;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(var(--stat-count, 4), minmax(0, 1fr));
   border-top: 2px solid var(--color-frame);
 }
 @media screen and (max-width: 768px) {
@@ -4081,6 +4109,11 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
 
 .cyril-case-back {
   margin-bottom: 60px;
+}
+@media screen and (min-width: 1201px) {
+  .cyril-case-back {
+    display: none;
+  }
 }
 
 .cyril-case-next {
@@ -4204,12 +4237,42 @@ zoom viewer (components/ZoomViewer.js)
 .cyril-zoom-backdrop {
   position: absolute;
   inset: 0;
+  overflow: hidden;
   background-color: var(--color-bg);
   opacity: 0;
   transition: opacity 0.45s ease;
 }
 .cyril-zoom-open .cyril-zoom-backdrop {
   opacity: calc(0.96 * var(--cyril-zoom-drag, 1));
+}
+.cyril-zoom-backdrop::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: transparent url(../img/bg-static.png) repeat 0 0;
+  animation: bg-animation 0.2s infinite;
+  will-change: transform;
+  opacity: var(--bg-static-opacity, 0.21);
+  pointer-events: none;
+}
+html.cyril-tab-hidden .cyril-zoom-backdrop::after {
+  animation-play-state: paused;
+}
+[data-theme=dark] .cyril-zoom-backdrop::after {
+  opacity: 0.2;
+}
+@media screen and (max-width: 1200px) {
+  .cyril-zoom-backdrop::after {
+    animation: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cyril-zoom-backdrop::after {
+    animation: none;
+  }
 }
 
 .cyril-zoom-img {
@@ -4314,4 +4377,357 @@ zoom viewer (components/ZoomViewer.js)
 .cyril-zoom-count {
   color: var(--color-accent);
   font-variant-numeric: tabular-nums;
+}
+
+/* -------------------------------------------
+
+brand guide (components/case/BrandGuide.js)
+Identity documentation inside a case study: logo suite, clear space, color
+discs, lettering crops and do/don't tiles. Artwork tiles keep the logo's own
+grounds (white / #121212) in both site themes, since the files include them.
+
+------------------------------------------- */
+.cyril-brand-grid {
+  display: grid;
+  gap: 30px;
+  margin: 50px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cyril-brand-name {
+  margin: 0;
+  font-family: var(--font-atkinson);
+  font-size: 17px;
+  line-height: 1.3;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  text-shadow: none;
+}
+
+.cyril-brand-role {
+  margin: 8px 0 0;
+  font-size: 15px;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+.cyril-brand-specs {
+  display: grid;
+  gap: 12px;
+  margin: 12px 0 0;
+}
+.cyril-brand-specs div {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 12px;
+  align-items: baseline;
+}
+.cyril-brand-specs dt {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: var(--tracking-caps);
+  opacity: 0.6;
+}
+.cyril-brand-specs dd {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.cyril-brand-crop {
+  position: relative;
+  overflow: hidden;
+  max-width: 100%;
+}
+.cyril-brand-crop img {
+  position: absolute;
+  max-width: none;
+  height: auto;
+  border: 0;
+  padding: 0;
+}
+
+.cyril-brand-logos {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+@media screen and (max-width: 992px) {
+  .cyril-brand-logos {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.cyril-brand-logo {
+  margin: 0;
+}
+.cyril-brand-logo .cyril-brand-logo-art {
+  overflow: hidden;
+  border: 2px solid var(--color-frame);
+}
+.cyril-brand-logo .cyril-brand-logo-art img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 0;
+  padding: 0;
+}
+.cyril-brand-logo figcaption {
+  margin-top: 20px;
+}
+.cyril-brand-logo .cyril-brand-logo-fixed img {
+  height: 100%;
+  object-fit: cover;
+}
+.cyril-brand-logo .cyril-brand-logo-part {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1600/1067;
+  background: #ffffff;
+}
+
+.cyril-brand-clear {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: center;
+  margin: 50px 0;
+}
+@media screen and (max-width: 992px) {
+  .cyril-brand-clear {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.cyril-brand-clear-diagram {
+  background: #ffffff;
+  border: 2px solid var(--color-frame);
+  padding: 24px;
+}
+
+.cyril-brand-clear-zone {
+  position: relative;
+  padding: var(--clear-pad, 10%);
+  outline: 1.5px dashed var(--color-accent);
+  outline-offset: -1.5px;
+}
+
+.cyril-brand-clear-emblem {
+  outline: 1.5px dashed rgba(18, 18, 18, 0.35);
+}
+
+.cyril-brand-clear-x {
+  position: absolute;
+  font-family: var(--font-atkinson);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-accent);
+}
+.cyril-brand-clear-x.cyril-brand-clear-x-top {
+  top: calc(var(--clear-pad, 10%) / 2);
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.cyril-brand-clear-x.cyril-brand-clear-x-left {
+  left: calc(var(--clear-pad, 10%) / 2);
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.cyril-brand-clear-specs {
+  margin: 0;
+  gap: 20px;
+}
+.cyril-brand-clear-specs div {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 4px;
+}
+
+.cyril-brand-swatches {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  row-gap: 50px;
+}
+@media screen and (max-width: 768px) {
+  .cyril-brand-swatches {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.cyril-brand-swatch {
+  margin: 0;
+}
+
+.cyril-brand-disc {
+  display: block;
+  width: min(100%, 160px);
+  aspect-ratio: 1;
+  margin-bottom: 20px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--color-frame);
+}
+
+.cyril-brand-values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin: 8px 0 0;
+  font-variant-numeric: tabular-nums;
+}
+.cyril-brand-values div {
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+}
+.cyril-brand-values dt {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: var(--tracking-caps);
+  opacity: 0.6;
+}
+.cyril-brand-values dd {
+  margin: 0;
+  font-size: 15px;
+}
+
+.cyril-brand-lettering {
+  display: grid;
+  margin: 50px 0;
+  border-top: 2px solid var(--color-frame);
+}
+
+.cyril-brand-letter {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: center;
+  padding: 30px 0;
+  border-bottom: 2px solid var(--color-frame);
+}
+@media screen and (max-width: 768px) {
+  .cyril-brand-letter {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+}
+
+.cyril-brand-letter-art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 140px;
+  padding: 24px;
+  background: #ffffff;
+}
+
+.cyril-brand-usage {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+@media screen and (max-width: 992px) {
+  .cyril-brand-usage {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media screen and (max-width: 576px) {
+  .cyril-brand-usage {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.cyril-brand-rule {
+  margin: 0;
+}
+.cyril-brand-rule figcaption {
+  margin-top: 16px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.cyril-brand-rule-art {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1600/1186;
+  background: #ffffff;
+  border: 2px solid var(--color-frame);
+}
+.cyril-brand-rule-art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+  padding: 0;
+}
+.cyril-brand-dont .cyril-brand-rule-art {
+  border-color: var(--color-accent);
+}
+
+.cyril-page.cyril-case-page .cyril-brand-rule-art .cyril-brand-fitbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.cyril-page.cyril-case-page .cyril-brand-rule-art .cyril-brand-fitbox .cyril-brand-crop img {
+  height: auto;
+  object-fit: initial;
+}
+
+.cyril-brand-verdict {
+  display: inline-block;
+  margin-right: 10px;
+  font-family: var(--font-atkinson);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: var(--tracking-caps);
+}
+.cyril-brand-do .cyril-brand-verdict {
+  opacity: 0.7;
+}
+.cyril-brand-dont .cyril-brand-verdict {
+  color: var(--color-accent);
+}
+
+.cyril-page.cyril-case-page .cyril-brand-rule-art img.cyril-brand-contain {
+  object-fit: contain;
+  padding: 6%;
+}
+.cyril-page.cyril-case-page .cyril-brand-rule-art img.cyril-brand-stretch {
+  transform: scaleX(1.45);
+}
+.cyril-page.cyril-case-page .cyril-brand-rule-art img.cyril-brand-recolor {
+  filter: hue-rotate(170deg) saturate(1.6);
+}
+.cyril-page.cyril-case-page .cyril-brand-rule-art .cyril-brand-tintbox {
+  width: 100%;
+  height: 100%;
+  background: #e8453c;
+}
+.cyril-page.cyril-case-page .cyril-brand-rule-art .cyril-brand-tintbox img {
+  mix-blend-mode: screen;
+}
+.cyril-page.cyril-case-page .cyril-brand-rule-art .cyril-brand-onblack {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: #121212;
+}
+.cyril-page.cyril-case-page .cyril-brand-rule-art .cyril-brand-onblack img {
+  width: 62%;
+  height: auto;
+}
+.cyril-page.cyril-case-page .cyril-brand-rule-art .cyril-brand-onphoto {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center 70%;
+}
+.cyril-page.cyril-case-page .cyril-brand-rule-art .cyril-brand-onphoto img {
+  mix-blend-mode: multiply;
+  object-fit: contain;
 }

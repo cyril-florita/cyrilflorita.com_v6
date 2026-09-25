@@ -85,7 +85,6 @@ const page = () => {
               <p>GTY.org is a Christian platform offering biblical resources for personal growth & discipleship, study & teaching materials, and pastoral & theological training. Despite its valuable resource offerings, the current website—version 8—faces usability and business challenges such as outdated design & UI elements, limited content internationalization features, less efficient search functionality, and lack of continuity in content & account management between the website and GTY's other platforms.</p>
               <p>This case study focuses on redesigning GTY.org &#40;version 9&#41; to broaden audience reach and improve engagement & retention by creating a more accessible and unified digital experience while maintaining its core mission of delivering high-quality theological content.</p>
               <CaseStats items={[
-                { value: "19", label: "Months, discovery to launch" },
                 { value: "16", label: "Key needs prioritized" },
                 { value: "3", label: "Homepage design directions" },
                 { value: "5", label: "Content pillars" },

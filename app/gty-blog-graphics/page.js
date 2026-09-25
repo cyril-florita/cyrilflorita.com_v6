@@ -11,12 +11,39 @@ import {
   CaseSection,
   CaseFigure,
   CaseGrid,
+  CaseQuote,
   CaseNext,
 } from "@/components/case/CaseStudy";
+import { BLOG_GRAPHICS } from "@/components/data/blogGraphics";
 
 const SECTIONS = [
-  { id: "visually-communicating-truth", label: "Communicating Truth" },
+  { id: "visually-communicating-truth", label: "Overview" },
+  { id: "starting-from-the-title", label: "Starting from the Title" },
+  { id: "a-consistent-frame", label: "A Consistent Frame" },
+  { id: "visual-metaphors", label: "Visual Metaphors" },
+  { id: "art-and-illustration", label: "Art & Illustration" },
+  { id: "typography", label: "Typography" },
+  { id: "the-collection", label: "The Collection" },
+  { id: "outcome", label: "Outcome" },
 ];
+
+// Figures come from components/data/blogGraphics.js (the same files the My
+// Work grid shows). Featured ones are picked by id per section; everything
+// else lands in "The Collection", so each graphic appears once.
+const BY_ID = Object.fromEntries(BLOG_GRAPHICS.map((g) => [g.id, g]));
+const Fig = ({ id, size }) => {
+  const g = BY_ID[`blog-${id}`];
+  return <CaseFigure src={g.src} alt={g.caption} caption={g.caption} size={size} />;
+};
+const FEATURED = {
+  title: ["christ-gives-the-gospel", "inerrancy-and-evangelical-syncretism"],
+  frame: ["what-is-the-eye-of-a-needle", "pauls-gospel-essential"],
+  metaphors: ["not-all-that-glitters-is-gold", "the-lord-told-me", "the-assault-on-the-virgin-birth-of-christ", "untangling-the-lords-lineage", "the-problem-of-evil", "takeaway-from-the-shepcon-q-a-session", "contentment-and-providence", "replacing-worry-with-the-right-focus"],
+  art: ["engaging-without-imbibing", "limitless-love", "people-who-missed-christmas", "the-truth-about-man"],
+  type: ["gods-unimpeachable-sovereignty", "the-totality-of-depravity", "the-subtlety-of-idolatry", "reconciled-in-christ", "the-coming-messiah", "faith-as-christ-defined-it"],
+};
+const SHOWN = new Set(["a-church-not-forsaken", ...Object.values(FEATURED).flat()].map((id) => `blog-${id}`));
+const COLLECTION = BLOG_GRAPHICS.filter((g) => !SHOWN.has(g.id));
 
 const page = () => {
 
@@ -64,84 +91,73 @@ const page = () => {
               { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Media Organization</> },
               { label: "Role", value: "Web Designer & Developer" },
             ]}
-            image="/img/portfolio/gty-blog_the-Bible-is-timeless-truth.jpg"
-            imageAlt="The Bible Is Timeless Truth"
+            image="/img/portfolio/gty-blog_Christ-gives-the-gospel.jpg"
+            imageAlt="Christ Gives the Gospel"
           />
 
           <CaseLayout sections={SECTIONS}>
 
-            {/* 01 — Visually Communicating Truth */}
+            {/* 01 — Overview */}
             <CaseSection id="visually-communicating-truth" number={1} title="Visually Communicating Truth">
-              <p>When I designed blog graphics for Grace to You, I would always start by considering the core theme and title of each post, as these elements would guide my visual choices. For example, for a post titled &ldquo;A Church Not Forsaken,&rdquo; I selected a serene image of a church bathed in warm light, evoking a sense of hope and steadfastness that matches the message. The font I chose is bold and classic, ensuring the title stands out and immediately communicates the gravity and reassurance of the topic. The overall composition is uncluttered, allowing the viewer's attention to be drawn to both the image and the text without distraction, which is crucial for making a strong first impression.</p>
-              <CaseFigure src="/img/portfolio/gty-blog_a-church-not-forsaken.jpg" alt="A Church Not Forsaken" caption="A Church Not Forsaken" size="text" />
-              <p>Similarly, for posts like &ldquo;Christ Gives the Gospel&rdquo; and &ldquo;Inerrancy and Evangelical Syncretism,&rdquo; I carefully pair imagery and typography to reinforce the post's subject. For the former, I use a dynamic split design with an illustration of Christ, combined with a modern, bold font for the word &ldquo;CHRIST&rdquo; to highlight its importance and draw the reader in. For the latter, I opt for a conceptual image&mdash;a jar with separated liquids&mdash;to visually represent the idea of syncretism, paired with clean, contemporary type to convey clarity and seriousness.</p>
+              <p>Every post on the Grace to You blog needed a header graphic: the image at the top of the article and the one people see when it&apos;s shared. Over dozens of posts, my goal was to create graphics that not only attract attention but also visually encapsulate the essence of the blog post, making the content inviting and memorable for readers.</p>
+            </CaseSection>
+
+            {/* 02 — Starting from the Title */}
+            <CaseSection id="starting-from-the-title" number={2} title="Starting from the Title">
+              <p>When I designed blog graphics for Grace to You, I would always start by considering the core theme and title of each post, as these elements would guide my visual choices. For example, for a post titled &ldquo;A Church Not Forsaken,&rdquo; I selected a serene image of a church bathed in warm light, evoking a sense of hope and steadfastness that matches the message. The font I chose is bold and classic, ensuring the title stands out and immediately communicates the gravity and reassurance of the topic. The overall composition is uncluttered, allowing the viewer&apos;s attention to be drawn to both the image and the text without distraction, which is crucial for making a strong first impression.</p>
+              <Fig id="a-church-not-forsaken" size="text" />
+              <p>Similarly, for posts like &ldquo;Christ Gives the Gospel&rdquo; and &ldquo;Inerrancy and Evangelical Syncretism,&rdquo; I carefully pair imagery and typography to reinforce the post&apos;s subject. For the former, I use a dynamic split design with an illustration of Christ, combined with a modern, bold font for the word &ldquo;CHRIST&rdquo; to highlight its importance and draw the reader in. For the latter, I opt for a conceptual image&mdash;a jar with separated liquids&mdash;to visually represent the idea of syncretism, paired with clean, contemporary type to convey clarity and seriousness.</p>
               <CaseGrid layout="two">
-                <CaseFigure src="/img/portfolio/gty-blog_Christ-gives-the-gospel.jpg" alt="Christ Gives the Gospel" caption="Christ Gives the Gospel" />
-                <CaseFigure src="/img/portfolio/gty-blog_inerrancy-and-evangelical-syncretism.jpg" alt="Inerrancy and Evangelical Syncretism" caption="Inerrancy and Evangelical Syncretism" />
+                {FEATURED.title.map((id) => <Fig key={id} id={id} />)}
               </CaseGrid>
-              <p>In every case, my goal is to create graphics that not only attract attention but also visually encapsulate the essence of the blog post, making the content inviting and memorable for readers.</p>
+            </CaseSection>
+
+            {/* 03 — A Consistent Frame */}
+            <CaseSection id="a-consistent-frame" number={3} title="A Consistent Frame">
+              <p>With a new graphic for nearly every post, the look could have drifted from week to week. What holds the set together is a fixed frame around a changing picture. Every graphic uses the same wide format, the Grace to You logo and &ldquo;gty.org/blog&rdquo; sit in the bottom-left corner, and the title gets the most room. When a post belongs to a series, its name runs small in the opposite corner (&ldquo;Frequently Abused Verses,&rdquo; &ldquo;Christian Clich&eacute;s,&rdquo; &ldquo;Paul&apos;s Gospel Essentials&rdquo;), so readers can tell at a glance which posts belong together.</p>
               <CaseGrid layout="two">
-                <CaseFigure src="/img/portfolio/gty-blog_a-world-gone-mad.jpg" alt="A World Gone Mad" caption="A World Gone Mad" />
-                <CaseFigure src="/img/portfolio/gty-blog_and-His-Name-shall-be-called.jpg" alt="And His Name Shall Be Called" caption="And His Name Shall Be Called" />
-                <CaseFigure src="/img/portfolio/gty-blog_answering-tough-questions-about-forgiveness.jpg" alt="Answering Tough Questions About Forgiveness" caption="Answering Tough Questions About Forgiveness" />
-                <CaseFigure src="/img/portfolio/gty-blog_assaulting-the-nature-of-truth.jpg" alt="Assaulting the Nature of Truth" caption="Assaulting the Nature of Truth" />
-                <CaseFigure src="/img/portfolio/gty-blog_commendation-of-a-persecuted-church.jpg" alt="Commendation of a Persecuted Church" caption="Commendation of a Persecuted Church" />
-                <CaseFigure src="/img/portfolio/gty-blog_contentment-and-providence.jpg" alt="Contentment and Providence" caption="Contentment and Providence" />
-                <CaseFigure src="/img/portfolio/gty-blog_courageous-Christianity.jpg" alt="Courageous Christianity" caption="Courageous Christianity" />
-                <CaseFigure src="/img/portfolio/gty-blog_dethroning-the-Judge.jpg" alt="Dethroning the Judge" caption="Dethroning the Judge" />
-                <CaseFigure src="/img/portfolio/gty-blog_digital-disrupters.jpg" alt="Digital Disrupters" caption="Digital Disrupters" />
-                <CaseFigure src="/img/portfolio/gty-blog_election-and-Christ.jpg" alt="Election and Christ" caption="Election and Christ" />
-                <CaseFigure src="/img/portfolio/gty-blog_engaging-without-embibing.jpg" alt="Engaging Without Imbibing" caption="Engaging Without Imbibing" />
-                <CaseFigure src="/img/portfolio/gty-blog_faith-as-Christ-defined-it.jpg" alt="Faith as Christ Defined It" caption="Faith as Christ Defined It" />
-                <CaseFigure src="/img/portfolio/gty-blog_false-Gods-fake-images.jpg" alt="False Gods, Fake Images" caption="False Gods, Fake Images" />
-                <CaseFigure src="/img/portfolio/gty-blog_Gods-unimpeachable-sovereignty.jpg" alt="God's Unimpeachable Sovereignty" caption="God's Unimpeachable Sovereignty" />
-                <CaseFigure src="/img/portfolio/gty-blog_He-loved-them-to-the-end.jpg" alt="He Loved Them to the End" caption="He Loved Them to the End" />
-                <CaseFigure src="/img/portfolio/gty-blog_in-the-world-but-not-of-it.jpg" alt="In the World but Not of It" caption="In the World but Not of It" />
-                <CaseFigure src="/img/portfolio/gty-blog_inerrancy-and-evangelical-syncretism.jpg" alt="Inerrancy and Evangelical Syncretism" caption="Inerrancy and Evangelical Syncretism" />
-                <CaseFigure src="/img/portfolio/gty-blog_is-there-a-temple-in-heaven.jpg" alt="Is There a Temple in Heaven?" caption="Is There a Temple in Heaven?" />
-                <CaseFigure src="/img/portfolio/gty-blog_legalism-and-assurance.jpg" alt="Legalism and Assurance" caption="Legalism and Assurance" />
-                <CaseFigure src="/img/portfolio/gty-blog_limitless-love.jpg" alt="Limitless Love" caption="Limitless Love" />
-                <CaseFigure src="/img/portfolio/gty-blog_looking-for-truth-in-the-wrong-places.jpg" alt="Looking for Truth in the Wrong Places" caption="Looking for Truth in the Wrong Places" />
-                <CaseFigure src="/img/portfolio/gty-blog_loving-the-local-church.jpg" alt="Loving the Local Church" caption="Loving the Local Church" />
-                <CaseFigure src="/img/portfolio/gty-blog_no-other-gospel.jpg" alt="No Other Gospel" caption="No Other Gospel" />
-                <CaseFigure src="/img/portfolio/gty-blog_not-all-that-glitters-is-gold.jpg" alt="Not All That Glitters Is Gold" caption="Not All That Glitters Is Gold" />
-                <CaseFigure src="/img/portfolio/gty-blog_one-race-one-remedy.jpg" alt="One Race, One Remedy" caption="One Race, One Remedy" />
-                <CaseFigure src="/img/portfolio/gty-blog_pauls-gospel-essential.jpg" alt="Paul's Gospel Essential" caption="Paul's Gospel Essential" />
-                <CaseFigure src="/img/portfolio/gty-blog_people-who-missed-Christmas.jpg" alt="People Who Missed Christmas" caption="People Who Missed Christmas" />
-                <CaseFigure src="/img/portfolio/gty-blog_purpose-of-the-parable-of-the-vineyard.jpg" alt="Purpose of the Parable of the Vineyard" caption="Purpose of the Parable of the Vineyard" />
-                <CaseFigure src="/img/portfolio/gty-blog_reconciled-in-Christ.jpg" alt="Reconciled in Christ" caption="Reconciled in Christ" />
-                <CaseFigure src="/img/portfolio/gty-blog_replacing-worry-with-the-right-focus.jpg" alt="Replacing Worry with the Right Focus" caption="Replacing Worry with the Right Focus" />
-                <CaseFigure src="/img/portfolio/gty-blog_seduced-by-mysticism.jpg" alt="Seduced by Mysticism" caption="Seduced by Mysticism" />
-                <CaseFigure src="/img/portfolio/gty-blog_social-injustice-and-the-gospel.jpg" alt="Social Injustice and the Gospel" caption="Social Injustice and the Gospel" />
-                <CaseFigure src="/img/portfolio/gty-blog_soteriology-of-the-thief.jpg" alt="Soteriology of the Thief" caption="Soteriology of the Thief" />
-                <CaseFigure src="/img/portfolio/gty-blog_stop-complaining.jpg" alt="Stop Complaining" caption="Stop Complaining" />
-                <CaseFigure src="/img/portfolio/gty-blog_takeaway-from-the-shepcon-qna-session.jpg" alt="Takeaway from the ShepCon Q&A Session" caption="Takeaway from the ShepCon Q&A Session" />
-                <CaseFigure src="/img/portfolio/gty-blog_teach-the-word.jpg" alt="Teach the Word" caption="Teach the Word" />
-                <CaseFigure src="/img/portfolio/gty-blog_the-assault-on-the-virgin-birth-of-Christ.jpg" alt="The Assault on the Virgin Birth of Christ" caption="The Assault on the Virgin Birth of Christ" />
-                <CaseFigure src="/img/portfolio/gty-blog_the-Bible-is-timeless-truth.jpg" alt="The Bible Is Timeless Truth" caption="The Bible Is Timeless Truth" />
-                <CaseFigure src="/img/portfolio/gty-blog_the-centraility-of-man-in-creation.jpg" alt="The Centrality of Man in Creation" caption="The Centrality of Man in Creation" />
-                <CaseFigure src="/img/portfolio/gty-blog_the-coming-Messiah.jpg" alt="The Coming Messiah" caption="The Coming Messiah" />
-                <CaseFigure src="/img/portfolio/gty-blog_the-condemnation-in-Gods-love.jpg" alt="The Condemnation in God's Love" caption="The Condemnation in God's Love" />
-                <CaseFigure src="/img/portfolio/gty-blog_the-danger-of-calling-the-church-to-repent.jpg" alt="The Danger of Calling the Church to Repent" caption="The Danger of Calling the Church to Repent" />
-                <CaseFigure src="/img/portfolio/gty-blog_the-fear-of-man.jpg" alt="The Fear of Man" caption="The Fear of Man" />
-                <CaseFigure src="/img/portfolio/gty-blog_the-fertile-ground.jpg" alt="The Fertile Ground" caption="The Fertile Ground" />
-                <CaseFigure src="/img/portfolio/gty-blog_the-great-exchange.jpg" alt="The Great Exchange" caption="The Great Exchange" />
-                <CaseFigure src="/img/portfolio/gty-blog_the-illegitimacy-of-the-pope.jpg" alt="The Illegitimacy of the Pope" caption="The Illegitimacy of the Pope" />
-                <CaseFigure src="/img/portfolio/gty-blog_the-inescapable-truth-about-God.jpg" alt="The Inescapable Truth About God" caption="The Inescapable Truth About God" />
-                <CaseFigure src="/img/portfolio/gty-blog_the-Lord-told-me.jpg" alt="The Lord Told Me" caption="The Lord Told Me" />
-                <CaseFigure src="/img/portfolio/gty-blog_the-problem-of-evil.jpg" alt="The Problem of Evil" caption="The Problem of Evil" />
-                <CaseFigure src="/img/portfolio/gty-blog_the-right-kind-of-hunger.jpg" alt="The Right Kind of Hunger" caption="The Right Kind of Hunger" />
-                <CaseFigure src="/img/portfolio/gty-blog_the-sovereign-Savior.jpg" alt="The Sovereign Savior" caption="The Sovereign Savior" />
-                <CaseFigure src="/img/portfolio/gty-blog_the-subtlety-of-idolatry.jpg" alt="The Subtlety of Idolatry" caption="The Subtlety of Idolatry" />
-                <CaseFigure src="/img/portfolio/gty-blog_the-totality-of-depravity.jpg" alt="The Totality of Depravity" caption="The Totality of Depravity" />
-                <CaseFigure src="/img/portfolio/gty-blog_the-truth-about-man.jpg" alt="The Truth About Man" caption="The Truth About Man" />
-                <CaseFigure src="/img/portfolio/gty-blog_ultimate-expression-divine-compassion.jpg" alt="Ultimate Expression of Divine Compassion" caption="Ultimate Expression of Divine Compassion" />
-                <CaseFigure src="/img/portfolio/gty-blog_unqualified-not-worthy.jpg" alt="Unqualified, Not Worthy" caption="Unqualified, Not Worthy" />
-                <CaseFigure src="/img/portfolio/gty-blog_untangling-the-Lords-lineage.jpg" alt="Untangling the Lord's Lineage" caption="Untangling the Lord's Lineage" />
-                <CaseFigure src="/img/portfolio/gty-blog_watching-your-spiritual-diet.jpg" alt="Watching Your Spiritual Diet" caption="Watching Your Spiritual Diet" />
-                <CaseFigure src="/img/portfolio/gty-blog_what-is-the-eye-of-a-needle.jpg" alt="What Is the Eye of a Needle?" caption="What Is the Eye of a Needle?" />
-                <CaseFigure src="/img/portfolio/gty-blog_when-truth-is-stranger-than-fiction.jpg" alt="When Truth Is Stranger Than Fiction" caption="When Truth Is Stranger Than Fiction" />
+                {FEATURED.frame.map((id) => <Fig key={id} id={id} />)}
               </CaseGrid>
+            </CaseSection>
+
+            {/* 04 — Visual Metaphors */}
+            <CaseSection id="visual-metaphors" number={4} title="Visual Metaphors">
+              <p>Many posts deal with abstract ideas, so I often looked for one everyday object that could stand for the argument: fool&apos;s gold for &ldquo;Not All That Glitters Is Gold,&rdquo; a tin-can telephone for the cliché &ldquo;The Lord Told Me,&rdquo; a row of dominoes with one red piece for the assault on the virgin birth, a knotted rope for untangling the Lord&apos;s lineage, chess pieces for the problem of evil, and a takeout box for the takeaways from a conference Q&amp;A. A single, clear object reads in a second, even as a small thumbnail.</p>
+              <CaseGrid layout="two">
+                {FEATURED.metaphors.map((id) => <Fig key={id} id={id} />)}
+              </CaseGrid>
+            </CaseSection>
+
+            {/* 05 — Art & Illustration */}
+            <CaseSection id="art-and-illustration" number={5} title="Art &amp; Illustration">
+              <p>For posts rooted in a biblical scene or a classic idea, I turned to engravings and paintings, such as Paul at Mars Hill, the Good Samaritan, and Leonardo&apos;s study of human proportions, and gave them a single-color treatment. The duotone ties very different artworks to the modern type set over them and keeps busy, detailed images calm enough to read a title against.</p>
+              <CaseGrid layout="two">
+                {FEATURED.art.map((id) => <Fig key={id} id={id} />)}
+              </CaseGrid>
+            </CaseSection>
+
+            {/* 06 — Typography */}
+            <CaseSection id="typography" number={6} title="Typography">
+              <p>Most titles are set in two voices: one key word given weight and size (SOVEREIGNTY, DEPRAVITY, IDOLATRY), and the rest of the phrase set smaller and lighter around it. The type style follows the tone of the post, with heavy, condensed capitals for urgent or confrontational topics, classic serifs for reflective ones, and an occasional script word, as in &ldquo;Reconciled&rdquo; and &ldquo;Messiah,&rdquo; where a personal, handwritten touch fits the subject.</p>
+              <CaseGrid layout="two">
+                {FEATURED.type.map((id) => <Fig key={id} id={id} />)}
+              </CaseGrid>
+            </CaseSection>
+
+            {/* 07 — The Collection */}
+            <CaseSection id="the-collection" number={7} title="The Collection">
+              <p>The rest of the series, each built the same way: the title first, then an image and type chosen to carry it.</p>
+              <CaseGrid layout="two">
+                {COLLECTION.map((g) => <CaseFigure key={g.id} src={g.src} alt={g.caption} caption={g.caption} />)}
+              </CaseGrid>
+            </CaseSection>
+
+            {/* 08 — Outcome */}
+            <CaseSection id="outcome" number={8} title="Outcome and Reflection">
+              <CaseQuote>
+                Graphics that not only attract attention but also visually encapsulate the essence of the blog post.
+              </CaseQuote>
+              <p>Over the series, the approach stayed the same even as the subjects changed from week to week: read the post, find the one idea the title turns on, and give it a single strong image and a clear typographic voice inside a frame readers recognize. The result is a body of graphics that each stand on their own, yet read unmistakably as Grace to You.</p>
             </CaseSection>
 
           </CaseLayout>

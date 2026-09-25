@@ -19,6 +19,16 @@ const CLICKABLE_SELECTOR = 'a, button, [role="button"], .cyril-dot, .cyril-prev,
 // can never get far from their centre.
 const MAGNETIC_MAX_PX = 12;
 
+// Follow speeds: the share of the remaining gap closed per 60fps frame
+// (scaled by elapsed time, so 120Hz displays ease at the same speed).
+// Lower = smoother, laggier. The diamond trails the dot slightly; the dot
+// itself tracks the pointer 1:1, since the native cursor is hidden and
+// clicks land where the dot is.
+const RING_FOLLOW = 0.28;
+const PARALLAX_FOLLOW = 0.06;
+const FRAME_MS = 1000 / 60;
+const follow = (rate, dt) => 1 - Math.pow(1 - rate, dt / FRAME_MS);
+
 // The custom cursor steps aside over:
 // - square outlined icon buttons (they fill orange on hover — feedback enough)
 // - the home hero photo, but only over its visible pixels: the transparent
@@ -433,6 +443,7 @@ const MotionEffects = () => {
     let magneticEl = null;
     let tiltEl = null;
     let rafId = null;
+    let lastTime = 0;
 
     const parallax = PARALLAX_LAYERS.map(([selector, depth]) => ({
       el: document.querySelector(`#intro ${selector}`),
@@ -448,9 +459,14 @@ const MotionEffects = () => {
 
     // Ring trails the dot; parallax layers ease toward the pointer. The loop
     // stops itself once everything has settled and restarts on movement.
-    const tick = () => {
-      ringX += (mouseX - ringX) * 0.18;
-      ringY += (mouseY - ringY) * 0.18;
+    const tick = (now) => {
+      // First frame after the loop restarts has no previous time: use one
+      // frame. Cap it so a stalled tab doesn't snap everything into place.
+      const dt = lastTime ? Math.min(now - lastTime, 4 * FRAME_MS) : FRAME_MS;
+      lastTime = now;
+      const ringK = follow(RING_FOLLOW, dt);
+      ringX += (mouseX - ringX) * ringK;
+      ringY += (mouseY - ringY) * ringK;
       ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
       let moving = Math.abs(mouseX - ringX) > 0.1 || Math.abs(mouseY - ringY) > 0.1;
 
@@ -458,17 +474,19 @@ const MotionEffects = () => {
         const active = heroShown();
         const nx = active ? mouseX / window.innerWidth - 0.5 : 0;
         const ny = active ? mouseY / window.innerHeight - 0.5 : 0;
+        const parallaxK = follow(PARALLAX_FOLLOW, dt);
         parallax.forEach((layer) => {
           const tx = nx * layer.depth * 2;
           const ty = ny * layer.depth * 2;
-          layer.x += (tx - layer.x) * 0.08;
-          layer.y += (ty - layer.y) * 0.08;
+          layer.x += (tx - layer.x) * parallaxK;
+          layer.y += (ty - layer.y) * parallaxK;
           layer.el.style.translate = `${layer.x.toFixed(2)}px ${layer.y.toFixed(2)}px`;
           if (Math.abs(tx - layer.x) > 0.05 || Math.abs(ty - layer.y) > 0.05) moving = true;
         });
       }
 
       rafId = moving ? requestAnimationFrame(tick) : null;
+      if (!rafId) lastTime = 0;
     };
 
     const startLoop = () => {

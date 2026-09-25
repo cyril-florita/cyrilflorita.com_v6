@@ -70,7 +70,7 @@ export const CaseHero = ({ category, detail, title, summary, facts, image, image
         <h1 className="cyril-up glitch cyril-case-title" data-text={title}>{title}</h1>
         <p className="cyril-case-summary">{summary}</p>
         {facts && (
-          <dl className="cyril-case-facts">
+          <dl className="cyril-case-facts" style={{ "--fact-count": facts.length }}>
             {facts.map(({ label, value }) => (
               <div key={label} className="cyril-case-fact">
                 <dt className="cyril-upper">{label}</dt>
@@ -93,8 +93,23 @@ export const CaseHero = ({ category, detail, title, summary, facts, image, image
 // Two-column body: a sticky section index on the left (highlighting the
 // section being read, click to jump) and the sections on the right. Pages
 // with fewer than 3 sections get no index — the left column stays as an
-// empty margin so text lines up the same on every project page.
+// empty margin (apart from the back button) so text lines up the same on
+// every project page.
+//
+// The left column is one sticky rail: the index with a "Back to All Work"
+// button under it, so the way back stays in view while reading. Each page stores
+// sessionStorage.returnToProject on mount, so the button only has to wipe
+// back to the grid. Hidden below 1200px with the index; CaseNext's copy of
+// the button covers tablet/mobile.
+export const BackToAllWork = ({ onClick, className = "" }) => (
+  <button type="button" onClick={onClick} className={`cyril-button cyril-type-2 ${className}`}>
+    <svg className="cyril-prev" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    Back to All Work
+  </button>
+);
+
 export const CaseLayout = ({ sections, children }) => {
+  const router = useRouter();
   const [activeId, setActiveId] = useState(sections[0]?.id);
 
   useEffect(() => {
@@ -120,7 +135,8 @@ export const CaseLayout = ({ sections, children }) => {
 
   return (
     <div className="container cyril-case-body">
-      {sections.length < 3 ? <div aria-hidden="true" /> : (
+      <aside className="cyril-case-rail">
+      {sections.length >= 3 && (
       <nav className="cyril-case-toc" aria-label="Case study sections">
         <ol>
           {sections.map(({ id, label }, i) => (
@@ -134,6 +150,8 @@ export const CaseLayout = ({ sections, children }) => {
         </ol>
       </nav>
       )}
+      <BackToAllWork onClick={() => wipeThen(() => router.push("/"))} className="cyril-case-rail-back" />
+      </aside>
       <div className="cyril-case-main">{children}</div>
     </div>
   );
@@ -192,7 +210,7 @@ export const CaseGrid = ({ layout = "two", children }) => (
 );
 
 export const CaseStats = ({ items }) => (
-  <dl className="cyril-case-stats">
+  <dl className="cyril-case-stats" style={{ "--stat-count": items.length }}>
     {items.map(({ value, label }) => (
       <div key={label} className="cyril-case-stat">
         <dt className="cyril-case-stat-value"><CountUp value={value} /></dt>
@@ -209,7 +227,7 @@ export const CaseQuote = ({ children, cite }) => (
   </blockquote>
 );
 
-// Closing band: "All Work" link back to the grid plus a large "Next project" link whose image
+// Closing band: "Back to All Work" link back to the grid plus a large "Next project" link whose image
 // fades in on hover (always shown on touch/smaller screens).
 export const CaseNext = ({ href, title, category, image, onBack }) => {
   const router = useRouter();
@@ -220,10 +238,7 @@ export const CaseNext = ({ href, title, category, image, onBack }) => {
   };
   return (
   <div className="container cyril-case-end">
-    <button type="button" onClick={onBack} className="cyril-button cyril-type-2 cyril-case-back">
-      <svg className="cyril-prev" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-      All Work
-    </button>
+    <BackToAllWork onClick={onBack} className="cyril-case-back" />
     <Link href={href} className="cyril-case-next" onClick={goNext}>
       <span className="cyril-case-next-image" aria-hidden="true">
         <img {...imageProps(image, SIZES_HINT.half)} alt="" loading="lazy" decoding="async" />

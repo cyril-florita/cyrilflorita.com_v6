@@ -630,7 +630,6 @@ page
 
 .cyril-page {
     position: relative;
-    margin: 20px;
     transform: translateY(90px) scale(0.95);
     opacity: 0;
     transition: variables.$tr;
@@ -651,10 +650,6 @@ page
         &.cyril-active {
             transform: none;
         }
-    }
-
-    @media screen and (max-width: 1200px) {
-        margin: 0;
     }
 
 }
@@ -1483,6 +1478,14 @@ banner
     position: relative;
     overflow: hidden;
 
+    // The bundled bootstrap-grid.css has no .no-gutters rule, so this row
+    // keeps Bootstrap's -15px side margins and would hang past the window
+    // edge (a horizontal scrollbar) now that .cyril-page has no margin.
+    & > .container-full > .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
     @media screen and (max-width: 1200px) {
         padding-top: 90px;
     }
@@ -1553,6 +1556,15 @@ banner
             position: static;
         }
 
+    }
+
+    // The text column is ~43% of the viewport, so a fixed 160px headline
+    // wraps "FLORITA" (≈4.26em wide) onto a third line below ~1690px.
+    // Scale with the viewport instead, capped at the original 160px.
+    & h1 {
+        @media screen and (min-width: 1401px) {
+            font-size: min(9.5vw, 160px);
+        }
     }
 
     & .cyril-short {
@@ -1983,16 +1995,20 @@ experience
         }
     }
 
+    // Shadow line, offset like the frame's shadow. It used to run 5px past
+    // the right edge (right: -5px), which now that .cyril-page has no margin
+    // made the page scroll sideways; stop it at the edge and keep its left
+    // end where it was.
     &::after {
         content: "";
         position: absolute;
         top: 7px;
-        right: -5px;
-        width: 70%;
+        right: 0;
+        width: calc(70% - 5px);
         border-bottom: 2px solid var(--color-frameshadow);
 
         @media screen and (max-width: 1024px) {
-            width: 100%;
+            width: calc(100% - 5px);
         }
     }
 
@@ -2675,14 +2691,13 @@ back to top
     position: relative;
     width: 100%;
 }// My Work on "/" (heading, filters, grid) runs wider than the site's
-// 1320px container on desktop: ~80px from each edge of the window
-// (60px padding + the page's 20px margin). The hero uses .container-full,
-// so it's unaffected.
+// 1320px container on desktop: 80px from each edge of the window. The hero
+// uses .container-full, so it's unaffected.
 @media screen and (min-width: 1201px) {
     .cyril-main-page .container {
         max-width: none;
-        padding-left: 60px;
-        padding-right: 60px;
+        padding-left: 80px;
+        padding-right: 80px;
     }
 }
 
@@ -2728,12 +2743,14 @@ contact band (components/ContactBand.js)
     .cyril-main-page & {
         border-top: 2px solid var(--color-frame);
 
+        // Shadow line; stops at the right edge (it used to run 5px past it,
+        // which made the page scroll sideways without .cyril-page's margin).
         &::before {
             content: "";
             position: absolute;
             top: 7px;
             left: 7px;
-            right: -5px;
+            right: 0;
             border-top: 2px solid var(--color-frameshadow);
         }
     }
@@ -2918,7 +2935,9 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
 .cyril-case-facts {
     margin: 80px 0 0;
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    // one column per fact (--fact-count is set inline by CaseHero), so three
+    // or four facts share the full width instead of five fixed columns
+    grid-template-columns: repeat(var(--fact-count, 5), minmax(0, 1fr));
     border-top: 2px solid var(--color-frame);
 
     @media screen and (max-width: 992px) {
@@ -2952,6 +2971,9 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
         margin: 0;
         font-size: 16px;
         line-height: 1.5;
+        // long URLs have no spaces to break at; let them wrap rather than
+        // run into the next cell
+        overflow-wrap: anywhere;
     }
 
     @media screen and (max-width: 992px) {
@@ -2990,11 +3012,39 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
     }
 }
 
-.cyril-case-toc {
+// sticky left column: back button + section index (see CaseLayout)
+.cyril-case-rail {
     position: sticky;
     top: 150px;
     align-self: start;
 
+    @media screen and (max-width: 1200px) {
+        display: none;
+    }
+}
+
+// compact version of the closing band's button, sized to the 200px rail
+.cyril-button.cyril-case-rail-back {
+    gap: 6px;
+    width: 100%;
+    height: 48px;
+    padding: 0 12px 0 8px;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+
+    & svg {
+        flex: none;
+        width: 18px;
+        height: 18px;
+    }
+}
+
+// under the index (pages without one just show the button)
+.cyril-case-toc + .cyril-case-rail-back {
+    margin-top: 40px;
+}
+
+.cyril-case-toc {
     & ol {
         list-style: none;
         margin: 0;
@@ -3274,7 +3324,8 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
 .cyril-case-stats {
     margin: 70px 0 20px;
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    // one column per stat (--stat-count is set inline by CaseStats)
+    grid-template-columns: repeat(var(--stat-count, 4), minmax(0, 1fr));
     border-top: 2px solid var(--color-frame);
 
     @media screen and (max-width: 768px) {
@@ -3350,8 +3401,14 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
     }
 }
 
+// Only on tablet/mobile: above 1200px the sticky rail's copy is always in
+// view (see .cyril-case-rail), so this one would be redundant.
 .cyril-case-back {
     margin-bottom: 60px;
+
+    @media screen and (min-width: 1201px) {
+        display: none;
+    }
 }
 
 .cyril-case-next {
@@ -3480,12 +3537,48 @@ zoom viewer (components/ZoomViewer.js)
 .cyril-zoom-backdrop {
     position: absolute;
     inset: 0;
+    overflow: hidden; // clips the oversized noise layer below
     background-color: var(--color-bg);
     opacity: 0;
     transition: opacity 0.45s ease;
 
     .cyril-zoom-open & {
         opacity: calc(0.96 * var(--cyril-zoom-drag, 1));
+    }
+
+    // The page's noise (body::after, z-index 1001) sits under the viewer, so
+    // the backdrop carries its own copy — behind the image, so the artwork
+    // stays clean. Same rules as body::after: still on tablet/mobile and for
+    // reduced motion, paused while the tab is hidden. Clicks pass through to
+    // the backdrop (close).
+    &::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: transparent url(../img/bg-static.png) repeat 0 0;
+        animation: bg-animation .2s infinite;
+        will-change: transform;
+        opacity: var(--bg-static-opacity, 0.21);
+        pointer-events: none;
+
+        html.cyril-tab-hidden & {
+            animation-play-state: paused;
+        }
+
+        [data-theme="dark"] & {
+            opacity: 0.2;
+        }
+
+        @media screen and (max-width: 1200px) {
+            animation: none;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            animation: none;
+        }
     }
 }
 
@@ -3595,4 +3688,400 @@ zoom viewer (components/ZoomViewer.js)
 .cyril-zoom-count {
     color: var(--color-accent);
     font-variant-numeric: tabular-nums;
+}
+
+/* -------------------------------------------
+
+brand guide (components/case/BrandGuide.js)
+Identity documentation inside a case study: logo suite, clear space, color
+discs, lettering crops and do/don't tiles. Artwork tiles keep the logo's own
+grounds (white / #121212) in both site themes, since the files include them.
+
+------------------------------------------- */
+.cyril-brand-grid {
+    display: grid;
+    gap: 30px;
+    margin: 50px 0;
+    padding: 0;
+    list-style: none;
+}
+
+.cyril-brand-name {
+    margin: 0;
+    font-family: var(--font-atkinson);
+    font-size: 17px;
+    line-height: 1.3;
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    text-shadow: none;
+}
+
+.cyril-brand-role {
+    margin: 8px 0 0;
+    font-size: 15px;
+    line-height: 1.6;
+    opacity: 0.8;
+}
+
+.cyril-brand-specs {
+    display: grid;
+    gap: 12px;
+    margin: 12px 0 0;
+
+    & div {
+        display: grid;
+        grid-template-columns: 96px minmax(0, 1fr);
+        gap: 12px;
+        align-items: baseline;
+    }
+
+    // reset the site-wide dl dt (bold, 40px bottom margin)
+    & dt {
+        margin: 0;
+        font-size: 12px;
+        font-weight: 400;
+        letter-spacing: var(--tracking-caps);
+        opacity: 0.6;
+    }
+
+    & dd {
+        margin: 0;
+        font-size: 15px;
+        line-height: 1.5;
+    }
+}
+
+// cropped artwork: the img is sized and offset inline (see BrandCrop)
+.cyril-brand-crop {
+    position: relative;
+    overflow: hidden;
+    max-width: 100%;
+
+    & img {
+        position: absolute;
+        max-width: none;
+        height: auto;
+        border: 0;
+        padding: 0;
+    }
+}
+
+// logo suite
+.cyril-brand-logos {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    @media screen and (max-width: 992px) {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+.cyril-brand-logo {
+    margin: 0;
+
+    & .cyril-brand-logo-art {
+        overflow: hidden;
+        border: 2px solid var(--color-frame);
+
+        & img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border: 0;
+            padding: 0;
+        }
+    }
+
+    & figcaption {
+        margin-top: 20px;
+    }
+
+    // tiles cropped to one shape (BrandLogos `ratio`)
+    & .cyril-brand-logo-fixed img {
+        height: 100%;
+        object-fit: cover;
+    }
+
+    // a region of the file (mark, wordmark) centered in a file-shaped tile
+    & .cyril-brand-logo-part {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        aspect-ratio: 1600 / 1067;
+        background: #ffffff;
+    }
+}
+
+// clear space
+.cyril-brand-clear {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 40px;
+    align-items: center;
+    margin: 50px 0;
+
+    @media screen and (max-width: 992px) {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+.cyril-brand-clear-diagram {
+    background: #ffffff;
+    border: 2px solid var(--color-frame);
+    padding: 24px;
+}
+
+.cyril-brand-clear-zone {
+    position: relative;
+    // --clear-pad is set inline by BrandClearSpace (10% = one eighth of the
+    // logo's width)
+    padding: var(--clear-pad, 10%);
+    outline: 1.5px dashed var(--color-accent);
+    outline-offset: -1.5px;
+}
+
+.cyril-brand-clear-emblem {
+    outline: 1.5px dashed rgba(18, 18, 18, 0.35);
+}
+
+.cyril-brand-clear-x {
+    position: absolute;
+    font-family: var(--font-atkinson);
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--color-accent);
+
+    &.cyril-brand-clear-x-top {
+        top: calc(var(--clear-pad, 10%) / 2);
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    &.cyril-brand-clear-x-left {
+        left: calc(var(--clear-pad, 10%) / 2);
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.cyril-brand-clear-specs {
+    margin: 0;
+    gap: 20px;
+
+    & div {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 4px;
+    }
+}
+
+// color
+.cyril-brand-swatches {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: 50px;
+
+    @media screen and (max-width: 768px) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.cyril-brand-swatch {
+    margin: 0;
+}
+
+.cyril-brand-disc {
+    display: block;
+    width: min(100%, 160px);
+    aspect-ratio: 1;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    // Ink and Paper would vanish on the page ground in one theme or the other.
+    box-shadow: 0 0 0 2px var(--color-frame);
+}
+
+.cyril-brand-values {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+    margin: 8px 0 0;
+    font-variant-numeric: tabular-nums;
+
+    & div {
+        display: flex;
+        gap: 6px;
+        align-items: baseline;
+    }
+
+    & dt {
+        margin: 0;
+        font-size: 11px;
+        font-weight: 400;
+        letter-spacing: var(--tracking-caps);
+        opacity: 0.6;
+    }
+
+    & dd {
+        margin: 0;
+        font-size: 15px;
+    }
+}
+
+// lettering
+.cyril-brand-lettering {
+    display: grid;
+    margin: 50px 0;
+    border-top: 2px solid var(--color-frame);
+}
+
+.cyril-brand-letter {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 40px;
+    align-items: center;
+    padding: 30px 0;
+    border-bottom: 2px solid var(--color-frame);
+
+    @media screen and (max-width: 768px) {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+    }
+}
+
+.cyril-brand-letter-art {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 140px;
+    padding: 24px;
+    background: #ffffff;
+
+}
+
+// usage
+.cyril-brand-usage {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    @media screen and (max-width: 992px) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media screen and (max-width: 576px) {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+.cyril-brand-rule {
+    margin: 0;
+
+    & figcaption {
+        margin-top: 16px;
+        font-size: 15px;
+        line-height: 1.5;
+    }
+}
+
+.cyril-brand-rule-art {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1600 / 1186;
+    background: #ffffff;
+    border: 2px solid var(--color-frame);
+
+    & img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border: 0;
+        padding: 0;
+    }
+
+    .cyril-brand-dont & {
+        border-color: var(--color-accent);
+    }
+}
+
+// a cropped region (e.g. the mark alone) centered in a usage tile
+.cyril-page.cyril-case-page .cyril-brand-rule-art .cyril-brand-fitbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+
+    & .cyril-brand-crop img {
+        height: auto;
+        object-fit: initial;
+    }
+}
+
+.cyril-brand-verdict {
+    display: inline-block;
+    margin-right: 10px;
+    font-family: var(--font-atkinson);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: var(--tracking-caps);
+
+    .cyril-brand-do & {
+        opacity: 0.7;
+    }
+
+    .cyril-brand-dont & {
+        color: var(--color-accent);
+    }
+}
+
+.cyril-page.cyril-case-page .cyril-brand-rule-art {
+    // show a whole square logo inside the wide tile instead of cropping it
+    & img.cyril-brand-contain {
+        object-fit: contain;
+        padding: 6%;
+    }
+
+    & img.cyril-brand-stretch {
+        transform: scaleX(1.45);
+    }
+
+    & img.cyril-brand-recolor {
+        filter: hue-rotate(170deg) saturate(1.6);
+    }
+
+    // recolor for black-on-white marks (hue-rotate can't tint black): the
+    // screen blend turns the black to the box's color and keeps the white
+    & .cyril-brand-tintbox {
+        width: 100%;
+        height: 100%;
+        background: #e8453c;
+
+        & img {
+            mix-blend-mode: screen;
+        }
+    }
+
+    & .cyril-brand-onblack {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        background: #121212;
+
+        & img {
+            width: 62%;
+            height: auto;
+        }
+    }
+
+    // multiply drops the logo's white ground onto the photo
+    & .cyril-brand-onphoto {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center 70%;
+
+        & img {
+            mix-blend-mode: multiply;
+            object-fit: contain;
+        }
+    }
 }

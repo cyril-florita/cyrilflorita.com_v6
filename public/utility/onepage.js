@@ -36,11 +36,20 @@ const prepareStagger = (sections) => {
   });
 };
 
+// Returns a cleanup function; call it on unmount. Without it, a second run
+// (React Strict Mode runs effects twice in dev) leaves two wheel/key
+// handlers, each with its own `scrolling` lock, so one wheel notch
+// advances two sections.
 export const onepage = () => {
   let sections = document.querySelectorAll(".cyril-section");
   let dots = document.querySelectorAll(".cyril-dot");
   let body = document.querySelector("body");
   let scrolling = false;
+  const timers = [];
+  // Let snapping resume once the smooth scroll has had time to finish.
+  const unlockLater = () => {
+    timers.push(setTimeout(() => { scrolling = false; }, 1200));
+  };
 
   // Read the current section straight off the DOM (whichever one has
   // cyril-active) instead of trusting a private counter, so it can't drift
@@ -75,17 +84,15 @@ export const onepage = () => {
     });
   }
 
-  dots.forEach((dot, dotIndex) => {
-    dot.addEventListener("click", function () {
+  const dotHandlers = Array.from(dots).map((dot, dotIndex) => {
+    const onClick = () => {
       if (!scrolling) {
         scrollToSection(dotIndex);
-
-        // Allow scrolling again after a short delay
-        setTimeout(function () {
-          scrolling = false;
-        }, 1200);
+        unlockLater();
       }
-    });
+    };
+    dot.addEventListener("click", onClick);
+    return [dot, onClick];
   });
 
   function handleWheel(event) {
@@ -105,11 +112,7 @@ export const onepage = () => {
       }
 
       scrollToSection(index);
-
-      // Allow scrolling again after a short delay
-      setTimeout(function () {
-        scrolling = false;
-      }, 1200);
+      unlockLater();
     }
   }
 
@@ -137,9 +140,7 @@ export const onepage = () => {
     index = Math.max(0, Math.min(sections.length - 1, index));
     if (index === getCurrentIndex()) return;
     scrollToSection(index);
-    setTimeout(function () {
-      scrolling = false;
-    }, 1200);
+    unlockLater();
   }
 
   // Tabbing onto something in a section that isn't showing: bring that
@@ -150,9 +151,7 @@ export const onepage = () => {
     const index = Array.from(sections).indexOf(section);
     if (index === -1 || index === getCurrentIndex()) return;
     scrollToSection(index);
-    setTimeout(function () {
-      scrolling = false;
-    }, 1200);
+    unlockLater();
   }
 
   if (body.classList.contains('cyril-custom-scroll')) {
@@ -162,17 +161,26 @@ export const onepage = () => {
   }
 
   // Set the initial scroll position to the top of the document after a short delay
-  setTimeout(function () {
+  timers.push(setTimeout(function () {
     if (body.classList.contains('cyril-custom-scroll')) {
       window.scrollTo(0, 0);
     }
-  }, 100);
+  }, 100));
 
   // Hold the first section's fade-in until the preloader is gone, so it
   // plays in view rather than behind it.
-  onPreloaderHidden(() => {
+  const stopPreloaderWait = onPreloaderHidden(() => {
     if (!body.classList.contains('cyril-custom-scroll')) return;
     if (window.innerWidth > 1200) prepareStagger(sections);
     updateActiveSection(getCurrentIndex());
   });
+
+  return () => {
+    dotHandlers.forEach(([dot, onClick]) => dot.removeEventListener("click", onClick));
+    window.removeEventListener("wheel", handleWheel);
+    window.removeEventListener("keydown", handleKey);
+    document.removeEventListener("focusin", handleFocus);
+    timers.forEach(clearTimeout);
+    stopPreloaderWait();
+  };
 };
