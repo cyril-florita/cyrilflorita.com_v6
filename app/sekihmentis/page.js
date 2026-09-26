@@ -81,7 +81,6 @@ const Page = () => {
             href="/he-took-my-place"
             title="He Took My Place"
             category="Illustration"
-            image="/img/portfolio/main_he-took-my-place.jpg"
             onBack={handleBackToPortfolio}
           />
 

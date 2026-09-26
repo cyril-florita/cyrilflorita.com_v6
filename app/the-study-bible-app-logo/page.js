@@ -214,7 +214,6 @@ const Page = () => {
             href="/patricia-macarthur-pastoral-care-fund"
             title="The Patricia MacArthur Pastoral Care Fund"
             category="Branding"
-            image="/img/portfolio/thumb_patricia-macarthur-pastoral-fund.jpg"
             onBack={handleBackToPortfolio}
           />
 

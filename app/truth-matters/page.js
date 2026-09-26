@@ -125,7 +125,7 @@ const Page = () => {
         <div className="cyril-page cyril-project-page cyril-case-page">
 
           <CaseHero
-            category="Design, Development, & Branding"
+            category="Branding, Design, & Development"
             detail="Podcast Brand & Website"
             title="Truth Matters Podcast"
             summary="Creating the brand, UX/UI design, and website for Grace to You's Truth Matters Podcast—a digital experience as grounded and compelling as the content itself."
@@ -235,7 +235,6 @@ const Page = () => {
             href="/volunteer-leadership-team"
             title="Volunteer Leadership Team"
             category="Design & Development"
-            image="/img/portfolio/chf-volunteer-leadership_main.jpg"
             onBack={handleBackToPortfolio}
           />
 

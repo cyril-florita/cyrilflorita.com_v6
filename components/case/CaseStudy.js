@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { imageProps, SIZES_HINT } from "@/components/imageProps";
 import VIDEO_SIZES from "@/components/data/videoSizes.json";
 import CountUp from "@/components/CountUp";
+import TileMedia, { TILE_MEDIA } from "@/components/TileMedia";
 
 // Building blocks for the editorial case-study layout (piloted on
 // app/gty_v9/page.js). Styles live under "case study" in _components.scss;
@@ -286,7 +287,11 @@ export const CaseQuote = ({ children, cite }) => (
 
 // Closing band: "Back to All Work" link back to the grid plus a large "Next project" link whose image
 // fades in on hover (always shown on touch/smaller screens).
-export const CaseNext = ({ href, title, category, image, onBack }) => {
+// "Next project" band. Its preview is the linked project's own My Work
+// thumbnail (video, slideshow or image — TileMedia), shaped like its tile.
+export const CaseNext = ({ href, title, category, onBack }) => {
+  const slug = `/${href.replace(/^\/|\/$/g, "")}`;
+  const media = TILE_MEDIA[slug];
   const router = useRouter();
   const goNext = (e) => {
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return; // new tab etc.
@@ -297,9 +302,15 @@ export const CaseNext = ({ href, title, category, image, onBack }) => {
   <div className="container cyril-case-end">
     <BackToAllWork onClick={onBack} className="cyril-case-back" />
     <Link href={href} className="cyril-case-next" onClick={goNext}>
-      <span className="cyril-case-next-image" aria-hidden="true">
-        <img {...imageProps(image, SIZES_HINT.half)} alt="" loading="lazy" decoding="async" />
-      </span>
+      {media && (
+        <span
+          className={`cyril-case-next-image cyril-case-next-image-${media.shape}`}
+          style={media.ratio ? { aspectRatio: media.ratio } : undefined}
+          aria-hidden="true"
+        >
+          <TileMedia slug={slug} sizes={SIZES_HINT.half} />
+        </span>
+      )}
       <span className="cyril-upper cyril-case-next-eyebrow">Next project</span>
       <span className="cyril-up cyril-case-next-title">
         {title}

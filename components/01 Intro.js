@@ -49,7 +49,7 @@ const Banner = ( { bgImage = "/img/cyril-florita-profile.webp" } ) => {
                   {/* Scope line — sets the focus (web, brand, front-end) so the
                       headline doesn't read as UX/product design. */}
                   <p className="cyril-mb-30 cyril-hero-scope">
-                    I design, build, and ship digital experiences that convert and <span style={{ whiteSpace: "nowrap" }}>perform&mdash;faster</span> and more efficiently these days with AI tools.
+                    I design, build, and ship digital experiences that convert and <span style={{ whiteSpace: "nowrap" }}>perform&mdash;faster</span> and more efficiently with AI tools these days.
                   </p>
                   <div className="cyril-buttons-frame">
                     <Link href="/" className="cyril-button" onClick={(e) => {

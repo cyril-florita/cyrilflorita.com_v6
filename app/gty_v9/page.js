@@ -259,8 +259,7 @@ const Page = () => {
           <CaseNext
             href="/giving-tuesday"
             title="Giving Tuesday Campaign"
-            category="Design & Development"
-            image="/img/portfolio/chf-giving-tuesday_main.jpg"
+            category="Design, Development, & Marketing Campaign Performance Tracking"
             onBack={handleBackToPortfolio}
           />
 

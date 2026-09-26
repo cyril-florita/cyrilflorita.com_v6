@@ -156,7 +156,6 @@ const Page = () => {
             href="/gty-dashboard"
             title="GTY Dashboard"
             category="Design & Development"
-            image="/img/portfolio/thumb_gty-dashboard.jpg"
             onBack={handleBackToPortfolio}
           />
 

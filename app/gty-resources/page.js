@@ -179,8 +179,7 @@ const Page = () => {
           <CaseNext
             href="/the-study-bible-app"
             title="The Study Bible App"
-            category="App Design"
-            image="/img/portfolio/main_the-study-bible-app.jpg"
+            category="App Design & Prototyping"
             onBack={handleBackToPortfolio}
           />
 

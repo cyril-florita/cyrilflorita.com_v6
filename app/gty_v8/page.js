@@ -386,8 +386,7 @@ const Page = () => {
           <CaseNext
             href="/35-day-generosity-challenge"
             title="35-Day Generosity Challenge"
-            category="Design & Development"
-            image="/img/portfolio/chf-35-day-generosity_main.jpg"
+            category="Design, Development, & Marketing Campaign Performance Tracking"
             onBack={handleBackToPortfolio}
           />
 

@@ -6,121 +6,10 @@ import { SOCIAL_GRAPHICS } from "@/components/data/socialGraphics";
 import { BLOG_GRAPHICS } from "@/components/data/blogGraphics";
 import { RESOURCE_GRAPHICS } from "@/components/data/resourceGraphics";
 import { imageProps, SIZES_HINT } from "@/components/imageProps";
+import TileMedia from "@/components/TileMedia";
 import { wipeThen } from './Preloader';
 import { useRouter } from "next/navigation";
 import { cyrilUtility } from "@/public/utility/index";
-
-// A looping, silent video in place of a tile's thumbnail. Shows its poster
-// and downloads nothing until the tile is near the viewport (preload="none"),
-// plays only while on screen, pauses when scrolled away. Reduced motion: the
-// poster only. Styled like tile images (grayscale → color on hover).
-const GridVideo = ({ src, poster, label }) => {
-  const ref = useRef(null);
-  useEffect(() => {
-    const video = ref.current;
-    if (!video || !("IntersectionObserver" in window)) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) video.play().catch(() => {});
-      else if (!video.paused) video.pause();
-    }, { rootMargin: "200px 0px" });
-    observer.observe(video);
-    return () => observer.disconnect();
-  }, []);
-  return (
-    <video
-      ref={ref}
-      src={src}
-      poster={poster}
-      preload="none"
-      muted
-      loop
-      playsInline
-      aria-label={label}
-    />
-  );
-};
-
-// A crossfading slideshow in place of a tile's thumbnail (images stacked,
-// one visible at a time). `interval` = ms per image; `fade` = crossfade
-// length in ms; `cut` swaps images instantly instead of fading.
-// Advances only while the tile is on screen, and skips images that haven't
-// loaded yet (so quick cuts never flash an empty frame); reduced motion
-// shows the starting image only. Styled like tile images.
-const SLIDE_MS = 2500;
-// The GTY Resources tile's slideshow: a hand-picked sequence of resource
-// graphics (Figs. 01, 17, 18, 34, 19, 20, 35 on /gty-resources, in this order).
-const RESOURCE_SLIDES = [
-  "resource-44nasmdbl",
-  "resource-autumn-sale-version-1",
-  "resource-autumn-sale-version-2",
-  "resource-the-preachers-bible-version-2",
-  "resource-autumn-sale-version-3",
-  "resource-summer-sale-version-1",
-  "resource-the-preachers-bible-version-3",
-];
-const RESOURCE_BANNERS = RESOURCE_SLIDES.map((id) => RESOURCE_GRAPHICS.find((g) => g.id === id).src);
-// The GTY Blog Graphics tile's slideshow, same style: a hand-picked sequence
-// (Figs. 01, 02, 03, 05, 15, 36, 56 on /gty-blog-graphics, in this order).
-const BLOG_SLIDES = [
-  "a-church-not-forsaken",
-  "christ-gives-the-gospel",
-  "inerrancy-and-evangelical-syncretism",
-  "pauls-gospel-essential",
-  "limitless-love",
-  "is-there-a-temple-in-heaven",
-  "the-inescapable-truth-about-god",
-].map((id) => BLOG_GRAPHICS.find((g) => g.id === `blog-${id}`).src);
-// The GTY Social Media Graphics tile's slideshow, same style (Figs. 01, 22,
-// 27, 02, 26, 15, 30 on /gty-social-media-graphics, in this order).
-const SOCIAL_SLIDES = [
-  "/img/portfolio/gty-social_train-tracks---Light-of-God's-Truth.jpg",
-  "/img/portfolio/gty-social_slant---Advancing-His-Kingdom.jpg",
-  "/img/portfolio/gty-social_circle---Free-Offer-of-the-Gospel.jpg",
-  "/img/portfolio/gty-social_masked-slant---Scriptures-Absolute,-Inerrant-Authority.jpg",
-  "/img/portfolio/gty-social_california---Worry-is-the-Sin.jpg",
-  "/img/portfolio/gty-social_hexagon---Know-Christ-As-Lord.jpg",
-  "/img/portfolio/gty-social_layers---Christ-Is-Lord.jpg",
-];
-const GridSlideshow = ({ images, label, interval = SLIDE_MS, fade, cut = false }) => {
-  const ref = useRef(null);
-  const [active, setActive] = useState(0);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el || !("IntersectionObserver" in window)) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    let timer = null;
-    const stop = () => { clearInterval(timer); timer = null; };
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && !timer) {
-        timer = setInterval(() => setActive((i) => {
-          const imgs = el.querySelectorAll("img");
-          for (let step = 1; step < imgs.length; step++) {
-            const next = (i + step) % imgs.length;
-            if (imgs[next].complete && imgs[next].naturalWidth) return next;
-          }
-          return i;
-        }), interval);
-      } else if (!entry.isIntersecting) stop();
-    });
-    observer.observe(el);
-    return () => { observer.disconnect(); stop(); };
-  }, [images.length, interval]);
-  return (
-    <span ref={ref} className={`cyril-grid-slideshow${cut ? " is-cut" : ""}`} style={fade ? { "--slide-fade": `${fade}ms` } : undefined} role="img" aria-label={label}>
-      {images.map((src, i) => (
-        <img
-          key={src}
-          {...imageProps(src, SIZES_HINT.gridTile)}
-          alt=""
-          loading="lazy"
-          decoding="async"
-          className={i === active ? "is-active" : undefined}
-        />
-      ))}
-    </span>
-  );
-};
 
 // A single graphic as its own grid item (Marketing filter). It links to the
 // original image, which the zoom viewer opens; `group` keeps prev/next
@@ -415,18 +304,14 @@ const PortfolioIsotope = () => {
             <Link href="/hunger-action-month" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <GridVideo
-                    src="/img/portfolio/chf-hunger-action-month_preview.mp4"
-                    poster="/img/thumbs/portfolio/chf-hunger-action-month_preview-poster.webp"
-                    label="Hunger Action Month landing page preview"
-                  />
+                  <TileMedia slug="/hunger-action-month" />
                   <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
                   </div>
                 </div>
                 <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Design &amp; Development</p>
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Design, Development, &amp; Marketing Campaign Performance Tracking</p>
                   <h4 className="cyril-up">Hunger Action Month</h4>
                 </div>
               </div>
@@ -438,29 +323,14 @@ const PortfolioIsotope = () => {
             <Link href="/grace-stream" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
-                  {/* The brand's story (final mark → on its blue photo → in the
-                      sunset photo → merchandise → the live page), crossfading. */}
-                  <GridSlideshow
-                    label="Grace Stream brand, from mark to merchandise and the live page"
-                    images={[
-                      "/img/portfolio/grace-stream_logo-2.jpg",
-                      "/img/portfolio/grace-stream_logo.jpg",
-                      "/img/portfolio/thumb_grace-stream-square.jpg",
-                      "/img/portfolio/grace-stream_merch-mug.jpg",
-                      "/img/portfolio/grace-stream_merch-tote.jpg",
-                      "/img/portfolio/grace-stream_merch-cap.jpg",
-                      "/img/portfolio/thumb_grace-stream-website-square.jpg",
-                    ]}
-                    interval={1250}
-                    fade={600}
-                  />
+                  <TileMedia slug="/grace-stream" />
                   <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
                   </div>
                 </div>
                 <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Design, Development, &amp; Branding</p>
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Branding, Design, &amp; Development</p>
                   <h4 className="cyril-up">Grace Stream</h4>
                 </div>
               </div>
@@ -472,11 +342,7 @@ const PortfolioIsotope = () => {
             <Link href="/gty_v9" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <GridVideo
-                    src="/img/portfolio/gty9_preview.mp4"
-                    poster="/img/thumbs/portfolio/gty9_preview-poster.webp"
-                    label="Grace to You preview"
-                  />
+                  <TileMedia slug="/gty_v9" />
                   <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
@@ -493,39 +359,12 @@ const PortfolioIsotope = () => {
             </Link>
           </div>
 
-          {/* wide . giving tuesday (looping video thumbnail) */}
-          <div id="givingtuesday" data-project="givingtuesday" data-order-uix="3" data-order-brand="1" className="cyril-grid-item fil-uix fil-marketing">
-            <Link href="/giving-tuesday" onClick={saveFilterOnNavigate}>
-              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
-                <div className="cyril-cover">
-                  <GridVideo
-                    src="/img/portfolio/chf-giving-tuesday_preview.mp4"
-                    poster="/img/thumbs/portfolio/chf-giving-tuesday_preview-poster.webp"
-                    label="Giving Tuesday Campaign landing page preview"
-                  />
-                  <h3>Case<br />Study</h3>
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
-                </div>
-                <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Design &amp; Development</p>
-                  <h4 className="cyril-up">Giving Tuesday Campaign</h4>
-                </div>
-              </div>
-            </Link>
-          </div>
-
           {/* long . gty v8 */}
           <div id="gty8" data-project="gty8" data-order-uix="6" className="cyril-grid-item fil-uix">
             <Link href="/gty_v8" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <GridVideo
-                    src="/img/portfolio/gty8_homepage_min.mp4"
-                    poster="/img/thumbs/portfolio/gty8_homepage_min-poster.webp"
-                    label="Grace to You (v.8) homepage preview"
-                  />
+                  <TileMedia slug="/gty_v8" />
                   <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
@@ -539,17 +378,32 @@ const PortfolioIsotope = () => {
             </Link>
           </div>
 
+          {/* wide . giving tuesday (looping video thumbnail) */}
+          <div id="givingtuesday" data-project="givingtuesday" data-order-uix="3" data-order-brand="1" className="cyril-grid-item fil-uix fil-marketing">
+            <Link href="/giving-tuesday" onClick={saveFilterOnNavigate}>
+              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
+                <div className="cyril-cover">
+                  <TileMedia slug="/giving-tuesday" />
+                  <h3>Case<br />Study</h3>
+                  <div className="cyril-hover-link">
+                    <i className="fas fa-link" />
+                  </div>
+                </div>
+                <div className="cyril-project-descr">
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Design, Development, &amp; Marketing Campaign Performance Tracking</p>
+                  <h4 className="cyril-up">Giving Tuesday Campaign</h4>
+                </div>
+              </div>
+            </Link>
+          </div>
+
           {/* wide . gty app (looping video thumbnail — Fig. 01 on its page) */}
           <div id="gtyapplanding" data-project="gtyapplanding" data-order-uix="5" className="cyril-grid-item fil-uix">
             <Link href="/gty-app-landing" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 {/* Cover sized to the video (640×488), so none of it is cropped. */}
                 <div className="cyril-cover" style={{ paddingBottom: `${(488 / 640) * 100}%` }}>
-                  <GridVideo
-                    src="/img/portfolio/gty-app-landing_min.mp4"
-                    poster="/img/thumbs/portfolio/gty-app-landing_min-poster.webp"
-                    label="GTY App Landing Page preview"
-                  />
+                  <TileMedia slug="/gty-app-landing" />
                   <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
@@ -563,39 +417,12 @@ const PortfolioIsotope = () => {
             </Link>
           </div>
 
-          {/* wide . 35-day generosity challenge (looping video thumbnail) */}
-          <div id="generositychallenge" data-project="generositychallenge" data-order-uix="8" data-order-brand="4" className="cyril-grid-item fil-uix fil-marketing">
-            <Link href="/35-day-generosity-challenge" onClick={saveFilterOnNavigate}>
-              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
-                <div className="cyril-cover">
-                  <GridVideo
-                    src="/img/portfolio/chf-35-day-generosity_preview-v2.mp4"
-                    poster="/img/thumbs/portfolio/chf-35-day-generosity_preview-v2-poster.webp"
-                    label="35-Day Generosity Challenge landing page preview"
-                  />
-                  <h3>Case<br />Study</h3>
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
-                </div>
-                <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Design &amp; Development</p>
-                  <h4 className="cyril-up">35-Day Generosity Challenge</h4>
-                </div>
-              </div>
-            </Link>
-          </div>
-
           {/* wide . volunteer leadership team (looping video thumbnail) */}
           <div id="volunteerleadership" data-project="volunteerleadership" data-order-uix="7" data-order-brand="6" className="cyril-grid-item fil-uix fil-marketing">
             <Link href="/volunteer-leadership-team" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <GridVideo
-                    src="/img/portfolio/chf-volunteer-leadership_preview.mp4"
-                    poster="/img/thumbs/portfolio/chf-volunteer-leadership_preview-poster.webp"
-                    label="Volunteer Leadership Team landing page preview"
-                  />
+                  <TileMedia slug="/volunteer-leadership-team" />
                   <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
@@ -609,66 +436,39 @@ const PortfolioIsotope = () => {
             </Link>
           </div>
 
-          {/* square . truth matters podcast */}
-          <div id="truthmatters" data-project="truthmatters" data-order-uix="10" data-order-brand="5" className="cyril-grid-item fil-branding fil-uix">
-            <Link href="/truth-matters" onClick={saveFilterOnNavigate}>
-              <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
-                <div className="cyril-cover truth-matters">
-                  {/* The brand's story (logo → YouTube → merchandise → Apple Podcasts →
-                      the website), crossfading like Grace Stream. */}
-                  <GridSlideshow
-                    label="Truth Matters Podcast brand, from logo to merchandise and the website"
-                    images={[
-                      "/img/portfolio/truth-matters_logo.jpg",
-                      "/img/portfolio/thumb_truth-matters-youtube-square.jpg",
-                      "/img/portfolio/truth-matters_merch-cap.jpg",
-                      "/img/portfolio/truth-matters_merch-stickers.jpg",
-                      "/img/portfolio/truth-matters_merch-mug.jpg",
-                      "/img/portfolio/thumb_truth-matters-podcast-2.jpg",
-                      "/img/portfolio/thumb_truth-matters-website-square.jpg",
-                    ]}
-                    interval={1250}
-                    fade={600}
-                  />
+          {/* wide . 35-day generosity challenge (looping video thumbnail) */}
+          <div id="generositychallenge" data-project="generositychallenge" data-order-uix="8" data-order-brand="4" className="cyril-grid-item fil-uix fil-marketing">
+            <Link href="/35-day-generosity-challenge" onClick={saveFilterOnNavigate}>
+              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
+                <div className="cyril-cover">
+                  <TileMedia slug="/35-day-generosity-challenge" />
                   <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
                   </div>
                 </div>
                 <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Design, Development, &amp; Branding</p>
-                  <h4 className="cyril-up">Truth Matters Podcast</h4>
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Design, Development, &amp; Marketing Campaign Performance Tracking</p>
+                  <h4 className="cyril-up">35-Day Generosity Challenge</h4>
                 </div>
               </div>
             </Link>
           </div>
 
-          {/* wide . gty dashboard */}
-          <div id="gtydashboard" data-project="gtydashboard" data-order-uix="9" className="cyril-grid-item fil-uix">
-            <Link href="/gty-dashboard" onClick={saveFilterOnNavigate}>
-              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
-                <div className="cyril-cover">
-                  <GridSlideshow
-                    label="GTY Dashboard screens"
-                    images={[
-                      "/img/portfolio/gty-dashboard-1b.jpg",
-                      "/img/portfolio/gty-dashboard-2a.jpg",
-                      "/img/portfolio/gty-dashboard-2b.jpg",
-                      "/img/portfolio/gty-dashboard-3.jpg",
-                      "/img/portfolio/gty-dashboard-4.jpg",
-                      "/img/portfolio/gty-dashboard-5.jpg",
-                    ]}
-                    interval={667}
-                    fade={600}
-                  />
+          {/* square . truth matters podcast */}
+          <div id="truthmatters" data-project="truthmatters" data-order-uix="10" data-order-brand="5" className="cyril-grid-item fil-branding fil-uix">
+            <Link href="/truth-matters" onClick={saveFilterOnNavigate}>
+              <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
+                <div className="cyril-cover truth-matters">
+                  <TileMedia slug="/truth-matters" />
                   <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
                   </div>
                 </div>
                 <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Design &amp; Development</p>
-                  <h4 className="cyril-up">GTY Dashboard</h4>
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Branding, Design, &amp; Development</p>
+                  <h4 className="cyril-up">Truth Matters Podcast</h4>
                 </div>
               </div>
             </Link>
@@ -679,12 +479,7 @@ const PortfolioIsotope = () => {
             <Link href="/gty-blog-graphics" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <GridSlideshow
-                    label="GTY blog graphics"
-                    images={BLOG_SLIDES}
-                    interval={667}
-                    fade={600}
-                  />
+                  <TileMedia slug="/gty-blog-graphics" />
                   <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
@@ -698,17 +493,31 @@ const PortfolioIsotope = () => {
             </Link>
           </div>
 
+          {/* wide . gty dashboard */}
+          <div id="gtydashboard" data-project="gtydashboard" data-order-uix="9" className="cyril-grid-item fil-uix">
+            <Link href="/gty-dashboard" onClick={saveFilterOnNavigate}>
+              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
+                <div className="cyril-cover">
+                  <TileMedia slug="/gty-dashboard" />
+                  <h3>Case<br />Study</h3>
+                  <div className="cyril-hover-link">
+                    <i className="fas fa-link" />
+                  </div>
+                </div>
+                <div className="cyril-project-descr">
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Design &amp; Development</p>
+                  <h4 className="cyril-up">GTY Dashboard</h4>
+                </div>
+              </div>
+            </Link>
+          </div>
+
           {/* square . social media graphics */}
           <div id="gtysocialmedia" data-project="gtysocialmedia" data-order-brand="7" className="cyril-grid-item fil-marketing">
             <Link href="/gty-social-media-graphics" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <GridSlideshow
-                    label="GTY social media graphics"
-                    images={SOCIAL_SLIDES}
-                    interval={667}
-                    fade={600}
-                  />
+                  <TileMedia slug="/gty-social-media-graphics" />
                   <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
@@ -722,17 +531,31 @@ const PortfolioIsotope = () => {
             </Link>
           </div>
 
+          {/* wide . the study bible app */}
+          <div id="thestudybibleapp" data-project="thestudybibleapp" data-order-uix="11" className="cyril-grid-item fil-uix">
+            <Link href="/the-study-bible-app" onClick={saveFilterOnNavigate}>
+              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
+                <div className="cyril-cover">
+                  <TileMedia slug="/the-study-bible-app" />
+                  <h3>Case<br />Study</h3>
+                  <div className="cyril-hover-link">
+                    <i className="fas fa-link" />
+                  </div>
+                </div>
+                <div className="cyril-project-descr">
+                  <p className="cyril-upper cyril-accent cyril-mb-10">App Design &amp; Prototyping</p>
+                  <h4 className="cyril-up">The Study Bible App</h4>
+                </div>
+              </div>
+            </Link>
+          </div>
+
           {/* wide . gty resources */}
           <div id="gtyresources" data-project="gtyresources" data-order-brand="9" className="cyril-grid-item fil-marketing">
             <Link href="/gty-resources" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <GridSlideshow
-                    label="GTY resource graphics"
-                    images={RESOURCE_BANNERS}
-                    interval={667}
-                    fade={600}
-                  />
+                  <TileMedia slug="/gty-resources" />
                   <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
@@ -746,20 +569,19 @@ const PortfolioIsotope = () => {
             </Link>
           </div>
 
-          {/* wide . the study bible app */}
-          <div id="thestudybibleapp" data-project="thestudybibleapp" data-order-uix="11" className="cyril-grid-item fil-uix">
-            <Link href="/the-study-bible-app" onClick={saveFilterOnNavigate}>
-              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
+          {/* long . sekihmentis */}
+          <div id="sekihmentis" data-project="sekihmentis" data-order-brand="12" className="cyril-grid-item fil-illustration">
+            <Link href="/sekihmentis" onClick={saveFilterOnNavigate}>
+              <div className="cyril-portfolio-item cyril-long-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <img {...imageProps("/img/portfolio/thumb_the-study-bible-app.jpg", SIZES_HINT.gridTile)} alt="Thumb - The Study Bible App" loading="lazy" decoding="async" />
-                  <h3>Case<br />Study</h3>
+                  <TileMedia slug="/sekihmentis" />
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
                   </div>
                 </div>
                 <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">App Design</p>
-                  <h4 className="cyril-up">The Study Bible App</h4>
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Illustration</p>
+                  <h4 className="cyril-up">SekihMentis</h4>
                 </div>
               </div>
             </Link>
@@ -770,18 +592,7 @@ const PortfolioIsotope = () => {
             <Link href="/the-study-bible-app-logo" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
-                  {/* The logo's story (iterations → final logo → on the phone),
-                      crossfading like Grace Stream. */}
-                  <GridSlideshow
-                    label="The Study Bible App logo, from iterations to the app"
-                    images={[
-                      "/img/portfolio/thumb_study-bible-iterations-square.jpg",
-                      "/img/portfolio/thumb_study-bible-logo-square.jpg",
-                      "/img/portfolio/thumb_study-bible-app-logo-2.jpg",
-                    ]}
-                    interval={1250}
-                    fade={600}
-                  />
+                  <TileMedia slug="/the-study-bible-app-logo" />
                   <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
@@ -795,46 +606,12 @@ const PortfolioIsotope = () => {
             </Link>
           </div>
 
-          {/* long . sekihmentis */}
-          <div id="sekihmentis" data-project="sekihmentis" data-order-brand="12" className="cyril-grid-item fil-illustration">
-            <Link href="/sekihmentis" onClick={saveFilterOnNavigate}>
-              <div className="cyril-portfolio-item cyril-long-item cyril-mb-80">
-                <div className="cyril-cover">
-                  <span className="cyril-ken-burns"><img {...imageProps("/img/portfolio/thumb_sekihmentis.jpg", SIZES_HINT.gridTile)} alt="Thumb - SekihMentis" loading="lazy" decoding="async" /></span>
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
-                </div>
-                <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Illustration</p>
-                  <h4 className="cyril-up">SekihMentis</h4>
-                </div>
-              </div>
-            </Link>
-          </div>
-
           {/* square . patricia macarthur */}
           <div id="patriciamacarthur" data-project="patriciamacarthur" data-order-brand="11" className="cyril-grid-item fil-branding fil-illustration">
             <Link href="/patricia-macarthur-pastoral-care-fund" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
-                  {/* The identity's versions and care items, dark and light
-                      alternating, ending on the logo presentation; crossfading like
-                      Grace Stream. */}
-                  <GridSlideshow
-                    label="The Patricia MacArthur Pastoral Care Fund logo versions, care items and presentation"
-                    images={[
-                      "/img/portfolio/thumb_patricia-macarthur-pastoral-fund.jpg",
-                      "/img/portfolio/patricia-macarthur_merch-card.jpg",
-                      "/img/portfolio/thumb_patricia-macarthur-portrait-square.jpg",
-                      "/img/portfolio/patricia-macarthur_merch-care-box.jpg",
-                      "/img/portfolio/thumb_patricia-macarthur-light-square.jpg",
-                      "/img/portfolio/patricia-macarthur_merch-tote.jpg",
-                      "/img/portfolio/thumb_patricia-macarthur-presentation-square.jpg",
-                    ]}
-                    interval={1250}
-                    fade={600}
-                  />
+                  <TileMedia slug="/patricia-macarthur-pastoral-care-fund" />
                   <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
@@ -853,7 +630,7 @@ const PortfolioIsotope = () => {
             <Link href="/he-took-my-place" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <span className="cyril-ken-burns"><img {...imageProps("/img/portfolio/thumb_he-took-my-place.jpg", SIZES_HINT.gridTile)} alt="Thumb - He Took My Place" loading="lazy" decoding="async" /></span>
+                  <TileMedia slug="/he-took-my-place" />
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
                   </div>

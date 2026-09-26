@@ -205,7 +205,6 @@ const Page = () => {
             href="/sekihmentis"
             title="SekihMentis"
             category="Illustration"
-            image="/img/portfolio/main_sekihmentis.jpg"
             onBack={handleBackToPortfolio}
           />
 

@@ -119,7 +119,7 @@ const Page = () => {
         <div className="cyril-page cyril-project-page cyril-case-page">
 
           <CaseHero
-            category="Design, Development, & Branding"
+            category="Branding, Design, & Development"
             detail="24/7 Broadcast Platform"
             title="Grace Stream"
             summary="Designing and building Grace to You's 24/7 online broadcasting platform—a digital space where truth can stream 24/7 and people can tune in without distraction."
@@ -227,7 +227,6 @@ const Page = () => {
             href="/gty_v9"
             title="Grace to You"
             category="UX Design"
-            image="/img/portfolio/main_gty9.png"
             onBack={handleBackToPortfolio}
           />
 

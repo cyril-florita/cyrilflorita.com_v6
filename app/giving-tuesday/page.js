@@ -59,7 +59,7 @@ const Page = () => {
         <div className="cyril-page cyril-project-page cyril-case-page">
 
           <CaseHero
-            category="Design & Development"
+            category="Design, Development, & Marketing Campaign Performance Tracking"
             detail="Campaign Landing Page"
             title="Giving Tuesday Campaign"
             summary="A single-purpose donation page for Children's Hunger Fund's biggest giving day of the year: rebuilt for conversion, re-engineered overnight for a corporate match, and run live, hour by hour."
@@ -150,7 +150,6 @@ const Page = () => {
             href="/gty-app-landing"
             title="GTY App Landing Page"
             category="Design & Development"
-            image="/img/portfolio/thumb_gty-app-landing.jpg"
             onBack={handleBackToPortfolio}
           />
 

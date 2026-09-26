@@ -61,7 +61,7 @@ const Page = () => {
         <div className="cyril-page cyril-project-page cyril-case-page">
 
           <CaseHero
-            category="App Design"
+            category="App Design & Prototyping"
             detail="Mobile & Tablet"
             title="The Study Bible App"
             summary="Leading the redesign of The Study Bible app to address the legacy app's critical usability issues with an experience that's simple, clean, yet delightful."
@@ -156,7 +156,6 @@ const Page = () => {
             href="/the-study-bible-app-logo"
             title="The Study Bible App Logo"
             category="Branding"
-            image="/img/portfolio/main_the-study-bible-app-logo.jpg"
             onBack={handleBackToPortfolio}
           />
 

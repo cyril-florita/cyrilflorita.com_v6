@@ -166,7 +166,6 @@ const Page = () => {
             href="/gty-social-media-graphics"
             title="GTY Social Media Graphics"
             category="Marketing"
-            image="/img/portfolio/thumb_gty-social-media.jpg"
             onBack={handleBackToPortfolio}
           />
 
