@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
+import { scrambleText } from "@/public/utility/index";
 
 // The preloader doubles as the page-transition panel:
 // - First paint: it's part of the static HTML, so it already covers the page
@@ -61,15 +62,32 @@ const Preloader = () => {
     let timers = [];
     const later = (fn, ms) => timers.push(window.setTimeout(fn, ms));
     const clearTimers = () => { timers.forEach(clearTimeout); timers = []; };
+    // "Cyril" scrambles through random letters, like the subheaders, and
+    // keeps re-scrambling for as long as the panel is showing (first load
+    // and every wipe). Each pass settles back to "Cyril" before the next, so
+    // stopping never leaves it garbled. Not under reduced motion.
+    const mark = el.querySelector('.cyril-preloader-mark strong');
+    const SCRAMBLE_MS = 700;
+    const SCRAMBLE_EVERY_MS = 1000; // one pass + a beat on the real word
+    let scrambleTimer = null;
+    const stopMark = () => { clearInterval(scrambleTimer); scrambleTimer = null; };
+    const scrambleMark = () => {
+      if (!mark || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      stopMark();
+      scrambleText(mark, SCRAMBLE_MS);
+      scrambleTimer = setInterval(() => scrambleText(mark, SCRAMBLE_MS), SCRAMBLE_EVERY_MS);
+    };
 
     const hide = () => {
       clearTimers();
+      stopMark();
       el.classList.add('cyril-preloader-hidden');
       preloaderState.hidden = true;
       window.dispatchEvent(new CustomEvent(HIDDEN_EVENT));
     };
 
     // First load.
+    scrambleMark();
     const scheduleHide = () => later(hide, MIN_DISPLAY_MS);
     if (document.readyState === 'complete') scheduleHide();
     else window.addEventListener('load', scheduleHide, { once: true });
@@ -84,6 +102,7 @@ const Preloader = () => {
       el.classList.add('cyril-preloader-below');
       void el.offsetHeight;
       el.classList.remove('cyril-preloader-below');
+      scrambleMark();
       later(() => {
         e.detail.go();
         // Client-side route changes keep this component mounted; reveal the
@@ -103,6 +122,7 @@ const Preloader = () => {
     window.addEventListener('pageshow', onPageShow);
     return () => {
       clearTimers();
+      stopMark();
       window.removeEventListener('load', scheduleHide);
       window.removeEventListener(WIPE_EVENT, onWipe);
       window.removeEventListener('pageshow', onPageShow);
