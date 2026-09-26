@@ -522,8 +522,8 @@ const PortfolioIsotope = () => {
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
                   <GridVideo
-                    src="/img/portfolio/gty8_homepage.mp4"
-                    poster="/img/thumbs/portfolio/gty8_homepage-poster.webp"
+                    src="/img/portfolio/gty8_homepage_min.mp4"
+                    poster="/img/thumbs/portfolio/gty8_homepage_min-poster.webp"
                     label="Grace to You (v.8) homepage preview"
                   />
                   <h3>Case<br />Study</h3>
@@ -546,8 +546,8 @@ const PortfolioIsotope = () => {
                 {/* Cover sized to the video (640×488), so none of it is cropped. */}
                 <div className="cyril-cover" style={{ paddingBottom: `${(488 / 640) * 100}%` }}>
                   <GridVideo
-                    src="/img/portfolio/gty-app-landing.mp4"
-                    poster="/img/thumbs/portfolio/gty-app-landing-poster.webp"
+                    src="/img/portfolio/gty-app-landing_min.mp4"
+                    poster="/img/thumbs/portfolio/gty-app-landing_min-poster.webp"
                     label="GTY App Landing Page preview"
                   />
                   <h3>Case<br />Study</h3>

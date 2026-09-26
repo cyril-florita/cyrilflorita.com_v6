@@ -30,3 +30,6 @@ next-env.d.ts
 node_modules/
 # Staging folder for new portfolio materials (originals; optimized copies live in public/img/portfolio)
 new-work/
+
+# Sass source map (style.css is compiled with --no-source-map)
+public/scss/style.css.map

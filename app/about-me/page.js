@@ -23,6 +23,10 @@ const AboutMe = () => {
     <SiteLayout header={0}>
 
       <div className="cyril-onepage">
+        {/* The page's main heading for screen readers and search engines —
+            the visible section titles (About Me, Experience, …) are <h2>s,
+            which the title and reveal animations target. */}
+        <h1 className="cyril-sr-only">About Cyril Florita</h1>
 
         {/* 02 background */}
         <Background />

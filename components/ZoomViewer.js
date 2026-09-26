@@ -128,7 +128,9 @@ const ZoomViewer = () => {
   // scale/x/y = the zoom transform; base = the image's unzoomed rect.
   const zoom = useRef({ scale: 1, x: 0, y: 0, base: null });
   const viewRef = useRef(null);
-  viewRef.current = view;
+  // Keep the latest view readable from event handlers (set after each render,
+  // before any handler can run).
+  useLayoutEffect(() => { viewRef.current = view; });
   const currentHref = useRef(null);
 
   const hideThumb = (item) => {

@@ -87,7 +87,7 @@ const USAGE = [
   { ok: false, label: "Place the black logo over busy imagery.", visual: <div className="cyril-brand-onphoto" style={{ backgroundImage: `url(${thumbFor(ARTWORK)})` }}>{art(LOGO)}</div> },
 ];
 
-const page = () => {
+const Page = () => {
 
   const router = useRouter();
 
@@ -125,7 +125,7 @@ const page = () => {
         <div className="cyril-page cyril-project-page cyril-case-page">
 
           <CaseHero
-            category="Branding/UI/UX/Web"
+            category="Design, Development, & Branding"
             detail="Podcast Brand & Website"
             title="Truth Matters Podcast"
             summary="Creating the brand, UX/UI design, and website for Grace to You's Truth Matters Podcast—a digital experience as grounded and compelling as the content itself."
@@ -245,4 +245,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

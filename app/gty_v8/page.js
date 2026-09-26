@@ -29,7 +29,7 @@ const SECTIONS = [
   { id: "reflection", label: "Reflection" },
 ];
 
-const page = () => {
+const Page = () => {
 
   const router = useRouter();
 
@@ -78,7 +78,7 @@ const page = () => {
               { label: "Team", value: "Digital Platforms Coordinator, Software Engineer, Software Developer" },
               { label: "Tools", value: "Visual Studio Code, Google's Material Design System, HandlebarsJS" },
             ]}
-            video="/img/portfolio/gty8_homepage.mp4"
+            video="/img/portfolio/gty8_homepage_min.mp4"
             imageAlt="Grace to You (v.8)"
           />
 
@@ -261,7 +261,7 @@ const page = () => {
               <ul className="cyril-case-list">
                 <li>I then tackled the homepage, about pages, resource pages, giving pages, the store, product pages, checkout page, and account pages.</li>
               </ul>
-              <CaseVideo src="/img/portfolio/gty8_homepage.mp4" caption="Homepage" url="gty.org" />
+              <CaseVideo src="/img/portfolio/gty8_homepage_min.mp4" caption="Homepage" url="gty.org" />
               <CaseVideo src="/img/portfolio/gty8_about.mp4" caption="About Pages" url="gty.org" />
               <CaseVideo src="/img/portfolio/gty8_resources.mp4" caption="Resource Pages" url="gty.org" />
               <CaseVideo src="/img/portfolio/gty8_giving.mp4" caption="Giving Pages" url="gty.org" />
@@ -397,4 +397,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

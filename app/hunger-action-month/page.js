@@ -29,7 +29,7 @@ const SECTIONS = [
   { id: "impact", label: "Impact" },
 ];
 
-const page = () => {
+const Page = () => {
 
   const router = useRouter();
 
@@ -174,7 +174,7 @@ const page = () => {
           <CaseNext
             href="/grace-stream"
             title="Grace Stream"
-            category="Branding/UI/UX/Web"
+            category="Design, Development, & Branding"
             image="/img/portfolio/main_grace-stream.jpg"
             onBack={handleBackToPortfolio}
           />
@@ -185,4 +185,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

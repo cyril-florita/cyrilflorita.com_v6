@@ -26,7 +26,7 @@ const SECTIONS = [
 
 const P = "/img/portfolio/gty-resource_";
 
-const page = () => {
+const Page = () => {
 
   const router = useRouter();
 
@@ -190,4 +190,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

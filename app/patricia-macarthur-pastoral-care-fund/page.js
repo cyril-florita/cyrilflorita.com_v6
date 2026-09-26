@@ -72,7 +72,7 @@ const USAGE = [
   { ok: false, label: "Place it over busy photography.", visual: <div className="cyril-brand-onphoto" style={{ backgroundImage: `url(${thumbFor(PRESENTATION)})` }}><img src={thumbFor(LOGO_LIGHT)} alt="" loading="lazy" decoding="async" /></div> },
 ];
 
-const page = () => {
+const Page = () => {
 
   const router = useRouter();
 
@@ -110,7 +110,7 @@ const page = () => {
         <div className="cyril-page cyril-project-page cyril-case-page">
 
           <CaseHero
-            category="Illustration/Branding"
+            category="Branding"
             detail="Logo Design"
             title="The Patricia MacArthur Pastoral Care Fund"
             summary="A logo for the Patricia MacArthur Pastoral Care Fund, designed as a visual identity that feels both personal and nurturing, reflecting the fund's mission."
@@ -215,4 +215,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

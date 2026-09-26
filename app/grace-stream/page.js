@@ -81,7 +81,7 @@ const USAGE = [
   { ok: false, label: "Put the white-ground artwork on a dark background.", visual: <div className="cyril-brand-onblack">{art(LOGO)}</div> },
 ];
 
-const page = () => {
+const Page = () => {
 
   const router = useRouter();
 
@@ -119,7 +119,7 @@ const page = () => {
         <div className="cyril-page cyril-project-page cyril-case-page">
 
           <CaseHero
-            category="Branding/UI/UX/Web"
+            category="Design, Development, & Branding"
             detail="24/7 Broadcast Platform"
             title="Grace Stream"
             summary="Designing and building Grace to You's 24/7 online broadcasting platform—a digital space where truth can stream 24/7 and people can tune in without distraction."
@@ -237,4 +237,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

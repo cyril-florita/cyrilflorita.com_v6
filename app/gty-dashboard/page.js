@@ -39,7 +39,7 @@ const COLORS = [
   { name: "Data Green", hex: "#1CF783", rgb: "28 247 131", role: "Active users, mobile share and The Study Bible app." },
 ];
 
-const page = () => {
+const Page = () => {
 
   const router = useRouter();
 
@@ -77,7 +77,7 @@ const page = () => {
         <div className="cyril-page cyril-project-page cyril-case-page">
 
           <CaseHero
-            category="UI Design & Front-End"
+            category="Design & Development"
             detail="TV Dashboard"
             title="GTY Dashboard"
             summary="A TV-optimized dashboard interface for the Grace to You office that cycles through weather updates, streaming activity, broadcast schedules, live website stats, global engagement, and ministry activities in a format easy to read from a distance."
@@ -174,4 +174,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

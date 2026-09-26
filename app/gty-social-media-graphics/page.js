@@ -42,7 +42,7 @@ const FEATURED = {
 const SHOWN = new Set(Object.values(FEATURED).flat().map((id) => `social-${id}`));
 const COLLECTION = SOCIAL_GRAPHICS.filter((g) => !SHOWN.has(g.id));
 
-const page = () => {
+const Page = () => {
 
   const router = useRouter();
 
@@ -163,4 +163,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

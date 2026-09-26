@@ -39,7 +39,7 @@ const Shot = ({ box, caption }) => (
   </figure>
 );
 
-const page = () => {
+const Page = () => {
 
   const router = useRouter();
 
@@ -77,7 +77,7 @@ const page = () => {
         <div className="cyril-page cyril-project-page cyril-case-page">
 
           <CaseHero
-            category="Web Design & Front-End"
+            category="Design & Development"
             detail="Landing Page"
             title="GTY App Landing Page"
             summary="Improving the user experience of the Grace to You App landing page to create a more engaging, informative, and user-friendly experience that encourages users to download and utilize the app."
@@ -95,7 +95,7 @@ const page = () => {
             {/* 01 — Overview */}
             <CaseSection id="overview" number={1} title="Project Overview">
               <p>As a designer and developer at Grace to You, I was tasked with improving the user experience of the Grace to You App landing page. The goal was to create a more engaging, informative, and user-friendly experience, encouraging users to download and utilize the app.</p>
-              <CaseVideo url="gty.org" src="/img/portfolio/gty-app-landing.mp4" caption="GTY App Landing Page" />
+              <CaseVideo url="gty.org" src="/img/portfolio/gty-app-landing_min.mp4" caption="GTY App Landing Page" />
             </CaseSection>
 
             {/* 02 — Initial Assessment */}
@@ -178,4 +178,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

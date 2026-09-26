@@ -12,7 +12,7 @@ Cyril Florita's personal portfolio site — a statically-exported Next.js (App R
 npm run dev      # next dev — local dev server
 npm run build    # prebuild (thumbs + og) then next build — produces the static export in out/
 npm run start    # next start (rarely useful since the site is statically exported)
-npm run lint     # next lint
+npm run lint     # eslint (flat config in eslint.config.mjs — `next lint` no longer exists); `npm run lint:fix` autofixes
 npm run deploy   # npm run build && node deploy.js — builds (incl. prebuild), then SFTP-uploads out/ using SFTP_HOST/SFTP_PORT/SFTP_USERNAME/SFTP_PASSWORD from .env. `node deploy.js` alone only uploads the existing out/
 npm run thumbs   # WebP thumbnails + size manifest for public/img/portfolio
 npm run og       # 1200×630 share images (public/og/) + app icons

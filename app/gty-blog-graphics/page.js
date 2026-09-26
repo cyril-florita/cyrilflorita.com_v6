@@ -45,7 +45,7 @@ const FEATURED = {
 const SHOWN = new Set(["a-church-not-forsaken", ...Object.values(FEATURED).flat()].map((id) => `blog-${id}`));
 const COLLECTION = BLOG_GRAPHICS.filter((g) => !SHOWN.has(g.id));
 
-const page = () => {
+const Page = () => {
 
   const router = useRouter();
 
@@ -176,4 +176,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

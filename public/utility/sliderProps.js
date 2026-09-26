@@ -7,6 +7,7 @@ import {
   Pagination,
   Parallax,
 } from "swiper/modules";
+// eslint-disable-next-line react-hooks/rules-of-hooks -- Swiper module registration, not a React hook
 SwiperCore.use([Pagination, Navigation, EffectFade, Autoplay, Grid, Parallax]);
 export const sliderProps = {
   reviewsSlider: {

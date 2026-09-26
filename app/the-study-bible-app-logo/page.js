@@ -77,7 +77,7 @@ const USAGE = [
   { ok: false, label: "Place it over busy imagery.", visual: <div className="cyril-brand-onphoto" style={{ backgroundImage: `url(${thumbFor(HOMEPAGE)})` }}>{art()}</div> },
 ];
 
-const page = () => {
+const Page = () => {
 
   const router = useRouter();
 
@@ -213,7 +213,7 @@ const page = () => {
           <CaseNext
             href="/patricia-macarthur-pastoral-care-fund"
             title="The Patricia MacArthur Pastoral Care Fund"
-            category="Illustration/Branding"
+            category="Branding"
             image="/img/portfolio/thumb_patricia-macarthur-pastoral-fund.jpg"
             onBack={handleBackToPortfolio}
           />
@@ -224,4 +224,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

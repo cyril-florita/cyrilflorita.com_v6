@@ -26,7 +26,7 @@ const SECTIONS = [
   { id: "impact", label: "Impact" },
 ];
 
-const page = () => {
+const Page = () => {
 
   const router = useRouter();
 
@@ -149,7 +149,7 @@ const page = () => {
           <CaseNext
             href="/gty-app-landing"
             title="GTY App Landing Page"
-            category="Web Design & Front-End"
+            category="Design & Development"
             image="/img/portfolio/thumb_gty-app-landing.jpg"
             onBack={handleBackToPortfolio}
           />
@@ -160,4 +160,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
