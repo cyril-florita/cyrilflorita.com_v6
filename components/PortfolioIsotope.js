@@ -203,9 +203,33 @@ const PortfolioIsotope = () => {
     document.fonts?.ready.then(relayout);
     document.fonts?.addEventListener?.("loadingdone", relayout);
 
+    // Safety nets — iOS Safari was still seen leaving titles overlapping the
+    // next tile on first load despite the observer above. Re-lay out once the
+    // page has fully loaded and when any tile's media loads, and for the
+    // first 10s compare every tile's height twice a second, re-laying out if
+    // anything changed.
+    window.addEventListener("load", relayout);
+    grid.addEventListener("load", relayout, true); // img/video load events don't bubble
+    grid.addEventListener("loadedmetadata", relayout, true);
+    const heights = () => Array.from(grid.querySelectorAll(".cyril-grid-item"), (el) => el.offsetHeight).join(",");
+    let lastHeights = heights();
+    let checks = 0;
+    const heightCheck = setInterval(() => {
+      const now = heights();
+      if (now !== lastHeights) {
+        lastHeights = now;
+        relayout();
+      }
+      if (++checks >= 20) clearInterval(heightCheck);
+    }, 500);
+
     // Cleanup
     return () => {
       resizeObserver?.disconnect();
+      clearInterval(heightCheck);
+      window.removeEventListener("load", relayout);
+      grid.removeEventListener("load", relayout, true);
+      grid.removeEventListener("loadedmetadata", relayout, true);
       document.fonts?.removeEventListener?.("loadingdone", relayout);
       if (relayoutFrame) cancelAnimationFrame(relayoutFrame);
       if (isotope.current) {
