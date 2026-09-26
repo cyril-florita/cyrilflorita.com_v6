@@ -172,10 +172,10 @@ const page = () => {
           </CaseLayout>
 
           <CaseNext
-            href="/gty_v8"
-            title="GTY Website, v.8"
-            category="UX Design & Web Development"
-            image="/img/portfolio/main_gty8.png"
+            href="/grace-stream"
+            title="Grace Stream"
+            category="Branding/UI/UX/Web"
+            image="/img/portfolio/main_grace-stream.jpg"
             onBack={handleBackToPortfolio}
           />
 

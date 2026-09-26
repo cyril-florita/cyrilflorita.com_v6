@@ -30,6 +30,7 @@ const SECTIONS = [
   { id: "color", label: "Color" },
   { id: "typography", label: "Typography" },
   { id: "usage", label: "Usage" },
+  { id: "merchandise", label: "Merchandise" },
   { id: "graphics", label: "Graphics & Media" },
   { id: "ux-web", label: "UX & Web" },
   { id: "reflection", label: "Reflection" },
@@ -187,8 +188,21 @@ const page = () => {
               <BrandUsage items={USAGE} />
             </CaseSection>
 
-            {/* 07 — Graphics & Supporting Media */}
-            <CaseSection id="graphics" number={7} title="Graphics &amp; Supporting Media">
+            {/* 07 — Merchandise */}
+            <CaseSection id="merchandise" number={7} title="Merchandise">
+              <p>A speech bubble with the name cut out of it is built to be worn and shared, so I carried the identity onto merchandise concepts: a cap, a mug, stickers, and a T-shirt. The solid black mark prints cleanly at any size, from a sticker on a laptop to the front of a shirt, and reads instantly as the show.</p>
+              <CaseGrid layout="two">
+                <CaseFigure src="/img/portfolio/truth-matters_merch-cap.jpg" alt="Truth Matters cap" caption="Cap" />
+                <CaseFigure src="/img/portfolio/truth-matters_merch-mug.jpg" alt="Truth Matters mug" caption="Mug" />
+              </CaseGrid>
+              <CaseGrid layout="two">
+                <CaseFigure src="/img/portfolio/truth-matters_merch-stickers.jpg" alt="Truth Matters stickers" caption="Stickers" />
+                <CaseFigure src="/img/portfolio/truth-matters_merch-t-shirt.jpg" alt="Truth Matters T-shirt" caption="T-Shirt" />
+              </CaseGrid>
+            </CaseSection>
+
+            {/* 08 — Graphics & Supporting Media */}
+            <CaseSection id="graphics" number={8} title="Graphics &amp; Supporting Media">
               <p>Each podcast episode has its own hero product/imagery and thematic layout, designed to reflect the subject matter while staying true to the brand system. I created all the assets in-house, including episode thumbnails, podcast artwork, website banners, and social share images. These were crafted to feel cohesive yet distinctive, giving each episode a unique identity within the larger Truth Matters Podcast brand.</p>
               <CaseGrid layout="two">
                 <CaseFigure src="/img/portfolio/truth-matters_youtube-thumb-1.jpg" alt="Truth Matters Podcast YouTube Thumb 1" caption="YouTube Thumbnail 1" />
@@ -201,15 +215,15 @@ const page = () => {
               <CaseFigure src="/img/portfolio/truth-matters_apple-podacast.png" alt="Truth Matters Apple Podcast" caption="Apple Podcast" ratio="3 / 4" size="text" />
             </CaseSection>
 
-            {/* 08 — UX Design, Web Development, & Podcast Integration */}
-            <CaseSection id="ux-web" number={8} title="UX Design, Web Development, &amp; Podcast Integration">
+            {/* 09 — UX Design, Web Development, & Podcast Integration */}
+            <CaseSection id="ux-web" number={9} title="UX Design, Web Development, &amp; Podcast Integration">
               <p>The user journey was my next focus. With leadership from the Digital Platforms Director and collaboration with the Senior Software Architect, I developed the site using WordPress for a more practical content publication and management. I designed the site to be clean, minimal, content-first, and easy to navigate. It's built with a focus on SEO and accessibility, ensuring that the podcast is easily discoverable, playable, and engaging for all audiences. I kept the UI minimal so the podcast episodes and visuals could shine. There's the ability for the user to engage by leaving a comment or sharing the episode on social media. I also built a fully responsive experience that works seamlessly on mobile—because I knew a lot of listeners would be discovering this on the go.</p>
               <p>The homepage showcases the most recent episodes with a global media player for immediate listening/watching, and one that does not get interrupted while trying to navigate the website. The media player keeps visitors focused on the main task of consuming great content. Anywhere in the site, there is the straightforward access to episodes, with a sidebar menu and clear CTAs &#40;&ldquo;Listen/Play,&rdquo; &ldquo;Share,&rdquo; and &ldquo;Subscribe&rdquo;&#41;.</p>
               <CaseFigure src="/img/portfolio/truth-matters_website.png" alt="Truth Matters Podcast Website" caption="Website" ratio="3 / 4" size="text" />
             </CaseSection>
 
-            {/* 09 — Reflection */}
-            <CaseSection id="reflection" number={9} title="Reflection">
+            {/* 10 — Reflection */}
+            <CaseSection id="reflection" number={10} title="Reflection">
               <p>As the Product Designer & Web Developer behind the Truth Matters Podcast, I embraced the challenge of creating a digital experience that felt as grounded and compelling as the content itself. My goal was to ensure every touchpoint&mdash;from the logo to the episode pages—told a consistent story, uniting branding, UX/UI design, and front-end development into a cohesive whole.</p>
               <p>In crafting the brand's visual identity, I leaned into a casual, yet theologically serious, thoughtful, and grounded in biblical truth tone. The minimal yet strong logo, paired with a muted, sophisticated color palette &#40;deep charcoal, soft neutrals&#41;, reinforced clarity and conviction. I selected sharp, readable fonts that convey authority without being loud, ensuring that the design echoed both the podcast's purpose and Grace to You's style guidelines.</p>
               <p>On the UX and development front, I designed a clean, minimal, content-first interface built on WordPress with a focus on SEO and accessibility. I implemented a global media player that doesn't interrupt playback when navigating, along with clear CTAs &#40;&ldquo;Listen/Play,&rdquo; &ldquo;Share,&rdquo; and &ldquo;Subscribe&rdquo;&#41; and responsive layouts for seamless mobile discovery. This approach kept the audience engaged with the content and empowered them to interact, share, and subscribe without friction.</p>
@@ -218,10 +232,10 @@ const page = () => {
           </CaseLayout>
 
           <CaseNext
-            href="/grace-stream"
-            title="Grace Stream"
-            category="Branding/UI/UX/Web"
-            image="/img/portfolio/main_grace-stream.jpg"
+            href="/volunteer-leadership-team"
+            title="Volunteer Leadership Team"
+            category="Design & Development"
+            image="/img/portfolio/chf-volunteer-leadership_main.jpg"
             onBack={handleBackToPortfolio}
           />
 

@@ -10,6 +10,7 @@ import {
   CaseLayout,
   CaseSection,
   CaseFigure,
+  CaseGrid,
   CaseQuote,
   CaseNext,
 } from "@/components/case/CaseStudy";
@@ -29,6 +30,7 @@ const SECTIONS = [
   { id: "color", label: "Color" },
   { id: "lettering", label: "Lettering" },
   { id: "usage", label: "Usage" },
+  { id: "stationery-and-care", label: "Stationery & Care" },
   { id: "outcome", label: "Outcome" },
 ];
 
@@ -174,8 +176,22 @@ const page = () => {
               <BrandUsage items={USAGE} />
             </CaseSection>
 
-            {/* 08 — Outcome */}
-            <CaseSection id="outcome" number={8} title="Outcome and Reflection">
+            {/* 08 — Stationery & Care Items */}
+            <CaseSection id="stationery-and-care" number={8} title="Stationery &amp; Care Items">
+              <p>A pastoral care fund is felt most through a note, a gift, or a care package, so I extended the identity onto the pieces that carry that care: note cards sealed in wax, stationery, a care box, a mug, and a tote. These concepts set the full-color emblem on warm paper, kraft, and natural canvas, with the poppies echoed in real flowers, so every piece feels personal, gentle, and handmade.</p>
+              <CaseFigure src="/img/portfolio/patricia-macarthur_merch-stationery.jpg" alt="Patricia MacArthur Pastoral Care Fund stationery set" caption="Stationery" />
+              <CaseGrid layout="two">
+                <CaseFigure src="/img/portfolio/patricia-macarthur_merch-card.jpg" alt="Patricia MacArthur Pastoral Care Fund note card" caption="Note Card" />
+                <CaseFigure src="/img/portfolio/patricia-macarthur_merch-care-box.jpg" alt="Patricia MacArthur Pastoral Care Fund care box" caption="Care Box" />
+              </CaseGrid>
+              <CaseGrid layout="two">
+                <CaseFigure src="/img/portfolio/patricia-macarthur_merch-mug.jpg" alt="Patricia MacArthur Pastoral Care Fund mug" caption="Mug" />
+                <CaseFigure src="/img/portfolio/patricia-macarthur_merch-tote.jpg" alt="Patricia MacArthur Pastoral Care Fund tote bag" caption="Tote" />
+              </CaseGrid>
+            </CaseSection>
+
+            {/* 09 — Outcome */}
+            <CaseSection id="outcome" number={9} title="Outcome and Reflection">
               <CaseQuote>
                 The balance of modern minimalism and classic script ensures the design feels both contemporary and enduring.
               </CaseQuote>
@@ -186,10 +202,10 @@ const page = () => {
           </CaseLayout>
 
           <CaseNext
-            href="/gty-resources"
-            title="GTY Resources"
-            category="Marketing"
-            image="/img/portfolio/thumb_gty-resources.jpg"
+            href="/sekihmentis"
+            title="SekihMentis"
+            category="Illustration"
+            image="/img/portfolio/main_sekihmentis.jpg"
             onBack={handleBackToPortfolio}
           />
 

@@ -30,6 +30,7 @@ const SECTIONS = [
   { id: "color", label: "Color" },
   { id: "typography", label: "Typography" },
   { id: "usage", label: "Usage" },
+  { id: "merchandise", label: "Merchandise" },
   { id: "ux-ui-design", label: "UX/UI Design" },
   { id: "web-development", label: "Development" },
   { id: "reflection", label: "Reflection" },
@@ -180,8 +181,21 @@ const page = () => {
               <BrandUsage items={USAGE} />
             </CaseSection>
 
-            {/* 07 — UX/UI Design */}
-            <CaseSection id="ux-ui-design" number={7} title="UX/UI Design">
+            {/* 07 — Merchandise */}
+            <CaseSection id="merchandise" number={7} title="Merchandise">
+              <p>To carry Grace Stream beyond the screen, I extended the identity onto merchandise concepts: a sweatshirt, a mug, a cap, and a tote. The roundel works as a simple print or patch in the brand&apos;s deep blue on light goods, and reverses to white on dark ones, so the same calm, whole mark holds up on fabric and ceramic as well as it does on a player.</p>
+              <CaseGrid layout="two">
+                <CaseFigure src="/img/portfolio/grace-stream_merch-sweatshirt.jpg" alt="Grace Stream sweatshirt" caption="Sweatshirt" />
+                <CaseFigure src="/img/portfolio/grace-stream_merch-mug.jpg" alt="Grace Stream mug" caption="Mug" />
+              </CaseGrid>
+              <CaseGrid layout="two">
+                <CaseFigure src="/img/portfolio/grace-stream_merch-cap.jpg" alt="Grace Stream cap" caption="Cap" />
+                <CaseFigure src="/img/portfolio/grace-stream_merch-tote.jpg" alt="Grace Stream tote bag" caption="Tote" />
+              </CaseGrid>
+            </CaseSection>
+
+            {/* 08 — UX/UI Design */}
+            <CaseSection id="ux-ui-design" number={8} title="UX/UI Design">
               <p>The user experience was all about minimizing friction. Even though this is a minimal page, every pixel was intentional. From the background textures to the soft lighting around the player module, I wanted the visuals to reinforce a sense of calm, focus, and trust. The background photo I picked captures the essence of the brand. I leaned into subtle gradients and soft neutrals, avoiding any overly trendy styles so that the experience stays classic and enduring, just like the content. It's a design that gets out of the way but still feels polished and complete. This page is about listening, not browsing.</p>
               <CaseQuote>
                 This page is about listening, not browsing.
@@ -190,8 +204,8 @@ const page = () => {
               <CaseFigure src="/img/portfolio/grace-stream_mobile-view.jpg" alt="Grace Stream Mobile View" caption="Mobile View" ratio="3 / 4" size="text" />
             </CaseSection>
 
-            {/* 08 — Web Development, & Integration of 24/7 Seamless Stream */}
-            <CaseSection id="web-development" number={8} title="Web Development &amp; Integration of 24/7 Seamless Stream">
+            {/* 09 — Web Development, & Integration of 24/7 Seamless Stream */}
+            <CaseSection id="web-development" number={9} title="Web Development &amp; Integration of 24/7 Seamless Stream">
               <p>This was a lean build, but a thoughtful one. Working with a Back-End Developer, I handled the front-end development, focusing on performance, responsiveness, and real-time functionality for the stream. We implemented logic to keep the stream information current, and made sure the media player behaves consistently across devices and browsers. Accessibility standards were a priority&mdash;every listener should have access, regardless of how they interact with the page.</p>
               <p>As both the front-end developer and product designer, I wanted to integrate this broadcast system in a way that felt completely native to the Grace to You ecosystem—visually, functionally, and technically. One of the key challenges in building Grace Stream was delivering a true 24/7 live audio experience—a never-ending loop of expository preaching that just works, no matter when a listener tunes in. That's where <a className="cyril-accent" target="_blank" href="https://radio.co"><strong>Radio.co</strong></a> came in. Radio.co provided the perfect backend infrastructure for this kind of continuous audio broadcast. Its reliability, scheduling features, and embeddable player gave us the foundation we needed for a &#8220;set-it-and-forget-it&#8221; style stream that still offers control over what content goes out and when.</p>
               <p>The Internet Ministry Coordinator, Digital Platforms Director, and I started by curating a looping playlist of John MacArthur's sermons&mdash;designed to play continuously, covering a wide range of books and topics, with carefully scheduled transitions and breaks. Using Radio.co's scheduling tools, we were able to set it up so the stream feels like a real-time broadcast, rather than a simple playlist.</p>
@@ -201,8 +215,8 @@ const page = () => {
               <p>Check out how <a className="cyril-accent" href="https://www.gty.org/listen/gracestream" target="_blank"><strong>Grace Stream</strong></a> offers continuous, scripture-rich content that's always available.</p>
             </CaseSection>
 
-            {/* 09 — Reflection */}
-            <CaseSection id="reflection" number={9} title="Reflection">
+            {/* 10 — Reflection */}
+            <CaseSection id="reflection" number={10} title="Reflection">
               <p>As the Product Designer & Web Developer for Grace Stream, I embraced the challenge of building a 24/7 online broadcasting platform that feels “quietly powerful”&mdash;not flashy or overdone, but a digital space where biblical truth streams without interruption and listeners can tune in without distraction. From the outset, I focused on delivering constant access to faithful Bible teaching, presented in a way that's clean, approachable, and timeless by crafting a minimal interface where every pixel was intentional, leveraging subtle gradients and soft neutrals to reinforce calm, focus, and trust—allowing the stream to take center stage and minimizing friction across devices and contexts.</p>
               <p>As a cross-functional partner to the Back-End Developer, Internet Ministry Coordinator, and Digital Platforms Director, I curated a looping playlist of John MacArthur's sermons and integrated a set-it-and-forget-it live audio experience via Radio.co, customizing the embeddable player to match the GTY design language and dynamically update the “Now Playing” info. Grace Stream reinforced that effective product design isn't just about UI polish but about orchestrating technology, content, and mission-aligned strategy to deliver an experience that just works anytime, anywhere.</p>
             </CaseSection>
@@ -210,10 +224,10 @@ const page = () => {
           </CaseLayout>
 
           <CaseNext
-            href="/gty-app-landing"
-            title="GTY App Landing Page"
-            category="Web Design & Front-End"
-            image="/img/portfolio/thumb_gty-app-landing.jpg"
+            href="/gty_v9"
+            title="Grace to You"
+            category="UX Design"
+            image="/img/portfolio/main_gty9.png"
             onBack={handleBackToPortfolio}
           />
 

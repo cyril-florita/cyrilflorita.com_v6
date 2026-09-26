@@ -228,7 +228,7 @@ const Index = () => {
               </p>
               <h2 className="cyril-up cyril-mb-20 glitch" data-text="My Work">My Work</h2>
               <p className="cyril-left-offset">
-                A selection of my projects to showcase my experience and skills.
+                Explore a selection of projects showcasing my creative approach and technical expertise.
               </p>
             </div>
             <div

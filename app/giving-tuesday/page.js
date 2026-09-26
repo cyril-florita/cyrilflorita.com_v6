@@ -10,6 +10,7 @@ import {
   CaseLayout,
   CaseSection,
   CaseFigure,
+  CaseGrid,
   CaseStats,
   CaseQuote,
   CaseNext,
@@ -21,6 +22,7 @@ const SECTIONS = [
   { id: "live-tracker", label: "Match & Live Tracker" },
   { id: "day-of", label: "Day-Of" },
   { id: "after", label: "After the Day" },
+  { id: "responsive", label: "Every Screen" },
   { id: "impact", label: "Impact" },
 ];
 
@@ -109,7 +111,6 @@ const page = () => {
                 <li><strong>A timed launch.</strong> The match version was scheduled to go live the night before, so it was ready when the first morning email reached inboxes. A lighter teaser update bridged the gap in the days before.</li>
               </ul>
               <CaseFigure src="/img/portfolio/chf-giving-tuesday_milestones.jpg" alt="Giving Tuesday milestone tracker and cards" caption="Milestone tracker & cards" />
-              <CaseFigure src="/img/portfolio/chf-giving-tuesday_progress.jpg" alt="Giving Tuesday live tracker page" caption="Live tracker version (full page)" ratio="3 / 4" size="text" />
             </CaseSection>
 
             {/* 04 — Day-Of */}
@@ -129,18 +130,27 @@ const page = () => {
               <CaseFigure src="/img/portfolio/chf-giving-tuesday_post-campaign.jpg" alt="Giving Tuesday post-campaign thank-you page" caption="Post-campaign page" />
             </CaseSection>
 
-            {/* 06 — Impact */}
-            <CaseSection id="impact" number={6} title="Impact">
+            {/* 06 — Every Screen */}
+            <CaseSection id="responsive" number={6} title="Designed for Every Screen">
+              <p>Donors arrived from inboxes, social feeds, and search throughout the day, so the live tracker, milestone cards, and embedded giving form all had to hold up on a phone as well as on a desktop, with the form sized to work at every screen width.</p>
+              <CaseGrid layout="two">
+                <CaseFigure src="/img/portfolio/chf-giving-tuesday_progress.jpg" alt="Giving Tuesday live tracker page on desktop" caption="Live tracker — Desktop" ratio="3 / 5" />
+                <CaseFigure src="/img/portfolio/chf-giving-tuesday_mobile.jpg" alt="Giving Tuesday live tracker page on mobile" caption="Live tracker — Mobile" ratio="3 / 5" />
+              </CaseGrid>
+            </CaseSection>
+
+            {/* 07 — Impact */}
+            <CaseSection id="impact" number={7} title="Impact">
               <p>The landing page was the single conversion destination for every email, ad, and social post in the campaign. The distraction-free, single-ask design pointed the entire donor journey toward one action; the live tracker kept donors engaged and coming back throughout the day; and the post-campaign redirect turned leftover traffic into year-end gifts instead of dead ends.</p>
             </CaseSection>
 
           </CaseLayout>
 
           <CaseNext
-            href="/truth-matters"
-            title="Truth Matters Podcast"
-            category="Design, Development, & Branding"
-            image="/img/portfolio/main_truth-matters-podcast.jpg"
+            href="/gty-app-landing"
+            title="GTY App Landing Page"
+            category="Web Design & Front-End"
+            image="/img/portfolio/thumb_gty-app-landing.jpg"
             onBack={handleBackToPortfolio}
           />
 

@@ -1599,6 +1599,10 @@ banner
                 font-size: 1.15em;
                 font-weight: normal;
                 opacity: 0.85;
+
+                @media screen and (max-width: 767px) {
+                    font-size: 15px;
+                }
             }
 
             @media screen and (max-width: 1200px) {
@@ -2280,16 +2284,62 @@ portfolio
 // tile image styles (grayscale → color on hover, hover shrink).
 .cyril-grid-slideshow {
     position: absolute;
+    // Own stacking layer, so the images stay beneath the "Case Study" badge
+    // and hover icon.
+    z-index: 0;
     inset: 0;
     display: block;
 
     & img {
         opacity: 0;
-        transition: opacity 1.2s ease, transform 0.4s cubic-bezier(0, 0, 0.3642, 1), filter 0.4s cubic-bezier(0, 0, 0.3642, 1) !important;
+        transition: opacity var(--slide-fade, 1.2s) ease, transform 0.4s cubic-bezier(0, 0, 0.3642, 1), filter 0.4s cubic-bezier(0, 0, 0.3642, 1) !important;
 
         &.is-active {
             opacity: 1;
         }
+    }
+
+    // Instant swaps (cut): no opacity transition.
+    &.is-cut img {
+        transition: transform 0.4s cubic-bezier(0, 0, 0.3642, 1), filter 0.4s cubic-bezier(0, 0, 0.3642, 1) !important;
+    }
+}
+
+// Hover Ken Burns on the individual graphics (GraphicItem in
+// PortfolioIsotope.js): the wrapper takes the usual hover shrink and clips;
+// the image inside slowly zooms and drifts while hovered (direction varies by
+// tile), then eases back quickly. Desktop mouse only, never under reduced
+// motion — nothing runs until someone hovers.
+.cyril-portfolio-item .cyril-cover .cyril-ken-burns {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    transform: scale(1);
+    transition: variables.$tr;
+
+    & img {
+        transform: none !important;
+        transition: scale 0.7s cubic-bezier(0.25, 1, 0.5, 1), translate 0.7s cubic-bezier(0.25, 1, 0.5, 1), filter 0.4s cubic-bezier(0, 0, 0.3642, 1);
+    }
+}
+
+.cyril-portfolio-item:hover .cyril-cover .cyril-ken-burns {
+    transform: scale(0.93);
+}
+
+@media (hover: hover) and (pointer: fine) and (min-width: 1201px) and (prefers-reduced-motion: no-preference) {
+    .cyril-portfolio-item:hover .cyril-cover .cyril-ken-burns img {
+        scale: 1.14;
+        translate: -3% -2%;
+        transition: scale 7s cubic-bezier(0.2, 0.6, 0.35, 1), translate 7s cubic-bezier(0.2, 0.6, 0.35, 1), filter 0.4s cubic-bezier(0, 0, 0.3642, 1);
+    }
+
+    .cyril-grid-item:nth-child(3n+1) .cyril-portfolio-item:hover .cyril-cover .cyril-ken-burns img {
+        translate: 3% -2%;
+    }
+
+    .cyril-grid-item:nth-child(3n+2) .cyril-portfolio-item:hover .cyril-cover .cyril-ken-burns img {
+        translate: 0 3%;
     }
 }
 
@@ -2327,7 +2377,7 @@ portfolio
             object-position: center;
             transform: scale(1);
             transition: variables.$tr;
-            filter: grayscale(100%) brightness(110%) contrast(180%);
+            filter: grayscale(100%) brightness(110%) contrast(130%);
 
             @media screen and (max-width: 1200px) {
                 filter: grayscale(0) brightness(100%) contrast(100%);
@@ -3021,7 +3071,8 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
     overflow: hidden;
 }
 
-.cyril-page.cyril-case-page .cyril-case-bleed img {
+.cyril-page.cyril-case-page .cyril-case-bleed img,
+.cyril-page.cyril-case-page .cyril-case-bleed video {
     display: block;
     width: 100%;
     height: auto;
@@ -3696,6 +3747,7 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
 
 @media (prefers-reduced-motion: reduce) {
     .cyril-page.cyril-case-page .cyril-case-bleed img,
+    .cyril-page.cyril-case-page .cyril-case-bleed video,
     .cyril-case-figure.cyril-reveal:not(.cyril-revealed) img,
     .cyril-case-figure.cyril-reveal:not(.cyril-revealed) video {
         scale: 1;

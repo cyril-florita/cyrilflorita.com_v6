@@ -5,6 +5,7 @@ import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { wipeThen } from "@/components/Preloader";
 import { useRouter } from "next/navigation";
 import { imageProps, SIZES_HINT } from "@/components/imageProps";
+import VIDEO_SIZES from "@/components/data/videoSizes.json";
 import CountUp from "@/components/CountUp";
 
 // Building blocks for the editorial case-study layout (piloted on
@@ -24,9 +25,23 @@ const prefersReducedMotion = () =>
 // Hero: eyebrow (category + a short descriptor — deliberately no dates, so
 // older work doesn't read as dated), oversized left-aligned title, summary,
 // the facts row, then (optionally)
-// a full-bleed image that settles from a slight zoom as it scrolls up.
-export const CaseHero = ({ category, detail, title, summary, facts, image, imageAlt }) => {
+// a full-bleed image — or a looping, muted video (`video`, with its poster
+// from videoSizes.json) — that settles from a slight zoom as it scrolls up.
+export const CaseHero = ({ category, detail, title, summary, facts, image, imageAlt, video }) => {
   const imgRef = useRef(null);
+
+  // The video plays only while it's on screen, and never under reduced
+  // motion (the poster stays).
+  useEffect(() => {
+    const el = imgRef.current;
+    if (!video || !el || prefersReducedMotion() || !("IntersectionObserver" in window)) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) el.play().catch(() => {});
+      else if (!el.paused) el.pause();
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [video]);
 
   useEffect(() => {
     const img = imgRef.current;
@@ -80,7 +95,22 @@ export const CaseHero = ({ category, detail, title, summary, facts, image, image
           </dl>
         )}
       </header>
-      {image && (
+      {video ? (
+        <div className="cyril-case-bleed">
+          <video
+            ref={imgRef}
+            src={video}
+            poster={video.replace("/img/portfolio/", "/img/thumbs/portfolio/").replace(/\.mp4$/i, "-poster.webp")}
+            width={VIDEO_SIZES[video]?.[0]}
+            height={VIDEO_SIZES[video]?.[1]}
+            preload="metadata"
+            muted
+            loop
+            playsInline
+            aria-label={imageAlt}
+          />
+        </div>
+      ) : image && (
         <div className="cyril-case-bleed">
           {/* On screen at arrival — load it right away, first. */}
           <img ref={imgRef} {...imageProps(image, "100vw")} alt={imageAlt} fetchPriority="high" />

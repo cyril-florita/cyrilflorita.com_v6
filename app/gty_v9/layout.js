@@ -1,8 +1,8 @@
 // Server layout so this route can export metadata (page.js is a client component).
-const title = "GTY Website, v.9";
+const title = "Grace to You";
 const description = "Redesigning GTY.org to broaden audience reach and improve engagement & retention through a more accessible and unified digital experience.";
 const url = "/gty_v9/";
-const images = [{ url: "/og/gty_v9.jpg", width: 1200, height: 630, alt: "GTY Website, v.9" }];
+const images = [{ url: "/og/gty_v9.jpg", width: 1200, height: 630, alt: "Grace to You" }];
 
 export const metadata = {
   title,

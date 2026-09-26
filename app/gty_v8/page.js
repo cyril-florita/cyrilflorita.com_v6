@@ -69,7 +69,7 @@ const page = () => {
           <CaseHero
             category="UX Design & Web Development"
             detail="Responsive Web"
-            title="GTY Website, v.8"
+            title="Grace to You (v.8)"
             summary="Enhancing the user experience of GTY.org, the digital home for John MacArthur's teaching ministry, through the UX design and front-end development strategies that shaped version 8 of GTY's website."
             facts={[
               { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Media Organization</> },
@@ -78,8 +78,8 @@ const page = () => {
               { label: "Team", value: "Digital Platforms Coordinator, Software Engineer, Software Developer" },
               { label: "Tools", value: "Visual Studio Code, Google's Material Design System, HandlebarsJS" },
             ]}
-            image="/img/portfolio/gty8_design_0 - init.gif"
-            imageAlt="GTY Website, v8"
+            video="/img/portfolio/gty8_homepage.mp4"
+            imageAlt="Grace to You (v.8)"
           />
 
           <CaseLayout sections={SECTIONS}>
@@ -384,10 +384,10 @@ const page = () => {
           </CaseLayout>
 
           <CaseNext
-            href="/gty-dashboard"
-            title="GTY Dashboard"
-            category="UI Design & Front-End"
-            image="/img/portfolio/thumb_gty-dashboard.jpg"
+            href="/35-day-generosity-challenge"
+            title="35-Day Generosity Challenge"
+            category="Design & Development"
+            image="/img/portfolio/chf-35-day-generosity_main.jpg"
             onBack={handleBackToPortfolio}
           />
 

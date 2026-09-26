@@ -161,10 +161,10 @@ const page = () => {
           </CaseLayout>
 
           <CaseNext
-            href="/35-day-generosity-challenge"
-            title="35-Day Generosity Challenge"
-            category="Design & Development"
-            image="/img/portfolio/chf-35-day-generosity_main.jpg"
+            href="/gty-blog-graphics"
+            title="GTY Blog Graphics"
+            category="Marketing"
+            image="/img/portfolio/thumb_gty-blog.jpg"
             onBack={handleBackToPortfolio}
           />
 

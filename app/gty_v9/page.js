@@ -65,7 +65,7 @@ const page = () => {
           <CaseHero
             category="UX Design"
             detail="Web & Mobile"
-            title="GTY Website, v.9"
+            title="Grace to You"
             summary="Redesigning GTY.org to broaden audience reach and improve engagement & retention through a more accessible and unified digital experience."
             facts={[
               { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Media Organization</> },
@@ -74,8 +74,8 @@ const page = () => {
               { label: "Tools", value: "Axure RP, Google Analytics" },
               { label: "Deliverables", value: "Research, IA, Personas & Journeys, Wireframes, Prototypes" },
             ]}
-            image="/img/portfolio/main_gty9.png"
-            imageAlt="Main Image for GTY v9"
+            video="/img/portfolio/gty9_preview.mp4"
+            imageAlt="Grace to You website preview"
           />
 
           <CaseLayout sections={SECTIONS}>
@@ -257,10 +257,10 @@ const page = () => {
           </CaseLayout>
 
           <CaseNext
-            href="/the-study-bible-app"
-            title="The Study Bible App"
-            category="App Design"
-            image="/img/portfolio/main_the-study-bible-app.jpg"
+            href="/giving-tuesday"
+            title="Giving Tuesday Campaign"
+            category="Design & Development"
+            image="/img/portfolio/chf-giving-tuesday_main.jpg"
             onBack={handleBackToPortfolio}
           />
 

@@ -146,10 +146,10 @@ const page = () => {
           </CaseLayout>
 
           <CaseNext
-            href="/giving-tuesday"
-            title="Giving Tuesday Campaign"
-            category="Design & Development"
-            image="/img/portfolio/chf-giving-tuesday_main.jpg"
+            href="/truth-matters"
+            title="Truth Matters Podcast"
+            category="Design, Development, & Branding"
+            image="/img/portfolio/main_truth-matters-podcast.jpg"
             onBack={handleBackToPortfolio}
           />
 
