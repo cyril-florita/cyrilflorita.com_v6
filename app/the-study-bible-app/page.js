@@ -153,10 +153,10 @@ const page = () => {
           </CaseLayout>
 
           <CaseNext
-            href="/gty_v8"
-            title="GTY Website, v.8"
-            category="UX Design & Web Development"
-            image="/img/portfolio/main_gty8.png"
+            href="/the-study-bible-app-logo"
+            title="The Study Bible App Logo"
+            category="Branding"
+            image="/img/portfolio/main_the-study-bible-app-logo.jpg"
             onBack={handleBackToPortfolio}
           />
 

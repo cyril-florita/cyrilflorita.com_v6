@@ -28,3 +28,5 @@ next-env.d.ts
 
 # Node Modules
 node_modules/
+# Staging folder for new portfolio materials (originals; optimized copies live in public/img/portfolio)
+new-work/

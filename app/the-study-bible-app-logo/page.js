@@ -211,10 +211,10 @@ const page = () => {
           </CaseLayout>
 
           <CaseNext
-            href="/sekihmentis"
-            title="SekihMentis"
-            category="Illustration"
-            image="/img/portfolio/main_sekihmentis.jpg"
+            href="/patricia-macarthur-pastoral-care-fund"
+            title="The Patricia MacArthur Pastoral Care Fund"
+            category="Illustration/Branding"
+            image="/img/portfolio/thumb_patricia-macarthur-pastoral-fund.jpg"
             onBack={handleBackToPortfolio}
           />
 

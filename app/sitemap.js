@@ -5,20 +5,23 @@ const SITE = 'https://cyrilflorita.com';
 
 // Project case-study routes (app/<slug>/page.js), in My Work grid order.
 const PROJECTS = [
-  'gty_v9',
-  'the-study-bible-app',
+  'hunger-action-month',
   'gty_v8',
+  'gty-dashboard',
+  '35-day-generosity-challenge',
+  'giving-tuesday',
   'truth-matters',
   'grace-stream',
-  'gty-dashboard',
   'gty-app-landing',
+  'gty_v9',
+  'the-study-bible-app',
   'the-study-bible-app-logo',
-  'sekihmentis',
-  'he-took-my-place',
-  'gty-blog-graphics',
   'patricia-macarthur-pastoral-care-fund',
   'gty-resources',
+  'gty-blog-graphics',
   'gty-social-media-graphics',
+  'sekihmentis',
+  'he-took-my-place',
 ];
 
 export default function sitemap() {

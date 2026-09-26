@@ -210,10 +210,10 @@ const page = () => {
           </CaseLayout>
 
           <CaseNext
-            href="/gty-dashboard"
-            title="GTY Dashboard"
-            category="UI Design & Front-End"
-            image="/img/portfolio/thumb_gty-dashboard.jpg"
+            href="/gty-app-landing"
+            title="GTY App Landing Page"
+            category="Web Design & Front-End"
+            image="/img/portfolio/thumb_gty-app-landing.jpg"
             onBack={handleBackToPortfolio}
           />
 

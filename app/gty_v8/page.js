@@ -78,7 +78,7 @@ const page = () => {
               { label: "Team", value: "Digital Platforms Coordinator, Software Engineer, Software Developer" },
               { label: "Tools", value: "Visual Studio Code, Google's Material Design System, HandlebarsJS" },
             ]}
-            image="/img/portfolio/main_gty8.png"
+            image="/img/portfolio/gty8_design_0 - init.gif"
             imageAlt="GTY Website, v8"
           />
 
@@ -188,10 +188,10 @@ const page = () => {
                 <li><strong>Project Team and Stakeholder Alignment:</strong> By producing mockups, I prioritized alignment with the stakeholders—managers, content creators, and the engineering team. With the Digital Platforms Coordinator's supervision, I held collaborative sessions where we clarified the project's goals, user needs, and brand voice. This helped me avoid unnecessary revisions down the road, ensuring everyone felt seen and heard from the start.</li>
                 <li><strong>Clean, Minimal, yet Sophisticated Theming and Design:</strong> I wanted the theme to communicate depth and sophistication. And so I designed the UI to feel intuitive and elegant. I wanted every element to have a purpose and so I eliminated any clutter. Though minimalistic in my approach, I didn't want the site to be bland. I wanted the user to focus on interacting with the content while subtly being guided by the layout, navigation, and everything else in the platform.</li>
               </ul>
-              <CaseFigure src="/img/portfolio/gty8_design_0 - init.gif" alt="GTY 8 Initial Mockups" caption="Initial Mockups" />
-              <CaseFigure src="/img/portfolio/gty8_design_rev-1.gif" alt="GTY 8 Revision 1" caption="Revision #1" />
-              <CaseVideo src="/img/portfolio/gty8_design_rev-2.mp4" caption="Revision #2" />
-              <CaseVideo src="/img/portfolio/gty8_design_rev-3.mp4" caption="Revision #3" />
+              <CaseFigure src="/img/portfolio/gty8_design_0 - init.gif" alt="GTY 8 Initial Mockups" caption="Initial Mockups" frame="browser" url="gty.org" />
+              <CaseFigure src="/img/portfolio/gty8_design_rev-1.gif" alt="GTY 8 Revision 1" caption="Revision #1" frame="browser" url="gty.org" />
+              <CaseVideo src="/img/portfolio/gty8_design_rev-2.mp4" caption="Revision #2" url="gty.org" />
+              <CaseVideo src="/img/portfolio/gty8_design_rev-3.mp4" caption="Revision #3" url="gty.org" />
               <CaseGrid layout="two">
                 <CaseFigure src="/img/portfolio/gty8_design_rev-4_1.jpg" alt="GTY 8 Revision 4.1" caption="Revision #4.1" ratio="3 / 4" />
                 <CaseFigure src="/img/portfolio/gty8_design_rev-4_2.jpg" alt="GTY 8 Revision 4.2" caption="Revision #4.2" ratio="3 / 4" />
@@ -257,21 +257,21 @@ const page = () => {
               <ul className="cyril-case-list">
                 <li>With several windows in various screen sizes opened, I started <strong>code-designing</strong> the global components such as the navigation, footer, media player layer, search layer, cart and wishlist layer, and registration and sign-in layer.</li>
               </ul>
-              <CaseVideo src="/img/portfolio/gty8_code-prototyping_mobile.mp4" caption="Code Prototyping — Mobile" size="text" />
+              <CaseVideo src="/img/portfolio/gty8_code-prototyping_mobile.mp4" caption="Code Prototyping — Mobile" size="phone" />
               <ul className="cyril-case-list">
                 <li>I then tackled the homepage, about pages, resource pages, giving pages, the store, product pages, checkout page, and account pages.</li>
               </ul>
-              <CaseVideo src="/img/portfolio/gty8_homepage.mp4" caption="Homepage" />
-              <CaseVideo src="/img/portfolio/gty8_about.mp4" caption="About Pages" />
-              <CaseVideo src="/img/portfolio/gty8_resources.mp4" caption="Resource Pages" />
-              <CaseVideo src="/img/portfolio/gty8_giving.mp4" caption="Giving Pages" />
-              <CaseVideo src="/img/portfolio/gty8_store.mp4" caption="Store, Product & Checkout Pages" />
-              <CaseVideo src="/img/portfolio/gty8_account.mp4" caption="Account Pages" />
+              <CaseVideo src="/img/portfolio/gty8_homepage.mp4" caption="Homepage" url="gty.org" />
+              <CaseVideo src="/img/portfolio/gty8_about.mp4" caption="About Pages" url="gty.org" />
+              <CaseVideo src="/img/portfolio/gty8_resources.mp4" caption="Resource Pages" url="gty.org" />
+              <CaseVideo src="/img/portfolio/gty8_giving.mp4" caption="Giving Pages" url="gty.org" />
+              <CaseVideo src="/img/portfolio/gty8_store.mp4" caption="Store, Product & Checkout Pages" url="gty.org" />
+              <CaseVideo src="/img/portfolio/gty8_account.mp4" caption="Account Pages" url="gty.org" />
               <ul className="cyril-case-list">
                 <li>I used HandlebarsJS to mock up and template the data and content so that I could freely and more efficiently design and develop without unnecessarily burdening and interfering with the back-end side of the development. This allowed the Software Engineer and the Software Developer to focus on the back-end side of the development at the same time as I would progress with cutting up the pages.</li>
                 <li><strong>Subtle, yet Pleasing UI Micro-interactions:</strong> To make the user's journey and experience more delightful, I added micro-interactions&mdash;elements such as button animations, hover effects, and component and page transitions.</li>
               </ul>
-              <CaseVideo src="/img/portfolio/gty8_micro-interactions.mp4" caption="Micro-interactions" />
+              <CaseVideo src="/img/portfolio/gty8_micro-interactions.mp4" caption="Micro-interactions" url="gty.org" />
             </CaseSection>
 
             {/* 07 — Feature Enhancements */}
@@ -384,10 +384,10 @@ const page = () => {
           </CaseLayout>
 
           <CaseNext
-            href="/truth-matters"
-            title="Truth Matters Podcast"
-            category="Branding/UI/UX/Web"
-            image="/img/portfolio/main_truth-matters-podcast.jpg"
+            href="/gty-dashboard"
+            title="GTY Dashboard"
+            category="UI Design & Front-End"
+            image="/img/portfolio/thumb_gty-dashboard.jpg"
             onBack={handleBackToPortfolio}
           />
 

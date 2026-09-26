@@ -27,7 +27,7 @@ const Skills = () => {
                     </div>
                   </div>
                   <div className="cyril-progress-inline">
-                    <span className="cyril-upper">Web, UI/UX, &amp; Mobile/App Design</span>
+                    <span className="cyril-upper">Web Design</span>
                   </div>
                 </div>
               </div>
@@ -80,6 +80,19 @@ const Skills = () => {
                   </div>
                   <div className="cyril-progress-inline">
                     <span className="cyril-upper">Creative Direction &amp; Marketing</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-40">
+                <div className="cyril-text-row">
+                  <div className="cyril-icon-box">
+                    <div className="cyril-text-icon no-textured">
+                    <i className="fa-solid fa-check"></i>
+                    </div>
+                  </div>
+                  <div className="cyril-progress-inline">
+                    <span className="cyril-upper">UI/UX &amp; Mobile/App Design</span>
                   </div>
                 </div>
               </div>

@@ -21,6 +21,7 @@ const OUT_DIR = path.join(ROOT, "public/img/thumbs/portfolio");
 const MANIFEST = path.join(ROOT, "components/data/imageSizes.json");
 const WIDTHS = [800, 1600];
 const QUALITY = 78;
+const WEBP_MAX = 16383;
 
 await mkdir(OUT_DIR, { recursive: true });
 
@@ -41,8 +42,10 @@ for (const file of files) {
     const out = path.join(OUT_DIR, outName);
     const outTime = await stat(out).then((s) => s.mtimeMs, () => 0);
     if (outTime < srcTime) {
+      // WebP can't exceed 16383px on either side — very tall full-page
+      // screenshots are scaled down to fit (aspect ratio kept).
       await sharp(src)
-        .resize({ width: Math.min(target, width), withoutEnlargement: true })
+        .resize({ width: Math.min(target, width), height: WEBP_MAX, fit: "inside", withoutEnlargement: true })
         .webp({ quality: QUALITY })
         .toFile(out);
       made++;

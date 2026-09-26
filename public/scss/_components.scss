@@ -1593,6 +1593,14 @@ banner
                 position: relative;
             }
 
+            // Supporting line under "Designer and Developer" — lighter, so the
+            // headline stays the headline.
+            & .cyril-hero-scope {
+                font-size: 1.15em;
+                font-weight: normal;
+                opacity: 0.85;
+            }
+
             @media screen and (max-width: 1200px) {
                 padding-left: 0;
             }
@@ -2267,6 +2275,24 @@ portfolio
     }
 }
 
+// Crossfading slideshow tile (GridSlideshow in PortfolioIsotope.js): the
+// images stack inside the cover and fade between each other; each keeps the
+// tile image styles (grayscale → color on hover, hover shrink).
+.cyril-grid-slideshow {
+    position: absolute;
+    inset: 0;
+    display: block;
+
+    & img {
+        opacity: 0;
+        transition: opacity 1.2s ease, transform 0.4s cubic-bezier(0, 0, 0.3642, 1), filter 0.4s cubic-bezier(0, 0, 0.3642, 1) !important;
+
+        &.is-active {
+            opacity: 1;
+        }
+    }
+}
+
 .cyril-portfolio-item {
     display: block;
     cursor: pointer;
@@ -2289,7 +2315,9 @@ portfolio
             transition: variables.$tr;
         }
 
-        & img {
+        & img,
+
+        & video {
             position: absolute;
             top: 0;
             left: 0;
@@ -2307,7 +2335,8 @@ portfolio
         }
 
         &.truth-matters {
-            & img {
+            & img,
+            & video {
                 filter: grayscale(0) brightness(100%) contrast(100%);
             }
         }
@@ -2343,7 +2372,8 @@ portfolio
         }
 
         &:hover {
-            & img {
+            & img,
+            & video {
                 filter: grayscale(0) brightness(100%) contrast(100%);
             }
 
@@ -2500,7 +2530,9 @@ portfolio
                 transform: scale(0.96);
             }
 
-            & img {
+            & img,
+
+            & video {
                 transform: scale(0.93);
             }
 
@@ -3039,6 +3071,18 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
     }
 }
 
+// "Back to All Work" (rail + small-screen copy) fills orange on hover, like
+// the site's square icon buttons.
+.cyril-button.cyril-back-all-work {
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.4s cubic-bezier(0, 0, 0.3642, 1);
+
+    &:hover {
+        background-color: var(--color-accent);
+        border-color: var(--color-accent);
+        color: var(--color-light);
+    }
+}
+
 // under the index (pages without one just show the button)
 .cyril-case-toc + .cyril-case-rail-back {
     margin-top: 40px;
@@ -3072,6 +3116,7 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
 
         &:hover {
             opacity: 1;
+            color: var(--color-accent);
         }
     }
 
@@ -3110,7 +3155,7 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
 
 .cyril-case-section-head {
     display: flex;
-    align-items: baseline;
+    align-items: flex-start;
     gap: 24px;
     margin-bottom: 50px;
 }
@@ -3122,7 +3167,15 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
 }
 
 .cyril-case-section-num {
+    // Sits at the top of the (often two-line) heading.
+    line-height: 1;
+    padding-top: 10px;
     font-size: 14px;
+
+    @media screen and (max-width: 1200px) {
+        padding-top: 4px;
+    }
+
     font-weight: 600;
     letter-spacing: var(--tracking-caps);
     color: var(--color-accent);
@@ -3215,6 +3268,122 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
     & .cyril-video-container {
         overflow: hidden;
         border: 2px solid var(--color-frame);
+    }
+
+    // size="phone": a phone-screen recording shown at a realistic phone width,
+    // in a simple device frame (dark rounded bezel around a rounded screen).
+    &.cyril-case-figure-phone {
+        max-width: 320px;
+
+        & .cyril-video-container,
+        & .cyril-cover {
+            padding: 12px;
+            border: 0;
+            border-radius: 44px;
+            background-color: #0b0b0b;
+            box-shadow: 0 0 0 2px var(--color-frame), 0 24px 60px rgba(0, 0, 0, 0.45);
+        }
+
+        & video,
+        & img {
+            border-radius: 32px;
+        }
+    }
+
+    // Desktop recordings (CaseVideo): a browser window in the same dark
+    // finish as the phone frame — toolbar with window dots + address bar.
+    & .cyril-browser-frame {
+        overflow: hidden;
+        border-radius: 14px;
+        background-color: #0b0b0b;
+        box-shadow: 0 0 0 2px var(--color-frame), 0 24px 60px rgba(0, 0, 0, 0.45);
+
+        & .cyril-video-container,
+        & .cyril-cover {
+            border: 0;
+            border-radius: 0;
+        }
+    }
+
+    & .cyril-browser-bar {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        height: 38px;
+        padding: 0 16px;
+
+        // Spacer as wide as the dots, so the address bar sits dead center.
+        &::after {
+            content: "";
+            flex: none;
+            width: 44px;
+        }
+    }
+
+    & .cyril-browser-dots {
+        display: flex;
+        flex: none;
+        gap: 7px;
+
+        & i {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.18);
+
+            &:first-child {
+                background-color: var(--color-accent);
+            }
+        }
+    }
+
+    & .cyril-browser-address {
+        flex: 0 1 50%;
+        min-width: 0;
+        height: 22px;
+        margin: 0 auto;
+        padding: 0 12px;
+        overflow: hidden;
+        border-radius: 11px;
+        background-color: rgba(255, 255, 255, 0.08);
+        color: rgba(255, 255, 255, 0.55);
+        font-size: 11px;
+        line-height: 22px;
+        letter-spacing: 0.02em;
+        text-align: center;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    @media (max-width: 767px) {
+        & .cyril-browser-frame {
+            border-radius: 10px;
+        }
+
+        & .cyril-browser-bar {
+            gap: 10px;
+            height: 28px;
+            padding: 0 10px;
+
+            &::after {
+                width: 31px;
+            }
+        }
+
+        & .cyril-browser-dots {
+            gap: 5px;
+
+            & i {
+                width: 7px;
+                height: 7px;
+            }
+        }
+
+        & .cyril-browser-address {
+            height: 16px;
+            font-size: 9px;
+            line-height: 16px;
+        }
     }
 
     & .cyril-video-container {
@@ -3336,11 +3505,23 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
 
 .cyril-case-stat {
     padding: 30px 20px 0 0;
+    // Each column is a size container, so a value can be sized to its own
+    // column's width.
+    container-type: inline-size;
 
     & dt {
         margin: 0;
         font-family: var(--font-atkinson);
-        font-size: clamp(48px, 5vw, 88px);
+        // Normal size, but never wider than the column: a bold glyph is ~0.65em,
+        // so 145cqi / character count keeps any value within ~95% of the column
+        // — short values ("5", "19") stay big, long ones ("$150K+") shrink.
+        font-size: min(clamp(48px, 5vw, 88px), calc(145cqi / var(--chars, 3)));
+        white-space: nowrap;
+        // Every value gets the full-size line box, bottom-aligned, so the
+        // labels below still line up when one value has shrunk to fit.
+        display: flex;
+        align-items: flex-end;
+        height: clamp(48px, 5vw, 88px);
         font-weight: 700;
         line-height: 1;
         color: var(--color-accent);

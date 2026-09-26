@@ -112,6 +112,9 @@ const Index = () => {
     if (returnToProject) {
       // Clear the storage
       sessionStorage.removeItem('returnToProject');
+      // Let the grid (mounts a moment later) switch to "All" if its restored
+      // filter would hide this project — see PortfolioIsotope.js.
+      window.cyrilReturnToProject = returnToProject;
 
       // We're jumping straight into the portfolio grid. Remove the hero from
       // layout entirely (instead of just fading/scrolling past it) so My Work

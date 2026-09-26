@@ -30,10 +30,11 @@ const FRAME_MS = 1000 / 60;
 const follow = (rate, dt) => 1 - Math.pow(1 - rate, dt / FRAME_MS);
 
 // The custom cursor steps aside over:
-// - square outlined icon buttons (they fill orange on hover — feedback enough)
+// - square outlined icon buttons and "Back to All Work" (they fill orange on
+//   hover — feedback enough)
 // - the home hero photo, but only over its visible pixels: the transparent
 //   areas of the PNG still show the cursor.
-const ICON_BUTTON_SELECTOR = '.cyril-slider-nav .cyril-prev, .cyril-slider-nav .cyril-next, .cyril-back-to-top, .cyril-zoom-btn';
+const ICON_BUTTON_SELECTOR = '.cyril-slider-nav .cyril-prev, .cyril-slider-nav .cyril-next, .cyril-back-to-top, .cyril-zoom-btn, .cyril-back-all-work';
 const MAIN_IMAGE_SELECTOR = '.cyril-banner-image';
 const ALPHA_SAMPLE_WIDTH = 400; // px — resolution of the hit-test copy
 const ALPHA_THRESHOLD = 24; // 0–255

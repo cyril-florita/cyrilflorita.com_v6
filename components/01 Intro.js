@@ -43,8 +43,13 @@ const Banner = ( { bgImage = "/img/cyril-florita-profile.webp" } ) => {
                   ))}
                 </h1>
                 <div className="cyril-short intro">
-                  <p className="cyril-mb-30">
+                  <p className="cyril-mb-10">
                     <strong><span className="cyril-accent">Designer</span></strong> and <strong><span className="cyril-accent">Developer</span></strong>
+                  </p>
+                  {/* Scope line — sets the focus (web, brand, front-end) so the
+                      headline doesn't read as UX/product design. */}
+                  <p className="cyril-mb-30 cyril-hero-scope">
+                    I design, build, and ship digital experiences that convert and perform.
                   </p>
                   <div className="cyril-buttons-frame">
                     <Link href="/" className="cyril-button" onClick={(e) => {

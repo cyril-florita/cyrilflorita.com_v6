@@ -163,10 +163,10 @@ const page = () => {
           </CaseLayout>
 
           <CaseNext
-            href="/patricia-macarthur-pastoral-care-fund"
-            title="The Patricia MacArthur Pastoral Care Fund"
-            category="Illustration/Branding"
-            image="/img/portfolio/thumb_patricia-macarthur-pastoral-fund.jpg"
+            href="/gty-social-media-graphics"
+            title="GTY Social Media Graphics"
+            category="Marketing"
+            image="/img/portfolio/thumb_gty-social-media.jpg"
             onBack={handleBackToPortfolio}
           />
 

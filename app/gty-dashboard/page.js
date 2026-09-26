@@ -118,7 +118,7 @@ const page = () => {
             {/* 04 — Live Weather */}
             <CaseSection id="live-weather" number={4} title="Live Weather">
               <p>The weather screen is the calmest of the set: a full-bleed photograph behind white line icons. It shows the current temperature and conditions for the office&apos;s location, with the low, high, wind, humidity and pressure beside it, and a seven-day forecast of highs and lows along the bottom. The time and date sit large in the corner.</p>
-              <CaseVideo src="/img/portfolio/gty-dashboard.mp4" caption="Live Weather v1" />
+              <CaseVideo url="gty.org" src="/img/portfolio/gty-dashboard.mp4" caption="Live Weather v1" />
               <CaseFigure src="/img/portfolio/gty-dashboard-1b.jpg" alt="GTY Dashboard - Screen 1B" caption="Live Weather v2" />
             </CaseSection>
 
@@ -161,10 +161,10 @@ const page = () => {
           </CaseLayout>
 
           <CaseNext
-            href="/gty-app-landing"
-            title="GTY App Landing Page"
-            category="Web Design & Front-End"
-            image="/img/portfolio/thumb_gty-app-landing.jpg"
+            href="/35-day-generosity-challenge"
+            title="35-Day Generosity Challenge"
+            category="Design & Development"
+            image="/img/portfolio/chf-35-day-generosity_main.jpg"
             onBack={handleBackToPortfolio}
           />
 

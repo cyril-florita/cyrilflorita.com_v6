@@ -102,7 +102,7 @@ export const CaseHero = ({ category, detail, title, summary, facts, image, image
 // back to the grid. Hidden below 1200px with the index; CaseNext's copy of
 // the button covers tablet/mobile.
 export const BackToAllWork = ({ onClick, className = "" }) => (
-  <button type="button" onClick={onClick} className={`cyril-button cyril-type-2 ${className}`}>
+  <button type="button" onClick={onClick} className={`cyril-button cyril-type-2 cyril-back-all-work ${className}`}>
     <svg className="cyril-prev" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
     Back to All Work
   </button>
@@ -170,16 +170,30 @@ export const CaseSection = ({ id, number, title, children }) => (
 // An image that opens in the lightbox (ImageView binds any <a href="/img…">).
 // `ratio` crops very tall images to a framed preview from the top; the
 // lightbox still shows the whole thing. `size`: "text" (prose width) or
-// "full" (the whole content column, wider than the text).
+// "full" (the whole content column, wider than the text), or "phone" (a
+// phone-screen capture at realistic phone width, in a device frame — also
+// works on CaseVideo).
 // Figures show the WebP thumbnails (lazy-loaded) and link to the original,
 // which the zoom viewer opens; the size hint comes from the enclosing grid.
 const GridLayout = createContext(null);
 
-export const CaseFigure = ({ src, alt, caption, ratio, size = "full" }) => {
+// Browser-window frame (toolbar with window dots and an address bar showing
+// `url`, if given) around a desktop screen — used by CaseVideo, and by
+// CaseFigure with frame="browser".
+const BrowserFrame = ({ url, children }) => (
+  <div className="cyril-browser-frame">
+    <div className="cyril-browser-bar" aria-hidden="true">
+      <span className="cyril-browser-dots"><i /><i /><i /></span>
+      <span className="cyril-browser-address">{url}</span>
+    </div>
+    {children}
+  </div>
+);
+
+export const CaseFigure = ({ src, alt, caption, ratio, size = "full", frame, url }) => {
   const layout = useContext(GridLayout);
   const hint = SIZES_HINT[layout === "offset" ? "two" : layout || size];
-  return (
-  <figure className={`cyril-case-figure cyril-case-figure-${size}`}>
+  const image = (
     <a href={src} className="cyril-project-figure">
       <div className="cyril-cover" style={ratio ? { aspectRatio: ratio } : undefined}>
         <img {...imageProps(src, hint)} alt={alt} loading="lazy" decoding="async" className={ratio ? "cyril-case-cropped" : undefined} />
@@ -188,14 +202,26 @@ export const CaseFigure = ({ src, alt, caption, ratio, size = "full" }) => {
         </div>
       </div>
     </a>
+  );
+  return (
+  <figure className={`cyril-case-figure cyril-case-figure-${size}`}>
+    {frame === "browser" ? <BrowserFrame url={url}>{image}</BrowserFrame> : image}
     {caption && <figcaption className="cyril-upper">{caption}</figcaption>}
   </figure>
   );
 };
 
-export const CaseVideo = ({ src, caption, size = "full" }) => (
+// Desktop recordings sit in a browser-window frame (see BrowserFrame);
+// size="phone" uses the phone frame instead.
+export const CaseVideo = ({ src, caption, size = "full", url }) => (
   <figure className={`cyril-case-figure cyril-case-figure-${size}`}>
-    <VideoFigure url={src} marginTop="" marginBottom="" />
+    {size === "phone" ? (
+      <VideoFigure url={src} marginTop="" marginBottom="" />
+    ) : (
+      <BrowserFrame url={url}>
+        <VideoFigure url={src} marginTop="" marginBottom="" />
+      </BrowserFrame>
+    )}
     {caption && <figcaption className="cyril-upper">{caption}</figcaption>}
   </figure>
 );
@@ -213,7 +239,8 @@ export const CaseStats = ({ items }) => (
   <dl className="cyril-case-stats" style={{ "--stat-count": items.length }}>
     {items.map(({ value, label }) => (
       <div key={label} className="cyril-case-stat">
-        <dt className="cyril-case-stat-value"><CountUp value={value} /></dt>
+        {/* --chars lets long values ("$150K+") shrink to fit their column. */}
+        <dt className="cyril-case-stat-value" style={{ "--chars": String(value).length }}><CountUp value={value} /></dt>
         <dd className="cyril-upper">{label}</dd>
       </div>
     ))}

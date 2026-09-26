@@ -47,6 +47,9 @@ const IMAGES = {
   "gty-social-media-graphics": ["/img/portfolio/gty-social_black-frame---None-Good-Enough,-None-So-Evil.jpg", "contain"],
   "he-took-my-place": ["/img/portfolio/main_he-took-my-place.jpg", "contain"],
   sekihmentis: ["/img/portfolio/main_sekihmentis.jpg", "contain"],
+  "hunger-action-month": ["/img/portfolio/chf-hunger-action-month_main.jpg", "cover", "left"],
+  "35-day-generosity-challenge": ["/img/portfolio/chf-35-day-generosity_main.jpg", "cover", "top"],
+  "giving-tuesday": ["/img/portfolio/chf-giving-tuesday_main.jpg", "cover", "top"],
 };
 
 await mkdir(OUT_DIR, { recursive: true });

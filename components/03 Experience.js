@@ -2,6 +2,7 @@ import { sliderProps } from "@/public/utility/sliderProps";
 import { Swiper, SwiperSlide } from "swiper/react";
 import CountUp from "@/components/CountUp";
 
+const FREELANCE_START_DATE = new Date(2025, 1, 1); // Feb 2025
 const CHF_START_DATE = new Date(2025, 3, 1); // Apr 2025
 
 const getYearsSince = (startDate) => {
@@ -62,21 +63,23 @@ const Experience = () => {
                   onTransitionEnd={unfadeEdges}
                 >
 
-                  {/* <SwiperSlide className="swiper-slide">
+                  <SwiperSlide className="swiper-slide">
                     <div className="cyril-slide-inner">
                     <div className="cyril-icon-box cyril-type-2">
                       <div className="cyril-box-text">
-                        <p className="cyril-upper cyril-text-lg cyril-mb-15">Freelance</p>
+                        <p className="cyril-upper cyril-text-lg cyril-mb-15 cyril-accent">
+                          Freelance Designer &amp; Developer
+                        </p>
                         <p className="cyril-upper cyril-mb-30 cyril-text-normal">
-                          <span className="cyril-accent">today</span>
+                          Feb 2025 &mdash; <span>Today</span> &#40;<CountUp value={`${getYearsSince(FREELANCE_START_DATE)} Years`} />&#41;
                         </p>
                         <p>
-                          Exploring the market while experimenting with new AI tools and technologies.
+                          A studio of one: taking ideas from first sketch to launch day&mdash;websites, brands, and campaigns designed, built, and shipped under one roof.
                         </p>
                       </div>
                     </div>
                   </div>
-                  </SwiperSlide> */}
+                  </SwiperSlide>
 
                   <SwiperSlide className="swiper-slide">
                     <div className="cyril-slide-inner">

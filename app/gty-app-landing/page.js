@@ -95,7 +95,7 @@ const page = () => {
             {/* 01 — Overview */}
             <CaseSection id="overview" number={1} title="Project Overview">
               <p>As a designer and developer at Grace to You, I was tasked with improving the user experience of the Grace to You App landing page. The goal was to create a more engaging, informative, and user-friendly experience, encouraging users to download and utilize the app.</p>
-              <CaseVideo src="/img/portfolio/gty-app-landing.mp4" caption="GTY App Landing Page" />
+              <CaseVideo url="gty.org" src="/img/portfolio/gty-app-landing.mp4" caption="GTY App Landing Page" />
             </CaseSection>
 
             {/* 02 — Initial Assessment */}
@@ -165,10 +165,10 @@ const page = () => {
           </CaseLayout>
 
           <CaseNext
-            href="/the-study-bible-app-logo"
-            title="The Study Bible App Logo"
-            category="Branding"
-            image="/img/portfolio/main_the-study-bible-app-logo.jpg"
+            href="/gty_v9"
+            title="GTY Website, v.9"
+            category="UX Design"
+            image="/img/portfolio/main_gty9.png"
             onBack={handleBackToPortfolio}
           />
 
