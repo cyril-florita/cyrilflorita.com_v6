@@ -95,7 +95,8 @@ Individual graphics in the My Work grid (no pages of their own, `fil-marketing`,
 
 ### Other pieces
 
-- `components/ContactBand.js`: "Let's work together" band at the end of `/` and as About Me's last snap section (`#contact`, 6th pagination dot). Pass `resume="/path.pdf"` to show a résumé button.
+- `components/ContactBand.js`: "Let's work together" band at the end of `/` and as About Me's last snap section (`#contact`, 6th pagination dot). Pass `resume="/path.pdf"` to show a résumé button. No frame line above it on `/` (removed on purpose). It carries two background diamonds sized off the band's height (`.cyril-contact .cyril-bg-item`, % heights + aspect-ratio) so they fit whole; on About Me desktop the band stretches to the full snap section.
+- Header background: pages call `cyrilUtility.tpInner()` for the solid top bar. On desktop (>1200px) it is transparent on About Me (always) and on `/` (except while scrolling up — `.cyril-scrolled-up` on `.cyril-frame`, set by `topBarActive()`); tablet/mobile always solid. Rules live next to `.cyril-tp-frame` in `_components.scss`.
 - `app/not-found.js` → `out/404.html` (Apache: `ErrorDocument 404 /404.html` in `public/.htaccess`).
 - `components/VideoFigure.js`: `preload="none"` + poster (`public/img/thumbs/portfolio/<name>-poster.webp`, sizes in `components/data/videoSizes.json`, grabbed from each mp4 via headless Chrome — there's no ffmpeg); plays only while ≥40% visible.
 - Smooth mouse-wheel glide (desktop, mouse wheels only, not trackpads) lives in `MotionEffects.js`; it yields to any wheel handler that calls `preventDefault()` first (hero hand-off, viewer) and to About Me's snapping.

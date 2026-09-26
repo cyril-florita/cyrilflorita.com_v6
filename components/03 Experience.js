@@ -74,7 +74,7 @@ const Experience = () => {
                           Feb 2025 &mdash; <span>Today</span> &#40;<CountUp value={`${getYearsSince(FREELANCE_START_DATE)} Years`} />&#41;
                         </p>
                         <p>
-                          A studio of one: taking ideas from first sketch to launch day&mdash;websites, brands, and campaigns designed, built, and shipped under one roof.
+                          Designing, building, and shipping high-performing digital experiences&mdash;faster with AI.
                         </p>
                       </div>
                     </div>

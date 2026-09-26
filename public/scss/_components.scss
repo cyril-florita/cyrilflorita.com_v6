@@ -451,6 +451,8 @@ page
 ------------------------------------------- */
 .cyril-onepage {
     width: 100%;
+    // Same side clipping as .cyril-page (big diamonds, the education slider).
+    overflow-x: clip;
 
     & .cyril-section {
         position: relative;
@@ -630,6 +632,10 @@ page
 
 .cyril-page {
     position: relative;
+    // Clip anything poking past the sides (the big background diamonds, the
+    // hero photo) so the page never gets a horizontal scrollbar — `clip`,
+    // not `hidden`, so it isn't a scroll container and sticky still works.
+    overflow-x: clip;
     transform: translateY(90px) scale(0.95);
     opacity: 0;
     transition: variables.$tr;
