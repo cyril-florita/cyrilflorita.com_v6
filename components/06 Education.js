@@ -9,7 +9,7 @@ const Education = () => {
 
         <div>
           <p className="cyril-upper subheader">
-            &#91; My <span className="cyril-accent">Training</span> &nbsp;&#93;
+            &#91; My <span className="cyril-accent">Training</span> &#93;
           </p>
           <h2 className="cyril-up cyril-mb-50 glitch" data-text="Education">Education</h2>
         </div>

@@ -7,7 +7,7 @@ import { scrambleText, splitChars, hideSplitTitle, scrambleInTitle } from "@/pub
 // - subheader text scramble and section-title letter type-in (all devices)
 // - custom cursor, magnetic clickables, portfolio card tilt and hero
 //   mouse parallax (desktop with a real mouse only)
-// - scroll + mouse parallax on the dotted background circles (desktop)
+// - scroll + mouse parallax on the dotted background diamonds (desktop)
 // Everything is skipped under prefers-reduced-motion. Hover targets are found
 // by delegation (closest()) so late-mounted content like the portfolio grid
 // works without re-binding.
@@ -173,15 +173,18 @@ const PARALLAX_LAYERS = [
 // same, driven by playHeroIntro in app/page.js).
 const TITLE_SELECTOR = '#portfolio-start h2.glitch, .cyril-onepage .cyril-section h2.glitch, .cyril-case-title, .cyril-contact-title, .cyril-not-found-title';
 
-// Dotted background circles: how much further than their section they
+// Dotted background diamonds: how much further than their section they
 // travel while it scrolls (fraction of the section's offset from the top of
 // the viewport), plus how far they drift with the mouse. They're pushed
 // *away* from the viewport while their section is off-screen, so they never
-// poke into a neighbouring section and meet its circles. The large circles
-// move less. At rest (section at the top) they're exactly where the markup
+// poke into a neighbouring section and meet its diamonds. The large ones
+// scroll less. At rest (section at the top) they're exactly where the markup
 // puts them.
 const BG_SCROLL_FACTOR = { large: 0.18, small: 0.4 };
-const BG_MOUSE_PX = { large: 14, small: 28 };
+// Mouse drift (px at the viewport edge) matches the hero's dotted box
+// (PARALLAX_LAYERS below), and is the same for every diamond so their gaps
+// never change.
+const BG_MOUSE_PX = { large: 32, small: 32 };
 
 const prefersReducedMotion = () =>
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -394,8 +397,8 @@ const MotionEffects = () => {
       let moving = false;
       circles.forEach((c) => {
         const top = c.anchor.getBoundingClientRect().top;
-        const tx = nx * c.mouse;
-        const ty = top * c.scroll + ny * c.mouse;
+        const tx = nx * c.mouse * 2;
+        const ty = top * c.scroll + ny * c.mouse * 2;
         c.x += (tx - c.x) * 0.12;
         c.y += (ty - c.y) * 0.12;
         if (Math.abs(tx - c.x) > 0.05 || Math.abs(ty - c.y) > 0.05) moving = true;

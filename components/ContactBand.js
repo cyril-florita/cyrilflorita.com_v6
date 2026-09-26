@@ -18,9 +18,14 @@ const PROFILES = [
 
 const ContactBand = ({ resume }) => (
   <div className="cyril-contact">
+    {/* Dotted background diamonds in the empty half beside the text, sized
+        off the band's height so both fit whole (.cyril-contact .cyril-bg-item
+        in _components.scss). */}
+    <div className="cyril-bg-item cyril-bg-item-large" style={{ top: "28.0%", right: "7%" }} />
+    <div className="cyril-bg-item" style={{ top: "16%", left: "42%" }} />
     <div className="container">
       <p className="cyril-upper subheader">
-        &#91; Let&apos;s <span className="cyril-accent">connect</span> &nbsp;&#93;
+        &#91; Let&apos;s <span className="cyril-accent">connect</span> &#93;
       </p>
       <h2 className="cyril-up glitch cyril-contact-title" data-text="Let's work together">
         Let&apos;s work together

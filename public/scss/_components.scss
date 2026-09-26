@@ -781,14 +781,21 @@ pagination
     }
 }
 
+// Dotted background diamonds (were circles). Squares turned 45° — forced over
+// the per-item inline rotations, which only varied the dot angle on circles —
+// and sized 1.9× the old circles' span (as large as the About Me layouts
+// allow while every diamond stays clear of the others — measured per
+// section at 1280–1920px wide; re-check before enlarging further). The
+// negative margin (half the growth) keeps each diamond centered where the
+// inline top/left/right/bottom positions originally put it.
 .cyril-bg-item {
     opacity: .35;
-    width: 420px;
-    height: 420px;
+    width: 564px;
+    height: 564px;
+    margin: -133.5px;
     position: absolute;
     z-index: -1;
-    border-radius: 50%;
-    transform: rotate(30deg);
+    transform: rotate(45deg) !important;
     --dot-size: 2px;
     --dot-space: 10px;
     background-image:
@@ -800,11 +807,10 @@ pagination
 
     &:before {
         content: '';
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
+        width: 201px;
+        height: 201px;
         position: absolute;
-        left: -170px;
+        left: -323px;
         --dot-size: 2px;
         --dot-space: 10px;
         background-image:
@@ -816,8 +822,9 @@ pagination
     }
 
     &.cyril-bg-item-large {
-        width: 700px;
-        height: 700px;
+        width: 940px;
+        height: 940px;
+        margin: -222.5px;
 
         &::before {
             display: none;
@@ -829,25 +836,25 @@ pagination
     }
 }
 
-// About Me: circles sized off the viewport height so each one (satellite
-// included) always fits whole on screen inside its 100vh section. The
-// inline positions/rotations in the About Me components were laid out
-// against these sizes to keep every circle fully visible and apart from
-// the others — resize them together.
+// About Me: diamonds sized off the viewport height, relative to the inline
+// positions in the About Me components, so no two shapes in a section touch
+// — resize them together.
 .cyril-onepage .cyril-bg-item {
-    width: 30vh;
-    height: 30vh;
+    width: 40.3vh;
+    height: 40.3vh;
+    margin: -9.55vh;
 
     &::before {
-        width: 10vh;
-        height: 10vh;
+        width: 13.5vh;
+        height: 13.5vh;
         top: 0;
-        left: -13vh;
+        left: -24.7vh;
     }
 
     &.cyril-bg-item-large {
-        width: 52vh;
-        height: 52vh;
+        width: 69.9vh;
+        height: 69.9vh;
+        margin: -16.55vh;
     }
 }
 
@@ -917,6 +924,24 @@ top panel
             z-index: -1;
         }
 
+    }
+
+    // Desktop: transparent header on About Me (snap-scrolled full-screen
+    // sections, marked by body.cyril-custom-scroll) and on the home page
+    // (hero + My Work), so the background diamonds show through — except
+    // that on the home page it gets its background back while scrolling up
+    // (.cyril-scrolled-up, set by cyrilUtility.topBarActive). Tablet and
+    // mobile keep the solid bar.
+    @media screen and (min-width: 1201px) {
+        .cyril-custom-scroll &.cyril-tp-inner,
+        body:has(.cyril-main-page) .cyril-frame:not(.cyril-scrolled-up) &.cyril-tp-inner {
+            background: transparent;
+
+            &::before,
+            &::after {
+                background: transparent;
+            }
+        }
     }
 
     & .cyril-tp-frame {
@@ -2820,27 +2845,43 @@ contact band (components/ContactBand.js)
 .cyril-contact {
     position: relative;
     padding: 160px 0 170px;
-
-    // Home page: a frame line separates it from the grid above.
-    .cyril-main-page & {
-        border-top: 2px solid var(--color-frame);
-
-        // Shadow line; stops at the right edge (it used to run 5px past it,
-        // which made the page scroll sideways without .cyril-page's margin).
-        &::before {
-            content: "";
-            position: absolute;
-            top: 7px;
-            left: 7px;
-            right: 0;
-            border-top: 2px solid var(--color-frameshadow);
-        }
-    }
+    // Keeps its background diamonds inside the band.
+    overflow: hidden;
 
     // About Me: it's a 100vh snap section, so just centre it vertically.
+    // Desktop: stretch to the section's full height so the background
+    // diamonds have the whole screen, not just the text's height.
     .cyril-onepage & {
         width: 100%;
         padding: 0;
+
+        @media screen and (min-width: 1201px) {
+            align-self: stretch;
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    // Diamonds sized off the band's height (tip-to-tip ≈ 62% and 34% of it)
+    // so they always fit whole; the satellite keeps its proportions.
+    & .cyril-bg-item {
+        width: auto;
+        height: 24%;
+        aspect-ratio: 1 / 1;
+        margin: 0;
+
+        &::before {
+            width: 35.6%;
+            height: 35.6%;
+            top: 0;
+            left: -57.3%;
+        }
+
+        &.cyril-bg-item-large {
+            width: auto;
+            height: 44%;
+            margin: 0;
+        }
     }
 
     @media screen and (max-width: 768px) {

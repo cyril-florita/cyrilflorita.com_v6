@@ -11,7 +11,7 @@ const Skills = () => {
       />
       <div className="container">
         <p className="cyril-upper subheader">
-        &#91; My <span className="cyril-accent">craft</span> &nbsp;&#93;
+        &#91; My <span className="cyril-accent">craft</span> &#93;
         </p>
         <h2 className="cyril-up cyril-mb-50 glitch" data-text="Skills">Skills</h2>
         <div className="row">

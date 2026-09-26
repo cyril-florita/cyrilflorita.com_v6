@@ -50,9 +50,6 @@ export const getSectionRevealElements = (section) => {
   });
 };
 
-const SCRAMBLE_CHARS = '!<>-_\\/[]{}=+*^?#01';
-const randomGlyph = () => SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
-
 const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 // A random letter in the same case as `char`.
 const randomLetter = (char) => {
@@ -60,7 +57,7 @@ const randomLetter = (char) => {
   return char === char.toLowerCase() ? letter.toLowerCase() : letter;
 };
 
-// Scrambles every text node under `el` through random glyphs, resolving
+// Scrambles every text node under `el` through random letters, resolving
 // left to right, without touching the markup (so nested accent spans keep
 // their styling). Used for subheaders (layout/MotionEffects.js).
 export const scrambleText = (el, duration = 800) => {
@@ -80,7 +77,7 @@ export const scrambleText = (el, duration = 800) => {
       node.textContent = originals[i].split('').map((char) => {
         const resolved = index++ / total < progress;
         if (resolved || !char.trim()) return char;
-        return randomGlyph();
+        return randomLetter(char);
       }).join('');
     });
     if (progress < 1) requestAnimationFrame(frame);
@@ -322,8 +319,12 @@ export const cyrilUtility = {
         // if scrolling down
         if (scrolling > lastScrollTop) {
           cyrilFrame.classList.add("hide");
+          cyrilFrame.classList.remove("cyril-scrolled-up");
         } else {
           cyrilFrame.classList.remove("hide");
+          // Scrolling back up (not at the very top): the home page's desktop
+          // header, otherwise transparent, gets its background back.
+          cyrilFrame.classList.toggle("cyril-scrolled-up", scrolling > 0);
         }
         // update last scroll position
         lastScrollTop = scrolling <= 0 ? 0 : scrolling;

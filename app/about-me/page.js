@@ -10,11 +10,16 @@ import Pagination from "@/layout/Pagination";
 import SiteLayout from "@/layout/SiteLayout";
 import { onepage } from "@/public/utility/onepage";
 import { useEffect } from "react";
+import { cyrilUtility } from "@/public/utility/index";
 
 const AboutMe = () => {
 
   useEffect(() => {
     document.querySelector("body").classList.add("cyril-custom-scroll");
+    // Solid header like the other pages — on tablet/mobile, where this page
+    // scrolls normally. Desktop keeps it transparent over the snap sections
+    // (see .cyril-tp-inner in _components.scss).
+    cyrilUtility.tpInner();
     return onepage();
   }, []);
 

@@ -224,7 +224,7 @@ const Index = () => {
 
             <div className="cyril-top-banner">
               <p className="cyril-upper subheader">
-                &#91; My <span className="cyril-accent">select projects</span> &nbsp;&#93;
+                &#91; My <span className="cyril-accent">select projects</span> &#93;
               </p>
               <h2 className="cyril-up cyril-mb-20 glitch" data-text="My Work">My Work</h2>
               <p className="cyril-left-offset">

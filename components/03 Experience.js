@@ -37,7 +37,7 @@ const Experience = () => {
       />
       <div className="container">
         <p className="cyril-upper subheader">
-          &#91; My <span className="cyril-accent">career</span> &nbsp;&#93;
+          &#91; My <span className="cyril-accent">career</span> &#93;
         </p>
         <h2 className="cyril-up glitch" data-text="Experience">Experience</h2>
 

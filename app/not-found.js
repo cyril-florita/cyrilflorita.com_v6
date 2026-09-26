@@ -27,7 +27,7 @@ const NotFound = () => {
       <div className="cyril-page cyril-not-found">
         <div className="container">
           <p className="cyril-upper subheader">
-            &#91; Page <span className="cyril-accent">not found</span> &nbsp;&#93;
+            &#91; Page <span className="cyril-accent">not found</span> &#93;
           </p>
           <h1 className="cyril-up glitch cyril-not-found-title" data-text="404">404</h1>
           <p className="cyril-not-found-lede">
