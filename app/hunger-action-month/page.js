@@ -62,7 +62,7 @@ const Page = () => {
         <div className="cyril-page cyril-project-page cyril-case-page">
 
           <CaseHero
-            category="Design, Development, & Marketing Campaign Performance Tracking"
+            category="Design, Development, & Campaign Performance Tracking"
             detail="Campaign Page & Analytics"
             title="Hunger Action Month"
             summary="A rebuilt campaign page for Children's Hunger Fund with analytics designed in from day one: every channel tagged, every key interaction measured, and every donation traceable to where it came from."

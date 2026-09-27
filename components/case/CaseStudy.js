@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { imageProps, SIZES_HINT } from "@/components/imageProps";
 import VIDEO_SIZES from "@/components/data/videoSizes.json";
 import CountUp from "@/components/CountUp";
+import ContactBand from "@/components/ContactBand";
 import TileMedia, { TILE_MEDIA } from "@/components/TileMedia";
 
 // Building blocks for the editorial case-study layout (piloted on
@@ -299,6 +300,7 @@ export const CaseNext = ({ href, title, category, onBack }) => {
     wipeThen(() => router.push(href));
   };
   return (
+  <>
   <div className="container cyril-case-end">
     <BackToAllWork onClick={onBack} className="cyril-case-back" />
     <Link href={href} className="cyril-case-next" onClick={goNext}>
@@ -319,5 +321,8 @@ export const CaseNext = ({ href, title, category, onBack }) => {
       <span className="cyril-upper cyril-accent cyril-case-next-category">{category}</span>
     </Link>
   </div>
+  {/* "Let's work together" closes every case study, as on / and /about-me. */}
+  <ContactBand />
+  </>
   );
 };

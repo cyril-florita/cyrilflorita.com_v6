@@ -59,7 +59,7 @@ const Page = () => {
         <div className="cyril-page cyril-project-page cyril-case-page">
 
           <CaseHero
-            category="Design, Development, & Marketing Campaign Performance Tracking"
+            category="Design, Development, & Campaign Performance Tracking"
             detail="Campaign Landing Page"
             title="35-Day Generosity Challenge"
             summary="A living landing page for a five-week, multi-channel campaign: one hub that evolved every Monday as supporters worked through a week-by-week journey of generosity."

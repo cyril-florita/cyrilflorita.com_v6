@@ -84,7 +84,7 @@ const Page = () => {
           <CaseNext
             href="/hunger-action-month"
             title="Hunger Action Month"
-            category="Design, Development, & Marketing Campaign Performance Tracking"
+            category="Design, Development, & Campaign Performance Tracking"
             onBack={handleBackToPortfolio}
           />
 

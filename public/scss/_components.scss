@@ -3165,10 +3165,14 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
     grid-template-columns: 200px minmax(0, 1fr);
     column-gap: 80px;
     padding-top: 120px;
+    // Room between the sticky rail's "Back to All Work" (which rides down to
+    // the end of this block) and the "Next project" band's top line.
+    padding-bottom: 120px;
 
     @media screen and (max-width: 1200px) {
         grid-template-columns: minmax(0, 1fr);
         padding-top: 80px;
+        padding-bottom: 0;
     }
 }
 
@@ -3702,12 +3706,9 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
 }
 
 // closing band: back link + next project
+// The "Let's work together" band follows, with its own top padding.
 .cyril-case-end {
-    padding: 20px 0 140px;
-
-    @media screen and (max-width: 768px) {
-        padding-bottom: 90px;
-    }
+    padding: 20px 0 0;
 }
 
 // Only on tablet/mobile: above 1200px the sticky rail's copy is always in
