@@ -1601,6 +1601,13 @@ banner
     & .cyril-short {
         max-width: 680px;
 
+        // Desktop: as wide as its lines need (the scope line sets it, see
+        // .cyril-hero-scope), even past the text column toward the photo.
+        @media screen and (min-width: 1201px) {
+            width: max-content;
+            max-width: none;
+        }
+
         @media screen and (max-width: 1200px) {
             max-width: 100%;
         }
@@ -1624,12 +1631,35 @@ banner
                 position: relative;
             }
 
+            // Desktop: a bigger role line ("Designer and Developer").
+            @media screen and (min-width: 1201px) {
+                & > p:first-child {
+                    font-size: 22px;
+
+                    & strong {
+                        font-size: 40px;
+                    }
+                }
+            }
+
             // Supporting line under "Designer and Developer" — lighter, so the
             // headline stays the headline.
             & .cyril-hero-scope {
                 font-size: 1.15em;
                 font-weight: normal;
                 opacity: 0.85;
+
+                // Desktop: sized up so the one line saying what I do holds
+                // its own under the huge name (was 18.4px, reading as fine
+                // print), and given the width to sit on exactly two lines.
+                // Width is in em so the two-line break holds at any size;
+                // the font eases from 20px (at 1201px) to 22px (1440px+) so
+                // the line always ends before the photo.
+                @media screen and (min-width: 1201px) {
+                    font-size: clamp(20px, calc(0.837vw + 9.95px), 22px);
+                    opacity: 0.92;
+                    width: 29.9em;
+                }
 
                 @media screen and (max-width: 767px) {
                     font-size: 15px;
