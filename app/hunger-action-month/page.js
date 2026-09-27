@@ -82,8 +82,8 @@ const Page = () => {
 
             {/* 01 — Overview */}
             <CaseSection id="overview" number={1} title="Project Overview">
-              <p>Every September, Hunger Action Month calls attention to hunger, and it&apos;s one of Children&apos;s Hunger Fund&apos;s key campaigns. This year it became the ministry&apos;s first campaign with end-to-end analytics built in from the very beginning.</p>
-              <p>I designed the landing page and wrote its copy. Beyond the page and its homepage banner, I built a complete event-tracking layer, wrote the plan that governs how every inbound link is tagged across all channels, and built an internal dashboard to follow the campaign in real time.</p>
+              <p>Every September, Hunger Action Month calls attention to hunger, and it&apos;s one of Children&apos;s Hunger Fund&apos;s key campaigns.</p>
+              <p>Beyond the landing page and its homepage banner, I built a complete event-tracking layer, wrote the plan that governs how every inbound link is tagged across all channels, and built an internal dashboard to follow the campaign in real time.</p>
               <CaseVideo src="/img/portfolio/chf-hunger-action-month_preview.mp4" caption="Landing page preview" url="childrenshungerfund.org" />
               <CaseStats items={[
                 { value: "10", label: "Modular page sections" },
@@ -119,7 +119,6 @@ const Page = () => {
               <ul className="cyril-case-list">
                 <li><strong>No exits.</strong> I removed the top navigation, leaving only the logo linking home, the same distraction-free pattern I established on Giving Tuesday.</li>
                 <li><strong>Fewer competing asks.</strong> I cut a secondary actions section and an extra button that pulled attention away from the primary give action.</li>
-                <li><strong>The form first.</strong> The embedded giving form stays above the fold, with supporting content below to carry undecided visitors down the page.</li>
               </ul>
             </CaseSection>
 
@@ -151,7 +150,6 @@ const Page = () => {
                 <li>gave internal site links their own medium, so they no longer overwrite a visitor&apos;s original source</li>
                 <li>built every link through one shared link generator, validated against the plan</li>
               </ul>
-              <p>It was the ministry&apos;s first unified link-tracking plan across every marketing channel for a single campaign.</p>
             </CaseSection>
 
             {/* 07 — Campaign Dashboard */}
@@ -174,7 +172,7 @@ const Page = () => {
               <CaseQuote>
                 Every email, paid ad, social post, QR code, and web placement was tagged and traceable&mdash;from first click to completed donation.
               </CaseQuote>
-              <p>Hunger Action Month was the ministry&apos;s first campaign with full-funnel, cross-channel attribution from day one, connecting on-page behavior and completed donations back to the channels that drove them. The tracking foundation built here became the reusable template for the campaigns that followed, including the year-end push.</p>
+              <p>Hunger Action Month was the ministry&apos;s first campaign with full-funnel, cross-channel attribution from day one, and the tracking foundation built here became the reusable template for the campaigns that followed, including the year-end push.</p>
               <p>See the <a className="cyril-accent" href="https://childrenshungerfund.org/hungeractionmonth/" target="_blank" rel="noopener noreferrer"><strong>Hunger Action Month campaign page</strong></a> live.</p>
             </CaseSection>
 
