@@ -324,7 +324,7 @@ const PortfolioIsotope = () => {
           <div className="grid-sizer" />
 
           {/* wide . hunger action month */}
-          <div id="hungeractionmonth" data-project="hungeractionmonth" data-order-uix="4" data-order-brand="2" className="cyril-grid-item fil-uix fil-marketing">
+          <div id="hungeractionmonth" data-project="hungeractionmonth" data-order-uix="2" data-order-brand="3" className="cyril-grid-item fil-uix fil-marketing">
             <Link href="/hunger-action-month" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -342,27 +342,27 @@ const PortfolioIsotope = () => {
             </Link>
           </div>
 
-          {/* square . gracestream */}
-          <div id="gracestream" data-project="gracestream" data-order-uix="1" data-order-brand="3" className="cyril-grid-item fil-branding fil-uix">
-            <Link href="/grace-stream" onClick={saveFilterOnNavigate}>
+          {/* square . hunger action month campaign dashboard (looping video thumbnail) */}
+          <div id="hamdashboard" data-project="hamdashboard" data-order-uix="4" data-order-brand="1" className="cyril-grid-item fil-uix fil-marketing">
+            <Link href="/hunger-action-month-dashboard" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <TileMedia slug="/grace-stream" />
+                  <TileMedia slug="/hunger-action-month-dashboard" />
                   <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
                   </div>
                 </div>
                 <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Branding, Design, &amp; Development</p>
-                  <h4 className="cyril-up">Grace Stream</h4>
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Design, Development, &amp; Campaign Performance Tracking</p>
+                  <h4 className="cyril-up">Hunger Action Month Campaign Dashboard</h4>
                 </div>
               </div>
             </Link>
           </div>
 
           {/* wide . gty v9 (looping video thumbnail) */}
-          <div id="gty9" data-project="gty9" data-order-uix="2" className="cyril-grid-item fil-uix">
+          <div id="gty9" data-project="gty9" data-order-uix="1" className="cyril-grid-item fil-uix">
             <Link href="/gty_v9" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -384,7 +384,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* wide . giving tuesday (looping video thumbnail) */}
-          <div id="givingtuesday" data-project="givingtuesday" data-order-uix="3" data-order-brand="1" className="cyril-grid-item fil-uix fil-marketing">
+          <div id="givingtuesday" data-project="givingtuesday" data-order-uix="5" data-order-brand="2" className="cyril-grid-item fil-uix fil-marketing">
             <Link href="/giving-tuesday" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -421,28 +421,27 @@ const PortfolioIsotope = () => {
             </Link>
           </div>
 
-          {/* wide . gty app (looping video thumbnail — Fig. 01 on its page) */}
-          <div id="gtyapplanding" data-project="gtyapplanding" data-order-uix="5" className="cyril-grid-item fil-uix">
-            <Link href="/gty-app-landing" onClick={saveFilterOnNavigate}>
-              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
-                {/* Cover sized to the video (640×488), so none of it is cropped. */}
-                <div className="cyril-cover" style={{ paddingBottom: `${(488 / 640) * 100}%` }}>
-                  <TileMedia slug="/gty-app-landing" />
+          {/* square . gracestream */}
+          <div id="gracestream" data-project="gracestream" data-order-uix="3" data-order-brand="4" className="cyril-grid-item fil-branding fil-uix">
+            <Link href="/grace-stream" onClick={saveFilterOnNavigate}>
+              <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
+                <div className="cyril-cover">
+                  <TileMedia slug="/grace-stream" />
                   <h3>Case<br />Study</h3>
                   <div className="cyril-hover-link">
                     <i className="fas fa-link" />
                   </div>
                 </div>
                 <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Design &amp; Development</p>
-                  <h4 className="cyril-up">GTY App Landing Page</h4>
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Branding, Design, &amp; Development</p>
+                  <h4 className="cyril-up">Grace Stream</h4>
                 </div>
               </div>
             </Link>
           </div>
 
           {/* wide . 35-day generosity challenge (looping video thumbnail) */}
-          <div id="generositychallenge" data-project="generositychallenge" data-order-uix="8" data-order-brand="4" className="cyril-grid-item fil-uix fil-marketing">
+          <div id="generositychallenge" data-project="generositychallenge" data-order-uix="8" data-order-brand="6" className="cyril-grid-item fil-uix fil-marketing">
             <Link href="/35-day-generosity-challenge" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -460,8 +459,46 @@ const PortfolioIsotope = () => {
             </Link>
           </div>
 
+          {/* wide . gty dashboard */}
+          <div id="gtydashboard" data-project="gtydashboard" data-order-uix="11" className="cyril-grid-item fil-uix">
+            <Link href="/gty-dashboard" onClick={saveFilterOnNavigate}>
+              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
+                <div className="cyril-cover">
+                  <TileMedia slug="/gty-dashboard" />
+                  <h3>Case<br />Study</h3>
+                  <div className="cyril-hover-link">
+                    <i className="fas fa-link" />
+                  </div>
+                </div>
+                <div className="cyril-project-descr">
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Design &amp; Development</p>
+                  <h4 className="cyril-up">GTY Dashboard</h4>
+                </div>
+              </div>
+            </Link>
+          </div>
+
+          {/* wide . the study bible app */}
+          <div id="thestudybibleapp" data-project="thestudybibleapp" data-order-uix="12" className="cyril-grid-item fil-uix">
+            <Link href="/the-study-bible-app" onClick={saveFilterOnNavigate}>
+              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
+                <div className="cyril-cover">
+                  <TileMedia slug="/the-study-bible-app" />
+                  <h3>Case<br />Study</h3>
+                  <div className="cyril-hover-link">
+                    <i className="fas fa-link" />
+                  </div>
+                </div>
+                <div className="cyril-project-descr">
+                  <p className="cyril-upper cyril-accent cyril-mb-10">App Design &amp; Prototyping</p>
+                  <h4 className="cyril-up">The Study Bible App</h4>
+                </div>
+              </div>
+            </Link>
+          </div>
+
           {/* wide . volunteer leadership team (looping video thumbnail) */}
-          <div id="volunteerleadership" data-project="volunteerleadership" data-order-uix="7" data-order-brand="6" className="cyril-grid-item fil-uix fil-marketing">
+          <div id="volunteerleadership" data-project="volunteerleadership" data-order-uix="9" data-order-brand="7" className="cyril-grid-item fil-uix fil-marketing">
             <Link href="/volunteer-leadership-team" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -474,6 +511,26 @@ const PortfolioIsotope = () => {
                 <div className="cyril-project-descr">
                   <p className="cyril-upper cyril-accent cyril-mb-10">Design &amp; Development</p>
                   <h4 className="cyril-up">Volunteer Leadership Team</h4>
+                </div>
+              </div>
+            </Link>
+          </div>
+
+          {/* wide . gty app (looping video thumbnail — Fig. 01 on its page) */}
+          <div id="gtyapplanding" data-project="gtyapplanding" data-order-uix="7" className="cyril-grid-item fil-uix">
+            <Link href="/gty-app-landing" onClick={saveFilterOnNavigate}>
+              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
+                {/* Cover sized to the video (640×488), so none of it is cropped. */}
+                <div className="cyril-cover" style={{ paddingBottom: `${(488 / 640) * 100}%` }}>
+                  <TileMedia slug="/gty-app-landing" />
+                  <h3>Case<br />Study</h3>
+                  <div className="cyril-hover-link">
+                    <i className="fas fa-link" />
+                  </div>
+                </div>
+                <div className="cyril-project-descr">
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Design &amp; Development</p>
+                  <h4 className="cyril-up">GTY App Landing Page</h4>
                 </div>
               </div>
             </Link>
@@ -498,27 +555,8 @@ const PortfolioIsotope = () => {
             </Link>
           </div>
 
-          {/* wide . gty dashboard */}
-          <div id="gtydashboard" data-project="gtydashboard" data-order-uix="9" className="cyril-grid-item fil-uix">
-            <Link href="/gty-dashboard" onClick={saveFilterOnNavigate}>
-              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
-                <div className="cyril-cover">
-                  <TileMedia slug="/gty-dashboard" />
-                  <h3>Case<br />Study</h3>
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
-                </div>
-                <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Design &amp; Development</p>
-                  <h4 className="cyril-up">GTY Dashboard</h4>
-                </div>
-              </div>
-            </Link>
-          </div>
-
           {/* wide . marketing . blog graphics */}
-          <div id="gtyblog" data-project="gtyblog" data-order-brand="8" className="cyril-grid-item fil-marketing">
+          <div id="gtyblog" data-project="gtyblog" data-order-brand="9" className="cyril-grid-item fil-marketing">
             <Link href="/gty-blog-graphics" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -537,7 +575,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* square . social media graphics */}
-          <div id="gtysocialmedia" data-project="gtysocialmedia" data-order-brand="7" className="cyril-grid-item fil-marketing">
+          <div id="gtysocialmedia" data-project="gtysocialmedia" data-order-brand="8" className="cyril-grid-item fil-marketing">
             <Link href="/gty-social-media-graphics" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -556,7 +594,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* wide . gty resources */}
-          <div id="gtyresources" data-project="gtyresources" data-order-brand="9" className="cyril-grid-item fil-marketing">
+          <div id="gtyresources" data-project="gtyresources" data-order-brand="10" className="cyril-grid-item fil-marketing">
             <Link href="/gty-resources" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -574,27 +612,8 @@ const PortfolioIsotope = () => {
             </Link>
           </div>
 
-          {/* wide . the study bible app */}
-          <div id="thestudybibleapp" data-project="thestudybibleapp" data-order-uix="11" className="cyril-grid-item fil-uix">
-            <Link href="/the-study-bible-app" onClick={saveFilterOnNavigate}>
-              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
-                <div className="cyril-cover">
-                  <TileMedia slug="/the-study-bible-app" />
-                  <h3>Case<br />Study</h3>
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
-                </div>
-                <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">App Design &amp; Prototyping</p>
-                  <h4 className="cyril-up">The Study Bible App</h4>
-                </div>
-              </div>
-            </Link>
-          </div>
-
           {/* square . (branding) study bible app */}
-          <div id="thestudybibleapplogo" data-project="thestudybibleapplogo" data-order-brand="10" className="cyril-grid-item fil-branding">
+          <div id="thestudybibleapplogo" data-project="thestudybibleapplogo" data-order-brand="11" className="cyril-grid-item fil-branding">
             <Link href="/the-study-bible-app-logo" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -612,26 +631,8 @@ const PortfolioIsotope = () => {
             </Link>
           </div>
 
-          {/* long . sekihmentis */}
-          <div id="sekihmentis" data-project="sekihmentis" data-order-brand="12" className="cyril-grid-item fil-illustration">
-            <Link href="/sekihmentis" onClick={saveFilterOnNavigate}>
-              <div className="cyril-portfolio-item cyril-long-item cyril-mb-80">
-                <div className="cyril-cover">
-                  <TileMedia slug="/sekihmentis" />
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
-                </div>
-                <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Illustration</p>
-                  <h4 className="cyril-up">SekihMentis</h4>
-                </div>
-              </div>
-            </Link>
-          </div>
-
           {/* square . patricia macarthur */}
-          <div id="patriciamacarthur" data-project="patriciamacarthur" data-order-brand="11" className="cyril-grid-item fil-branding fil-illustration">
+          <div id="patriciamacarthur" data-project="patriciamacarthur" data-order-brand="12" className="cyril-grid-item fil-branding fil-illustration">
             <Link href="/patricia-macarthur-pastoral-care-fund" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -649,8 +650,26 @@ const PortfolioIsotope = () => {
             </Link>
           </div>
 
+          {/* long . sekihmentis */}
+          <div id="sekihmentis" data-project="sekihmentis" data-order-brand="13" className="cyril-grid-item fil-illustration">
+            <Link href="/sekihmentis" onClick={saveFilterOnNavigate}>
+              <div className="cyril-portfolio-item cyril-long-item cyril-mb-80">
+                <div className="cyril-cover">
+                  <TileMedia slug="/sekihmentis" />
+                  <div className="cyril-hover-link">
+                    <i className="fas fa-link" />
+                  </div>
+                </div>
+                <div className="cyril-project-descr">
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Illustration</p>
+                  <h4 className="cyril-up">SekihMentis</h4>
+                </div>
+              </div>
+            </Link>
+          </div>
+
           {/* square . illustration . he took my place */}
-          <div id="hetookmyplace" data-project="hetookmyplace" data-order-brand="13" className="cyril-grid-item fil-illustration">
+          <div id="hetookmyplace" data-project="hetookmyplace" data-order-brand="14" className="cyril-grid-item fil-illustration">
             <Link href="/he-took-my-place" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">

@@ -177,9 +177,9 @@ const Page = () => {
           </CaseLayout>
 
           <CaseNext
-            href="/the-study-bible-app"
-            title="The Study Bible App"
-            category="App Design & Prototyping"
+            href="/the-study-bible-app-logo"
+            title="The Study Bible App Logo"
+            category="Branding"
             onBack={handleBackToPortfolio}
           />
 

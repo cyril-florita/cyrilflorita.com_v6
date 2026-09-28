@@ -123,6 +123,10 @@ const GridSlideshow = ({ images, label, interval = SLIDE_MS, fade, cut = false }
 };
 
 export const TILE_MEDIA = {
+  "/hunger-action-month-dashboard": {
+    kind: "video", src: "/img/portfolio/chf-ham-dashboard_preview.mp4", poster: "/img/thumbs/portfolio/chf-ham-dashboard_preview-poster.webp", label: "Hunger Action Month Campaign Dashboard preview",
+    shape: "square",
+  },
   "/hunger-action-month": {
     kind: "video", src: "/img/portfolio/chf-hunger-action-month_preview.mp4", poster: "/img/thumbs/portfolio/chf-hunger-action-month_preview-poster.webp", label: "Hunger Action Month landing page preview",
     shape: "wide",

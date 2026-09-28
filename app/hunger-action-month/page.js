@@ -14,6 +14,7 @@ import {
   CaseGrid,
   CaseStats,
   CaseQuote,
+  CaseLink,
   CaseNext,
 } from "@/components/case/CaseStudy";
 
@@ -72,6 +73,7 @@ const Page = () => {
               { label: "Platform", value: "WordPress" },
               { label: "Tools", value: "PHP, SASS, JavaScript, Google Tag Manager, Google Analytics 4" },
               { label: "Deliverables", value: "Landing page, homepage banner, event tracking, link-tagging plan, campaign dashboard" },
+              { label: "Related", value: <CaseLink href="/hunger-action-month-dashboard" className="cyril-dark">Campaign dashboard case study</CaseLink> },
               { label: "Website", value: <a className="cyril-dark" href="https://childrenshungerfund.org/hungeractionmonth/" target="_blank" rel="noopener noreferrer">childrenshungerfund.org/hungeractionmonth</a> },
             ]}
             image="/img/portfolio/chf-hunger-action-month_main.jpg"
@@ -155,7 +157,7 @@ const Page = () => {
             {/* 07 — Campaign Dashboard */}
             <CaseSection id="dashboard" number={7} title="A Campaign Dashboard">
               <p>To follow the campaign as it happened, I built a private, internal analytics dashboard. Its data is gathered in the background on a fixed schedule and served from a local cache, so the dashboard loads instantly and never slows the public site down.</p>
-              <p><strong>Coming soon:</strong> a case study for the Hunger Action Month Campaign Dashboard.</p>
+              <p>Read the full story, from the tracking plan behind it to a design that keeps the website up no matter how slow the data source is, in the <CaseLink href="/hunger-action-month-dashboard"><strong>Hunger Action Month Campaign Dashboard</strong></CaseLink> case study.</p>
             </CaseSection>
 
             {/* 08 — Every Screen */}
@@ -179,9 +181,9 @@ const Page = () => {
           </CaseLayout>
 
           <CaseNext
-            href="/grace-stream"
-            title="Grace Stream"
-            category="Branding, Design, & Development"
+            href="/hunger-action-month-dashboard"
+            title="Hunger Action Month Campaign Dashboard"
+            category="Design, Development, & Campaign Performance Tracking"
             onBack={handleBackToPortfolio}
           />
 

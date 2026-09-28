@@ -140,6 +140,18 @@ export const BackToAllWork = ({ onClick, className = "" }) => (
   </button>
 );
 
+// An in-text link to another case study, going through the same preloader
+// wipe as every other internal navigation (new tabs etc. still work).
+export const CaseLink = ({ href, children, className = "cyril-accent" }) => {
+  const router = useRouter();
+  const go = (e) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+    e.preventDefault();
+    wipeThen(() => router.push(href));
+  };
+  return <Link href={href} className={className} onClick={go}>{children}</Link>;
+};
+
 export const CaseLayout = ({ sections, children }) => {
   const router = useRouter();
   const [activeId, setActiveId] = useState(sections[0]?.id);

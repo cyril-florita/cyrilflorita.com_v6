@@ -213,9 +213,9 @@ const Page = () => {
           </CaseLayout>
 
           <CaseNext
-            href="/the-study-bible-app-logo"
-            title="The Study Bible App Logo"
-            category="Branding"
+            href="/gty-dashboard"
+            title="GTY Dashboard"
+            category="Design & Development"
             onBack={handleBackToPortfolio}
           />
 

@@ -48,6 +48,7 @@ const IMAGES = {
   "he-took-my-place": ["/img/portfolio/main_he-took-my-place.jpg", "contain"],
   sekihmentis: ["/img/portfolio/main_sekihmentis.jpg", "contain"],
   "hunger-action-month": ["/img/portfolio/chf-hunger-action-month_main.jpg", "cover", "left"],
+  "hunger-action-month-dashboard": ["/img/portfolio/chf-ham-dashboard_poster.jpg", "cover", "top"],
   "35-day-generosity-challenge": ["/img/portfolio/chf-35-day-generosity_main.jpg", "cover", "top"],
   "giving-tuesday": ["/img/portfolio/chf-giving-tuesday_main.jpg", "cover", "top"],
   "volunteer-leadership-team": ["/img/portfolio/chf-volunteer-leadership_main.jpg", "cover", "top"],

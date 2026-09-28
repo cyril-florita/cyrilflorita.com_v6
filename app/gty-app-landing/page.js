@@ -165,9 +165,9 @@ const Page = () => {
           </CaseLayout>
 
           <CaseNext
-            href="/gty_v8"
-            title="Grace to You (v.8)"
-            category="Design & Front-End Development"
+            href="/gty-blog-graphics"
+            title="GTY Blog Graphics"
+            category="Marketing"
             onBack={handleBackToPortfolio}
           />
 

@@ -153,9 +153,9 @@ const Page = () => {
           </CaseLayout>
 
           <CaseNext
-            href="/gty-dashboard"
-            title="GTY Dashboard"
-            category="Design & Development"
+            href="/truth-matters"
+            title="Truth Matters Podcast"
+            category="Branding, Design, & Development"
             onBack={handleBackToPortfolio}
           />
 

@@ -224,9 +224,9 @@ const Page = () => {
           </CaseLayout>
 
           <CaseNext
-            href="/gty_v9"
-            title="Grace to You"
-            category="UX Design"
+            href="/gty_v8"
+            title="Grace to You (v.8)"
+            category="Design & Front-End Development"
             onBack={handleBackToPortfolio}
           />
 
