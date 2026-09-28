@@ -67,13 +67,13 @@ const Page = () => {
         <div className="cyril-page cyril-project-page cyril-case-page">
 
           <CaseHero
-            category="UX Design & Web Development"
+            category="Design & Front-End Development"
             detail="Responsive Web"
             title="Grace to You (v.8)"
             summary="Enhancing the user experience of GTY.org, the digital home for John MacArthur's teaching ministry, through the UX design and front-end development strategies that shaped version 8 of GTY's website."
             facts={[
               { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Media Organization</> },
-              { label: "Role", value: "Web Designer & Developer" },
+              { label: "Role", value: "Designer & Front-End Developer" },
               { label: "Platform", value: "Responsive Web — Mobile & Desktop" },
               { label: "Team", value: "Digital Platforms Coordinator, Software Engineer, Software Developer" },
               { label: "Tools", value: "Visual Studio Code, Google's Material Design System, HandlebarsJS" },

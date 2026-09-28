@@ -414,7 +414,7 @@ const PortfolioIsotope = () => {
                   </div>
                 </div>
                 <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">UX Design &amp; Web Development</p>
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Design &amp; Front-End Development</p>
                   <h4 className="cyril-up">Grace to You (v.8)</h4>
                 </div>
               </div>

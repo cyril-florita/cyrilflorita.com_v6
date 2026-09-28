@@ -3619,6 +3619,24 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
         &.cyril-case-grid-three {
             grid-template-columns: minmax(0, 1fr);
         }
+
+        // Phone-framed app screens stay two across, or a set of them turns
+        // into a very long scroll; the frame slims down to fit.
+        &.cyril-case-grid-three:has(.cyril-case-figure-phone) {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+
+            & .cyril-case-figure-phone {
+                & .cyril-cover {
+                    padding: 6px;
+                    border-radius: 26px;
+                }
+
+                & img {
+                    border-radius: 20px;
+                }
+            }
+        }
     }
 }
 
