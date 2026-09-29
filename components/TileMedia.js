@@ -210,8 +210,19 @@ export const TILE_MEDIA = {
     interval: 667, fade: 600,
     shape: "square",
   },
+  // The app, three screens per slide (reading, navigation, search, settings,
+  // account) after the original tile image; crossfading like the brand tiles.
   "/the-study-bible-app": {
-    kind: "image", src: "/img/portfolio/thumb_the-study-bible-app.jpg", alt: "Thumb - The Study Bible App",
+    kind: "slideshow", label: "The Study Bible app screens",
+    images: [
+      "/img/portfolio/thumb_the-study-bible-app.jpg",
+      "/img/portfolio/thumb_tsba-slide-1.jpg",
+      "/img/portfolio/thumb_tsba-slide-2.jpg",
+      "/img/portfolio/thumb_tsba-slide-3.jpg",
+      "/img/portfolio/thumb_tsba-slide-4.jpg",
+      "/img/portfolio/thumb_tsba-slide-5.jpg",
+    ],
+    interval: 1250, fade: 600,
     shape: "wide",
   },
   "/gty-resources": {

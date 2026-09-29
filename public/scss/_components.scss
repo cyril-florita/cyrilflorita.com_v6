@@ -3104,7 +3104,7 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
 .cyril-case-hero .cyril-case-summary {
     grid-column: 7 / -1;
     margin: 50px 0 0;
-    max-width: 34ch;
+    max-width: 42ch;
     font-size: 22px;
     line-height: 1.5;
 
@@ -3192,6 +3192,10 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
     // Room between the sticky rail's "Back to All Work" (which rides down to
     // the end of this block) and the "Next project" band's top line.
     padding-bottom: 120px;
+
+    @media screen and (min-width: 1400px) {
+        max-width: 1400px;
+    }
 
     @media screen and (max-width: 1200px) {
         grid-template-columns: minmax(0, 1fr);
@@ -3350,7 +3354,7 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
     & > p,
     & > ul,
     & > .cyril-case-subheading {
-        max-width: 68ch;
+        max-width: 70ch;
     }
 
     & > p {
