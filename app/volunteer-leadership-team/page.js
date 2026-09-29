@@ -70,6 +70,7 @@ const Page = () => {
               { label: "Platform", value: "WordPress" },
               { label: "Tools", value: "PHP, HTML & CSS, WPForms" },
               { label: "Deliverables", value: "Landing page, lead-capture form, event registration hand-off" },
+              { label: "Website", value: <a className="cyril-dark" href="https://childrenshungerfund.org/dallas-volunteer-leader" target="_blank" rel="noopener noreferrer">childrenshungerfund.org/dallas-volunteer-leader</a> },
             ]}
             image="/img/portfolio/chf-volunteer-leadership_main.jpg"
             imageAlt="Volunteer Leadership Team landing page"
@@ -148,6 +149,7 @@ const Page = () => {
             {/* 07 — Impact */}
             <CaseSection id="impact" number={7} title="Impact">
               <p>The page launched on schedule, ahead of the Open House, and became the single digital destination for the recruitment effort: every printed flyer, QR code scan, and staff conversation with a prospective Volunteer Leader pointed to it. Its interest form gave the new facility a structured pipeline for leads from day one.</p>
+              <p>See the <a className="cyril-accent" href="https://childrenshungerfund.org/dallas-volunteer-leader" target="_blank" rel="noopener noreferrer"><strong>Volunteer Leadership Team page</strong></a> live.</p>
             </CaseSection>
 
           </CaseLayout>

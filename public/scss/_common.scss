@@ -511,7 +511,7 @@ h4 {
 }
 
 .cyril-accent {
-    color: variables.$accent;
+    color: var(--color-accent-text);
 }
 
 .cyril-dark {
@@ -612,7 +612,7 @@ blockquote {
         margin-right: 30px;
         font-size: 36px;
         font-weight: 600;
-        color: variables.$accent;
+        color: var(--color-accent-text);
     }
 }
 
@@ -996,7 +996,7 @@ ul {
         padding: 2px 15px;
 
         & .fa-heart {
-            color: variables.$accent;
+            color: var(--color-accent-text);
             position: relative;
             top: 1px;
             display: inline-block;

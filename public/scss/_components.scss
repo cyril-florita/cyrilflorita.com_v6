@@ -712,7 +712,7 @@ pagination
             line-height: 100%;
             text-transform: uppercase;
             font-weight: 600;
-            color: var(--color-accent);
+            color: var(--color-accent-text);
             transform: translateX(-10px) scale(.9);
             transition: .4s cubic-bezier(0, 0, 0.3642, 1);
         }
@@ -998,7 +998,7 @@ top panel
         }
 
         &:hover {
-            color: variables.$accent;
+            color: var(--color-accent-text);
         }
 
         // Disabled state
@@ -1079,13 +1079,13 @@ top panel
                     }
 
                     &:hover {
-                        color: variables.$accent;
+                        color: var(--color-accent-text);
                     }
                 }
 
                 &.cyril-active {
                     &>a {
-                        color: variables.$accent;
+                        color: var(--color-accent-text);
                         cursor: default;
                     }
 
@@ -1204,7 +1204,7 @@ social panel
                 transition: variables.$tr;
 
                 &:hover {
-                    color: variables.$accent;
+                    color: var(--color-accent-text);
                 }
             }
         }
@@ -1353,7 +1353,7 @@ footer
                     }
 
                     &:hover {
-                        color: variables.$accent;
+                        color: var(--color-accent-text);
                     }
                 }
             }
@@ -1369,7 +1369,7 @@ footer
             padding: 0 15px;
 
             &:hover {
-                color: variables.$accent;
+                color: var(--color-accent-text);
             }
 
             & i {
@@ -2120,11 +2120,11 @@ experience
                 transition: variables.$tr;
 
                 &:hover {
-                    color: variables.$accent;
+                    color: var(--color-accent-text);
                 }
 
                 &.cyril-current {
-                    color: variables.$accent;
+                    color: var(--color-accent-text);
 
                     &::after {
                         content: '';
@@ -2262,7 +2262,7 @@ experience
             transition: variables.$tr;
 
             &:hover {
-                color: variables.$accent;
+                color: var(--color-accent-text);
             }
         }
     }
@@ -2452,23 +2452,24 @@ portfolio
             }
         }
 
+        // "Case Study" tag: a one-line rectangular label, top right.
         & h3 {
             position: absolute;
             top: 30px;
             right: 10px;
             display: inline-flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            text-align: center;
-            width: 80px;
-            height: 80px;
-            margin: 0 0 10px;
+            margin: 0;
+            padding: 10px 15px;
             background-color: variables.$accent;
-            border-radius: 50%;
+            border-radius: 0;
             color: variables.$light;
             font-family: var(--font-atkinson);
-            font-size: 12px;
+            font-size: 10px;
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: var(--tracking-caps);
+            white-space: nowrap;
             text-transform: uppercase;
             text-shadow: none;
             z-index: 1;
@@ -2544,7 +2545,7 @@ portfolio
                     font-weight: 600;
                     letter-spacing: 0.5px;
                     line-height: 1.25;
-                    color: variables.$accent;
+                    color: var(--color-accent-text);
                 }
 
                 @media screen and (max-width: 1200px) {
@@ -2563,19 +2564,42 @@ portfolio
 
         }
 
-        &:has(h3) .cyril-hover-link {
-            @media screen and (max-width: 1200px) {
-                display: none;
+        // Pages that aren't case studies (Sekihmentis, He Took My Place): the
+        // chain icon sits where the "Case Study" tag would, always visible.
+        & .cyril-hover-link.cyril-corner-link {
+            top: 30px;
+            right: 10px;
+            bottom: auto;
+            left: auto;
+            width: 44px;
+            height: 44px;
+            opacity: 1;
+            box-shadow: none;
+
+            & svg,
+            & i {
+                opacity: 1;
+                transform: none;
             }
         }
 
-        &:not(:has(h3)) .cyril-hover-link {
+        &:hover .cyril-hover-link.cyril-corner-link {
+            transform: translate(-10px, 5px);
+        }
+
+        // Graphics that only open in the zoom viewer: magnifier on hover, top
+        // right like the chain icon (desktop). No hover on touch, so it stays hidden there.
+        & .cyril-hover-link.cyril-zoom-link {
+            top: 30px;
+            right: 10px;
+            bottom: auto;
+            left: auto;
+            width: 44px;
+            height: 44px;
+            box-shadow: none;
+
             @media screen and (max-width: 1200px) {
-                top: 30px;
-                bottom: auto;
-                left: auto;
-                right: 10px;
-                transform: none;
+                display: none;
             }
         }
     }
@@ -2972,7 +2996,7 @@ contact band (components/ContactBand.js)
         transition: background-size 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
 
         &:hover {
-            color: var(--color-accent);
+            color: var(--color-accent-text);
             background-size: 100% 3px;
         }
     }
@@ -3001,7 +3025,7 @@ contact band (components/ContactBand.js)
 
         &:hover {
             opacity: 1;
-            color: var(--color-accent);
+            color: var(--color-accent-text);
         }
     }
 }
@@ -3249,13 +3273,13 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
 
         &:hover {
             opacity: 1;
-            color: var(--color-accent);
+            color: var(--color-accent-text);
         }
     }
 
     & .cyril-active a {
         opacity: 1;
-        color: var(--color-accent);
+        color: var(--color-accent-text);
         border-left-color: var(--color-accent);
     }
 
@@ -3311,7 +3335,7 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
 
     font-weight: 600;
     letter-spacing: var(--tracking-caps);
-    color: var(--color-accent);
+    color: var(--color-accent-text);
 }
 
 .cyril-case-section-head .cyril-case-heading {
@@ -3542,7 +3566,7 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
 
         &::before {
             content: "Fig. " counter(cyril-fig, decimal-leading-zero) " \2014\00a0";
-            color: var(--color-accent);
+            color: var(--color-accent-text);
         }
     }
 }
@@ -3640,6 +3664,15 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
     }
 }
 
+// Phone-framed app screens (CaseFigure size="phone"): on tablet/mobile the
+// always-visible zoom icon would cover much of the small screen — hide it
+// there (tapping still opens the viewer). Desktop keeps it on hover.
+@media screen and (max-width: 1200px) {
+    .cyril-case-figure-phone .cyril-hover-link {
+        display: none;
+    }
+}
+
 // big-number pull-outs
 .cyril-case-stats {
     margin: 70px 0 20px;
@@ -3675,7 +3708,7 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
         height: clamp(48px, 5vw, 88px);
         font-weight: 700;
         line-height: 1;
-        color: var(--color-accent);
+        color: var(--color-accent-text);
         text-shadow: 5px 5px 0 var(--color-soft);
     }
 
@@ -3864,7 +3897,7 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
     }
 
     & .cyril-case-next-title {
-        color: var(--color-accent);
+        color: var(--color-accent-text);
     }
 
     & .cyril-case-next-arrow {
@@ -4046,7 +4079,7 @@ zoom viewer (components/ZoomViewer.js)
 }
 
 .cyril-zoom-count {
-    color: var(--color-accent);
+    color: var(--color-accent-text);
     font-variant-numeric: tabular-nums;
 }
 
@@ -4209,7 +4242,7 @@ grounds (white / #121212) in both site themes, since the files include them.
     font-size: 13px;
     font-weight: 700;
     line-height: 1;
-    color: var(--color-accent);
+    color: var(--color-accent-text);
 
     &.cyril-brand-clear-x-top {
         top: calc(var(--clear-pad, 10%) / 2);
@@ -4387,7 +4420,7 @@ grounds (white / #121212) in both site themes, since the files include them.
     }
 
     .cyril-brand-dont & {
-        color: var(--color-accent);
+        color: var(--color-accent-text);
     }
 }
 

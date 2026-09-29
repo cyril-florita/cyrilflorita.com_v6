@@ -226,7 +226,7 @@ const Page = () => {
           <CaseNext
             href="/gty_v8"
             title="Grace to You (v.8)"
-            category="Design & Front-End Development"
+            category="UX Design & Front-End Development"
             onBack={handleBackToPortfolio}
           />
 

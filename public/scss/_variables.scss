@@ -9,6 +9,9 @@
     --color-light-gray: #e4e4e4;
     --color-accent: #fa4729;
     --color-accent-light: rgba(250, 71, 41, 0.18);
+    // Orange for *text* (labels, links, eyebrows): deeper in light mode so it
+    // passes WCAG AA (4.5:1) on white; the brand orange stays for fills.
+    --color-accent-text: #d63a1f;
     --color-black: #010101;
     --color-bg: var(--color-light);
     --color-text: var(--color-dark);
@@ -22,6 +25,7 @@
 
 // Dark theme colors
 [data-theme="dark"] {
+    --color-accent-text: #fa4729;
     --color-dark: #e4e4e4;
     --color-gray: #d0d0d0;
     --color-soft: rgba(255, 255, 255, 0.18);

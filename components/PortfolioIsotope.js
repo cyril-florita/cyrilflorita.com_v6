@@ -14,7 +14,7 @@ import { cyrilUtility } from "@/public/utility/index";
 // A single graphic as its own grid item (Marketing filter). It links to the
 // original image, which the zoom viewer opens; `group` keeps prev/next
 // within its set. `shape` picks the cover ratio: "square" or "banner"
-// (the ~2:1 blog header size). No hover icon — the cursor's "View" says it.
+// (the ~2:1 blog header size). A magnifying-glass icon shows on hover.
 const GraphicItem = ({ id, src, caption, group, label, shape }) => (
   <div id={id} className="cyril-grid-item fil-marketing">
     <a href={src} data-zoom-group={group} data-zoom-id={id} data-zoom-caption={caption}>
@@ -24,6 +24,9 @@ const GraphicItem = ({ id, src, caption, group, label, shape }) => (
           <span className="cyril-ken-burns">
             <img {...imageProps(src, SIZES_HINT.gridTile)} alt={caption} loading="lazy" decoding="async" />
           </span>
+          <div className="cyril-hover-link cyril-zoom-link">
+            <i className="fas fa-search-plus" />
+          </div>
         </div>
         <div className="cyril-project-descr">
           <p className="cyril-upper cyril-accent cyril-mb-10">{label}</p>
@@ -329,10 +332,7 @@ const PortfolioIsotope = () => {
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
                   <TileMedia slug="/hunger-action-month" />
-                  <h3>Case<br />Study</h3>
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
+                  <h3>Case Study</h3>
                 </div>
                 <div className="cyril-project-descr">
                   <p className="cyril-upper cyril-accent cyril-mb-10">Design, Development, &amp; Campaign Performance Tracking</p>
@@ -348,10 +348,7 @@ const PortfolioIsotope = () => {
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
                   <TileMedia slug="/hunger-action-month-dashboard" />
-                  <h3>Case<br />Study</h3>
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
+                  <h3>Case Study</h3>
                 </div>
                 <div className="cyril-project-descr">
                   <p className="cyril-upper cyril-accent cyril-mb-10">Design, Development, &amp; Campaign Performance Tracking</p>
@@ -367,10 +364,7 @@ const PortfolioIsotope = () => {
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
                   <TileMedia slug="/gty_v9" />
-                  <h3>Case<br />Study</h3>
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
+                  <h3>Case Study</h3>
                   {/* <div className="cyril-hover-link coming-soon">
                     <span className="cyril-upper">Coming Soon</span>
                   </div> */}
@@ -389,10 +383,7 @@ const PortfolioIsotope = () => {
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
                   <TileMedia slug="/giving-tuesday" />
-                  <h3>Case<br />Study</h3>
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
+                  <h3>Case Study</h3>
                 </div>
                 <div className="cyril-project-descr">
                   <p className="cyril-upper cyril-accent cyril-mb-10">Design, Development, &amp; Campaign Performance Tracking</p>
@@ -408,13 +399,10 @@ const PortfolioIsotope = () => {
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
                   <TileMedia slug="/gty_v8" />
-                  <h3>Case<br />Study</h3>
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
+                  <h3>Case Study</h3>
                 </div>
                 <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Design &amp; Front-End Development</p>
+                  <p className="cyril-upper cyril-accent cyril-mb-10">UX Design &amp; Front-End Development</p>
                   <h4 className="cyril-up">Grace to You (v.8)</h4>
                 </div>
               </div>
@@ -427,10 +415,7 @@ const PortfolioIsotope = () => {
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
                   <TileMedia slug="/grace-stream" />
-                  <h3>Case<br />Study</h3>
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
+                  <h3>Case Study</h3>
                 </div>
                 <div className="cyril-project-descr">
                   <p className="cyril-upper cyril-accent cyril-mb-10">Branding, Design, &amp; Development</p>
@@ -446,10 +431,7 @@ const PortfolioIsotope = () => {
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
                   <TileMedia slug="/35-day-generosity-challenge" />
-                  <h3>Case<br />Study</h3>
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
+                  <h3>Case Study</h3>
                 </div>
                 <div className="cyril-project-descr">
                   <p className="cyril-upper cyril-accent cyril-mb-10">Design, Development, &amp; Campaign Performance Tracking</p>
@@ -465,10 +447,7 @@ const PortfolioIsotope = () => {
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
                   <TileMedia slug="/gty-dashboard" />
-                  <h3>Case<br />Study</h3>
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
+                  <h3>Case Study</h3>
                 </div>
                 <div className="cyril-project-descr">
                   <p className="cyril-upper cyril-accent cyril-mb-10">Design &amp; Development</p>
@@ -484,10 +463,7 @@ const PortfolioIsotope = () => {
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
                   <TileMedia slug="/the-study-bible-app" />
-                  <h3>Case<br />Study</h3>
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
+                  <h3>Case Study</h3>
                 </div>
                 <div className="cyril-project-descr">
                   <p className="cyril-upper cyril-accent cyril-mb-10">App Design &amp; Prototyping</p>
@@ -503,10 +479,7 @@ const PortfolioIsotope = () => {
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
                   <TileMedia slug="/volunteer-leadership-team" />
-                  <h3>Case<br />Study</h3>
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
+                  <h3>Case Study</h3>
                 </div>
                 <div className="cyril-project-descr">
                   <p className="cyril-upper cyril-accent cyril-mb-10">Design &amp; Development</p>
@@ -523,10 +496,7 @@ const PortfolioIsotope = () => {
                 {/* Cover sized to the video (640×488), so none of it is cropped. */}
                 <div className="cyril-cover" style={{ paddingBottom: `${(488 / 640) * 100}%` }}>
                   <TileMedia slug="/gty-app-landing" />
-                  <h3>Case<br />Study</h3>
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
+                  <h3>Case Study</h3>
                 </div>
                 <div className="cyril-project-descr">
                   <p className="cyril-upper cyril-accent cyril-mb-10">Design &amp; Development</p>
@@ -542,10 +512,7 @@ const PortfolioIsotope = () => {
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover truth-matters">
                   <TileMedia slug="/truth-matters" />
-                  <h3>Case<br />Study</h3>
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
+                  <h3>Case Study</h3>
                 </div>
                 <div className="cyril-project-descr">
                   <p className="cyril-upper cyril-accent cyril-mb-10">Branding, Design, &amp; Development</p>
@@ -561,10 +528,7 @@ const PortfolioIsotope = () => {
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
                   <TileMedia slug="/gty-blog-graphics" />
-                  <h3>Case<br />Study</h3>
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
+                  <h3>Case Study</h3>
                 </div>
                 <div className="cyril-project-descr">
                   <p className="cyril-upper cyril-accent cyril-mb-10">Marketing</p>
@@ -580,10 +544,7 @@ const PortfolioIsotope = () => {
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
                   <TileMedia slug="/gty-social-media-graphics" />
-                  <h3>Case<br />Study</h3>
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
+                  <h3>Case Study</h3>
                 </div>
                 <div className="cyril-project-descr">
                   <p className="cyril-upper cyril-accent cyril-mb-10">Marketing</p>
@@ -599,10 +560,7 @@ const PortfolioIsotope = () => {
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
                   <TileMedia slug="/gty-resources" />
-                  <h3>Case<br />Study</h3>
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
+                  <h3>Case Study</h3>
                 </div>
                 <div className="cyril-project-descr">
                   <p className="cyril-upper cyril-accent cyril-mb-10">Marketing</p>
@@ -618,10 +576,7 @@ const PortfolioIsotope = () => {
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
                   <TileMedia slug="/the-study-bible-app-logo" />
-                  <h3>Case<br />Study</h3>
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
+                  <h3>Case Study</h3>
                 </div>
                 <div className="cyril-project-descr">
                   <p className="cyril-upper cyril-accent cyril-mb-10">Branding</p>
@@ -637,10 +592,7 @@ const PortfolioIsotope = () => {
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
                   <TileMedia slug="/patricia-macarthur-pastoral-care-fund" />
-                  <h3>Case<br />Study</h3>
-                  <div className="cyril-hover-link">
-                    <i className="fas fa-link" />
-                  </div>
+                  <h3>Case Study</h3>
                 </div>
                 <div className="cyril-project-descr">
                   <p className="cyril-upper cyril-accent cyril-mb-10">Branding</p>
@@ -656,7 +608,7 @@ const PortfolioIsotope = () => {
               <div className="cyril-portfolio-item cyril-long-item cyril-mb-80">
                 <div className="cyril-cover">
                   <TileMedia slug="/sekihmentis" />
-                  <div className="cyril-hover-link">
+                  <div className="cyril-hover-link cyril-corner-link">
                     <i className="fas fa-link" />
                   </div>
                 </div>
@@ -674,7 +626,7 @@ const PortfolioIsotope = () => {
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
                   <TileMedia slug="/he-took-my-place" />
-                  <div className="cyril-hover-link">
+                  <div className="cyril-hover-link cyril-corner-link">
                     <i className="fas fa-link" />
                   </div>
                 </div>

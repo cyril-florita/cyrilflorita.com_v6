@@ -17,11 +17,22 @@ import {
   CaseNext,
 } from "@/components/case/CaseStudy";
 
+// Final design screens (full pages); cropped to a framed top preview, the
+// zoom viewer opens each one whole.
+const FD = ({ name, caption }) => (
+  <CaseFigure src={`/img/portfolio/gty9_fd_${name}.jpg`} alt={`Grace to You final design: ${caption}`} caption={caption} ratio="3 / 4" />
+);
+
 const SECTIONS = [
   { id: "overview", label: "Overview" },
   { id: "problem", label: "Problem" },
   { id: "research", label: "Research" },
-  { id: "design-process", label: "Design Process" },
+  { id: "personas", label: "Personas & Journeys" },
+  { id: "ideation", label: "Ideation" },
+  { id: "wireframes", label: "Wireframes" },
+  { id: "prototyping", label: "Prototyping" },
+  { id: "handoff", label: "Design Handoff" },
+  { id: "final-design", label: "Final Design" },
   { id: "reflection", label: "Reflection" },
 ];
 
@@ -74,8 +85,8 @@ const Page = () => {
               { label: "Tools", value: "Axure RP, Google Analytics" },
               { label: "Deliverables", value: "Research, IA, Personas & Journeys, Wireframes, Prototypes" },
             ]}
-            video="/img/portfolio/gty9_preview.mp4"
-            imageAlt="Grace to You website preview"
+            image="/img/portfolio/gty9_final-design_homepage_4x3.jpg"
+            imageAlt="Grace to You final homepage design"
           />
 
           <CaseLayout sections={SECTIONS}>
@@ -84,9 +95,10 @@ const Page = () => {
             <CaseSection id="overview" number={1} title="Project Overview">
               <p>GTY.org is a Christian platform offering biblical resources for personal growth & discipleship, study & teaching materials, and pastoral & theological training. Despite its valuable resource offerings, the current website—version 8—faces usability and business challenges such as outdated design & UI elements, limited content internationalization features, less efficient search functionality, and lack of continuity in content & account management between the website and GTY's other platforms.</p>
               <p>This case study focuses on redesigning GTY.org &#40;version 9&#41; to broaden audience reach and improve engagement & retention by creating a more accessible and unified digital experience while maintaining its core mission of delivering high-quality theological content.</p>
+              <CaseVideo src="/img/portfolio/gty9_preview.mp4" caption="Final design preview" url="gty.org" />
               <CaseStats items={[
                 { value: "16", label: "Key needs prioritized" },
-                { value: "3", label: "Homepage design directions" },
+                { value: "4", label: "Homepage design directions" },
                 { value: "5", label: "Content pillars" },
               ]} />
             </CaseSection>
@@ -99,7 +111,7 @@ const Page = () => {
                 <li>Restrictive search results filtering and sorting mechanism</li>
                 <li>Lack of continuity in experience, content presentation, and account management between GTY's website and its apps</li>
               </ul>
-              <CaseVideo src="/img/portfolio/gty9_problem-statement.mp4" caption="Problem statement" />
+              <CaseVideo src="/img/portfolio/gty9_problem-statement_min.mp4" caption="Problem statement" />
               <p><strong>Business Need:</strong> The new GTY website must broaden audience reach and improve engagement & retention by optimizing its content architecture and unifying its user experience with all of GTY's digital platforms.</p>
             </CaseSection>
 
@@ -189,10 +201,8 @@ const Page = () => {
               <p>Working with the team and key stakeholders, I identified areas for improvement, made informed decisions about content strategy, organization, & optimization, and defined a more simplified content, site, & navigation structure&mdash;<strong>Listen, Watch, Read, Study, Shop.</strong></p>
             </CaseSection>
 
-            {/* 04 — Design Process */}
-            <CaseSection id="design-process" number={4} title="Design Process">
-
-              <h3 className="cyril-case-subheading">User Personas, Journeys, and Stories</h3>
+            {/* 04 — Personas & Journeys */}
+            <CaseSection id="personas" number={4} title="User Personas, Journeys, and Stories">
               <p>I created user personas to represent the wants, needs, and behavior patterns of GTY's target audience.</p>
               <p>These personas were used throughout the design and development process—from deciding on features to include in the design, to evaluating feature requirements—to ensure we're making intelligent, practical, and usable design and development solutions.</p>
               <p>I then mapped user journeys to visualize the user's interactions across GTY's multiple platforms &#40;apps, social media, etc.&#41; and over an extended period of time, from initial awareness to post-purchase/donation engagement.</p>
@@ -208,8 +218,10 @@ const Page = () => {
                 <CaseFigure src="/img/portfolio/gty9_user-stories.jpg" alt="user stories" caption="User stories" ratio="4 / 3" />
                 <CaseFigure src="/img/portfolio/gty9_mvp.jpg" alt="project mvp" caption="Project MVP" ratio="4 / 3" />
               </CaseGrid>
+            </CaseSection>
 
-              <h3 className="cyril-case-subheading">Ideation</h3>
+            {/* 05 — Ideation */}
+            <CaseSection id="ideation" number={5} title="Ideation">
               <p>I collaborated with the development team to identify UI elements that would make the development process more efficient and more aligned with GTY's technology stack. This collaboration also prepared the project team for the creation and development of GTY's style guide and design system.</p>
               <CaseGrid layout="offset">
                 <CaseFigure src="/img/portfolio/gty9_homepage-components.jpg" alt="homepage components" caption="Homepage components" ratio="3 / 4" />
@@ -218,28 +230,86 @@ const Page = () => {
               <CaseFigure src="/img/portfolio/gty9_design-system.jpg" alt="design system" caption="Design system" size="text" />
               <p>I brainstormed and researched solutions focusing on intuitive navigation, improved search functionality, and mobile-first / progressive web application design approach where the mobile version of the site will look and feel like a native Apple or Android app. I then presented these ideas to the Senior Software Architect and the development team to validate my ideas.</p>
               <CaseVideo src="/img/portfolio/gty9_progressive-web-app.mp4" caption="Progressive web app" />
-              <p>Having clearer insights and strategies for information architecture, UI/UX, and technology stack, I then designed 3 sets of homepage mockups. These were aimed to facilitate collaboration and foster alignment with the development team and stakeholders&mdash;to establish the design direction, especially in terms of layout, typography, and color. This step was necessary to ensure that the design and development process were moving in the same direction, and also to prepare and avoid any misunderstandings from the stakeholders about the next process of creating low-fidelity wireframes and prototypes.</p>
+              <p>Having clearer insights and strategies for information architecture, UI/UX, and technology stack, I then designed 4 sets of homepage mockups. These were aimed to facilitate collaboration and foster alignment with the development team and stakeholders&mdash;to establish the design direction, especially in terms of layout, typography, and color. This step was necessary to ensure that the design and development process were moving in the same direction, and also to prepare and avoid any misunderstandings from the stakeholders about the next process of creating low-fidelity wireframes and prototypes.</p>
               <CaseVideo src="/img/portfolio/gty9_hi-fi-mockups.mp4" caption="Hi-fi homepage mockups" />
+              <p>The four homepage directions, each explored at full length:</p>
+              <CaseGrid layout="two">
+                <CaseVideo src="/img/portfolio/gty9_idea_v1-mobile.mp4" caption="Direction 1: mobile" size="phone" />
+                <CaseFigure src="/img/portfolio/gty9_idea_v1-desktop.jpg" alt="Grace to You homepage direction 1, desktop" caption="Direction 1: desktop" ratio="3 / 4" />
+                <CaseFigure src="/img/portfolio/gty9_idea_v2-light.jpg" alt="Grace to You homepage direction 2, light" caption="Direction 2: light" ratio="3 / 4" />
+                <CaseFigure src="/img/portfolio/gty9_idea_v2-dark.jpg" alt="Grace to You homepage direction 2, dark" caption="Direction 2: dark" ratio="3 / 4" />
+                <CaseFigure src="/img/portfolio/gty9_idea_v3.jpg" alt="Grace to You homepage direction 3" caption="Direction 3" ratio="3 / 4" />
+                <CaseFigure src="/img/portfolio/gty9_idea_v4.jpg" alt="Grace to You homepage direction 4" caption="Direction 4" ratio="3 / 4" />
+              </CaseGrid>
+            </CaseSection>
 
-              <h3 className="cyril-case-subheading">Wireframes</h3>
+            {/* 06 — Wireframes */}
+            <CaseSection id="wireframes" number={6} title="Wireframes">
               <p><strong>Collaboration:</strong> I worked closely with the Senior Software Architect and the development team to define and organize UI elements, components, pages, journeys into wireframe requirements, preparing and serving as the basis for the further development of GTY's design system.</p>
               <CaseFigure src="/img/portfolio/gty9_wireframe-requirements.jpg" alt="wireframe requirements" caption="Wireframe requirements" />
               <p>I then designed low-fidelity wireframes focusing on the structure, functionality, and placement of key content and elements without delving into visual details like colors, typography, or images. These wireframes served as blueprints for the design, helping the development team and stakeholders visualize the flow and hierarchy of content before moving into more detailed stages of providing mockups and prototypes.</p>
               <CaseVideo src="/img/portfolio/gty9_wireframes.mp4" caption="Low-fidelity wireframes" />
               <p><strong>Key Outcomes:</strong> The wireframes helped the development team and the stakeholders reach a common understanding by clearly communicating the prioritization and placement of specific resources and content and how UIs will function.</p>
+            </CaseSection>
 
-              <h3 className="cyril-case-subheading">Prototyping</h3>
+            {/* 07 — Prototyping */}
+            <CaseSection id="prototyping" number={7} title="Prototyping">
               <p>After getting alignment from the stakeholders about the hierarchy and presentation of the content on the homepage and other important pages via the wireframes, I designed high-fidelity interactive prototypes for mobile, tablet, laptop/desktop screens using Axure RP to simulate user interactions, test usability, and refine designs before development.</p>
               <ul className="cyril-case-list">
                 <li>These prototypes closely represented what would be the final version of the design, including detailed UI elements &amp; functionality, typography, color schemes, and animations.</li>
                 <li>Stakeholders then would be able to visualize the final project more clearly, which facilitated approvals and alignment.</li>
               </ul>
+              <CaseVideo src="/img/portfolio/gty9_media-player.mp4" caption="Prototype: media player" url="gty.org" />
               <p><strong>Challenges:</strong> Balancing modern design with the traditional & clean aesthetic expected by GTY.org's core audience and stakeholders presented a challenge. Specific stakeholders wanted the simplicity and minimalism of the current site &#40;version 8&#41; to be carried over to this new version. To this UX Designer, this would be the best approach to the redesign project so as not to frustrate users when introduced to a newer site version.</p>
-              <p><strong>Design Handoff:</strong> Working closely with the Senior Software Architect, and as the stakeholders would approve of the high-fidelity prototypes&mdash;each screen, interaction, and animation closely mirroring the intended GTY v9 experience&mdash;I would hand them off to the development team to ensure a smooth transition to the development phase of our Agile process.</p>
             </CaseSection>
 
-            {/* 05 — Reflection */}
-            <CaseSection id="reflection" number={5} title="Reflection">
+            {/* 08 — Design Handoff */}
+            <CaseSection id="handoff" number={8} title="Design Handoff">
+              <p>Working closely with the Senior Software Architect, and as the stakeholders would approve of the high-fidelity prototypes&mdash;each screen, interaction, and animation closely mirroring the intended GTY v9 experience&mdash;I would hand them off to the development team to ensure a smooth transition to the development phase of our Agile process.</p>
+            </CaseSection>
+
+            {/* 09 — Final Design */}
+            <CaseSection id="final-design" number={9} title="Final Design">
+              <p>The final designs bring the research, content structure, and design system together across the site, from the homepage to streaming, the store, giving, and the ministry&apos;s free offers.</p>
+              <CaseFigure src="/img/portfolio/gty9_fd_a-homepage.jpg" alt="Grace to You final design: homepage" caption="Homepage" ratio="3 / 4" size="text" />
+              <p><strong>Stream, Listen, and Watch.</strong> John MacArthur&apos;s teaching, live and on demand, in one consistent media experience.</p>
+              <CaseGrid layout="two">
+                <FD name="b-stream-live" caption="Stream: live" />
+                <FD name="b-stream-grace-stream" caption="Stream: Grace Stream" />
+                <FD name="c-listen_1-main" caption="Listen" />
+                <FD name="c-listen_2-broadcast" caption="Listen: broadcast" />
+                <FD name="c-listen_3-sermons" caption="Listen: sermons" />
+                <FD name="d-watch_1-main" caption="Watch" />
+                <FD name="d-watch_2-tv-broadcast" caption="Watch: TV broadcast" />
+              </CaseGrid>
+              <p><strong>Shop.</strong> From browsing to the cart, the store follows the same design system as the rest of the site.</p>
+              <CaseGrid layout="two">
+                <FD name="e-shop_1-main" caption="Shop" />
+                <FD name="e-shop_2-bibles" caption="Shop: Bibles" />
+                <FD name="e-shop_3-a-product-page" caption="Product page" />
+                <FD name="e-shop_3-b-added-to-cart" caption="Added to cart" />
+                <FD name="e-shop_4-cart" caption="Cart" />
+              </CaseGrid>
+              <p><strong>Give.</strong> A simple giving flow, from choosing a gift to reviewing it and a thank-you.</p>
+              <CaseGrid layout="two">
+                <FD name="k-give_1-main" caption="Give" />
+                <FD name="k-give_2-form" caption="Give: form" />
+                <FD name="k-give_3-review" caption="Give: review" />
+                <FD name="k-give_4-thank-you" caption="Give: thank you" />
+              </CaseGrid>
+              <p><strong>Search, offers, reading, and more.</strong> Site-wide search, free resources for newcomers, the blog, daily devotionals, and the story of the ministry.</p>
+              <CaseGrid layout="two">
+                <FD name="j-search-results" caption="Search results" />
+                <FD name="f-free-offer" caption="Free offer" />
+                <FD name="f-new-to-gty-offer" caption="New to GTY offer" />
+                <FD name="g-blog" caption="Blog" />
+                <FD name="h-devotional" caption="Devotional" />
+                <FD name="i-about" caption="About" />
+              </CaseGrid>
+            </CaseSection>
+
+            {/* 10 — Reflection */}
+            <CaseSection id="reflection" number={10} title="Reflection">
               <CaseQuote>
                 Rigorously following a structured UX process isn&apos;t just a &ldquo;nice to have&rdquo;&mdash;it&apos;s the very foundation of delivering design solutions that truly resonate.
               </CaseQuote>

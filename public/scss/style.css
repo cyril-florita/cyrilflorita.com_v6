@@ -9,6 +9,7 @@
   --color-light-gray: #e4e4e4;
   --color-accent: #fa4729;
   --color-accent-light: rgba(250, 71, 41, 0.18);
+  --color-accent-text: #d63a1f;
   --color-black: #010101;
   --color-bg: var(--color-light);
   --color-text: var(--color-dark);
@@ -19,6 +20,7 @@
 }
 
 [data-theme=dark] {
+  --color-accent-text: #fa4729;
   --color-dark: #e4e4e4;
   --color-gray: #d0d0d0;
   --color-soft: rgba(255, 255, 255, 0.18);
@@ -511,7 +513,7 @@ h4 {
 }
 
 .cyril-accent {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 
 .cyril-dark {
@@ -615,7 +617,7 @@ blockquote:before {
   margin-right: 30px;
   font-size: 36px;
   font-weight: 600;
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 
 label.error {
@@ -972,7 +974,7 @@ ul.no-disc.w-icon span {
   padding: 2px 15px;
 }
 .cyril-built p .fa-heart {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   position: relative;
   top: 1px;
   display: inline-block;
@@ -1044,174 +1046,174 @@ box to be used for the random glitch effect. Also adds a very subtle
 skew to change the 'thickness' of the glitch.*/
 @keyframes glitch-anim {
   0% {
-    clip: rect(355px, 9999px, 22px, 0);
-    transform: skew(0.67deg);
-  }
-  5% {
-    clip: rect(359px, 9999px, 140px, 0);
-    transform: skew(0.1deg);
-  }
-  10% {
-    clip: rect(200px, 9999px, 117px, 0);
-    transform: skew(0.04deg);
-  }
-  15% {
-    clip: rect(302px, 9999px, 378px, 0);
-    transform: skew(0.15deg);
-  }
-  20% {
-    clip: rect(12px, 9999px, 175px, 0);
-    transform: skew(0.24deg);
-  }
-  25% {
-    clip: rect(294px, 9999px, 354px, 0);
-    transform: skew(0.84deg);
-  }
-  30% {
-    clip: rect(20px, 9999px, 341px, 0);
-    transform: skew(0.87deg);
-  }
-  35% {
-    clip: rect(104px, 9999px, 113px, 0);
-    transform: skew(0.18deg);
-  }
-  40% {
-    clip: rect(271px, 9999px, 305px, 0);
-    transform: skew(0.76deg);
-  }
-  45% {
-    clip: rect(179px, 9999px, 343px, 0);
-    transform: skew(0.1deg);
-  }
-  50% {
-    clip: rect(323px, 9999px, 106px, 0);
-    transform: skew(0.33deg);
-  }
-  55% {
-    clip: rect(20px, 9999px, 229px, 0);
+    clip: rect(318px, 9999px, 39px, 0);
     transform: skew(0.49deg);
   }
+  5% {
+    clip: rect(243px, 9999px, 228px, 0);
+    transform: skew(0.24deg);
+  }
+  10% {
+    clip: rect(238px, 9999px, 38px, 0);
+    transform: skew(0.38deg);
+  }
+  15% {
+    clip: rect(303px, 9999px, 149px, 0);
+    transform: skew(0.79deg);
+  }
+  20% {
+    clip: rect(62px, 9999px, 273px, 0);
+    transform: skew(0.97deg);
+  }
+  25% {
+    clip: rect(327px, 9999px, 261px, 0);
+    transform: skew(0.44deg);
+  }
+  30% {
+    clip: rect(60px, 9999px, 346px, 0);
+    transform: skew(0.27deg);
+  }
+  35% {
+    clip: rect(168px, 9999px, 376px, 0);
+    transform: skew(0.66deg);
+  }
+  40% {
+    clip: rect(259px, 9999px, 297px, 0);
+    transform: skew(0.28deg);
+  }
+  45% {
+    clip: rect(59px, 9999px, 369px, 0);
+    transform: skew(0.68deg);
+  }
+  50% {
+    clip: rect(390px, 9999px, 310px, 0);
+    transform: skew(0.18deg);
+  }
+  55% {
+    clip: rect(98px, 9999px, 236px, 0);
+    transform: skew(0.64deg);
+  }
   60% {
-    clip: rect(189px, 9999px, 389px, 0);
-    transform: skew(0.16deg);
+    clip: rect(323px, 9999px, 130px, 0);
+    transform: skew(0.55deg);
   }
   65% {
-    clip: rect(307px, 9999px, 81px, 0);
-    transform: skew(0.73deg);
+    clip: rect(66px, 9999px, 15px, 0);
+    transform: skew(0.2deg);
   }
   70% {
-    clip: rect(319px, 9999px, 382px, 0);
-    transform: skew(0.92deg);
+    clip: rect(152px, 9999px, 340px, 0);
+    transform: skew(0.25deg);
   }
   75% {
-    clip: rect(275px, 9999px, 394px, 0);
-    transform: skew(0.8deg);
+    clip: rect(104px, 9999px, 147px, 0);
+    transform: skew(0.12deg);
   }
   80% {
-    clip: rect(169px, 9999px, 203px, 0);
-    transform: skew(0.77deg);
+    clip: rect(138px, 9999px, 164px, 0);
+    transform: skew(0.09deg);
   }
   85% {
-    clip: rect(202px, 9999px, 173px, 0);
-    transform: skew(0.85deg);
+    clip: rect(69px, 9999px, 45px, 0);
+    transform: skew(0.89deg);
   }
   90% {
-    clip: rect(41px, 9999px, 8px, 0);
-    transform: skew(0.23deg);
+    clip: rect(94px, 9999px, 361px, 0);
+    transform: skew(0.76deg);
   }
   95% {
-    clip: rect(113px, 9999px, 146px, 0);
-    transform: skew(0.45deg);
+    clip: rect(292px, 9999px, 52px, 0);
+    transform: skew(0.18deg);
   }
   100% {
-    clip: rect(196px, 9999px, 387px, 0);
-    transform: skew(0.05deg);
+    clip: rect(135px, 9999px, 311px, 0);
+    transform: skew(0.87deg);
   }
 }
 @keyframes glitch-anim2 {
   0% {
-    clip: rect(30px, 9999px, 2px, 0);
-    transform: skew(0.93deg);
+    clip: rect(24px, 9999px, 6px, 0);
+    transform: skew(0.97deg);
   }
   5% {
-    clip: rect(81px, 9999px, 83px, 0);
-    transform: skew(0.69deg);
+    clip: rect(42px, 9999px, 68px, 0);
+    transform: skew(0.12deg);
   }
   10% {
-    clip: rect(34px, 9999px, 35px, 0);
-    transform: skew(0.53deg);
+    clip: rect(59px, 9999px, 81px, 0);
+    transform: skew(0.36deg);
   }
   15% {
-    clip: rect(43px, 9999px, 25px, 0);
-    transform: skew(0.82deg);
+    clip: rect(46px, 9999px, 71px, 0);
+    transform: skew(0.06deg);
   }
   20% {
-    clip: rect(92px, 9999px, 53px, 0);
-    transform: skew(0.2deg);
+    clip: rect(90px, 9999px, 27px, 0);
+    transform: skew(0.79deg);
   }
   25% {
-    clip: rect(64px, 9999px, 61px, 0);
-    transform: skew(0.08deg);
+    clip: rect(16px, 9999px, 78px, 0);
+    transform: skew(0.6deg);
   }
   30% {
-    clip: rect(5px, 9999px, 97px, 0);
-    transform: skew(0.44deg);
+    clip: rect(96px, 9999px, 92px, 0);
+    transform: skew(0.16deg);
   }
   35% {
-    clip: rect(62px, 9999px, 86px, 0);
-    transform: skew(0.9deg);
+    clip: rect(98px, 9999px, 68px, 0);
+    transform: skew(0.79deg);
   }
   40% {
-    clip: rect(63px, 9999px, 68px, 0);
-    transform: skew(0.67deg);
+    clip: rect(52px, 9999px, 60px, 0);
+    transform: skew(0.92deg);
   }
   45% {
-    clip: rect(21px, 9999px, 88px, 0);
-    transform: skew(0.24deg);
+    clip: rect(21px, 9999px, 81px, 0);
+    transform: skew(0.99deg);
   }
   50% {
-    clip: rect(28px, 9999px, 74px, 0);
-    transform: skew(0.91deg);
+    clip: rect(38px, 9999px, 21px, 0);
+    transform: skew(0.87deg);
   }
   55% {
-    clip: rect(24px, 9999px, 61px, 0);
-    transform: skew(0.86deg);
+    clip: rect(94px, 9999px, 19px, 0);
+    transform: skew(0.56deg);
   }
   60% {
-    clip: rect(17px, 9999px, 37px, 0);
-    transform: skew(0.94deg);
+    clip: rect(25px, 9999px, 45px, 0);
+    transform: skew(0.42deg);
   }
   65% {
-    clip: rect(48px, 9999px, 7px, 0);
-    transform: skew(0.58deg);
+    clip: rect(40px, 9999px, 69px, 0);
+    transform: skew(0.94deg);
   }
   70% {
-    clip: rect(88px, 9999px, 46px, 0);
-    transform: skew(0.29deg);
+    clip: rect(43px, 9999px, 5px, 0);
+    transform: skew(0.92deg);
   }
   75% {
-    clip: rect(66px, 9999px, 65px, 0);
-    transform: skew(0.15deg);
+    clip: rect(22px, 9999px, 40px, 0);
+    transform: skew(0.91deg);
   }
   80% {
-    clip: rect(86px, 9999px, 1px, 0);
-    transform: skew(0.59deg);
+    clip: rect(43px, 9999px, 53px, 0);
+    transform: skew(0.5deg);
   }
   85% {
-    clip: rect(38px, 9999px, 85px, 0);
-    transform: skew(0.81deg);
+    clip: rect(13px, 9999px, 31px, 0);
+    transform: skew(0.63deg);
   }
   90% {
-    clip: rect(12px, 9999px, 18px, 0);
-    transform: skew(0.67deg);
+    clip: rect(27px, 9999px, 81px, 0);
+    transform: skew(0.11deg);
   }
   95% {
-    clip: rect(18px, 9999px, 39px, 0);
-    transform: skew(0.89deg);
+    clip: rect(89px, 9999px, 12px, 0);
+    transform: skew(0.64deg);
   }
   100% {
-    clip: rect(93px, 9999px, 70px, 0);
-    transform: skew(0.87deg);
+    clip: rect(51px, 9999px, 59px, 0);
+    transform: skew(0.43deg);
   }
 }
 /* -------------------------------------------
@@ -1597,14 +1599,8 @@ page
   position: relative;
   height: 100vh;
   width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
   justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
 }
 @media screen and (min-width: 1201px) {
@@ -1806,7 +1802,7 @@ pagination
   line-height: 100%;
   text-transform: uppercase;
   font-weight: 600;
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   transform: translateX(-10px) scale(0.9);
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
 }
@@ -2033,7 +2029,7 @@ top panel
   border-bottom: none;
 }
 .cyril-top-panel .cyril-logo:hover {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 .cyril-top-panel .cyril-logo.cyril-disabled {
   cursor: default;
@@ -2103,10 +2099,10 @@ top panel
   }
 }
 .cyril-top-panel nav ul li a:hover {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 .cyril-top-panel nav ul li.cyril-active > a {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   cursor: default;
 }
 .cyril-top-panel nav ul li.cyril-active:after {
@@ -2211,7 +2207,7 @@ social panel
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
 }
 .cyril-social-panel ul li a:hover {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 
 .cyril-theme-toggle {
@@ -2343,7 +2339,7 @@ footer
   width: 20px;
 }
 .cyril-bottom-panel .cyril-footer ul li a:hover {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 .cyril-bottom-panel .cyril-footer a {
   text-decoration: none;
@@ -2355,7 +2351,7 @@ footer
   padding: 0 15px;
 }
 .cyril-bottom-panel .cyril-footer a:hover {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 .cyril-bottom-panel .cyril-footer a i {
   position: relative;
@@ -2544,6 +2540,7 @@ banner
 }
 @media screen and (min-width: 1201px) {
   .cyril-banner .cyril-short {
+    width: -moz-max-content;
     width: max-content;
     max-width: none;
   }
@@ -2664,8 +2661,10 @@ about
 }
 .cyril-about-person .cyril-avatar {
   width: 100%;
-  object-fit: cover;
-  object-position: center;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
   margin-right: 60px;
 }
 @media screen and (max-width: 1200px) {
@@ -2685,8 +2684,10 @@ about
 .cyril-about-person-2 .cyril-avatar {
   width: 160px;
   height: 160px;
-  object-fit: cover;
-  object-position: top;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: top;
+     object-position: top;
   border-radius: 50%;
 }
 @media screen and (max-width: 1200px) {
@@ -2987,10 +2988,10 @@ experience
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
 }
 .cyril-filter ul li a:hover, .cyril-filter ul li button:hover {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 .cyril-filter ul li a.cyril-current, .cyril-filter ul li button.cyril-current {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 .cyril-filter ul li a.cyril-current::after, .cyril-filter ul li button.cyril-current::after {
   content: "";
@@ -3095,8 +3096,10 @@ experience
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
 }
 
 .cyril-tags {
@@ -3115,7 +3118,7 @@ experience
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
 }
 .cyril-tags li a:hover {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 
 /* -------------------------------------------
@@ -3248,8 +3251,10 @@ portfolio
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
   transform: scale(1);
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
   filter: grayscale(100%) brightness(110%) contrast(130%);
@@ -3267,18 +3272,18 @@ portfolio
   top: 30px;
   right: 10px;
   display: inline-flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  text-align: center;
-  width: 80px;
-  height: 80px;
-  margin: 0 0 10px;
+  margin: 0;
+  padding: 10px 15px;
   background-color: var(--color-accent);
-  border-radius: 50%;
+  border-radius: 0;
   color: var(--color-light);
   font-family: var(--font-atkinson);
-  font-size: 12px;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: var(--tracking-caps);
+  white-space: nowrap;
   text-transform: uppercase;
   text-shadow: none;
   z-index: 1;
@@ -3338,7 +3343,7 @@ portfolio
   font-weight: 600;
   letter-spacing: 0.5px;
   line-height: 1.25;
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 @media screen and (max-width: 1200px) {
   .cyril-portfolio-item .cyril-cover .cyril-hover-link.coming-soon {
@@ -3351,18 +3356,35 @@ portfolio
     justify-content: center;
   }
 }
-@media screen and (max-width: 1200px) {
-  .cyril-portfolio-item .cyril-cover:has(h3) .cyril-hover-link {
-    display: none;
-  }
+.cyril-portfolio-item .cyril-cover .cyril-hover-link.cyril-corner-link {
+  top: 30px;
+  right: 10px;
+  bottom: auto;
+  left: auto;
+  width: 44px;
+  height: 44px;
+  opacity: 1;
+  box-shadow: none;
+}
+.cyril-portfolio-item .cyril-cover .cyril-hover-link.cyril-corner-link svg, .cyril-portfolio-item .cyril-cover .cyril-hover-link.cyril-corner-link i {
+  opacity: 1;
+  transform: none;
+}
+.cyril-portfolio-item .cyril-cover:hover .cyril-hover-link.cyril-corner-link {
+  transform: translate(-10px, 5px);
+}
+.cyril-portfolio-item .cyril-cover .cyril-hover-link.cyril-zoom-link {
+  top: 30px;
+  right: 10px;
+  bottom: auto;
+  left: auto;
+  width: 44px;
+  height: 44px;
+  box-shadow: none;
 }
 @media screen and (max-width: 1200px) {
-  .cyril-portfolio-item .cyril-cover:not(:has(h3)) .cyril-hover-link {
-    top: 30px;
-    bottom: auto;
-    left: auto;
-    right: 10px;
-    transform: none;
+  .cyril-portfolio-item .cyril-cover .cyril-hover-link.cyril-zoom-link {
+    display: none;
   }
 }
 .cyril-portfolio-item.cyril-square-item {
@@ -3694,7 +3716,7 @@ contact band (components/ContactBand.js)
   transition: background-size 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
 }
 .cyril-contact-email a:hover {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   background-size: 100% 3px;
 }
 
@@ -3720,7 +3742,7 @@ contact band (components/ContactBand.js)
 }
 .cyril-contact-profiles a:hover {
   opacity: 1;
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 
 /* -------------------------------------------
@@ -3744,7 +3766,8 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
   padding-top: 200px;
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: 30px;
+  -moz-column-gap: 30px;
+       column-gap: 30px;
 }
 .cyril-case-hero > * {
   grid-column: 1/-1;
@@ -3873,7 +3896,8 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
 .cyril-case-body {
   display: grid;
   grid-template-columns: 200px minmax(0, 1fr);
-  column-gap: 80px;
+  -moz-column-gap: 80px;
+       column-gap: 80px;
   padding-top: 120px;
   padding-bottom: 120px;
 }
@@ -3948,11 +3972,11 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
 }
 .cyril-case-toc a:hover {
   opacity: 1;
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 .cyril-case-toc .cyril-active a {
   opacity: 1;
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   border-left-color: var(--color-accent);
 }
 .cyril-case-toc .cyril-case-toc-num {
@@ -4005,7 +4029,7 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
 .cyril-case-section-num {
   font-weight: 600;
   letter-spacing: var(--tracking-caps);
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 
 .cyril-case-section-head .cyril-case-heading {
@@ -4063,15 +4087,19 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
 }
 .cyril-page.cyril-case-page .cyril-case-list.cyril-case-list-columns {
   max-width: none;
-  columns: 2;
-  column-gap: 50px;
+  -moz-columns: 2;
+       columns: 2;
+  -moz-column-gap: 50px;
+       column-gap: 50px;
 }
 .cyril-page.cyril-case-page .cyril-case-list.cyril-case-list-columns li {
-  break-inside: avoid;
+  -moz-column-break-inside: avoid;
+       break-inside: avoid;
 }
 @media screen and (max-width: 768px) {
   .cyril-page.cyril-case-page .cyril-case-list.cyril-case-list-columns {
-    columns: 1;
+    -moz-columns: 1;
+         columns: 1;
   }
 }
 
@@ -4196,7 +4224,7 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
 }
 .cyril-case-figure figcaption::before {
   content: "Fig. " counter(cyril-fig, decimal-leading-zero) " — ";
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 
 @media (hover: hover) and (min-width: 1201px) {
@@ -4217,8 +4245,10 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
 }
 .cyril-page.cyril-case-page .cyril-case-figure img.cyril-case-cropped {
   height: 100%;
-  object-fit: cover;
-  object-position: top;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: top;
+     object-position: top;
 }
 
 .cyril-case-figure.cyril-reveal:not(.cyril-revealed) img,
@@ -4273,6 +4303,11 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
   }
 }
 
+@media screen and (max-width: 1200px) {
+  .cyril-case-figure-phone .cyril-hover-link {
+    display: none;
+  }
+}
 .cyril-case-stats {
   margin: 70px 0 20px;
   display: grid;
@@ -4300,7 +4335,7 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
   height: clamp(48px, 5vw, 88px);
   font-weight: 700;
   line-height: 1;
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   text-shadow: 5px 5px 0 var(--color-soft);
 }
 .cyril-case-stat dd {
@@ -4457,7 +4492,8 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
   height: 100%;
   padding: 0;
   border: 0;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .cyril-page.cyril-case-page .cyril-case-next-image .cyril-ken-burns {
   position: absolute;
@@ -4469,7 +4505,7 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
   scale: 1;
 }
 .cyril-case-next:hover .cyril-case-next-title {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 .cyril-case-next:hover .cyril-case-next-arrow {
   transform: translateX(12px);
@@ -4539,8 +4575,11 @@ html.cyril-tab-hidden .cyril-zoom-backdrop::after {
 .cyril-zoom-img {
   position: fixed;
   max-width: none;
-  object-fit: cover;
-  user-select: none;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   -webkit-user-drag: none;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
   will-change: left, top, width, height, transform;
@@ -4636,7 +4675,7 @@ html.cyril-tab-hidden .cyril-zoom-backdrop::after {
 }
 
 .cyril-zoom-count {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   font-variant-numeric: tabular-nums;
 }
 
@@ -4738,7 +4777,8 @@ grounds (white / #121212) in both site themes, since the files include them.
 }
 .cyril-brand-logo .cyril-brand-logo-fixed img {
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .cyril-brand-logo .cyril-brand-logo-part {
   display: flex;
@@ -4784,7 +4824,7 @@ grounds (white / #121212) in both site themes, since the files include them.
   font-size: 13px;
   font-weight: 700;
   line-height: 1;
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 .cyril-brand-clear-x.cyril-brand-clear-x-top {
   top: calc(var(--clear-pad, 10%) / 2);
@@ -4917,7 +4957,8 @@ grounds (white / #121212) in both site themes, since the files include them.
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   border: 0;
   padding: 0;
 }
@@ -4934,7 +4975,8 @@ grounds (white / #121212) in both site themes, since the files include them.
 }
 .cyril-page.cyril-case-page .cyril-brand-rule-art .cyril-brand-fitbox .cyril-brand-crop img {
   height: auto;
-  object-fit: initial;
+  -o-object-fit: initial;
+     object-fit: initial;
 }
 
 .cyril-brand-verdict {
@@ -4949,11 +4991,12 @@ grounds (white / #121212) in both site themes, since the files include them.
   opacity: 0.7;
 }
 .cyril-brand-dont .cyril-brand-verdict {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 
 .cyril-page.cyril-case-page .cyril-brand-rule-art img.cyril-brand-contain {
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
   padding: 6%;
 }
 .cyril-page.cyril-case-page .cyril-brand-rule-art img.cyril-brand-stretch {
@@ -4990,5 +5033,6 @@ grounds (white / #121212) in both site themes, since the files include them.
 }
 .cyril-page.cyril-case-page .cyril-brand-rule-art .cyril-brand-onphoto img {
   mix-blend-mode: multiply;
-  object-fit: contain;
-}
+  -o-object-fit: contain;
+     object-fit: contain;
+}/*# sourceMappingURL=style.css.map */
