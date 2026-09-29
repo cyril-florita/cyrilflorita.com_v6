@@ -327,9 +327,9 @@ const Page = () => {
           </CaseLayout>
 
           <CaseNext
-            href="/giving-tuesday"
-            title="Giving Tuesday Campaign"
-            category="Design, Development, & Campaign Performance Tracking"
+            href="/grace-stream"
+            title="Grace Stream"
+            category="Branding, Design, & Development"
             onBack={handleBackToPortfolio}
           />
 

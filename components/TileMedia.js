@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { gsap } from "gsap";
 import { BLOG_GRAPHICS } from "@/components/data/blogGraphics";
 import { RESOURCE_GRAPHICS } from "@/components/data/resourceGraphics";
 import { imageProps, SIZES_HINT } from "@/components/imageProps";
@@ -122,6 +123,74 @@ const GridSlideshow = ({ images, label, interval = SLIDE_MS, fade, cut = false }
   );
 };
 
+// A phone in 3D perspective playing a screen recording (CSS 3D, animated
+// with GSAP). While the tile is on screen the video plays and — on desktop
+// with a mouse — the camera pushes in dramatically on the screen and pulls
+// back out on a loop; hovering pauses it and turns the phone toward the
+// pointer. Tablet
+// and mobile get a still tilt (no continuous motion there); reduced motion
+// gets the still tilt and the poster only. Styles: .cyril-phone3d.
+const GridPhone3D = ({ src, poster, label }) => {
+  const stageRef = useRef(null);
+  const deviceRef = useRef(null);
+  const videoRef = useRef(null);
+  useEffect(() => {
+    const stage = stageRef.current, device = deviceRef.current, video = videoRef.current;
+    if (!stage || !device || !video) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const animate = !reduce && window.matchMedia("(hover: hover) and (pointer: fine)").matches && window.innerWidth > 1200;
+    gsap.set(device, { scale: 0.95, rotationY: -24, rotationX: 10, rotationZ: 2, transformPerspective: 1200 });
+    if (reduce || !("IntersectionObserver" in window)) return;
+
+    // A dramatic push-in: from the whole tilted phone to a close-up of the
+    // screen, a beat there, then a pull back out that swings to the other
+    // side — and around again.
+    const sway = animate
+      ? gsap.timeline({ repeat: -1, paused: true, defaults: { ease: "power3.inOut" } })
+          .to(device, { scale: 2.5, rotationY: -4, rotationX: 2, rotationZ: 0, y: 40, duration: 1.8 })
+          .to(device, { scale: 2.65, rotationY: 3, y: 10, duration: 1.6, ease: "sine.inOut" })
+          .to(device, { scale: 0.95, rotationY: 22, rotationX: 8, rotationZ: -2, y: 0, duration: 1.8 })
+          .to(device, { rotationY: 16, y: -6, duration: 1.2, ease: "sine.inOut" })
+          .to(device, { scale: 2.4, rotationY: 5, rotationX: 3, rotationZ: 0, y: -30, duration: 1.8 })
+          .to(device, { scale: 2.55, rotationY: -3, y: -10, duration: 1.4, ease: "sine.inOut" })
+          .to(device, { scale: 0.95, rotationY: -24, rotationX: 10, rotationZ: 2, y: 0, duration: 1.8 })
+          .to(device, { rotationY: -18, y: -6, duration: 1.2, ease: "sine.inOut" })
+      : null;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { video.play().catch(() => {}); sway?.play(); }
+      else { if (!video.paused) video.pause(); sway?.pause(); }
+    }, { rootMargin: "100px 0px" });
+    observer.observe(stage);
+
+    // Desktop: turn toward the pointer while hovering, ease back after.
+    const tile = stage.closest(".cyril-portfolio-item, .cyril-case-next") || stage;
+    const onMove = (e) => {
+      if (!animate) return;
+      const r = stage.getBoundingClientRect();
+      const nx = (e.clientX - r.left) / r.width - 0.5, ny = (e.clientY - r.top) / r.height - 0.5;
+      sway.pause();
+      gsap.to(device, { scale: 1.05, rotationY: nx * 30 - 4, rotationX: -ny * 18 + 4, rotationZ: 0, y: -6, duration: 0.6, ease: "power2.out", overwrite: "auto" });
+    };
+    const onLeave = () => {
+      if (!animate) return;
+      gsap.to(device, { scale: 0.95, rotationY: -24, rotationX: 10, rotationZ: 2, y: 0, duration: 0.9, ease: "power2.out", overwrite: "auto", onComplete: () => sway.restart() });
+    };
+    tile.addEventListener("pointermove", onMove);
+    tile.addEventListener("pointerleave", onLeave);
+    return () => {
+      observer.disconnect(); sway?.kill(); gsap.killTweensOf(device);
+      tile.removeEventListener("pointermove", onMove); tile.removeEventListener("pointerleave", onLeave);
+    };
+  }, []);
+  return (
+    <span ref={stageRef} className="cyril-phone3d" role="img" aria-label={label}>
+      <span ref={deviceRef} className="cyril-phone3d-device">
+        <video ref={videoRef} src={src} poster={poster} preload="none" muted loop playsInline />
+      </span>
+    </span>
+  );
+};
+
 export const TILE_MEDIA = {
   "/hunger-action-month-dashboard": {
     kind: "video", src: "/img/portfolio/chf-ham-dashboard_preview.mp4", poster: "/img/thumbs/portfolio/chf-ham-dashboard_preview-poster.webp", label: "Hunger Action Month Campaign Dashboard preview",
@@ -210,19 +279,9 @@ export const TILE_MEDIA = {
     interval: 667, fade: 600,
     shape: "square",
   },
-  // The app, three screens per slide (reading, navigation, search, settings,
-  // account) after the original tile image; crossfading like the brand tiles.
+  // The released app playing on a phone in 3D perspective (GSAP).
   "/the-study-bible-app": {
-    kind: "slideshow", label: "The Study Bible app screens",
-    images: [
-      "/img/portfolio/thumb_the-study-bible-app.jpg",
-      "/img/portfolio/thumb_tsba-slide-1.jpg",
-      "/img/portfolio/thumb_tsba-slide-2.jpg",
-      "/img/portfolio/thumb_tsba-slide-3.jpg",
-      "/img/portfolio/thumb_tsba-slide-4.jpg",
-      "/img/portfolio/thumb_tsba-slide-5.jpg",
-    ],
-    interval: 1250, fade: 600,
+    kind: "phone3d", src: "/img/portfolio/tsba_released-app.mp4", poster: "/img/thumbs/portfolio/tsba_released-app-poster.webp", label: "The MacArthur Study Bible app, playing on a phone",
     shape: "wide",
   },
   "/gty-resources": {
@@ -273,6 +332,7 @@ const TileMedia = ({ slug, sizes = SIZES_HINT.gridTile }) => {
   const m = TILE_MEDIA[slug];
   if (!m) return null;
   if (m.kind === "video") return <GridVideo src={m.src} poster={m.poster} label={m.label} />;
+  if (m.kind === "phone3d") return <GridPhone3D src={m.src} poster={m.poster} label={m.label} />;
   if (m.kind === "slideshow") return <GridSlideshow images={m.images} label={m.label} interval={m.interval} fade={m.fade} />;
   const img = <img {...imageProps(m.src, sizes)} alt={m.alt} loading="lazy" decoding="async" />;
   return m.kenBurns ? <span className="cyril-ken-burns">{img}</span> : img;

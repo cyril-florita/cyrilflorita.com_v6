@@ -29,7 +29,7 @@ const prefersReducedMotion = () =>
 // the facts row, then (optionally)
 // a full-bleed image — or a looping, muted video (`video`, with its poster
 // from videoSizes.json) — that settles from a slight zoom as it scrolls up.
-export const CaseHero = ({ category, detail, title, summary, facts, image, imageAlt, video }) => {
+export const CaseHero = ({ category, detail, title, summary, facts, image, imageAlt, video, tile }) => {
   const imgRef = useRef(null);
 
   // The video plays only while it's on screen, and never under reduced
@@ -97,7 +97,13 @@ export const CaseHero = ({ category, detail, title, summary, facts, image, image
           </dl>
         )}
       </header>
-      {video ? (
+      {tile ? (
+        // A project's My Work thumbnail as the hero (e.g. the 3D phone),
+        // from TILE_MEDIA — same media, full width.
+        <div className="cyril-case-bleed cyril-case-bleed-tile">
+          <TileMedia slug={tile} sizes="100vw" />
+        </div>
+      ) : video ? (
         <div className="cyril-case-bleed">
           <video
             ref={imgRef}

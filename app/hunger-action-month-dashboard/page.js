@@ -140,9 +140,9 @@ const Page = () => {
           </CaseLayout>
 
           <CaseNext
-            href="/gty_v9"
-            title="Grace to You"
-            category="UX Design"
+            href="/the-study-bible-app"
+            title="The Study Bible App"
+            category="App Design & Prototyping"
             onBack={handleBackToPortfolio}
           />
 

@@ -358,6 +358,22 @@ const PortfolioIsotope = () => {
             </Link>
           </div>
 
+          {/* wide . the study bible app */}
+          <div id="thestudybibleapp" data-project="thestudybibleapp" data-order-uix="12" className="cyril-grid-item fil-uix">
+            <Link href="/the-study-bible-app" onClick={saveFilterOnNavigate}>
+              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
+                <div className="cyril-cover">
+                  <TileMedia slug="/the-study-bible-app" />
+                  <h3>Case Study</h3>
+                </div>
+                <div className="cyril-project-descr">
+                  <p className="cyril-upper cyril-accent cyril-mb-10">App Design &amp; Prototyping</p>
+                  <h4 className="cyril-up">The Study Bible App</h4>
+                </div>
+              </div>
+            </Link>
+          </div>
+
           {/* wide . gty v9 (looping video thumbnail) */}
           <div id="gty9" data-project="gty9" data-order-uix="1" className="cyril-grid-item fil-uix">
             <Link href="/gty_v9" onClick={saveFilterOnNavigate}>
@@ -372,22 +388,6 @@ const PortfolioIsotope = () => {
                 <div className="cyril-project-descr">
                   <p className="cyril-upper cyril-accent cyril-mb-10">UX Design</p>
                   <h4 className="cyril-up">Grace to You</h4>
-                </div>
-              </div>
-            </Link>
-          </div>
-
-          {/* wide . giving tuesday (looping video thumbnail) */}
-          <div id="givingtuesday" data-project="givingtuesday" data-order-uix="5" data-order-brand="2" className="cyril-grid-item fil-uix fil-marketing">
-            <Link href="/giving-tuesday" onClick={saveFilterOnNavigate}>
-              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
-                <div className="cyril-cover">
-                  <TileMedia slug="/giving-tuesday" />
-                  <h3>Case Study</h3>
-                </div>
-                <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Design, Development, &amp; Campaign Performance Tracking</p>
-                  <h4 className="cyril-up">Giving Tuesday Campaign</h4>
                 </div>
               </div>
             </Link>
@@ -457,17 +457,17 @@ const PortfolioIsotope = () => {
             </Link>
           </div>
 
-          {/* wide . the study bible app */}
-          <div id="thestudybibleapp" data-project="thestudybibleapp" data-order-uix="12" className="cyril-grid-item fil-uix">
-            <Link href="/the-study-bible-app" onClick={saveFilterOnNavigate}>
+          {/* wide . giving tuesday (looping video thumbnail) */}
+          <div id="givingtuesday" data-project="givingtuesday" data-order-uix="5" data-order-brand="2" className="cyril-grid-item fil-uix fil-marketing">
+            <Link href="/giving-tuesday" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <TileMedia slug="/the-study-bible-app" />
+                  <TileMedia slug="/giving-tuesday" />
                   <h3>Case Study</h3>
                 </div>
                 <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">App Design &amp; Prototyping</p>
-                  <h4 className="cyril-up">The Study Bible App</h4>
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Design, Development, &amp; Campaign Performance Tracking</p>
+                  <h4 className="cyril-up">Giving Tuesday Campaign</h4>
                 </div>
               </div>
             </Link>

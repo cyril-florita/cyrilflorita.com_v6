@@ -2404,6 +2404,48 @@ portfolio
     }
 }
 
+// 3D phone thumbnail (GridPhone3D in TileMedia.js): a dark stage with a
+// phone-shaped device, rotated in perspective by GSAP. Overrides the tile
+// image rules (cover-fill, hover shrink) for the video inside.
+.cyril-phone3d {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    perspective: 1200px;
+    background:
+        radial-gradient(60% 80% at 50% 45%, rgba(250, 71, 41, 0.22), transparent 70%),
+        linear-gradient(160deg, #262626, #121212);
+
+    & .cyril-phone3d-device {
+        position: relative;
+        display: block;
+        height: 84%;
+        aspect-ratio: 750 / 1624;
+        padding: 1.6%;
+        border-radius: 12% / 5.6%;
+        background: #0b0b0b;
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.12), 24px 30px 50px rgba(0, 0, 0, 0.55);
+        transform-style: preserve-3d;
+        will-change: transform;
+    }
+
+    & .cyril-phone3d-device video,
+    .cyril-portfolio-item .cyril-cover & .cyril-phone3d-device video,
+    .cyril-page.cyril-case-page .cyril-case-next-image & .cyril-phone3d-device video {
+        position: static;
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10% / 4.6%;
+        transform: none !important;
+    }
+}
+
 .cyril-portfolio-item {
     display: block;
     cursor: pointer;
@@ -3172,6 +3214,16 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
     overflow: hidden;
 }
 
+// Hero showing a project's tile media (CaseHero `tile`), e.g. the 3D phone.
+.cyril-case-bleed.cyril-case-bleed-tile {
+    position: relative;
+    aspect-ratio: 16 / 8;
+
+    @media screen and (max-width: 768px) {
+        aspect-ratio: 4 / 3;
+    }
+}
+
 .cyril-page.cyril-case-page .cyril-case-bleed img,
 .cyril-page.cyril-case-page .cyril-case-bleed video {
     display: block;
@@ -3655,12 +3707,14 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
             gap: 20px;
 
             & .cyril-case-figure-phone {
-                & .cyril-cover {
+                & .cyril-cover,
+                & .cyril-video-container {
                     padding: 6px;
                     border-radius: 26px;
                 }
 
-                & img {
+                & img,
+                & video {
                     border-radius: 20px;
                 }
             }

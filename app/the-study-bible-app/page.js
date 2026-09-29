@@ -10,6 +10,7 @@ import {
   CaseLayout,
   CaseSection,
   CaseFigure,
+  CaseVideo,
   CaseGrid,
   CaseQuote,
   CaseNext,
@@ -33,6 +34,7 @@ const SECTIONS = [
   { id: "screens", label: "Designing the Screens" },
   { id: "prototyping", label: "Prototyping" },
   { id: "handoff", label: "Handoff" },
+  { id: "released", label: "The Released App" },
   { id: "reflection", label: "Reflection" },
 ];
 
@@ -82,16 +84,16 @@ const Page = () => {
               { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Media Organization</> },
               { label: "Role", value: "User Experience Designer" },
               { label: "Deliverables", value: "Research, Interactive Prototype, Style Guide" },
+              { label: "Website", value: <a className="cyril-dark" href="https://studybible.org" target="_blank" rel="noopener noreferrer">studybible.org</a> },
             ]}
-            image="/img/portfolio/main_the-study-bible-app.jpg"
-            imageAlt="The Study Bible App - Main"
+            tile="/the-study-bible-app"
           />
 
           <CaseLayout sections={SECTIONS}>
 
             {/* 01 — Overview */}
             <CaseSection id="overview" number={1} title="Project Overview">
-              <p>As a UX designer at Grace to You, I had the opportunity to lead the redesign of The Study Bible app&mdash;a rich digital resource for Bible readers, students, and teachers who rely on the faithful teaching of and commentary from John MacArthur. While the legacy app offered unparalleled theological depth and matched the physical MacArthur Study Bible, it was fraught with critical usability issues.</p>
+              <p>As a UX designer at Grace to You, I had the opportunity to lead the redesign of The Study Bible app (released as <strong>The MacArthur Study Bible</strong> app)&mdash;a rich digital resource for Bible readers, students, and teachers who rely on the faithful teaching of and commentary from John MacArthur. While the legacy app offered unparalleled theological depth and matched the physical MacArthur Study Bible, it was fraught with critical usability issues.</p>
               <p>This project is not just about addressing the usability issues of the legacy app, but also about building something much more powerful. Not flashy. Not overdone. Just something that users can expect to do with the physical MacArthur Study Bible, but more and better with this digital platform. And so I set out to create an experience that reflects the heart of what this Bible app offers&mdash;convenient access to faithful Bible teaching&mdash;presented in a way that's simple, clean, yet delightful.</p>
               <CaseFigure src={`${P}project-timeline.jpg`} alt="The Study Bible app project flow, from research to public release" caption="Project flow" />
             </CaseSection>
@@ -193,29 +195,43 @@ const Page = () => {
             {/* 07 — Prototyping */}
             <CaseSection id="prototyping" number={7} title="Prototyping a Better Experience">
               <p>One of the central pieces of this redesign project was validating the goals above by building an interactive prototype. And once the prototype was ready, I conducted user testing to gather feedback.</p>
+              <CaseGrid layout="three">
+                <CaseVideo src="/img/portfolio/tsba_proto_1_home.mp4" caption="Prototype: home" size="phone" />
+                <CaseVideo src="/img/portfolio/tsba_proto_2_bible-text_get-notes.mp4" caption="Prototype: Bible text & John's notes" size="phone" />
+                <CaseVideo src="/img/portfolio/tsba_proto_3_bible-text_personalization.mp4" caption="Prototype: personalization" size="phone" />
+                <CaseVideo src="/img/portfolio/tsba_proto_4_bible-nav.mp4" caption="Prototype: Bible navigation" size="phone" />
+                <CaseVideo src="/img/portfolio/tsba_proto_5_johns-notes_main.mp4" caption="Prototype: John's notes" size="phone" />
+              </CaseGrid>
               <p>Feedback from the stakeholders, Digital Platforms team, and testers was overwhelmingly positive. Users found the navigation intuitive, the Bible text having less distractions, and their beloved tools working as they expected.</p>
             </CaseSection>
 
             {/* 08 — Handoff */}
             <CaseSection id="handoff" number={8} title="Development Handoff">
               <p>Once the high-fidelity prototype was validated through user testing, I shifted focus toward setting up a smooth development handoff. From the start, my goal was to minimize ambiguity, accelerate build time, and reduce rework cycles. And so with the guidance of the Senior Software Architect, I set up prototype walkthroughs with the developers. I also provided them with a style guide and the prototype itself to use as references.</p>
+              <p>The app was built by the development team behind the Literal Word Bible app, so the redesign was handed to developers already experienced in building a fast, reliable Bible reader&mdash;a strong foundation for bringing the prototype to life.</p>
             </CaseSection>
 
-            {/* 09 — Reflection */}
-            <CaseSection id="reflection" number={9} title="Reflection">
+            {/* 09 — The Released App */}
+            <CaseSection id="released" number={9} title="The Released App">
+              <p>At release, the app took the name of the print edition it brings to life: <strong>The MacArthur Study Bible</strong>. Here&apos;s the finished app, built from the redesign and prototype. Learn more at <a className="cyril-accent" href="https://studybible.org" target="_blank" rel="noopener noreferrer"><strong>studybible.org</strong></a>.</p>
+              <CaseVideo src="/img/portfolio/tsba_released-app.mp4" caption="The MacArthur Study Bible app" size="phone" />
+            </CaseSection>
+
+            {/* 10 — Reflection */}
+            <CaseSection id="reflection" number={10} title="Reflection">
               <CaseQuote>
                 The project was a testament to the power of user-centered design.
               </CaseQuote>
               <p>I was privileged to have worked on this project at Grace to You. My responsibility ended after the development handoff. But the project was a testament to the power of user-centered design, and the prototype was a turning point in validating, iterating, and finalizing the project's vision. It grounded the Digital Platforms team's choices in real user feedback and helped build trust among the stakeholders.</p>
-              <p>Moreover, by focusing on simplicity, usability, and performance, the organization aimed for The Study Bible app not just to be another Bible-reading &amp; study tool, but a platform where users could enjoy a meaningful and focused study consistent with the GTY platforms ecosystem and like no other&mdash;hence the name, <strong>The Study Bible</strong>.</p>
+              <p>Moreover, by focusing on simplicity, usability, and performance, the organization aimed for The Study Bible app not just to be another Bible-reading &amp; study tool, but a platform where users could enjoy a meaningful and focused study consistent with the GTY platforms ecosystem and like no other.</p>
             </CaseSection>
 
           </CaseLayout>
 
           <CaseNext
-            href="/gty-dashboard"
-            title="GTY Dashboard"
-            category="Design & Development"
+            href="/gty_v9"
+            title="Grace to You"
+            category="UX Design"
             onBack={handleBackToPortfolio}
           />
 

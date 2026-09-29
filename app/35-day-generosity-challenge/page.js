@@ -146,9 +146,9 @@ const Page = () => {
           </CaseLayout>
 
           <CaseNext
-            href="/the-study-bible-app"
-            title="The Study Bible App"
-            category="App Design & Prototyping"
+            href="/giving-tuesday"
+            title="Giving Tuesday Campaign"
+            category="Design, Development, & Campaign Performance Tracking"
             onBack={handleBackToPortfolio}
           />
 

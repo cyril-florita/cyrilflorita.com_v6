@@ -147,9 +147,9 @@ const Page = () => {
           </CaseLayout>
 
           <CaseNext
-            href="/grace-stream"
-            title="Grace Stream"
-            category="Branding, Design, & Development"
+            href="/gty-dashboard"
+            title="GTY Dashboard"
+            category="Design & Development"
             onBack={handleBackToPortfolio}
           />
 
