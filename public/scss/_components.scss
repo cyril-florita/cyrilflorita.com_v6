@@ -2416,33 +2416,145 @@ portfolio
     justify-content: center;
     overflow: hidden;
     perspective: 1200px;
-    background:
-        radial-gradient(60% 80% at 50% 45%, rgba(250, 71, 41, 0.22), transparent 70%),
-        linear-gradient(160deg, #262626, #121212);
+    container-type: size;
+    // Light "studio" stage in the app's teal: a soft spotlight behind the
+    // phone, two thin concentric diamond outlines (the site's motif) and a
+    // floor shadow under it.
+    background-color: #d3e6e8;
+    background-image:
+        radial-gradient(38% 12% at 50% 90%, rgba(20, 60, 68, 0.22), transparent 70%),
+        radial-gradient(70% 85% at 50% 42%, #f3f9f9 0%, #dcebed 45%, #bcd7da 100%);
 
+    // Concentric diamonds (the site's motif) stepping outward and fading,
+    // alternating teal and the site's orange; the first orange ring carries a
+    // small solid orange diamond on its right corner.
+    // Concentric diamonds (the site's motif), tilted back in 3D like a floor
+    // the phone stands on and running out toward the horizon, fading into the
+    // distance; alternating teal and the site's orange, the first orange ring
+    // carrying a small solid orange diamond on its right corner.
+    & .cyril-phone3d-rings {
+        position: absolute;
+        // Extends past the stage bottom so the fade mask (which only covers
+        // this box) doesn't cut the near rings off at the edge.
+        inset: -60cqh -40cqh -60cqh;
+        pointer-events: none;
+        // Perspective in cqh so the tilt looks the same at any size (the
+        // tile and the much larger page hero).
+        transform: perspective(343cqh) translateY(6cqh) rotateX(62deg);
+        transform-origin: 50% 54.5%;
+        -webkit-mask-image: linear-gradient(to top, #000 55%, transparent 94%);
+        mask-image: linear-gradient(to top, #000 55%, transparent 94%);
+
+        & i {
+            position: absolute;
+            top: 54.5%;
+            left: 50%;
+            height: calc(var(--n) * 17cqh + 12cqh);
+            aspect-ratio: 1;
+            border: 1px solid rgba(38, 92, 102, 0.24);
+            transform: translate(-50%, -50%) rotate(45deg);
+
+            @for $n from 1 through 16 {
+                &:nth-child(#{$n}) {
+                    --n: #{$n};
+                }
+            }
+
+            &:nth-child(even) {
+                border: 1.5px solid rgba(250, 71, 41, 0.6);
+            }
+
+            &:nth-child(2) {
+                border-color: rgba(250, 71, 41, 0.8);
+                background: linear-gradient(var(--color-accent), var(--color-accent)) top right / 3.2cqh 3.2cqh no-repeat;
+            }
+        }
+    }
+
+    // The phone: the screen (content box) is exactly the recording's
+    // 750 × 1624; the bezel is padding around it (sized off the stage height,
+    // so it scales with the tile), with a metallic rim, side buttons, a
+    // Dynamic Island and a glass sheen.
     & .cyril-phone3d-device {
         position: relative;
         display: block;
-        height: 84%;
+        box-sizing: content-box;
+        height: 74cqh;
         aspect-ratio: 750 / 1624;
-        padding: 1.6%;
-        border-radius: 12% / 5.6%;
-        background: #0b0b0b;
-        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.12), 24px 30px 50px rgba(0, 0, 0, 0.55);
+        padding: 2.4cqh;
+        border-radius: 6.5cqh;
+        background: #0a0a0a;
+        box-shadow:
+            0 0 0 0.45cqh #3a3a3c,
+            0 0 0 0.75cqh #1c1c1e,
+            inset 0 0 0 0.3cqh #202022,
+            3cqh 4cqh 8cqh rgba(20, 60, 68, 0.3);
         transform-style: preserve-3d;
         will-change: transform;
+
+        // side buttons (power on the right, volume on the left)
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            width: 0.7cqh;
+            border-radius: 0.4cqh;
+            background: linear-gradient(90deg, #2c2c2e, #4a4a4c);
+        }
+
+        &::before {
+            right: -1.3cqh;
+            top: 22%;
+            height: 11%;
+        }
+
+        &::after {
+            left: -1.3cqh;
+            top: 18%;
+            height: 16%;
+            box-shadow: 0 13cqh 0 #3a3a3c;
+        }
     }
 
+    // Dynamic Island + glass sheen, over the screen
+    & .cyril-phone3d-island {
+        position: absolute;
+        top: calc(2.4cqh + 1.6cqh);
+        left: 50%;
+        z-index: 2;
+        width: 28%;
+        height: 2.6cqh;
+        border-radius: 2cqh;
+        background: #000;
+        transform: translateX(-50%);
+    }
+
+    & .cyril-phone3d-glass {
+        position: absolute;
+        inset: 2.4cqh;
+        z-index: 1;
+        border-radius: 4.4cqh;
+        background: linear-gradient(115deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.03) 28%, transparent 45%);
+        pointer-events: none;
+    }
+
+    // (Also beats the hero's own full-width video rules and scroll-zoom
+    // `scale` in .cyril-case-bleed.)
     & .cyril-phone3d-device video,
     .cyril-portfolio-item .cyril-cover & .cyril-phone3d-device video,
-    .cyril-page.cyril-case-page .cyril-case-next-image & .cyril-phone3d-device video {
+    .cyril-page.cyril-case-page .cyril-case-next-image & .cyril-phone3d-device video,
+    .cyril-page.cyril-case-page .cyril-case-bleed & .cyril-phone3d-device video {
         position: static;
         display: block;
         width: 100%;
         height: 100%;
-        object-fit: cover;
-        border-radius: 10% / 4.6%;
+        object-fit: fill;
+        border-radius: 4.4cqh;
         transform: none !important;
+        scale: 1;
+        padding: 0;
+        border: 0;
+        filter: none;
     }
 }
 
@@ -3217,7 +3329,9 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
 // Hero showing a project's tile media (CaseHero `tile`), e.g. the 3D phone.
 .cyril-case-bleed.cyril-case-bleed-tile {
     position: relative;
-    aspect-ratio: 16 / 8;
+    // Same proportions as the wide My Work tile, so the hero shows the exact
+    // composition of the thumbnail (the 3D floor depends on the aspect).
+    aspect-ratio: 5 / 3;
 
     @media screen and (max-width: 768px) {
         aspect-ratio: 4 / 3;

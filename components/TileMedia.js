@@ -147,12 +147,12 @@ const GridPhone3D = ({ src, poster, label }) => {
     // side — and around again.
     const sway = animate
       ? gsap.timeline({ repeat: -1, paused: true, defaults: { ease: "power3.inOut" } })
-          .to(device, { scale: 2.5, rotationY: -4, rotationX: 2, rotationZ: 0, y: 40, duration: 1.8 })
-          .to(device, { scale: 2.65, rotationY: 3, y: 10, duration: 1.6, ease: "sine.inOut" })
+          .to(device, { scale: 1.75, rotationY: -4, rotationX: 2, rotationZ: 0, y: 40, duration: 1.8 })
+          .to(device, { scale: 1.85, rotationY: 3, y: 10, duration: 1.6, ease: "sine.inOut" })
           .to(device, { scale: 0.95, rotationY: 22, rotationX: 8, rotationZ: -2, y: 0, duration: 1.8 })
           .to(device, { rotationY: 16, y: -6, duration: 1.2, ease: "sine.inOut" })
-          .to(device, { scale: 2.4, rotationY: 5, rotationX: 3, rotationZ: 0, y: -30, duration: 1.8 })
-          .to(device, { scale: 2.55, rotationY: -3, y: -10, duration: 1.4, ease: "sine.inOut" })
+          .to(device, { scale: 1.7, rotationY: 5, rotationX: 3, rotationZ: 0, y: -30, duration: 1.8 })
+          .to(device, { scale: 1.8, rotationY: -3, y: -10, duration: 1.4, ease: "sine.inOut" })
           .to(device, { scale: 0.95, rotationY: -24, rotationX: 10, rotationZ: 2, y: 0, duration: 1.8 })
           .to(device, { rotationY: -18, y: -6, duration: 1.2, ease: "sine.inOut" })
       : null;
@@ -184,8 +184,13 @@ const GridPhone3D = ({ src, poster, label }) => {
   }, []);
   return (
     <span ref={stageRef} className="cyril-phone3d" role="img" aria-label={label}>
+      <span className="cyril-phone3d-rings" aria-hidden="true">
+        {Array.from({ length: 16 }, (_, i) => <i key={i} />)}
+      </span>
       <span ref={deviceRef} className="cyril-phone3d-device">
         <video ref={videoRef} src={src} poster={poster} preload="none" muted loop playsInline />
+        <span className="cyril-phone3d-glass" aria-hidden="true" />
+        <span className="cyril-phone3d-island" aria-hidden="true" />
       </span>
     </span>
   );

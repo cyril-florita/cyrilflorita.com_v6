@@ -1046,174 +1046,174 @@ box to be used for the random glitch effect. Also adds a very subtle
 skew to change the 'thickness' of the glitch.*/
 @keyframes glitch-anim {
   0% {
-    clip: rect(146px, 9999px, 158px, 0);
-    transform: skew(0.29deg);
-  }
-  5% {
-    clip: rect(316px, 9999px, 109px, 0);
-    transform: skew(0.08deg);
-  }
-  10% {
-    clip: rect(87px, 9999px, 173px, 0);
-    transform: skew(0.31deg);
-  }
-  15% {
-    clip: rect(98px, 9999px, 89px, 0);
-    transform: skew(0.94deg);
-  }
-  20% {
-    clip: rect(187px, 9999px, 52px, 0);
-    transform: skew(0.64deg);
-  }
-  25% {
-    clip: rect(393px, 9999px, 394px, 0);
+    clip: rect(274px, 9999px, 223px, 0);
     transform: skew(0.92deg);
   }
+  5% {
+    clip: rect(358px, 9999px, 35px, 0);
+    transform: skew(0.23deg);
+  }
+  10% {
+    clip: rect(75px, 9999px, 58px, 0);
+    transform: skew(0.56deg);
+  }
+  15% {
+    clip: rect(36px, 9999px, 178px, 0);
+    transform: skew(0.32deg);
+  }
+  20% {
+    clip: rect(87px, 9999px, 151px, 0);
+    transform: skew(0.8deg);
+  }
+  25% {
+    clip: rect(66px, 9999px, 308px, 0);
+    transform: skew(0.55deg);
+  }
   30% {
-    clip: rect(353px, 9999px, 18px, 0);
-    transform: skew(0.53deg);
+    clip: rect(274px, 9999px, 141px, 0);
+    transform: skew(0.59deg);
   }
   35% {
-    clip: rect(372px, 9999px, 36px, 0);
-    transform: skew(0.61deg);
+    clip: rect(314px, 9999px, 363px, 0);
+    transform: skew(0.55deg);
   }
   40% {
-    clip: rect(145px, 9999px, 286px, 0);
-    transform: skew(0.42deg);
+    clip: rect(185px, 9999px, 346px, 0);
+    transform: skew(0.24deg);
   }
   45% {
-    clip: rect(345px, 9999px, 224px, 0);
-    transform: skew(0.01deg);
+    clip: rect(220px, 9999px, 252px, 0);
+    transform: skew(0.79deg);
   }
   50% {
-    clip: rect(265px, 9999px, 355px, 0);
-    transform: skew(0.46deg);
-  }
-  55% {
-    clip: rect(66px, 9999px, 41px, 0);
-    transform: skew(0.18deg);
-  }
-  60% {
-    clip: rect(284px, 9999px, 263px, 0);
-    transform: skew(0.13deg);
-  }
-  65% {
-    clip: rect(3px, 9999px, 79px, 0);
-    transform: skew(0.42deg);
-  }
-  70% {
-    clip: rect(154px, 9999px, 204px, 0);
-    transform: skew(0.14deg);
-  }
-  75% {
-    clip: rect(331px, 9999px, 238px, 0);
+    clip: rect(252px, 9999px, 377px, 0);
     transform: skew(0.36deg);
   }
+  55% {
+    clip: rect(131px, 9999px, 115px, 0);
+    transform: skew(0.66deg);
+  }
+  60% {
+    clip: rect(79px, 9999px, 139px, 0);
+    transform: skew(0.03deg);
+  }
+  65% {
+    clip: rect(110px, 9999px, 125px, 0);
+    transform: skew(0.61deg);
+  }
+  70% {
+    clip: rect(382px, 9999px, 387px, 0);
+    transform: skew(0.19deg);
+  }
+  75% {
+    clip: rect(206px, 9999px, 192px, 0);
+    transform: skew(0.97deg);
+  }
   80% {
-    clip: rect(83px, 9999px, 5px, 0);
-    transform: skew(0.84deg);
+    clip: rect(317px, 9999px, 398px, 0);
+    transform: skew(0.16deg);
   }
   85% {
-    clip: rect(374px, 9999px, 62px, 0);
-    transform: skew(0.29deg);
+    clip: rect(382px, 9999px, 262px, 0);
+    transform: skew(0.38deg);
   }
   90% {
-    clip: rect(334px, 9999px, 320px, 0);
-    transform: skew(0.88deg);
+    clip: rect(218px, 9999px, 28px, 0);
+    transform: skew(0.7deg);
   }
   95% {
-    clip: rect(395px, 9999px, 142px, 0);
-    transform: skew(0.82deg);
+    clip: rect(52px, 9999px, 311px, 0);
+    transform: skew(0.36deg);
   }
   100% {
-    clip: rect(260px, 9999px, 263px, 0);
-    transform: skew(0.68deg);
+    clip: rect(177px, 9999px, 239px, 0);
+    transform: skew(0.96deg);
   }
 }
 @keyframes glitch-anim2 {
   0% {
-    clip: rect(42px, 9999px, 28px, 0);
-    transform: skew(0.15deg);
+    clip: rect(93px, 9999px, 64px, 0);
+    transform: skew(0.66deg);
   }
   5% {
-    clip: rect(97px, 9999px, 41px, 0);
-    transform: skew(0.35deg);
+    clip: rect(3px, 9999px, 77px, 0);
+    transform: skew(0.94deg);
   }
   10% {
-    clip: rect(96px, 9999px, 37px, 0);
-    transform: skew(0.5deg);
-  }
-  15% {
-    clip: rect(74px, 9999px, 83px, 0);
-    transform: skew(0.8deg);
-  }
-  20% {
-    clip: rect(33px, 9999px, 61px, 0);
-    transform: skew(0.95deg);
-  }
-  25% {
-    clip: rect(77px, 9999px, 89px, 0);
-    transform: skew(0.08deg);
-  }
-  30% {
-    clip: rect(65px, 9999px, 98px, 0);
-    transform: skew(0.11deg);
-  }
-  35% {
-    clip: rect(84px, 9999px, 23px, 0);
-    transform: skew(0.51deg);
-  }
-  40% {
-    clip: rect(29px, 9999px, 50px, 0);
-    transform: skew(0.95deg);
-  }
-  45% {
-    clip: rect(87px, 9999px, 24px, 0);
-    transform: skew(0.91deg);
-  }
-  50% {
-    clip: rect(67px, 9999px, 35px, 0);
-    transform: skew(0.14deg);
-  }
-  55% {
-    clip: rect(66px, 9999px, 69px, 0);
-    transform: skew(0.31deg);
-  }
-  60% {
-    clip: rect(39px, 9999px, 9px, 0);
-    transform: skew(0.79deg);
-  }
-  65% {
-    clip: rect(15px, 9999px, 89px, 0);
-    transform: skew(0.14deg);
-  }
-  70% {
-    clip: rect(63px, 9999px, 78px, 0);
-    transform: skew(0.19deg);
-  }
-  75% {
-    clip: rect(1px, 9999px, 87px, 0);
-    transform: skew(0.73deg);
-  }
-  80% {
-    clip: rect(16px, 9999px, 72px, 0);
-    transform: skew(0.63deg);
-  }
-  85% {
-    clip: rect(75px, 9999px, 73px, 0);
-    transform: skew(0.25deg);
-  }
-  90% {
-    clip: rect(66px, 9999px, 75px, 0);
+    clip: rect(49px, 9999px, 30px, 0);
     transform: skew(0.75deg);
   }
+  15% {
+    clip: rect(96px, 9999px, 28px, 0);
+    transform: skew(0.77deg);
+  }
+  20% {
+    clip: rect(15px, 9999px, 34px, 0);
+    transform: skew(0.45deg);
+  }
+  25% {
+    clip: rect(42px, 9999px, 52px, 0);
+    transform: skew(0.26deg);
+  }
+  30% {
+    clip: rect(44px, 9999px, 50px, 0);
+    transform: skew(0.85deg);
+  }
+  35% {
+    clip: rect(71px, 9999px, 5px, 0);
+    transform: skew(0.18deg);
+  }
+  40% {
+    clip: rect(86px, 9999px, 38px, 0);
+    transform: skew(0.27deg);
+  }
+  45% {
+    clip: rect(81px, 9999px, 21px, 0);
+    transform: skew(0.99deg);
+  }
+  50% {
+    clip: rect(37px, 9999px, 33px, 0);
+    transform: skew(0.6deg);
+  }
+  55% {
+    clip: rect(26px, 9999px, 83px, 0);
+    transform: skew(0.75deg);
+  }
+  60% {
+    clip: rect(15px, 9999px, 29px, 0);
+    transform: skew(0.53deg);
+  }
+  65% {
+    clip: rect(38px, 9999px, 80px, 0);
+    transform: skew(0.36deg);
+  }
+  70% {
+    clip: rect(92px, 9999px, 10px, 0);
+    transform: skew(0.09deg);
+  }
+  75% {
+    clip: rect(80px, 9999px, 78px, 0);
+    transform: skew(0.94deg);
+  }
+  80% {
+    clip: rect(15px, 9999px, 11px, 0);
+    transform: skew(0.04deg);
+  }
+  85% {
+    clip: rect(82px, 9999px, 94px, 0);
+    transform: skew(0.41deg);
+  }
+  90% {
+    clip: rect(72px, 9999px, 19px, 0);
+    transform: skew(0.17deg);
+  }
   95% {
-    clip: rect(93px, 9999px, 42px, 0);
-    transform: skew(0.91deg);
+    clip: rect(3px, 9999px, 25px, 0);
+    transform: skew(0.01deg);
   }
   100% {
-    clip: rect(15px, 9999px, 17px, 0);
-    transform: skew(0.07deg);
+    clip: rect(100px, 9999px, 97px, 0);
+    transform: skew(0.18deg);
   }
 }
 /* -------------------------------------------
@@ -3232,28 +3232,145 @@ portfolio
   justify-content: center;
   overflow: hidden;
   perspective: 1200px;
-  background: radial-gradient(60% 80% at 50% 45%, rgba(250, 71, 41, 0.22), transparent 70%), linear-gradient(160deg, #262626, #121212);
+  container-type: size;
+  background-color: #d3e6e8;
+  background-image: radial-gradient(38% 12% at 50% 90%, rgba(20, 60, 68, 0.22), transparent 70%), radial-gradient(70% 85% at 50% 42%, #f3f9f9 0%, #dcebed 45%, #bcd7da 100%);
+}
+.cyril-phone3d .cyril-phone3d-rings {
+  position: absolute;
+  inset: -60cqh -40cqh -60cqh;
+  pointer-events: none;
+  transform: perspective(343cqh) translateY(6cqh) rotateX(62deg);
+  transform-origin: 50% 54.5%;
+  -webkit-mask-image: linear-gradient(to top, #000 55%, transparent 94%);
+  mask-image: linear-gradient(to top, #000 55%, transparent 94%);
+}
+.cyril-phone3d .cyril-phone3d-rings i {
+  position: absolute;
+  top: 54.5%;
+  left: 50%;
+  height: calc(var(--n) * 17cqh + 12cqh);
+  aspect-ratio: 1;
+  border: 1px solid rgba(38, 92, 102, 0.24);
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.cyril-phone3d .cyril-phone3d-rings i:nth-child(1) {
+  --n: 1;
+}
+.cyril-phone3d .cyril-phone3d-rings i:nth-child(2) {
+  --n: 2;
+}
+.cyril-phone3d .cyril-phone3d-rings i:nth-child(3) {
+  --n: 3;
+}
+.cyril-phone3d .cyril-phone3d-rings i:nth-child(4) {
+  --n: 4;
+}
+.cyril-phone3d .cyril-phone3d-rings i:nth-child(5) {
+  --n: 5;
+}
+.cyril-phone3d .cyril-phone3d-rings i:nth-child(6) {
+  --n: 6;
+}
+.cyril-phone3d .cyril-phone3d-rings i:nth-child(7) {
+  --n: 7;
+}
+.cyril-phone3d .cyril-phone3d-rings i:nth-child(8) {
+  --n: 8;
+}
+.cyril-phone3d .cyril-phone3d-rings i:nth-child(9) {
+  --n: 9;
+}
+.cyril-phone3d .cyril-phone3d-rings i:nth-child(10) {
+  --n: 10;
+}
+.cyril-phone3d .cyril-phone3d-rings i:nth-child(11) {
+  --n: 11;
+}
+.cyril-phone3d .cyril-phone3d-rings i:nth-child(12) {
+  --n: 12;
+}
+.cyril-phone3d .cyril-phone3d-rings i:nth-child(13) {
+  --n: 13;
+}
+.cyril-phone3d .cyril-phone3d-rings i:nth-child(14) {
+  --n: 14;
+}
+.cyril-phone3d .cyril-phone3d-rings i:nth-child(15) {
+  --n: 15;
+}
+.cyril-phone3d .cyril-phone3d-rings i:nth-child(16) {
+  --n: 16;
+}
+.cyril-phone3d .cyril-phone3d-rings i:nth-child(even) {
+  border: 1.5px solid rgba(250, 71, 41, 0.6);
+}
+.cyril-phone3d .cyril-phone3d-rings i:nth-child(2) {
+  border-color: rgba(250, 71, 41, 0.8);
+  background: linear-gradient(var(--color-accent), var(--color-accent)) top right/3.2cqh 3.2cqh no-repeat;
 }
 .cyril-phone3d .cyril-phone3d-device {
   position: relative;
   display: block;
-  height: 84%;
+  box-sizing: content-box;
+  height: 74cqh;
   aspect-ratio: 750/1624;
-  padding: 1.6%;
-  border-radius: 12%/5.6%;
-  background: #0b0b0b;
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.12), 24px 30px 50px rgba(0, 0, 0, 0.55);
+  padding: 2.4cqh;
+  border-radius: 6.5cqh;
+  background: #0a0a0a;
+  box-shadow: 0 0 0 0.45cqh #3a3a3c, 0 0 0 0.75cqh #1c1c1e, inset 0 0 0 0.3cqh #202022, 3cqh 4cqh 8cqh rgba(20, 60, 68, 0.3);
   transform-style: preserve-3d;
   will-change: transform;
 }
-.cyril-phone3d .cyril-phone3d-device video, .cyril-portfolio-item .cyril-cover .cyril-phone3d .cyril-phone3d-device video, .cyril-page.cyril-case-page .cyril-case-next-image .cyril-phone3d .cyril-phone3d-device video {
+.cyril-phone3d .cyril-phone3d-device::before, .cyril-phone3d .cyril-phone3d-device::after {
+  content: "";
+  position: absolute;
+  width: 0.7cqh;
+  border-radius: 0.4cqh;
+  background: linear-gradient(90deg, #2c2c2e, #4a4a4c);
+}
+.cyril-phone3d .cyril-phone3d-device::before {
+  right: -1.3cqh;
+  top: 22%;
+  height: 11%;
+}
+.cyril-phone3d .cyril-phone3d-device::after {
+  left: -1.3cqh;
+  top: 18%;
+  height: 16%;
+  box-shadow: 0 13cqh 0 #3a3a3c;
+}
+.cyril-phone3d .cyril-phone3d-island {
+  position: absolute;
+  top: 4cqh;
+  left: 50%;
+  z-index: 2;
+  width: 28%;
+  height: 2.6cqh;
+  border-radius: 2cqh;
+  background: #000;
+  transform: translateX(-50%);
+}
+.cyril-phone3d .cyril-phone3d-glass {
+  position: absolute;
+  inset: 2.4cqh;
+  z-index: 1;
+  border-radius: 4.4cqh;
+  background: linear-gradient(115deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.03) 28%, transparent 45%);
+  pointer-events: none;
+}
+.cyril-phone3d .cyril-phone3d-device video, .cyril-portfolio-item .cyril-cover .cyril-phone3d .cyril-phone3d-device video, .cyril-page.cyril-case-page .cyril-case-next-image .cyril-phone3d .cyril-phone3d-device video, .cyril-page.cyril-case-page .cyril-case-bleed .cyril-phone3d .cyril-phone3d-device video {
   position: static;
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  border-radius: 10%/4.6%;
+  object-fit: fill;
+  border-radius: 4.4cqh;
   transform: none !important;
+  scale: 1;
+  padding: 0;
+  border: 0;
+  filter: none;
 }
 
 .cyril-portfolio-item {
@@ -3913,7 +4030,7 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
 
 .cyril-case-bleed.cyril-case-bleed-tile {
   position: relative;
-  aspect-ratio: 16/8;
+  aspect-ratio: 5/3;
 }
 @media screen and (max-width: 768px) {
   .cyril-case-bleed.cyril-case-bleed-tile {
