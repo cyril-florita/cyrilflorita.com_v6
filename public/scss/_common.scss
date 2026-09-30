@@ -196,7 +196,7 @@ main:focus {
     letter-spacing: 0.06em;
     text-transform: uppercase;
     text-decoration: none;
-    color: var(--color-light);
+    color: var(--color-on-accent);
     background-color: var(--color-accent);
     transform: translateY(-200%);
     transition: transform 0.2s ease;
@@ -695,7 +695,7 @@ button
     font-size: 16px;
     text-decoration: none;
     border: solid 2px variables.$accent;
-    color: variables.$light;
+    color: var(--color-on-accent);
     box-shadow: 7px 7px 0px 0px variables.$accent-light;
     transition: variables.$tr;
     cursor: pointer;
@@ -714,7 +714,7 @@ button
     &.cyril-type-3 {
         background-color: variables.$dark;
         border-color: variables.$dark;
-        color: variables.$light;
+        color: var(--color-on-accent);
         box-shadow: 7px 7px 0px 0px variables.$soft;
     }
 

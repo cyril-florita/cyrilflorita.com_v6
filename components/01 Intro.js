@@ -6,7 +6,6 @@ import { Fragment } from "react";
 
 const HEADLINE = "Cyril Florita";
 
-// WebP (82 KB, keeps the transparency) instead of the 686 KB PNG original.
 const Banner = ( { bgImage = "/img/cyril-florita-profile.webp" } ) => {
   const pathname = usePathname();
   return (
@@ -49,7 +48,7 @@ const Banner = ( { bgImage = "/img/cyril-florita-profile.webp" } ) => {
                   {/* Scope line — sets the focus (web, brand, front-end) so the
                       headline doesn't read as UX/product design. */}
                   <p className="cyril-mb-30 cyril-hero-scope">
-                    I design, build, and ship digital experiences that convert and <span style={{ whiteSpace: "nowrap" }}>perform&mdash;faster</span> and more efficiently with AI tools these days.
+                    I design, build, and ship digital experiences that delight, convert, and perform.
                   </p>
                   <div className="cyril-buttons-frame">
                     <Link href="/" className="cyril-button" onClick={(e) => {

@@ -319,7 +319,7 @@ html.cyril-has-cursor * {
         // Balances the trailing letter-spacing so the word sits dead center.
         padding-left: 0.08em;
         text-transform: uppercase;
-        color: var(--color-light);
+        color: var(--color-on-accent);
         opacity: 0;
         transition: opacity 0.2s ease;
     }
@@ -1672,6 +1672,45 @@ banner
         }
     }
 
+    // Backlight glow behind the hero photo (dark mode, desktop): a soft light
+    // source in the accent color, as if the photo is lit from behind — the
+    // cinematic focal point. Static (no animation); follows the accent theme.
+    & .col-xl-5:has(.cyril-banner-image) {
+        position: relative;
+
+        & .cyril-banner-image {
+            z-index: 1;
+        }
+    }
+
+    // Keep the hero content above the mouse-following glow (see below).
+    & .container-full {
+        position: relative;
+        z-index: 1;
+    }
+
+    [data-theme="dark"] & .col-xl-5:has(.cyril-banner-image)::before {
+        content: "";
+        position: absolute;
+        z-index: 0;
+        top: 0;
+        left: 64%;
+        width: 125%;
+        aspect-ratio: 1;
+        transform: translateX(-50%);
+        background: radial-gradient(circle at 50% 42%,
+            rgba(var(--color-accent-rgb), 0.7) 0%,
+            rgba(var(--color-accent-rgb), 0.36) 22%,
+            rgba(var(--color-accent-rgb), 0.12) 44%,
+            transparent 66%);
+        filter: blur(24px);
+        pointer-events: none;
+
+        @media screen and (max-width: 1200px) {
+            display: none;
+        }
+    }
+
     &.cyril-banner-right {
         & .cyril-banner-text {
             position: relative;
@@ -2027,7 +2066,7 @@ experience
             box-shadow: 0px 0px 0 0 variables.$soft;
         background-color: var(--color-accent);
         border-color: var(--color-accent);
-        color: var(--color-light);
+        color: var(--color-on-accent);
     }
 
         @media screen and (max-width: 450px) {
@@ -2284,6 +2323,43 @@ call to action
 portfolio
 
 ------------------------------------------- */
+// Glow that glides behind the hovered My Work tile (useGridGlow in
+// PortfolioIsotope.js positions and sizes it). Dark mode + desktop only.
+.cyril-grid-glow-host {
+    position: relative;
+
+    & > .cyril-portfolio-grid {
+        position: relative;
+        z-index: 1;
+    }
+}
+
+.cyril-grid-glow {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+        rgba(var(--color-accent-rgb), 0.8) 0%,
+        rgba(var(--color-accent-rgb), 0.38) 32%,
+        rgba(var(--color-accent-rgb), 0.12) 54%,
+        transparent 72%);
+    filter: blur(24px);
+    pointer-events: none;
+    will-change: transform, opacity;
+
+    [data-theme="dark"] & {
+        @media (hover: hover) and (pointer: fine) and (min-width: 1201px) {
+            display: block;
+        }
+    }
+}
+
 .cyril-portfolio-grid {
     margin-left: -30px;
     margin-right: -30px;
@@ -2461,11 +2537,11 @@ portfolio
             }
 
             &:nth-child(even) {
-                border: 1.5px solid rgba(250, 71, 41, 0.6);
+                border: 1.5px solid rgba(var(--color-accent-rgb), 0.6);
             }
 
             &:nth-child(2) {
-                border-color: rgba(250, 71, 41, 0.8);
+                border-color: rgba(var(--color-accent-rgb), 0.8);
                 background: linear-gradient(var(--color-accent), var(--color-accent)) top right / 3.2cqh 3.2cqh no-repeat;
             }
         }
@@ -2558,6 +2634,21 @@ portfolio
     }
 }
 
+// The phone3d thumbnail (The Study Bible App) as a My Work tile only — the
+// whole stage (teal background, diamonds, phone and video) is grayscale at
+// rest and fades to color on hover (desktop). The hero and the "next project"
+// band keep full color (they don't match this scope).
+@media (hover: hover) and (pointer: fine) and (min-width: 1201px) {
+    .cyril-portfolio-item .cyril-cover .cyril-phone3d {
+        filter: grayscale(100%) brightness(108%) contrast(108%);
+        transition: filter 0.5s ease;
+    }
+
+    .cyril-portfolio-item:hover .cyril-cover .cyril-phone3d {
+        filter: grayscale(0);
+    }
+}
+
 .cyril-portfolio-item {
     display: block;
     cursor: pointer;
@@ -2617,7 +2708,7 @@ portfolio
             padding: 10px 15px;
             background-color: variables.$accent;
             border-radius: 0;
-            color: variables.$light;
+            color: var(--color-on-accent);
             font-family: var(--font-atkinson);
             font-size: 10px;
             font-weight: 700;
@@ -2666,8 +2757,8 @@ portfolio
             & svg,
             & i {
                 opacity: 0;
-                color: var(--color-light);
-                stroke: var(--color-light);
+                color: var(--color-on-accent);
+                stroke: var(--color-on-accent);
                 transform: translateY(10px) scale(.6);
                 transition: variables.$tr;
             }
@@ -2817,6 +2908,7 @@ portfolio
 
             &::after {
                 transform: scale(0.96);
+                border-color: var(--color-accent);
             }
 
             & img,
@@ -2940,7 +3032,7 @@ back to top
         box-shadow: 0px 0px 0 0 variables.$soft;
         background-color: var(--color-accent);
         border-color: var(--color-accent);
-        color: var(--color-light);
+        color: var(--color-on-accent);
     }
 
     @media screen and (max-width: 768px) {
@@ -2987,8 +3079,8 @@ back to top
 
         & svg,
         & i {
-            stroke: var(--color-light);
-            color: var(--color-light);
+            stroke: var(--color-on-accent);
+            color: var(--color-on-accent);
         }
 
     }
@@ -3405,7 +3497,7 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
     &:hover {
         background-color: var(--color-accent);
         border-color: var(--color-accent);
-        color: var(--color-light);
+        color: var(--color-on-accent);
     }
 }
 
@@ -4171,9 +4263,9 @@ zoom viewer (components/ZoomViewer.js)
     height: 54px;
     padding: 0;
     color: var(--color-text);
-    background-color: var(--color-bg);
+    background-color: transparent;
     border: 2px solid var(--color-frame);
-    box-shadow: 6px 6px 0 0 var(--color-soft);
+    box-shadow: 6px 6px 0 0 var(--color-frameshadow);
     cursor: pointer;
     opacity: 0;
     transition: opacity 0.3s ease 0.15s, box-shadow 0.4s cubic-bezier(0, 0, 0.3642, 1), color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
@@ -4183,11 +4275,13 @@ zoom viewer (components/ZoomViewer.js)
         height: 22px;
     }
 
+    // Same treatment as the About Me / Experience slider nav buttons: a
+    // neutral outlined button that fills with the accent on hover.
     &:hover {
-        color: var(--color-light);
+        color: var(--color-on-accent);
         background-color: var(--color-accent);
         border-color: var(--color-accent);
-        box-shadow: 0 0 0 0 var(--color-soft);
+        box-shadow: 0 0 0 0 var(--color-frameshadow);
     }
 
     .cyril-zoom-open & {

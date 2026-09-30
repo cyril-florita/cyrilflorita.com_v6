@@ -7,6 +7,7 @@ import { BLOG_GRAPHICS } from "@/components/data/blogGraphics";
 import { RESOURCE_GRAPHICS } from "@/components/data/resourceGraphics";
 import { imageProps, SIZES_HINT } from "@/components/imageProps";
 import TileMedia from "@/components/TileMedia";
+import { gsap } from "gsap";
 import { wipeThen } from './Preloader';
 import { useRouter } from "next/navigation";
 import { cyrilUtility } from "@/public/utility/index";
@@ -92,7 +93,49 @@ const filterSelector = (key) => {
   return `.${key}`;
 };
 
+// A soft glow in the accent color that glides behind whichever My Work tile
+// is hovered (desktop with a mouse, dark mode — see .cyril-grid-glow) and
+// fades out when the pointer leaves the grid. Reduced motion: it jumps
+// instead of gliding.
+const useGridGlow = (glowRef) => {
+  useEffect(() => {
+    const glow = glowRef.current;
+    const grid = document.querySelector(".cyril-portfolio-grid");
+    if (!glow || !grid) return;
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const host = glow.offsetParent || glow.parentElement;
+    let current = null;
+
+    const onOver = (e) => {
+      const cover = e.target.closest(".cyril-grid-item")?.querySelector(".cyril-cover");
+      if (!cover || cover === current) return;
+      current = cover;
+      const c = cover.getBoundingClientRect(), h = host.getBoundingClientRect();
+      const x = c.left - h.left + c.width / 2, y = c.top - h.top + c.height / 2;
+      const size = Math.max(c.width, c.height) * 1.9;
+      gsap.to(glow, {
+        x: x - size / 2, y: y - size / 2, width: size, height: size, opacity: 1,
+        duration: reduce ? 0 : 0.7, ease: "power3.out", overwrite: "auto",
+      });
+    };
+    const onLeave = () => {
+      current = null;
+      gsap.to(glow, { opacity: 0, duration: reduce ? 0 : 0.5, ease: "power2.out", overwrite: "auto" });
+    };
+    grid.addEventListener("pointerover", onOver);
+    grid.addEventListener("pointerleave", onLeave);
+    return () => {
+      grid.removeEventListener("pointerover", onOver);
+      grid.removeEventListener("pointerleave", onLeave);
+      gsap.killTweensOf(glow);
+    };
+  }, [glowRef]);
+};
+
 const PortfolioIsotope = () => {
+  const glowRef = useRef(null);
+  useGridGlow(glowRef);
   // Case studies (items with a page) stay first, in their set order; the
   // individual graphics follow in a fresh spread-out random order on each
   // visit. Fixed for the life of the page so filtering doesn't reshuffle
@@ -321,7 +364,8 @@ const PortfolioIsotope = () => {
         </div>
       </div>{/* end of .cyril-filter */}
 
-      <div className="container">
+      <div className="container cyril-grid-glow-host">
+        <div ref={glowRef} className="cyril-grid-glow" aria-hidden="true" />
         <div className="cyril-portfolio-grid">
 
           <div className="grid-sizer" />
