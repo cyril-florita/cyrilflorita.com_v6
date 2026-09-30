@@ -5,6 +5,7 @@ const Education = () => {
         className="cyril-bg-item"
         style={{ top: "12%", right: "12%", transform: "rotate(5deg)" }}
       />
+      <div className="cyril-section-glow" aria-hidden="true" />
       <div className="container">
 
         <div>

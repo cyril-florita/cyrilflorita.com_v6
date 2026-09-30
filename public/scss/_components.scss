@@ -456,6 +456,8 @@ page
 
     & .cyril-section {
         position: relative;
+        // A title glow (or diamond) must not bleed into the next section.
+        overflow: clip;
         height: 100vh;
         width: 100%;
         display: -webkit-box;
@@ -2360,6 +2362,40 @@ portfolio
     }
 }
 
+// Title glows — one per About Me section and one in the home page's closing
+// Let's Connect band (<ContactBand glow />), centered behind the h2
+// (MotionEffects.js measures the title and sets left/top; the values here
+// are only the fallback). Same size and falloff as the My Work tile glow
+// (.cyril-grid-glow). Sits above the dotted diamonds (later in the DOM, same
+// z-index) and below the content. Parallax: MotionEffects drives the CSS
+// `translate` property, which composes with the `transform` that centers it.
+// Desktop + dark mode only.
+.cyril-section-glow {
+    display: none;
+    position: absolute;
+    z-index: -1;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 828px;
+    height: 828px;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+        rgba(var(--color-accent-rgb), 0.8) 0%,
+        rgba(var(--color-accent-rgb), 0.38) 32%,
+        rgba(var(--color-accent-rgb), 0.12) 54%,
+        transparent 72%);
+    filter: blur(24px);
+    opacity: 0.75;
+    pointer-events: none;
+
+    [data-theme="dark"] & {
+        @media screen and (min-width: 1201px) {
+            display: block;
+        }
+    }
+}
+
 .cyril-portfolio-grid {
     margin-left: -30px;
     margin-right: -30px;
@@ -3112,6 +3148,20 @@ back to top
         padding-left: 80px;
         padding-right: 80px;
     }
+
+    // The closing Let's Connect band keeps the site's regular container (like
+    // About Me's), so its text isn't jammed against the left edge.
+    .cyril-main-page .cyril-contact .container {
+        max-width: 1100px;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    .cyril-main-page .cyril-contact .container {
+        max-width: 1300px;
+    }
 }
 
 /* -------------------------------------------
@@ -3165,6 +3215,12 @@ contact band (components/ContactBand.js)
             align-self: stretch;
             display: flex;
             align-items: center;
+            // The section has 30px of top padding, which would leave the
+            // band (and its overflow:hidden clip) starting 30px down and
+            // cut the title glow off there. Pull the band up over it and pad
+            // it back so the content stays put.
+            margin-top: -30px;
+            padding-top: 30px;
         }
     }
 

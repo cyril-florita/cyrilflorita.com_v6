@@ -55,7 +55,7 @@ const AboutMe = () => {
 
         {/* 07 contact */}
         <div className="cyril-section cyril-op-space-90" id="contact">
-          <ContactBand />
+          <ContactBand glow />
         </div>
 
       </div>

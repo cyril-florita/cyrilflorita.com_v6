@@ -6,6 +6,7 @@ const Tools = () => {
         className="cyril-bg-item cyril-bg-item-large"
         style={{ top: "8%", right: "10%" }}
       />
+      <div className="cyril-section-glow" aria-hidden="true" />
       <div className="container">
         <div>
           <p className="cyril-upper subheader">

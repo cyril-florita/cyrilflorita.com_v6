@@ -9,6 +9,7 @@ const Background = ( { bgImage = "/img/cyril-profile-w-a-smile.jpg" } ) => {
         className="cyril-bg-item"
         style={{ bottom: "8%", right: "34%", transform: "rotate(0deg)" }}
       />
+      <div className="cyril-section-glow" aria-hidden="true" />
       <div className="container">
         <div className="row justify-content-between align-items-center">
           

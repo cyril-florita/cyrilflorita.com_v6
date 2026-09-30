@@ -237,7 +237,7 @@ const Index = () => {
             />
           </div>
           <PortfolioIsotope />
-          <ContactBand />
+          <ContactBand glow />
         </div>
       </div>
     </SiteLayout>

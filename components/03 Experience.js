@@ -35,6 +35,7 @@ const Experience = () => {
         className="cyril-bg-item"
         style={{ bottom: "10%", left: "12%", transform: "rotate(105deg)" }}
       />
+      <div className="cyril-section-glow" aria-hidden="true" />
       <div className="container">
         <p className="cyril-upper subheader">
           &#91; My <span className="cyril-accent">career</span> &#93;

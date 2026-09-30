@@ -369,9 +369,74 @@ const MotionEffects = () => {
     };
   }, []);
 
+  // Section title glows (About Me): centre each one on its section's h2 —
+  // the width of the text itself, not the full-width heading box. Measured
+  // with offset* (unaffected by the reveal/scramble transforms) and redone
+  // on resize and once web fonts settle.
+  useEffect(() => {
+    const glows = Array.from(document.querySelectorAll('.cyril-section-glow'));
+    if (!glows.length) return;
+
+    const place = () => {
+      glows.forEach((glow) => {
+        const host = glow.offsetParent;
+        const title = host?.querySelector('h2');
+        if (!host || !title) return;
+        let x = 0;
+        let y = 0;
+        for (let el = title; el && el !== host; el = el.offsetParent) {
+          x += el.offsetLeft;
+          y += el.offsetTop;
+        }
+        // One-line width of the text, capped by the heading's own box (the
+        // contact title wraps onto two lines).
+        const probe = document.createElement('span');
+        probe.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;';
+        probe.textContent = title.dataset.text || title.textContent;
+        title.appendChild(probe);
+        const w = Math.min(probe.offsetWidth, title.offsetWidth);
+        title.removeChild(probe);
+        // Sit on the title, but no higher than the orb's own radius from the
+        // section's top edge (and no lower than its bottom edge): a round orb
+        // that fits inside the section never gets flattened by a fade.
+        const r = glow.offsetHeight / 2;
+        const titleCy = y + title.offsetHeight / 2;
+        const cy = Math.round(
+          host.offsetHeight >= 2 * r
+            ? Math.min(Math.max(titleCy, r), host.offsetHeight - r)
+            : titleCy
+        );
+        glow.style.left = `${Math.round(x + w / 2)}px`;
+        glow.style.top = `${cy}px`;
+
+        // Only when the orb can't fit (a short viewport) fade it out before
+        // the section's top/bottom edge, so there's no hard cut from the
+        // section's overflow clip. Edges in the glow's own coordinates.
+        const fade = 180;
+        const top = Math.max(0, r - cy);
+        const bottom = Math.min(2 * r, r + (host.offsetHeight - cy));
+        const mask = top > 0 || bottom < 2 * r
+          ? `linear-gradient(to bottom, transparent ${top}px, #000 ${top + fade}px, #000 ${bottom - fade}px, transparent ${bottom}px)`
+          : '';
+        glow.style.maskImage = mask;
+        glow.style.webkitMaskImage = mask;
+      });
+    };
+
+    place();
+    window.addEventListener('resize', place);
+    document.fonts?.addEventListener('loadingdone', place);
+    document.fonts?.ready.then(place);
+    return () => {
+      window.removeEventListener('resize', place);
+      document.fonts?.removeEventListener('loadingdone', place);
+    };
+  }, []);
+
   // Background circle parallax. Desktop only — the circles are hidden at
   // 1200px and below anyway. Uses `translate` so each circle's inline
-  // rotate transform is left alone.
+  // rotate transform is left alone. Section title glows (About Me) join the
+  // same loop with gentler scroll + mouse factors.
   useEffect(() => {
     if (prefersReducedMotion() || window.innerWidth <= 1200) return;
 
@@ -386,7 +451,20 @@ const MotionEffects = () => {
         y: 0,
       };
     });
-    if (!circles.length) return;
+
+    // Section title glows (About Me page). Same parallax loop, much gentler
+    // motion so they feel like a soft ambient layer behind the diamonds.
+    const glows = Array.from(document.querySelectorAll('.cyril-section-glow')).map((el) => ({
+      el,
+      anchor: el.closest('.cyril-section') || el.parentElement,
+      scroll: 0.06,
+      mouse: 14,
+      x: 0,
+      y: 0,
+    }));
+
+    const movers = [...circles, ...glows];
+    if (!movers.length) return;
 
     const useMouse = hasFinePointer();
     let nx = 0;
@@ -395,7 +473,7 @@ const MotionEffects = () => {
 
     const tick = () => {
       let moving = false;
-      circles.forEach((c) => {
+      movers.forEach((c) => {
         const top = c.anchor.getBoundingClientRect().top;
         const tx = nx * c.mouse * 2;
         const ty = top * c.scroll + ny * c.mouse * 2;
@@ -427,7 +505,7 @@ const MotionEffects = () => {
       window.removeEventListener('resize', start);
       window.removeEventListener('pointermove', onMove);
       if (rafId) cancelAnimationFrame(rafId);
-      circles.forEach((c) => { c.el.style.translate = ''; });
+      movers.forEach((c) => { c.el.style.translate = ''; });
     };
   }, []);
 

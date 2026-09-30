@@ -16,13 +16,15 @@ const PROFILES = [
   { label: "Twitter/X", href: "https://x.com/CyrilFlorita", icon: "fab fa-x-twitter" },
 ];
 
-const ContactBand = ({ resume }) => (
+const ContactBand = ({ resume, glow = false }) => (
   <div className="cyril-contact">
     {/* Dotted background diamonds in the empty half beside the text, sized
         off the band's height so both fit whole (.cyril-contact .cyril-bg-item
         in _components.scss). */}
     <div className="cyril-bg-item cyril-bg-item-large" style={{ top: "28.0%", right: "7%" }} />
     <div className="cyril-bg-item" style={{ top: "16%", left: "42%" }} />
+    {/* Accent glow behind the title, above the diamonds (About Me + home). */}
+    {glow && <div className="cyril-section-glow" aria-hidden="true" />}
     <div className="container">
       <p className="cyril-upper subheader">
         &#91; Let&apos;s <span className="cyril-accent">connect</span> &#93;

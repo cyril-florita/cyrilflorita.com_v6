@@ -9,6 +9,7 @@ const Skills = () => {
         className="cyril-bg-item"
         style={{ bottom: "10%", left: "8%", transform: "rotate(150deg)" }}
       />
+      <div className="cyril-section-glow" aria-hidden="true" />
       <div className="container">
         <p className="cyril-upper subheader">
         &#91; My <span className="cyril-accent">craft</span> &#93;
