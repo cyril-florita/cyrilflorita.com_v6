@@ -163,12 +163,26 @@ main
     width: 12px;
 }
 
+// The browser draws the scrollbar above the page's grain overlay
+// (body::after), so the grain is baked into it instead: a copy of the noise
+// at the overlay's opacity (bg-static-faded.png) over the track/thumb colors.
+// The track is the page background itself (black in dark mode, white in light
+// mode), so it reads as part of the page rather than a gray strip.
 ::-webkit-scrollbar-track {
-    background: variables.$soft;
+    background: url(../img/bg-static-faded.png) repeat 0 0, var(--color-bg);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: variables.$accent;
+    background: url(../img/bg-static-faded.png) repeat 0 0, variables.$accent;
+}
+
+// Firefox has no ::-webkit-scrollbar; give it the same colors. (Not applied
+// where ::-webkit-scrollbar works: in Chrome scrollbar-color would override
+// the grain texture above.)
+@supports not selector(::-webkit-scrollbar) {
+    html {
+        scrollbar-color: var(--color-accent) var(--color-bg);
+    }
 }
 
 // Keyboard focus: a clear orange ring (the custom cursor gives keyboard users

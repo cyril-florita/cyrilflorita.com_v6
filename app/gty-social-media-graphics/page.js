@@ -87,7 +87,7 @@ const Page = () => {
             facts={[
               { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Media Organization</> },
               { label: "Role", value: "Web Designer & Developer" },
-              { label: "Platform", value: "Social Media" },
+              { label: "Platform & Tools", value: "Social Media" },
             ]}
             image="/img/portfolio/gty-social_train-tracks---Light-of-God's-Truth.jpg"
             imageAlt="Light of God's Truth"

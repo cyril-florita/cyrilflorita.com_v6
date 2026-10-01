@@ -15,6 +15,7 @@ import {
   CaseStats,
   CaseQuote,
   CaseNext,
+  CaseLearnings,
 } from "@/components/case/CaseStudy";
 
 const SECTIONS = [
@@ -25,6 +26,7 @@ const SECTIONS = [
   { id: "deadline", label: "Holding the Deadline" },
   { id: "responsive", label: "Every Screen" },
   { id: "impact", label: "Impact" },
+  { id: "learnings", label: "Learning & Next Steps" },
 ];
 
 const Page = () => {
@@ -34,7 +36,7 @@ const Page = () => {
   useEffect(() => {
     // Mark which project to scroll back to whenever the user leaves this
     // page — including via the browser's own back button, not just the
-    // "Back to All Work" buttons.
+    // "Back to My Work" buttons.
     sessionStorage.setItem('returnToProject', 'volunteerleadership');
     cyrilUtility.tpInner();
     // Wait for the preloader to actually finish hiding before starting this
@@ -67,8 +69,7 @@ const Page = () => {
             facts={[
               { label: "Client", value: <><a className="cyril-dark" href="https://childrenshungerfund.org" target="_blank">Children&apos;s Hunger Fund</a>&mdash;A Christian Non-Profit Ministry</> },
               { label: "Role", value: "Designer & Developer (sole developer)" },
-              { label: "Platform", value: "WordPress" },
-              { label: "Tools", value: "PHP, HTML & CSS, WPForms" },
+              { label: "Platform & Tools", value: <>{"WordPress"}<br />{"PHP, HTML & CSS, WPForms"}</> },
               { label: "Deliverables", value: "Landing page, lead-capture form, event registration hand-off" },
               { label: "Website", value: <a className="cyril-dark" href="https://childrenshungerfund.org/dallas-volunteer-leader" target="_blank" rel="noopener noreferrer">childrenshungerfund.org/dallas-volunteer-leader</a> },
             ]}
@@ -80,7 +81,7 @@ const Page = () => {
 
             {/* 01 — Overview */}
             <CaseSection id="overview" number={1} title="Project Overview">
-              <p>Children&apos;s Hunger Fund was opening a new facility in North Texas, and it needed people to help lead it: Volunteer Leaders who serve on a recurring basis alongside staff. The request came straight from the Executive Director, with a hard deadline set by a physical event&mdash;an Open House whose printed flyers were already in production.</p>
+              <p>Children&apos;s Hunger Fund was opening a new facility in North Texas, and it needed people to help lead it: Volunteer Leaders who serve on a recurring basis alongside staff. The constraint was time: a physical Open House set a hard deadline, and its flyers were already in production, so the page had to be the one destination behind them. The request came straight from the Executive Director.</p>
               <p>As the sole developer, I owned the page end to end, from its structure and visual design to the build, the lead-capture form, and launch.</p>
               <CaseVideo src="/img/portfolio/chf-volunteer-leadership_preview.mp4" caption="Landing page preview" url="childrenshungerfund.org" />
               <CaseStats items={[
@@ -150,6 +151,22 @@ const Page = () => {
             <CaseSection id="impact" number={7} title="Impact">
               <p>The page launched on schedule, ahead of the Open House, and became the single digital destination for the recruitment effort: every printed flyer, QR code scan, and staff conversation with a prospective Volunteer Leader pointed to it. Its interest form gave the new facility a structured pipeline for leads from day one.</p>
               <p>See the <a className="cyril-accent" href="https://childrenshungerfund.org/dallas-volunteer-leader" target="_blank" rel="noopener noreferrer"><strong>Volunteer Leadership Team page</strong></a> live.</p>
+            </CaseSection>
+
+            {/* 08 — Learnings & Next Steps */}
+            <CaseSection id="learnings" number={8} title="Learnings &amp; Next Steps">
+              <CaseLearnings
+                learned={[
+                  "Flagging a dependency early, like the registration link that didn't exist yet, and building the story section as flagged placeholder content let the launch date hold while other pieces moved.",
+                  "When leadership asked to remove the hero overlay, showing that white text wouldn't hold up without it was how I made the case for keeping it.",
+                  "Reusing button styles and the gradient treatment from the ministry's other pages made the new page read as part of one site.",
+                ]}
+                next={[
+                  "Replace the placeholder volunteer story with a real one.",
+                  "Compare how visitors use the two paths in, now that the interest form gives the team a structured pipeline.",
+                  "Reuse the modular sections and form hand-off for future volunteer recruitment pages.",
+                ]}
+              />
             </CaseSection>
 
           </CaseLayout>

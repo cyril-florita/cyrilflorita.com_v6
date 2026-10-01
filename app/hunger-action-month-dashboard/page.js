@@ -14,6 +14,7 @@ import {
   CaseQuote,
   CaseLink,
   CaseNext,
+  CaseLearnings,
 } from "@/components/case/CaseStudy";
 
 const SECTIONS = [
@@ -23,6 +24,7 @@ const SECTIONS = [
   { id: "never-wait", label: "Built to Never Wait" },
   { id: "layers", label: "One System" },
   { id: "impact", label: "Impact" },
+  { id: "learnings", label: "Learning & Next Steps" },
 ];
 
 const Page = () => {
@@ -32,7 +34,7 @@ const Page = () => {
   useEffect(() => {
     // Mark which project to scroll back to whenever the user leaves this
     // page — including via the browser's own back button, not just the
-    // "Back to All Work" buttons.
+    // "Back to My Work" buttons.
     sessionStorage.setItem('returnToProject', 'hamdashboard');
     cyrilUtility.tpInner();
     // Wait for the preloader to actually finish hiding before starting this
@@ -65,8 +67,7 @@ const Page = () => {
             facts={[
               { label: "Client", value: <><a className="cyril-dark" href="https://childrenshungerfund.org" target="_blank" rel="noopener noreferrer">Children&apos;s Hunger Fund</a>&mdash;A Christian Non-Profit Ministry</> },
               { label: "Role", value: "Designer, Developer & Analytics (sole developer)" },
-              { label: "Platform", value: "WordPress (custom plugin)" },
-              { label: "Tools", value: "PHP, JavaScript, Google Analytics 4, Google Tag Manager" },
+              { label: "Platform & Tools", value: <>{"WordPress (custom plugin)"}<br />{"PHP, JavaScript, Google Analytics 4, Google Tag Manager"}</> },
               { label: "Deliverables", value: "Tracking infrastructure plan, implementation backlog, campaign dashboard" },
               { label: "Related", value: <CaseLink href="/hunger-action-month" className="cyril-dark">Hunger Action Month campaign page</CaseLink> },
             ]}
@@ -76,7 +77,7 @@ const Page = () => {
 
             {/* 01 — Overview */}
             <CaseSection id="overview" number={1} title="Project Overview">
-              <p>Hunger Action Month was the first Children&apos;s Hunger Fund campaign measured end to end. The <CaseLink href="/hunger-action-month">campaign page</CaseLink> produced the data; this project made that data trustworthy and put it in front of the people who needed it.</p>
+              <p>Hunger Action Month was the first Children&apos;s Hunger Fund campaign measured end to end. The analytics tools were already installed, but no one had checked what they actually tracked, and the numbers sat where only technical users could find them. The <CaseLink href="/hunger-action-month">campaign page</CaseLink> produced the data; this project made that data trustworthy and put it in front of the people who needed it.</p>
               <p>It had two parts that depend on each other: a tracking plan that set the rules for what the ministry measures and how, and a live dashboard, built as a WordPress plugin, that turned those numbers into a view anyone on the team could read, without opening an analytics tool.</p>
               <CaseVideo src="/img/portfolio/chf-ham-dashboard_preview.mp4" caption="Campaign dashboard preview (figures blurred)" size="text" />
               <CaseStats items={[
@@ -89,7 +90,7 @@ const Page = () => {
 
             {/* 02 — A Plan First */}
             <CaseSection id="tracking-plan" number={2} title="A Plan Before a Dashboard">
-              <p>The tools were already installed, but no one had checked what they actually tracked, whether donation data arrived intact, or whether campaign links were tagged the same way across channels. So before building anything, I wrote the ministry&apos;s first tracking infrastructure plan, which became the reference for all of its marketing analytics:</p>
+              <p>No one had checked whether donation data arrived intact, or whether campaign links were tagged the same way across channels. So before building anything, I wrote the ministry&apos;s first tracking infrastructure plan, which became the reference for all of its marketing analytics:</p>
               <ul className="cyril-case-list">
                 <li><strong>A verified baseline.</strong> An audit of the whole tracking stack across ten platforms, from analytics and the giving forms to email and event registration.</li>
                 <li><strong>Four questions.</strong> Every tag has to serve one of them, in priority order: which channels raise money, how the giving funnel performs, how the list grows, and how programs are used. A tag that serves none is a candidate for removal.</li>
@@ -135,6 +136,22 @@ const Page = () => {
             {/* 06 — Impact */}
             <CaseSection id="impact" number={6} title="Impact">
               <p>The ministry now has its first documented, governed analytics framework, and Hunger Action Month became the first campaign where leadership could answer &ldquo;which channel raised the money?&rdquo; with confidence. The dashboard gave non-technical staff live visibility into the campaign, and its background-and-cache design became the pattern for internal reporting tools that followed.</p>
+            </CaseSection>
+
+            {/* 07 — Learnings & Next Steps */}
+            <CaseSection id="learnings" number={7} title="Learnings &amp; Next Steps">
+              <CaseLearnings
+                learned={[
+                  "Agreeing on what to measure and how to validate it before building anything meant the dashboard could show numbers people could trust.",
+                  "Having the site read only cached data traded a little freshness for reliability, so a slow analytics service can never take the website down.",
+                  "Saying plainly where two sources report differently helps the team know which number to trust for which question.",
+                ]}
+                next={[
+                  "Work through the remaining items in the sixteen-item backlog.",
+                  "Reuse the background-and-cache pattern for further internal reporting tools.",
+                  "Use the four-question framework to decide what to measure in future campaigns.",
+                ]}
+              />
             </CaseSection>
 
           </CaseLayout>

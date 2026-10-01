@@ -14,6 +14,7 @@ import {
   CaseStats,
   CaseQuote,
   CaseNext,
+  CaseLearnings,
 } from "@/components/case/CaseStudy";
 
 const SECTIONS = [
@@ -24,6 +25,7 @@ const SECTIONS = [
   { id: "after", label: "After the Day" },
   { id: "responsive", label: "Every Screen" },
   { id: "impact", label: "Impact" },
+  { id: "learnings", label: "Learning & Next Steps" },
 ];
 
 const Page = () => {
@@ -33,7 +35,7 @@ const Page = () => {
   useEffect(() => {
     // Mark which project to scroll back to whenever the user leaves this
     // page — including via the browser's own back button, not just the
-    // "Back to All Work" buttons.
+    // "Back to My Work" buttons.
     sessionStorage.setItem('returnToProject', 'givingtuesday');
     cyrilUtility.tpInner();
     // Wait for the preloader to actually finish hiding before starting this
@@ -66,10 +68,10 @@ const Page = () => {
             facts={[
               { label: "Client", value: <><a className="cyril-dark" href="https://childrenshungerfund.org" target="_blank">Children&apos;s Hunger Fund</a>&mdash;A Christian Non-Profit Ministry</> },
               { label: "Role", value: "Designer & Developer (sole developer)" },
-              { label: "Platform", value: "WordPress" },
-              { label: "Tools", value: "PHP, SASS, JavaScript/jQuery, embedded giving forms" },
+              { label: "Platform & Tools", value: <>{"WordPress"}<br />{"PHP, SASS, JavaScript/jQuery, embedded giving forms"}</> },
               { label: "Deliverables", value: "Landing page, live donation tracker, post-campaign page" },
             ]}
+            result={{ value: "$150K+", label: "Raised on Giving Tuesday" }}
             image="/img/portfolio/chf-giving-tuesday_main.jpg"
             imageAlt="Giving Tuesday landing page"
           />
@@ -78,7 +80,7 @@ const Page = () => {
 
             {/* 01 — Overview */}
             <CaseSection id="overview" number={1} title="Project Overview">
-              <p>Giving Tuesday is Children&apos;s Hunger Fund&apos;s largest single-day fundraising push of the year. Every channel pointed to one place: a 20+ email drip campaign, paid social and search ads, and organic social posts all sent donors to the campaign&apos;s landing page, which then handed off to the year-end giving season.</p>
+              <p>Giving Tuesday is Children&apos;s Hunger Fund&apos;s largest single-day fundraising push of the year, and every channel pointed to one place: a 20+ email drip campaign, paid social and search ads, and organic social posts all sent donors to the campaign&apos;s landing page, which then handed off to the year-end giving season. That put the whole day&apos;s effort on a single page.</p>
               <p>As the sole developer, I owned that page end to end, designing directly in code with no mockup handed to me, across four phases: a conversion-focused rebuild, a corporate gift-match version with a live donation tracker, hourly updates on the day itself, and a post-campaign page that kept giving momentum alive.</p>
               <CaseStats items={[
                 { value: "$150K+", label: "Raised on Giving Tuesday" },
@@ -144,12 +146,28 @@ const Page = () => {
               <p>The landing page was the single conversion destination for every email, ad, and social post in the campaign. The distraction-free, single-ask design pointed the entire donor journey toward one action; the live tracker kept donors engaged and coming back throughout the day; and the post-campaign redirect turned leftover traffic into year-end gifts instead of dead ends.</p>
             </CaseSection>
 
+            {/* 08 — Learnings & Next Steps */}
+            <CaseSection id="learnings" number={8} title="Learnings & Next Steps">
+              <CaseLearnings
+                learned={[
+                  "With the timeline too tight for a design comp, I learned that building straight from the content strategy in code can work when every decision serves one goal.",
+                  "When the corporate gift-match was confirmed mid-November, I had to build a new version within a week, which showed me the value of a page structured so a new story can be swapped in quickly.",
+                  "Retiring the form after the day and catching late visitors with a popup taught me to plan for the traffic that arrives after a campaign ends.",
+                ]}
+                next={[
+                  "Reuse the live tracker and milestone cards for future matched giving campaigns, as I already adapted the tracker for the 35-Day Generosity Challenge.",
+                  "Use the trackable links to compare how the single-ask, no-exit template performs against other campaign pages.",
+                  "Carry the thank-you page and popup pattern into other campaigns so no donation intent is lost afterward.",
+                ]}
+              />
+            </CaseSection>
+
           </CaseLayout>
 
           <CaseNext
-            href="/gty-dashboard"
-            title="GTY Dashboard"
-            category="Design & Development"
+            href="/gty_v8"
+            title="Grace to You (v.8)"
+            category="UX Design & Front-End Development"
             onBack={handleBackToPortfolio}
           />
 

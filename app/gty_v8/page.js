@@ -15,6 +15,7 @@ import {
   CaseStats,
   CaseQuote,
   CaseNext,
+  CaseLearnings,
 } from "@/components/case/CaseStudy";
 
 const SECTIONS = [
@@ -26,7 +27,7 @@ const SECTIONS = [
   { id: "development", label: "Development" },
   { id: "feature-enhancements", label: "Features" },
   { id: "results", label: "Results" },
-  { id: "reflection", label: "Reflection" },
+  { id: "learnings", label: "Learning and Reflection" },
 ];
 
 const Page = () => {
@@ -71,12 +72,12 @@ const Page = () => {
             detail="Responsive Web"
             title="Grace to You (v.8)"
             summary="Enhancing the user experience of GTY.org, the digital home for John MacArthur's teaching ministry, through the UX design and front-end development strategies that shaped version 8 of GTY's website."
+            result={{ value: "+38%", label: "Engagement, mobile users" }}
             facts={[
               { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Media Organization</> },
               { label: "Role", value: "UX Designer & Front-End Developer" },
-              { label: "Platform", value: "Responsive Web — Mobile & Desktop" },
+              { label: "Platform & Tools", value: <>{"Responsive Web — Mobile & Desktop"}<br />{"Visual Studio Code, Google's Material Design System, HandlebarsJS"}</> },
               { label: "Team", value: "Digital Platforms Coordinator, Software Engineer, Software Developer" },
-              { label: "Tools", value: "Visual Studio Code, Google's Material Design System, HandlebarsJS" },
             ]}
             image="/img/portfolio/gty8_screenshot_4x3.jpg"
             imageAlt="Grace to You (v.8)"
@@ -86,8 +87,8 @@ const Page = () => {
 
             {/* 01 — Overview */}
             <CaseSection id="overview" number={1} title="Project Overview">
-              <p>GTY.org &#40;Grace to You&#41; serves as the digital home for John MacArthur's teaching ministry, offering sermons, articles, and resources to a global audience. The ministry began in 1969 as a small tape ministry and has since evolved into a comprehensive media organization distributing biblical teaching through multiple channels.</p>
-              <p>Despite its valuable resource offerings, GTY's previous website&mdash;version 7&mdash;faced usability challenges such as outdated design & UI elements and not being mobile-friendly. My role was to enhance the user experience while maintaining the trust of long-time users and strengthening the ministry's mission of &ldquo;Unleashing God's Truth, One Verse at a Time.&rdquo; This case study then examines the UX design and front-end development strategies that shaped version 8 of GTY's website.</p>
+              <p>GTY's previous website&mdash;version 7&mdash;faced usability challenges such as outdated design & UI elements and not being mobile-friendly, even though more than 50% of its visitors were on mobile devices. That mattered because GTY.org &#40;Grace to You&#41; serves as the digital home for John MacArthur's teaching ministry, offering sermons, articles, and resources to a global audience, despite its valuable resource offerings.</p>
+              <p>The ministry began in 1969 as a small tape ministry and has since evolved into a comprehensive media organization distributing biblical teaching through multiple channels. My role was to enhance the user experience while maintaining the trust of long-time users and strengthening the ministry's mission of &ldquo;Unleashing God's Truth, One Verse at a Time.&rdquo; This case study then examines the UX design and front-end development strategies that shaped version 8 of GTY's website.</p>
               <CaseGrid layout="two">
                 <CaseFigure src="/img/portfolio/gty7_screenshot.jpg" alt="GTY 7 Screenshot" caption="Before" ratio="4 / 3" />
                 <CaseFigure src="/img/portfolio/gty8_screenshot.jpg" alt="GTY 8 Screenshot" caption="After" ratio="4 / 3" />
@@ -372,8 +373,20 @@ const Page = () => {
               <p>But more than metrics, the site now reflects the clarity, simplicity, quality, and timelessness of John MacArthur's preaching and teaching. It's a testament to the ministry's commitment to providing high-quality, timeless content that resonates with the audience.</p>
             </CaseSection>
 
-            {/* 09 — Reflection */}
-            <CaseSection id="reflection" number={9} title="Reflection">
+            {/* 9 — Learning and Reflection */}
+            <CaseSection id="learnings" number={9} title="Learning and Reflection">
+              <CaseLearnings
+                learned={[
+                "Mocking up data with HandlebarsJS let me design and cut up pages while the engineers built the back end, so I'd use mock data again to keep front-end and back-end work from blocking each other.",
+                "Taking a full UI inventory before any wireframes showed what had grown inconsistently across departments, which is why I now start redesigns by taking stock of what already exists.",
+                "The account system needed secure OAuth and GDPR-compliant data practices that meant substantial back-end changes, so compliance requirements are worth raising with the engineers at the start.",
+                ]}
+                next={[
+                "Keep the style guide current as new features land, so it stays the single source of truth for the team.",
+                "Use Google Analytics and heatmaps to keep refining the featured content modules and search.",
+                "Keep checking accessibility against WCAG as the site grows, building on the Lighthouse ratings over 90.",
+                ]}
+              />
               <CaseQuote>
                 The best UX isn&apos;t necessarily flashy&mdash;it&apos;s subtle and almost invisible.
               </CaseQuote>

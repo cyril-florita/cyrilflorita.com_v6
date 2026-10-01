@@ -60,8 +60,7 @@ const Page = () => {
             title="SekihMentis"
             summary="A grungy &ldquo;Transformers: Autobots Big Gun&rdquo; themed background graphic designed for my MySpace profile."
             facts={[
-              { label: "Platform", value: "MySpace" },
-              { label: "Tools", value: "Adobe Illustrator, Photoshop" },
+              { label: "Platform & Tools", value: <>{"MySpace"}<br />{"Adobe Illustrator, Photoshop"}</> },
             ]}
           />
 

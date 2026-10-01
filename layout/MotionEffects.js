@@ -30,7 +30,7 @@ const FRAME_MS = 1000 / 60;
 const follow = (rate, dt) => 1 - Math.pow(1 - rate, dt / FRAME_MS);
 
 // The custom cursor steps aside over:
-// - square outlined icon buttons and "Back to All Work" (they fill orange on
+// - square outlined icon buttons and "Back to My Work" (they fill orange on
 //   hover — feedback enough)
 // - the home hero photo, but only over its visible pixels: the transparent
 //   areas of the PNG still show the cursor.

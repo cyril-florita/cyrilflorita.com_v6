@@ -62,7 +62,7 @@ const Page = () => {
             summary="A desktop wallpaper designed for my Illustration class, sparked by coming to grips with the reality of the gospel."
             facts={[
               { label: "Deliverables", value: "Desktop Wallpaper" },
-              { label: "Tools", value: "Adobe Illustrator, Photoshop" },
+              { label: "Platform & Tools", value: "Adobe Illustrator, Photoshop" },
             ]}
           />
 

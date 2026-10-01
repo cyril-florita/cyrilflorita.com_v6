@@ -13,6 +13,7 @@ import {
   CaseGrid,
   CaseQuote,
   CaseNext,
+  CaseLearnings,
 } from "@/components/case/CaseStudy";
 import {
   BrandLogos,
@@ -33,7 +34,7 @@ const SECTIONS = [
   { id: "merchandise", label: "Merchandise" },
   { id: "ux-ui-design", label: "UX/UI Design" },
   { id: "web-development", label: "Development" },
-  { id: "reflection", label: "Reflection" },
+  { id: "learnings", label: "Learning and Reflection" },
 ];
 
 // Brand guide data. Colors are sampled from the delivered artwork; crop boxes
@@ -127,7 +128,7 @@ const Page = () => {
               { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Media Organization</> },
               { label: "Role", value: "Product Designer & Web Developer" },
               { label: "Website", value: <a className="cyril-dark" href="https://www.gty.org/listen/gracestream" target="_blank">gty.org/listen/gracestream</a> },
-              { label: "Tools", value: "Radio.co" },
+              { label: "Platform & Tools", value: "Radio.co" },
             ]}
             image="/img/portfolio/main_grace-stream.jpg"
             imageAlt="Main Image for Grace Stream"
@@ -137,7 +138,7 @@ const Page = () => {
 
             {/* 01 — Overview */}
             <CaseSection id="overview" number={1} title="Project Overview">
-              <p>Grace Stream is a 24/7 online broadcasting platform created by Grace to You, featuring continuous teaching from John MacArthur's extensive library of sermons. Designed to provide uninterrupted access to biblically sound preaching, Grace Stream serves as a powerful resource for spiritual growth, encouragement, and discipleship. Whether you're tuning in during your morning commute, throughout your workday, or during quiet evening moments, Grace Stream delivers clear, uncompromising truth directly from God's Word&mdash;anytime, anywhere.</p>
+              <p>Listeners needed uninterrupted access to biblically sound preaching&mdash;whether tuning in during a morning commute, throughout a workday, or during quiet evening moments. Grace to You created Grace Stream, a 24/7 online broadcasting platform featuring continuous teaching from John MacArthur's extensive library of sermons, to meet that need. Grace Stream serves as a powerful resource for spiritual growth, encouragement, and discipleship. Whether you're tuning in during your morning commute, throughout your workday, or during quiet evening moments, Grace Stream delivers clear, uncompromising truth directly from God's Word&mdash;anytime, anywhere.</p>
               <p>This project was about building something quietly powerful. Not flashy. Not overdone. Just a digital space where truth can stream 24/7&mdash;and people can tune in without distraction. As both the Product Designer and Web Developer, I set out to create an experience that reflects the heart of what this feature offers&mdash;constant access to faithful Bible teaching, presented in a way that's clean, approachable, and timeless.</p>
             </CaseSection>
 
@@ -215,8 +216,20 @@ const Page = () => {
               <p>Check out how <a className="cyril-accent" href="https://www.gty.org/listen/gracestream" target="_blank"><strong>Grace Stream</strong></a> offers continuous, scripture-rich content that's always available.</p>
             </CaseSection>
 
-            {/* 10 — Reflection */}
-            <CaseSection id="reflection" number={10} title="Reflection">
+            {/* 10 — Learning and Reflection */}
+            <CaseSection id="learnings" number={10} title="Learning and Reflection">
+              <CaseLearnings
+                learned={[
+                  "Presenting two logo concepts, each with its own rationale, let the ministry choose the direction that would represent the brand.",
+                  "Building the broadcast on Radio.co let me put my effort into the player and the listening experience rather than the streaming infrastructure.",
+                  "For an always-on product, uptime is a design requirement, which is why the Back-end Engineer and I built fallback behaviors into the player.",
+                ]}
+                next={[
+                  "Review and refresh the looping playlist and schedule with the Internet Ministry Coordinator and Digital Platforms Director.",
+                  "Test the player and \u201cNow Playing\u201d info on more devices and browsers to keep the reliability and accessibility standard.",
+                  "Extend the brand guide to new Grace Stream touchpoints as they come up.",
+                ]}
+              />
               <p>As the Product Designer & Web Developer for Grace Stream, I embraced the challenge of building a 24/7 online broadcasting platform that feels “quietly powerful”&mdash;not flashy or overdone, but a digital space where biblical truth streams without interruption and listeners can tune in without distraction. From the outset, I focused on delivering constant access to faithful Bible teaching, presented in a way that's clean, approachable, and timeless by crafting a minimal interface where every pixel was intentional, leveraging subtle gradients and soft neutrals to reinforce calm, focus, and trust—allowing the stream to take center stage and minimizing friction across devices and contexts.</p>
               <p>As a cross-functional partner to the Back-End Developer, Internet Ministry Coordinator, and Digital Platforms Director, I curated a looping playlist of John MacArthur's sermons and integrated a set-it-and-forget-it live audio experience via Radio.co, customizing the embeddable player to match the GTY design language and dynamically update the “Now Playing” info. Grace Stream reinforced that effective product design isn't just about UI polish but about orchestrating technology, content, and mission-aligned strategy to deliver an experience that just works anytime, anywhere.</p>
             </CaseSection>
@@ -224,9 +237,9 @@ const Page = () => {
           </CaseLayout>
 
           <CaseNext
-            href="/gty_v8"
-            title="Grace to You (v.8)"
-            category="UX Design & Front-End Development"
+            href="/gty-dashboard"
+            title="GTY Dashboard"
+            category="Design & Development"
             onBack={handleBackToPortfolio}
           />
 

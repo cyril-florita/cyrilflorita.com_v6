@@ -16,6 +16,7 @@ import {
   CaseQuote,
   CaseLink,
   CaseNext,
+  CaseLearnings,
 } from "@/components/case/CaseStudy";
 
 const SECTIONS = [
@@ -28,6 +29,7 @@ const SECTIONS = [
   { id: "dashboard", label: "Campaign Dashboard" },
   { id: "responsive", label: "Every Screen" },
   { id: "impact", label: "Impact" },
+  { id: "learnings", label: "Learning & Next Steps" },
 ];
 
 const Page = () => {
@@ -37,7 +39,7 @@ const Page = () => {
   useEffect(() => {
     // Mark which project to scroll back to whenever the user leaves this
     // page — including via the browser's own back button, not just the
-    // "Back to All Work" buttons.
+    // "Back to My Work" buttons.
     sessionStorage.setItem('returnToProject', 'hungeractionmonth');
     cyrilUtility.tpInner();
     // Wait for the preloader to actually finish hiding before starting this
@@ -70,8 +72,7 @@ const Page = () => {
             facts={[
               { label: "Client", value: <><a className="cyril-dark" href="https://childrenshungerfund.org" target="_blank">Children&apos;s Hunger Fund</a>&mdash;A Christian Non-Profit Ministry</> },
               { label: "Role", value: "Designer, Copywriter, Developer & Analytics (sole developer)" },
-              { label: "Platform", value: "WordPress" },
-              { label: "Tools", value: "PHP, SASS, JavaScript, Google Tag Manager, Google Analytics 4" },
+              { label: "Platform & Tools", value: <>{"WordPress"}<br />{"PHP, SASS, JavaScript, Google Tag Manager, Google Analytics 4"}</> },
               { label: "Deliverables", value: "Landing page, homepage banner, event tracking, link-tagging plan, campaign dashboard" },
               { label: "Related", value: <CaseLink href="/hunger-action-month-dashboard" className="cyril-dark">Campaign dashboard case study</CaseLink> },
               { label: "Website", value: <a className="cyril-dark" href="https://childrenshungerfund.org/hungeractionmonth/" target="_blank" rel="noopener noreferrer">childrenshungerfund.org/hungeractionmonth</a> },
@@ -84,8 +85,8 @@ const Page = () => {
 
             {/* 01 — Overview */}
             <CaseSection id="overview" number={1} title="Project Overview">
-              <p>Every September, Hunger Action Month calls attention to hunger, and it&apos;s one of Children&apos;s Hunger Fund&apos;s key campaigns.</p>
-              <p>Beyond the landing page and its homepage banner, I built a complete event-tracking layer, wrote the plan that governs how every inbound link is tagged across all channels, and built an internal dashboard to follow the campaign in real time.</p>
+              <p>Every September, Hunger Action Month calls attention to hunger, and it&apos;s one of Children&apos;s Hunger Fund&apos;s key campaigns. The existing campaign page was a single monolithic template, and the ministry had no way to trace a donation back to the channel that produced it.</p>
+              <p>So beyond rebuilding the landing page and its homepage banner, I built a complete event-tracking layer, wrote the plan that governs how every inbound link is tagged across all channels, and built an internal dashboard to follow the campaign in real time.</p>
               <CaseVideo src="/img/portfolio/chf-hunger-action-month_preview.mp4" caption="Landing page preview" url="childrenshungerfund.org" />
               <CaseStats items={[
                 { value: "10", label: "Modular page sections" },
@@ -176,6 +177,22 @@ const Page = () => {
               </CaseQuote>
               <p>Hunger Action Month was the ministry&apos;s first campaign with full-funnel, cross-channel attribution from day one, and the tracking foundation built here became the reusable template for the campaigns that followed, including the year-end push.</p>
               <p>See the <a className="cyril-accent" href="https://childrenshungerfund.org/hungeractionmonth/" target="_blank" rel="noopener noreferrer"><strong>Hunger Action Month campaign page</strong></a> live.</p>
+            </CaseSection>
+
+            {/* 10 — Learnings & Next Steps */}
+            <CaseSection id="learnings" number={10} title="Learnings &amp; Next Steps">
+              <CaseLearnings
+                learned={[
+                  "Extending the site's existing tracking pattern, rather than adding a parallel setup, meant each new interaction needed only a few new variables.",
+                  "Basing decisions on real captured data rather than documentation caught problems, like data-type mismatches that would have silently dropped donation values.",
+                  "Keeping each page section self-contained, with all tracking in one script, made the page easy to edit and kept every interaction from being counted twice.",
+                ]}
+                next={[
+                  "Reuse the modular sections and the tracking template for the next campaign.",
+                  "Keep the link-tagging plan current as new channels or placements are added.",
+                  "Use the campaign dashboard's data to see which page sections and channels earn their place.",
+                ]}
+              />
             </CaseSection>
 
           </CaseLayout>

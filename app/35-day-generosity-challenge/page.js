@@ -14,6 +14,7 @@ import {
   CaseStats,
   CaseQuote,
   CaseNext,
+  CaseLearnings,
 } from "@/components/case/CaseStudy";
 
 const SECTIONS = [
@@ -24,6 +25,7 @@ const SECTIONS = [
   { id: "content", label: "Content & Resources" },
   { id: "responsive", label: "Every Screen" },
   { id: "impact", label: "Impact" },
+  { id: "learnings", label: "Learning & Next Steps" },
 ];
 
 const Page = () => {
@@ -33,7 +35,7 @@ const Page = () => {
   useEffect(() => {
     // Mark which project to scroll back to whenever the user leaves this
     // page — including via the browser's own back button, not just the
-    // "Back to All Work" buttons.
+    // "Back to My Work" buttons.
     sessionStorage.setItem('returnToProject', 'generositychallenge');
     cyrilUtility.tpInner();
     // Wait for the preloader to actually finish hiding before starting this
@@ -66,8 +68,7 @@ const Page = () => {
             facts={[
               { label: "Client", value: <><a className="cyril-dark" href="https://childrenshungerfund.org" target="_blank">Children&apos;s Hunger Fund</a>&mdash;A Christian Non-Profit Ministry</> },
               { label: "Role", value: "Designer & Developer (sole developer)" },
-              { label: "Platform", value: "WordPress" },
-              { label: "Tools", value: "PHP, SASS, JavaScript/jQuery" },
+              { label: "Platform & Tools", value: <>{"WordPress"}<br />{"PHP, SASS, JavaScript/jQuery"}</> },
               { label: "Deliverables", value: "Landing page, 5 weekly updates, 5 blog posts, downloadable resource" },
             ]}
             image="/img/portfolio/chf-35-day-generosity_main.jpg"
@@ -78,7 +79,7 @@ const Page = () => {
 
             {/* 01 — Overview */}
             <CaseSection id="overview" number={1} title="Project Overview">
-              <p>The 35-Day Generosity Challenge was a five-week engagement campaign designed to deepen relationships with Children&apos;s Hunger Fund&apos;s donors and supporters. Daily devotional emails, weekly blog posts, and a landing page worked together, with each week centered on one of the ministry&apos;s five core values: Prioritize the Gospel, Elevate the Church, Impact the Next Generation, Pursue Relationships, and Strive for Integrity.</p>
+              <p>Children&apos;s Hunger Fund wanted to deepen its relationships with donors and supporters, and the 35-Day Generosity Challenge was a five-week engagement campaign built for that. Daily devotional emails needed somewhere to send people, so a landing page worked together with the emails and weekly blog posts, with each week centered on one of the ministry&apos;s five core values: Prioritize the Gospel, Elevate the Church, Impact the Next Generation, Pursue Relationships, and Strive for Integrity.</p>
               <p>As the sole developer, I owned the campaign&apos;s entire web presence, from the page&apos;s UX and visual design to its build and every weekly release.</p>
               <CaseStats items={[
                 { value: "5", label: "Weeks, one core value each" },
@@ -143,12 +144,28 @@ const Page = () => {
               <p>The landing page became the central hub for more than 35 daily devotional emails, bringing recipients back to a living web experience that changed every week. The five blog posts gave engaged readers somewhere to go deeper, and together they tied email, web, and content into one cohesive, five-week story.</p>
             </CaseSection>
 
+            {/* 08 — Learnings & Next Steps */}
+            <CaseSection id="learnings" number={8} title="Learnings & Next Steps">
+              <CaseLearnings
+                learned={[
+                  "Adapting the Giving Tuesday milestone tracker into a five-step weekly challenge taught me how much a proven pattern speeds up a build with no mockup.",
+                  "A month of review across four stakeholders and more than 20 rounds of feedback showed me that designing in code means the review process needs to be part of the build.",
+                  "Building the hero as its own module and preparing each week as an unpublished revision taught me to structure a page so it can change weekly without touching the rest of the layout or the live page.",
+                ]}
+                next={[
+                  "Reuse the weekly tile states and rotating hero module for other multi-week campaigns.",
+                  "Measure return visits to the page across the five weeks to see whether the tile progression encouraged them.",
+                  "Keep the build-ahead, approve, and scheduled Monday release routine as the template for future timed updates.",
+                ]}
+              />
+            </CaseSection>
+
           </CaseLayout>
 
           <CaseNext
-            href="/giving-tuesday"
-            title="Giving Tuesday Campaign"
-            category="Design, Development, & Campaign Performance Tracking"
+            href="/grace-stream"
+            title="Grace Stream"
+            category="Branding, Design, & Development"
             onBack={handleBackToPortfolio}
           />
 

@@ -15,6 +15,7 @@ import {
   CaseStats,
   CaseQuote,
   CaseNext,
+  CaseLearnings,
 } from "@/components/case/CaseStudy";
 
 // Final design screens (full pages); cropped to a framed top preview, the
@@ -33,7 +34,7 @@ const SECTIONS = [
   { id: "prototyping", label: "Prototyping" },
   { id: "handoff", label: "Design Handoff" },
   { id: "final-design", label: "Final Design" },
-  { id: "reflection", label: "Reflection" },
+  { id: "learnings", label: "Learning and Reflection" },
 ];
 
 const Page = () => {
@@ -81,8 +82,7 @@ const Page = () => {
             facts={[
               { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Media Organization</> },
               { label: "Role", value: "User Experience Designer" },
-              { label: "Platform", value: "Web — Mobile, Tablet, Desktop" },
-              { label: "Tools", value: "Axure RP, Google Analytics" },
+              { label: "Platform & Tools", value: <>{"Web — Mobile, Tablet, Desktop"}<br />{"Axure RP, Google Analytics"}</> },
               { label: "Deliverables", value: "Research, IA, Personas & Journeys, Wireframes, Prototypes" },
             ]}
             image="/img/portfolio/gty9_final-design_homepage_4x3.jpg"
@@ -93,7 +93,7 @@ const Page = () => {
 
             {/* 01 — Overview */}
             <CaseSection id="overview" number={1} title="Project Overview">
-              <p>GTY.org is a Christian platform offering biblical resources for personal growth & discipleship, study & teaching materials, and pastoral & theological training. Despite its valuable resource offerings, the current website—version 8—faces usability and business challenges such as outdated design & UI elements, limited content internationalization features, less efficient search functionality, and lack of continuity in content & account management between the website and GTY's other platforms.</p>
+              <p>The current GTY.org website—version 8—faces usability and business challenges such as outdated design & UI elements, limited content internationalization features, less efficient search functionality, and lack of continuity in content & account management between the website and GTY's other platforms. That matters because GTY.org is a Christian platform offering biblical resources for personal growth & discipleship, study & teaching materials, and pastoral & theological training, and these challenges get in the way of those valuable resource offerings.</p>
               <p>This case study focuses on redesigning GTY.org &#40;version 9&#41; to broaden audience reach and improve engagement & retention by creating a more accessible and unified digital experience while maintaining its core mission of delivering high-quality theological content.</p>
               <CaseVideo src="/img/portfolio/gty9_preview.mp4" caption="Final design preview" url="gty.org" />
               <CaseStats items={[
@@ -308,8 +308,20 @@ const Page = () => {
               </CaseGrid>
             </CaseSection>
 
-            {/* 10 — Reflection */}
-            <CaseSection id="reflection" number={10} title="Reflection">
+            {/* 10 — Learning and Reflection */}
+            <CaseSection id="learnings" number={10} title="Learning and Reflection">
+              <CaseLearnings
+                learned={[
+                "Stakeholder interviews showed that a redesign is more than a new look and feel, so I start by grounding the project's priorities in the organization's goals and data rather than assumptions.",
+                "Some stakeholders wanted version 8's simplicity carried over, which taught me to weigh modern design against the traditional, clean aesthetic a core audience expects.",
+                "Research found that asking donors where they hear about GTY added friction to giving, a reminder that a single question can slow an entire flow.",
+                ]}
+                next={[
+                "Compare engagement and retention against the goals set at the start, using the analytics the process already builds in.",
+                "Try moving the ministry exposure attribution question into account creation, as the research suggested, and check whether giving takes less time.",
+                "Keep the design system and the content review process I proposed up to date as the site's content grows.",
+                ]}
+              />
               <CaseQuote>
                 Rigorously following a structured UX process isn&apos;t just a &ldquo;nice to have&rdquo;&mdash;it&apos;s the very foundation of delivering design solutions that truly resonate.
               </CaseQuote>
@@ -327,9 +339,9 @@ const Page = () => {
           </CaseLayout>
 
           <CaseNext
-            href="/grace-stream"
-            title="Grace Stream"
-            category="Branding, Design, & Development"
+            href="/giving-tuesday"
+            title="Giving Tuesday Campaign"
+            category="Design, Development, & Campaign Performance Tracking"
             onBack={handleBackToPortfolio}
           />
 

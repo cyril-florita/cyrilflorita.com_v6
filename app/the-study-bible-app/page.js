@@ -14,6 +14,7 @@ import {
   CaseGrid,
   CaseQuote,
   CaseNext,
+  CaseLearnings,
 } from "@/components/case/CaseStudy";
 
 // Design & prototype screens (Axure), grouped as in the prototype. Very tall
@@ -35,7 +36,7 @@ const SECTIONS = [
   { id: "prototyping", label: "Prototyping" },
   { id: "handoff", label: "Handoff" },
   { id: "released", label: "The Released App" },
-  { id: "reflection", label: "Reflection" },
+  { id: "learnings", label: "Learning and Reflection" },
 ];
 
 const Page = () => {
@@ -93,7 +94,7 @@ const Page = () => {
 
             {/* 01 — Overview */}
             <CaseSection id="overview" number={1} title="Project Overview">
-              <p>As a UX designer at Grace to You, I had the opportunity to lead the redesign of The Study Bible app (released as <strong>The MacArthur Study Bible</strong> app)&mdash;a rich digital resource for Bible readers, students, and teachers who rely on the faithful teaching of and commentary from John MacArthur. While the legacy app offered unparalleled theological depth and matched the physical MacArthur Study Bible, it was fraught with critical usability issues.</p>
+              <p>The legacy Study Bible app offered unparalleled theological depth and matched the physical MacArthur Study Bible, but it was fraught with critical usability issues. As a UX designer at Grace to You, I had the opportunity to lead its redesign (released as <strong>The MacArthur Study Bible</strong> app)&mdash;a rich digital resource for Bible readers, students, and teachers who rely on the faithful teaching of and commentary from John MacArthur.</p>
               <p>This project is not just about addressing the usability issues of the legacy app, but also about building something much more powerful. Not flashy. Not overdone. Just something that users can expect to do with the physical MacArthur Study Bible, but more and better with this digital platform. And so I set out to create an experience that reflects the heart of what this Bible app offers&mdash;convenient access to faithful Bible teaching&mdash;presented in a way that's simple, clean, yet delightful.</p>
               <CaseFigure src={`${P}project-timeline.jpg`} alt="The Study Bible app project flow, from research to public release" caption="Project flow" />
             </CaseSection>
@@ -217,8 +218,20 @@ const Page = () => {
               <CaseVideo src="/img/portfolio/tsba_released-app.mp4" caption="The MacArthur Study Bible app" size="phone" />
             </CaseSection>
 
-            {/* 10 — Reflection */}
-            <CaseSection id="reflection" number={10} title="Reflection">
+            {/* 10 — Learning and Reflection */}
+            <CaseSection id="learnings" number={10} title="Learning and Reflection">
+              <CaseLearnings
+                learned={[
+                  "Testing an interactive prototype with users before handoff grounded the team's choices in real feedback and built trust among stakeholders.",
+                  "Prototype walkthroughs, a style guide, and the prototype itself gave developers clear references and cut down ambiguity at handoff.",
+                  "Mapping every piece of content into one tree before designing a screen gave the navigation and the prototype a solid blueprint.",
+                ]}
+                next={[
+                  "Revisit the legacy app's login, sync, and lost-notes problems against feedback on the released app.",
+                  "Run another round of usability testing on navigation, notes, and highlights in the released app.",
+                  "Keep aligning content management with the GTY website and GTY app so the experience stays consistent.",
+                ]}
+              />
               <CaseQuote>
                 The project was a testament to the power of user-centered design.
               </CaseQuote>

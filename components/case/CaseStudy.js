@@ -29,7 +29,7 @@ const prefersReducedMotion = () =>
 // the facts row, then (optionally)
 // a full-bleed image — or a looping, muted video (`video`, with its poster
 // from videoSizes.json) — that settles from a slight zoom as it scrolls up.
-export const CaseHero = ({ category, detail, title, summary, facts, image, imageAlt, video, tile }) => {
+export const CaseHero = ({ category, detail, title, summary, result, facts, image, imageAlt, video, tile }) => {
   const imgRef = useRef(null);
 
   // The video plays only while it's on screen, and never under reduced
@@ -86,6 +86,14 @@ export const CaseHero = ({ category, detail, title, summary, facts, image, image
         </p>
         <h1 className="cyril-up glitch cyril-case-title" data-text={title}>{title}</h1>
         <p className="cyril-case-summary">{summary}</p>
+        {/* The headline outcome, up top: { value: "$150K+", label: "raised…" }.
+            Only for results the page can back up further down. */}
+        {result && (
+          <p className="cyril-case-result">
+            <strong className="cyril-case-result-value">{result.value}</strong>
+            <span className="cyril-upper">{result.label}</span>
+          </p>
+        )}
         {facts && (
           <dl className="cyril-case-facts" style={{ "--fact-count": facts.length }}>
             {facts.map(({ label, value }) => (
@@ -134,7 +142,7 @@ export const CaseHero = ({ category, detail, title, summary, facts, image, image
 // empty margin (apart from the back button) so text lines up the same on
 // every project page.
 //
-// The left column is one sticky rail: the index with a "Back to All Work"
+// The left column is one sticky rail: the index with a "Back to My Work"
 // button under it, so the way back stays in view while reading. Each page stores
 // sessionStorage.returnToProject on mount, so the button only has to wipe
 // back to the grid. Hidden below 1200px with the index; CaseNext's copy of
@@ -142,7 +150,7 @@ export const CaseHero = ({ category, detail, title, summary, facts, image, image
 export const BackToAllWork = ({ onClick, className = "" }) => (
   <button type="button" onClick={onClick} className={`cyril-button cyril-type-2 cyril-back-all-work ${className}`}>
     <svg className="cyril-prev" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
-    Back to All Work
+    Back to My Work
   </button>
 );
 
@@ -297,6 +305,29 @@ export const CaseStats = ({ items }) => (
   </dl>
 );
 
+// Closing reflection: what the project taught, and what would come next.
+// `learned` / `next` are arrays of strings (or nodes).
+export const CaseLearnings = ({ learned = [], next = [] }) => (
+  <div className="cyril-case-learnings">
+    {learned.length > 0 && (
+      <div>
+        <h3 className="cyril-upper">What I learned</h3>
+        <ul className="cyril-case-list">
+          {learned.map((item, i) => <li key={i}>{item}</li>)}
+        </ul>
+      </div>
+    )}
+    {next.length > 0 && (
+      <div>
+        <h3 className="cyril-upper">What&apos;s next</h3>
+        <ul className="cyril-case-list">
+          {next.map((item, i) => <li key={i}>{item}</li>)}
+        </ul>
+      </div>
+    )}
+  </div>
+);
+
 export const CaseQuote = ({ children, cite }) => (
   <blockquote className="cyril-case-quote">
     <p>{children}</p>
@@ -304,7 +335,7 @@ export const CaseQuote = ({ children, cite }) => (
   </blockquote>
 );
 
-// Closing band: "Back to All Work" link back to the grid plus a large "Next project" link whose image
+// Closing band: "Back to My Work" link back to the grid plus a large "Next project" link whose image
 // fades in on hover (always shown on touch/smaller screens).
 // "Next project" band. Its preview is the linked project's own My Work
 // thumbnail (video, slideshow or image — TileMedia), shaped like its tile.
@@ -322,21 +353,25 @@ export const CaseNext = ({ href, title, category, onBack }) => {
   <div className="container cyril-case-end">
     <BackToAllWork onClick={onBack} className="cyril-case-back" />
     <Link href={href} className="cyril-case-next" onClick={goNext}>
+      <span className="cyril-case-next-text">
+        <span className="cyril-upper cyril-case-next-eyebrow">Next project</span>
+        <span className="cyril-up cyril-case-next-title">
+          {title}
+          <svg className="cyril-case-next-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+        </span>
+        <span className="cyril-upper cyril-accent cyril-case-next-category">{category}</span>
+      </span>
       {media && (
         <span
           className={`cyril-case-next-image cyril-case-next-image-${media.shape}`}
           style={media.ratio ? { aspectRatio: media.ratio } : undefined}
           aria-hidden="true"
         >
-          <TileMedia slug={slug} sizes={SIZES_HINT.half} />
+          <span className="cyril-case-next-media">
+            <TileMedia slug={slug} sizes={SIZES_HINT.half} />
+          </span>
         </span>
       )}
-      <span className="cyril-upper cyril-case-next-eyebrow">Next project</span>
-      <span className="cyril-up cyril-case-next-title">
-        {title}
-        <svg className="cyril-case-next-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
-      </span>
-      <span className="cyril-upper cyril-accent cyril-case-next-category">{category}</span>
     </Link>
   </div>
   {/* "Let's work together" closes every case study, as on / and /about-me. */}

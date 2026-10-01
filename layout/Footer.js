@@ -23,7 +23,7 @@ const Footer = () => {
           <ul>
             <li>
               <a href="mailto:cyril.florita@pm.me" aria-label="Email">
-                <i className="fa-solid fa-envelope" />
+                <i className="fa-solid fa-paper-plane" />
               </a>
             </li>
             <li>

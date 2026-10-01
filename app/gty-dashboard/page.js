@@ -14,6 +14,7 @@ import {
   CaseGrid,
   CaseQuote,
   CaseNext,
+  CaseLearnings,
 } from "@/components/case/CaseStudy";
 import { BrandSwatches } from "@/components/case/BrandGuide";
 
@@ -27,6 +28,7 @@ const SECTIONS = [
   { id: "global-reach", label: "Global Reach" },
   { id: "ministry-photos", label: "Ministry Photos" },
   { id: "outcome", label: "Outcome" },
+  { id: "learnings", label: "Learning & Next Steps" },
 ];
 
 // Interface colors, sampled from the dashboard screens.
@@ -84,7 +86,7 @@ const Page = () => {
             facts={[
               { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Media Organization</> },
               { label: "Role", value: "Web Designer & Developer" },
-              { label: "Platform", value: "TV — Office Displays" },
+              { label: "Platform & Tools", value: "TV — Office Displays" },
             ]}
             image="/img/portfolio/gty-dashboard-2b.jpg"
             imageAlt="GTY Dashboard - Ministry Activities screen"
@@ -94,7 +96,8 @@ const Page = () => {
 
             {/* 01 — Overview */}
             <CaseSection id="overview" number={1} title="Real-Time TV Dashboard to Visualize the Global Impact of Grace to You">
-              <p>As a web designer and developer at Grace to You, I was commissioned to design and build a TV dashboard system. The objective was to create a TV-optimized dashboard interface for use in the office. The dashboard needed to cycle through screens such as weather updates, streaming activity, TV &amp; radio broadcast schedules, live website user activities &amp; stats, global engagement, event photos, and ministry activities in a visually engaging, easy-to-read format from a distance.</p>
+              <p>The Grace to You office had a wide range of ministry activity and website and app usage that staff, volunteers, and visitors had no easy way to see at a glance. As a web designer and developer there, I was commissioned to design and build a TV dashboard system for the office to show it.</p>
+              <p>The objective was a TV-optimized dashboard interface that cycles through screens such as weather updates, streaming activity, TV &amp; radio broadcast schedules, live website user activities &amp; stats, global engagement, event photos, and ministry activities in a visually engaging, easy-to-read format from a distance.</p>
             </CaseSection>
 
             {/* 02 — Designing for the Room */}
@@ -156,6 +159,22 @@ const Page = () => {
                 Just glance at the screen and know what&apos;s going on.
               </CaseQuote>
               <p>The TV dashboard is now prominently displayed in the volunteer room and the hallways of the Grace to You office, providing volunteers, staff, and visitors with immediate insight into key metrics and activities of the website and apps. It improved internal awareness and coordination during live events and boosted morale by visually reinforcing the ministry's global reach. Team feedback emphasized how easy it was to &ldquo;just glance at the screen and know what's going on.&rdquo;</p>
+            </CaseSection>
+
+            {/* 10 — Learnings & Next Steps */}
+            <CaseSection id="learnings" number={10} title="Learnings & Next Steps">
+              <CaseLearnings
+                learned={[
+                  "Because nobody sits in front of a wall display or clicks it, I learned to design for a glance: large numerals, short labels, and screens that rotate on their own.",
+                  "Giving each metric its own color across screens, and reserving the single filled green card for what is on air today, taught me that color should carry meaning rather than decoration.",
+                  "Making a second version of the Ministry Activities screen that trades some of the schedule for engagement showed me that limited screen space always forces a choice about what matters most.",
+                ]}
+                next={[
+                  "Add further screens using the same card pattern: a label, a time frame or source, and one large figure.",
+                  "Revisit which Ministry Activities version best serves the room, using the team feedback about glancing at the screen.",
+                  "Keep extending the live-data screens so the dashboard stays current as new ministry activity and apps are added.",
+                ]}
+              />
             </CaseSection>
 
           </CaseLayout>

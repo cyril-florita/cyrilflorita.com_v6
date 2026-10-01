@@ -13,6 +13,7 @@ import {
   CaseVideo,
   CaseQuote,
   CaseNext,
+  CaseLearnings,
 } from "@/components/case/CaseStudy";
 import { BrandCrop } from "@/components/case/BrandGuide";
 
@@ -23,7 +24,7 @@ const SECTIONS = [
   { id: "walkthrough", label: "Page Walkthrough" },
   { id: "implementation", label: "Implementation" },
   { id: "outcome", label: "Outcome" },
-  { id: "reflection", label: "Reflection" },
+  { id: "learnings", label: "Learning and Reflection" },
 ];
 
 // The walkthrough shows parts of the full-page screenshot, top to bottom.
@@ -84,7 +85,7 @@ const Page = () => {
             facts={[
               { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Media Organization</> },
               { label: "Role", value: "Web Designer & Developer" },
-              { label: "Platform", value: "Web — Desktop, Tablet, Mobile" },
+              { label: "Platform & Tools", value: "Web — Desktop, Tablet, Mobile" },
             ]}
             image="/img/portfolio/main_gty-app-landing.jpg"
             imageAlt="GTY App Landing Page, first screen"
@@ -94,7 +95,7 @@ const Page = () => {
 
             {/* 01 — Overview */}
             <CaseSection id="overview" number={1} title="Project Overview">
-              <p>As a designer and developer at Grace to You, I was tasked with improving the user experience of the Grace to You App landing page. The goal was to create a more engaging, informative, and user-friendly experience, encouraging users to download and utilize the app.</p>
+              <p>The Grace to You App landing page was functional but didn't draw users in, didn't make the apps' benefits immediately apparent, and didn't give the download call to action enough prominence. As a designer and developer at Grace to You, I was tasked with improving its user experience. The goal was to create a more engaging, informative, and user-friendly experience, encouraging users to download and utilize the app.</p>
               <CaseVideo url="gty.org" src="/img/portfolio/gty-app-landing_min.mp4" caption="GTY App Landing Page" />
             </CaseSection>
 
@@ -154,8 +155,20 @@ const Page = () => {
               <p>The refreshed landing page offers a more visually appealing and user-friendly experience, making it easier for visitors to understand the benefits of the apps and encouraging them to download and engage with the content. The strategic content placement and clear call-to-action buttons contribute to a better overall user experience.</p>
             </CaseSection>
 
-            {/* 07 — Reflection */}
-            <CaseSection id="reflection" number={7} title="Reflection">
+            {/* 7 — Learning and Reflection */}
+            <CaseSection id="learnings" number={7} title="Learning and Reflection">
+              <CaseLearnings
+                learned={[
+                "Naming three specific gaps up front (visual appeal, information hierarchy, call to action) kept every design decision tied to a problem worth solving.",
+                "A relaunch raises practical questions about accounts and the old app, so I answer them on the page itself in an FAQ instead of leaving visitors to wonder.",
+                "Placing the download buttons at both the top and the bottom of the page means the next step is always one tap away.",
+                ]}
+                next={[
+                "Track how many visitors tap the store buttons, to see whether the more prominent calls to action help.",
+                "Update the new-features carousel and the FAQ as the app continues to evolve.",
+                "Try the page with real visitors to see which sections help them decide to download.",
+                ]}
+              />
               <CaseQuote>
                 A user-centric approach ensures that the end product meets the needs and expectations of the target audience.
               </CaseQuote>

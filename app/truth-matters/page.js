@@ -13,6 +13,7 @@ import {
   CaseGrid,
   CaseQuote,
   CaseNext,
+  CaseLearnings,
 } from "@/components/case/CaseStudy";
 import {
   BrandLogos,
@@ -33,7 +34,7 @@ const SECTIONS = [
   { id: "merchandise", label: "Merchandise" },
   { id: "graphics", label: "Graphics & Media" },
   { id: "ux-web", label: "UX & Web" },
-  { id: "reflection", label: "Reflection" },
+  { id: "learnings", label: "Learning and Reflection" },
 ];
 
 // Brand guide data. Colors are sampled from the delivered logo and website;
@@ -133,7 +134,7 @@ const Page = () => {
               { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Media Organization</> },
               { label: "Role", value: "Product Designer & Web Developer" },
               { label: "Website", value: <a className="cyril-dark" href="https://truthmatterspodcast.gty.org" target="_blank">truthmatterspodcast.gty.org</a> },
-              { label: "Platform", value: "WordPress" },
+              { label: "Platform & Tools", value: "WordPress" },
             ]}
             image="/img/portfolio/main_truth-matters-podcast.jpg"
             imageAlt="Truth Matters Podcast Wide"
@@ -143,8 +144,8 @@ const Page = () => {
 
             {/* 01 — Overview */}
             <CaseSection id="overview" number={1} title="Project Overview">
-              <p>The Truth Matters Podcast is a media production by Grace to You. In each episode, host Darrell Harrison welcomes a guest to explore a featured resource from the Grace to You collection—whether it's a book, sermon, or blog series by John MacArthur. Together, they dive into the inspiration behind the resource, its core message, and why it still matters for the church today.</p>
-              <p>As the Product Designer and Developer behind the Truth Matters Podcast, my goal was to create a digital experience that felt as grounded and compelling as the content itself. This project was one of those many projects for Grace to You where I got to wear many hats and ensure every touchpoint—from the logo to the episode pages—told a consistent story. It brought together three core roles I love: branding, UX/UI design, and front-end development.</p>
+              <p>The Truth Matters Podcast is a media production by Grace to You. In each episode, host Darrell Harrison welcomes a guest to explore a featured resource from the Grace to You collection&mdash;whether it's a book, sermon, or blog series by John MacArthur. Together, they dive into the inspiration behind the resource, its core message, and why it still matters for the church today.</p>
+              <p>The show needed a digital experience as grounded and compelling as the content itself, with every touchpoint&mdash;from the logo to the episode pages&mdash;telling a consistent story. As the Product Designer and Developer behind the Truth Matters Podcast, I wore many hats on this one, bringing together three core roles I love: branding, UX/UI design, and front-end development.</p>
             </CaseSection>
 
             {/* 02 — Branding */}
@@ -222,8 +223,20 @@ const Page = () => {
               <CaseFigure src="/img/portfolio/truth-matters_website.png" alt="Truth Matters Podcast Website" caption="Website" ratio="3 / 4" size="text" />
             </CaseSection>
 
-            {/* 10 — Reflection */}
-            <CaseSection id="reflection" number={10} title="Reflection">
+            {/* 10 — Learning and Reflection */}
+            <CaseSection id="learnings" number={10} title="Learning and Reflection">
+              <CaseLearnings
+                learned={[
+                  "Owning branding, UX/UI design, and front-end development together made it possible to keep every touchpoint, from the logo to the episode pages, telling one consistent story.",
+                  "Keeping the global media player uninterrupted while visitors browse showed me how navigation can be designed around the main task of listening and watching.",
+                  "Creating episode assets in-house showed me how a brand system can keep episodes cohesive yet distinctive.",
+                ]}
+                next={[
+                  "Keep extending the brand system to new episode thumbnails, artwork, and banners.",
+                  "Look at how visitors use the comment, share, and subscribe options to see which calls to action earn their place.",
+                  "Keep checking SEO and accessibility as the episode library grows.",
+                ]}
+              />
               <p>As the Product Designer & Web Developer behind the Truth Matters Podcast, I embraced the challenge of creating a digital experience that felt as grounded and compelling as the content itself. My goal was to ensure every touchpoint&mdash;from the logo to the episode pages—told a consistent story, uniting branding, UX/UI design, and front-end development into a cohesive whole.</p>
               <p>In crafting the brand's visual identity, I leaned into a casual, yet theologically serious, thoughtful, and grounded in biblical truth tone. The minimal yet strong logo, paired with a muted, sophisticated color palette &#40;deep charcoal, soft neutrals&#41;, reinforced clarity and conviction. I selected sharp, readable fonts that convey authority without being loud, ensuring that the design echoed both the podcast's purpose and Grace to You's style guidelines.</p>
               <p>On the UX and development front, I designed a clean, minimal, content-first interface built on WordPress with a focus on SEO and accessibility. I implemented a global media player that doesn't interrupt playback when navigating, along with clear CTAs &#40;&ldquo;Listen/Play,&rdquo; &ldquo;Share,&rdquo; and &ldquo;Subscribe&rdquo;&#41; and responsive layouts for seamless mobile discovery. This approach kept the audience engaged with the content and empowered them to interact, share, and subscribe without friction.</p>
