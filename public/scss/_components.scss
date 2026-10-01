@@ -1541,6 +1541,19 @@ banner
         -o-object-position: left center;
         object-position: left center;
         vertical-align: top;
+        // Grayscale at rest, full color while the pointer is on the person
+        // (.cyril-photo-hover, toggled by MotionEffects.js from the photo's
+        // alpha map).
+        filter: grayscale(100%) brightness(120%) contrast(120%);
+        transition: filter 0.6s ease;
+
+        &.cyril-photo-hover {
+            filter: grayscale(0) brightness(100%) contrast(100%);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            transition: none;
+        }
 
         @media screen and (max-width: 1200px) {
             display: none;

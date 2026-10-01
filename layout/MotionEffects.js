@@ -534,6 +534,8 @@ const MotionEffects = () => {
       y: 0,
     })).filter((layer) => layer.el);
 
+    const heroPhoto = document.querySelector(MAIN_IMAGE_SELECTOR);
+
     const heroShown = () => {
       const hero = document.getElementById('intro');
       return !!hero && !hero.classList.contains('cyril-hero-exit');
@@ -603,8 +605,11 @@ const MotionEffects = () => {
       ring.classList.toggle('cyril-cursor-link', !card && !!link);
       // Hide over icon buttons and the visible pixels of the hero photo.
       const mainImage = target?.closest(MAIN_IMAGE_SELECTOR);
-      root.classList.toggle('cyril-cursor-hide',
-        !!target?.closest(ICON_BUTTON_SELECTOR) || (!!mainImage && isOverVisiblePixel(mainImage, mouseX, mouseY)));
+      const overPhoto = !!mainImage && isOverVisiblePixel(mainImage, mouseX, mouseY);
+      root.classList.toggle('cyril-cursor-hide', !!target?.closest(ICON_BUTTON_SELECTOR) || overPhoto);
+      // The hero photo is grayscale at rest and turns to color while the
+      // pointer is on the person (not the transparent area around them).
+      heroPhoto?.classList.toggle('cyril-photo-hover', overPhoto);
 
       // Magnetic pull
       const magnetic = findMagnetic(target);
@@ -646,6 +651,7 @@ const MotionEffects = () => {
     const onLeave = (e) => {
       if (e.relatedTarget) return;
       root.classList.remove('cyril-cursor-visible');
+      heroPhoto?.classList.remove('cyril-photo-hover');
       releaseMagnetic();
       releaseTilt();
     };
@@ -664,6 +670,7 @@ const MotionEffects = () => {
       releaseMagnetic();
       releaseTilt();
       parallax.forEach((layer) => { layer.el.style.translate = ''; });
+      heroPhoto?.classList.remove('cyril-photo-hover');
       root.classList.remove('cyril-has-cursor', 'cyril-cursor-visible', 'cyril-cursor-hide');
     };
   }, []);
