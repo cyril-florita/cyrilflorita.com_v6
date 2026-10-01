@@ -18,7 +18,7 @@ const Education = () => {
         <div className="row">
           <div className="offset-xl-1 col-xl-5 cyril-mb-30">
             <div className="cyril-icon-box">
-              <div className="cyril-text-icon">
+              <div className="cyril-text-icon no-textured">
               <i className="fa-solid fa-user-graduate"></i>
               </div>
               <div className="cyril-box-text">
@@ -36,7 +36,7 @@ const Education = () => {
           </div>
           <div className="col-xl-6">         
             <div className="cyril-icon-box cyril-mb-60">
-              <div className="cyril-text-icon">
+              <div className="cyril-text-icon no-textured">
               <i className="fa-solid fa-user-graduate"></i>
               </div>
               <div className="cyril-box-text">

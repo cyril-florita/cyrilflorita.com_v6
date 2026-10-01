@@ -2727,7 +2727,7 @@ portfolio
             object-position: center;
             transform: scale(1);
             transition: variables.$tr;
-            filter: grayscale(100%) brightness(110%) contrast(130%);
+            filter: grayscale(100%) brightness(110%) contrast(160%);
 
             @media screen and (max-width: 1200px) {
                 filter: grayscale(0) brightness(100%) contrast(100%);
@@ -4350,7 +4350,7 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
     .cyril-page.cyril-case-page .cyril-case-next-image {
         & img,
         & video {
-            filter: grayscale(100%) brightness(110%) contrast(130%);
+            filter: grayscale(100%) brightness(110%) contrast(160%);
             transition: filter 0.5s ease;
         }
     }
