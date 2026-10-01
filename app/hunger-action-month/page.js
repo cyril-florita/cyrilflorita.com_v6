@@ -29,6 +29,8 @@ const SECTIONS = [
   { id: "dashboard", label: "Campaign Dashboard" },
   { id: "responsive", label: "Every Screen" },
   { id: "impact", label: "Impact" },
+  { id: "audience", label: "Audience & Traffic" },
+  { id: "giving", label: "How Visitors Gave" },
   { id: "learnings", label: "Learning & Next Steps" },
 ];
 
@@ -69,6 +71,7 @@ const Page = () => {
             detail="Campaign Page & Analytics"
             title="Hunger Action Month"
             summary="A rebuilt campaign page for Children's Hunger Fund with analytics designed in from day one: every channel tagged, every key interaction measured, and every donation traceable to where it came from."
+            result={{ value: "113", label: "Donations completed in the campaign month" }}
             facts={[
               { label: "Client", value: <><a className="cyril-dark" href="https://childrenshungerfund.org" target="_blank">Children&apos;s Hunger Fund</a>&mdash;A Christian Non-Profit Ministry</> },
               { label: "Role", value: "Designer, Copywriter, Developer & Analytics (sole developer)" },
@@ -87,6 +90,13 @@ const Page = () => {
             <CaseSection id="overview" number={1} title="Project Overview">
               <p>Every September, Hunger Action Month calls attention to hunger, and it&apos;s one of Children&apos;s Hunger Fund&apos;s key campaigns. The existing campaign page was a single monolithic template, and the ministry had no way to trace a donation back to the channel that produced it.</p>
               <p>So beyond rebuilding the landing page and its homepage banner, I built a complete event-tracking layer, wrote the plan that governs how every inbound link is tagged across all channels, and built an internal dashboard to follow the campaign in real time.</p>
+              <p>The page had four jobs:</p>
+              <ul className="cyril-case-list">
+                <li>drive one-time and monthly (&ldquo;Hope Partner&rdquo;) donations through an on-page giving widget</li>
+                <li>build trust with visitors who didn&apos;t know the organization</li>
+                <li>give supporters shareable assets: graphics and captions</li>
+                <li>give stakeholders a single view of results, with live and daily-snapshot data kept separate</li>
+              </ul>
               <CaseVideo src="/img/portfolio/chf-hunger-action-month_preview.mp4" caption="Landing page preview" url="childrenshungerfund.org" />
               <CaseStats items={[
                 { value: "10", label: "Modular page sections" },
@@ -176,21 +186,53 @@ const Page = () => {
                 Every email, paid ad, social post, QR code, and web placement was tagged and traceable&mdash;from first click to completed donation.
               </CaseQuote>
               <p>Hunger Action Month was the ministry&apos;s first campaign with full-funnel, cross-channel attribution from day one, and the tracking foundation built here became the reusable template for the campaigns that followed, including the year-end push.</p>
+              <p>The dashboard&apos;s snapshot of the campaign month shows what that visibility captured, with giving figures from Classy and behavior from Google Analytics 4:</p>
+              <CaseStats items={[
+                { value: "113", label: "Completed donations" },
+                { value: "92", label: "Distinct donors, 9 of them monthly" },
+                { value: "3.7%", label: "Donation conversion rate" },
+                { value: "164", label: "\u201cGive a Meal\u201d clicks" },
+              ]} />
+              <p>Across 3,805 page views, the engagement rate was 49.2%. Behavior numbers from GA4 can lag and won&apos;t sum to Classy&apos;s totals, which the dashboard says outright, so they&apos;re best read as comparisons between channels and sections rather than absolute rates.</p>
               <p>See the <a className="cyril-accent" href="https://childrenshungerfund.org/hungeractionmonth/" target="_blank" rel="noopener noreferrer"><strong>Hunger Action Month campaign page</strong></a> live.</p>
             </CaseSection>
 
-            {/* 10 — Learning & Next Steps */}
-            <CaseSection id="learnings" number={10} title="Learning &amp; Next Steps">
+            {/* 10 — Audience & Traffic */}
+            <CaseSection id="audience" number={10} title="Audience & Traffic">
+              <ul className="cyril-case-list">
+                <li><strong>Paid social carried the traffic.</strong> It drove 2,313 visits, about 74% of the total. Email followed with 515, organic search brought 82, and AI-assistant referrals (ChatGPT) brought 5.</li>
+                <li><strong>Mobile first was the right call.</strong> Visitors were 85.9% new and 74% were on mobile, and mobile dominated giving too: 83 of the 96 donations GA4 tracked.</li>
+                <li><strong>Email was the higher-value channel.</strong> Paid social produced 78 donations and email 7, but each email donation was worth roughly 2.7 times a paid-social one, even though email sent far less traffic.</li>
+              </ul>
+            </CaseSection>
+
+            {/* 11 — How Visitors Gave */}
+            <CaseSection id="giving" number={11} title="How Visitors Gave">
+              <p>Because every step was measured, the dashboard showed where giving held up and where it stalled:</p>
+              <ul className="cyril-case-list">
+                <li><strong>Checkout starts outnumbered completions.</strong> 142 visitors started checkout and 113 completed a donation.</li>
+                <li><strong>Monthly was chosen more than it was completed.</strong> Visitors selected monthly giving 45 times against 21 for one-time, yet only 9 donors became recurring. One preset amount led clearly, selected 45 times against 20 and 15 for the next two.</li>
+                <li><strong>Form errors pointed at the address fields.</strong> There were 37 in all; the most common were &ldquo;Enter a state&rdquo; (9) and &ldquo;Try again with another payment method&rdquo; (9), then incomplete card numbers (6). The state errors suggest the address fields can be improved.</li>
+                <li><strong>Visitors converted without stopping to verify.</strong> Trust-badge clicks were rare (Candid 3, ECFA 2, MinistryWatch 2, Charity Navigator 1), and the newsletter sign-up saw 117 starts but only 4 completions.</li>
+                <li><strong>Section views ranked the content.</strong> The giving module was seen by 15.7% of visitors, the Honduras story by 9.2%, monthly giving by 6.4%, the social share section by 5.1%, and trust signals by 3.2%.</li>
+                <li><strong>Sharing tools saw modest use.</strong> 8 graphics were downloaded (the &ldquo;siblings&rdquo; graphic led with 5) and 5 captions were copied.</li>
+              </ul>
+            </CaseSection>
+
+            {/* 12 — Learning & Next Steps */}
+            <CaseSection id="learnings" number={12} title="Learning &amp; Next Steps">
               <CaseLearnings
                 learned={[
-                  "Extending the site's existing tracking pattern, rather than adding a parallel setup, meant each new interaction needed only a few new variables.",
-                  "Basing decisions on real captured data rather than documentation caught problems, like data-type mismatches that would have silently dropped donation values.",
-                  "Keeping each page section self-contained, with all tracking in one script, made the page easy to edit and kept every interaction from being counted twice.",
+                  "Interest in monthly giving far outran completion, so the choice to give monthly is where the page was losing the most.",
+                  "Email sent much less traffic than paid social but brought in far more per donation, so traffic alone is the wrong way to judge a channel.",
+                  "Visitors gave without checking the trust badges or finishing the newsletter sign-up, so the page earned trust without them.",
                 ]}
                 next={[
-                  "Reuse the modular sections and the tracking template for the next campaign.",
-                  "Keep the link-tagging plan current as new channels or placements are added.",
-                  "Use the campaign dashboard's data to see which page sections and channels earn their place.",
+                  "Test the monthly-giving flow, since selection far outran completion.",
+                  "Fix the state and address field errors.",
+                  "Move the newsletter sign-up and trust signals, or rethink them.",
+                  "Invest more in email, which had the highest value per donation.",
+                  "Reduce dependence on a single paid social channel.",
                 ]}
               />
             </CaseSection>

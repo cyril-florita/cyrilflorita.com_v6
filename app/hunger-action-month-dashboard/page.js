@@ -136,6 +136,19 @@ const Page = () => {
             {/* 06 — Impact */}
             <CaseSection id="impact" number={6} title="Impact">
               <p>The ministry now has its first documented, governed analytics framework, and Hunger Action Month became the first campaign where leadership could answer &ldquo;which channel raised the money?&rdquo; with confidence. The dashboard gave non-technical staff live visibility into the campaign, and its background-and-cache design became the pattern for internal reporting tools that followed.</p>
+              <p>It paid off in the campaign month itself, when one view of giving (from Classy) and behavior (from Google Analytics 4) made patterns visible that no single tool showed:</p>
+              <CaseStats items={[
+                { value: "113", label: "Completed donations in view" },
+                { value: "92", label: "Distinct donors, 9 of them monthly" },
+                { value: "2.7×", label: "Email\u2019s value per donation vs. paid social" },
+                { value: "37", label: "Checkout form errors surfaced" },
+              ]} />
+              <ul className="cyril-case-list">
+                <li><strong>Channel value, not just volume.</strong> Paid social sent about 74% of the traffic, but email&apos;s seven donations were each worth roughly 2.7 times a paid-social donation.</li>
+                <li><strong>Friction in the giving flow.</strong> 142 checkout starts against 113 completed donations, and the most common form errors (&ldquo;Enter a state&rdquo;, 9) pointed to the address fields.</li>
+                <li><strong>Where monthly giving fell short.</strong> Monthly was selected 45 times against 21 for one-time, but only 9 donors ended up recurring.</li>
+              </ul>
+              <p>Where two sources disagreed, the dashboard said so: GA4 numbers can lag and won&apos;t sum to Classy&apos;s totals, so each figure is labeled with its source and the team knows which to trust for which question.</p>
             </CaseSection>
 
             {/* 07 — Learning & Next Steps */}
@@ -147,9 +160,9 @@ const Page = () => {
                   "Saying plainly where two sources report differently helps the team know which number to trust for which question.",
                 ]}
                 next={[
-                  "Work through the remaining items in the sixteen-item backlog.",
+                  "Show checkout starts, completions, and the leading form errors side by side, so friction is visible while a campaign is still running.",
+                  "Report value per donation by channel next to traffic, so the gap between email and paid social is visible without a calculation.",
                   "Reuse the background-and-cache pattern for further internal reporting tools.",
-                  "Use the four-question framework to decide what to measure in future campaigns.",
                 ]}
               />
             </CaseSection>
