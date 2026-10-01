@@ -146,8 +146,8 @@ const Page = () => {
               <p>The landing page was the single conversion destination for every email, ad, and social post in the campaign. The distraction-free, single-ask design pointed the entire donor journey toward one action; the live tracker kept donors engaged and coming back throughout the day; and the post-campaign redirect turned leftover traffic into year-end gifts instead of dead ends.</p>
             </CaseSection>
 
-            {/* 08 — Learnings & Next Steps */}
-            <CaseSection id="learnings" number={8} title="Learnings & Next Steps">
+            {/* 08 — Learning & Next Steps */}
+            <CaseSection id="learnings" number={8} title="Learning & Next Steps">
               <CaseLearnings
                 learned={[
                   "With the timeline too tight for a design comp, I learned that building straight from the content strategy in code can work when every decision serves one goal.",

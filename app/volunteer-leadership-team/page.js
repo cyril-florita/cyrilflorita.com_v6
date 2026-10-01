@@ -153,8 +153,8 @@ const Page = () => {
               <p>See the <a className="cyril-accent" href="https://childrenshungerfund.org/dallas-volunteer-leader" target="_blank" rel="noopener noreferrer"><strong>Volunteer Leadership Team page</strong></a> live.</p>
             </CaseSection>
 
-            {/* 08 — Learnings & Next Steps */}
-            <CaseSection id="learnings" number={8} title="Learnings &amp; Next Steps">
+            {/* 08 — Learning & Next Steps */}
+            <CaseSection id="learnings" number={8} title="Learning &amp; Next Steps">
               <CaseLearnings
                 learned={[
                   "Flagging a dependency early, like the registration link that didn't exist yet, and building the story section as flagged placeholder content let the launch date hold while other pieces moved.",

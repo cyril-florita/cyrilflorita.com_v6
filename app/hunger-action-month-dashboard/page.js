@@ -138,8 +138,8 @@ const Page = () => {
               <p>The ministry now has its first documented, governed analytics framework, and Hunger Action Month became the first campaign where leadership could answer &ldquo;which channel raised the money?&rdquo; with confidence. The dashboard gave non-technical staff live visibility into the campaign, and its background-and-cache design became the pattern for internal reporting tools that followed.</p>
             </CaseSection>
 
-            {/* 07 — Learnings & Next Steps */}
-            <CaseSection id="learnings" number={7} title="Learnings &amp; Next Steps">
+            {/* 07 — Learning & Next Steps */}
+            <CaseSection id="learnings" number={7} title="Learning &amp; Next Steps">
               <CaseLearnings
                 learned={[
                   "Agreeing on what to measure and how to validate it before building anything meant the dashboard could show numbers people could trust.",

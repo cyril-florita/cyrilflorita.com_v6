@@ -161,8 +161,8 @@ const Page = () => {
               <p>The TV dashboard is now prominently displayed in the volunteer room and the hallways of the Grace to You office, providing volunteers, staff, and visitors with immediate insight into key metrics and activities of the website and apps. It improved internal awareness and coordination during live events and boosted morale by visually reinforcing the ministry's global reach. Team feedback emphasized how easy it was to &ldquo;just glance at the screen and know what's going on.&rdquo;</p>
             </CaseSection>
 
-            {/* 10 — Learnings & Next Steps */}
-            <CaseSection id="learnings" number={10} title="Learnings & Next Steps">
+            {/* 10 — Learning & Next Steps */}
+            <CaseSection id="learnings" number={10} title="Learning & Next Steps">
               <CaseLearnings
                 learned={[
                   "Because nobody sits in front of a wall display or clicks it, I learned to design for a glance: large numerals, short labels, and screens that rotate on their own.",

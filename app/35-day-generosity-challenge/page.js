@@ -144,8 +144,8 @@ const Page = () => {
               <p>The landing page became the central hub for more than 35 daily devotional emails, bringing recipients back to a living web experience that changed every week. The five blog posts gave engaged readers somewhere to go deeper, and together they tied email, web, and content into one cohesive, five-week story.</p>
             </CaseSection>
 
-            {/* 08 — Learnings & Next Steps */}
-            <CaseSection id="learnings" number={8} title="Learnings & Next Steps">
+            {/* 08 — Learning & Next Steps */}
+            <CaseSection id="learnings" number={8} title="Learning & Next Steps">
               <CaseLearnings
                 learned={[
                   "Adapting the Giving Tuesday milestone tracker into a five-step weekly challenge taught me how much a proven pattern speeds up a build with no mockup.",

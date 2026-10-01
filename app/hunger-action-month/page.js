@@ -179,8 +179,8 @@ const Page = () => {
               <p>See the <a className="cyril-accent" href="https://childrenshungerfund.org/hungeractionmonth/" target="_blank" rel="noopener noreferrer"><strong>Hunger Action Month campaign page</strong></a> live.</p>
             </CaseSection>
 
-            {/* 10 — Learnings & Next Steps */}
-            <CaseSection id="learnings" number={10} title="Learnings &amp; Next Steps">
+            {/* 10 — Learning & Next Steps */}
+            <CaseSection id="learnings" number={10} title="Learning &amp; Next Steps">
               <CaseLearnings
                 learned={[
                   "Extending the site's existing tracking pattern, rather than adding a parallel setup, meant each new interaction needed only a few new variables.",
