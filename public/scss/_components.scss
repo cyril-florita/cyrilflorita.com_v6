@@ -2747,13 +2747,6 @@ portfolio
             }
         }
 
-        &.truth-matters {
-            & img,
-            & video {
-                filter: grayscale(0) brightness(100%) contrast(100%);
-            }
-        }
-
         // "Case Study" tag: a one-line rectangular label, top right.
         & h3 {
             position: absolute;
