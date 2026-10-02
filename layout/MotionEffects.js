@@ -169,6 +169,15 @@ const PARALLAX_LAYERS = [
   ['.cyril-bg-title-boxed', 32],
 ];
 
+// The hero's orange glow (.cyril-hero-glow) rests on the left and follows the
+// pointer. Its follow strength grows as the pointer moves toward the photo:
+// a gentle lean on the left, fully tracking the pointer over the picture.
+const GLOW_REST_X = 0.3; // resting centre, as a share of the hero's width
+const GLOW_FOLLOW_MIN = 0.35; // share of the pointer's offset followed on the left
+const GLOW_RAMP = [0.3, 0.65]; // pointer x (share of width) where following ramps to 100%
+const GLOW_MAX_DY = 0.12; // vertical travel limit (share of hero height)
+const GLOW_EASE = 0.07;
+
 // Section titles that type in letter by letter (the hero headline does the
 // same, driven by playHeroIntro in app/page.js).
 const TITLE_SELECTOR = '#portfolio-start h2.glitch, .cyril-onepage .cyril-section h2.glitch, .cyril-case-title, .cyril-contact-title, .cyril-not-found-title';
@@ -383,10 +392,8 @@ const MotionEffects = () => {
         const title = host?.querySelector('h2');
         if (!host || !title) return;
         let x = 0;
-        let y = 0;
         for (let el = title; el && el !== host; el = el.offsetParent) {
           x += el.offsetLeft;
-          y += el.offsetTop;
         }
         // One-line width of the text, capped by the heading's own box (the
         // contact title wraps onto two lines).
@@ -396,30 +403,14 @@ const MotionEffects = () => {
         title.appendChild(probe);
         const w = Math.min(probe.offsetWidth, title.offsetWidth);
         title.removeChild(probe);
-        // Sit on the title, but no higher than the orb's own radius from the
-        // section's top edge (and no lower than its bottom edge): a round orb
-        // that fits inside the section never gets flattened by a fade.
-        const r = glow.offsetHeight / 2;
-        const titleCy = y + title.offsetHeight / 2;
-        const cy = Math.round(
-          host.offsetHeight >= 2 * r
-            ? Math.min(Math.max(titleCy, r), host.offsetHeight - r)
-            : titleCy
-        );
+        // The orb is as tall as its section (the screen, on About Me): a
+        // perfect circle whose gradient fades to nothing right at the top and
+        // bottom edges, centred on the title's text horizontally.
+        const size = host.offsetHeight;
+        glow.style.width = `${size}px`;
+        glow.style.height = `${size}px`;
         glow.style.left = `${Math.round(x + w / 2)}px`;
-        glow.style.top = `${cy}px`;
-
-        // Only when the orb can't fit (a short viewport) fade it out before
-        // the section's top/bottom edge, so there's no hard cut from the
-        // section's overflow clip. Edges in the glow's own coordinates.
-        const fade = 180;
-        const top = Math.max(0, r - cy);
-        const bottom = Math.min(2 * r, r + (host.offsetHeight - cy));
-        const mask = top > 0 || bottom < 2 * r
-          ? `linear-gradient(to bottom, transparent ${top}px, #000 ${top + fade}px, #000 ${bottom - fade}px, transparent ${bottom}px)`
-          : '';
-        glow.style.maskImage = mask;
-        glow.style.webkitMaskImage = mask;
+        glow.style.top = `${Math.round(size / 2)}px`;
       });
     };
 
@@ -433,10 +424,31 @@ const MotionEffects = () => {
     };
   }, []);
 
+  // Hero glow, resting spot only — for visitors who get no pointer effects
+  // (reduced motion, touch): the pointer effects below place it otherwise.
+  useEffect(() => {
+    if (!prefersReducedMotion() && hasFinePointer()) return;
+    const hero = document.getElementById('intro');
+    const glow = hero?.querySelector('.cyril-hero-glow');
+    if (!glow) return;
+    const place = () => {
+      const text = glow.offsetParent;
+      if (!text) return;
+      const h = hero.getBoundingClientRect();
+      const t = text.getBoundingClientRect();
+      glow.style.setProperty('--glow-x', `${(h.width * GLOW_REST_X - (t.left - h.left)).toFixed(1)}px`);
+      glow.style.setProperty('--glow-y', `${(h.height / 2 - (t.top - h.top)).toFixed(1)}px`);
+    };
+    place();
+    window.addEventListener('resize', place);
+    document.fonts?.ready.then(place);
+    return () => window.removeEventListener('resize', place);
+  }, []);
+
   // Background circle parallax. Desktop only — the circles are hidden at
   // 1200px and below anyway. Uses `translate` so each circle's inline
   // rotate transform is left alone. Section title glows (About Me) join the
-  // same loop with gentler scroll + mouse factors.
+  // same loop, drifting the other way at its own speed.
   useEffect(() => {
     if (prefersReducedMotion() || window.innerWidth <= 1200) return;
 
@@ -447,6 +459,7 @@ const MotionEffects = () => {
         anchor: el.closest('.cyril-section') || el.parentElement,
         scroll: BG_SCROLL_FACTOR[size],
         mouse: BG_MOUSE_PX[size],
+        ease: 0.12,
         x: 0,
         y: 0,
       };
@@ -457,8 +470,11 @@ const MotionEffects = () => {
     const glows = Array.from(document.querySelectorAll('.cyril-section-glow')).map((el) => ({
       el,
       anchor: el.closest('.cyril-section') || el.parentElement,
-      scroll: 0.06,
-      mouse: 14,
+      // Opposite direction to the diamonds (negative factors) and a slower,
+      // floatier ease, so the two layers visibly drift against each other.
+      scroll: -0.1,
+      mouse: -22,
+      ease: 0.05,
       x: 0,
       y: 0,
     }));
@@ -477,8 +493,8 @@ const MotionEffects = () => {
         const top = c.anchor.getBoundingClientRect().top;
         const tx = nx * c.mouse * 2;
         const ty = top * c.scroll + ny * c.mouse * 2;
-        c.x += (tx - c.x) * 0.12;
-        c.y += (ty - c.y) * 0.12;
+        c.x += (tx - c.x) * c.ease;
+        c.y += (ty - c.y) * c.ease;
         if (Math.abs(tx - c.x) > 0.05 || Math.abs(ty - c.y) > 0.05) moving = true;
         c.el.style.translate = `${c.x.toFixed(2)}px ${c.y.toFixed(2)}px`;
       });
@@ -533,6 +549,10 @@ const MotionEffects = () => {
       x: 0,
       y: 0,
     })).filter((layer) => layer.el);
+    const heroEl = document.getElementById('intro');
+    const heroGlow = heroEl?.querySelector('.cyril-hero-glow');
+    const glowPos = { x: null, y: null };
+    let pointerSeen = false;
 
     const heroPhoto = document.querySelector(MAIN_IMAGE_SELECTOR);
 
@@ -569,6 +589,34 @@ const MotionEffects = () => {
         });
       }
 
+      if (heroGlow) {
+        const rect = heroEl.getBoundingClientRect();
+        const W = rect.width;
+        const H = rect.height;
+        const restX = W * GLOW_REST_X;
+        const restY = H / 2;
+        let gx = restX;
+        let gy = restY;
+        if (pointerSeen && heroShown()) {
+          const u = Math.min(Math.max((mouseX / window.innerWidth - GLOW_RAMP[0]) / (GLOW_RAMP[1] - GLOW_RAMP[0]), 0), 1);
+          const k = GLOW_FOLLOW_MIN + (1 - GLOW_FOLLOW_MIN) * (u * u * (3 - 2 * u));
+          gx = restX + (mouseX - rect.left - restX) * k;
+          gy = restY + Math.min(Math.max((mouseY - rect.top - restY) * k, -H * GLOW_MAX_DY), H * GLOW_MAX_DY);
+        }
+        if (glowPos.x === null) { glowPos.x = restX; glowPos.y = restY; }
+        const glowK = follow(GLOW_EASE, dt);
+        glowPos.x += (gx - glowPos.x) * glowK;
+        glowPos.y += (gy - glowPos.y) * glowK;
+        // The glow lives inside .cyril-banner-text: express hero-space
+        // coordinates relative to it.
+        const textRect = heroGlow.offsetParent?.getBoundingClientRect();
+        const ox = textRect ? textRect.left - rect.left : 0;
+        const oy = textRect ? textRect.top - rect.top : 0;
+        heroGlow.style.setProperty('--glow-x', `${(glowPos.x - ox).toFixed(1)}px`);
+        heroGlow.style.setProperty('--glow-y', `${(glowPos.y - oy).toFixed(1)}px`);
+        if (Math.abs(gx - glowPos.x) > 0.3 || Math.abs(gy - glowPos.y) > 0.3) moving = true;
+      }
+
       rafId = moving ? requestAnimationFrame(tick) : null;
       if (!rafId) lastTime = 0;
     };
@@ -592,6 +640,7 @@ const MotionEffects = () => {
     const onMove = (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
+      pointerSeen = true;
       dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
       root.classList.add('cyril-cursor-visible');
       startLoop();
@@ -657,12 +706,15 @@ const MotionEffects = () => {
     };
 
     window.addEventListener('pointermove', onMove, { passive: true });
+    window.addEventListener('resize', startLoop);
+    startLoop(); // places the hero glow at its resting spot
     window.addEventListener('pointerdown', onDown);
     window.addEventListener('pointerup', onUp);
     document.addEventListener('pointerout', onLeave);
 
     return () => {
       window.removeEventListener('pointermove', onMove);
+      window.removeEventListener('resize', startLoop);
       window.removeEventListener('pointerdown', onDown);
       window.removeEventListener('pointerup', onUp);
       document.removeEventListener('pointerout', onLeave);
@@ -670,6 +722,8 @@ const MotionEffects = () => {
       releaseMagnetic();
       releaseTilt();
       parallax.forEach((layer) => { layer.el.style.translate = ''; });
+      heroGlow?.style.removeProperty('--glow-x');
+      heroGlow?.style.removeProperty('--glow-y');
       heroPhoto?.classList.remove('cyril-photo-hover');
       root.classList.remove('cyril-has-cursor', 'cyril-cursor-visible', 'cyril-cursor-hide');
     };

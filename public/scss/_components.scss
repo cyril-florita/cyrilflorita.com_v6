@@ -176,6 +176,14 @@ hero first-load entrance (see playHeroIntro in app/page.js)
     transform: none;
 }
 
+// The hero photo's grayscale → color hover (.cyril-banner-image) keeps its
+// own filter transition while the entrance class is still on; otherwise the
+// rule above replaces it and a hover during the first seconds snaps to color.
+#intro .cyril-banner-image.cyril-hero-piece {
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+    transition-delay: var(--hero-delay, 0ms), var(--hero-delay, 0ms), 0ms;
+}
+
 // The headline doesn't rise with the rest; its letters type in instead
 // (see split titles below).
 #intro h1.cyril-hero-piece {
@@ -184,7 +192,8 @@ hero first-load entrance (see playHeroIntro in app/page.js)
 }
 
 @media (prefers-reduced-motion: reduce) {
-    #intro .cyril-hero-piece {
+    #intro .cyril-hero-piece,
+    #intro .cyril-banner-image.cyril-hero-piece {
         opacity: 1;
         transform: none;
         transition: none;
@@ -1695,9 +1704,7 @@ banner
         }
     }
 
-    // Backlight glow behind the hero photo (dark mode, desktop): a soft light
-    // source in the accent color, as if the photo is lit from behind — the
-    // cinematic focal point. Static (no animation); follows the accent theme.
+    // The photo sits above the hero glow (.cyril-hero-glow, below).
     & .col-xl-5:has(.cyril-banner-image) {
         position: relative;
 
@@ -1706,31 +1713,42 @@ banner
         }
     }
 
-    // Keep the hero content above the mouse-following glow (see below).
+    // Keep the hero content above the glow.
     & .container-full {
         position: relative;
         z-index: 1;
     }
 
-    [data-theme="dark"] & .col-xl-5:has(.cyril-banner-image)::before {
-        content: "";
+    // Accent glow (dark mode, desktop): a circle as tall as the hero, fading
+    // to nothing at the top and bottom edges — same falloff as the About Me
+    // section glows. It sits inside .cyril-banner-text (after the dotted
+    // background box) so it paints over that box, under the text. It rests on
+    // the left and MotionEffects.js moves it with the pointer via
+    // --glow-x / --glow-y (its centre, relative to .cyril-banner-text).
+    & .cyril-hero-glow {
+        display: none;
         position: absolute;
-        z-index: 0;
+        z-index: -1;
         top: 0;
-        left: 64%;
-        width: 125%;
-        aspect-ratio: 1;
-        transform: translateX(-50%);
-        background: radial-gradient(circle at 50% 42%,
-            rgba(var(--color-accent-rgb), 0.7) 0%,
-            rgba(var(--color-accent-rgb), 0.36) 22%,
-            rgba(var(--color-accent-rgb), 0.12) 44%,
-            transparent 66%);
+        left: 0;
+        width: 100vh;
+        height: 100vh;
+        margin: -50vh 0 0 -50vh;
+        translate: var(--glow-x, 0px) var(--glow-y, 0px);
+        background: radial-gradient(circle,
+            rgba(var(--color-accent-rgb), 0.8) 0%,
+            rgba(var(--color-accent-rgb), 0.38) 32%,
+            rgba(var(--color-accent-rgb), 0.12) 54%,
+            transparent 72%);
         filter: blur(24px);
+        opacity: 1;
         pointer-events: none;
+        will-change: translate;
 
-        @media screen and (max-width: 1200px) {
-            display: none;
+        [data-theme="dark"] & {
+            @media screen and (min-width: 1201px) {
+                display: block;
+            }
         }
     }
 
@@ -2395,11 +2413,13 @@ portfolio
     display: none;
     position: absolute;
     z-index: -1;
-    top: 25%;
+    // Fallback only: MotionEffects.js sizes the orb to its section's height
+    // and centres it on the title text horizontally.
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 828px;
-    height: 828px;
+    width: 100vh;
+    height: 100vh;
     border-radius: 50%;
     background: radial-gradient(circle,
         rgba(var(--color-accent-rgb), 0.8) 0%,
@@ -2407,7 +2427,7 @@ portfolio
         rgba(var(--color-accent-rgb), 0.12) 54%,
         transparent 72%);
     filter: blur(24px);
-    opacity: 0.75;
+    opacity: 0.5;
     pointer-events: none;
 
     [data-theme="dark"] & {

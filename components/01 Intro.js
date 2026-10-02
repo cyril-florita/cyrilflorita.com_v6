@@ -23,6 +23,12 @@ const Banner = ( { bgImage = "/img/cyril-florita-profile.webp" } ) => {
                   className="cyril-bg-title-boxed"
                   style={{ top: 0, left: "-82%" }}
                 />
+                {/* Accent glow: rests on the left, follows the pointer (see
+                    MotionEffects.js). It lives here, right after the dotted
+                    box, so it paints above that background object (same
+                    stacking context, z-index -1, later in the tree) but
+                    below the text. Dark mode / desktop only (CSS). */}
+                <span className="cyril-hero-glow" aria-hidden="true" />
                 <p className="cyril-upper cyril-mb-10 subheader">
                   <span className="cyril-accent">Hello!</span>&nbsp;I&apos;m 
                 </p>
