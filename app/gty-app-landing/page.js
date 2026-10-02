@@ -14,6 +14,7 @@ import {
   CaseNext,
   CaseLearnings,
 } from "@/components/case/CaseStudy";
+import { CASE_SUMMARIES } from "@/components/data/caseSummaries";
 import { BrandCrop } from "@/components/case/BrandGuide";
 
 const SECTIONS = [
@@ -77,7 +78,7 @@ const Page = () => {
             category="Design & Development"
             detail="Landing Page"
             title="GTY App Landing Page"
-            summary="Improving the user experience of the Grace to You App landing page to create a more engaging, informative, and user-friendly experience that encourages users to download and utilize the app."
+            summary={CASE_SUMMARIES["/gty-app-landing"]}
             facts={[
               { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Media Organization</> },
               { label: "Role", value: "Web Designer & Developer" },

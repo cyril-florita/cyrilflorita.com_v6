@@ -15,6 +15,7 @@ import {
   CaseNext,
   CaseLearnings,
 } from "@/components/case/CaseStudy";
+import { CASE_SUMMARIES } from "@/components/data/caseSummaries";
 
 const SECTIONS = [
   { id: "overview", label: "Overview" },
@@ -60,7 +61,7 @@ const Page = () => {
             category="Design & Development"
             detail="Recruitment Landing Page"
             title="Volunteer Leadership Team"
-            summary="A new landing page recruiting Volunteer Leaders for Children's Hunger Fund's new North Texas facility: the one destination behind every printed flyer, event QR code, and staff conversation, launched ahead of an in-person Open House."
+            summary={CASE_SUMMARIES["/volunteer-leadership-team"]}
             facts={[
               { label: "Client", value: <><a className="cyril-dark" href="https://childrenshungerfund.org" target="_blank">Children&apos;s Hunger Fund</a>&mdash;A Christian Non-Profit Ministry</> },
               { label: "Role", value: "Designer & Developer (sole developer)" },

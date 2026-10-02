@@ -17,6 +17,7 @@ import {
   CaseNext,
   CaseLearnings,
 } from "@/components/case/CaseStudy";
+import { CASE_SUMMARIES } from "@/components/data/caseSummaries";
 
 const SECTIONS = [
   { id: "overview", label: "Overview" },
@@ -63,7 +64,7 @@ const Page = () => {
             category="Design, Development, & Campaign Performance Tracking"
             detail="Campaign Page & Analytics"
             title="Hunger Action Month"
-            summary="A rebuilt campaign page for Children's Hunger Fund with analytics designed in from day one: every channel tagged, every key interaction measured, and every donation traceable to where it came from."
+            summary={CASE_SUMMARIES["/hunger-action-month"]}
             result={{ value: "113", label: "Donations completed in the campaign month" }}
             facts={[
               { label: "Client", value: <><a className="cyril-dark" href="https://childrenshungerfund.org" target="_blank">Children&apos;s Hunger Fund</a>&mdash;A Christian Non-Profit Ministry</> },

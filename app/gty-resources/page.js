@@ -13,6 +13,7 @@ import {
   CaseGrid,
   CaseNext,
 } from "@/components/case/CaseStudy";
+import { CASE_SUMMARIES } from "@/components/data/caseSummaries";
 
 const SECTIONS = [
   { id: "overview", label: "Overview" },
@@ -65,7 +66,7 @@ const Page = () => {
             category="Marketing"
             detail="Resource Graphics"
             title="GTY Resources"
-            summary="Clean, modern graphics for Grace to You that highlight products being promoted, offered for free, or sold at a discount, clearly communicating the value of each offer."
+            summary={CASE_SUMMARIES["/gty-resources"]}
             facts={[
               { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Media Organization</> },
               { label: "Role", value: "Web Designer & Developer" },

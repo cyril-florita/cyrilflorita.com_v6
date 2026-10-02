@@ -12,6 +12,7 @@ import {
   CaseFigure,
   CaseNext,
 } from "@/components/case/CaseStudy";
+import { CASE_SUMMARIES } from "@/components/data/caseSummaries";
 
 const SECTIONS = [
   { id: "overview", label: "Overview" },
@@ -60,7 +61,7 @@ const Page = () => {
             category="Illustration"
             detail="Profile Background Graphic"
             title="SekihMentis"
-            summary="A grungy &ldquo;Transformers: Autobots Big Gun&rdquo; themed background graphic designed for my MySpace profile."
+            summary={CASE_SUMMARIES["/sekihmentis"]}
             facts={[
               { label: "Platform & Tools", value: <>{"MySpace"}<br />{"Adobe Illustrator, Photoshop"}</> },
             ]}

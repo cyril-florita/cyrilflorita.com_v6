@@ -14,6 +14,7 @@ import {
   CaseNext,
   CaseLearnings,
 } from "@/components/case/CaseStudy";
+import { CASE_SUMMARIES } from "@/components/data/caseSummaries";
 import {
   BrandLogos,
   BrandClearSpace,
@@ -117,7 +118,7 @@ const Page = () => {
             category="Branding, Design, & Development"
             detail="24/7 Broadcast Platform"
             title="Grace Stream"
-            summary="Designing and building Grace to You's 24/7 online broadcasting platform—a digital space where truth can stream 24/7 and people can tune in without distraction."
+            summary={CASE_SUMMARIES["/grace-stream"]}
             facts={[
               { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Media Organization</> },
               { label: "Role", value: "Product Designer & Web Developer" },

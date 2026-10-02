@@ -60,7 +60,7 @@ const randomLetter = (char) => {
 // Scrambles every text node under `el` through random letters, resolving
 // left to right, without touching the markup (so nested accent spans keep
 // their styling). Used for subheaders (layout/MotionEffects.js).
-export const scrambleText = (el, duration = 800) => {
+export const scrambleText = (el, duration = 800, delay = 0) => {
   const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
   const nodes = [];
   while (walker.nextNode()) nodes.push(walker.currentNode);
@@ -69,9 +69,11 @@ export const scrambleText = (el, duration = 800) => {
   const total = originals.join('').length;
   if (!total) return;
 
-  const start = performance.now();
+  // `delay`: hold every letter scrambled this long before resolving starts
+  // (e.g. while the element fades in), so the first word is seen resolving.
+  const start = performance.now() + delay;
   const frame = (now) => {
-    const progress = Math.min((now - start) / duration, 1);
+    const progress = Math.min(Math.max((now - start) / duration, 0), 1);
     let index = 0;
     nodes.forEach((node, i) => {
       node.textContent = originals[i].split('').map((char) => {

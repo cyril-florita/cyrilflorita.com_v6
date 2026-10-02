@@ -12,6 +12,7 @@ import {
   CaseFigure,
   CaseNext,
 } from "@/components/case/CaseStudy";
+import { CASE_SUMMARIES } from "@/components/data/caseSummaries";
 
 const SECTIONS = [
   { id: "overview", label: "Overview" },
@@ -60,7 +61,7 @@ const Page = () => {
             category="Illustration"
             detail="Desktop Wallpaper"
             title="He Took My Place"
-            summary="A desktop wallpaper designed for my Illustration class, sparked by coming to grips with the reality of the gospel."
+            summary={CASE_SUMMARIES["/he-took-my-place"]}
             facts={[
               { label: "Deliverables", value: "Desktop Wallpaper" },
               { label: "Platform & Tools", value: "Adobe Illustrator, Photoshop" },

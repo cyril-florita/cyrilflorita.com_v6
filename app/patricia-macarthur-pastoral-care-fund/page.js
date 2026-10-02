@@ -13,6 +13,7 @@ import {
   CaseGrid,
   CaseNext,
 } from "@/components/case/CaseStudy";
+import { CASE_SUMMARIES } from "@/components/data/caseSummaries";
 import {
   BrandClearSpace,
   BrandSwatches,
@@ -108,7 +109,7 @@ const Page = () => {
             category="Branding"
             detail="Logo Design"
             title="The Patricia MacArthur Pastoral Care Fund"
-            summary="A logo for the Patricia MacArthur Pastoral Care Fund, designed as a visual identity that feels both personal and nurturing, reflecting the fund's mission."
+            summary={CASE_SUMMARIES["/patricia-macarthur-pastoral-care-fund"]}
             facts={[
               { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Media Organization</> },
               { label: "Role", value: "Logo Designer" },

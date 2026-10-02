@@ -14,6 +14,7 @@ import {
   CaseGrid,
   CaseNext,
 } from "@/components/case/CaseStudy";
+import { CASE_SUMMARIES } from "@/components/data/caseSummaries";
 
 const SECTIONS = [
   { id: "overview", label: "Overview" },
@@ -81,7 +82,7 @@ const Page = () => {
             category="Marketing"
             detail="Social Media Graphics"
             title="GTY Social Media Graphics"
-            summary="Quote graphics tailored for social media sharing, designed to drive engagement and direct traffic back to the Grace to You website."
+            summary={CASE_SUMMARIES["/gty-social-media-graphics"]}
             facts={[
               { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Media Organization</> },
               { label: "Role", value: "Web Designer & Developer" },

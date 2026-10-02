@@ -15,6 +15,7 @@ import {
   CaseNext,
   CaseLearnings,
 } from "@/components/case/CaseStudy";
+import { CASE_SUMMARIES } from "@/components/data/caseSummaries";
 import { BrandSwatches } from "@/components/case/BrandGuide";
 
 const SECTIONS = [
@@ -76,7 +77,7 @@ const Page = () => {
             category="Design & Development"
             detail="TV Dashboard"
             title="GTY Dashboard"
-            summary="A TV-optimized dashboard interface for the Grace to You office that cycles through weather updates, streaming activity, broadcast schedules, live website stats, global engagement, and ministry activities in a format easy to read from a distance."
+            summary={CASE_SUMMARIES["/gty-dashboard"]}
             facts={[
               { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Media Organization</> },
               { label: "Role", value: "Web Designer & Developer" },

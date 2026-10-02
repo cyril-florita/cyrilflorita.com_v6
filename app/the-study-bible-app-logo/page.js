@@ -12,6 +12,7 @@ import {
   CaseFigure,
   CaseNext,
 } from "@/components/case/CaseStudy";
+import { CASE_SUMMARIES } from "@/components/data/caseSummaries";
 import {
   BrandLogos,
   BrandClearSpace,
@@ -112,7 +113,7 @@ const Page = () => {
             category="Branding"
             detail="Visual Identity"
             title="The Study Bible App Logo"
-            summary="Creating a visual identity for The Study Bible app: a simple, versatile logo that communicates usability, clarity, and a sense of illumination."
+            summary={CASE_SUMMARIES["/the-study-bible-app-logo"]}
             facts={[
               { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Media Organization</> },
               { label: "Role", value: "Logo/Brand Designer" },

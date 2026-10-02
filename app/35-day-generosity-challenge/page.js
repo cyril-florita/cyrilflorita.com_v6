@@ -14,6 +14,7 @@ import {
   CaseNext,
   CaseLearnings,
 } from "@/components/case/CaseStudy";
+import { CASE_SUMMARIES } from "@/components/data/caseSummaries";
 
 const SECTIONS = [
   { id: "overview", label: "Overview" },
@@ -59,7 +60,7 @@ const Page = () => {
             category="Design, Development, & Campaign Performance Tracking"
             detail="Campaign Landing Page"
             title="35-Day Generosity Challenge"
-            summary="A living landing page for a five-week, multi-channel campaign: one hub that evolved every Monday as supporters worked through a week-by-week journey of generosity."
+            summary={CASE_SUMMARIES["/35-day-generosity-challenge"]}
             facts={[
               { label: "Client", value: <><a className="cyril-dark" href="https://childrenshungerfund.org" target="_blank">Children&apos;s Hunger Fund</a>&mdash;A Christian Non-Profit Ministry</> },
               { label: "Role", value: "Designer & Developer (sole developer)" },

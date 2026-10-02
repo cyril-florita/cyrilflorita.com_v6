@@ -15,6 +15,7 @@ import {
   CaseNext,
   CaseLearnings,
 } from "@/components/case/CaseStudy";
+import { CASE_SUMMARIES } from "@/components/data/caseSummaries";
 
 const SECTIONS = [
   { id: "overview", label: "Overview" },
@@ -60,7 +61,7 @@ const Page = () => {
             category="Design, Development, & Campaign Performance Tracking"
             detail="Campaign Landing Page"
             title="Giving Tuesday Campaign"
-            summary="A single-purpose donation page for Children's Hunger Fund's biggest giving day of the year: rebuilt for conversion, re-engineered overnight for a corporate match, and run live, hour by hour."
+            summary={CASE_SUMMARIES["/giving-tuesday"]}
             facts={[
               { label: "Client", value: <><a className="cyril-dark" href="https://childrenshungerfund.org" target="_blank">Children&apos;s Hunger Fund</a>&mdash;A Christian Non-Profit Ministry</> },
               { label: "Role", value: "Designer & Developer (sole developer)" },

@@ -14,6 +14,7 @@ import {
   CaseNext,
   CaseLearnings,
 } from "@/components/case/CaseStudy";
+import { CASE_SUMMARIES } from "@/components/data/caseSummaries";
 import {
   BrandLogos,
   BrandClearSpace,
@@ -123,7 +124,7 @@ const Page = () => {
             category="Branding, Design, & Development"
             detail="Podcast Brand & Website"
             title="Truth Matters Podcast"
-            summary="Creating the brand, UX/UI design, and website for Grace to You's Truth Matters Podcast—a digital experience as grounded and compelling as the content itself."
+            summary={CASE_SUMMARIES["/truth-matters"]}
             facts={[
               { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Media Organization</> },
               { label: "Role", value: "Product Designer & Web Developer" },

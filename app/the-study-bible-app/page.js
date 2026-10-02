@@ -15,6 +15,7 @@ import {
   CaseNext,
   CaseLearnings,
 } from "@/components/case/CaseStudy";
+import { CASE_SUMMARIES } from "@/components/data/caseSummaries";
 
 // Design & prototype screens (Axure), grouped as in the prototype. Very tall
 // full-page screens are cropped to a phone-height preview; the zoom viewer
@@ -75,7 +76,7 @@ const Page = () => {
             category="App Design & Prototyping"
             detail="Mobile & Tablet"
             title="The Study Bible App"
-            summary="Leading the redesign of The Study Bible app to address the legacy app's critical usability issues with an experience that's simple, clean, yet delightful."
+            summary={CASE_SUMMARIES["/the-study-bible-app"]}
             facts={[
               { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Media Organization</> },
               { label: "Role", value: "User Experience Designer" },

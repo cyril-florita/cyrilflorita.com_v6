@@ -13,6 +13,7 @@ import {
   CaseGrid,
   CaseNext,
 } from "@/components/case/CaseStudy";
+import { CASE_SUMMARIES } from "@/components/data/caseSummaries";
 import { BLOG_GRAPHICS } from "@/components/data/blogGraphics";
 
 const SECTIONS = [
@@ -82,7 +83,7 @@ const Page = () => {
             category="Marketing"
             detail="Blog Graphics"
             title="GTY Blog Graphics"
-            summary="Blog graphics for Grace to You that pair imagery and typography to visually encapsulate the essence of each post, making the content inviting and memorable for readers."
+            summary={CASE_SUMMARIES["/gty-blog-graphics"]}
             facts={[
               { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Media Organization</> },
               { label: "Role", value: "Web Designer & Developer" },

@@ -15,6 +15,7 @@ import {
   CaseNext,
   CaseLearnings,
 } from "@/components/case/CaseStudy";
+import { CASE_SUMMARIES } from "@/components/data/caseSummaries";
 
 const SECTIONS = [
   { id: "overview", label: "Overview" },
@@ -60,7 +61,7 @@ const Page = () => {
             category="Design, Development, & Campaign Performance Tracking"
             detail="Campaign Dashboard & Tracking Plan"
             title="Hunger Action Month Campaign Dashboard"
-            summary="A live campaign dashboard for Children's Hunger Fund, and the tracking plan underneath it: the ministry's first analytics governance, turned into an internal tool that shows leadership how the campaign is doing, as it happens."
+            summary={CASE_SUMMARIES["/hunger-action-month-dashboard"]}
             facts={[
               { label: "Client", value: <><a className="cyril-dark" href="https://childrenshungerfund.org" target="_blank" rel="noopener noreferrer">Children&apos;s Hunger Fund</a>&mdash;A Christian Non-Profit Ministry</> },
               { label: "Role", value: "Designer, Developer & Analytics (sole developer)" },

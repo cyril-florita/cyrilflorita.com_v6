@@ -16,6 +16,7 @@ import {
   CaseNext,
   CaseLearnings,
 } from "@/components/case/CaseStudy";
+import { CASE_SUMMARIES } from "@/components/data/caseSummaries";
 
 // Final design screens (full pages); cropped to a framed top preview, the
 // zoom viewer opens each one whole.
@@ -73,7 +74,7 @@ const Page = () => {
             category="UX Design"
             detail="Web & Mobile"
             title="Grace to You"
-            summary="Redesigning GTY.org to broaden audience reach and improve engagement & retention through a more accessible and unified digital experience."
+            summary={CASE_SUMMARIES["/gty_v9"]}
             result={{ value: "+50%", label: "Engaged sessions vs. v8" }}
             facts={[
               { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Media Organization</> },

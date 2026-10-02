@@ -16,6 +16,7 @@ import {
   CaseNext,
   CaseLearnings,
 } from "@/components/case/CaseStudy";
+import { CASE_SUMMARIES } from "@/components/data/caseSummaries";
 
 const SECTIONS = [
   { id: "overview", label: "Overview" },
@@ -67,7 +68,7 @@ const Page = () => {
             category="UX Design & Front-End Development"
             detail="Responsive Web"
             title="Grace to You (v.8)"
-            summary="Enhancing the user experience of GTY.org, the digital home for John MacArthur's teaching ministry, through the UX design and front-end development strategies that shaped version 8 of GTY's website."
+            summary={CASE_SUMMARIES["/gty_v8"]}
             result={{ value: "+38%", label: "Engagement, mobile users" }}
             facts={[
               { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Media Organization</> },
