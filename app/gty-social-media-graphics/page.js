@@ -12,17 +12,15 @@ import {
   CaseSection,
   CaseFigure,
   CaseGrid,
-  CaseQuote,
   CaseNext,
 } from "@/components/case/CaseStudy";
 
 const SECTIONS = [
-  { id: "visually-driving-engagement", label: "Overview" },
-  { id: "anatomy-of-a-quote", label: "Anatomy of a Quote" },
-  { id: "templates-in-pairs", label: "Templates in Pairs" },
-  { id: "type-and-photography", label: "Type & Photography" },
+  { id: "overview", label: "Overview" },
+  { id: "results", label: "Results & Impact" },
+  { id: "system", label: "Design System" },
   { id: "the-collection", label: "The Collection" },
-  { id: "outcome", label: "Outcome" },
+  { id: "reflection", label: "Reflection" },
 ];
 
 // Figures come from components/data/socialGraphics.js (the same files the My
@@ -96,13 +94,19 @@ const Page = () => {
           <CaseLayout sections={SECTIONS}>
 
             {/* 01 — Overview */}
-            <CaseSection id="visually-driving-engagement" number={1} title="Visually Driving Engagement">
-              <p>These graphics are clearly tailored for social media sharing. The quotes are concise and impactful, perfect for capturing attention in a fast-scrolling environment. The strategic placement of the website address, GTY.org, ensures that viewers know exactly where to go for more information. By presenting thought-provoking quotes in visually appealing formats, these designs aim to spark conversations, encourage shares, and ultimately drive traffic to the GTY website, expanding the reach of their resources.</p>
+            <CaseSection id="overview" number={1} title="Overview">
+              <p>These quote graphics are tailored for social media sharing: concise, impactful quotes built to capture attention in a fast-scrolling feed, with the GTY.org address placed so viewers know exactly where to go for more. By presenting thought-provoking quotes in visually appealing formats, they aim to spark conversations, encourage shares, and drive traffic to the GTY website, expanding the reach of its resources.</p>
+              <p>Consistent branding, with the &ldquo;Grace to You&rdquo; logo and the GTY.org URL prominently displayed, reinforces brand recognition. Each design credits John MacArthur and specifies the source material, which maintains credibility and encourages viewers to explore the original context of the quotes.</p>
             </CaseSection>
 
-            {/* 02 — Anatomy of a Quote */}
-            <CaseSection id="anatomy-of-a-quote" number={2} title="Anatomy of a Quote">
-              <p>These graphics are effective tools for driving engagement and directing traffic back to the Grace to You website. The consistent branding, with the &ldquo;Grace to You&rdquo; logo and the GTY.org URL prominently displayed, reinforces brand recognition. Each design clearly credits John MacArthur and specifies the source material, which is crucial for maintaining credibility and encouraging viewers to explore the original context of the quotes.</p>
+            {/* 02 — Results & Impact */}
+            <CaseSection id="results" number={2} title="Results & Impact">
+              <p>Each post could look fresh in the feed, yet every one credits its source and points back to GTY.org, turning a moment of scrolling into a path to the original teaching.</p>
+            </CaseSection>
+
+            {/* 03 — Design System */}
+            <CaseSection id="system" number={3} title="Design System">
+              <h3 className="cyril-case-subheading">Anatomy of a Quote</h3>
               <p>However the layout changes, every graphic carries the same four parts, always in the same order of importance:</p>
               <ul className="cyril-case-list">
                 <li>The quote, given most of the square and set large enough to read on a phone</li>
@@ -113,38 +117,31 @@ const Page = () => {
               <CaseGrid layout="two">
                 {FEATURED.anatomy.map((id) => <Fig key={id} id={id} />)}
               </CaseGrid>
-            </CaseSection>
 
-            {/* 03 — Templates in Pairs */}
-            <CaseSection id="templates-in-pairs" number={3} title="Templates in Pairs">
+              <h3 className="cyril-case-subheading">Templates in Pairs</h3>
               <p>A feed needs variety, but a brand needs consistency. Rather than design every post from scratch, I built a set of about fifteen layouts, among them a framed print, a chalkboard, a sheet pinned to a concrete wall, and a black card over white architecture, and set two different quotes in each. A new quote could drop into a proven layout, and consecutive posts could vary in look while still reading as one series.</p>
               <CaseGrid layout="two">
                 {FEATURED.pairs.map((id) => <Fig key={id} id={id} />)}
               </CaseGrid>
-            </CaseSection>
 
-            {/* 04 — Type & Photography */}
-            <CaseSection id="type-and-photography" number={4} title="Type &amp; Photography">
-              <p>The visual elements, such as the contrasting fonts and carefully selected photographs, are designed to capture attention and make the content easily digestible. The fonts are consistent with GTY&apos;s style guide, ensuring consistency and readability. Reflective quotes are set in a light serif or sentence case; declarative ones in widely spaced capitals. The photography sets a mood without illustrating the quote literally: two small birds for humility and self-sufficiency, a figure at a railing for a quote about the deepest human need, a kayak at sunset for God&apos;s provision. Soft duotones and dark overlays keep every photo quiet enough for the quote to sit on top.</p>
+              <h3 className="cyril-case-subheading">Type &amp; Photography</h3>
+              <p>Contrasting fonts and carefully selected photographs capture attention and keep the content easy to digest, with fonts consistent with GTY&apos;s style guide. Reflective quotes are set in a light serif or sentence case; declarative ones in widely spaced capitals. The photography sets a mood without illustrating the quote literally: two small birds for humility and self-sufficiency, a figure at a railing for a quote about the deepest human need, a kayak at sunset for God&apos;s provision. Soft duotones and dark overlays keep every photo quiet enough for the quote to sit on top.</p>
               <CaseGrid layout="two">
                 {FEATURED.photo.map((id) => <Fig key={id} id={id} />)}
               </CaseGrid>
             </CaseSection>
 
-            {/* 05 — The Collection */}
-            <CaseSection id="the-collection" number={5} title="The Collection">
+            {/* 04 — The Collection */}
+            <CaseSection id="the-collection" number={4} title="The Collection">
               <p>The rest of the series, each in one of the same layouts and carrying the same four parts.</p>
               <CaseGrid layout="three">
                 {COLLECTION.map((g) => <CaseFigure key={g.id} src={g.src} alt={g.caption} caption={g.caption} />)}
               </CaseGrid>
             </CaseSection>
 
-            {/* 06 — Outcome */}
-            <CaseSection id="outcome" number={6} title="Outcome and Reflection">
-              <CaseQuote>
-                The quotes are concise and impactful, perfect for capturing attention in a fast-scrolling environment.
-              </CaseQuote>
-              <p>The series shows how far a small system can stretch: a fixed set of parts, a library of paired layouts, and a clear hierarchy of quote, name, source and logo. Each post could look fresh in the feed, yet every one credits its source and points back to GTY.org, turning a moment of scrolling into a path to the original teaching.</p>
+            {/* 05 — Reflection */}
+            <CaseSection id="reflection" number={5} title="Reflection">
+              <p>The series shows how far a small system can stretch: a fixed set of parts, a library of paired layouts, and a clear hierarchy of quote, name, source and logo.</p>
             </CaseSection>
 
           </CaseLayout>

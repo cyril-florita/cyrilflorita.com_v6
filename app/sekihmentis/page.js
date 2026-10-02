@@ -14,7 +14,9 @@ import {
 } from "@/components/case/CaseStudy";
 
 const SECTIONS = [
-  { id: "myspace-profile-background", label: "Profile Background" },
+  { id: "overview", label: "Overview" },
+  { id: "piece", label: "The Piece" },
+  { id: "reflection", label: "Reflection" },
 ];
 
 const Page = () => {
@@ -66,12 +68,20 @@ const Page = () => {
 
           <CaseLayout sections={SECTIONS}>
 
-            {/* 01 — A MySpace Profile Background Graphic */}
-            <CaseSection id="myspace-profile-background" number={1} title="A MySpace Profile Background Graphic">
-              <p>MySpace? Yes, it's been a minute since MySpace dominated the social media scene. But MySpace crawled, so that Facebook, Twitter, etc. could walk and run. Back then, if you could customize your profile page and make it look great, you could set yourself apart from the rest of the profiles. And customization showcases not only your uniqueness and your design skillz ;&#41; ... but also your HTML, CSS, and JavaScript chops&mdash;even if it's just for fun.</p>
-              <p>So I designed this piece for my MySpace profile as the background graphic. &ldquo;SekihMentis&rdquo; was my screen name in those days, and being a big fan of Transformers and guns, I thought it would be cool to have a grungy &ldquo;Transformers: Autobots Big Gun&rdquo; theme.</p>
-              <p>I would always include this piece as part of my portfolio, even though it's not a professional one. It's a fun way to showcase my skills and creativity, especially when I was just a beginner learning layout, typography, color theory, and various design styles. It also exhibits my ability to design using industry-standard tools&mdash;back then, Adobe Illustrator and Photoshop dominated the craft.</p>
+            {/* 01 — Overview */}
+            <CaseSection id="overview" number={1} title="Overview">
+              <p>MySpace? Yes, it&apos;s been a minute since MySpace dominated the social media scene. But MySpace crawled, so that Facebook, Twitter, etc. could walk and run. Back then, if you could customize your profile page and make it look great, you could set yourself apart from the rest. Customization showcased not only your uniqueness and your design skillz ;&#41; but also your HTML, CSS, and JavaScript chops&mdash;even if just for fun.</p>
+              <p>So I designed this piece as the background graphic for my MySpace profile. &ldquo;SekihMentis&rdquo; was my screen name in those days, and being a big fan of Transformers and guns, I thought it would be cool to have a grungy &ldquo;Transformers: Autobots Big Gun&rdquo; theme.</p>
+            </CaseSection>
+
+            {/* 02 — The Piece */}
+            <CaseSection id="piece" number={2} title="The Piece">
               <CaseFigure src="/img/portfolio/main_sekihmentis.jpg" alt="SekihMentis MySpace Profile Background Illustration" caption="SekihMentis MySpace Profile Background" />
+            </CaseSection>
+
+            {/* 03 — Reflection */}
+            <CaseSection id="reflection" number={3} title="Reflection">
+              <p>I would always include this piece as part of my portfolio, even though it&apos;s not a professional one. It&apos;s a fun way to showcase my skills and creativity from when I was just a beginner learning layout, typography, color theory, and various design styles, and it exhibits my ability to design with the industry-standard tools of the time, Adobe Illustrator and Photoshop.</p>
             </CaseSection>
 
           </CaseLayout>

@@ -11,7 +11,6 @@ import {
   CaseSection,
   CaseFigure,
   CaseVideo,
-  CaseQuote,
   CaseNext,
   CaseLearnings,
 } from "@/components/case/CaseStudy";
@@ -19,11 +18,8 @@ import { BrandCrop } from "@/components/case/BrandGuide";
 
 const SECTIONS = [
   { id: "overview", label: "Overview" },
-  { id: "initial-assessment", label: "Assessment" },
-  { id: "approach", label: "Approach" },
-  { id: "walkthrough", label: "Page Walkthrough" },
-  { id: "implementation", label: "Implementation" },
-  { id: "outcome", label: "Outcome" },
+  { id: "results", label: "Results & Impact" },
+  { id: "approach", label: "Design and Development Approach" },
   { id: "learnings", label: "Learning and Reflection" },
 ];
 
@@ -94,34 +90,34 @@ const Page = () => {
           <CaseLayout sections={SECTIONS}>
 
             {/* 01 — Overview */}
-            <CaseSection id="overview" number={1} title="Project Overview">
-              <p>The Grace to You App landing page was functional but didn't draw users in, didn't make the apps' benefits immediately apparent, and didn't give the download call to action enough prominence. As a designer and developer at Grace to You, I was tasked with improving its user experience. The goal was to create a more engaging, informative, and user-friendly experience, encouraging users to download and utilize the app.</p>
+            <CaseSection id="overview" number={1} title="Overview">
+              <p>The Grace to You App landing page was functional but didn&apos;t draw users in. As a designer and developer at Grace to You, I was tasked with improving its user experience so that more visitors download and use the app. Reviewing the page, I found three gaps:</p>
+              <ul className="cyril-case-list">
+                <li><strong>Visual Appeal:</strong> The design lacked the appeal to draw users in.</li>
+                <li><strong>Information Hierarchy:</strong> The apps&apos; benefits weren&apos;t immediately apparent.</li>
+                <li><strong>Call to Action:</strong> The download call to action needed more prominence.</li>
+              </ul>
               <CaseVideo url="gty.org" src="/img/portfolio/gty-app-landing_min.mp4" caption="GTY App Landing Page" />
             </CaseSection>
 
-            {/* 02 — Initial Assessment */}
-            <CaseSection id="initial-assessment" number={2} title="Initial Assessment">
-              <p>Upon reviewing the landing page, I identified several key areas for improvement:</p>
-              <ul className="cyril-case-list">
-                <li><strong>Visual Appeal:</strong> The page was functional but lacked a visually compelling design to draw users in.</li>
-                <li><strong>Information Hierarchy:</strong> Key information about the apps and their benefits wasn't immediately apparent.</li>
-                <li><strong>Call to Action:</strong> The call to action to download and explore the apps could be more prominent.</li>
-              </ul>
+            {/* 02 — Results & Impact */}
+            <CaseSection id="results" number={2} title="Results & Impact">
+              <p>The refreshed landing page is more visually appealing and easier to use, so visitors can quickly see the apps&apos; benefits and are encouraged to download them. The strategic content placement and clear call-to-action buttons carry that experience.</p>
             </CaseSection>
 
             {/* 03 — Design and Development Approach */}
             <CaseSection id="approach" number={3} title="Design and Development Approach">
-              <p>To address these issues, I focused on the following strategies:</p>
+              <p>I answered each gap directly:</p>
               <ul className="cyril-case-list">
-                <li><strong>Modernized Visual Design:</strong> Implementing a cleaner, more contemporary design with better use of whitespace to improve readability.</li>
-                <li><strong>Strategic Content Placement:</strong> Reorganizing content to highlight the benefits of using the apps, such as access to John MacArthur's teachings, convenient listening schedules, and devotionals.</li>
-                <li><strong>Clear Call-to-Action:</strong> Adding prominent, visually distinct download buttons for each app.</li>
+                <li><strong>Modernized Visual Design:</strong> A cleaner, more contemporary design with better use of whitespace for readability, using high-quality images and icons to show the apps&apos; interfaces and features, and a font consistent with GTY&apos;s style guide.</li>
+                <li><strong>Strategic Content Placement:</strong> Content reorganized to highlight the benefits of the apps, such as access to John MacArthur&apos;s teachings, convenient listening schedules, and devotionals.</li>
+                <li><strong>Clear Call-to-Action:</strong> Prominent, visually distinct download buttons for each app.</li>
+                <li><strong>Responsive Design:</strong> A fully responsive page across desktops, tablets, and smartphones.</li>
               </ul>
-            </CaseSection>
 
-            {/* 04 — Page Walkthrough */}
-            <CaseSection id="walkthrough" number={4} title="Page Walkthrough">
+              <h3 className="cyril-case-subheading">Page Walkthrough</h3>
               <p>The page reads as one short story, told in alternating sage-green and white bands with slanted edges that keep the eye moving down the page.</p>
+
               <h3 className="cyril-case-subheading">The First Screen</h3>
               <p>Everything a visitor needs to decide is visible before scrolling: the headline &ldquo;The Brand-New Grace to You App,&rdquo; a one-sentence promise (&ldquo;Rebuilt from the ground up, our new app provides a fresh look and simpler navigation&rdquo;), a phone showing the app&apos;s real home screen, and both store buttons right beside it.</p>
               <Shot box={[0, 130, 1600, 970]} caption="First Screen" />
@@ -137,42 +133,21 @@ const Page = () => {
               <h3 className="cyril-case-subheading">One More Chance to Download</h3>
               <p>The page closes where it started: a &ldquo;Get the App Now&rdquo; band with both store buttons, so the download is one tap away at the top and at the bottom.</p>
               <Shot box={[0, 4170, 1600, 660]} caption="Closing Call to Action" />
-            </CaseSection>
-
-            {/* 05 — Implementation */}
-            <CaseSection id="implementation" number={5} title="Implementation">
-              <ul className="cyril-case-list">
-                <li><strong>Visual Elements:</strong> High-quality images and icons were incorporated to showcase the apps' interfaces and features. This helped users visualize the benefits of downloading the apps.</li>
-                <li><strong>Typography and Readability:</strong> The font is consistent with GTY's style guide, and so the readability and overall user experience are optimized.</li>
-                <li><strong>Responsive Design:</strong> Ensuring the landing page is fully responsive, providing an optimal experience across various devices &#40;desktops, tablets, and smartphones&#41;.</li>
-                <li><strong>Call-to-Action Buttons:</strong> Strategically placed and visually enhanced download buttons for each app, making it easier for users to take action.</li>
-              </ul>
               <CaseFigure src="/img/portfolio/gty-app-landing-screenshot.jpg" alt="GTY App Landing Page Screenshot" caption="Full Landing Page" ratio="3 / 4" />
             </CaseSection>
 
-            {/* 06 — Outcome */}
-            <CaseSection id="outcome" number={6} title="Outcome">
-              <p>The refreshed landing page offers a more visually appealing and user-friendly experience, making it easier for visitors to understand the benefits of the apps and encouraging them to download and engage with the content. The strategic content placement and clear call-to-action buttons contribute to a better overall user experience.</p>
-            </CaseSection>
-
-            {/* 7 — Learning and Reflection */}
-            <CaseSection id="learnings" number={7} title="Learning and Reflection">
+            {/* 04 — Learning and Reflection */}
+            <CaseSection id="learnings" number={4} title="Learning and Reflection">
               <CaseLearnings
                 learned={[
                 "Naming three specific gaps up front (visual appeal, information hierarchy, call to action) kept every design decision tied to a problem worth solving.",
                 "A relaunch raises practical questions about accounts and the old app, so I answer them on the page itself in an FAQ instead of leaving visitors to wonder.",
                 "Placing the download buttons at both the top and the bottom of the page means the next step is always one tap away.",
                 ]}
-                next={[
-                "Track how many visitors tap the store buttons, to see whether the more prominent calls to action help.",
-                "Update the new-features carousel and the FAQ as the app continues to evolve.",
-                "Try the page with real visitors to see which sections help them decide to download.",
-                ]}
+                reflection={
+                  <p>This project highlighted the importance of a user-centric approach in web design and development, ensuring that the end product meets the needs and expectations of the target audience.</p>
+                }
               />
-              <CaseQuote>
-                A user-centric approach ensures that the end product meets the needs and expectations of the target audience.
-              </CaseQuote>
-              <p>This project highlighted the importance of a user-centric approach in web design and development, ensuring that the end product meets the needs and expectations of the target audience.</p>
             </CaseSection>
 
           </CaseLayout>

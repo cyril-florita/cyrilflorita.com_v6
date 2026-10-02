@@ -10,7 +10,6 @@ import {
   CaseLayout,
   CaseSection,
   CaseFigure,
-  CaseQuote,
   CaseNext,
 } from "@/components/case/CaseStudy";
 import {
@@ -25,15 +24,10 @@ import { thumbFor } from "@/components/imageProps";
 
 const SECTIONS = [
   { id: "overview", label: "Overview" },
-  { id: "research", label: "Research" },
-  { id: "ideation", label: "Ideation" },
-  { id: "iterations", label: "Iterations" },
-  { id: "final-design", label: "Final Design" },
-  { id: "logo-suite", label: "Logo Suite" },
-  { id: "color", label: "Color" },
-  { id: "typography", label: "Typography" },
-  { id: "usage", label: "Usage" },
-  { id: "outcome", label: "Outcome" },
+  { id: "results", label: "Results & Impact" },
+  { id: "process", label: "Concept & Design Process" },
+  { id: "brand-guide", label: "Brand Guide" },
+  { id: "reflection", label: "Reflection" },
 ];
 
 // Brand guide data. The blue is sampled from the delivered artwork; crop
@@ -131,38 +125,36 @@ const Page = () => {
           <CaseLayout sections={SECTIONS}>
 
             {/* 01 — Overview */}
-            <CaseSection id="overview" number={1} title="Project Overview">
+            <CaseSection id="overview" number={1} title="Overview">
               <p>As a designer at Grace to You, I was tasked with creating a visual identity for The Study Bible app. The goal was to design a logo that communicates usability, clarity, and a sense of illumination, while remaining simple and versatile for digital use.</p>
             </CaseSection>
 
-            {/* 02 — Research */}
-            <CaseSection id="research" number={2} title="Research and Concept Development">
-              <p>I began by researching existing Bible and study-related app logos to identify common visual themes—open books, crosses, rays of light, and bookmarks. My aim was to create a design that felt familiar yet distinct, balancing tradition with modern minimalism.</p>
+            {/* 02 — Results & Impact */}
+            <CaseSection id="results" number={2} title="Results &amp; Impact">
+              <p>The final logo is simple, memorable, and effective across the mobile platforms. The combination of book, pen, and rising sun encapsulates the app&apos;s mission: to encourage a deeper study with the digital version of the MacArthur Bible.</p>
+              <CaseFigure src="/img/portfolio/the-study-bible-app-logo_on-gty-homepage.jpg" alt="The Study Bible App Logo" caption="Logo on GTY Homepage" />
             </CaseSection>
 
-            {/* 03 — Ideation */}
-            <CaseSection id="ideation" number={3} title="Ideation and Exploration">
-              <p>I sketched multiple concepts, focusing on the core idea of an open book, which universally symbolizes learning and accessibility. I experimented with different elements:</p>
+            {/* 03 — Concept & Design Process */}
+            <CaseSection id="process" number={3} title="Concept &amp; Design Process">
+              <h3 className="cyril-case-subheading">Research &amp; Concept</h3>
+              <p>I began by researching existing Bible and study-related app logos to identify common visual themes&mdash;open books, crosses, rays of light, and bookmarks. My aim was a design that felt familiar yet distinct, balancing tradition with modern minimalism.</p>
+              <h3 className="cyril-case-subheading">Ideation &amp; Exploration</h3>
+              <p>I sketched multiple concepts around the core idea of an open book, which universally symbolizes learning and accessibility, and experimented with:</p>
               <ul className="cyril-case-list">
                 <li>Rays of light to suggest inspiration and enlightenment</li>
                 <li>Crosses to signify faith in Christ</li>
                 <li>Bookmarks and pens to represent study and engagement</li>
               </ul>
-            </CaseSection>
-
-            {/* 04 — Design Iterations */}
-            <CaseSection id="iterations" number={4} title="Design Iterations">
-              <p>I then developed a grid of logo variations. Each icon was tested for clarity at small sizes and adaptability across backgrounds. I explored different compositions, such as:</p>
+              <h3 className="cyril-case-subheading">Design Iterations</h3>
+              <p>I then developed a grid of logo variations, testing each icon for clarity at small sizes and adaptability across backgrounds. Compositions included:</p>
               <ul className="cyril-case-list">
                 <li>Books with radiating lines for a sense of revelation</li>
                 <li>Closed and open Bibles to convey both authority and approachability</li>
                 <li>Integrated crosses and bookmarks for subtle devotional cues</li>
               </ul>
               <CaseFigure src="/img/portfolio/the-study-bible-logo-iterations.jpg" alt="The Study Bible Logo Iterations" caption="Logo Iterations" />
-            </CaseSection>
-
-            {/* 05 — Final Design Selection */}
-            <CaseSection id="final-design" number={5} title="Final Design Selection">
+              <h3 className="cyril-case-subheading">Final Design Selection</h3>
               <p>After reviewing the options with the Digital Platforms Coordinator and stakeholders, we agreed on the final design. This logo features:</p>
               <ul className="cyril-case-list">
                 <li>The Bible, the source of truth</li>
@@ -172,40 +164,28 @@ const Page = () => {
               <CaseFigure src="/img/portfolio/the-study-bible-app-logo.jpg" alt="The Study Bible Logo" caption="The Study Bible Logo" />
             </CaseSection>
 
-            {/* 06 — Logo Suite */}
-            <CaseSection id="logo-suite" number={6} title="Logo Suite">
+            {/* 04 — Brand Guide */}
+            <CaseSection id="brand-guide" number={4} title="Brand Guide">
+              <h3 className="cyril-case-subheading">Logo Suite</h3>
               <p>The logo works as a full lockup, and its two parts can stand alone: the mark for small, square spaces and the wordmark where text leads.</p>
               <BrandLogos items={LOGOS} />
               <h3 className="cyril-case-subheading">Clear Space &amp; Size</h3>
               <p>The sun needs room to rise. Keep the space around it clear, and switch to the mark alone before the wordmark gets too small to read.</p>
               <BrandClearSpace src={LOGO} box={[440, 207, 724, 649]} size={LOGO_SIZE} specs={CLEAR_SPECS} />
-            </CaseSection>
-
-            {/* 07 — Color */}
-            <CaseSection id="color" number={7} title="Color">
-              <p>The color palette is a muted blue, chosen for its calm, trustworthy, and timeless qualities. It&apos;s used as a single flat color, with the book&apos;s pages cut out in white.</p>
+              <h3 className="cyril-case-subheading">Color</h3>
+              <p>The palette is a muted blue, chosen for its calm, trustworthy, and timeless qualities. It&apos;s used as a single flat color, with the book&apos;s pages cut out in white.</p>
               <BrandSwatches colors={COLORS} />
-            </CaseSection>
-
-            {/* 08 — Typography */}
-            <CaseSection id="typography" number={8} title="Typography">
-              <p>For the wordmark, I selected a clean, sans-serif font. The hierarchy emphasizes &ldquo;STUDY BIBLE&rdquo; in bold, with &ldquo;THE&rdquo; in a lighter weight above, ensuring readability and balance.</p>
+              <h3 className="cyril-case-subheading">Typography</h3>
+              <p>For the wordmark, I selected a clean, sans-serif font. &ldquo;STUDY BIBLE&rdquo; is set in bold, with &ldquo;THE&rdquo; in a lighter weight above, ensuring readability and balance.</p>
               <BrandLettering src={LOGO} size={LOGO_SIZE} items={TYPE} />
-            </CaseSection>
-
-            {/* 09 — Usage */}
-            <CaseSection id="usage" number={9} title="Usage">
+              <h3 className="cyril-case-subheading">Usage</h3>
               <p>A few rules keep the logo clear and consistent across app stores, devices and the GTY website.</p>
               <BrandUsage items={USAGE} />
             </CaseSection>
 
-            {/* 10 — Outcome and Reflection */}
-            <CaseSection id="outcome" number={10} title="Outcome and Reflection">
-              <CaseQuote>
-                The combination of book, pen, and rising sun encapsulates the app&apos;s mission: to encourage a deeper study with the digital version of the MacArthur Bible.
-              </CaseQuote>
-              <p>The final logo is simple, memorable, and effective across the mobile platforms. The combination of book, pen, and rising sun encapsulates the app's mission: to encourage a deeper study with the digital version of the MacArthur Bible. The iterative process, from broad exploration to focused refinement, ensured that the final mark met both the user's needs and the brand's vision.</p>
-              <CaseFigure src="/img/portfolio/the-study-bible-app-logo_on-gty-homepage.jpg" alt="The Study Bible App Logo" caption="Logo on GTY Homepage" />
+            {/* 05 — Reflection */}
+            <CaseSection id="reflection" number={5} title="Reflection">
+              <p>The iterative process, from broad exploration to focused refinement, ensured that the final mark met both the user&apos;s needs and the brand&apos;s vision.</p>
             </CaseSection>
 
           </CaseLayout>

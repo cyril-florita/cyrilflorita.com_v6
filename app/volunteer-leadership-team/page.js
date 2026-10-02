@@ -12,21 +12,16 @@ import {
   CaseFigure,
   CaseVideo,
   CaseGrid,
-  CaseStats,
-  CaseQuote,
   CaseNext,
   CaseLearnings,
 } from "@/components/case/CaseStudy";
 
 const SECTIONS = [
   { id: "overview", label: "Overview" },
-  { id: "designed-in-code", label: "Designed in Code" },
-  { id: "two-paths", label: "Two Paths In" },
-  { id: "audience", label: "Built for Its Audience" },
+  { id: "results", label: "Results & Impact" },
+  { id: "building", label: "Building the Page" },
   { id: "deadline", label: "Holding the Deadline" },
-  { id: "responsive", label: "Every Screen" },
-  { id: "impact", label: "Impact" },
-  { id: "learnings", label: "Learning & Next Steps" },
+  { id: "learnings", label: "Learning and Reflection" },
 ];
 
 const Page = () => {
@@ -80,20 +75,21 @@ const Page = () => {
           <CaseLayout sections={SECTIONS}>
 
             {/* 01 — Overview */}
-            <CaseSection id="overview" number={1} title="Project Overview">
-              <p>Children&apos;s Hunger Fund was opening a new facility in North Texas, and it needed people to help lead it: Volunteer Leaders who serve on a recurring basis alongside staff. The constraint was time: a physical Open House set a hard deadline, and its flyers were already in production, so the page had to be the one destination behind them. The request came straight from the Executive Director.</p>
+            <CaseSection id="overview" number={1} title="Overview">
+              <p>Children&apos;s Hunger Fund was opening a new facility in North Texas, and it needed people to help lead it: Volunteer Leaders who serve on a recurring basis alongside staff. The constraint was time. A physical Open House set a hard deadline and its flyers were already in production, so the page had to be the one destination behind them. The request came straight from the Executive Director, and I had 19 days from brief to launch.</p>
               <p>As the sole developer, I owned the page end to end, from its structure and visual design to the build, the lead-capture form, and launch.</p>
               <CaseVideo src="/img/portfolio/chf-volunteer-leadership_preview.mp4" caption="Landing page preview" url="childrenshungerfund.org" />
-              <CaseStats items={[
-                { value: "19", label: "Days from brief to launch" },
-                { value: "2", label: "Calls to action, one goal" },
-                { value: "20+", label: "Review threads resolved" },
-                { value: "3", label: "Approvers signing off" },
-              ]} />
             </CaseSection>
 
-            {/* 02 — Designed in Code */}
-            <CaseSection id="designed-in-code" number={2} title="Designed in Code">
+            {/* 02 — Results & Impact */}
+            <CaseSection id="results" number={2} title="Results &amp; Impact">
+              <p>The page launched on schedule, ahead of the Open House, and became the single digital destination for the recruitment effort: every printed flyer, QR code scan, and staff conversation with a prospective Volunteer Leader pointed to it. Its interest form gave the new facility a structured pipeline for leads from day one.</p>
+              <p>See the <a className="cyril-accent" href="https://childrenshungerfund.org/dallas-volunteer-leader" target="_blank" rel="noopener noreferrer"><strong>Volunteer Leadership Team page</strong></a> live.</p>
+            </CaseSection>
+
+            {/* 03 — Building the Page */}
+            <CaseSection id="building" number={3} title="Building the Page">
+              <h3 className="cyril-case-subheading">Designed in Code</h3>
               <p>The brief came with content and a page outline, but no design comp, so I designed directly in the browser, building a custom page template out of modular sections: hero, the case for serving, where you could fit, what&apos;s expected, next steps, and a form to get in touch.</p>
               <ul className="cyril-case-list">
                 <li><strong>A legible hero.</strong> Full-bleed photography under a navy-to-transparent gradient. When leadership asked to remove the overlay, I showed that white text wouldn&apos;t hold up against the photo without it, and matched the treatment to the Hunger Action Month page instead, so the two campaigns read as one site.</li>
@@ -103,42 +99,21 @@ const Page = () => {
               <CaseFigure src="/img/portfolio/chf-volunteer-leadership_why.jpg" alt="Why volunteer leadership section" caption="Why volunteer leadership" />
               <CaseFigure src="/img/portfolio/chf-volunteer-leadership_impact.jpg" alt="Tabbed story section: purpose, community, impact, growth, belonging" caption="Purpose, community, impact, growth & belonging" />
               <CaseFigure src="/img/portfolio/chf-volunteer-leadership_opportunities.jpg" alt="Volunteer opportunities by team" caption="Where could you make a difference?" />
-            </CaseSection>
 
-            {/* 03 — Two Paths In */}
-            <CaseSection id="two-paths" number={3} title="Two Paths In">
-              <p>Not every prospective leader is ready to commit on the spot, so the page offers two ways forward, repeated at the top and bottom of the page:</p>
+              <h3 className="cyril-case-subheading">Two Paths In</h3>
+              <p>Not every prospective leader is ready to commit on the spot, so the page offers two ways forward, repeated at the top and bottom:</p>
               <ul className="cyril-case-list">
-                <li><strong>Attend an Open House.</strong> A hand-off to the event&apos;s registration, for people who want to meet the team, hear the vision, and ask questions in person first.</li>
+                <li><strong>Attend an Open House.</strong> A hand-off to the event&apos;s registration, for people who want to meet the team and ask questions in person first.</li>
                 <li><strong>Express Interest.</strong> A short form that sends each submission straight to the ministry team who follows up, replacing a loose, email-based intake with a structured pipeline.</li>
               </ul>
               <CaseFigure src="/img/portfolio/chf-volunteer-leadership_next-step.jpg" alt="Take the next step call to action" caption="Take the next step" />
               <CaseFigure src="/img/portfolio/chf-volunteer-leadership_form.jpg" alt="Express interest form" caption="Express interest form" ratio="4 / 3" size="text" />
-            </CaseSection>
 
-            {/* 04 — Built for Its Audience */}
-            <CaseSection id="audience" number={4} title="Built for Its Audience">
-              <p>Many of the people this page was written for are retirees with time and experience to give, so readability came first: the expectations section got larger type, and body text scales comfortably across screen sizes.</p>
-              <p>It also had to feel like it belonged. The page reuses the button styles and gradient treatment I established on the ministry&apos;s giving and campaign pages, so it reads as part of one consistent site.</p>
+              <h3 className="cyril-case-subheading">Built for Its Audience</h3>
+              <p>Many of the people this page was written for are retirees with time and experience to give, so readability came first: the expectations section got larger type, and body text scales comfortably across screen sizes. The page also reuses the button styles and gradient treatment I established on the ministry&apos;s giving and campaign pages, so it reads as part of one consistent site.</p>
               <CaseFigure src="/img/portfolio/chf-volunteer-leadership_expectations.jpg" alt="Is the Volunteer Leadership Team right for me? section" caption="Expectations, set clearly" />
-            </CaseSection>
 
-            {/* 05 — Holding the Deadline */}
-            <CaseSection id="deadline" number={5} title="Holding the Deadline">
-              <p>With the flyers already printed, the launch date couldn&apos;t move, even as pieces of the project did:</p>
-              <ul className="cyril-case-list">
-                <li><strong>A registration link that didn&apos;t exist yet.</strong> The brief called for an Open House button, but no registration had been set up. I flagged it early; after a week of cross-team follow-up, the button came off the page&mdash;and when the registration went live the next day, I had it back up and linked that same morning.</li>
-                <li><strong>Launch now, backfill later.</strong> The volunteer story section was built with placeholder content and flagged, so the team could launch on time and add a real story afterward.</li>
-                <li><strong>The right photo.</strong> When a reviewer noticed the original hero image prominently showed another organization&apos;s branding, I swapped in a photo centered on the ministry&apos;s own work.</li>
-                <li><strong>Collaboration with conviction.</strong> When leadership and the designer felt the page read differently from the rest of the site, I adopted the designer&apos;s button styles while keeping the choices I could defend&mdash;like the oversized open-quote treatment, a pattern used on well-established sites.</li>
-              </ul>
-              <CaseQuote cite="Review process">
-                Three approvers, twenty-plus comment threads, and one date that never moved.
-              </CaseQuote>
-            </CaseSection>
-
-            {/* 06 — Every Screen */}
-            <CaseSection id="responsive" number={6} title="Designed for Every Screen">
+              <h3 className="cyril-case-subheading">Designed for Every Screen</h3>
               <p>With most visitors arriving from a printed flyer&apos;s QR code, the page had to work first and best on a phone.</p>
               <CaseGrid layout="three">
                 <CaseFigure src="/img/portfolio/chf-volunteer-leadership_desktop.jpg" alt="Volunteer Leadership Team page on desktop" caption="Desktop" ratio="3 / 5" />
@@ -147,25 +122,28 @@ const Page = () => {
               </CaseGrid>
             </CaseSection>
 
-            {/* 07 — Impact */}
-            <CaseSection id="impact" number={7} title="Impact">
-              <p>The page launched on schedule, ahead of the Open House, and became the single digital destination for the recruitment effort: every printed flyer, QR code scan, and staff conversation with a prospective Volunteer Leader pointed to it. Its interest form gave the new facility a structured pipeline for leads from day one.</p>
-              <p>See the <a className="cyril-accent" href="https://childrenshungerfund.org/dallas-volunteer-leader" target="_blank" rel="noopener noreferrer"><strong>Volunteer Leadership Team page</strong></a> live.</p>
+            {/* 04 — Holding the Deadline */}
+            <CaseSection id="deadline" number={4} title="Holding the Deadline">
+              <p>With the flyers already printed, the launch date couldn&apos;t move, even as pieces of the project did. Three approvers signed off, and more than 20 review threads were resolved along the way:</p>
+              <ul className="cyril-case-list">
+                <li><strong>A registration link that didn&apos;t exist yet.</strong> The brief called for an Open House button, but no registration had been set up. I flagged it early; after a week of cross-team follow-up, the button came off the page&mdash;and when the registration went live the next day, I had it back up and linked that same morning.</li>
+                <li><strong>Launch now, backfill later.</strong> The volunteer story section was built with placeholder content and flagged, so the team could launch on time and add a real story afterward.</li>
+                <li><strong>The right photo.</strong> When a reviewer noticed the original hero image prominently showed another organization&apos;s branding, I swapped in a photo centered on the ministry&apos;s own work.</li>
+                <li><strong>Collaboration with conviction.</strong> When leadership and the designer felt the page read differently from the rest of the site, I adopted the designer&apos;s button styles while keeping the choices I could defend&mdash;like the oversized open-quote treatment, a pattern used on well-established sites.</li>
+              </ul>
             </CaseSection>
 
-            {/* 08 — Learning & Next Steps */}
-            <CaseSection id="learnings" number={8} title="Learning &amp; Next Steps">
+            {/* 05 — Learning and Reflection */}
+            <CaseSection id="learnings" number={5} title="Learning and Reflection">
               <CaseLearnings
                 learned={[
                   "Flagging a dependency early, like the registration link that didn't exist yet, and building the story section as flagged placeholder content let the launch date hold while other pieces moved.",
                   "When leadership asked to remove the hero overlay, showing that white text wouldn't hold up without it was how I made the case for keeping it.",
                   "Reusing button styles and the gradient treatment from the ministry's other pages made the new page read as part of one site.",
                 ]}
-                next={[
-                  "Replace the placeholder volunteer story with a real one.",
-                  "Compare how visitors use the two paths in, now that the interest form gives the team a structured pipeline.",
-                  "Reuse the modular sections and form hand-off for future volunteer recruitment pages.",
-                ]}
+                reflection={
+                  <p>Three approvers, twenty-plus comment threads, and one date that never moved: the project was as much about managing the review as building the page. Flagging dependencies early, making the case for the choices I could stand behind, and building on the ministry&apos;s existing button styles and gradient treatment kept the page on schedule and looking like part of one site.</p>
+                }
               />
             </CaseSection>
 

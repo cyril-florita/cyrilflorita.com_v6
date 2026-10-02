@@ -308,13 +308,14 @@ body {
         }
     }
 
+    // Tablet and mobile: no side gutter, so the site frame lines run to the
+    // edges of the screen (content keeps its own container padding).
     @media screen and (max-width: 1200px) {
-        padding: 0 30px;
+        padding: 0;
         font-size: 16px;
     }
 
     @media screen and (max-width: 768px) {
-        padding: 0 10px;
         font-size: 15px;
     }
 

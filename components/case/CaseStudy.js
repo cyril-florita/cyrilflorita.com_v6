@@ -307,7 +307,7 @@ export const CaseStats = ({ items }) => (
 
 // Closing reflection: what the project taught, and what would come next.
 // `learned` / `next` are arrays of strings (or nodes).
-export const CaseLearnings = ({ learned = [], next = [] }) => (
+export const CaseLearnings = ({ learned = [], next = [], reflection = null }) => (
   <div className="cyril-case-learnings">
     {learned.length > 0 && (
       <div>
@@ -323,6 +323,12 @@ export const CaseLearnings = ({ learned = [], next = [] }) => (
         <ul className="cyril-case-list">
           {next.map((item, i) => <li key={i}>{item}</li>)}
         </ul>
+      </div>
+    )}
+    {reflection && (
+      <div>
+        <h3 className="cyril-upper">Reflection</h3>
+        {reflection}
       </div>
     )}
   </div>

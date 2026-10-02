@@ -10,12 +10,13 @@ import {
   CaseLayout,
   CaseSection,
   CaseFigure,
-  CaseQuote,
   CaseNext,
 } from "@/components/case/CaseStudy";
 
 const SECTIONS = [
-  { id: "desktop-wallpaper", label: "Desktop Wallpaper" },
+  { id: "overview", label: "Overview" },
+  { id: "piece", label: "The Piece" },
+  { id: "reflection", label: "Reflection" },
 ];
 
 const Page = () => {
@@ -68,15 +69,20 @@ const Page = () => {
 
           <CaseLayout sections={SECTIONS}>
 
-            {/* 01 — A Desktop Wallpaper */}
-            <CaseSection id="desktop-wallpaper" number={1} title="A Desktop Wallpaper">
-              <p>Most of the time, your creativity is sparked by your passion. Whatever grips your heart tends to bleed through the works of your hand. And so I designed this piece as a desktop wallpaper for my Illustration class. I was in a period of my life when I was coming to grips with the reality of the gospel of the Lord and Savior Jesus Christ.</p>
-              <CaseQuote>
-                Whatever grips your heart tends to bleed through the works of your hand.
-              </CaseQuote>
-              <p>2 Corinthians 5:21 states, &#8220;He [God the Father] made Him [Christ] who knew no sin to be sin on our behalf, so that we might become the righteousness of God [the Father] in Him [Christ].&#8221; This means that on the cross, Christ&mdash;though He was sinless, guiltless, and perfect&mdash;died the death that sinners deserve because of their sins. So in a personal way, Christ died in my place&mdash;<strong>He took my place</strong>. God accounts Christ's death on my behalf as righteousness so I can be made right with God.</p>
+            {/* 01 — Overview */}
+            <CaseSection id="overview" number={1} title="Overview">
+              <p>Most of the time, your creativity is sparked by your passion. Whatever grips your heart tends to bleed through the works of your hand. And so I designed this piece as a desktop wallpaper for my Illustration class, when I was coming to grips with the reality of the gospel of the Lord and Savior Jesus Christ.</p>
+              <p>2 Corinthians 5:21 states, &#8220;He [God the Father] made Him [Christ] who knew no sin to be sin on our behalf, so that we might become the righteousness of God [the Father] in Him [Christ].&#8221; This means that on the cross, Christ&mdash;though He was sinless, guiltless, and perfect&mdash;died the death that sinners deserve because of their sins. So in a personal way, Christ died in my place&mdash;<strong>He took my place</strong>. God accounts Christ&apos;s death on my behalf as righteousness so I can be made right with God.</p>
+            </CaseSection>
+
+            {/* 02 — The Piece */}
+            <CaseSection id="piece" number={2} title="The Piece">
               <CaseFigure src="/img/portfolio/main_he-took-my-place.jpg" alt="He Took My Place Illustration" caption="He Took My Place Illustration" />
-              <p>I would always include this piece as part of my portfolio, even though it's not a professional one. It's a great way to showcase my skills and creativity, especially when I was just a beginner learning layout, typography, color theory, and various design styles. It also exhibits my ability to design using industry-standard tools&mdash;and back then, Adobe Illustrator and Photoshop dominated the craft.</p>
+            </CaseSection>
+
+            {/* 03 — Reflection */}
+            <CaseSection id="reflection" number={3} title="Reflection">
+              <p>I would always include this piece as part of my portfolio, even though it&apos;s not a professional one. It&apos;s a great way to showcase my skills and creativity from when I was just a beginner learning layout, typography, color theory, and various design styles, and it exhibits my ability to design with the industry-standard tools of the time, Adobe Illustrator and Photoshop.</p>
             </CaseSection>
 
           </CaseLayout>
