@@ -475,9 +475,21 @@ const MotionEffects = () => {
       scroll: -0.1,
       mouse: -22,
       ease: 0.05,
+      glow: true,
       x: 0,
       y: 0,
     }));
+
+    // Each glow is as tall as its band. About Me sections clip their glow
+    // (overflow: clip, so it can't bleed into the next section), so there it
+    // may only drift within its own empty margin: the gradient is
+    // transparent past 72% of the radius (14% of the height on each side),
+    // minus the blur's spread. The home page's Let's Connect band doesn't
+    // clip it (it may fade up into the grid), but it must not drift down:
+    // the band ends the page, and a glow below it would lengthen the page.
+    const GLOW_BLUR_SPREAD = 60; // ~2.5 × the 24px blur
+    const glowRoom = (el) => Math.max(0, el.offsetHeight * 0.14 - GLOW_BLUR_SPREAD);
+    glows.forEach((g) => { g.clipped = !!g.el.closest('.cyril-onepage .cyril-section'); });
 
     const movers = [...circles, ...glows];
     if (!movers.length) return;
@@ -491,8 +503,13 @@ const MotionEffects = () => {
       let moving = false;
       movers.forEach((c) => {
         const top = c.anchor.getBoundingClientRect().top;
-        const tx = nx * c.mouse * 2;
-        const ty = top * c.scroll + ny * c.mouse * 2;
+        let tx = nx * c.mouse * 2;
+        let ty = top * c.scroll + ny * c.mouse * 2;
+        if (c.glow) {
+          const room = glowRoom(c.el);
+          tx = Math.max(-room, Math.min(room, tx));
+          ty = c.clipped ? Math.max(-room, Math.min(room, ty)) : Math.min(0, ty);
+        }
         c.x += (tx - c.x) * c.ease;
         c.y += (ty - c.y) * c.ease;
         if (Math.abs(tx - c.x) > 0.05 || Math.abs(ty - c.y) > 0.05) moving = true;

@@ -3365,8 +3365,16 @@ contact band (components/ContactBand.js)
 .cyril-contact {
     position: relative;
     padding: 160px 0 170px;
-    // Keeps its background diamonds inside the band.
-    overflow: hidden;
+
+    // Only the background diamonds are clipped to the band (they drift with
+    // the parallax). The title glow is not, so it can fade out past the
+    // band's top edge instead of being cut off in a hard line.
+    & .cyril-contact-bg {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+    }
 
     // About Me: it's a 100vh snap section, so just centre it vertically.
     // Desktop: stretch to the section's full height so the background
@@ -3385,6 +3393,18 @@ contact band (components/ContactBand.js)
             // it back so the content stays put.
             margin-top: -30px;
             padding-top: 30px;
+
+            // Keep the text clear of the fixed left pagination (dots at 50px,
+            // the active "CONTACT" label ends ~146px). The container's own
+            // left edge only clears it on screens ~1680px+ (15" MacBook Air),
+            // so on narrower ones start the text at 190px instead.
+            @media screen and (max-width: 1679px) {
+                & .container {
+                    max-width: none;
+                    padding-left: 190px;
+                    padding-right: 80px;
+                }
+            }
         }
     }
 

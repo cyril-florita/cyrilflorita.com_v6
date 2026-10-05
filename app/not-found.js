@@ -35,7 +35,7 @@ const NotFound = () => {
           </p>
           <div className="cyril-contact-actions">
             <a className="cyril-button" href="/" onClick={goTo("/")}>See My Work</a>
-            <a className="cyril-button cyril-type-2" href="/about-me/" onClick={goTo("/about-me/")}>About Me</a>
+            <a className="cyril-button cyril-type-3" href="/about-me/" onClick={goTo("/about-me/")}>About Me</a>
           </div>
         </div>
       </div>

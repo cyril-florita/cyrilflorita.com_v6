@@ -70,8 +70,10 @@ const ContactBand = ({ resume, glow = false }) => (
     {/* Dotted background diamonds in the empty half beside the text, sized
         off the band's height so both fit whole (.cyril-contact .cyril-bg-item
         in _components.scss). */}
-    <div className="cyril-bg-item cyril-bg-item-large" style={{ top: "28.0%", right: "7%" }} />
-    <div className="cyril-bg-item" style={{ top: "16%", left: "42%" }} />
+    <div className="cyril-contact-bg" aria-hidden="true">
+      <div className="cyril-bg-item cyril-bg-item-large" style={{ top: "28.0%", right: "7%" }} />
+      <div className="cyril-bg-item" style={{ top: "16%", left: "42%" }} />
+    </div>
     {/* Accent glow behind the title, above the diamonds (About Me + home). */}
     {glow && <div className="cyril-section-glow" aria-hidden="true" />}
     <div className="container">
@@ -89,14 +91,14 @@ const ContactBand = ({ resume, glow = false }) => (
           <i className="fa-solid fa-paper-plane" aria-hidden="true" />
           Email Me
         </a>
-        <a className="cyril-button cyril-type-2" href={LINKEDIN} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <a className="cyril-button cyril-type-3" href={LINKEDIN} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
           <i className="fab fa-linkedin-in" aria-hidden="true" />
           {/* "LinkedIn" with only the L and I at full size, so the word reads
               as LinkedIn rather than a run of capitals. */}
           <span aria-hidden="true">L<span className="cyril-sc">inked</span>I<span className="cyril-sc">n</span></span>
         </a>
         {resume && (
-          <a className="cyril-button cyril-type-2" href={resume} download>
+          <a className="cyril-button cyril-type-3" href={resume} download>
             <i className="fa-solid fa-download" aria-hidden="true" />
             Résumé
           </a>

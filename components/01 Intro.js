@@ -74,6 +74,7 @@ const Banner = ( { bgImage = "/img/cyril-florita-profile.webp" } ) => {
                       See My Work
                     </Link>
                     <Link href="mailto:cyril.florita@pm.me" className="cyril-button cyril-type-3">
+                      <i className="fa-solid fa-paper-plane" aria-hidden="true" />
                       Email Me
                     </Link>
                   </div>
