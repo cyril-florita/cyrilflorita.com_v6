@@ -6,42 +6,101 @@ import { SOCIAL_GRAPHICS } from "@/components/data/socialGraphics";
 import { BLOG_GRAPHICS } from "@/components/data/blogGraphics";
 import { RESOURCE_GRAPHICS } from "@/components/data/resourceGraphics";
 import { imageProps, SIZES_HINT } from "@/components/imageProps";
-import TileMedia from "@/components/TileMedia";
+import TileMedia, { GridVideo } from "@/components/TileMedia";
 import { gsap } from "gsap";
 import { wipeThen } from './Preloader';
 import { useRouter } from "next/navigation";
 import { cyrilUtility } from "@/public/utility/index";
 
-// A single graphic as its own grid item (Marketing filter). It links to the
+// A single graphic as its own grid item (Marketing filter by default; web
+// pieces pass filter="fil-uix" so they show under Web & App). It links to the
 // original image, which the zoom viewer opens; `group` keeps prev/next
 // within its set. `shape` picks the cover ratio: "square" or "banner"
 // (the ~2:1 blog header size). A magnifying-glass icon shows on hover.
-const GraphicItem = ({ id, src, caption, group, label, shape }) => (
-  <div id={id} className="cyril-grid-item fil-marketing">
-    <a href={src} data-zoom-group={group} data-zoom-id={id} data-zoom-caption={caption}>
-      <div className={`cyril-portfolio-item cyril-${shape}-item cyril-mb-80`}>
-        <div className="cyril-cover">
-          {/* Clips the hover Ken Burns zoom (.cyril-ken-burns in _components.scss). */}
-          <span className="cyril-ken-burns">
-            <img {...imageProps(src, SIZES_HINT.gridTile)} alt={caption} loading="lazy" decoding="async" />
-          </span>
-          <div className="cyril-hover-link cyril-zoom-link">
-            <i className="fas fa-search-plus" />
+const GraphicItem = ({ id, src, caption, group, label, shape, filter = "fil-marketing", note, noteHref, poster, position }) => {
+  // Videos play in the tile (while on screen, via GridVideo) and in the
+  // viewer; GIFs animate as-is.
+  const video = /\.mp4$/i.test(src);
+  return (
+    <div id={id} className={`cyril-grid-item ${filter}`}>
+      <a href={src} data-zoom-group={group} data-zoom-id={id} data-zoom-caption={caption} data-zoom-note={note} data-zoom-link={noteHref} data-zoom-poster={poster}>
+        <div className={`cyril-portfolio-item cyril-${shape}-item cyril-mb-80`}>
+          <div className="cyril-cover">
+            {video ? (
+              <GridVideo src={src} poster={poster} label={caption} />
+            ) : (
+              /* Clips the hover Ken Burns zoom (.cyril-ken-burns in _components.scss). */
+              <span className="cyril-ken-burns">
+                <img {...imageProps(src, SIZES_HINT.gridTile)} alt={caption} loading="lazy" decoding="async" style={position ? { objectPosition: position } : undefined} />
+              </span>
+            )}
+            <div className="cyril-hover-link cyril-zoom-link">
+              {video ? (
+                <svg className="cyril-play-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="7 4 20 12 7 20 7 4" /></svg>
+              ) : (
+                <i className="fas fa-search-plus" />
+              )}
+            </div>
+          </div>
+          <div className="cyril-project-descr">
+            <p className="cyril-upper cyril-accent cyril-mb-10">{label}</p>
+            <h4 className="cyril-up">{caption}</h4>
           </div>
         </div>
-        <div className="cyril-project-descr">
-          <p className="cyril-upper cyril-accent cyril-mb-10">{label}</p>
-          <h4 className="cyril-up">{caption}</h4>
-        </div>
-      </div>
-    </a>
-  </div>
-);
+      </a>
+    </div>
+  );
+};
+
+// Grace to You (v.8) web pieces: the mockup revisions (images; GIFs animate
+// in the grid) and the recorded page builds (videos, playing in the grid).
+// Long screenshots are cropped from the top (position). Two sets so
+// the viewer never mixes videos and images.
+const GTY8 = "/img/portfolio/gty8_";
+const GTY8_POSTER = "/img/thumbs/portfolio/gty8_";
+const GTY8_NOTE = { filter: "fil-uix", note: "Part of the Grace to You (v.8) case study", noteHref: "/gty_v8/" };
+const GTY8_PIECES = [
+  { id: "gty8-initial-mockups", src: `${GTY8}design_0 - init.gif`, caption: "GTY Initial Mockups", shape: "wide" },
+  { id: "gty8-revision-1", src: `${GTY8}design_rev-1.gif`, caption: "GTY Pages (Horizontal/Vertical Page Scroll Prototype)", shape: "wide" },
+  { id: "gty8-revision-4-1", src: `${GTY8}design_rev-4_1.jpg`, caption: "GTY Homepage (Glass Version)", shape: "long", position: "50% 0%" },
+  { id: "gty8-revision-4-2", src: `${GTY8}design_rev-4_2.jpg`, caption: "GTY Featured Products", shape: "long", position: "50% 0%" },
+  { id: "gty8-revision-6-1", src: `${GTY8}design_rev-6_1.jpg`, caption: "GTY Homepage (Minimal Version)", shape: "long", position: "50% 0%" },
+  { id: "gty8-revision-6-2", src: `${GTY8}design_rev-6_2.jpg`, caption: "GTY Store", shape: "long", position: "50% 0%" },
+  { id: "gty8-revision-6-3", src: `${GTY8}design_rev-6_3.jpg`, caption: "GTY Blogpost", shape: "long", position: "50% 0%" },
+  { id: "gty8-revision-6-4", src: `${GTY8}design_rev-6_4.jpg`, caption: "GTY Devotionals", shape: "long", position: "50% 0%" },
+].map((g) => ({ ...g, ...GTY8_NOTE, group: "gty8-designs", label: "Web Design" }));
+const GTY8_VIDEOS = [
+  ["gty8-revision-2", "design_rev-2", "GTY Homepage (Section Slides Prototype)", "Web Design"],
+  ["gty8-homepage", "homepage_min", "GTY Homepage", "Front-End Development"],
+  ["gty8-about-pages", "about", "GTY About Pages", "Front-End Development"],
+  ["gty8-resource-pages", "resources", "GTY Resource Pages", "Front-End Development"],
+  ["gty8-giving-pages", "giving", "GTY Giving Pages", "Front-End Development"],
+  ["gty8-store-pages", "store", "GTY Store, Product & Checkout", "Front-End Development"],
+  ["gty8-account-pages", "account", "GTY Account Pages", "Front-End Development"],
+  ["gty8-micro-interactions", "micro-interactions", "GTY Micro-interactions", "Front-End Development"],
+].map(([id, file, caption, label]) => ({
+  id, caption, label, src: `${GTY8}${file}.mp4`, poster: `${GTY8_POSTER}${file}-poster.webp`, shape: "wide", group: "gty8-video", ...GTY8_NOTE,
+}));
 
 const GRAPHIC_SETS = [
   ...SOCIAL_GRAPHICS.map((g) => ({ ...g, group: "social", label: "Social Media Graphic", shape: "square" })),
   ...BLOG_GRAPHICS.map((g) => ({ ...g, group: "blog", label: "Blog Graphic", shape: "banner" })),
   ...RESOURCE_GRAPHICS.map((g) => ({ ...g, group: "resources" })),
+  // Web pieces: single screens from a case study, shown under Web & App.
+  // The viewer links back to the case study they belong to.
+  {
+    id: "grace-stream-website",
+    src: "/img/portfolio/grace-stream_website.jpg",
+    caption: "Grace Stream Website",
+    label: "Web Design",
+    shape: "long",
+    group: "web",
+    filter: "fil-uix",
+    note: "Part of the Grace Stream case study",
+    noteHref: "/grace-stream/",
+  },
+  ...GTY8_PIECES,
+  ...GTY8_VIDEOS,
 ];
 
 // Fisher–Yates shuffle (returns a new array).
@@ -89,6 +148,7 @@ const spreadShuffled = (items) => {
 // Isotope filter selector for a filter key.
 const filterSelector = (key) => {
   if (key === "*") return "*";
+  if (key === "case-studies") return ".cyril-grid-item[data-project]";
   if (key === "fil-branding-marketing-illustration") return ".fil-branding, .fil-marketing, .fil-illustration";
   return `.${key}`;
 };
@@ -151,11 +211,10 @@ const PortfolioIsotope = () => {
   // Restore whichever sort option was active when the user clicked into a
   // project, so coming back via the browser's back button lands them back
   // on the same filter instead of resetting to the default.
-  // Starting filter: Design & Development by default ("All" is the last
-  // button). A filter saved when leaving for a project is restored on the
+  // Starting filter: Case Studies by default ("All" is the last button). A filter saved when leaving for a project is restored on the
   // way back — except for a shared #zoom-<id> link, which always opens on
   // "All" so the graphic it points to is there.
-  const DEFAULT_FILTER = "fil-uix";
+  const DEFAULT_FILTER = "case-studies";
   const [filterKey, setFilterKey] = useState(() => {
     if (typeof window === "undefined") return DEFAULT_FILTER;
     try {
@@ -216,6 +275,7 @@ const PortfolioIsotope = () => {
       getSortData: {
         orderAll: (itemElem) => parseInt(itemElem.getAttribute("data-order-all"), 10) || 999,
         orderBrand: (itemElem) => parseInt(itemElem.getAttribute("data-order-brand"), 10) || 999,
+        orderWeb: (itemElem) => parseInt(itemElem.getAttribute("data-order-web"), 10) || 999,
       },
       animationOptions: {
         duration: 750,
@@ -295,15 +355,17 @@ const PortfolioIsotope = () => {
     try {
       const filter = filterSelector(filterKey);
 
-      // Design & Development keeps the DOM (file) order, which is laid out
-      // as its three-across rows. "All" and Marketing & Branding each have an
-      // order of their own (data-order-all / data-order-brand), chosen so
+      // Case Studies keeps the DOM (file) order, which is laid out as its
+      // three-across rows. Web & App, "All" and Marketing & Branding each have
+      // an order of their own (data-order-web / data-order-all /
+      // data-order-brand), chosen so
       // every tile lands somewhere new when switching filters — the grid
       // visibly moves, not just hides tiles. Graphics have no order
       // attribute, so they sort after the case studies, keeping their
       // per-visit random order (original-order).
       const sortBy =
         filterKey === "*" ? ["orderAll", "original-order"]
+        : filterKey === "fil-uix" ? ["orderWeb", "original-order"]
         : filterKey === "fil-branding-marketing-illustration" ? ["orderBrand", "original-order"]
         : "original-order";
 
@@ -341,11 +403,24 @@ const PortfolioIsotope = () => {
             <li>
               <button
                 type="button"
+                className={activeBtn("case-studies")}
+                aria-pressed={filterKey === "case-studies"}
+                onClick={handleFilterKeyChange("case-studies")}
+              >
+                Case Studies
+              </button>
+            </li>
+
+            {/* Web & App: the web and app projects (the fil-uix class, kept
+                from the old "Design & Development" filter). */}
+            <li>
+              <button
+                type="button"
                 className={activeBtn("fil-uix")}
                 aria-pressed={filterKey === "fil-uix"}
                 onClick={handleFilterKeyChange("fil-uix")}
               >
-                Design &amp; Development
+                Web &amp; App
               </button>
             </li>
 
@@ -381,7 +456,7 @@ const PortfolioIsotope = () => {
           <div className="grid-sizer" />
 
           {/* wide . hunger action month */}
-          <div id="hungeractionmonth" data-project="hungeractionmonth" data-order-all="4" data-order-brand="2" className="cyril-grid-item fil-uix fil-marketing">
+          <div id="hungeractionmonth" data-project="hungeractionmonth" data-order-web="3" data-order-all="4" data-order-brand="2" className="cyril-grid-item fil-uix fil-marketing">
             <Link href="/hunger-action-month" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -397,7 +472,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* square . hunger action month campaign dashboard (looping video thumbnail) */}
-          <div id="hamdashboard" data-project="hamdashboard" data-order-all="10" data-order-brand="1" className="cyril-grid-item fil-uix fil-marketing">
+          <div id="hamdashboard" data-project="hamdashboard" data-order-web="5" data-order-all="10" data-order-brand="1" className="cyril-grid-item fil-uix fil-marketing">
             <Link href="/hunger-action-month-dashboard" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -413,7 +488,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* wide . the study bible app */}
-          <div id="thestudybibleapp" data-project="thestudybibleapp" data-order-all="7" className="cyril-grid-item fil-uix">
+          <div id="thestudybibleapp" data-project="thestudybibleapp" data-order-web="1" data-order-all="7" className="cyril-grid-item fil-uix">
             <Link href="/the-study-bible-app" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -429,7 +504,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* wide . gty v9 (looping video thumbnail) */}
-          <div id="gty9" data-project="gty9" data-order-all="8" className="cyril-grid-item fil-uix">
+          <div id="gty9" data-project="gty9" data-order-web="2" data-order-all="8" className="cyril-grid-item fil-uix">
             <Link href="/gty_v9" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -448,7 +523,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* long . gty v8 */}
-          <div id="gty8" data-project="gty8" data-order-all="1" className="cyril-grid-item fil-uix">
+          <div id="gty8" data-project="gty8" data-order-web="4" data-order-all="1" className="cyril-grid-item fil-uix">
             <Link href="/gty_v8" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -464,7 +539,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* wide . giving tuesday (looping video thumbnail) */}
-          <div id="givingtuesday" data-project="givingtuesday" data-order-all="2" data-order-brand="3" className="cyril-grid-item fil-uix fil-marketing">
+          <div id="givingtuesday" data-project="givingtuesday" data-order-web="9" data-order-all="2" data-order-brand="3" className="cyril-grid-item fil-uix fil-marketing">
             <Link href="/giving-tuesday" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -480,7 +555,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* wide . 35-day generosity challenge (looping video thumbnail) */}
-          <div id="generositychallenge" data-project="generositychallenge" data-order-all="6" data-order-brand="6" className="cyril-grid-item fil-uix fil-marketing">
+          <div id="generositychallenge" data-project="generositychallenge" data-order-web="12" data-order-all="6" data-order-brand="6" className="cyril-grid-item fil-uix fil-marketing">
             <Link href="/35-day-generosity-challenge" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -496,7 +571,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* wide . gty dashboard */}
-          <div id="gtydashboard" data-project="gtydashboard" data-order-all="3" className="cyril-grid-item fil-uix">
+          <div id="gtydashboard" data-project="gtydashboard" data-order-web="6" data-order-all="3" className="cyril-grid-item fil-uix">
             <Link href="/gty-dashboard" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -512,7 +587,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* square . gracestream */}
-          <div id="gracestream" data-project="gracestream" data-order-all="11" data-order-brand="4" className="cyril-grid-item fil-branding fil-uix">
+          <div id="gracestream" data-project="gracestream" data-order-web="8" data-order-all="11" data-order-brand="4" className="cyril-grid-item fil-branding fil-uix">
             <Link href="/grace-stream" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -528,7 +603,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* wide . volunteer leadership team (looping video thumbnail) */}
-          <div id="volunteerleadership" data-project="volunteerleadership" data-order-all="5" data-order-brand="7" className="cyril-grid-item fil-uix fil-marketing">
+          <div id="volunteerleadership" data-project="volunteerleadership" data-order-web="11" data-order-all="5" data-order-brand="7" className="cyril-grid-item fil-uix fil-marketing">
             <Link href="/volunteer-leadership-team" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -544,7 +619,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* wide . gty app (looping video thumbnail — Fig. 01 on its page) */}
-          <div id="gtyapplanding" data-project="gtyapplanding" data-order-all="13" className="cyril-grid-item fil-uix">
+          <div id="gtyapplanding" data-project="gtyapplanding" data-order-web="7" data-order-all="13" className="cyril-grid-item fil-uix">
             <Link href="/gty-app-landing" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 {/* Cover sized to the video (640×488), so none of it is cropped. */}
@@ -561,7 +636,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* square . truth matters podcast */}
-          <div id="truthmatters" data-project="truthmatters" data-order-all="12" data-order-brand="5" className="cyril-grid-item fil-branding fil-uix">
+          <div id="truthmatters" data-project="truthmatters" data-order-web="10" data-order-all="12" data-order-brand="5" className="cyril-grid-item fil-branding fil-uix">
             <Link href="/truth-matters" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover truth-matters">

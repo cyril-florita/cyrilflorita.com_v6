@@ -15,7 +15,7 @@ import { imageProps, SIZES_HINT } from "@/components/imageProps";
 // and downloads nothing until the tile is near the viewport (preload="none"),
 // plays only while on screen, pauses when scrolled away. Reduced motion: the
 // poster only. Styled like tile images (grayscale → color on hover).
-const GridVideo = ({ src, poster, label }) => {
+export const GridVideo = ({ src, poster, label }) => {
   const ref = useRef(null);
   useEffect(() => {
     const video = ref.current;

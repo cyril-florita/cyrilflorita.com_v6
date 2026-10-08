@@ -4603,6 +4603,34 @@ zoom viewer (components/ZoomViewer.js)
     }
 }
 
+// Play icon on video web pieces in the My Work grid (in place of the
+// magnifier).
+.cyril-hover-link .cyril-play-icon {
+    width: 18px;
+    height: 18px;
+    margin-left: 3px;
+}
+
+// "Part of the … case study" link under a web piece's caption.
+.cyril-zoom-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-accent-text);
+    text-decoration: none;
+    pointer-events: auto;
+
+    & svg {
+        width: 14px;
+        height: 14px;
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    &:hover svg {
+        transform: translateX(4px);
+    }
+}
+
 .cyril-zoom-count {
     color: var(--color-accent-text);
     font-variant-numeric: tabular-nums;

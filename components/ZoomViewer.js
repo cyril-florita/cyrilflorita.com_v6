@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { onPreloaderHidden } from "@/components/Preloader";
+import { onPreloaderHidden, wipeThen } from "@/components/Preloader";
 import { imageSize, thumbFor } from "@/components/imageProps";
+import VIDEO_SIZES from "@/components/data/videoSizes.json";
 
 // Site-wide image viewer (replaces the old magnific-style lightbox). Any link
 // to an image under /img/ opens here instead of navigating:
@@ -12,16 +13,23 @@ import { imageSize, thumbFor } from "@/components/imageProps";
 //   closes; click (mouse) or pinch / double-tap (touch) zooms into detail
 // - each image gets a shareable #zoom-<id> hash (data-zoom-id, else the
 //   file name) that reopens it on load
+// - links to an .mp4 open the same way and play the video (muted, looping),
+//   e.g. the web pieces in the My Work grid; a set never mixes videos and
+//   images (the clicked link's kind wins)
 // Styles: "zoom viewer" in _components.scss.
 
 const IMAGE_LINK = 'a[href*="/img/"]';
 const IMAGE_EXT = /\.(jpe?g|png|gif|webp|avif)(\?.*)?$/i;
+const VIDEO_EXT = /\.(mp4|webm)(\?.*)?$/i;
 const MOVE_MS = 500;
 const FADE_MS = 160;
 const MOVE = `left ${MOVE_MS}ms cubic-bezier(0.16, 1, 0.3, 1), top ${MOVE_MS}ms cubic-bezier(0.16, 1, 0.3, 1), width ${MOVE_MS}ms cubic-bezier(0.16, 1, 0.3, 1), height ${MOVE_MS}ms cubic-bezier(0.16, 1, 0.3, 1), opacity ${FADE_MS}ms ease, transform 0.3s ease`;
 
 const isImageLink = (a) =>
   !!a && !a.hasAttribute("download") && IMAGE_EXT.test(a.getAttribute("href") || "");
+const isVideoLink = (a) =>
+  !!a && !a.hasAttribute("download") && VIDEO_EXT.test(a.getAttribute("href") || "");
+const isMediaLink = (a) => isImageLink(a) || isVideoLink(a);
 
 const slugFromHref = (href) =>
   href.split("/").pop().replace(/\.[^.]+$/, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
@@ -36,6 +44,12 @@ const describe = (link) => {
     href,
     caption: link.dataset.zoomCaption || figcaption?.textContent.trim() || img?.alt || "",
     id: link.dataset.zoomId || slugFromHref(href),
+    // Optional link under the caption (e.g. a web piece pointing to the case
+    // study it belongs to): data-zoom-note + data-zoom-link.
+    note: link.dataset.zoomNote || "",
+    noteHref: link.dataset.zoomLink || "",
+    video: VIDEO_EXT.test(href),
+    poster: link.dataset.zoomPoster || img?.currentSrc || "",
   };
 };
 
@@ -50,8 +64,12 @@ const groupFor = (link) => {
   } else {
     links = [link];
   }
-  // Skip anything hidden (e.g. grid items filtered out by Isotope).
-  return links.filter((l) => l === link || isShown(l)).map(describe);
+  // Skip anything hidden (e.g. grid items filtered out by Isotope), and keep
+  // to the clicked link's kind (video or image).
+  const video = isVideoLink(link);
+  return links
+    .filter((l) => l === link || (isShown(l) && isVideoLink(l) === video))
+    .map(describe);
 };
 
 const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -86,6 +104,19 @@ const inViewport = (r) => r.bottom > 0 && r.top < window.innerHeight && r.right 
 // already-loaded thumbnail when it's the same file, else by loading it.
 const naturalSize = (item) =>
   new Promise((resolve) => {
+    if (item.video) {
+      const size = VIDEO_SIZES[item.href];
+      if (size) {
+        resolve(size);
+        return;
+      }
+      const probe = document.createElement("video");
+      probe.preload = "metadata";
+      probe.onloadedmetadata = () => resolve([probe.videoWidth || 16, probe.videoHeight || 9]);
+      probe.onerror = () => resolve([16, 9]);
+      probe.src = item.href;
+      return;
+    }
     const known = imageSize(item.href);
     if (known) {
       resolve(known);
@@ -107,6 +138,13 @@ const absolute = (url) => new URL(url, window.location.href).href;
 // Show the image right away using what's already loaded (the page's
 // thumbnail), then swap in the full-resolution original once it arrives.
 const showImage = (img, item, currentHref) => {
+  if (item.video) {
+    // Poster first (it's the grid tile's own image), then play.
+    img.poster = item.poster || "";
+    img.src = item.href;
+    img.play?.().catch(() => {});
+    return;
+  }
   const preview = item.img?.currentSrc || (imageSize(item.href) ? thumbFor(item.href) : item.href);
   img.src = preview;
   if (absolute(preview) === absolute(item.href)) return;
@@ -158,7 +196,7 @@ const ZoomViewer = () => {
     const onClick = (e) => {
       if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       const link = e.target.closest?.(IMAGE_LINK);
-      if (!isImageLink(link) || busy.current || viewRef.current) return;
+      if (!isMediaLink(link) || busy.current || viewRef.current) return;
       e.preventDefault();
       const items = groupFor(link);
       returnFocus.current = link;
@@ -177,7 +215,7 @@ const ZoomViewer = () => {
     const unsubscribe = onPreloaderHidden(() => {
       timer = setTimeout(() => {
         const link = [...document.querySelectorAll(IMAGE_LINK)]
-          .filter(isImageLink)
+          .filter(isMediaLink)
           .find((l) => describe(l).id === decodeURIComponent(match[1]));
         if (!link) return;
         const items = groupFor(link);
@@ -231,7 +269,7 @@ const ZoomViewer = () => {
     // Preload neighbours.
     [view.index - 1, view.index + 1].forEach((i) => {
       const n = view.items[(i + view.items.length) % view.items.length];
-      if (n) new Image().src = n.href;
+      if (n && !n.video) new Image().src = n.href;
     });
   }, [view]);
 
@@ -285,7 +323,7 @@ const ZoomViewer = () => {
         img.style.transition = MOVE;
         img.style.opacity = "1";
         const after = v.items[(nextIndex + delta + v.items.length) % v.items.length];
-        if (after) new Image().src = after.href;
+        if (after && !after.video) new Image().src = after.href;
         setTimeout(() => { busy.current = false; }, FADE_MS);
       });
     }, FADE_MS);
@@ -344,7 +382,7 @@ const ZoomViewer = () => {
     const img = imgRef.current;
     const v = viewRef.current;
     const t = v?.items[v.index]?.img;
-    const natural = t?.naturalWidth || img.naturalWidth || img.width;
+    const natural = t?.naturalWidth || img.naturalWidth || img.videoWidth || img.width;
     return Math.min(Math.max(natural / img.getBoundingClientRect().width, 1.8), 5);
   };
 
@@ -467,16 +505,32 @@ const ZoomViewer = () => {
       aria-label={item.caption || "Image viewer"}
     >
       <div className="cyril-zoom-backdrop" onClick={close} />
-      <img
-        ref={imgRef}
-        className="cyril-zoom-img"
-        alt={item.caption}
-        draggable={false}
-        onPointerDown={onPointerDown}
-        onPointerMove={onPointerMove}
-        onPointerUp={onPointerUp}
-        onPointerCancel={onPointerUp}
-      />
+      {item.video ? (
+        <video
+          ref={imgRef}
+          className="cyril-zoom-img"
+          aria-label={item.caption}
+          muted
+          loop
+          playsInline
+          autoPlay
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={onPointerUp}
+          onPointerCancel={onPointerUp}
+        />
+      ) : (
+        <img
+          ref={imgRef}
+          className="cyril-zoom-img"
+          alt={item.caption}
+          draggable={false}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={onPointerUp}
+          onPointerCancel={onPointerUp}
+        />
+      )}
       <button ref={closeRef} type="button" className="cyril-zoom-btn cyril-zoom-close" onClick={close} aria-label="Close">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18" /><line x1="18" y1="6" x2="6" y2="18" /></svg>
       </button>
@@ -497,6 +551,20 @@ const ZoomViewer = () => {
           </span>
         )}
         {item.caption && <span>{item.caption}</span>}
+        {item.note && item.noteHref && (
+          <a
+            className="cyril-zoom-note"
+            href={item.noteHref}
+            onClick={(e) => {
+              if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+              e.preventDefault();
+              wipeThen(() => { window.location.href = item.noteHref; });
+            }}
+          >
+            {item.note}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+          </a>
+        )}
       </div>
     </div>
   );
