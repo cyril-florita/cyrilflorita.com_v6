@@ -51,6 +51,7 @@ const IMAGES = {
   "hunger-action-month-dashboard": ["/img/portfolio/chf-ham-dashboard_poster.jpg", "cover", "top"],
   "35-day-generosity-challenge": ["/img/portfolio/chf-35-day-generosity_main.jpg", "cover", "top"],
   "giving-tuesday": ["/img/portfolio/chf-giving-tuesday_main.jpg", "cover", "top"],
+  viteo: ["/img/portfolio/viteo_desktop-landing.jpg", "cover"],
   "volunteer-leadership-team": ["/img/portfolio/chf-volunteer-leadership_main.jpg", "cover", "top"],
 };
 

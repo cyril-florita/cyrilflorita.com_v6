@@ -3640,6 +3640,20 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
     }
 }
 
+// A slideshow tile as the hero (e.g. /viteo): stack the slides in the
+// tile's frame so they crossfade in place instead of flowing down the page.
+.cyril-page.cyril-case-page .cyril-case-bleed-tile {
+    overflow: hidden;
+}
+.cyril-page.cyril-case-page .cyril-case-bleed-tile .cyril-grid-slideshow img {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    scale: 1;
+}
+
 .cyril-page.cyril-case-page .cyril-case-bleed img,
 .cyril-page.cyril-case-page .cyril-case-bleed video {
     display: block;

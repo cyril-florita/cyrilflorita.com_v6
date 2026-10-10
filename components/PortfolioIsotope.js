@@ -148,7 +148,8 @@ const spreadShuffled = (items) => {
 // Isotope filter selector for a filter key.
 const filterSelector = (key) => {
   if (key === "*") return "*";
-  if (key === "case-studies") return ".cyril-grid-item[data-project]";
+  // Case Studies: every project page except the illustrations.
+  if (key === "case-studies") return ".cyril-grid-item[data-project]:not(.fil-illustration)";
   if (key === "fil-branding-marketing-illustration") return ".fil-branding, .fil-marketing, .fil-illustration";
   return `.${key}`;
 };
@@ -455,24 +456,24 @@ const PortfolioIsotope = () => {
 
           <div className="grid-sizer" />
 
-          {/* wide . hunger action month */}
-          <div id="hungeractionmonth" data-project="hungeractionmonth" data-order-web="3" data-order-all="4" data-order-brand="2" className="cyril-grid-item fil-uix fil-marketing">
-            <Link href="/hunger-action-month" onClick={saveFilterOnNavigate}>
+          {/* wide . viteo (self-initiated concept; first in Case Studies, second in Web & App) */}
+          <div id="viteo" data-project="viteo" data-order-web="2" data-order-all="20" className="cyril-grid-item fil-uix">
+            <Link href="/viteo" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
-                  <TileMedia slug="/hunger-action-month" />
+                  <TileMedia slug="/viteo" />
                   <h3>Case Study</h3>
                 </div>
                 <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Design, Development, &amp; Campaign Performance Tracking</p>
-                  <h4 className="cyril-up">Hunger Action Month</h4>
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Product Design &amp; Development · Concept</p>
+                  <h4 className="cyril-up">Viteo</h4>
                 </div>
               </div>
             </Link>
           </div>
 
           {/* square . hunger action month campaign dashboard (looping video thumbnail) */}
-          <div id="hamdashboard" data-project="hamdashboard" data-order-web="5" data-order-all="10" data-order-brand="1" className="cyril-grid-item fil-uix fil-marketing">
+          <div id="hamdashboard" data-project="hamdashboard" data-order-web="6" data-order-all="10" data-order-brand="1" className="cyril-grid-item fil-uix fil-marketing">
             <Link href="/hunger-action-month-dashboard" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -504,7 +505,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* wide . gty v9 (looping video thumbnail) */}
-          <div id="gty9" data-project="gty9" data-order-web="2" data-order-all="8" className="cyril-grid-item fil-uix">
+          <div id="gty9" data-project="gty9" data-order-web="3" data-order-all="8" className="cyril-grid-item fil-uix">
             <Link href="/gty_v9" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -517,6 +518,38 @@ const PortfolioIsotope = () => {
                 <div className="cyril-project-descr">
                   <p className="cyril-upper cyril-accent cyril-mb-10">UX Design</p>
                   <h4 className="cyril-up">Grace to You</h4>
+                </div>
+              </div>
+            </Link>
+          </div>
+
+          {/* wide . hunger action month */}
+          <div id="hungeractionmonth" data-project="hungeractionmonth" data-order-web="5" data-order-all="4" data-order-brand="2" className="cyril-grid-item fil-uix fil-marketing">
+            <Link href="/hunger-action-month" onClick={saveFilterOnNavigate}>
+              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
+                <div className="cyril-cover">
+                  <TileMedia slug="/hunger-action-month" />
+                  <h3>Case Study</h3>
+                </div>
+                <div className="cyril-project-descr">
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Design, Development, &amp; Campaign Performance Tracking</p>
+                  <h4 className="cyril-up">Hunger Action Month</h4>
+                </div>
+              </div>
+            </Link>
+          </div>
+
+          {/* wide . giving tuesday (looping video thumbnail) */}
+          <div id="givingtuesday" data-project="givingtuesday" data-order-web="10" data-order-all="2" data-order-brand="3" className="cyril-grid-item fil-uix fil-marketing">
+            <Link href="/giving-tuesday" onClick={saveFilterOnNavigate}>
+              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
+                <div className="cyril-cover">
+                  <TileMedia slug="/giving-tuesday" />
+                  <h3>Case Study</h3>
+                </div>
+                <div className="cyril-project-descr">
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Design, Development, &amp; Campaign Performance Tracking</p>
+                  <h4 className="cyril-up">Giving Tuesday Campaign</h4>
                 </div>
               </div>
             </Link>
@@ -538,24 +571,8 @@ const PortfolioIsotope = () => {
             </Link>
           </div>
 
-          {/* wide . giving tuesday (looping video thumbnail) */}
-          <div id="givingtuesday" data-project="givingtuesday" data-order-web="9" data-order-all="2" data-order-brand="3" className="cyril-grid-item fil-uix fil-marketing">
-            <Link href="/giving-tuesday" onClick={saveFilterOnNavigate}>
-              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
-                <div className="cyril-cover">
-                  <TileMedia slug="/giving-tuesday" />
-                  <h3>Case Study</h3>
-                </div>
-                <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Design, Development, &amp; Campaign Performance Tracking</p>
-                  <h4 className="cyril-up">Giving Tuesday Campaign</h4>
-                </div>
-              </div>
-            </Link>
-          </div>
-
           {/* wide . 35-day generosity challenge (looping video thumbnail) */}
-          <div id="generositychallenge" data-project="generositychallenge" data-order-web="12" data-order-all="6" data-order-brand="6" className="cyril-grid-item fil-uix fil-marketing">
+          <div id="generositychallenge" data-project="generositychallenge" data-order-web="13" data-order-all="6" data-order-brand="6" className="cyril-grid-item fil-uix fil-marketing">
             <Link href="/35-day-generosity-challenge" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -570,24 +587,8 @@ const PortfolioIsotope = () => {
             </Link>
           </div>
 
-          {/* wide . gty dashboard */}
-          <div id="gtydashboard" data-project="gtydashboard" data-order-web="6" data-order-all="3" className="cyril-grid-item fil-uix">
-            <Link href="/gty-dashboard" onClick={saveFilterOnNavigate}>
-              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
-                <div className="cyril-cover">
-                  <TileMedia slug="/gty-dashboard" />
-                  <h3>Case Study</h3>
-                </div>
-                <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Design &amp; Development</p>
-                  <h4 className="cyril-up">GTY Dashboard</h4>
-                </div>
-              </div>
-            </Link>
-          </div>
-
           {/* square . gracestream */}
-          <div id="gracestream" data-project="gracestream" data-order-web="8" data-order-all="11" data-order-brand="4" className="cyril-grid-item fil-branding fil-uix">
+          <div id="gracestream" data-project="gracestream" data-order-web="9" data-order-all="11" data-order-brand="4" className="cyril-grid-item fil-branding fil-uix">
             <Link href="/grace-stream" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -602,8 +603,24 @@ const PortfolioIsotope = () => {
             </Link>
           </div>
 
+          {/* wide . gty dashboard */}
+          <div id="gtydashboard" data-project="gtydashboard" data-order-web="7" data-order-all="3" className="cyril-grid-item fil-uix">
+            <Link href="/gty-dashboard" onClick={saveFilterOnNavigate}>
+              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
+                <div className="cyril-cover">
+                  <TileMedia slug="/gty-dashboard" />
+                  <h3>Case Study</h3>
+                </div>
+                <div className="cyril-project-descr">
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Design &amp; Development</p>
+                  <h4 className="cyril-up">GTY Dashboard</h4>
+                </div>
+              </div>
+            </Link>
+          </div>
+
           {/* wide . volunteer leadership team (looping video thumbnail) */}
-          <div id="volunteerleadership" data-project="volunteerleadership" data-order-web="11" data-order-all="5" data-order-brand="7" className="cyril-grid-item fil-uix fil-marketing">
+          <div id="volunteerleadership" data-project="volunteerleadership" data-order-web="12" data-order-all="5" data-order-brand="7" className="cyril-grid-item fil-uix fil-marketing">
             <Link href="/volunteer-leadership-team" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -618,8 +635,24 @@ const PortfolioIsotope = () => {
             </Link>
           </div>
 
+          {/* square . truth matters podcast */}
+          <div id="truthmatters" data-project="truthmatters" data-order-web="11" data-order-all="12" data-order-brand="5" className="cyril-grid-item fil-branding fil-uix">
+            <Link href="/truth-matters" onClick={saveFilterOnNavigate}>
+              <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
+                <div className="cyril-cover truth-matters">
+                  <TileMedia slug="/truth-matters" />
+                  <h3>Case Study</h3>
+                </div>
+                <div className="cyril-project-descr">
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Branding, Design, &amp; Development</p>
+                  <h4 className="cyril-up">Truth Matters Podcast</h4>
+                </div>
+              </div>
+            </Link>
+          </div>
+
           {/* wide . gty app (looping video thumbnail — Fig. 01 on its page) */}
-          <div id="gtyapplanding" data-project="gtyapplanding" data-order-web="7" data-order-all="13" className="cyril-grid-item fil-uix">
+          <div id="gtyapplanding" data-project="gtyapplanding" data-order-web="8" data-order-all="13" className="cyril-grid-item fil-uix">
             <Link href="/gty-app-landing" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 {/* Cover sized to the video (640×488), so none of it is cropped. */}
@@ -630,22 +663,6 @@ const PortfolioIsotope = () => {
                 <div className="cyril-project-descr">
                   <p className="cyril-upper cyril-accent cyril-mb-10">Design &amp; Development</p>
                   <h4 className="cyril-up">GTY App Landing Page</h4>
-                </div>
-              </div>
-            </Link>
-          </div>
-
-          {/* square . truth matters podcast */}
-          <div id="truthmatters" data-project="truthmatters" data-order-web="10" data-order-all="12" data-order-brand="5" className="cyril-grid-item fil-branding fil-uix">
-            <Link href="/truth-matters" onClick={saveFilterOnNavigate}>
-              <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
-                <div className="cyril-cover truth-matters">
-                  <TileMedia slug="/truth-matters" />
-                  <h3>Case Study</h3>
-                </div>
-                <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Branding, Design, &amp; Development</p>
-                  <h4 className="cyril-up">Truth Matters Podcast</h4>
                 </div>
               </div>
             </Link>
@@ -766,6 +783,10 @@ const PortfolioIsotope = () => {
               </div>
             </Link>
           </div>
+
+
+
+
 
           {/* individual graphics — no pages; each opens in the zoom viewer
               (components/ZoomViewer.js), browsable within its own set */}

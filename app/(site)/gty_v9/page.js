@@ -270,8 +270,8 @@ const Page = () => {
           </CaseLayout>
 
           <CaseNext
-            href="/giving-tuesday"
-            title="Giving Tuesday Campaign"
+            href="/hunger-action-month"
+            title="Hunger Action Month"
             category="Design, Development, & Campaign Performance Tracking"
             onBack={handleBackToPortfolio}
           />

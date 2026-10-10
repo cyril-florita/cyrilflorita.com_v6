@@ -1,5 +1,12 @@
 "use client";
 
+// The 404 renders under the root layout only (outside app/(site)), so it
+// brings the portfolio's styles and preloader itself.
+import "@css/plugins/bootstrap-grid.css";
+import "@css/plugins/swiper.min.css";
+import "@fonts/font-awesome/css/fa-subset.css";
+import "@scss/style.css";
+import Preloader from "@/components/Preloader";
 import SiteLayout from "@/layout/SiteLayout";
 import { cyrilUtility } from "@/public/utility/index";
 import { onPreloaderHidden } from "@/components/Preloader";
@@ -23,6 +30,8 @@ const NotFound = () => {
   }, []);
 
   return (
+    <>
+    <Preloader />
     <SiteLayout>
       <div className="cyril-page cyril-not-found">
         <div className="container">
@@ -40,6 +49,7 @@ const NotFound = () => {
         </div>
       </div>
     </SiteLayout>
+    </>
   );
 };
 

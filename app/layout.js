@@ -1,12 +1,11 @@
-import "@css/plugins/bootstrap-grid.css";
 import { Atkinson_Hyperlegible, Space_Grotesk } from "next/font/google";
 import Script from "next/script";
 
-import "@css/plugins/swiper.min.css";
-// Only the icons the site uses — regenerate with scripts/subset-icons.py.
-import "@fonts/font-awesome/css/fa-subset.css";
-
-import "@scss/style.css";
+// Root layout shared by the portfolio and the /lab prototypes: only the
+// <html>/<body> shell, fonts, theme script, analytics and metadata. The
+// portfolio's styles and preloader live in app/(site)/layout.js (and
+// app/not-found.js), so lab prototypes such as /lab/viteo/ load none of
+// them.
 
 const atkinson = Atkinson_Hyperlegible({
   weight: ['400', '700'],
@@ -71,7 +70,6 @@ export const metadata = {
 };
 
 import { ClientThemeProvider } from '../components/ClientThemeProvider';
-import Preloader from '../components/Preloader';
 
 // Social profiles match the links in layout/Footer.js.
 const PERSON_JSON_LD = {
@@ -113,7 +111,6 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="cyril-custom-scroll" suppressHydrationWarning={true}>
-        <Preloader />
         {/* Google Analytics */}
         <Script
           strategy="afterInteractive"

@@ -197,6 +197,22 @@ const GridPhone3D = ({ src, poster, label }) => {
 };
 
 export const TILE_MEDIA = {
+  // Viteo (lab concept): the product, flow by flow.
+  "/viteo": {
+    kind: "slideshow", label: "Viteo prototype: landing, quiz, plan, checkout and account",
+    images: [
+      "/img/portfolio/viteo_desktop-landing.jpg",
+      "/img/portfolio/viteo_desktop-quiz.jpg",
+      "/img/portfolio/viteo_desktop-quiz-building.jpg",
+      "/img/portfolio/viteo_desktop-plan.jpg",
+      "/img/portfolio/viteo_desktop-checkout-review.jpg",
+      "/img/portfolio/viteo_desktop-checkout-confirmed.jpg",
+      "/img/portfolio/viteo_desktop-account.jpg",
+      "/img/portfolio/viteo_desktop-hero-grove-light.jpg",
+    ],
+    interval: 1250, fade: 600,
+    shape: "wide",
+  },
   "/hunger-action-month-dashboard": {
     kind: "video", src: "/img/portfolio/chf-ham-dashboard_preview.mp4", poster: "/img/thumbs/portfolio/chf-ham-dashboard_preview-poster.webp", label: "Hunger Action Month Campaign Dashboard preview",
     shape: "square",
