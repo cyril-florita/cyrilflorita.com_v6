@@ -148,8 +148,9 @@ const spreadShuffled = (items) => {
 // Isotope filter selector for a filter key.
 const filterSelector = (key) => {
   if (key === "*") return "*";
-  // Case Studies: every project page except the illustrations.
-  if (key === "case-studies") return ".cyril-grid-item[data-project]:not(.fil-illustration)";
+  // Case Studies: every project page except the pure illustrations
+  // (Patricia MacArthur is branding + illustration, so it stays).
+  if (key === "case-studies") return ".cyril-grid-item[data-project]:not(.fil-illustration:not(.fil-branding))";
   if (key === "fil-branding-marketing-illustration") return ".fil-branding, .fil-marketing, .fil-illustration";
   return `.${key}`;
 };
