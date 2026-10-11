@@ -25,6 +25,10 @@ export default function Reveal() {
   const pathname = usePathname();
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // On desktop the 3D story flies pills into these cards; they must already
+    // be there when a pill arrives, or the card rising in afterwards replays
+    // the movement (déjà vu). So docks skip the reveal there.
+    const story = window.matchMedia("(hover: hover) and (pointer: fine) and (min-width: 961px)").matches;
     const els = [];
     TARGETS.forEach(([sel, kind]) => {
       document.querySelectorAll(`.dl ${sel}`).forEach((el) => {
@@ -32,6 +36,7 @@ export default function Reveal() {
         // runs effects twice in dev): only fresh pieces below the fold are
         // hidden, but any still-hidden piece is picked up again.
         if (el.dataset.revealed) return;
+        if (story && el.querySelector("[data-story-pill]")) return;
         if (!el.dataset.reveal) {
           if (el.getBoundingClientRect().top < window.innerHeight * 0.9) return;
           const siblings = el.parentElement

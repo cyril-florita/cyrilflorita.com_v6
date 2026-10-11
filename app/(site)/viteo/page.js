@@ -37,6 +37,9 @@ const LIVE = "/lab/viteo/";
 const Desktop = ({ name, caption, ratio, path = "" }) => (
   <CaseFigure src={`${P}desktop-${name}.jpg`} alt={`Viteo — ${caption}`} caption={caption} frame="browser" url={`${URL}/${path}`} ratio={ratio} />
 );
+const Arrow = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" /></svg>
+);
 const Phone = ({ name, caption }) => (
   <CaseFigure src={`${P}mobile-${name}.jpg`} alt={`Viteo on a phone — ${caption}`} caption={caption} size="phone" ratio="390 / 844" />
 );
@@ -71,13 +74,13 @@ const Page = () => {
             facts={[
               { label: "Project", value: "Self-initiated concept (Viteo is not a real company)" },
               { label: "Role", value: "Product Designer & Front-End Developer" },
-              { label: "Platform & Tools", value: "Web — Desktop, Tablet, Mobile · Next.js, React, CSS" },
+              { label: "Platform & Tools", value: "Web — Desktop, Tablet, Mobile · Next.js, React, three.js, CSS" },
               { label: "Live Prototype", value: <a className="cyril-dark" href={LIVE} target="_blank" rel="noopener">cyrilflorita.com/lab/viteo</a> },
             ]}
             tile="/viteo"
           />
 
-          <CaseLayout sections={SECTIONS}>
+          <CaseLayout sections={SECTIONS} railAction={{ href: LIVE, label: "Try the prototype" }}>
 
             {/* 01 — Overview */}
             <CaseSection id="overview" number={1} title="Overview">
@@ -89,7 +92,7 @@ const Page = () => {
               </ul>
               <p>Viteo answers each one: a two-minute quiz that builds a pack around how you live, a plan where every item says why it&apos;s there, and an account where skip, pause and swap are one tap each, with undo. I designed and built the whole product myself, from the brand and design system to a working, responsive front end.</p>
               <p>Two constraints shaped it from the start. It makes <strong>no health claims</strong> (the quiz suggests common supplements from lifestyle answers and keeps pointing people to a healthcare professional), and it takes <strong>no real payments</strong>: the payment step is a clearly labelled demo, and every page carries a &ldquo;concept project&rdquo; notice.</p>
-              <p><a className="cyril-button" href={LIVE} target="_blank" rel="noopener">Open the live prototype</a></p>
+              <p><a className="cyril-button" href={LIVE} target="_blank" rel="noopener">Open the live prototype <Arrow /></a></p>
               <Desktop name="landing" caption="Landing Page" />
             </CaseSection>
 
@@ -106,23 +109,32 @@ const Page = () => {
 
             {/* 03 — The Experience */}
             <CaseSection id="experience" number={3} title="The Experience">
-              <h3 className="cyril-case-subheading">A Landing Page That Shows the Product</h3>
-              <p>The landing page is a bento layout inside a rounded frame. The hero is a product shot in real 3D (the carton and all nine essentials, built with three.js, spinning gently and following the pointer) next to one clear call to action: take the two-minute quiz. Below it, cards preview the account, the quiz length and the ingredients, then How it works, every ingredient with its dose and form, sample reviews and an FAQ.</p>
-              <Desktop name="landing-full" caption="Full Landing Page" ratio="16 / 10" />
+              <h3 className="cyril-case-subheading">A Product You Can Turn Over</h3>
+              <p>The landing page opens on the product itself, in real 3D: the Viteo carton and all nine essentials, built with three.js. It follows the pointer, a soft light moves with it like a desk lamp, and while you&apos;re over the hero every piece turns slowly. The one call to action, take the two-minute quiz, sits beside it. On phones and tablets the same shot is a lightweight still, so they never download the 3D.</p>
+              <Desktop name="landing" caption="Landing Page" />
 
-              <h3 className="cyril-case-subheading">A Quiz That Feels Like a Conversation</h3>
-              <p>Eight short questions, one per screen, about how you eat, sleep and spend your days. Single answers advance on their own; questions that don&apos;t apply are skipped (vegetarians and vegans never see the fish question). A short &ldquo;building your pack&rdquo; moment shows the pills dropping in before the plan appears.</p>
+              <h3 className="cyril-case-subheading">A Story Told by Scrolling</h3>
+              <p>Scrolling turns the product into the page&apos;s guide. The carton tips toward you and opens, and its pills lift out and follow you down: three land in the How it works steps, then all nine settle into their Ingredients cards, which are already waiting for them. Scrolling back up plays it in reverse. The scene only draws while something is moving, so it costs nothing at rest.</p>
+              <Desktop name="story" caption="The Pack Opens" />
               <CaseGrid layout="two">
-                <Desktop name="quiz" caption="Quiz Question" path="quiz/" />
+                <Desktop name="steps" caption="Pills Land in the Steps" />
+                <Desktop name="ingredients" caption="…Then in Their Ingredients" />
+              </CaseGrid>
+
+              <h3 className="cyril-case-subheading">Every Ingredient, Up Close</h3>
+              <p>Every ingredient card opens a close-up: the pill grows out of its card onto a dark stage and turns in 3D, beside its dose and form, the exact quiz answers that add it to a pack, and what it&apos;s often packed with (one tap swaps to that one). A plain &ldquo;not medical advice&rdquo; note sits under every one.</p>
+              <Desktop name="closeup" caption="Ingredient Close-Up" />
+
+              <h3 className="cyril-case-subheading">A Quiz That Builds Your Pack as You Answer</h3>
+              <p>Eight short questions, one per screen, about how you eat, sleep and spend your days; questions that don&apos;t apply are skipped. Beside them, &ldquo;Your pack so far&rdquo; fills as you go: each answer that earns a pill drops it in with its reason, so cause and effect are visible. At the end the pills drop one by one into a pack printed with your name.</p>
+              <CaseGrid layout="two">
+                <Desktop name="quiz" caption="Your Pack So Far" path="quiz/" />
                 <Desktop name="quiz-building" caption="Building Your Pack" path="quiz/" />
               </CaseGrid>
 
-              <h3 className="cyril-case-subheading">A Plan That Explains Itself</h3>
-              <p>Every item in the pack comes with a plain &ldquo;why it&apos;s here&rdquo; tied to your answers, and you can remove anything or add from the rest of the range. Delivery frequency and a running price summary sit beside it, including the cost per day.</p>
+              <h3 className="cyril-case-subheading">A Pack With Your Name On It</h3>
+              <p>From the quiz on, the pack is yours: &ldquo;Victoria&apos;s Morning pack&rdquo; sits beside the pills on the plan, in the checkout summary and on the confirmation, and it glides from page to page as you move through. Every item in the plan says why it&apos;s there, and you can remove anything or add from the range. Checkout is four short steps with plain-language errors, a clearly labelled demo payment and a review you can edit.</p>
               <Desktop name="plan-full" caption="Your Plan" path="plan/" ratio="16 / 10" />
-
-              <h3 className="cyril-case-subheading">A Checkout With No Surprises</h3>
-              <p>Four short steps (details, delivery date, payment, review) with plain-language errors right under each field. The payment step says outright that this prototype doesn&apos;t take payments, and the review step lets you jump back to edit anything before the demo order is placed.</p>
               <CaseGrid layout="two">
                 <Desktop name="checkout-details" caption="Details" path="checkout/" />
                 <Desktop name="checkout-delivery" caption="Delivery Date" path="checkout/" />
@@ -132,7 +144,7 @@ const Page = () => {
               <Desktop name="checkout-confirmed" caption="Order Confirmed" path="checkout/" />
 
               <h3 className="cyril-case-subheading">An Account That Keeps People in Control</h3>
-              <p>The account opens on the next delivery, with Skip and Pause right there. Every change shows a toast with Undo, and the pack, frequency, address and a daily check-in streak are all editable in place.</p>
+              <p>The account opens on the next delivery, with Skip and Pause right there. A timeline runs from today across the next few months, and a tiny pack slides along it when you skip or pause; every change has Undo. The daily check-in is a pill organizer: checking a day off drops one of your own pills into its compartment.</p>
               <Desktop name="account-full" caption="Account" path="account/" ratio="16 / 10" />
             </CaseSection>
 
@@ -140,7 +152,7 @@ const Page = () => {
             <CaseSection id="system" number={4} title="Design System & Themes">
               <p>Everything is built on one set of design tokens, so the whole product can change its look without touching a component. To prove it, Viteo ships with two themes, each with dark and light modes, switchable from the header:</p>
               <ul className="cyril-case-list">
-                <li><strong>Aqua (default):</strong> navy ink on pastel teal, peach and lavender blocks, in Plus Jakarta Sans and Inter.</li>
+                <li><strong>Aqua (default):</strong> a cool palette of Dark Knight, Laguna, Cold Blue and Dr. White, in Plus Jakarta Sans and Inter.</li>
                 <li><strong>Grove:</strong> mint and leaf green, in Outfit and Figtree.</li>
               </ul>
               <CaseGrid layout="two">
@@ -154,25 +166,26 @@ const Page = () => {
               <Desktop name="design-system-full" caption="Design System" path="design-system/" ratio="16 / 10" />
               <h3 className="cyril-case-subheading">Details</h3>
               <ul className="cyril-case-list">
-                <li><strong>Pills modelled in 3D:</strong> capsules, softgels and tablets are built from each product&apos;s colors and form; the hero renders them live, and a script bakes the same models into images for every other screen, so a new product needs no new artwork.</li>
+                <li><strong>Pills modelled in 3D:</strong> capsules, softgels, scored tablets and caplets are built from each product&apos;s colors and form; the hero, scroll story and close-ups render them live, and a script bakes the same models into images for every other screen, so a new product needs no new artwork.</li>
                 <li><strong>Labels that don&apos;t look like buttons:</strong> sample content is stamped like a batch code on a bottle (&ldquo;Sample data · Lot 01&rdquo;), so it&apos;s clearly a label.</li>
-                <li><strong>Motion with restraint:</strong> sections fade and rise into place as you scroll, and every animation turns off for people who prefer reduced motion.</li>
+                <li><strong>Motion with restraint:</strong> a short intro plays once per visit, sections fade and rise into place, the routine chart draws itself in, and every animation turns off for people who prefer reduced motion.</li>
+                <li><strong>Accessible by default:</strong> every text color pair passes WCAG AA contrast in both themes and modes, form controls have visible boundaries, dialogs and the menu manage focus, and everything works with a keyboard.</li>
               </ul>
             </CaseSection>
 
             {/* 05 — Tablet & Mobile */}
             <CaseSection id="responsive" number={5} title="Tablet & Mobile">
-              <p>On tablets and phones the header folds into a hamburger that opens a full-screen menu with a circular wipe and staggered links, and the hamburger stays within reach as you scroll. The bento stacks into a single column, and every flow, including the quiz, checkout and account, works the same way on a phone.</p>
+              <p>On tablets and phones the product comes first on screen, the header folds into a hamburger that opens a full-screen menu with a circular wipe and staggered links, and the hamburger stays within reach as you scroll. The bento stacks into a single column, and every flow, including the quiz, the ingredient close-ups, checkout and account, works the same way on a phone.</p>
               <CaseGrid layout="two">
                 <CaseFigure src={`${P}tablet-landing.jpg`} alt="Viteo on a tablet — landing page" caption="Tablet · Landing" ratio="820 / 1180" />
                 <CaseFigure src={`${P}tablet-menu.jpg`} alt="Viteo on a tablet — menu" caption="Tablet · Menu" ratio="820 / 1180" />
               </CaseGrid>
               <CaseGrid layout="three">
                 <Phone name="landing" caption="Landing" />
-                <Phone name="menu" caption="Menu" />
+                <Phone name="ingredients" caption="Ingredients" />
+                <Phone name="closeup" caption="Ingredient Close-Up" />
                 <Phone name="quiz" caption="Quiz" />
                 <Phone name="account" caption="Account" />
-                <Phone name="checkout" caption="Checkout" />
                 <Phone name="landing-grove" caption="Grove · Light" />
               </CaseGrid>
             </CaseSection>
@@ -184,6 +197,7 @@ const Page = () => {
                   "Building the prototype instead of only drawing it surfaced the real decisions early: what happens when a quiz answer makes a question irrelevant, or when someone undoes a skip.",
                   "Driving every color from tokens made a second theme cheap, and it doubled as a test that no component had a hard-coded color.",
                   "Writing the copy as part of the design (the “why it’s here” lines, the demo labels, the plain-language errors) did as much for trust as any visual choice.",
+                  "Premium motion is mostly restraint: the 3D scene only draws while something moves (an always-running canvas made the glass cards flicker), and scrolling stays native (taking it over in JavaScript made it feel laggy).",
                 ]}
                 next={[
                   "Run moderated usability tests on the quiz and plan pages, and see where people hesitate or edit.",
@@ -192,6 +206,14 @@ const Page = () => {
                 ]}
               />
             </CaseSection>
+
+            <div className="cyril-case-cta">
+              <div>
+                <h3 className="cyril-case-subheading">See it for yourself</h3>
+                <p>Every flow works: take the quiz, open an ingredient, place a demo order and skip a delivery. Nothing is charged and nothing leaves your browser.</p>
+              </div>
+              <a className="cyril-button" href={LIVE} target="_blank" rel="noopener">Open the live prototype <Arrow /></a>
+            </div>
 
           </CaseLayout>
 

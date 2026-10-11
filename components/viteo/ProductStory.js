@@ -74,7 +74,7 @@ export default function ProductStory({ burst }) {
       } catch {
         return; // no WebGL: keep the CSS version
       }
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5)); // full-viewport canvas: keep it light
       renderer.outputColorSpace = THREE.SRGBColorSpace;
       renderer.toneMapping = THREE.NeutralToneMapping; // keeps brand colours true
 

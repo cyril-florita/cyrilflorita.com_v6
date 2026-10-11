@@ -166,7 +166,9 @@ export const CaseLink = ({ href, children, className = "cyril-accent" }) => {
   return <Link href={href} className={className} onClick={go}>{children}</Link>;
 };
 
-export const CaseLayout = ({ sections, children }) => {
+// `railAction` (optional): a { href, label } link shown in the rail above
+// "Back to My Work" (e.g. a live prototype), opened in a new tab.
+export const CaseLayout = ({ sections, children, railAction }) => {
   const router = useRouter();
   const [activeId, setActiveId] = useState(sections[0]?.id);
 
@@ -207,6 +209,12 @@ export const CaseLayout = ({ sections, children }) => {
           ))}
         </ol>
       </nav>
+      )}
+      {railAction && (
+        <a className="cyril-button cyril-case-rail-back cyril-case-rail-action" href={railAction.href} target="_blank" rel="noopener">
+          {railAction.label}
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" /></svg>
+        </a>
       )}
       <BackToAllWork onClick={() => wipeThen(() => router.push("/"))} className="cyril-case-rail-back" />
       </aside>
