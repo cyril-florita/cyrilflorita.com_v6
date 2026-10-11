@@ -1,0 +1,53 @@
+<!doctype html>
+<!-- Loaded by scripts/render-pills.mjs in headless Chrome: renders each Viteo
+     product's 3D pill (components/viteo/pillModels.js) to a transparent PNG. -->
+<meta charset="utf-8">
+<script type="importmap">
+{ "imports": { "three": "/node_modules/three/build/three.module.js", "three/addons/": "/node_modules/three/examples/jsm/" } }
+</script>
+<script type="module">
+import * as THREE from "three";
+import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+import { buildPill } from "/components/viteo/pillModels.js";
+import { PRODUCTS } from "/components/viteo/data.js";
+
+// Frame = the CSS pill box (world unit = 1 CSS px) plus PAD on every side;
+// the site scales the image up by the same factor so the pill fills its box.
+const PAD = 1.12, PX = 7; // output px per CSS px (sharp up to ~2.5× at 3× DPR)
+const BOXES = { capsule: [46, 18], softgel: [40, 22], tablet: [26, 26], oblong: [42, 19] };
+// A little 3D attitude so each reads as an object, not a flat badge.
+const POSE = { capsule: [-0.32, 0.22, 0], softgel: [-0.38, 0.18, 0], tablet: [-0.35, 0.15, 0], oblong: [-0.4, 0.2, 0] };
+
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.NeutralToneMapping;
+const pmrem = new THREE.PMREMGenerator(renderer);
+
+window.__render = async () => {
+  const out = {};
+  for (const p of Object.values(PRODUCTS)) {
+    const scene = new THREE.Scene();
+    scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+    scene.environmentIntensity = 0.5;
+    const key = new THREE.DirectionalLight(0xffffff, 1.1);
+    key.position.set(-4, 6, 8);
+    scene.add(key, new THREE.AmbientLight(0xffffff, 0.15));
+    const { inner } = buildPill(THREE, p, 1);
+    const g = new THREE.Group();
+    g.add(inner);
+    const kind = p.shape === "oblong" ? "oblong" : p.form;
+    g.rotation.set(...POSE[kind]);
+    scene.add(g);
+    const [bw, bh] = BOXES[kind];
+    const w = bw * PAD, h = bh * PAD;
+    const cam = new THREE.OrthographicCamera(-w / 2, w / 2, h / 2, -h / 2, 0.1, 200);
+    cam.position.set(0, 0, 100);
+    renderer.setSize(Math.round(w * PX), Math.round(h * PX), false);
+    renderer.render(scene, cam);
+    out[p.id] = renderer.domElement.toDataURL("image/png");
+  }
+  return out;
+};
+window.__ready = true;
+</script>

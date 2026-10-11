@@ -5,7 +5,8 @@
 export const BASE = "/lab/viteo";
 
 // The catalog. `color`/`color2` paint the pill illustration; `form` picks
-// its shape (capsule = two-tone, softgel = oval, tablet = round).
+// its shape (capsule = two-tone, softgel = oval, tablet = round, or an oblong
+// caplet with `shape: "oblong"`).
 export const PRODUCTS = {
   d3: {
     id: "d3",
@@ -18,6 +19,7 @@ export const PRODUCTS = {
   },
   b12: {
     id: "b12",
+    shape: "oblong", // a caplet rather than a round tablet
     name: "Vitamin B12",
     dose: "500 mcg",
     form: "tablet",
@@ -74,6 +76,7 @@ export const PRODUCTS = {
   },
   biotin: {
     id: "biotin",
+    shape: "oblong", // a caplet rather than a round tablet
     name: "Biotin",
     dose: "2,500 mcg",
     form: "tablet",

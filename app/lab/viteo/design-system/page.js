@@ -97,7 +97,7 @@ export default function DesignSystem() {
           </div>
         </Section>
 
-        <Section id="ds-pills" title="Pills" lede="Drawn in CSS from each product's color and form, so a new product needs no new artwork.">
+        <Section id="ds-pills" title="Pills" lede="Modelled in 3D from each product's color and form and rendered by a script, so a new product needs no new artwork.">
           <ul className="dl-ds-pills">
             {Object.values(PRODUCTS).map((p) => (
               <li key={p.id}>

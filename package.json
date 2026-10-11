@@ -22,7 +22,8 @@
     "react-dom": "^19.2.6",
     "react-player": "^3.4.0",
     "ssh2-sftp-client": "^12.0.0",
-    "swiper": "^12.1.4"
+    "swiper": "^12.1.4",
+    "three": "0.185.1"
   },
   "overrides": {
     "postcss": "^8.4.31"

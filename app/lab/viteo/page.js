@@ -1,5 +1,7 @@
 import { BASE, PRODUCTS, SAMPLE_REVIEWS, money } from "@/components/viteo/data";
 import Link from "next/link";
+import HeroParallax from "@/components/viteo/HeroParallax";
+import ProductScene from "@/components/viteo/ProductScene";
 import { Arrow, BigWordHead, Button, Pill, PillTray, ProductBox } from "@/components/viteo/ui";
 
 export const metadata = {
@@ -191,11 +193,11 @@ const BURST = [
   ["d3", 86, 25, 1.7, 20],
   ["omega", 71, 36, 1.6, -15],
   ["probiotic", 90, 46, 1.45, 62],
-  ["b12", 76, 56, 1.5, 0],
+  ["b12", 76, 56, 1.4, 28],
   ["theanine", 8, 34, 1.35, 28],
   ["zinc", 60, 88, 1.4, 0],
   ["c", 41, 91, 1.5, 0],
-  ["biotin", 15, 84, 1.35, 0],
+  ["biotin", 15, 84, 1.3, -32],
 ];
 const burst = ([id, x, y, scale, tilt], i) => (
   <span
@@ -224,11 +226,11 @@ export default function Landing() {
                 Personalized daily vitamins
               </p>
               <h1 className="dl-display">
-                Your vitamins <em>made for your days.</em>
+                 Your routine, <em>with the right vitamins.</em>
               </h1>
               <p className="dl-lede">
                 Answer eight quick questions. We&apos;ll build a daily pack
-                around how you actually live, explain every item in it, and
+                tailored around your lifestyle, walk you through every ingredient, and
                 deliver it on your schedule.
               </p>
               <Link className="dl-underline-cta" href={`${BASE}/quiz/`}>
@@ -253,7 +255,9 @@ export default function Landing() {
               >
                 <ProductBox />
                 {BURST.map(burst)}
+                <ProductScene burst={BURST} />
               </div>
+              <HeroParallax />
               <span className="dl-badge" aria-hidden="true">
                 <svg viewBox="0 0 100 100">
                   <defs>
@@ -365,7 +369,7 @@ export default function Landing() {
       <section id="ingredients" className="dl-section dl-section-tint">
         <div className="dl-wrap">
           <BigWordHead word="Ingredients">
-            <h2 className="dl-h2">Nine essentials. Nothing hidden.</h2>
+            <h2 className="dl-h2">Nine essentials.</h2>
           </BigWordHead>
           <p className="dl-section-lede">
             Each one comes with its dose, its form, and why it might be in your

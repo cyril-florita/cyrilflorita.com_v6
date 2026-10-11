@@ -445,7 +445,7 @@ body:has(.dl[data-dl-theme="aqua"][data-dl-mode="dark"]) { background: #4E5285; 
 .dl-chip:hover { border-color: var(--dl-sun); background: var(--dl-selected); }
 .dl-note { margin-top: 24px; padding: 16px 20px; border-radius: 14px; background: var(--dl-butter); font-size: 15px; }
 
-/* ---------- pills (drawn in CSS) ---------- */
+/* ---------- pills: CSS drawings (superseded by the 3D renders, see .dl-pill-3d at the end; kept for sizing) ---------- */
 .dl-pill { display: inline-block; position: relative; flex: none; transform: rotate(var(--tilt, 0deg)); }
 /* Premium, product-render look, all in CSS. Shared: a light from the top
    left; dark mode adds a soft shadow that follows the shape (light mode is
@@ -1009,7 +1009,29 @@ body:has(.dl[data-dl-theme="aqua"][data-dl-mode="dark"]) { background: #4E5285; 
    it (all nine essentials). The box is big enough to break out over the
    circle's edge. Sized off the art box (container units). Pills bob gently
    on desktop. */
-.dl-product { position: relative; width: min(560px, 100%); aspect-ratio: 1; container-type: inline-size; perspective: 1100px; }
+.dl-product {
+  position: relative; width: min(560px, 100%); aspect-ratio: 1; container-type: inline-size; perspective: 1100px;
+  --px: 0; --py: 0; /* pointer position over the hero, -1…1 (HeroParallax.js) */
+  transition: scale 0.7s var(--dl-ease);
+}
+/* Real 3D version (ProductScene.js, desktop): a WebGL canvas overhanging the
+   square by 15% each side; it fades in, and the CSS box and pills step aside
+   only once its first frame is drawn (.is-3d). */
+.dl-product-3d {
+  position: absolute; inset: -15%; width: 130%; height: 130%; z-index: 2; pointer-events: none;
+  opacity: 0; transition: opacity 0.6s ease;
+  /* Cut the overhang at the bottom so the canvas never overlaps the bento
+     cards below (their glass blur flickered under a live canvas). */
+  clip-path: inset(0 0 9% 0);
+}
+.dl-product.is-3d .dl-product-3d { opacity: 1; }
+.dl-product.is-3d > :is(.dl-box, .dl-burst) { visibility: hidden; }
+@media (max-width: 960px) { .dl-product-3d { display: none; } }
+
+/* Hovering the hero's main call to action brings the product shot forward. */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .dl-bento-hero:has(.dl-underline-cta:hover, .dl-underline-cta:focus-visible) .dl-product { scale: 1.07; }
+}
 .dl-product::before { /* soft light behind the box */
   content: ""; position: absolute; inset: 14%; border-radius: 50%;
   background: radial-gradient(circle, color-mix(in srgb, var(--dl-panel-1) 26%, transparent), transparent 68%);
@@ -1017,7 +1039,10 @@ body:has(.dl[data-dl-theme="aqua"][data-dl-mode="dark"]) { background: #4E5285; 
 .dl-box {
   position: absolute; z-index: 1; left: 15%; top: -7%; width: 47%; height: 86%;
   --d: 15cqw; transform-style: preserve-3d;
-  transform: rotateY(-26deg) rotateX(-7deg) rotateZ(-5deg);
+  /* Parallax: the box sits mid-depth, so it travels a little and turns
+     toward the pointer. */
+  translate: calc(var(--px) * 1.4cqw) calc(var(--py) * 1.4cqw);
+  transform: rotateY(calc(-26deg + var(--px) * 9deg)) rotateX(calc(-7deg - var(--py) * 6deg)) rotateZ(-5deg);
 }
 .dl-box > div { position: absolute; backface-visibility: hidden; }
 .dl-box-front {
@@ -1052,11 +1077,13 @@ body:has(.dl[data-dl-theme="aqua"][data-dl-mode="dark"]) { background: #4E5285; 
   background: linear-gradient(180deg, color-mix(in srgb, var(--dl-panel-1) 60%, #fff), color-mix(in srgb, var(--dl-panel-1) 85%, #fff));
 }
 .dl-burst {
-  position: absolute; z-index: 2; left: var(--x); top: var(--y); translate: -50% -50%;
+  position: absolute; z-index: 2; left: var(--x); top: var(--y);
+  /* Parallax: pills are nearer than the box; bigger (nearer) ones travel further. */
+  translate: calc(-50% + var(--px) * var(--s) * 2.6cqw) calc(-50% + var(--py) * var(--s) * 2.6cqw);
   filter: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.55));
 }
-.dl .dl-burst .dl-pill { transform: rotate(var(--tilt, 0deg)) scale(var(--s)); }
-@media (max-width: 680px) { .dl .dl-burst .dl-pill { transform: rotate(var(--tilt, 0deg)) scale(calc(var(--s) * 0.68)); } }
+.dl .dl-burst .dl-pill { transform: rotate(var(--tilt, 0deg)) scale(calc(var(--s) * 1.3)); }
+@media (max-width: 680px) { .dl .dl-burst .dl-pill { transform: rotate(var(--tilt, 0deg)) scale(calc(var(--s) * 0.88)); } }
 @keyframes dl-bob { 50% { transform: translateY(-1.8cqw); } }
 @media (min-width: 961px) and (prefers-reduced-motion: no-preference) {
   .dl-burst { animation: dl-bob 5s ease-in-out infinite; animation-delay: calc(var(--i) * -0.7s); }
@@ -1295,4 +1322,39 @@ body:has(.dl[data-dl-theme="aqua"][data-dl-mode="dark"]) { background: #4E5285; 
 
 @media (prefers-reduced-motion: reduce) {
   .dl *, .dl *::before, .dl *::after { animation: none !important; transition: none !important; }
+}
+
+/* Pills as 3D renders (Pill in ui.js): the baked image replaces the CSS
+   drawing. Each PNG is the form's CSS box plus 12% padding on every side
+   (scripts/render-pills.html), so it's scaled up by that much to fill the
+   box exactly. Sizes, tilts and the dark-mode drop shadow are unchanged. */
+.dl .dl-pill.dl-pill-3d {
+  background: var(--img) center / 112% 112% no-repeat !important;
+  box-shadow: none !important;
+  border-radius: 0;
+}
+.dl .dl-pill.dl-pill-3d::before, .dl .dl-pill.dl-pill-3d::after { content: none; }
+/* Oblong caplets (shape: "oblong" in data.js) get their own box. */
+.dl .dl-pill.dl-pill-oblong { width: 42px; height: 19px; }
+
+/* Ingredients: hovering a card makes its pill hop up with a turn, then sway
+   gently while the pointer stays (individual transform properties, so they
+   compose with the pill's own tilt/scale). Off under reduced motion. */
+.dl-ingredient-pill { transition: background-color 0.3s; }
+.dl-ingredient { transition: scale 0.45s var(--dl-ease), border-color 0.3s; }
+.dl-ingredient-pill .dl-pill { transition: scale 0.4s var(--dl-ease); }
+@keyframes dl-pill-hop {
+  0% { translate: 0 0; rotate: 0deg; }
+  40% { translate: 0 -9px; rotate: -16deg; }
+  70% { translate: 0 1px; rotate: 8deg; }
+  100% { translate: 0 0; rotate: 0deg; }
+}
+@keyframes dl-pill-sway { 50% { translate: 0 -3px; rotate: 6deg; } }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .dl-ingredient:hover .dl-ingredient-pill .dl-pill {
+    scale: 1.18;
+    animation: dl-pill-hop 0.8s var(--dl-ease), dl-pill-sway 2.6s ease-in-out 0.8s infinite;
+  }
+  .dl-ingredient:hover { scale: 1.03; position: relative; z-index: 1; }
+  .dl-ingredient:hover .dl-ingredient-pill { background-color: color-mix(in srgb, var(--dl-well) 60%, var(--dl-sun) 14%); }
 }

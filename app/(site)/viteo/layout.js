@@ -1,6 +1,6 @@
 // Server layout so this route can export metadata (page.js is a client component).
 const title = "Viteo — Personalized Vitamins (Concept)";
-const description = "A self-initiated product concept: a personalized vitamin subscription, designed and built end to end — quiz, plan, checkout and account.";
+const description = "A product concept: a personalized vitamin subscription, designed and built end to end — quiz, plan, checkout and account.";
 const url = "/viteo/";
 const images = [{ url: "/og/viteo.jpg", width: 1200, height: 630, alt: "Viteo concept prototype" }];
 

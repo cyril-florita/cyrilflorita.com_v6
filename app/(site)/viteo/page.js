@@ -107,7 +107,7 @@ const Page = () => {
             {/* 03 — The Experience */}
             <CaseSection id="experience" number={3} title="The Experience">
               <h3 className="cyril-case-subheading">A Landing Page That Shows the Product</h3>
-              <p>The landing page is a bento layout inside a rounded frame. The hero is a product shot built entirely in CSS (a 3D box with all nine essentials spilling out around it) next to one clear call to action: take the two-minute quiz. Below it, cards preview the account, the quiz length and the ingredients, then How it works, every ingredient with its dose and form, sample reviews and an FAQ.</p>
+              <p>The landing page is a bento layout inside a rounded frame. The hero is a product shot in real 3D (the carton and all nine essentials, built with three.js, spinning gently and following the pointer) next to one clear call to action: take the two-minute quiz. Below it, cards preview the account, the quiz length and the ingredients, then How it works, every ingredient with its dose and form, sample reviews and an FAQ.</p>
               <Desktop name="landing-full" caption="Full Landing Page" ratio="16 / 10" />
 
               <h3 className="cyril-case-subheading">A Quiz That Feels Like a Conversation</h3>
@@ -154,7 +154,7 @@ const Page = () => {
               <Desktop name="design-system-full" caption="Design System" path="design-system/" ratio="16 / 10" />
               <h3 className="cyril-case-subheading">Details</h3>
               <ul className="cyril-case-list">
-                <li><strong>Pills drawn in CSS:</strong> capsules, softgels and tablets are rendered from each product&apos;s colors, so a new product needs no new artwork.</li>
+                <li><strong>Pills modelled in 3D:</strong> capsules, softgels and tablets are built from each product&apos;s colors and form; the hero renders them live, and a script bakes the same models into images for every other screen, so a new product needs no new artwork.</li>
                 <li><strong>Labels that don&apos;t look like buttons:</strong> sample content is stamped like a batch code on a bottle (&ldquo;Sample data · Lot 01&rdquo;), so it&apos;s clearly a label.</li>
                 <li><strong>Motion with restraint:</strong> sections fade and rise into place as you scroll, and every animation turns off for people who prefer reduced motion.</li>
               </ul>
