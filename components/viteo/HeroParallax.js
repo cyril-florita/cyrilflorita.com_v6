@@ -22,6 +22,9 @@ export default function HeroParallax() {
       y += (ty - y) * 0.08;
       product.style.setProperty("--px", x.toFixed(4));
       product.style.setProperty("--py", y.toFixed(4));
+      // The "desk lamp": the hero's light follows the pointer (viteo.css).
+      hero.style.setProperty("--lx", `${(50 + x * 50).toFixed(1)}%`);
+      hero.style.setProperty("--ly", `${(50 + y * 50).toFixed(1)}%`);
       frame = Math.abs(tx - x) > 0.001 || Math.abs(ty - y) > 0.001 ? requestAnimationFrame(tick) : 0;
     };
     const run = () => { if (!frame) frame = requestAnimationFrame(tick); };

@@ -1,7 +1,9 @@
 import { BASE, PRODUCTS, SAMPLE_REVIEWS, money } from "@/components/viteo/data";
 import Link from "next/link";
 import HeroParallax from "@/components/viteo/HeroParallax";
-import ProductScene from "@/components/viteo/ProductScene";
+import IntroMoment from "@/components/viteo/IntroMoment";
+import ProductStory from "@/components/viteo/ProductStory";
+import Ingredients from "@/components/viteo/Ingredients";
 import { Arrow, BigWordHead, Button, Pill, PillTray, ProductBox } from "@/components/viteo/ui";
 
 export const metadata = {
@@ -11,16 +13,19 @@ export const metadata = {
 const STEPS = [
   {
     n: "01",
+    pill: "d3",
     title: "Take the 2-minute quiz",
     text: "A few questions about how you eat, sleep and spend your days. No account needed.",
   },
   {
     n: "02",
+    pill: "magnesium",
     title: "Get a pack that explains itself",
     text: "Every item comes with a plain reason it's there, and you can add or remove anything.",
   },
   {
     n: "03",
+    pill: "c",
     title: "Stay in control",
     text: "Skip, pause or swap from your account in a tap. No calls, no fine print.",
   },
@@ -133,20 +138,26 @@ const RoutineChart = () => {
             d={`${curve(THIS_YEAR)} L${pt(0, 5)[0]},${CH - 28} L${X0},${CH - 28} Z`}
             fill="var(--dl-dark-accent)"
             opacity="0.14"
+            className="dl-chart-area"
           />
           <path
             d={curve(LAST_YEAR)}
+            className="dl-chart-line"
+            pathLength="1"
             fill="none"
             stroke="var(--dl-panel-1)"
             strokeWidth="2.5"
           />
           <path
             d={curve(THIS_YEAR)}
+            className="dl-chart-line is-main"
+            pathLength="1"
             fill="none"
             stroke="var(--dl-dark-accent)"
             strokeWidth="2.5"
           />
           <line
+            className="dl-chart-mark"
             x1={tx}
             x2={tx}
             y1={ty}
@@ -155,6 +166,7 @@ const RoutineChart = () => {
             strokeWidth="1.5"
           />
           <circle
+            className="dl-chart-mark"
             cx={tx}
             cy={ty}
             r="7"
@@ -163,7 +175,7 @@ const RoutineChart = () => {
             strokeWidth="3"
           />
           <g
-            className="dl-chart-tip"
+            className="dl-chart-tip dl-chart-mark"
             transform={`translate(${tx - 46}, ${ty - 46})`}
           >
             <rect width="92" height="28" rx="10" />
@@ -221,6 +233,37 @@ export default function Landing() {
                 Take the quiz
               </Button>
             </div>
+            <div className="dl-bento-art">
+              <span className="dl-orbit" aria-hidden="true" />
+              <div
+                className="dl-product"
+                role="img"
+                aria-label="A Viteo Morning pack box with all nine essentials spilling out around it"
+              >
+                <ProductBox morph={false} />
+                {BURST.map(burst)}
+              </div>
+              <HeroParallax />
+              <span className="dl-badge" aria-hidden="true">
+                <svg viewBox="0 0 100 100">
+                  <defs>
+                    <path
+                      id="dl-badge-path"
+                      d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"
+                    />
+                  </defs>
+                  <text>
+                    <textPath
+                      href="#dl-badge-path"
+                      textLength="236"
+                      lengthAdjust="spacing"
+                    >
+                      Personalized · Explained · Daily ·
+                    </textPath>
+                  </text>
+                </svg>
+              </span>
+            </div>
             <div className="dl-bento-copy">
               <p className="dl-eyebrow dl-hero-eyebrow">
                 Personalized daily vitamins
@@ -246,44 +289,12 @@ export default function Landing() {
                 </Link>
               </p>
             </div>
-            <div className="dl-bento-art">
-              <span className="dl-orbit" aria-hidden="true" />
-              <div
-                className="dl-product"
-                role="img"
-                aria-label="A Viteo Morning pack box with all nine essentials spilling out around it"
-              >
-                <ProductBox />
-                {BURST.map(burst)}
-                <ProductScene burst={BURST} />
-              </div>
-              <HeroParallax />
-              <span className="dl-badge" aria-hidden="true">
-                <svg viewBox="0 0 100 100">
-                  <defs>
-                    <path
-                      id="dl-badge-path"
-                      d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"
-                    />
-                  </defs>
-                  <text>
-                    <textPath
-                      href="#dl-badge-path"
-                      textLength="236"
-                      lengthAdjust="spacing"
-                    >
-                      Personalized · Explained · Daily ·
-                    </textPath>
-                  </text>
-                </svg>
-              </span>
-            </div>
           </div>
 
           <div className="dl-bento-row">
             <RoutineChart />
 
-            <div className="dl-panel dl-panel-2 dl-bento-card">
+            <div className="dl-panel dl-panel-2 dl-bento-card is-link">
               <div className="dl-bento-card-top">
                 {/* A stopwatch, three-quarters round: "2 min". */}
                 <svg
@@ -324,7 +335,7 @@ export default function Landing() {
               </div>
             </div>
 
-            <div className="dl-panel dl-panel-3 dl-bento-card">
+            <div className="dl-panel dl-panel-3 dl-bento-card is-link">
               <div className="dl-bento-card-top">
                 <span className="dl-pill-label is-solid">9 essentials</span>
                 <a
@@ -353,6 +364,10 @@ export default function Landing() {
                 key={s.n}
                 className={`dl-panel dl-panel-${STEPS.indexOf(s) + 1} dl-step`}
               >
+                {/* A pill docks here on its way down the page (ProductStory). */}
+                <span className="dl-step-pill" data-story-pill={s.pill}>
+                  <Pill id={s.pill} size="lg" tilt={-20} />
+                </span>
                 <h3>{s.title}</h3>
                 <p>{s.text}</p>
                 {/* The list numbers the steps; the numeral is decoration. */}
@@ -375,22 +390,7 @@ export default function Landing() {
             Each one comes with its dose, its form, and why it might be in your
             pack.
           </p>
-          <ul className="dl-ingredients">
-            {Object.values(PRODUCTS).map((p) => (
-              <li key={p.id} className="dl-card dl-glass dl-ingredient">
-                <span className="dl-ingredient-pill">
-                  <Pill id={p.id} size="lg" tilt={-20} />
-                </span>
-                <div>
-                  <h3>{p.name}</h3>
-                  <p className="dl-meta">
-                    {p.dose} · {p.form} · {money(p.price)}/mo
-                  </p>
-                  <p>{p.blurb}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
+          <Ingredients />
         </div>
       </section>
 
@@ -449,6 +449,9 @@ export default function Landing() {
           </Link>
         </div>
       </section>
+      {/* The 3D product story over the page (desktop). */}
+      <ProductStory burst={BURST} />
+      <IntroMoment />
     </>
   );
 }

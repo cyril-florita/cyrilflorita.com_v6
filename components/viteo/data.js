@@ -16,6 +16,9 @@ export const PRODUCTS = {
     color: "#F6C453",
     price: 5,
     blurb: "The sunshine vitamin, for days spent mostly indoors.",
+    // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
+    reasons: ["You spend most of the day indoors.", "Your daily time outside is on the short side.", "It rounds out packs that would otherwise have fewer than three items."],
+    pairs: ["omega"],
   },
   b12: {
     id: "b12",
@@ -26,6 +29,9 @@ export const PRODUCTS = {
     color: "#E58E73",
     price: 4,
     blurb: "Found mostly in animal foods, so plant-based diets often fall short.",
+    // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
+    reasons: ["You eat mostly or fully plant-based.", "You'd like steadier energy through the day."],
+    pairs: ["omega"],
   },
   omega: {
     id: "omega",
@@ -35,6 +41,9 @@ export const PRODUCTS = {
     color: "#7FB3A6",
     price: 9,
     blurb: "Plant-sourced EPA & DHA, for when fish isn't on the menu.",
+    // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
+    reasons: ["Fish isn't part of your diet.", "Oily fish rarely makes it onto your plate.", "It rounds out packs that would otherwise have fewer than three items."],
+    pairs: ["b12", "d3"],
   },
   magnesium: {
     id: "magnesium",
@@ -45,6 +54,9 @@ export const PRODUCTS = {
     color2: "#F4EFFB",
     price: 6,
     blurb: "A gentle form, often taken in the evening.",
+    // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
+    reasons: ["You'd like help winding down.", "You mentioned restless nights.", "You train hard most weeks."],
+    pairs: [],
   },
   c: {
     id: "c",
@@ -54,6 +66,9 @@ export const PRODUCTS = {
     color: "#F29E4C",
     price: 4,
     blurb: "A daily staple for busy weeks.",
+    // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
+    reasons: ["You picked busy-season support.", "It rounds out packs that would otherwise have fewer than three items."],
+    pairs: ["zinc"],
   },
   zinc: {
     id: "zinc",
@@ -63,6 +78,9 @@ export const PRODUCTS = {
     color: "#9FB7C9",
     price: 4,
     blurb: "A small daily dose to round out the pack.",
+    // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
+    reasons: ["You picked busy-season support (it joins vitamin C)."],
+    pairs: ["c"],
   },
   probiotic: {
     id: "probiotic",
@@ -73,6 +91,9 @@ export const PRODUCTS = {
     color2: "#F1F7EE",
     price: 8,
     blurb: "Five well-studied strains in a delayed-release capsule.",
+    // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
+    reasons: ["You'd like to focus on digestion."],
+    pairs: [],
   },
   biotin: {
     id: "biotin",
@@ -83,6 +104,9 @@ export const PRODUCTS = {
     color: "#E7A9C0",
     price: 5,
     blurb: "A B vitamin people often add for hair and nails.",
+    // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
+    reasons: ["You picked hair & nails."],
+    pairs: [],
   },
   theanine: {
     id: "theanine",
@@ -93,6 +117,9 @@ export const PRODUCTS = {
     color2: "#EEF4FB",
     price: 7,
     blurb: "An amino acid from tea leaves, paired with your morning coffee.",
+    // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
+    reasons: ["You'd like calm focus."],
+    pairs: [],
   },
 };
 
@@ -188,7 +215,9 @@ export const QUESTIONS = [
 ];
 
 // The quiz answers -> recommended products, each with a plain reason.
-export const recommend = (a) => {
+// `fill: false` skips the "at least three" top-up, so the quiz can show only
+// what the answers so far have earned.
+export const recommend = (a, { fill = true } = {}) => {
   const picks = [];
   const add = (id, why) => {
     if (!picks.find((p) => p.id === id)) picks.push({ id, why });
@@ -208,7 +237,7 @@ export const recommend = (a) => {
   if (goals.includes("focus")) add("theanine", "You'd like calm focus.");
   if (goals.includes("energy") && !picks.find((p) => p.id === "b12")) add("b12", "You'd like steadier energy through the day.");
   // Always at least three, so every pack feels complete.
-  ["d3", "omega", "c"].forEach((id) => {
+  if (fill) ["d3", "omega", "c"].forEach((id) => {
     if (picks.length < 3) add(id, "A well-rounded everyday addition.");
   });
   return picks.slice(0, 6);

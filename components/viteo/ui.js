@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { ViewTransition, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { BASE, PRODUCTS } from "./data";
 
 // Shared Viteo UI: logo, pill illustrations, buttons, and the page shell
@@ -81,12 +81,18 @@ export const PillTray = ({ ids, label = "Your daily pack", size = "lg" }) => (
 
 // The Viteo product box, drawn in CSS (front, side and top faces; styles
 // under "Hero product shot" in viteo.css). Sized by its container: put it in
-// a .dl-product (landing hero) or .dl-product-sm (order confirmation).
-export const ProductBox = ({ name = "Morning pack" }) => (
+// a .dl-product (landing hero), .dl-product-sm (order confirmation) or
+// .dl-product-xs (plan, checkout summary, quiz finale).
+// `owner` prints the customer's name on the pack ("Victoria's"). `morph`
+// (default) names it for page transitions, so the same pack moves from page
+// to page; the landing hero turns it off (its 3D version takes over there).
+export const ProductBox = ({ name = "Morning pack", owner, morph = true }) => {
+  const box = (
   <div className="dl-box">
     <div className="dl-box-front">
       <span className="dl-box-brand">Viteo</span>
       <span className="dl-box-info">
+        {owner && <span className="dl-box-owner">{owner}&apos;s</span>}
         <span className="dl-box-name">{name}</span>
         <span className="dl-box-meta">30 daily packs</span>
       </span>
@@ -96,7 +102,13 @@ export const ProductBox = ({ name = "Morning pack" }) => (
     </div>
     <div className="dl-box-top" />
   </div>
-);
+  );
+  return morph ? (
+    <ViewTransition name="dl-pack" share="dl-morph" default="none">
+      {box}
+    </ViewTransition>
+  ) : box;
+};
 
 export const Button = ({
   href,
@@ -170,7 +182,7 @@ export const THEMES = [
     id: "aqua",
     label: "Aqua",
     fonts: "Plus Jakarta Sans + Inter",
-    color: "#A6E0E8",
+    color: "#7DE2DF",
   },
   {
     id: "grove",

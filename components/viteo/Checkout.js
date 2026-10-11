@@ -126,7 +126,7 @@ export default function Checkout() {
         <div className="dl-wrap dl-confirm dl-panel dl-panel-1">
           {/* The box that's on its way, in place of a generic success badge. */}
           <div className="dl-product dl-product-sm" aria-hidden="true">
-            <ProductBox name={placed.time === "evening" ? "Evening pack" : "Morning pack"} />
+            <ProductBox name={placed.time === "evening" ? "Evening pack" : "Morning pack"} owner={placed.name || undefined} />
           </div>
           <BigWordHead word="Confirmed">
             <h1 className="dl-h2" tabIndex={-1} ref={headingRef}>You&apos;re all set{placed.name ? `, ${placed.name}` : ""}.</h1>
@@ -235,6 +235,9 @@ export default function Checkout() {
 
           <aside className="dl-card dl-panel dl-panel-2 dl-summary" aria-label="Order summary">
             <h2 className="dl-h3">Your pack</h2>
+            <div className="dl-product dl-product-xs" aria-hidden="true">
+              <ProductBox name={answers?.time === "evening" ? "Evening pack" : "Morning pack"} owner={answers?.name?.trim() || undefined} />
+            </div>
             <PillTray ids={cart.items.map((i) => i.id)} label="Your pack" size="sm" />
             <ul className="dl-summary-items">
               {cart.items.map((i) => (

@@ -1,5 +1,5 @@
 // Viteo's 3D pill models (three.js), shared by the live hero scene
-// (ProductScene.js) and the pill image renderer (scripts/render-pills.mjs,
+// (ProductStory.js) and the pill image renderer (scripts/render-pills.mjs,
 // which bakes them into public/img/viteo/pills/<id>.png for every other
 // pill on the site). Plain ESM with THREE passed in, so the renderer can load
 // it straight in a browser without bundling.
@@ -51,26 +51,31 @@ export function buildPill(THREE, product, unit, keep = (o) => o) {
     return { inner, spinAxis: "z" };
   }
 
-  // Tablets are extruded shapes facing the camera (+z), with rounded,
-  // bevelled edges: round tablets carry a score line, oblong caplets
-  // (product.shape === "oblong") are plain and domed. The score is part of the
-  // face itself (a colour texture plus a bump map on the caps, mapped in the
-  // shape's own coordinates), so it can't drift off the tablet at any angle.
-  const oblong = product.shape === "oblong";
-  const W = (oblong ? 42 : 26) * unit, H = (oblong ? 19 : 26) * unit;
-  const bevSize = (oblong ? 5.5 : 3) * unit, bevThick = (oblong ? 4.6 : 3) * unit;
-  const thick = (oblong ? 11 : 9) * unit;
-  const iw = W - 2 * bevSize, ih = H - 2 * bevSize, r = Math.min(iw, ih) / 2;
-  const shape = new THREE.Shape();
-  if (oblong) {
-    shape.moveTo(-iw / 2 + r, -r);
-    shape.lineTo(iw / 2 - r, -r);
-    shape.absarc(iw / 2 - r, 0, r, -Math.PI / 2, Math.PI / 2, false);
-    shape.lineTo(-iw / 2 + r, r);
-    shape.absarc(-iw / 2 + r, 0, r, Math.PI / 2, (3 * Math.PI) / 2, false);
-  } else {
-    shape.absarc(0, 0, r, 0, Math.PI * 2, false);
+  // Oblong caplets (product.shape === "oblong"): a capsule flattened front to
+  // back — a stadium outline with smoothly domed faces and fully rounded
+  // ends. (An extruded stadium needed a bevel wider than its end radius,
+  // which folded over itself and left rough corners.)
+  if (product.shape === "oblong") {
+    const R = 9.5 * unit, straight = 23 * unit; // 42 × 19 overall
+    const m = new THREE.Mesh(
+      keep(new THREE.CapsuleGeometry(R, straight, 24, 72, 4)),
+      keep(new THREE.MeshPhysicalMaterial({ color, roughness: 0.58, clearcoat: 0.2, clearcoatRoughness: 0.4 })),
+    );
+    m.rotation.z = Math.PI / 2; // lie along x
+    m.scale.z = 11 / 19; // 11 thick
+    inner.add(m);
+    return { inner, spinAxis: "z" };
   }
+
+  // Round tablets: an extruded disc facing the camera (+z) with a rounded,
+  // bevelled edge. The score is part of the face itself (a colour texture
+  // plus a bump map on the caps, mapped in the shape's own coordinates), so
+  // it can't drift off the tablet at any angle.
+  const W = 26 * unit, H = 26 * unit;
+  const bevSize = 3 * unit, bevThick = 3 * unit, thick = 9 * unit;
+  const r = (W - 2 * bevSize) / 2;
+  const shape = new THREE.Shape();
+  shape.absarc(0, 0, r, 0, Math.PI * 2, false);
   const depth = Math.max(thick - 2 * bevThick, 0.01 * unit);
   const geo = keep(new THREE.ExtrudeGeometry(shape, {
     depth, bevelEnabled: true, bevelThickness: bevThick, bevelSize: bevSize, bevelSegments: 16, curveSegments: 48,
@@ -78,7 +83,7 @@ export function buildPill(THREE, product, unit, keep = (o) => o) {
   geo.translate(0, 0, -depth / 2);
   const side = keep(new THREE.MeshPhysicalMaterial({ color, roughness: 0.62, clearcoat: 0.15 }));
   let face = side;
-  if (!oblong && typeof document !== "undefined") {
+  if (typeof document !== "undefined") {
     // Face art in the cap's own (x, y) coordinates: base colour with a
     // slightly darker groove, and a bump map that sinks the groove in.
     const px = 256;

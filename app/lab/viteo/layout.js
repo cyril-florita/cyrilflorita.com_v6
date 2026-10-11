@@ -1,6 +1,8 @@
+import { ViewTransition } from "react";
 import { Outfit, Figtree, Plus_Jakarta_Sans, Inter } from "next/font/google";
 import { Header, Footer, ToTop } from "@/components/viteo/ui";
 import Reveal from "@/components/viteo/Reveal";
+import ScrollMotion from "@/components/viteo/ScrollMotion";
 import "./viteo.css";
 
 // Viteo: a fictional personalized-vitamin subscription, built as a
@@ -46,11 +48,17 @@ export default function ViteoLayout({ children }) {
       <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       <div className="dl-frame">
         <Header />
-        <main id="main" tabIndex={-1}>{children}</main>
+        {/* Page changes animate (View Transitions): the content eases out and the
+            next page rises in; the printed pack morphs between pages
+            (ProductBox). Header and footer stay put. */}
+        <ViewTransition name="dl-main">
+          <main id="main" tabIndex={-1}>{children}</main>
+        </ViewTransition>
         <Footer />
       </div>
       <ToTop />
       <Reveal />
+      <ScrollMotion />
     </div>
   );
 }

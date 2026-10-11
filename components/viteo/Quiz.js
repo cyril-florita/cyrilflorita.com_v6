@@ -1,15 +1,17 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { BASE, QUESTIONS, recommend } from "./data";
+import { BASE, PRODUCTS, QUESTIONS, recommend } from "./data";
 import { write } from "./store";
-import { Arrow, BigWordHead, Button, PillTray } from "./ui";
+import { Arrow, BigWordHead, Button, Pill, PillTray, ProductBox } from "./ui";
 
 // The quiz: one question per screen, with a progress bar. Single-choice
 // questions advance on their own after a short beat; multi-choice and the
 // name step use Continue. Questions can be skipped by earlier answers (no
-// fish question for plant-based diets). The last screen "builds" the pack,
-// then hands off to /plan/.
+// fish question for plant-based diets). Beside the questions, "Your pack so
+// far" fills live as answers earn pills (each drops in with its reason), on
+// a pack printed with the person's name. The last screen drops the pills
+// into the pack, then hands off to /plan/.
 
 const reducedMotion = () =>
   typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -23,6 +25,9 @@ export default function Quiz() {
   const headingRef = useRef(null);
   const advanceTimer = useRef(null);
 
+  const live = useMemo(() => recommend(answers, { fill: false }), [answers]);
+  const owner = answers.name?.trim() || undefined;
+  const packName = answers.time === "evening" ? "Evening pack" : "Morning pack";
   const steps = useMemo(() => QUESTIONS.filter((q) => !q.skip || !q.skip(answers)), [answers]);
   const q = steps[Math.min(step, steps.length - 1)];
   const value = answers[q.id];
@@ -41,7 +46,8 @@ export default function Quiz() {
     write("answers", all);
     write("cart", { items: picks, plan: "two" });
     setBuilding(picks.map((p) => p.id));
-    setTimeout(() => router.push(`${BASE}/plan/`), reducedMotion() ? 400 : 2600);
+    // Long enough for every pill to drop into the pack (see .dl-fill-pill).
+    setTimeout(() => router.push(`${BASE}/plan/`), reducedMotion() ? 400 : 1500 + picks.length * 400);
   };
 
   const next = (all = answers) => {
@@ -77,7 +83,17 @@ export default function Quiz() {
           <BigWordHead word="One moment">
             <h1 className="dl-h2">Building your pack{answers.name ? `, ${answers.name}` : ""}…</h1>
           </BigWordHead>
-          <PillTray ids={building} label="Your pack" />
+          {/* The pills drop into the printed pack, one after another. */}
+          <div className="dl-pack-fill" role="img" aria-label={`Your pack: ${building.map((i) => PRODUCTS[i]?.name).join(", ")}`}>
+            {building.map((id, i) => (
+              <span key={id} className="dl-fill-pill" style={{ "--i": i }} aria-hidden="true">
+                <Pill id={id} size="lg" tilt={-20} />
+              </span>
+            ))}
+            <div className="dl-product dl-product-sm" aria-hidden="true">
+              <ProductBox name={packName} owner={owner} />
+            </div>
+          </div>
           <p className="dl-meta">Matching {building.length} essentials to your answers</p>
         </div>
       </section>
@@ -88,7 +104,8 @@ export default function Quiz() {
 
   return (
     <section className="dl-quiz">
-      <div className="dl-wrap dl-quiz-inner dl-panel dl-panel-1">
+      <div className="dl-wrap dl-quiz-layout">
+      <div className="dl-quiz-inner dl-panel dl-panel-1">
         <div className="dl-progress" aria-hidden="true">
           <span style={{ width: `${pct}%` }} />
         </div>
@@ -166,6 +183,29 @@ export default function Quiz() {
             </p>
           )}
         </form>
+      </div>
+
+      {/* Your pack so far: earned live by the answers. */}
+      <aside className="dl-card dl-quiz-pack" aria-label="Your pack so far" aria-live="polite">
+        <div className="dl-product dl-product-xs" aria-hidden="true">
+          <ProductBox name={packName} owner={owner} />
+        </div>
+        <h2 className="dl-h3">Your pack so far</h2>
+        {live.length ? (
+          <>
+            <PillTray ids={live.map((p) => p.id)} label="Your pack so far" size="sm" />
+            <ul className="dl-quiz-why">
+              {live.map((p) => (
+                <li key={p.id}>
+                  <strong>{PRODUCTS[p.id].name}</strong> {p.why}
+                </li>
+              ))}
+            </ul>
+          </>
+        ) : (
+          <p className="dl-meta">Your answers add pills here, each with the reason it&apos;s in your pack.</p>
+        )}
+      </aside>
       </div>
     </section>
   );

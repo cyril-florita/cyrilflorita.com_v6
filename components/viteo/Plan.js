@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { BASE, PLANS, PRODUCTS, money, priceFor, recommend } from "./data";
 import { useHydrated, useStored, write } from "./store";
-import { Arrow, BigWordHead, Button, Pill, PillTray } from "./ui";
+import { Arrow, BigWordHead, Button, Pill, PillTray, ProductBox } from "./ui";
 
 // "Your plan": the recommended pack with a reason for every item, add /
 // remove, a delivery-frequency picker, and a running price summary. Without
@@ -51,6 +51,10 @@ export default function Plan() {
         <div className="dl-plan-grid">
           <div className="dl-plan-main">
             <div className="dl-card dl-panel dl-panel-1 dl-plan-tray">
+              {/* The pack, printed for you. */}
+              <div className="dl-product dl-product-xs" aria-hidden="true">
+                <ProductBox name={answers?.time === "evening" ? "Evening pack" : "Morning pack"} owner={name || undefined} />
+              </div>
               <PillTray ids={ids} label="Your daily pack" />
               <span className="dl-meta">{ids.length} {ids.length === 1 ? "pill" : "pills"} a day · {answers?.time === "evening" ? "with dinner" : "with breakfast"}</span>
             </div>

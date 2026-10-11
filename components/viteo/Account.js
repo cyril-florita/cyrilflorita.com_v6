@@ -129,6 +129,12 @@ export default function Account() {
   });
 
   const daysAway = Math.max(0, Math.round((new Date(order.next) - now) / DAY));
+  // Timeline: today → about three months out (further when paused longer).
+  const span = Math.max(95, daysAway + 12);
+  const ticks = Array.from({ length: Math.floor(span / 30) + 1 }, (_, i) => ({
+    at: (i * 30) / span,
+    label: i === 0 ? "Today" : new Date(now + i * 30 * DAY).toLocaleDateString("en-US", { month: "short" }),
+  }));
   const upcoming = [0, 1, 2].map((n) => addMonths(order.next, n * plan.months));
   const hour = new Date(now).getHours();
   const greeting = hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
@@ -156,6 +162,14 @@ export default function Account() {
             <p className="dl-meta">
               {order.paused ? `Deliveries resume ${fmt(order.paused)}.` : `${daysAway} ${daysAway === 1 ? "day" : "days"} away · ${money(price.total)} · ${plan.label.toLowerCase()}`}
             </p>
+            {/* The box on its way: skipping or pausing slides it along. */}
+            <div className="dl-timeline" aria-hidden="true">
+              <span className="dl-timeline-track" />
+              {ticks.map((t) => (
+                <span key={t.label} className="dl-timeline-tick" style={{ "--at": t.at }}>{t.label}</span>
+              ))}
+              <span className="dl-timeline-pack" style={{ "--at": daysAway / span }} />
+            </div>
             <div className="dl-next-actions">
               {order.paused ? (
                 <Button onClick={resume}>Resume deliveries</Button>
@@ -181,10 +195,16 @@ export default function Account() {
             <p className="dl-eyebrow">Daily check-in</p>
             <h2 className="dl-h3">{streak > 0 ? `${streak}-day streak` : "Start a streak"}</h2>
             <ol className="dl-week" aria-label="This week">
-              {week.map((d) => (
+              {/* A pill organizer: each day's compartment gets a pill once taken. */}
+              {week.map((d, i) => (
                 <li key={d.key} className={`${checkins.includes(d.key) ? "is-done" : ""} ${d.today ? "is-today" : ""}`}>
                   <span className="dl-sr">{d.key}{checkins.includes(d.key) ? ": taken" : ""}</span>
-                  <span aria-hidden="true">{d.label}</span>
+                  <span className="dl-week-lid" aria-hidden="true">{d.label}</span>
+                  {checkins.includes(d.key) && (
+                    <span className="dl-week-pill" aria-hidden="true">
+                      <Pill id={ids[i % ids.length]} size="sm" tilt={-30 + ((i * 23) % 50)} />
+                    </span>
+                  )}
                 </li>
               ))}
             </ol>
