@@ -1,10 +1,10 @@
 import { Atkinson_Hyperlegible, Space_Grotesk } from "next/font/google";
 import Script from "next/script";
 
-// Root layout shared by the portfolio and the /lab prototypes: only the
+// Root layout shared by the portfolio and the /pitch prototypes: only the
 // <html>/<body> shell, fonts, theme script, analytics and metadata. The
 // portfolio's styles and preloader live in app/(site)/layout.js (and
-// app/not-found.js), so lab prototypes such as /lab/viteo/ load none of
+// app/not-found.js), so pitch prototypes such as /pitch/viteo/ load none of
 // them.
 
 const atkinson = Atkinson_Hyperlegible({

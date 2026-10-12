@@ -60,14 +60,14 @@ export default function Checkout() {
       <section className="dl-checkout">
         <div className="dl-wrap dl-empty">
           <h1 className="dl-h2">Your pack is empty</h1>
-          <p className="dl-section-lede">Take the two-minute quiz to build one, or start from the sample plan.</p>
+          <p className="dl-section-lede">Take the two-minute quiz to build one, or start from an example pack.</p>
           <div className="dl-hero-actions">
             <Button href={`${BASE}/quiz/`}>Take the quiz <Arrow /></Button>
             <Button
               variant="ghost"
               onClick={() => write("cart", { items: recommend({ diet: "vegetarian", sun: "rarely", goals: ["energy"] }), plan: "two" })}
             >
-              Use the sample plan
+              Start from an example
             </Button>
           </div>
         </div>
@@ -132,7 +132,7 @@ export default function Checkout() {
             <h1 className="dl-h2" tabIndex={-1} ref={headingRef}>You&apos;re all set{placed.name ? `, ${placed.name}` : ""}.</h1>
           </BigWordHead>
           <p className="dl-section-lede">
-            Order {placed.id} (demo). Your first box would arrive {fmt(new Date(placed.start))}. Nothing was charged — this is a design prototype.
+            Order {placed.id}. Your first box arrives {fmt(new Date(placed.start))}, and we&apos;ll email you when it ships. Preview mode: nothing was charged.
           </p>
           <PillTray ids={placed.cart.items.map((i) => i.id)} label="Your pack" />
           <div className="dl-hero-actions">
@@ -168,7 +168,7 @@ export default function Checkout() {
                   <Field label="State" error={errors.state}><input value={form.state} onChange={setField("state")} autoComplete="address-level1" maxLength={20} /></Field>
                   <Field label="ZIP code" error={errors.zip}><input inputMode="numeric" value={form.zip} onChange={setField("zip")} autoComplete="postal-code" maxLength={5} /></Field>
                 </div>
-                <p className="dl-meta">Prototype only: what you type stays in this browser and is never sent anywhere.</p>
+                <p className="dl-meta">Preview mode: your details stay in this browser and aren&apos;t sent anywhere.</p>
                 <div className="dl-quiz-nav"><span /><button type="submit" className="dl-btn dl-btn-primary">Continue <Arrow /></button></div>
               </form>
             )}
@@ -203,16 +203,16 @@ export default function Checkout() {
               <div>
                 <h1 className="dl-h3" tabIndex={-1} ref={headingRef}>Payment</h1>
                 <div className="dl-demo-pay">
-                  <span className="dl-code" data-lot="Lot 00">Demo</span>
-                  <h2 className="dl-h3">This prototype doesn&apos;t take payments.</h2>
+                  <span className="dl-code" data-lot="Lot 00">Preview</span>
+                  <h2 className="dl-h3">Payments are switched off in preview mode.</h2>
                   <p>
-                    In a real store, a secure payment form from a provider like Stripe would sit here. To keep this
-                    concept safe, there are no card fields at all.
+                    At launch, a secure card and Apple Pay form from our payment provider sits here. You&apos;re only
+                    charged when your first box ships, and you can cancel before then.
                   </p>
                 </div>
                 <div className="dl-quiz-nav">
                   <Button variant="ghost" onClick={() => setStep(1)}>Back</Button>
-                  <Button onClick={next}>Use demo payment <Arrow /></Button>
+                  <Button onClick={next}>Continue without paying <Arrow /></Button>
                 </div>
               </div>
             )}
@@ -223,11 +223,11 @@ export default function Checkout() {
                 <dl className="dl-review-list">
                   <div><dt>Ship to</dt><dd>{form.name}<br />{form.line1}{form.line2 ? `, ${form.line2}` : ""}<br />{form.city}, {form.state} {form.zip}</dd><button type="button" className="dl-textlink" onClick={() => setStep(0)}>Edit</button></div>
                   <div><dt>First box</dt><dd>{fmt(startDate)}, then every {price.plan.months === 1 ? "month" : `${price.plan.months} months`}</dd><button type="button" className="dl-textlink" onClick={() => setStep(1)}>Edit</button></div>
-                  <div><dt>Payment</dt><dd>Demo — nothing is charged</dd></div>
+                  <div><dt>Payment</dt><dd>Preview mode — nothing is charged</dd></div>
                 </dl>
                 <div className="dl-quiz-nav">
                   <Button variant="ghost" onClick={() => setStep(2)}>Back</Button>
-                  <Button onClick={place} size="lg">Place demo order <Arrow /></Button>
+                  <Button onClick={place} size="lg">Place order <Arrow /></Button>
                 </div>
               </div>
             )}

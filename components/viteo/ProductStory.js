@@ -2,6 +2,7 @@
 import { useEffect, useRef } from "react";
 import { PRODUCTS } from "./data";
 import { buildPill } from "./pillModels";
+import { introState } from "./introFall";
 
 // The landing page's product story, in real 3D (three.js, WebGL), on one
 // transparent canvas fixed over the viewport (pointer-events: none):
@@ -72,7 +73,10 @@ export default function ProductStory({ burst }) {
       try {
         renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: "high-performance" });
       } catch {
-        return; // no WebGL: keep the CSS version
+        // No WebGL: keep the CSS version (and don't keep the preloader waiting).
+        window.__dl3dReady = true;
+        window.dispatchEvent(new Event("dl:3d-ready"));
+        return;
       }
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5)); // full-viewport canvas: keep it light
       renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -122,7 +126,7 @@ export default function ProductStory({ burst }) {
         const display = getComputedStyle(product.querySelector(".dl-box-name")).fontFamily;
         const bodyFont = getComputedStyle(product.querySelector(".dl-box-meta")).fontFamily;
         const sideCol = mix(panel, "#000000", 0.1); // lighting does the shading
-        const PX = 2200; // texture px per carton unit
+        const PX = 1400; // texture px per carton unit (crisp at the carton's largest on-screen size, light to upload)
         const tex = (w, h, draw) => {
           const c = document.createElement("canvas");
           c.width = Math.round(w * PX);
@@ -130,7 +134,7 @@ export default function ProductStory({ burst }) {
           draw(c.getContext("2d"), c.width, c.height);
           const t = new THREE.CanvasTexture(c);
           t.colorSpace = THREE.SRGBColorSpace;
-          t.anisotropy = 8;
+          t.anisotropy = 4;
           return keep(t);
         };
         const frontTex = tex(BOX.w, BOX.h, (g, w, h) => {
@@ -149,9 +153,26 @@ export default function ProductStory({ burst }) {
           g.rotate(-Math.PI / 2);
           g.font = `800 ${1.9 * u * 0.98}px ${display}`;
           g.textBaseline = "top";
-          const tw = g.measureText("VITEO").width;
+          const tw = g.measureText("viteo").width;
           g.letterSpacing = "-0.04em";
-          g.fillText("VITEO", -tw - 0.02 * u, 0);
+          g.fillText("viteo", -tw - 0.02 * u, 0);
+          g.restore();
+          // The capsule-"V" mark in the top corner (as on the CSS box).
+          const cs = getComputedStyle(front);
+          const c1 = cs.getPropertyValue("--dl-logo-1").trim() || "#4FC3D2";
+          const c2 = cs.getPropertyValue("--dl-logo-2").trim() || "#1F7F8E";
+          const k = (0.9 * u) / 44; // the mark is 0.9 units across
+          g.save();
+          g.translate(w - 0.45 * u - 44 * k, 0.5 * u);
+          g.scale(k, k);
+          const cap = (deg, px, fill) => {
+            g.save(); g.translate(px, 39); g.rotate((deg * Math.PI) / 180); g.translate(-px, -39);
+            g.beginPath(); g.roundRect(px - 6, 1, 12, 38, 6); g.fillStyle = fill; g.fill(); g.restore();
+          };
+          const grad = g.createLinearGradient(0, 0, 44, 44);
+          grad.addColorStop(0, c1); grad.addColorStop(1, c2);
+          cap(-24, 21, grad);
+          cap(24, 23, ink);
           g.restore();
           g.font = `700 ${0.56 * u}px ${display}`;
           g.textBaseline = "alphabetic";
@@ -257,6 +278,11 @@ export default function ProductStory({ burst }) {
       const legT = (cy, col) => smooth(clamp01((vh * 1.02 - cy - col * vh * 0.05) / (vh * 0.48)));
 
       let hovered = false, spin = 0, frame = 0, last = performance.now(), time = 0, shown = false, settleUntil = 0;
+      // The intro (IntroMoment.js, a GSAP timeline) writes each object's fall
+      // into introState: p = progress (0 before it starts), drop = remaining
+      // fall (fraction of the product width), turn = remaining spin (degrees).
+      const NO_FALL = { p: 1, drop: 0, turn: 0 };
+      const introFall = (s) => (introState.active && s ? { p: s.p, drop: s.drop, turn: rad(s.turn) } : NO_FALL);
       const need = () => { if (!frame && !disposed) { last = performance.now(); frame = requestAnimationFrame(loop); } };
       const loop = (now) => {
         frame = 0;
@@ -275,15 +301,16 @@ export default function ProductStory({ burst }) {
         // How far the hero has scrolled away: drives the lid and the turn.
         const away = clamp01(-hr.top / (hr.height * 0.55));
         const heroOn = pr.bottom > -S * 0.3 && pr.top < vh + S * 0.3;
+        const cFall = introFall(introState.carton);
 
         // Carton
-        carton.visible = heroOn;
+        carton.visible = heroOn && cFall.p > 0;
         if (heroOn) {
           const [cx, cy] = toWorld(pr.left + (BOX.left + BOX.w / 2) * S, pr.top + (BOX.top + BOX.h / 2) * S);
           // While it tips and opens, the carton lags behind the scroll (up to
           // half its height) so its top, and the open lid, stay in view.
           const lag = Math.min(-hr.top, S * 0.5) * (1 - smooth(clamp01((away - 0.75) * 4)));
-          carton.position.set(cx + px * 0.014 * S, cy - py * 0.014 * S - Math.max(0, lag), 0);
+          carton.position.set(cx + px * 0.014 * S, cy - py * 0.014 * S - Math.max(0, lag) + cFall.drop * S, 0);
           carton.scale.setScalar(S);
           const tilt = smooth(clamp01(away * 2.2)); // fully tipped after a short scroll
           carton.rotation.set(
@@ -298,15 +325,16 @@ export default function ProductStory({ burst }) {
         }
 
         // Pills
-        pills.forEach((pl) => {
+        pills.forEach((pl, i) => {
           const h = pl.hero;
+          const fall = introFall(introState.pills[i]);
           const heroPose = {
             x: toWorld(pr.left + h.x * S, 0)[0] + px * h.scale * 0.026 * S,
-            y: toWorld(0, pr.top + h.y * S)[1] - py * h.scale * 0.026 * S + smooth(clamp01(away * 1.6)) * 40,
+            y: toWorld(0, pr.top + h.y * S)[1] - py * h.scale * 0.026 * S + smooth(clamp01(away * 1.6)) * 40 + fall.drop * S,
             // Lifted forward as the carton tips toward the viewer, so they stay in front of it.
             z: h.z * (S / 560) + smooth(clamp01(away * 2.2)) * S * 0.6,
             scale: h.scale * (S / 560),
-            tilt: h.tilt,
+            tilt: h.tilt - fall.turn,
             rx: h.rx + spin * Math.sin(time * 0.6 + pl.phase) * 0.18,
             ry: h.ry + spin * Math.cos(time * 0.5 + pl.phase) * 0.22,
           };
@@ -332,7 +360,7 @@ export default function ProductStory({ burst }) {
           if (leg > 0 && a.y > vh / 2 + 90) a = { ...a, y: vh / 2 + 90 };
           const tt = leg === 0 ? 0 : t;
           const arc = Math.sin(Math.PI * tt);
-          pl.outer.visible = !docked && (leg > 0 || heroOn);
+          pl.outer.visible = !docked && (leg > 0 || (heroOn && fall.p > 0));
           const sway = (b.col ?? pl.col) - 1;
           pl.outer.position.set(lerp(a.x, b.x, tt) + arc * sway * 60, lerp(a.y, b.y, tt) + arc * 40, lerp(a.z, b.z, tt) + arc * 260);
           pl.outer.scale.setScalar(lerp(a.scale, b.scale, tt) * (1 + arc * 0.25));
@@ -349,7 +377,7 @@ export default function ProductStory({ burst }) {
           root.classList.add("is-story"); // docks hide their images until a pill lands
         }
         // Positions only change with scroll, pointer or hover, so idle = no frames.
-        const busy = hovered || spin > 0.002 || now < settleUntil;
+        const busy = hovered || spin > 0.002 || now < settleUntil || introState.active;
         if (busy && !document.hidden) frame = requestAnimationFrame(loop);
       };
 
@@ -374,7 +402,6 @@ export default function ProductStory({ burst }) {
 
       resize();
       paintBox();
-      wake(1200);
       cleanup = () => {
         cancelAnimationFrame(frame);
         window.removeEventListener("scroll", onScroll);
@@ -392,7 +419,22 @@ export default function ProductStory({ burst }) {
         envTex.dispose();
         pmrem.dispose();
         renderer.dispose();
+        window.__dl3dReady = false;
       };
+
+      // Warm up before anything animates: compile every shader and upload
+      // every texture now, under the landing preloader, so the intro's first
+      // frames don't stall on them. Then tell the preloader (IntroMoment.js).
+      try { await renderer.compileAsync(scene, camera); } catch { /* compiles on first render instead */ }
+      if (disposed) return;
+      scene.traverse((o) => {
+        (Array.isArray(o.material) ? o.material : [o.material]).forEach((m) => {
+          ["map", "emissiveMap", "bumpMap"].forEach((k) => m?.[k] && renderer.initTexture(m[k]));
+        });
+      });
+      window.__dl3dReady = true;
+      window.dispatchEvent(new Event("dl:3d-ready"));
+      wake(1200); // first frames only now, with everything already on the GPU
     })();
 
     return () => {

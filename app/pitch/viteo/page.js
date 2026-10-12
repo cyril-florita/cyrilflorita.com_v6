@@ -1,13 +1,22 @@
-import { BASE, PRODUCTS, SAMPLE_REVIEWS, money } from "@/components/viteo/data";
+import { BASE, PRODUCTS, money } from "@/components/viteo/data";
+import Reviews from "@/components/viteo/Reviews";
+import RoutineGraph from "@/components/viteo/RoutineGraph";
 import Link from "next/link";
 import HeroParallax from "@/components/viteo/HeroParallax";
 import IntroMoment from "@/components/viteo/IntroMoment";
 import ProductStory from "@/components/viteo/ProductStory";
 import Ingredients from "@/components/viteo/Ingredients";
-import { Arrow, BigWordHead, Button, Pill, PillTray, ProductBox } from "@/components/viteo/ui";
+import QuizBar from "@/components/viteo/QuizBar";
+import { Arrow, BigWordHead, Button, LogoMark, Pill, PillTray, ProductBox } from "@/components/viteo/ui";
 
 export const metadata = {
-  title: { absolute: "Viteo — personalized daily vitamins (concept)" },
+  title: { absolute: "Viteo — Personalized vitamin subscription | Design & dev pitch by Cyril Florita" },
+  alternates: { canonical: "/pitch/viteo/" },
+  openGraph: {
+    title: "Viteo — Personalized vitamin subscription | Design & dev pitch by Cyril Florita",
+    url: "/pitch/viteo/",
+    images: [{ url: "/og/viteo.jpg", width: 1200, height: 630, alt: "Viteo, a personalized vitamin subscription" }],
+  },
 };
 
 const STEPS = [
@@ -15,38 +24,46 @@ const STEPS = [
     n: "01",
     pill: "d3",
     title: "Take the 2-minute quiz",
-    text: "A few questions about how you eat, sleep and spend your days. No account needed.",
+    text: "Tell us how you eat, sleep and spend your days. You'll see your pack before you sign up for anything.",
   },
   {
     n: "02",
     pill: "magnesium",
     title: "Get a pack that explains itself",
-    text: "Every item comes with a plain reason it's there, and you can add or remove anything.",
+    text: "Every pill comes with the answer that put it there. Remove or add anything before you order.",
   },
   {
     n: "03",
     pill: "c",
     title: "Stay in control",
-    text: "Skip, pause or swap from your account in a tap. No calls, no fine print.",
+    text: "Skip, pause or change your pack from your account anytime. No calls, no fine print.",
   },
 ];
 
 const FAQ = [
   {
-    q: "Is Viteo a real company?",
-    a: "No. Viteo is a design concept by Cyril Florita, built to show product design and front-end work. Nothing here is for sale.",
+    q: "How does the quiz decide what goes in my pack?",
+    a: "Your answers about diet, time outdoors, sleep, activity and goals map to a short list of everyday nutrients. Each pill in your plan shows the answer that put it there, and you can remove or add anything before you order.",
   },
   {
-    q: "Is this medical advice?",
-    a: "No. The quiz suggests common supplements based on simple lifestyle answers. A real version would encourage everyone to check with a healthcare professional, especially if you take medication.",
+    q: "Should I talk to my doctor first?",
+    a: "If you're pregnant or nursing, take prescription medication, or have a medical condition, check with your doctor or pharmacist before starting any supplement. We'll remind you before checkout, too.",
   },
   {
-    q: "Can I change my pack later?",
-    a: "Yes — in the concept, you can add, remove or swap items at any time from your account, and changes apply to your next delivery.",
+    q: "How are your vitamins made and tested?",
+    a: "Every batch is made in a cGMP-certified facility and tested by an independent lab for identity, purity and potency. All nine are vegan and free from gluten, dairy and artificial colors.",
   },
   {
-    q: "What happens if I'm away?",
-    a: "Skip a single delivery or pause for up to three months. The prototype's account page lets you try both.",
+    q: "Can I change, skip or pause my deliveries?",
+    a: "Yes. From your account you can add or remove items, change how often your box arrives, skip a delivery or pause for up to three months. Changes apply to your next box.",
+  },
+  {
+    q: "How much does it cost?",
+    a: "Each item is $4–9 a month, so most packs land between $20 and $35. Delivering every 2 or 3 months saves 10–15%, and shipping is always free.",
+  },
+  {
+    q: "What arrives in the box?",
+    a: "Thirty daily packs, one per day, printed with your name and the day. The box is recyclable and fits through most letterboxes.",
   },
 ];
 
@@ -66,137 +83,36 @@ const Corner = () => (
 );
 
 // A sample member's routine: days the pack was taken each month, this year
-// against last. Clearly sample data — no health outcomes are charted.
+// against last. Clearly sample data — no health outcomes are charted. The
+// real tracker lives in the account (Account.js); the arrow goes there.
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"];
 const THIS_YEAR = [18, 21, 26, 24, 27, 29];
 const LAST_YEAR = [12, 16, 13, 19, 15, 20];
-const CW = 520;
-const CH = 200;
-const X0 = 36;
-const pt = (v, i) => [
-  X0 + (i * (CW - X0 - 8)) / 5,
-  12 + (1 - v / 30) * (CH - 40),
-];
-const curve = (vals) => {
-  const p = vals.map(pt);
-  return p.reduce((d, [x, y], i) => {
-    if (!i) return `M${x},${y}`;
-    const [px, py] = p[i - 1];
-    const mx = (px + x) / 2;
-    return `${d} C${mx},${py} ${mx},${y} ${x},${y}`;
-  }, "");
-};
 
-const RoutineChart = () => {
-  const [tx, ty] = pt(THIS_YEAR[3], 3);
-  // Glass: a translucent, blurred pane over two soft drifting orbs (plus the
-  // landing frame's fixed blue glow, see .dl-frame:has(.dl-bento-hero)).
-  return (
-    <div className="dl-glass-wrap">
-      <span className="dl-glass-orbs" aria-hidden="true">
-        <i />
-        <i />
-      </span>
-      <div className="dl-panel dl-panel-dark dl-bento-card dl-glass">
-        <div className="dl-bento-card-top">
-          <span className="dl-pill-label">
-            Your routine <span className="dl-code" data-lot="Lot 01">Sample data</span>
-          </span>
-          <Link
-            className="dl-corner"
-            href={`${BASE}/account/`}
-            aria-label="Open the account dashboard"
-          >
-            <Corner />
-          </Link>
-        </div>
-        <svg
-          className="dl-chart"
-          viewBox={`0 0 ${CW} ${CH}`}
-          role="img"
-          aria-label="Sample member: days on routine per month, January to June, rising from 18 to 29 this year, versus 12 to 20 last year"
-        >
-          {[0, 10, 20, 30].map((v) => {
-            const y = 12 + (1 - v / 30) * (CH - 40);
-            return (
-              <g key={v}>
-                <line
-                  className="dl-chart-grid"
-                  x1={X0}
-                  x2={CW - 8}
-                  y1={y}
-                  y2={y}
-                  strokeDasharray="3 5"
-                />
-                <text x="0" y={y + 4}>
-                  {v}
-                </text>
-              </g>
-            );
-          })}
-          <path
-            d={`${curve(THIS_YEAR)} L${pt(0, 5)[0]},${CH - 28} L${X0},${CH - 28} Z`}
-            fill="var(--dl-dark-accent)"
-            opacity="0.14"
-            className="dl-chart-area"
-          />
-          <path
-            d={curve(LAST_YEAR)}
-            className="dl-chart-line"
-            pathLength="1"
-            fill="none"
-            stroke="var(--dl-panel-1)"
-            strokeWidth="2.5"
-          />
-          <path
-            d={curve(THIS_YEAR)}
-            className="dl-chart-line is-main"
-            pathLength="1"
-            fill="none"
-            stroke="var(--dl-dark-accent)"
-            strokeWidth="2.5"
-          />
-          <line
-            className="dl-chart-mark"
-            x1={tx}
-            x2={tx}
-            y1={ty}
-            y2={CH - 28}
-            stroke="var(--dl-dark-accent)"
-            strokeWidth="1.5"
-          />
-          <circle
-            className="dl-chart-mark"
-            cx={tx}
-            cy={ty}
-            r="7"
-            fill="var(--dl-dark-card)"
-            stroke="var(--dl-dark-accent)"
-            strokeWidth="3"
-          />
-          <g
-            className="dl-chart-tip dl-chart-mark"
-            transform={`translate(${tx - 46}, ${ty - 46})`}
-          >
-            <rect width="92" height="28" rx="10" />
-            <text x="46" y="18" textAnchor="middle">
-              24 days
-            </text>
-          </g>
-          {MONTHS.map((m, i) => (
-            <text key={m} x={pt(0, i)[0]} y={CH - 6} textAnchor="middle">
-              {m}
-            </text>
-          ))}
-        </svg>
-        <p className="dl-chart-legend">
-          <span style={{ "--c": "var(--dl-dark-accent)" }}>This year</span>
-          <span style={{ "--c": "var(--dl-panel-1)" }}>Last year</span>
-        </p>
+const RoutineChart = () => (
+  // Glass: a clear, blurred pane over the landing frame's ambient light.
+  <div className="dl-glass-wrap">
+    <div className="dl-panel dl-panel-dark dl-bento-card dl-glass">
+      <div className="dl-bento-card-top">
+        <span className="dl-pill-label">
+          Track your routine <span className="dl-code" data-lot="Lot 01">Sample data</span>
+        </span>
+        <Link className="dl-corner" href={`${BASE}/account/#acc-tracker`} aria-label="See the routine tracker in your account">
+          <Corner />
+        </Link>
       </div>
+      <RoutineGraph
+        labels={MONTHS}
+        main={THIS_YEAR}
+        compare={LAST_YEAR}
+        tipIndex={3}
+        tip="24 days"
+        ariaLabel="Sample member: days on routine per month, January to June, rising from 18 to 29 this year, versus 12 to 20 last year"
+        legend={[{ label: "This year", color: "var(--dl-dark-accent)" }, { label: "Last year", color: "var(--dl-panel-1)" }]}
+      />
     </div>
-  );
-};
+  </div>
+);
 
 // Hero product shot: all nine essentials bursting out around the box. Each
 // is [product, x %, y %, scale, tilt].
@@ -224,6 +140,13 @@ const burst = ([id, x, y, scale, tilt], i) => (
 export default function Landing() {
   return (
     <>
+      {/* Preloader: shown from the first paint (only while the intro is
+          pending, see layout.js) until the page is ready, then faded out by
+          the intro (IntroMoment.js). The logo's capsules spin on a loop. */}
+      <div className="dl-preloader" aria-hidden="true">
+        <span className="dl-preloader-mark"><LogoMark /></span>
+        <span className="dl-preloader-word">viteo</span>
+      </div>
       {/* Bento: hero panel (with a tab rising into the header) + three cards */}
       <section className="dl-bento">
         <div className="dl-wrap">
@@ -272,9 +195,8 @@ export default function Landing() {
                  Your routine, <em>with the right vitamins.</em>
               </h1>
               <p className="dl-lede">
-                Answer eight quick questions. We&apos;ll build a daily pack
-                tailored around your lifestyle, walk you through every ingredient, and
-                deliver it on your schedule.
+                Eight quick questions. One daily pack built around you, with every
+                pill explained.
               </p>
               <Link className="dl-underline-cta" href={`${BASE}/quiz/`}>
                 Take the 2-minute quiz
@@ -283,7 +205,7 @@ export default function Landing() {
                 </span>
               </Link>
               <p className="dl-bento-sub">
-                <span>Free delivery · Skip or pause anytime</span>
+                <span>Free delivery · Skip anytime</span>
                 <Link className="dl-textlink" href={`${BASE}/plan/`}>
                   See a sample plan
                 </Link>
@@ -403,16 +325,7 @@ export default function Landing() {
               <span className="dl-code" data-lot="Lot 02">Sample content</span>
             </p>
           </BigWordHead>
-          <ul className="dl-reviews">
-            {SAMPLE_REVIEWS.map((r) => (
-              <li key={r.name} className="dl-card dl-review">
-                <p>&ldquo;{r.text}&rdquo;</p>
-                <span className="dl-meta">
-                  {r.name} · {r.plan}
-                </span>
-              </li>
-            ))}
-          </ul>
+          <Reviews />
         </div>
       </section>
 
@@ -452,6 +365,7 @@ export default function Landing() {
       {/* The 3D product story over the page (desktop). */}
       <ProductStory burst={BURST} />
       <IntroMoment />
+      <QuizBar />
     </>
   );
 }

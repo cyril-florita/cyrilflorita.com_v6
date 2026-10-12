@@ -41,7 +41,7 @@ export default function Plan() {
             </BigWordHead>
             <p className="dl-section-lede">
               {sample
-                ? "This is an example for a mostly-indoors vegetarian. Take the quiz to get your own."
+                ? "An example pack for a mostly-indoors vegetarian. Take the quiz to build yours."
                 : `${cart.items.length} essentials, one ${answers?.time === "evening" ? "evening" : "morning"} pack. Every item says why it's here, and you can change anything.`}
             </p>
           </div>
@@ -103,7 +103,7 @@ export default function Plan() {
 
             <div className="dl-note" role="note">
               <strong>Already taking something?</strong> Check with your doctor or pharmacist before starting any
-              supplement, especially alongside medication. (In this concept, that&apos;s a real step in the flow.)
+              supplement, especially if you&apos;re pregnant, nursing or taking medication.
             </div>
           </div>
 

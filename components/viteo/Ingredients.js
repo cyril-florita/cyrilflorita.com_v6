@@ -158,6 +158,29 @@ export default function Ingredients() {
   };
   const swap = (id) => withTransition(() => setOpenId(id));
 
+  // Phones: the close-up is a bottom sheet; dragging its top (the handle and
+  // pill stage) down past a threshold closes it, otherwise it springs back.
+  const drag = useRef(null);
+  const onDragStart = (e) => {
+    if (!window.matchMedia("(max-width: 760px)").matches || e.pointerType === "mouse") return;
+    drag.current = { y: e.clientY, dy: 0 };
+    dialogRef.current?.classList.add("is-dragging");
+  };
+  const onDragMove = (e) => {
+    if (!drag.current) return;
+    drag.current.dy = Math.max(0, e.clientY - drag.current.y);
+    dialogRef.current.style.translate = `0 ${drag.current.dy}px`;
+  };
+  const onDragEnd = () => {
+    if (!drag.current) return;
+    const far = drag.current.dy > 110;
+    drag.current = null;
+    const d = dialogRef.current;
+    d.classList.remove("is-dragging");
+    d.style.translate = "";
+    if (far) close();
+  };
+
   const p = openId && PRODUCTS[openId];
 
   return (
@@ -167,7 +190,11 @@ export default function Ingredients() {
           <li key={item.id} className="dl-card dl-glass dl-ingredient">
             {/* Visible on every screen (touch has no hover): the card opens. */}
             <span className="dl-ing-plus" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M12 5v14M5 12h14" /></svg>
+              {/* "Expand": opens a larger view (distinct from the ↗ "go to" corners). */}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path className="dl-ing-plus-a" d="M14 4h6v6M20 4l-6.5 6.5" />
+                <path className="dl-ing-plus-b" d="M10 20H4v-6M4 20l6.5-6.5" />
+              </svg>
             </span>
             <span className="dl-ingredient-pill" data-story-pill={item.id} data-story-scale="2">
               <Pill id={item.id} size="lg" tilt={-20} />
@@ -178,10 +205,10 @@ export default function Ingredients() {
                   {item.name}
                 </button>
               </h3>
-              <p className="dl-meta">
+              <p className="dl-meta dl-ing-meta">
                 {item.dose} · {item.form} · {money(item.price)}/mo
               </p>
-              <p>{item.blurb}</p>
+              <p className="dl-ing-blurb">{item.blurb}</p>
             </div>
           </li>
         ))}
@@ -189,7 +216,7 @@ export default function Ingredients() {
 
       <dialog
         ref={dialogRef}
-        className="dl-ing-dialog"
+        className="dl-ing-dialog dl-panel dl-panel-1"
         aria-labelledby="dl-ing-title"
         onClose={() => openId && setOpenId(null)}
         onCancel={(e) => { e.preventDefault(); close(); }}
@@ -197,10 +224,14 @@ export default function Ingredients() {
       >
         {p && (
           <div className="dl-ing-sheet">
-            <PillStage key={p.id} id={p.id} />
+            <div className="dl-ing-grab" onPointerDown={onDragStart} onPointerMove={onDragMove} onPointerUp={onDragEnd} onPointerCancel={onDragEnd}>
+              <span className="dl-ing-handle" aria-hidden="true" />
+              <PillStage key={p.id} id={p.id} />
+            </div>
             <div className="dl-ing-body">
               <p className="dl-eyebrow">{p.form}</p>
-              <h2 id="dl-ing-title" className="dl-h2">{p.name}</h2>
+              {/* Focus lands on the title when the dialog opens (not on the first chip). */}
+              <h2 id="dl-ing-title" className="dl-h2" tabIndex={-1} autoFocus>{p.name}</h2>
               <p className="dl-meta">{p.dose} · {money(p.price)}/mo</p>
               <p className="dl-lede">{p.blurb}</p>
               <h3 className="dl-h4">When the quiz adds it</h3>

@@ -2,3 +2,6 @@ Options -Indexes
 
 ErrorDocument 403 /index.html
 ErrorDocument 404 /404.html
+
+# Viteo moved from /lab/viteo/ to /pitch/viteo/ (mod_alias; no RewriteEngine).
+RedirectMatch 301 ^/lab/viteo(/.*)?$ /pitch/viteo$1

@@ -4,11 +4,14 @@ import Link from "next/link";
 import { BASE, PLANS, PRODUCTS, money, priceFor } from "./data";
 import { useHydrated, useStored, write } from "./store";
 import { BigWordHead, Button, Pill, PillTray } from "./ui";
+import AccountTabs from "./AccountTabs";
+import RoutineGraph from "./RoutineGraph";
 
 // The subscriber's account: next delivery (skip with undo, pause, resume),
 // the pack (remove / add, applied to the next box), delivery frequency,
-// address, a daily check-in streak with reminder settings, and the upcoming
-// schedule. Without a placed order it runs on a demo subscription, and the
+// address (edited in a modal), a daily check-in streak with reminder
+// settings, the routine tracker (days the pack was taken, month by month)
+// and the upcoming schedule. Without a placed order it runs on a demo subscription, and the
 // first change saves it — so every control can be tried.
 
 const DAY = 86400000;
@@ -58,10 +61,21 @@ export default function Account() {
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState(null);
   const toastTimer = useRef(null);
+  const addressDialog = useRef(null);
+  const editButton = useRef(null);
   const [demo] = useState(() => (typeof window === "undefined" ? null : demoOrder()));
   const [now] = useState(() => Date.now());
 
   useEffect(() => () => clearTimeout(toastTimer.current), []);
+
+  // The address editor is a modal: open and close the native dialog in step
+  // with state (Esc, the backdrop and Cancel close it; focus returns to Edit).
+  useEffect(() => {
+    const d = addressDialog.current;
+    if (!d) return;
+    if (editing && !d.open) d.showModal();
+    if (!editing && d.open) d.close();
+  }, [editing]);
 
   if (!hydrated) return <section className="dl-account dl-wrap" aria-busy="true" />;
 
@@ -136,6 +150,21 @@ export default function Account() {
     label: i === 0 ? "Today" : new Date(now + i * 30 * DAY).toLocaleDateString("en-US", { month: "short" }),
   }));
   const upcoming = [0, 1, 2].map((n) => addMonths(order.next, n * plan.months));
+
+  // Routine tracker: days the pack was taken in each of the last six months.
+  // This month comes from the check-ins; in preview mode the earlier months
+  // are sample history (a real account would have its own).
+  const SAMPLE_HISTORY = [19, 22, 21, 25, 26];
+  const months = Array.from({ length: 6 }, (_, i) => {
+    const d = new Date(now);
+    d.setDate(1);
+    d.setMonth(d.getMonth() - (5 - i));
+    return { key: dayKey(d).slice(0, 7), label: d.toLocaleDateString("en-US", { month: "short" }) };
+  });
+  const taken = months.map((m, i) =>
+    order.demo && i < 5 ? SAMPLE_HISTORY[i] : checkins.filter((k) => k.startsWith(m.key)).length,
+  );
+  const thisMonth = taken[5];
   const hour = new Date(now).getHours();
   const greeting = hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
   const extras = Object.values(PRODUCTS).filter((p) => !ids.includes(p.id));
@@ -145,30 +174,36 @@ export default function Account() {
       <div className="dl-wrap">
         <div className="dl-plan-head">
           <div>
-            <BigWordHead word={order.demo ? "Demo account" : "Your account"}>
+            <BigWordHead word={order.demo ? "Account" : "Your account"}>
               <h1 className="dl-h2">{greeting}{order.name ? `, ${order.name}` : ""}.</h1>
             </BigWordHead>
           </div>
           {order.demo
-            ? <p className="dl-meta">Every control works — try skipping or pausing. <Link className="dl-textlink" href={`${BASE}/quiz/`}>Or build your own pack</Link></p>
+            ? <p className="dl-meta">Manage your deliveries, pack and reminders. <Link className="dl-textlink" href={`${BASE}/quiz/`}>Retake the quiz</Link></p>
             : <p className="dl-meta">Order {order.id}</p>}
         </div>
 
         <div className="dl-account-grid">
           {/* Next delivery */}
-          <div className={`dl-card dl-panel dl-panel-1 dl-next ${order.paused ? "is-paused" : ""}`}>
+          <div id="acc-next" className={`dl-card dl-panel dl-panel-1 dl-next ${order.paused ? "is-paused" : ""}`}>
             <p className="dl-eyebrow">{order.paused ? "Paused" : "Next delivery"}</p>
             <h2 className="dl-display dl-next-date">{fmt(order.next)}</h2>
             <p className="dl-meta">
               {order.paused ? `Deliveries resume ${fmt(order.paused)}.` : `${daysAway} ${daysAway === 1 ? "day" : "days"} away · ${money(price.total)} · ${plan.label.toLowerCase()}`}
             </p>
-            {/* The box on its way: skipping or pausing slides it along. */}
+            {/* The box on its way: a labelled marker (not a handle: the date is
+                changed with Skip and Pause), which slides along when it moves. */}
             <div className="dl-timeline" aria-hidden="true">
               <span className="dl-timeline-track" />
               {ticks.map((t) => (
                 <span key={t.label} className="dl-timeline-tick" style={{ "--at": t.at }}>{t.label}</span>
               ))}
-              <span className="dl-timeline-pack" style={{ "--at": daysAway / span }} />
+              <span className="dl-timeline-pin" style={{ "--at": daysAway / span }}>
+                <span className="dl-timeline-flag">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"><path d="M4 8l8-4 8 4v8l-8 4-8-4zM4 8l8 4 8-4M12 12v8" /></svg>
+                  {new Date(order.next).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                </span>
+              </span>
             </div>
             <div className="dl-next-actions">
               {order.paused ? (
@@ -191,7 +226,7 @@ export default function Account() {
           </div>
 
           {/* Check-in */}
-          <div className="dl-card dl-panel dl-panel-3 dl-checkin">
+          <div id="acc-checkin" className="dl-card dl-panel dl-panel-3 dl-checkin">
             <p className="dl-eyebrow">Daily check-in</p>
             <h2 className="dl-h3">{streak > 0 ? `${streak}-day streak` : "Start a streak"}</h2>
             <ol className="dl-week" aria-label="This week">
@@ -218,8 +253,51 @@ export default function Account() {
             </label>
           </div>
 
+          {/* Routine tracker */}
+          <div id="acc-tracker" className="dl-card dl-panel dl-panel-dark dl-tracker">
+            <div className="dl-bento-card-top">
+              <h2 className="dl-pill-label">Your routine tracker</h2>
+              <span className="dl-meta">{thisMonth} {thisMonth === 1 ? "day" : "days"} this month</span>
+            </div>
+            <RoutineGraph
+              labels={months.map((m) => m.label)}
+              main={taken}
+              max={31}
+              width={760}
+              openEnd
+              tip={`${thisMonth} so far`}
+              ariaLabel={`Days you took your pack, ${months[0].label} to ${months[5].label}: ${taken.join(", ")}`}
+              legend={[{ label: "Days you took your pack", color: "var(--dl-dark-accent)" }]}
+            />
+            {order.demo && (
+              <p className="dl-meta">
+                <span className="dl-code" data-lot="Lot 03">Sample history</span> Earlier months are examples in preview
+                mode; this month counts your check-ins.
+              </p>
+            )}
+          </div>
+
+          {/* Frequency + schedule */}
+          <div id="acc-settings" className="dl-card dl-panel dl-panel-2">
+            <h2 className="dl-h3">Delivery frequency</h2>
+            <div className="dl-segment" role="radiogroup" aria-label="Delivery frequency">
+              {PLANS.map((pl) => (
+                <button key={pl.id} type="button" role="radio" aria-checked={order.plan === pl.id} className={order.plan === pl.id ? "is-on" : ""} onClick={() => save({ plan: pl.id, cart: { ...order.cart, plan: pl.id } })}>
+                  {pl.months === 1 ? "Monthly" : `${pl.months} months`}
+                </button>
+              ))}
+            </div>
+            <p className="dl-meta">{money(price.total)} per box{price.savings > 0 ? ` · you save ${money(price.savings)}` : ""}</p>
+            <h3 className="dl-h4">Coming up</h3>
+            <ol className="dl-schedule">
+              {upcoming.map((d, i) => (
+                <li key={d}><span className="dl-schedule-dot" aria-hidden="true" />{fmt(d)}{i === 0 && !order.paused && <span className="dl-tag dl-tag-sun">Next</span>}</li>
+              ))}
+            </ol>
+          </div>
+
           {/* Pack */}
-          <div className="dl-card dl-account-pack">
+          <div id="acc-pack" className="dl-card dl-account-pack">
             <div className="dl-card-head">
               <h2 className="dl-h3">Your pack</h2>
               <span className="dl-meta">Changes apply to your next box</span>
@@ -251,68 +329,73 @@ export default function Account() {
             )}
           </div>
 
-          {/* Frequency + schedule */}
-          <div className="dl-card dl-panel dl-panel-2">
-            <h2 className="dl-h3">Delivery frequency</h2>
-            <div className="dl-segment" role="radiogroup" aria-label="Delivery frequency">
-              {PLANS.map((pl) => (
-                <button key={pl.id} type="button" role="radio" aria-checked={order.plan === pl.id} className={order.plan === pl.id ? "is-on" : ""} onClick={() => save({ plan: pl.id, cart: { ...order.cart, plan: pl.id } })}>
-                  {pl.months === 1 ? "Monthly" : `${pl.months} months`}
-                </button>
-              ))}
-            </div>
-            <p className="dl-meta">{money(price.total)} per box{price.savings > 0 ? ` · you save ${money(price.savings)}` : ""}</p>
-            <h3 className="dl-h4">Coming up</h3>
-            <ol className="dl-schedule">
-              {upcoming.map((d, i) => (
-                <li key={d}><span className="dl-schedule-dot" aria-hidden="true" />{fmt(d)}{i === 0 && !order.paused && <span className="dl-tag dl-tag-sun">Next</span>}</li>
-              ))}
-            </ol>
-          </div>
-
-          {/* Address */}
-          <div className="dl-card">
+          {/* Address (edited in a modal) */}
+          <div className="dl-card dl-account-address">
             <div className="dl-card-head">
               <h2 className="dl-h3">Delivery address</h2>
-              {!editing && <button type="button" className="dl-textlink" onClick={() => { setDraft(order.address); setEditing(true); }}>Edit</button>}
-            </div>
-            {editing ? (
-              <form
-                className="dl-form-grid"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  save({ address: draft });
-                  setEditing(false);
-                  notify("Address updated for your next box.");
-                }}
+              <button
+                ref={editButton}
+                type="button"
+                className="dl-textlink"
+                aria-haspopup="dialog"
+                onClick={() => { setDraft(order.address); setEditing(true); }}
               >
-                {[["name", "Full name"], ["line1", "Street address"], ["city", "City"], ["state", "State"], ["zip", "ZIP code"]].map(([k, l]) => (
-                  <label key={k} className={`dl-field ${["name", "line1"].includes(k) ? "dl-field-wide" : ""}`}>
-                    <span>{l}</span>
-                    <input value={draft[k] || ""} onChange={(e) => setDraft({ ...draft, [k]: e.target.value })} required />
-                  </label>
-                ))}
-                <div className="dl-quiz-nav dl-field-wide">
-                  <Button variant="ghost" onClick={() => setEditing(false)}>Cancel</Button>
-                  <button type="submit" className="dl-btn dl-btn-primary">Save address</button>
-                </div>
-              </form>
-            ) : (
-              <address className="dl-address">
-                {order.address.name}<br />
-                {order.address.line1}{order.address.line2 ? `, ${order.address.line2}` : ""}<br />
-                {order.address.city}, {order.address.state} {order.address.zip}
-              </address>
-            )}
+                Edit
+              </button>
+            </div>
+            <address className="dl-address">
+              {order.address.name}<br />
+              {order.address.line1}{order.address.line2 ? `, ${order.address.line2}` : ""}<br />
+              {order.address.city}, {order.address.state} {order.address.zip}
+            </address>
           </div>
         </div>
 
         <p className="dl-meta dl-fine">
-          Prototype: changes are saved in this browser only.{" "}
-          <button type="button" className="dl-textlink" onClick={() => { write("order", null); notify("Demo account reset."); }}>Reset demo</button>
+          Preview mode: changes are saved in this browser.{" "}
+          <button type="button" className="dl-textlink" onClick={() => { write("order", null); notify("Preview reset."); }}>Reset</button>
         </p>
       </div>
 
+      <dialog
+        ref={addressDialog}
+        className="dl-modal"
+        aria-labelledby="dl-address-title"
+        onClose={() => { setEditing(false); editButton.current?.focus({ preventScroll: true }); }}
+        onClick={(e) => e.target === e.currentTarget && setEditing(false)}
+      >
+        {editing && draft && (
+          <form
+            className="dl-modal-body"
+            onSubmit={(e) => {
+              e.preventDefault();
+              save({ address: draft });
+              setEditing(false);
+              notify("Address updated for your next box.");
+            }}
+          >
+            <h2 id="dl-address-title" className="dl-h3">Edit delivery address</h2>
+            <p className="dl-meta">Changes apply from your next box.</p>
+            <div className="dl-form-grid">
+              {[["name", "Full name", "name"], ["line1", "Street address", "address-line1"], ["city", "City", "address-level2"], ["state", "State", "address-level1"], ["zip", "ZIP code", "postal-code"]].map(([k, l, ac], i) => (
+                <label key={k} className={`dl-field ${["name", "line1"].includes(k) ? "dl-field-wide" : ""}`}>
+                  <span>{l}</span>
+                  <input value={draft[k] || ""} autoComplete={ac} autoFocus={i === 0} onChange={(e) => setDraft({ ...draft, [k]: e.target.value })} required />
+                </label>
+              ))}
+            </div>
+            <div className="dl-modal-actions">
+              <Button variant="ghost" onClick={() => setEditing(false)}>Cancel</Button>
+              <button type="submit" className="dl-btn dl-btn-primary">Save address</button>
+            </div>
+            <button type="button" className="dl-ing-close dl-modal-close" onClick={() => setEditing(false)} aria-label="Close">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+            </button>
+          </form>
+        )}
+      </dialog>
+
+      <AccountTabs />
       <div className={`dl-toast ${toast ? "is-on" : ""}`} role="status" aria-live="polite">
         {toast && (
           <>

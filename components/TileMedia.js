@@ -197,9 +197,9 @@ const GridPhone3D = ({ src, poster, label }) => {
 };
 
 export const TILE_MEDIA = {
-  // Viteo (lab concept): the product, flow by flow.
+  // Viteo (design & dev pitch): the product, flow by flow.
   "/viteo": {
-    kind: "slideshow", label: "Viteo prototype: the 3D pack, its scroll story, an ingredient close-up, the live quiz, your plan and account",
+    kind: "slideshow", label: "Viteo: the 3D pack, its scroll story, an ingredient close-up, the live quiz, your plan and account",
     images: [
       "/img/portfolio/viteo_desktop-landing.jpg",
       "/img/portfolio/viteo_desktop-story.jpg",
@@ -209,6 +209,7 @@ export const TILE_MEDIA = {
       "/img/portfolio/viteo_desktop-plan.jpg",
       "/img/portfolio/viteo_desktop-account.jpg",
       "/img/portfolio/viteo_desktop-hero-grove-light.jpg",
+      "/img/portfolio/viteo_desktop-hero-peach-light.jpg",
     ],
     interval: 1250, fade: 600,
     shape: "wide",

@@ -27,6 +27,8 @@ const PROJECTS = [
   'he-took-my-place',
 ];
 
+const PITCH = ['/pitch/viteo/', '/pitch/viteo/quiz/', '/pitch/viteo/design-system/'];
+
 export default function sitemap() {
   return [
     { url: `${SITE}/`, changeFrequency: 'monthly', priority: 1 },
@@ -36,5 +38,7 @@ export default function sitemap() {
       changeFrequency: 'yearly',
       priority: 0.6,
     })),
+    // The Viteo prototype's indexable pages (plan, checkout and account are noindex).
+    ...PITCH.map((path) => ({ url: `${SITE}${path}`, changeFrequency: 'monthly', priority: 0.7 })),
   ];
 }

@@ -1,8 +1,8 @@
 // Viteo — a fictional personalized-vitamin subscription, built as a
-// product design concept (/lab/viteo/). Everything here is made up:
+// product design concept (/pitch/viteo/). Everything here is made up:
 // products, prices, people. No health claims; nothing is medical advice.
 
-export const BASE = "/lab/viteo";
+export const BASE = "/pitch/viteo";
 
 // The catalog. `color`/`color2` paint the pill illustration; `form` picks
 // its shape (capsule = two-tone, softgel = oval, tablet = round, or an oblong
@@ -15,7 +15,7 @@ export const PRODUCTS = {
     form: "softgel",
     color: "#F6C453",
     price: 5,
-    blurb: "The sunshine vitamin, for days spent mostly indoors.",
+    blurb: "Vegan D3 from lichen, in an olive-oil softgel. Your skin makes vitamin D from sunlight, so indoor days mean less of it.",
     // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
     reasons: ["You spend most of the day indoors.", "Your daily time outside is on the short side.", "It rounds out packs that would otherwise have fewer than three items."],
     pairs: ["omega"],
@@ -28,7 +28,7 @@ export const PRODUCTS = {
     form: "tablet",
     color: "#E58E73",
     price: 4,
-    blurb: "Found mostly in animal foods, so plant-based diets often fall short.",
+    blurb: "Methylcobalamin, a ready-to-use form of B12. It comes almost entirely from animal foods, so most plant-based eaters supplement it.",
     // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
     reasons: ["You eat mostly or fully plant-based.", "You'd like steadier energy through the day."],
     pairs: ["omega"],
@@ -40,7 +40,7 @@ export const PRODUCTS = {
     form: "softgel",
     color: "#7FB3A6",
     price: 9,
-    blurb: "Plant-sourced EPA & DHA, for when fish isn't on the menu.",
+    blurb: "EPA and DHA from algae, the same source fish get theirs from. A plant-based alternative to fish oil, with no fishy aftertaste.",
     // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
     reasons: ["Fish isn't part of your diet.", "Oily fish rarely makes it onto your plate.", "It rounds out packs that would otherwise have fewer than three items."],
     pairs: ["b12", "d3"],
@@ -53,7 +53,7 @@ export const PRODUCTS = {
     color: "#B9A6E0",
     color2: "#F4EFFB",
     price: 6,
-    blurb: "A gentle form, often taken in the evening.",
+    blurb: "Magnesium bound to glycine, a form known for being easy on the stomach. Most people take it in the evening.",
     // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
     reasons: ["You'd like help winding down.", "You mentioned restless nights.", "You train hard most weeks."],
     pairs: [],
@@ -65,7 +65,7 @@ export const PRODUCTS = {
     form: "tablet",
     color: "#F29E4C",
     price: 4,
-    blurb: "A daily staple for busy weeks.",
+    blurb: "250 mg of buffered vitamin C, a moderate everyday amount that's gentle enough to take on an empty stomach.",
     // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
     reasons: ["You picked busy-season support.", "It rounds out packs that would otherwise have fewer than three items."],
     pairs: ["zinc"],
@@ -77,7 +77,7 @@ export const PRODUCTS = {
     form: "tablet",
     color: "#9FB7C9",
     price: 4,
-    blurb: "A small daily dose to round out the pack.",
+    blurb: "Zinc picolinate, a well-absorbed form, at 15 mg. Usually paired with vitamin C.",
     // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
     reasons: ["You picked busy-season support (it joins vitamin C)."],
     pairs: ["c"],
@@ -90,7 +90,7 @@ export const PRODUCTS = {
     color: "#8FBF7F",
     color2: "#F1F7EE",
     price: 8,
-    blurb: "Five well-studied strains in a delayed-release capsule.",
+    blurb: "Five well-studied strains, 10 billion CFU at expiry, in a delayed-release capsule built to get past stomach acid.",
     // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
     reasons: ["You'd like to focus on digestion."],
     pairs: [],
@@ -103,7 +103,7 @@ export const PRODUCTS = {
     form: "tablet",
     color: "#E7A9C0",
     price: 5,
-    blurb: "A B vitamin people often add for hair and nails.",
+    blurb: "Vitamin B7. A popular addition for people whose routine centres on hair and nails.",
     // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
     reasons: ["You picked hair & nails."],
     pairs: [],
@@ -116,7 +116,7 @@ export const PRODUCTS = {
     color: "#6E9CCF",
     color2: "#EEF4FB",
     price: 7,
-    blurb: "An amino acid from tea leaves, paired with your morning coffee.",
+    blurb: "An amino acid found naturally in green tea. Many people take it alongside their morning coffee.",
     // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
     reasons: ["You'd like calm focus."],
     pairs: [],
@@ -129,8 +129,8 @@ export const QUESTIONS = [
   {
     id: "name",
     type: "text",
-    title: "First, what should we call you?",
-    sub: "Just a first name. We'll use it to label your pack.",
+    title: "First, what's your first name?",
+    sub: "We print it on your pack, so it's easy to spot.",
     placeholder: "Your first name",
   },
   {
@@ -138,7 +138,7 @@ export const QUESTIONS = [
     type: "multi",
     max: 3,
     title: "What would you like your routine to focus on?",
-    sub: "Pick up to three.",
+    sub: "Pick up to three. You can change these later.",
     options: [
       { value: "energy", label: "Steady energy", icon: "☀" },
       { value: "sleep", label: "Winding down", icon: "☾" },
@@ -175,7 +175,8 @@ export const QUESTIONS = [
   {
     id: "sun",
     type: "single",
-    title: "On a typical day, how much time do you spend outside?",
+    title: "On a typical day, how much time do you spend outdoors?",
+    sub: "Commutes and lunch breaks count.",
     options: [
       { value: "rarely", label: "Hardly any", hint: "Mostly indoors" },
       { value: "some", label: "Around 30 minutes" },
@@ -205,8 +206,8 @@ export const QUESTIONS = [
   {
     id: "time",
     type: "single",
-    title: "When would you rather take your pack?",
-    sub: "We'll set your reminder for it.",
+    title: "When would you like to take your pack?",
+    sub: "We'll time your daily reminder to match.",
     options: [
       { value: "morning", label: "With breakfast" },
       { value: "evening", label: "With dinner" },
@@ -263,7 +264,11 @@ export const money = (n) => `$${n.toFixed(2).replace(/\.00$/, "")}`;
 
 // Sample people for the landing page — clearly fictional.
 export const SAMPLE_REVIEWS = [
-  { name: "Maya R.", text: "The quiz took two minutes and actually explained why each thing was in my pack.", plan: "Vegan · 4 items" },
-  { name: "Jordan T.", text: "Skipping a month from the app is one tap. That's the whole reason I stayed.", plan: "Every 2 months" },
-  { name: "Priya S.", text: "I like that it told me to check with my doctor about anything I already take.", plan: "Morning pack" },
+  { name: "Maya R.", text: "The quiz took two minutes, and for once I know why every pill is in my pack.", plan: "Vegan · 4 items" },
+  { name: "Jordan T.", text: "I travel a lot. Skipping a month is one tap, and that's why I've stayed.", plan: "Every 2 months" },
+  { name: "Priya S.", text: "It flagged that I should check with my doctor about the medication I take. I appreciated that.", plan: "Morning pack" },
+  { name: "Daniel K.", text: "I swapped one item for another in about ten seconds. No email thread, no phone call.", plan: "Evening pack" },
+  { name: "Aisha M.", text: "Seeing my name on the box sounds small, but it's the first routine I've actually kept up with.", plan: "Every 3 months" },
+  { name: "Tomás L.", text: "The reminder lands right when I'm making coffee, and checking the day off is weirdly satisfying.", plan: "Morning pack · 5 items" },
+  { name: "Grace H.", text: "I moved apartments mid-subscription. Changing the address took a minute, and the next box just showed up.", plan: "Every 2 months" },
 ];

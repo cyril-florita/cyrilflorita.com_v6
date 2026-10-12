@@ -1,41 +1,42 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ViewTransition, useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { ViewTransition, useEffect, useId, useRef, useState, useSyncExternalStore } from "react";
 import { BASE, PRODUCTS } from "./data";
 
 // Shared Viteo UI: logo, pill illustrations, buttons, and the page shell
-// (header, footer with the concept notice). Styles: app/lab/viteo/viteo.css.
+// (header, footer with the concept notice). Styles: app/pitch/viteo/viteo.css.
 
+// The Viteo mark: a "V" of two capsules meeting at the base, one glossy in
+// the theme's accent, one in ink. Gradient ids are per instance (useId).
+// The capsule-"V" mark on its own (also printed on the product box).
+export const LogoMark = ({ className = "" }) => {
+  const id = useId().replace(/:/g, "");
+  return (
+    <svg className={`dl-logo-mark ${className}`.trim()} viewBox="0 0 44 44" aria-hidden="true">
+      <defs>
+        <linearGradient id={`${id}a`} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" style={{ stopColor: "var(--dl-logo-1)" }} />
+          <stop offset="1" style={{ stopColor: "var(--dl-logo-2)" }} />
+        </linearGradient>
+      </defs>
+      <g className="dl-logo-a">
+        <rect x="15" y="1" width="12" height="38" rx="6" transform="rotate(-24 21 39)" fill={`url(#${id}a)`} />
+      </g>
+      <g className="dl-logo-b">
+        <rect x="17" y="1" width="12" height="38" rx="6" transform="rotate(24 23 39)" fill="var(--dl-logo-ink, var(--dl-ink))" />
+      </g>
+    </svg>
+  );
+};
+
+// The Viteo logo: the mark beside a lowercase wordmark. Hovering the logo
+// (or its link) spins each capsule a full turn around its own centre, in
+// opposite directions, back into the V (CSS: "logo" in viteo.css).
 export const Logo = ({ small = false }) => (
   <span className={`dl-logo ${small ? "dl-logo-sm" : ""}`}>
-    <svg viewBox="0 0 32 32" aria-hidden="true">
-      <circle cx="16" cy="19" r="8" fill="var(--dl-sun)" />
-      {[0, 1, 2, 3, 4].map((i) => {
-        const a = Math.PI + (i * Math.PI) / 4;
-        return (
-          <line
-            key={i}
-            x1={16 + Math.cos(a) * 11}
-            y1={19 + Math.sin(a) * 11}
-            x2={16 + Math.cos(a) * 14.5}
-            y2={19 + Math.sin(a) * 14.5}
-            stroke="var(--dl-sun)"
-            strokeWidth="2.4"
-            strokeLinecap="round"
-          />
-        );
-      })}
-      <rect
-        x="2"
-        y="26"
-        width="28"
-        height="2.6"
-        rx="1.3"
-        fill="var(--dl-ink)"
-      />
-    </svg>
-    <span>Viteo</span>
+    <LogoMark />
+    <span>viteo</span>
   </span>
 );
 
@@ -90,7 +91,8 @@ export const ProductBox = ({ name = "Morning pack", owner, morph = true }) => {
   const box = (
   <div className="dl-box">
     <div className="dl-box-front">
-      <span className="dl-box-brand">Viteo</span>
+      <LogoMark className="dl-box-mark" />
+      <span className="dl-box-brand">viteo</span>
       <span className="dl-box-info">
         {owner && <span className="dl-box-owner">{owner}&apos;s</span>}
         <span className="dl-box-name">{name}</span>
@@ -175,7 +177,7 @@ export const Arrow = () => (
 );
 
 // Theme + mode live as attributes on the .dl root (set before paint by the
-// script in app/lab/viteo/layout.js). This reads them live and writes
+// script in app/pitch/viteo/layout.js). This reads them live and writes
 // them back, saving the choice for the next visit.
 export const THEMES = [
   {
@@ -189,6 +191,12 @@ export const THEMES = [
     label: "Grove",
     fonts: "Outfit + Figtree",
     color: "#5FBF8A",
+  },
+  {
+    id: "peach",
+    label: "Peach",
+    fonts: "Fraunces + DM Sans",
+    color: "#F7A47C",
   },
 ];
 const root = () => document.querySelector(".dl");
@@ -472,12 +480,13 @@ export const Footer = () => (
       <div>
         <Logo small />
         <p>
-          Personalized daily vitamins, explained. Products, prices, reviews and
-          people are made up. Nothing here is medical advice; talk to a
-          healthcare professional before starting any supplement.
+          Personalized daily vitamins, explained. These statements have not
+          been evaluated by the Food and Drug Administration. This product is
+          not intended to diagnose, treat, cure, or prevent any disease. Talk
+          to your doctor before starting any supplement.
         </p>
       </div>
-      <nav aria-label="Prototype pages">
+      <nav aria-label="Footer">
         <Link href={`${BASE}/`}>Home</Link>
         <Link href={`${BASE}/quiz/`}>Quiz</Link>
         <Link href={`${BASE}/plan/`}>Your plan</Link>
@@ -486,11 +495,11 @@ export const Footer = () => (
         <Link href={`${BASE}/design-system/`}>Design system</Link>
       </nav>
     </div>
-    {/* Always visible: this is a design concept, not a store. */}
+    {/* Always visible: this is a design & dev pitch, not a store. */}
     <div className="dl-wrap dl-footer-legal">
       <p>
-        <strong>Concept project</strong> by Cyril Florita. Viteo is not a real
-        product; nothing here is for sale or medical advice.
+        <strong>Design and Dev Pitch</strong> &middot; &copy; {new Date().getFullYear()} Cyril Florita. All
+        rights reserved.
       </p>
       {/* A full page load: the portfolio uses a different layout and styles. */}
       <a href="/">Back to portfolio</a>

@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { gsap } from "gsap";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { BASE, PRODUCTS, QUESTIONS, recommend } from "./data";
 import { write } from "./store";
 import { Arrow, BigWordHead, Button, Pill, PillTray, ProductBox } from "./ui";
@@ -11,7 +13,9 @@ import { Arrow, BigWordHead, Button, Pill, PillTray, ProductBox } from "./ui";
 // fish question for plant-based diets). Beside the questions, "Your pack so
 // far" fills live as answers earn pills (each drops in with its reason), on
 // a pack printed with the person's name. The last screen drops the pills
-// into the pack, then hands off to /plan/.
+// into the pack (a GSAP timeline: each pill falls with its own drift and
+// spin, and the pack squashes a little as each one lands), then hands off
+// to /plan/ when the timeline completes.
 
 const reducedMotion = () =>
   typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -23,6 +27,7 @@ export default function Quiz() {
   const [step, setStep] = useState(0);
   const [building, setBuilding] = useState(null); // recommended ids while "building"
   const headingRef = useRef(null);
+  const fillRef = useRef(null);
   const advanceTimer = useRef(null);
 
   const live = useMemo(() => recommend(answers, { fill: false }), [answers]);
@@ -46,9 +51,35 @@ export default function Quiz() {
     write("answers", all);
     write("cart", { items: picks, plan: "two" });
     setBuilding(picks.map((p) => p.id));
-    // Long enough for every pill to drop into the pack (see .dl-fill-pill).
-    setTimeout(() => router.push(`${BASE}/plan/`), reducedMotion() ? 400 : 1500 + picks.length * 400);
   };
+
+  // The finale: drop the pills into the pack, then go to the plan.
+  useEffect(() => {
+    if (!building) return;
+    const go = () => router.push(`${BASE}/plan/`);
+    const box = fillRef.current;
+    if (!box || reducedMotion()) {
+      const t = setTimeout(go, 400);
+      return () => clearTimeout(t);
+    }
+    const pills = [...box.querySelectorAll(".dl-fill-pill")];
+    const pack = box.querySelector(".dl-product");
+    const tl = gsap.timeline({ delay: 0.3, onComplete: go });
+    pills.forEach((el, i) => {
+      const drift = ((i * 37) % 7) - 3; // a little sideways wander, per pill
+      const at = i * 0.38;
+      tl.fromTo(el,
+        { y: -40, x: drift * 6, rotation: -40 - ((i * 23) % 30), autoAlpha: 0 },
+        { y: 150, x: drift * 2, rotation: 25 + ((i * 17) % 25), autoAlpha: 1, duration: 0.75 + (i % 3) * 0.08, ease: "power2.in" },
+        at);
+      // Into the pack: it shrinks out of sight as it drops in…
+      tl.to(el, { y: 178, scale: 0.55, autoAlpha: 0, duration: 0.2, ease: "power1.in" }, ">");
+      // …and the pack squashes a touch to catch it.
+      if (pack) tl.fromTo(pack, { scaleX: 1, scaleY: 1 }, { scaleX: 1.04, scaleY: 0.95, duration: 0.09, yoyo: true, repeat: 1, ease: "power1.out", transformOrigin: "50% 100%" }, "<");
+    });
+    tl.to({}, { duration: 0.35 }); // a beat on the full pack before moving on
+    return () => tl.kill();
+  }, [building, router]);
 
   const next = (all = answers) => {
     clearTimeout(advanceTimer.current);
@@ -84,9 +115,9 @@ export default function Quiz() {
             <h1 className="dl-h2">Building your pack{answers.name ? `, ${answers.name}` : ""}…</h1>
           </BigWordHead>
           {/* The pills drop into the printed pack, one after another. */}
-          <div className="dl-pack-fill" role="img" aria-label={`Your pack: ${building.map((i) => PRODUCTS[i]?.name).join(", ")}`}>
+          <div ref={fillRef} className="dl-pack-fill" role="img" aria-label={`Your pack: ${building.map((i) => PRODUCTS[i]?.name).join(", ")}`}>
             {building.map((id, i) => (
-              <span key={id} className="dl-fill-pill" style={{ "--i": i }} aria-hidden="true">
+              <span key={id} className="dl-fill-pill" aria-hidden="true">
                 <Pill id={id} size="lg" tilt={-20} />
               </span>
             ))}
@@ -106,6 +137,10 @@ export default function Quiz() {
     <section className="dl-quiz">
       <div className="dl-wrap dl-quiz-layout">
       <div className="dl-quiz-inner dl-panel dl-panel-1">
+        {/* Phones: the quiz is full-screen (no site header), so it has its own way out. */}
+        <Link className="dl-quiz-exit" href={`${BASE}/`} aria-label="Leave the quiz">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+        </Link>
         <div className="dl-progress" aria-hidden="true">
           <span style={{ width: `${pct}%` }} />
         </div>

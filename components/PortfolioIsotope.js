@@ -457,7 +457,7 @@ const PortfolioIsotope = () => {
 
           <div className="grid-sizer" />
 
-          {/* wide . viteo (self-initiated concept; first in Case Studies, second in Web & App) */}
+          {/* wide . viteo (design & dev pitch; first in Case Studies, second in Web & App) */}
           <div id="viteo" data-project="viteo" data-order-web="2" data-order-all="20" className="cyril-grid-item fil-uix">
             <Link href="/viteo" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
@@ -466,7 +466,7 @@ const PortfolioIsotope = () => {
                   <h3>Case Study</h3>
                 </div>
                 <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Product Design &amp; Development · Concept</p>
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Product Design &amp; Development · Pitch</p>
                   <h4 className="cyril-up">Viteo</h4>
                 </div>
               </div>
