@@ -260,7 +260,7 @@ export const priceFor = (items, planId) => {
   return { plan, monthly, subtotal, savings, total: Math.round((subtotal - savings) * 100) / 100 };
 };
 
-export const money = (n) => `$${n.toFixed(2).replace(/\.00$/, "")}`;
+export const money = (n) => `$${n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(/\.00$/, "")}`;
 
 // Sample people for the landing page — clearly fictional.
 export const SAMPLE_REVIEWS = [
@@ -272,3 +272,26 @@ export const SAMPLE_REVIEWS = [
   { name: "Tomás L.", text: "The reminder lands right when I'm making coffee, and checking the day off is weirdly satisfying.", plan: "Morning pack · 5 items" },
   { name: "Grace H.", text: "I moved apartments mid-subscription. Changing the address took a minute, and the next box just showed up.", plan: "Every 2 months" },
 ];
+
+// Batch results (/lot/): sample lots, so the transparency page can be tried.
+// Each lot is one production batch of one product, tested by an independent
+// lab before release. Clearly sample data (stamped on the page).
+const METALS = (lead) => [
+  { test: "Lead", result: `${lead} µg/serving`, spec: "≤ 0.5 µg/serving", pass: true },
+  { test: "Cadmium", result: "Not detected", spec: "Within spec", pass: true },
+  { test: "Arsenic", result: "Not detected", spec: "Within spec", pass: true },
+  { test: "Mercury", result: "Not detected", spec: "Within spec", pass: true },
+];
+const MICRO = [
+  { test: "Total aerobic count", result: "< 10 CFU/g", spec: "Within spec", pass: true },
+  { test: "Yeast and mold", result: "< 10 CFU/g", spec: "Within spec", pass: true },
+  { test: "E. coli", result: "Absent", spec: "Absent", pass: true },
+  { test: "Salmonella", result: "Absent", spec: "Absent", pass: true },
+];
+export const SAMPLE_LOTS = {
+  "VT-2410-07": { product: "d3", made: "Sep 18, 2026", tested: "Sep 24, 2026", bestBy: "Sep 2028", potency: 104, metals: METALS("0.04"), micro: MICRO },
+  "VT-2409-12": { product: "magnesium", made: "Aug 27, 2026", tested: "Sep 3, 2026", bestBy: "Aug 2028", potency: 101, metals: METALS("0.07"), micro: MICRO },
+  "VT-2408-03": { product: "omega", made: "Aug 5, 2026", tested: "Aug 12, 2026", bestBy: "Feb 2028", potency: 108, metals: METALS("0.02"), micro: MICRO },
+};
+export const LOT_LAB = "An ISO/IEC 17025-accredited independent laboratory";
+

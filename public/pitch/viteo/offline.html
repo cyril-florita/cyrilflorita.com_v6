@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#13151F">
+<title>You're offline — Viteo</title>
+<style>
+  html, body { margin: 0; height: 100%; }
+  body { display: grid; place-items: center; background: #13151F; color: #F1F3F7; font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; text-align: center; padding: 24px; box-sizing: border-box; }
+  .card { max-width: 380px; display: grid; gap: 14px; justify-items: center; }
+  img { width: 72px; height: 72px; border-radius: 18px; }
+  h1 { margin: 6px 0 0; font-size: 26px; line-height: 1.2; letter-spacing: -0.02em; }
+  p { margin: 0; color: #A7AEC2; }
+  button { margin-top: 8px; border: 0; border-radius: 999px; padding: 14px 26px; font: inherit; font-weight: 600; background: #7DE2DF; color: #1A1D2E; cursor: pointer; }
+</style>
+</head>
+<body>
+  <main class="card">
+    <img src="/pitch/viteo/icon-192.png" alt="">
+    <h1>You're offline</h1>
+    <p>Viteo needs a connection for your pack and account. We'll pick up where you left off once you're back online.</p>
+    <button type="button" onclick="location.reload()">Try again</button>
+  </main>
+</body>
+</html>

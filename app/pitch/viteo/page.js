@@ -51,7 +51,8 @@ const FAQ = [
   },
   {
     q: "How are your vitamins made and tested?",
-    a: "Every batch is made in a cGMP-certified facility and tested by an independent lab for identity, purity and potency. All nine are vegan and free from gluten, dairy and artificial colors.",
+    a: "Every batch is made in a cGMP-certified facility and tested by an independent lab for identity, purity and potency, and the results are published: enter the lot code from the bottom of your box to see them. All nine are vegan and free from gluten, dairy and artificial colors.",
+    link: { href: `${BASE}/lot/`, label: "Look up a batch" },
   },
   {
     q: "Can I change, skip or pause my deliveries?",
@@ -341,7 +342,7 @@ export default function Landing() {
             {FAQ.map((f) => (
               <details key={f.q} className="dl-glass dl-faq-item">
                 <summary>{f.q}</summary>
-                <p>{f.a}</p>
+                <p>{f.a}{f.link && <> <Link className="dl-textlink" href={f.link.href}>{f.link.label}</Link></>}</p>
               </details>
             ))}
           </div>

@@ -6,6 +6,7 @@ import { useHydrated, useStored, write } from "./store";
 import { BigWordHead, Button, Pill, PillTray } from "./ui";
 import AccountTabs from "./AccountTabs";
 import RoutineGraph from "./RoutineGraph";
+import CancelFlow from "./CancelFlow";
 
 // The subscriber's account: next delivery (skip with undo, pause, resume),
 // the pack (remove / add, applied to the next box), delivery frequency,
@@ -59,6 +60,7 @@ export default function Account() {
   const [pausing, setPausing] = useState(false);
   const [adding, setAdding] = useState(false);
   const [editing, setEditing] = useState(false);
+  const [cancelling, setCancelling] = useState(false);
   const [draft, setDraft] = useState(null);
   const toastTimer = useRef(null);
   const addressDialog = useRef(null);
@@ -115,6 +117,23 @@ export default function Account() {
     const next = new Date(clock() + 3 * DAY).toISOString();
     save({ paused: null, next });
     notify(`Welcome back. Your next box ships ${fmt(next)}.`);
+  };
+
+  // Cancelling (CancelFlow.js) and coming back.
+  const cancelSubscription = () => {
+    const before = order;
+    save({ cancelled: new Date(clock()).toISOString(), paused: null });
+    notify("Subscription cancelled. No more boxes will ship.", () => write("order", before));
+  };
+  const restart = () => {
+    const next = new Date(clock() + 3 * DAY).toISOString();
+    save({ cancelled: null, paused: null, next });
+    notify(`Welcome back. Your first box ships ${fmt(next)}.`);
+  };
+  const switchToThreeMonths = () => {
+    const before = order;
+    save({ plan: "three", cart: { ...order.cart, plan: "three" } });
+    notify("Switched to a delivery every 3 months.", () => write("order", before));
   };
 
   const removeItem = (id) => {
@@ -185,7 +204,18 @@ export default function Account() {
 
         <div className="dl-account-grid">
           {/* Next delivery */}
-          <div id="acc-next" className={`dl-card dl-panel dl-panel-1 dl-next ${order.paused ? "is-paused" : ""}`}>
+          <div id="acc-next" className={`dl-card dl-panel dl-panel-1 dl-next ${order.paused || order.cancelled ? "is-paused" : ""}`}>
+            {order.cancelled ? (
+              <>
+                <p className="dl-eyebrow">Cancelled</p>
+                <h2 className="dl-display dl-next-date">No boxes scheduled</h2>
+                <p className="dl-meta">You cancelled on {fmt(order.cancelled)}. Your pack and routine history are kept.</p>
+                <div className="dl-next-actions">
+                  <Button onClick={restart}>Restart subscription</Button>
+                </div>
+              </>
+            ) : (
+            <>
             <p className="dl-eyebrow">{order.paused ? "Paused" : "Next delivery"}</p>
             <h2 className="dl-display dl-next-date">{fmt(order.next)}</h2>
             <p className="dl-meta">
@@ -222,6 +252,8 @@ export default function Account() {
                   <button key={m} type="button" className="dl-chip" onClick={() => pause(m)}>{m} {m === 1 ? "month" : "months"}</button>
                 ))}
               </div>
+            )}
+            </>
             )}
           </div>
 
@@ -289,11 +321,20 @@ export default function Account() {
             </div>
             <p className="dl-meta">{money(price.total)} per box{price.savings > 0 ? ` · you save ${money(price.savings)}` : ""}</p>
             <h3 className="dl-h4">Coming up</h3>
-            <ol className="dl-schedule">
-              {upcoming.map((d, i) => (
-                <li key={d}><span className="dl-schedule-dot" aria-hidden="true" />{fmt(d)}{i === 0 && !order.paused && <span className="dl-tag dl-tag-sun">Next</span>}</li>
-              ))}
-            </ol>
+            {order.cancelled ? (
+              <p className="dl-meta">No deliveries scheduled.</p>
+            ) : (
+              <ol className="dl-schedule">
+                {upcoming.map((d, i) => (
+                  <li key={d}><span className="dl-schedule-dot" aria-hidden="true" />{fmt(d)}{i === 0 && !order.paused && <span className="dl-tag dl-tag-sun">Next</span>}</li>
+                ))}
+              </ol>
+            )}
+            {!order.cancelled && (
+              <button type="button" className="dl-textlink dl-cancel-link" aria-haspopup="dialog" onClick={() => setCancelling(true)}>
+                Cancel subscription
+              </button>
+            )}
           </div>
 
           {/* Pack */}
@@ -394,6 +435,18 @@ export default function Account() {
           </form>
         )}
       </dialog>
+
+      <CancelFlow
+        open={cancelling}
+        onClose={() => setCancelling(false)}
+        order={order}
+        nextDate={fmt(order.next)}
+        threePrice={priceFor(items, "three").total}
+        onSkip={skip}
+        onPause={pause}
+        onThreeMonths={switchToThreeMonths}
+        onCancel={cancelSubscription}
+      />
 
       <AccountTabs />
       <div className={`dl-toast ${toast ? "is-on" : ""}`} role="status" aria-live="polite">

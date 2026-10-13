@@ -1,0 +1,20 @@
+{
+  "name": "Viteo — Personalized daily vitamins",
+  "short_name": "Viteo",
+  "description": "Take the 2-minute quiz, get a daily pack that explains itself, and manage your deliveries.",
+  "id": "/pitch/viteo/",
+  "start_url": "/pitch/viteo/",
+  "scope": "/pitch/viteo/",
+  "display": "standalone",
+  "background_color": "#13151F",
+  "theme_color": "#13151F",
+  "icons": [
+    { "src": "/pitch/viteo/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/pitch/viteo/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/pitch/viteo/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Take the quiz", "url": "/pitch/viteo/quiz/" },
+    { "name": "Your account", "url": "/pitch/viteo/account/" }
+  ]
+}

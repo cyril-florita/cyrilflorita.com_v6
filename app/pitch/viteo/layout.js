@@ -18,12 +18,15 @@ import "./viteo.css";
 // Figtree, calm botanical) and Peach (Fraunces + DM Sans, peach + periwinkle on navy ink). Dark mode is the default. Every page
 // sits in a rounded frame (.dl-frame) of bento panels.
 
-const outfit = Outfit({ subsets: ["latin"], variable: "--dl-font-grove-display", display: "swap" });
-const figtree = Figtree({ subsets: ["latin"], variable: "--dl-font-grove-body", display: "swap" });
+// Only the default theme's fonts (Aqua) are preloaded: preloading all six
+// made them compete on slow connections and held back the hero's first paint.
+// Grove and Peach load when someone switches theme.
+const outfit = Outfit({ subsets: ["latin"], variable: "--dl-font-grove-display", display: "swap", preload: false });
+const figtree = Figtree({ subsets: ["latin"], variable: "--dl-font-grove-body", display: "swap", preload: false });
 const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--dl-font-aqua-display", display: "swap" });
 const inter = Inter({ subsets: ["latin"], variable: "--dl-font-aqua-body", display: "swap" });
-const fraunces = Fraunces({ subsets: ["latin"], axes: ["SOFT", "opsz"], style: ["normal", "italic"], variable: "--dl-font-peach-display", display: "swap" });
-const dmSans = DM_Sans({ subsets: ["latin"], variable: "--dl-font-peach-body", display: "swap" });
+const fraunces = Fraunces({ subsets: ["latin"], axes: ["SOFT", "opsz"], style: ["normal", "italic"], variable: "--dl-font-peach-display", display: "swap", preload: false });
+const dmSans = DM_Sans({ subsets: ["latin"], variable: "--dl-font-peach-body", display: "swap", preload: false });
 
 export const metadata = {
   title: {
@@ -39,7 +42,15 @@ export const metadata = {
     images: [{ url: "/og/viteo.jpg", width: 1200, height: 630, alt: "Viteo, a personalized vitamin subscription" }],
   },
   twitter: { card: "summary_large_image", images: ["/og/viteo.jpg"] },
+  // Installable (a PWA scoped to /pitch/viteo/; see InstallApp.js).
+  manifest: "/pitch/viteo/manifest.webmanifest",
+  appleWebApp: { capable: true, title: "Viteo", statusBarStyle: "black-translucent" },
+  icons: { apple: "/pitch/viteo/apple-touch-icon.png" },
 };
+
+// Pinch-zoom stays available on Viteo (the root layout locks it for the
+// portfolio); zooming is an accessibility requirement.
+export const viewport = { themeColor: "#13151F", maximumScale: 5, userScalable: true };
 
 // Applies the saved theme and mode before first paint, so there's no flash
 // (else the defaults on the element: Aqua, dark). ThemeSwitcher keeps these

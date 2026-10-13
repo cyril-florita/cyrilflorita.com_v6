@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ViewTransition, useEffect, useId, useRef, useState, useSyncExternalStore } from "react";
 import { BASE, PRODUCTS } from "./data";
+import InstallApp from "./InstallApp";
 
 // Shared Viteo UI: logo, pill illustrations, buttons, and the page shell
 // (header, footer with the concept notice). Styles: app/pitch/viteo/viteo.css.
@@ -492,7 +493,11 @@ export const Footer = () => (
         <Link href={`${BASE}/plan/`}>Your plan</Link>
         <Link href={`${BASE}/checkout/`}>Checkout</Link>
         <Link href={`${BASE}/account/`}>Account</Link>
+        <Link href={`${BASE}/partners/`}>For professionals</Link>
+        <Link href={`${BASE}/lot/`}>Batch results</Link>
+        <Link href={`${BASE}/emails/`}>Emails</Link>
         <Link href={`${BASE}/design-system/`}>Design system</Link>
+        <InstallApp />
       </nav>
     </div>
     {/* Always visible: this is a design & dev pitch, not a store. */}

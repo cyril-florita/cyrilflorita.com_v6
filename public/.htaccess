@@ -3,5 +3,31 @@ Options -Indexes
 ErrorDocument 403 /index.html
 ErrorDocument 404 /404.html
 
+# Web app manifests (the portfolio's and Viteo's).
+AddType application/manifest+json .webmanifest
+
+# Compress text responses (HTML, CSS, JS, JSON, SVG, manifests). Each block
+# only applies if the server has the module, so it can never break the site.
+<IfModule mod_filter.c>
+  <IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css text/plain text/javascript application/javascript application/json application/manifest+json image/svg+xml application/xml
+  </IfModule>
+</IfModule>
+
+# Caching: Next's build files are content-hashed (new name on every build),
+# so they can be cached for a year; images for a day (screenshots get
+# replaced under the same name); pages are always revalidated.
+<IfModule mod_headers.c>
+  <If "%{REQUEST_URI} =~ m#^/_next/static/#">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </If>
+  <ElseIf "%{REQUEST_URI} =~ m#\.(jpe?g|png|webp|gif|svg|mp4|woff2?)$#">
+    Header set Cache-Control "public, max-age=86400"
+  </ElseIf>
+  <ElseIf "%{REQUEST_URI} =~ m#(/|\.html)$#">
+    Header set Cache-Control "no-cache"
+  </ElseIf>
+</IfModule>
+
 # Viteo moved from /lab/viteo/ to /pitch/viteo/ (mod_alias; no RewriteEngine).
 RedirectMatch 301 ^/lab/viteo(/.*)?$ /pitch/viteo$1

@@ -27,7 +27,7 @@ const PROJECTS = [
   'he-took-my-place',
 ];
 
-const PITCH = ['/pitch/viteo/', '/pitch/viteo/quiz/', '/pitch/viteo/design-system/'];
+const PITCH = ['/pitch/viteo/', '/pitch/viteo/quiz/', '/pitch/viteo/partners/', '/pitch/viteo/lot/', '/pitch/viteo/emails/', '/pitch/viteo/design-system/'];
 
 export default function sitemap() {
   return [

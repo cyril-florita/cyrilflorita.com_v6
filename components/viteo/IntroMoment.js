@@ -99,7 +99,7 @@ export default function IntroMoment() {
     pills.forEach((el, i) => fall(tl, el, pillFall(i), introState.pills[i]));
     // The badge spins in; the copy rises, staggered.
     if (badge) tl.fromTo(badge, { "--is": 0.4, "--ir": "-90deg", "--io": 0 }, { "--is": 1, "--ir": "0deg", "--io": 1, duration: 0.8, ease: "power3.out" }, 0.8);
-    if (copy.length) tl.fromTo(copy, { "--iy": "24px", "--io": 0 }, { "--iy": "0px", "--io": 1, duration: 0.8, ease: "power3.out", stagger: 0.1 }, 0.35);
+    if (copy.length) tl.fromTo(copy, { "--iy": "24px" }, { "--iy": "0px", duration: 0.8, ease: "power3.out", stagger: 0.1 }, 0.35);
 
     wake(tl.duration() * 1000 + 400);
 
