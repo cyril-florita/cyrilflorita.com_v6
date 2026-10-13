@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { BASE, PLANS, PRODUCTS, money, priceFor } from "./data";
 import { useHydrated, useStored, write } from "./store";
-import { BigWordHead, Button, Pill, PillTray } from "./ui";
+import { Arrow, BigWordHead, Button, Pill, PillTray } from "./ui";
 import AccountTabs from "./AccountTabs";
 import RoutineGraph from "./RoutineGraph";
 import CancelFlow from "./CancelFlow";
@@ -56,6 +56,7 @@ const demoOrder = () => {
 export default function Account() {
   const hydrated = useHydrated();
   const stored = useStored("order");
+  const session = useStored("session");
   const [toast, setToast] = useState(null); // { text, undo }
   const [pausing, setPausing] = useState(false);
   const [adding, setAdding] = useState(false);
@@ -81,6 +82,34 @@ export default function Account() {
 
   if (!hydrated) return <section className="dl-account dl-wrap" aria-busy="true" />;
 
+  // Signed out (sign-in is simulated, SignIn.js): a gate with both ways in.
+  if (!session) {
+    return (
+      <section className="dl-account">
+        <div className="dl-wrap">
+          <div className="dl-card dl-panel dl-panel-1 dl-signin-card dl-account-gate">
+            <BigWordHead word="Account">
+              <h1 className="dl-h2">Sign in to manage your deliveries.</h1>
+            </BigWordHead>
+            <p className="dl-section-lede">Skip, pause or change your pack, check off today&apos;s pack and see your routine.</p>
+            <div className="dl-hero-actions">
+              <Button href={`${BASE}/sign-in/?next=account`} size="lg">Sign in <Arrow /></Button>
+              <Button
+                variant="ghost"
+                onClick={() => write("session", { email: (stored?.address?.email) || "victoria@example.com", name: stored?.name || "Victoria", method: "sample", since: new Date().toISOString() })}
+              >
+                Explore the sample account
+              </Button>
+            </div>
+            <p className="dl-meta dl-signin-note">
+              <span className="dl-code" data-lot="Lot 07">Preview</span> Sign-in is simulated: nothing is sent anywhere.
+            </p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   const order = stored || demo || demoOrder();
   const items = order.cart.items;
   const ids = items.map((i) => i.id);
@@ -91,6 +120,7 @@ export default function Account() {
   const tookToday = checkins.includes(today);
 
   const save = (patch) => write("order", { ...order, ...patch });
+  const signOut = () => write("session", null);
 
   const notify = (text, undo) => {
     clearTimeout(toastTimer.current);
@@ -198,8 +228,8 @@ export default function Account() {
             </BigWordHead>
           </div>
           {order.demo
-            ? <p className="dl-meta">Manage your deliveries, pack and reminders. <Link className="dl-textlink" href={`${BASE}/quiz/`}>Retake the quiz</Link></p>
-            : <p className="dl-meta">Order {order.id}</p>}
+            ? <p className="dl-meta">Signed in as {session.email}. <Link className="dl-textlink" href={`${BASE}/quiz/`}>Retake the quiz</Link> · <button type="button" className="dl-textlink" onClick={signOut}>Sign out</button></p>
+            : <p className="dl-meta">Order {order.id} · Signed in as {session.email} · <button type="button" className="dl-textlink" onClick={signOut}>Sign out</button></p>}
         </div>
 
         <div className="dl-account-grid">
@@ -394,7 +424,7 @@ export default function Account() {
 
         <p className="dl-meta dl-fine">
           Preview mode: changes are saved in this browser.{" "}
-          <button type="button" className="dl-textlink" onClick={() => { write("order", null); notify("Preview reset."); }}>Reset</button>
+          <button type="button" className="dl-textlink" onClick={() => { write("order", null); write("session", null); notify("Preview reset."); }}>Reset</button>
         </p>
       </div>
 

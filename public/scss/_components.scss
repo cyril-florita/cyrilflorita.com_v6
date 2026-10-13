@@ -3749,6 +3749,15 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
 }
 
 // a closing call to action at the end of a case study's content
+/* Case-study buttons with an icon ("Try Viteo live ↗"): the same label/icon
+   spacing wherever they sit (in a paragraph or the closing CTA). */
+.cyril-case-page .cyril-button:has(> svg) {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    & svg { width: 18px; height: 18px; flex: none; }
+}
+
 .cyril-case-cta {
     margin-top: 72px;
     padding: 48px;
@@ -3762,8 +3771,10 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
 
     & h3 { margin: 0 0 8px; }
     & p { margin: 0; max-width: 34em; }
-    & .cyril-button { gap: 8px; }
-    & .cyril-button svg { width: 18px; height: 18px; }
+
+    // Inside a section (Viteo's Overview): sits in the text flow, so less
+    // space above, and some below before the next figure.
+    &.cyril-case-cta-inline { margin: 32px 0 40px; }
 
     @media screen and (max-width: 768px) {
         padding: 28px 22px;

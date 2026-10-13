@@ -3,12 +3,18 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { BASE, PRODUCTS, money, priceFor, recommend } from "./data";
 import { useHydrated, useStored, write } from "./store";
+import { PaymentStep } from "./Payment";
 import { Arrow, BigWordHead, Button, PillTray, ProductBox } from "./ui";
 
 // Checkout in four steps (Details, Delivery, Payment, Review), then a
-// confirmation. It's a prototype: there are no card fields and nothing is
-// charged — the payment step is a clearly labelled demo. The order is saved
-// to localStorage so the account page can show it.
+// confirmation. The order is saved to localStorage so the account page can
+// show it, and placing it signs you in (the account is created with it).
+//
+// Payment is simulated, and safe by construction: nobody can type a card.
+// Two experiences: a wallet sheet (Apple Pay on Apple devices, Google Pay
+// elsewhere) with a sample card, and a card form whose fields are read-only
+// and filled with public test cards (Stripe's 4242… succeeds, 4000…0002 is
+// declined, showing the error path). Nothing is charged or sent anywhere.
 
 const STEPS = ["Details", "Delivery", "Payment", "Review"];
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -42,16 +48,21 @@ export default function Checkout() {
   const hydrated = useHydrated();
   const stored = useStored("cart");
   const answers = useStored("answers");
+  const session = useStored("session");
   const [step, setStep] = useState(0);
-  const [form, setForm] = useState({ name: "", email: "", line1: "", line2: "", city: "", state: "", zip: "" });
+  // name/email start null: until typed, they fall back to the signed-in account.
+  const [form, setForm] = useState({ name: null, email: null, line1: "", line2: "", city: "", state: "", zip: "" });
   const [errors, setErrors] = useState({});
   const [start, setStart] = useState(null);
   const [placed, setPlaced] = useState(null);
+  const [payment, setPayment] = useState(null); // { method, label } once authorized
+  const [placing, setPlacing] = useState(false);
   const headingRef = useRef(null);
 
   useEffect(() => {
     headingRef.current?.focus({ preventScroll: true });
   }, [step, placed]);
+
 
   if (!hydrated) return <section className="dl-checkout dl-wrap" aria-busy="true" />;
 
@@ -76,6 +87,7 @@ export default function Checkout() {
   }
 
   const cart = stored || placed.cart;
+  const fm = { ...form, name: form.name ?? session?.name ?? "", email: form.email ?? session?.email ?? "" };
   const price = priceFor(cart.items, cart.plan);
   const dates = startDates();
   const startDate = start ? new Date(start) : dates[0];
@@ -87,12 +99,12 @@ export default function Checkout() {
 
   const validate = () => {
     const e = {};
-    if (!form.name.trim()) e.name = "Add the name for the delivery.";
-    if (!EMAIL.test(form.email.trim())) e.email = "That email doesn't look right.";
-    if (!form.line1.trim()) e.line1 = "Add a street address.";
-    if (!form.city.trim()) e.city = "Add a city.";
-    if (!form.state.trim()) e.state = "Add a state.";
-    if (!/^\d{5}$/.test(form.zip.trim())) e.zip = "Use a 5-digit ZIP code.";
+    if (!fm.name.trim()) e.name = "Add the name for the delivery.";
+    if (!EMAIL.test(fm.email.trim())) e.email = "That email doesn't look right.";
+    if (!fm.line1.trim()) e.line1 = "Add a street address.";
+    if (!fm.city.trim()) e.city = "Add a city.";
+    if (!fm.state.trim()) e.state = "Add a state.";
+    if (!/^\d{5}$/.test(fm.zip.trim())) e.zip = "Use a 5-digit ZIP code.";
     setErrors(e);
     return !Object.keys(e).length;
   };
@@ -102,21 +114,28 @@ export default function Checkout() {
     setStep((s) => s + 1);
   };
 
-  const place = () => {
+  const place = async () => {
+    setPlacing(true);
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    await new Promise((r) => setTimeout(r, reduce ? 150 : 1200));
     const order = {
       id: orderId(),
       cart,
-      name: answers?.name?.trim() || form.name.trim().split(" ")[0],
-      address: form,
+      name: answers?.name?.trim() || fm.name.trim().split(" ")[0],
+      address: fm,
       start: startDate.toISOString(),
       next: startDate.toISOString(),
       plan: cart.plan,
       paused: null,
       created: new Date().toISOString(),
       time: answers?.time || "morning",
+      payment,
     };
     write("order", order);
     write("cart", null);
+    // Placing an order creates the account and signs you in.
+    write("session", { email: fm.email.trim(), name: order.name, method: "checkout", since: order.created });
+    setPlacing(false);
     setPlaced(order);
   };
 
@@ -160,14 +179,15 @@ export default function Checkout() {
               <form onSubmit={(e) => { e.preventDefault(); next(); }} noValidate>
                 <h1 className="dl-h3" tabIndex={-1} ref={headingRef}>Where should we send it?</h1>
                 <div className="dl-form-grid">
-                  <Field label="Full name" error={errors.name} wide><input value={form.name} onChange={setField("name")} autoComplete="name" /></Field>
-                  <Field label="Email" error={errors.email} wide><input type="email" value={form.email} onChange={setField("email")} autoComplete="email" /></Field>
-                  <Field label="Street address" error={errors.line1} wide><input value={form.line1} onChange={setField("line1")} autoComplete="address-line1" /></Field>
-                  <Field label="Apartment, suite (optional)" wide><input value={form.line2} onChange={setField("line2")} autoComplete="address-line2" /></Field>
-                  <Field label="City" error={errors.city}><input value={form.city} onChange={setField("city")} autoComplete="address-level2" /></Field>
-                  <Field label="State" error={errors.state}><input value={form.state} onChange={setField("state")} autoComplete="address-level1" maxLength={20} /></Field>
-                  <Field label="ZIP code" error={errors.zip}><input inputMode="numeric" value={form.zip} onChange={setField("zip")} autoComplete="postal-code" maxLength={5} /></Field>
+                  <Field label="Full name" error={errors.name} wide><input value={fm.name} onChange={setField("name")} autoComplete="name" /></Field>
+                  <Field label="Email" error={errors.email} wide><input type="email" value={fm.email} onChange={setField("email")} autoComplete="email" /></Field>
+                  <Field label="Street address" error={errors.line1} wide><input value={fm.line1} onChange={setField("line1")} autoComplete="address-line1" /></Field>
+                  <Field label="Apartment, suite (optional)" wide><input value={fm.line2} onChange={setField("line2")} autoComplete="address-line2" /></Field>
+                  <Field label="City" error={errors.city}><input value={fm.city} onChange={setField("city")} autoComplete="address-level2" /></Field>
+                  <Field label="State" error={errors.state}><input value={fm.state} onChange={setField("state")} autoComplete="address-level1" maxLength={20} /></Field>
+                  <Field label="ZIP code" error={errors.zip}><input inputMode="numeric" value={fm.zip} onChange={setField("zip")} autoComplete="postal-code" maxLength={5} /></Field>
                 </div>
+                {!session && <p className="dl-meta">Have an account? <Link className="dl-textlink" href={`${BASE}/sign-in/?next=checkout`}>Sign in</Link> to fill this in.</p>}
                 <p className="dl-meta">Preview mode: your details stay in this browser and aren&apos;t sent anywhere.</p>
                 <div className="dl-quiz-nav"><span /><button type="submit" className="dl-btn dl-btn-primary">Continue <Arrow /></button></div>
               </form>
@@ -200,34 +220,28 @@ export default function Checkout() {
             )}
 
             {step === 2 && (
-              <div>
-                <h1 className="dl-h3" tabIndex={-1} ref={headingRef}>Payment</h1>
-                <div className="dl-demo-pay">
-                  <span className="dl-code" data-lot="Lot 00">Preview</span>
-                  <h2 className="dl-h3">Payments are switched off in preview mode.</h2>
-                  <p>
-                    At launch, a secure card and Apple Pay form from our payment provider sits here. You&apos;re only
-                    charged when your first box ships, and you can cancel before then.
-                  </p>
-                </div>
-                <div className="dl-quiz-nav">
-                  <Button variant="ghost" onClick={() => setStep(1)}>Back</Button>
-                  <Button onClick={next}>Continue without paying <Arrow /></Button>
-                </div>
-              </div>
+              <PaymentStep
+                headingRef={headingRef}
+                total={price.total}
+                zip={fm.zip}
+                onBack={() => setStep(1)}
+                onPaid={(p) => { setPayment(p); setStep(3); }}
+              />
             )}
 
             {step === 3 && (
               <div>
                 <h1 className="dl-h3" tabIndex={-1} ref={headingRef}>Review your order</h1>
                 <dl className="dl-review-list">
-                  <div><dt>Ship to</dt><dd>{form.name}<br />{form.line1}{form.line2 ? `, ${form.line2}` : ""}<br />{form.city}, {form.state} {form.zip}</dd><button type="button" className="dl-textlink" onClick={() => setStep(0)}>Edit</button></div>
+                  <div><dt>Ship to</dt><dd>{fm.name}<br />{fm.line1}{fm.line2 ? `, ${fm.line2}` : ""}<br />{fm.city}, {fm.state} {fm.zip}</dd><button type="button" className="dl-textlink" onClick={() => setStep(0)}>Edit</button></div>
                   <div><dt>First box</dt><dd>{fmt(startDate)}, then every {price.plan.months === 1 ? "month" : `${price.plan.months} months`}</dd><button type="button" className="dl-textlink" onClick={() => setStep(1)}>Edit</button></div>
-                  <div><dt>Payment</dt><dd>Preview mode — nothing is charged</dd></div>
+                  <div><dt>Payment</dt><dd>{payment?.label || "Not added yet"}<br /><span className="dl-meta">Charged when your first box ships. Preview mode: nothing is charged.</span></dd><button type="button" className="dl-textlink" onClick={() => setStep(2)}>Edit</button></div>
                 </dl>
                 <div className="dl-quiz-nav">
                   <Button variant="ghost" onClick={() => setStep(2)}>Back</Button>
-                  <Button onClick={place} size="lg">Place order <Arrow /></Button>
+                  <Button onClick={place} size="lg" disabled={placing || !payment} aria-busy={placing}>
+                    {placing ? <><span className="dl-spin dl-spin-sm" aria-hidden="true" /> Placing order…</> : <>Place order <Arrow /></>}
+                  </Button>
                 </div>
               </div>
             )}
