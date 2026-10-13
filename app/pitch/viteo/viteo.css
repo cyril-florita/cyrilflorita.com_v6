@@ -584,6 +584,39 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
   .dl-email-body, .dl-email-head, .dl-email-foot { padding-left: 18px; padding-right: 18px; }
 }
 
+/* The partner program on the landing page (page.js): a proof line under the
+   reviews, and a band with what a client sees; plus the "Suggested by"
+   banner on the plan page (Plan.js, ?pro=). */
+.dl-pro-proof { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-top: 28px !important; color: var(--dl-ink-2); }
+.dl-pro-faces { display: inline-flex; }
+.dl-pro-faces span, .dl-pro-avatar {
+  display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; flex: none;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.02em;
+  background: var(--dl-panel-1); color: var(--dl-panel-ink); box-shadow: 0 0 0 2px var(--dl-cream);
+}
+.dl-pro-faces span + span { margin-left: -8px; }
+.dl-pro-faces span:nth-child(2) { background: var(--dl-panel-2); }
+.dl-pro-faces span:nth-child(3) { background: var(--dl-panel-3); }
+.dl-pro-band.dl-panel { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: 40px; align-items: center; padding: 48px; border-radius: 32px; }
+.dl-pro-band-copy { display: grid; gap: 18px; }
+/* Links on the coloured band take the panel's ink (the accent text colour
+   is too light on Peach's periwinkle). */
+.dl .dl-pro-band .dl-textlink { color: var(--dl-panel-ink); }
+.dl-section:has(> .dl-wrap > .dl-pro-band) { padding-top: 8px; }
+.dl-pro-band .dl-h2 { max-width: 16em; }
+.dl .dl-pro-preview { display: grid; gap: 14px; padding: 24px; text-decoration: none; color: inherit; background: var(--dl-panel-paper); border-color: transparent; transition: translate 0.3s var(--dl-ease); }
+.dl .dl-pro-preview:hover { translate: 0 -3px; }
+.dl-pro-preview-by { display: flex; align-items: center; gap: 10px; }
+.dl-pro-preview .dl-pro-avatar { box-shadow: none; background: var(--dl-panel-ink); color: var(--dl-panel-on-ink); }
+.dl-pro-preview .dl-textlink { display: inline-flex; align-items: center; gap: 6px; }
+.dl-pro-preview .dl-textlink svg { width: 16px; height: 16px; }
+.dl-pro-suggested { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 14px; align-items: start; padding: 18px 20px; margin-bottom: 16px; border: 1.5px solid var(--dl-sun-deep); }
+.dl-pro-suggested .dl-pro-avatar { width: 44px; height: 44px; font-size: 14px; box-shadow: none; background: var(--dl-sun-deep); color: var(--dl-paper); }
+.dl-pro-suggested > div { display: grid; gap: 4px; }
+.dl-pro-suggested-by { font-size: 16px; }
+@media (max-width: 960px) { .dl-pro-band.dl-panel { grid-template-columns: 1fr; padding: 32px 24px; } }
+@media (max-width: 680px) { .dl-pro-band.dl-panel { padding: 26px 20px; border-radius: 24px; } }
+
 /* Partners (Partners.js): Viteo for professionals. */
 .dl-pro { padding: 24px 0 72px; }
 .dl-pro-hero.dl-panel { padding: 56px; display: grid; gap: 22px; }
@@ -644,6 +677,18 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 .dl-cancel-pause { display: flex; flex-wrap: wrap; gap: 10px; }
 .dl .dl-btn-danger { color: var(--dl-danger); border-color: color-mix(in srgb, var(--dl-danger) 60%, transparent); }
 .dl .dl-btn-danger:hover { background: color-mix(in srgb, var(--dl-danger) 10%, transparent); }
+/* Preview-mode notice (PreviewNotice in ui.js): a tinted box with an info
+   icon, at the top of the sign-in card and the account gate. Uses the
+   panel's ink so it reads on any bento colour. */
+.dl-preview-notice {
+  display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 12px; align-items: start;
+  padding: 14px 16px; border-radius: 16px; font-size: 15px; line-height: 1.5;
+  color: var(--dl-panel-ink); background: color-mix(in srgb, var(--dl-panel-paper) 100%, transparent);
+  border: 1.5px solid color-mix(in srgb, var(--dl-panel-ink) 55%, transparent);
+}
+.dl-preview-notice svg { width: 22px; height: 22px; margin-top: 1px; }
+.dl-preview-notice p { margin: 0; }
+
 /* Sign in (SignIn.js) and the account's signed-out gate: simulated,
    passwordless. */
 .dl-signin { padding: 40px 0 72px; }

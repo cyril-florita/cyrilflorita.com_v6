@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { BASE, PRODUCTS, money, priceFor, recommend } from "./data";
+import { BASE, PARTNERS, PRODUCTS, money, priceFor, recommend } from "./data";
 import { useHydrated, useStored, write } from "./store";
 import { PaymentStep } from "./Payment";
 import { Arrow, BigWordHead, Button, PillTray, ProductBox } from "./ui";
@@ -49,6 +49,7 @@ export default function Checkout() {
   const stored = useStored("cart");
   const answers = useStored("answers");
   const session = useStored("session");
+  const referral = useStored("referral");
   const [step, setStep] = useState(0);
   // name/email start null: until typed, they fall back to the signed-in account.
   const [form, setForm] = useState({ name: null, email: null, line1: "", line2: "", city: "", state: "", zip: "" });
@@ -263,6 +264,16 @@ export default function Checkout() {
               {price.savings > 0 && <div className="dl-save"><dt>Saving</dt><dd>−{money(price.savings)}</dd></div>}
               <div><dt>Delivery</dt><dd>Free</dd></div>
               <div className="dl-total"><dt>Per box</dt><dd>{money(price.total)}</dd></div>
+              {PARTNERS[referral?.id] && (() => {
+                const pr = PARTNERS[referral.id];
+                const off = Math.round(price.total * pr.discount * 100) / 100;
+                return (
+                  <>
+                    <div className="dl-save"><dt>{pr.first}&apos;s code, first box ({Math.round(pr.discount * 100)}%)</dt><dd>−{money(off)}</dd></div>
+                    <div className="dl-total"><dt>First box</dt><dd>{money(price.total - off)}</dd></div>
+                  </>
+                );
+              })()}
             </dl>
             <Link className="dl-textlink" href={`${BASE}/plan/`}>Edit pack</Link>
           </aside>

@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { money } from "./data";
+import { BASE, money } from "./data";
 import { Arrow, BigWordHead, Button, Pill } from "./ui";
 
 // Viteo for professionals: personal trainers share Viteo with a link and a
@@ -169,7 +169,7 @@ export default function Partners() {
               ))}
             </div>
             <div className="dl-ds-row">
-              <Button variant="secondary" size="sm">Suggest a pack</Button>
+              <Button variant="secondary" size="sm" href={`${BASE}/plan/?pro=jane-doe`}>See a suggested pack</Button>
               <Button variant="ghost" size="sm">Copy my link</Button>
             </div>
           </div>

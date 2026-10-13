@@ -112,7 +112,7 @@ const Page = () => {
                 <li><strong>Honest cancellation</strong> that offers one fitting alternative, never a maze</li>
                 <li><strong>Ingredient close-ups</strong> in 3D, with dose, form and when the quiz adds each one</li>
                 <li><strong>Batch results:</strong> independent lab results by lot code</li>
-                <li><strong>Partner program</strong> for trainers, dietitians and nutritionists</li>
+                <li><strong>Partner program</strong> for trainers, dietitians and nutritionists, whose suggested packs open for clients with their notes and a first-box discount</li>
                 <li><strong>Lifecycle messages:</strong> shipping reminder, order confirmation, daily text</li>
                 <li><strong>Installable app</strong> with an offline screen</li>
                 <li><strong>Design system</strong> with three themes, each in light and dark</li>

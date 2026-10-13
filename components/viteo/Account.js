@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { BASE, PLANS, PRODUCTS, money, priceFor } from "./data";
 import { useHydrated, useStored, write } from "./store";
-import { Arrow, BigWordHead, Button, Pill, PillTray } from "./ui";
+import { Arrow, BigWordHead, Button, Pill, PillTray, PreviewNotice } from "./ui";
 import AccountTabs from "./AccountTabs";
 import RoutineGraph from "./RoutineGraph";
 import CancelFlow from "./CancelFlow";
@@ -88,6 +88,7 @@ export default function Account() {
       <section className="dl-account">
         <div className="dl-wrap">
           <div className="dl-card dl-panel dl-panel-1 dl-signin-card dl-account-gate">
+            <PreviewNotice>Sign-in is simulated: nothing is emailed or sent anywhere.</PreviewNotice>
             <BigWordHead word="Account">
               <h1 className="dl-h2">Sign in to manage your deliveries.</h1>
             </BigWordHead>
@@ -101,9 +102,6 @@ export default function Account() {
                 Explore the sample account
               </Button>
             </div>
-            <p className="dl-meta dl-signin-note">
-              <span className="dl-code" data-lot="Lot 07">Preview</span> Sign-in is simulated: nothing is sent anywhere.
-            </p>
           </div>
         </div>
       </section>

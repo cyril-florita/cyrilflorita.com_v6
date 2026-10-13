@@ -327,6 +327,42 @@ export default function Landing() {
             </p>
           </BigWordHead>
           <Reviews />
+          {/* Proof from the partner program (sample until it launches). */}
+          <p className="dl-pro-proof">
+            <span className="dl-pro-faces" aria-hidden="true"><span>RD</span><span>PT</span><span>RD</span></span>
+            <span>Recommended by trainers and dietitians in our partner program.</span>
+            <Link className="dl-textlink" href={`${BASE}/partners/`}>For professionals</Link>
+            <span className="dl-code" data-lot="Lot 05">Sample data</span>
+          </p>
+        </div>
+      </section>
+
+      {/* Partner program: for trainers, dietitians and nutritionists. */}
+      <section className="dl-section" aria-labelledby="pro-band-title">
+        <div className="dl-wrap">
+          <div className="dl-panel dl-panel-2 dl-pro-band">
+            <div className="dl-pro-band-copy">
+              <span className="dl-pill-label">For professionals</span>
+              <h2 id="pro-band-title" className="dl-h2">Trainers, dietitians, nutritionists: give your clients a clear answer.</h2>
+              <ul className="dl-pro-list">
+                <li>Your clients get 15% off their first box</li>
+                <li>You earn 10% on every box they keep, for a year</li>
+                <li>Or give it all back to them as a bigger discount</li>
+              </ul>
+              <div className="dl-ds-row">
+                <Button href={`${BASE}/partners/#pro-apply`}>Become a partner <Arrow /></Button>
+                <Link className="dl-textlink" href={`${BASE}/partners/#pro-earnings`}>Estimate your earnings</Link>
+              </div>
+            </div>
+            {/* What a client sees when a professional suggests a pack. */}
+            <Link className="dl-card dl-pro-preview" href={`${BASE}/plan/?pro=jane-doe`}>
+              <span className="dl-pill-label">What your client sees</span>
+              <span className="dl-pro-preview-by"><span className="dl-pro-avatar" aria-hidden="true">JD</span> Suggested by <strong>Jane Doe, RD</strong></span>
+              <PillTray ids={["d3", "b12", "omega", "magnesium"]} label="Suggested pack" size="sm" />
+              <span className="dl-meta">4 essentials, each with Jane&apos;s note · 15% off the first box</span>
+              <span className="dl-textlink">Open the example <Arrow /></span>
+            </Link>
+          </div>
         </div>
       </section>
 

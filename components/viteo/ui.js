@@ -296,6 +296,7 @@ export const ThemeSwitcher = () => {
 const NAV = [
   ["How it works", `${BASE}/#how`],
   ["Ingredients", `${BASE}/#ingredients`],
+  ["Partners", `${BASE}/partners/`],
   ["Account", `${BASE}/account/`],
 ];
 
@@ -511,3 +512,15 @@ export const Footer = () => (
     </div>
   </footer>
 );
+
+// A prominent preview-mode notice (sign-in, the account's sign-in gate):
+// an info icon, "Preview mode" and what's simulated.
+export const PreviewNotice = ({ children }) => (
+  <div className="dl-preview-notice" role="note">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="9" /><path d="M12 11v5M12 7.5v.5" />
+    </svg>
+    <p><strong>Preview mode.</strong> {children}</p>
+  </div>
+);
+

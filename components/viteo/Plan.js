@@ -1,13 +1,16 @@
 "use client";
+import { useEffect } from "react";
 import Link from "next/link";
-import { BASE, PLANS, PRODUCTS, money, priceFor, recommend } from "./data";
+import { BASE, PARTNERS, PLANS, PRODUCTS, money, priceFor, recommend } from "./data";
 import { useHydrated, useStored, write } from "./store";
 import { Arrow, BigWordHead, Button, Pill, PillTray, ProductBox } from "./ui";
 
 // "Your plan": the recommended pack with a reason for every item, add /
 // remove, a delivery-frequency picker, and a running price summary. Without
 // quiz answers it shows a sample plan, so the page always has something to
-// show.
+// show. A partner's link (?pro=<id>, PARTNERS in data.js) loads the pack
+// they suggest, with their reasons, a "Suggested by" banner and their
+// first-box discount (applied at checkout).
 
 const SAMPLE_ANSWERS = { name: "", goals: ["energy", "sleep"], diet: "vegetarian", sun: "rarely", sleep: "okay", activity: "moderate", time: "morning" };
 
@@ -15,6 +18,14 @@ export default function Plan() {
   const hydrated = useHydrated();
   const stored = useStored("cart");
   const answers = useStored("answers");
+  // A partner's link: load their suggested pack (once per visit to the link).
+  useEffect(() => {
+    const pro = PARTNERS[new URLSearchParams(window.location.search).get("pro")];
+    if (!pro) return;
+    write("referral", { id: pro.id });
+    write("cart", { items: pro.items, plan: "two", suggestedBy: pro.id });
+    window.history.replaceState(null, "", window.location.pathname);
+  }, []);
   const sample = !stored;
   const cart = stored || { items: recommend(SAMPLE_ANSWERS), plan: "two" };
   const ids = cart.items.map((i) => i.id);
@@ -29,6 +40,7 @@ export default function Plan() {
 
   // The sample plan is nobody in particular, even if an old quiz left a name.
   const name = sample ? "" : answers?.name?.trim();
+  const pro = PARTNERS[cart.suggestedBy];
   const extras = Object.values(PRODUCTS).filter((p) => !ids.includes(p.id));
 
   return (
@@ -37,10 +49,12 @@ export default function Plan() {
         <div className="dl-plan-head">
           <div>
             <BigWordHead word={sample ? "Sample plan" : "Your plan"}>
-              <h1 className="dl-h2">{name ? `${name}'s daily pack` : sample ? "A sample daily pack" : "Your daily pack"}</h1>
+              <h1 className="dl-h2">{name ? `${name}'s daily pack` : pro ? "Your suggested pack" : sample ? "A sample daily pack" : "Your daily pack"}</h1>
             </BigWordHead>
             <p className="dl-section-lede">
-              {sample
+              {pro
+                ? `Suggested by ${pro.name}. Every item comes with ${pro.first}'s note, and you can change anything.`
+                : sample
                 ? "An example pack for a mostly-indoors vegetarian. Take the quiz to build yours."
                 : `${cart.items.length} essentials, one ${answers?.time === "evening" ? "evening" : "morning"} pack. Every item says why it's here, and you can change anything.`}
             </p>
@@ -50,6 +64,16 @@ export default function Plan() {
 
         <div className="dl-plan-grid">
           <div className="dl-plan-main">
+            {pro && (
+              <div className="dl-card dl-pro-suggested" role="note">
+                <span className="dl-pro-avatar" aria-hidden="true">{pro.name.split(" ").slice(0, 2).map((w) => w[0]).join("")}</span>
+                <div>
+                  <p className="dl-pro-suggested-by">Suggested by <strong>{pro.name}</strong> · {pro.role}</p>
+                  <p className="dl-meta">&ldquo;{pro.note}&rdquo;</p>
+                  <p className="dl-meta"><strong>{Math.round(pro.discount * 100)}% off your first box</strong> with {pro.first}&apos;s link, applied at checkout. <span className="dl-code" data-lot="Lot 05">Sample data</span></p>
+                </div>
+              </div>
+            )}
             <div className="dl-card dl-panel dl-panel-1 dl-plan-tray">
               {/* The pack, printed for you. */}
               <div className="dl-product dl-product-xs" aria-hidden="true">
@@ -67,7 +91,7 @@ export default function Plan() {
                     <span className="dl-item-pill"><Pill id={item.id} size="lg" tilt={-18} /></span>
                     <div className="dl-item-body">
                       <h3>{p.name} <span className="dl-meta">{p.dose}</span></h3>
-                      <p className="dl-why"><span className="dl-why-label">Why it&apos;s here</span> {item.why}</p>
+                      <p className="dl-why"><span className="dl-why-label">{pro && item.why.startsWith(`${pro.first}'s note`) ? `${pro.first}'s note` : "Why it's here"}</span> {pro ? item.why.replace(`${pro.first}'s note: `, "") : item.why}</p>
                     </div>
                     <div className="dl-item-side">
                       <span className="dl-price">{money(p.price)}<span className="dl-meta">/mo</span></span>
