@@ -13,6 +13,8 @@ import {
   CaseGrid,
   CaseNext,
   CaseLearnings,
+  CaseStats,
+  CaseVideo,
 } from "@/components/case/CaseStudy";
 import { CASE_SUMMARIES } from "@/components/data/caseSummaries";
 
@@ -40,6 +42,10 @@ const Desktop = ({ name, caption, ratio, path = "" }) => (
 );
 const Arrow = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" /></svg>
+);
+// Motion recordings of the live build (desktop, in the browser frame).
+const Clip = ({ name, caption, path = "" }) => (
+  <CaseVideo src={`${P}${name}.mp4`} caption={caption} url={`${URL}/${path}`} />
 );
 const Phone = ({ name, caption }) => (
   <CaseFigure src={`${P}mobile-${name}.jpg`} alt={`Viteo on a phone — ${caption}`} caption={caption} size="phone" ratio="390 / 844" />
@@ -100,7 +106,16 @@ const Page = () => {
             {/* 02 — Results & Impact */}
             <CaseSection id="results" number={2} title="Results & Impact">
               <p>Viteo hasn&apos;t launched yet, so the result to show is what&apos;s built, not market numbers (and I won&apos;t invent any): a complete, working product rather than a set of mockups. Every flow can be clicked through on any device, the quiz really builds a pack from your answers, and the account really skips, pauses, undoes and tracks your routine.</p>
-              <p>At launch, these are the metrics to track from day one, because each one tests one of the three problems above:</p>
+              <h3 className="cyril-case-subheading">Measured on the Live Site</h3>
+              <CaseStats items={[
+                { value: "95", label: "Performance (desktop)" },
+                { value: "100", label: "Accessibility" },
+                { value: "100", label: "Best practices" },
+                { value: "100", label: "SEO" },
+              ]} />
+              <p>Lighthouse 12 scores for the live landing page, 3D scene and all. The first audit found three fixes: the server wasn&apos;t compressing its files, the headline was hidden until the intro ran, and the page blocked pinch-zoom. Fixing them took desktop performance from 72 to 95 (the largest element now paints in 0.9 seconds) and accessibility from 94 to 100. On a simulated mid-range phone over slow 4G, performance went from 58 to 64, with no layout shift. Separately, every text color pair passes WCAG AA in all three themes, light and dark, on every page.</p>
+              <h3 className="cyril-case-subheading">What to Measure at Launch</h3>
+              <p>These are the metrics to track from day one, because each one tests one of the three problems above:</p>
               <ul className="cyril-case-list">
                 <li><strong>Quiz completion and quiz-to-checkout conversion:</strong> does a two-minute, eight-question quiz keep people going?</li>
                 <li><strong>Edits on the plan page:</strong> do people trust the recommendation, or rebuild it?</li>
@@ -116,6 +131,7 @@ const Page = () => {
                 <li><strong>The base, everywhere:</strong> statically rendered pages with real content, pill images baked from the 3D models, and a CSS-only product shot. With reduced motion turned on, everything is simply there, with no animation.</li>
                 <li><strong>Phones (the default layout):</strong> one column with the product first, a sticky &ldquo;Take the quiz&rdquo; bar once the hero&apos;s button has scrolled away, swipe rows for ingredients and reviews, a full-screen quiz, ingredient close-ups as bottom sheets you drag down to close, and an app-style tab bar in the account. Touch targets are at least 44px, and a tighter rhythm cut the landing page from about 4,600px to 3,800px.</li>
                 <li><strong>Tablets:</strong> two columns, a full-screen menu that opens with a circular wipe, and account cards that fill the grid without gaps.</li>
+                <li><strong>Installable:</strong> on any device Viteo can be added to the home screen as an app, with its own icon, a full-screen window and a branded offline screen (a web app manifest and a small service worker, scoped to Viteo).</li>
                 <li><strong>Desktop with a mouse:</strong> the header tab, hover states, a light that follows the pointer, mouse-drag on the reviews carousel, and the live three.js scene with its scroll story and 3D close-ups.</li>
               </ul>
               <h3 className="cyril-case-subheading">How the Enhancements Are Gated</h3>
@@ -138,11 +154,11 @@ const Page = () => {
             <CaseSection id="experience" number={4} title="The Experience">
               <h3 className="cyril-case-subheading">A Product You Can Turn Over</h3>
               <p>The landing page opens on the product itself, in real 3D: the Viteo carton and all nine essentials, built with three.js. It follows the pointer, a soft light moves with it like a desk lamp, and while you&apos;re over the hero every piece turns slowly. The one call to action, take the two-minute quiz, sits beside it. Each time the page loads, the carton drops in first and the pills follow one by one, each at its own speed. On phones and tablets the same shot is a lightweight still, so they never download the 3D.</p>
-              <Desktop name="landing" caption="Landing Page" />
+              <Clip name="intro" caption="The Intro: a Preloader, Then the Product Lands Piece by Piece" />
 
               <h3 className="cyril-case-subheading">A Story Told by Scrolling</h3>
               <p>Scrolling turns the product into the page&apos;s guide. The carton tips toward you and opens, and its pills lift out and follow you down: three land in the How it works steps, then all nine settle into their Ingredients cards, which are already waiting for them. Scrolling back up plays it in reverse. The scene only draws while something is moving, so it costs nothing at rest.</p>
-              <Desktop name="story" caption="The Pack Opens" />
+              <Clip name="scroll-story" caption="The Scroll Story" />
               <CaseGrid layout="two">
                 <Desktop name="steps" caption="Pills Land in the Steps" />
                 <Desktop name="ingredients" caption="…Then in Their Ingredients" />
@@ -158,6 +174,7 @@ const Page = () => {
                 <Desktop name="quiz" caption="Your Pack So Far" path="quiz/" />
                 <Desktop name="quiz-building" caption="Building Your Pack" path="quiz/" />
               </CaseGrid>
+              <Clip name="quiz-finale" caption="The Finale: Each Pill Drops Into Your Pack" path="quiz/" />
 
               <h3 className="cyril-case-subheading">A Pack With Your Name On It</h3>
               <p>From the quiz on, the pack is yours: &ldquo;Victoria&apos;s Morning pack&rdquo; sits beside the pills on the plan, in the checkout summary and on the confirmation, and it glides from page to page as you move through. Every item in the plan says why it&apos;s there, and you can remove anything or add from the range. Checkout is four short steps with plain-language errors, a clearly labelled payment preview and a review you can edit.</p>
@@ -173,6 +190,23 @@ const Page = () => {
               <h3 className="cyril-case-subheading">An Account That Keeps People in Control</h3>
               <p>The account opens on the next delivery, with Skip and Pause right there. A timeline runs from today across the next few months, and a marker with the date slides along it when you skip or pause; every change has Undo. The daily check-in is a pill organizer: checking a day off drops one of your own pills into its compartment, and the routine tracker charts the days you took your pack, month by month (the month in progress is dashed and labelled &ldquo;so far&rdquo;, so it never reads as a drop). The address is edited in a modal that hands focus back when it closes.</p>
               <Desktop name="account-full" caption="Account" path="account/" ratio="16 / 10" />
+
+              <h3 className="cyril-case-subheading">Cancelling Without the Trap</h3>
+              <p>Cancelling is a plain link in the delivery settings, and it takes at most three short steps, each with a way straight through. An optional reason leads to one alternative that fits it: delivering every 3 months to save, skipping the next box, pausing, or retaking the quiz. It applies in one tap, with &ldquo;Continue to cancel&rdquo; right beside it. The confirmation says plainly what happens, keeping and cancelling carry equal weight, and a cancelled account keeps the pack and history for a one-tap restart.</p>
+              <Desktop name="cancel" caption="An Alternative That Fits the Reason" path="account/" />
+
+              <h3 className="cyril-case-subheading">Beyond the Store</h3>
+              <p>A real subscription business doesn&apos;t end at checkout, so the pitch covers what&apos;s around it too:</p>
+              <ul className="cyril-case-list">
+                <li><strong>Batch results:</strong> the lot code on every box looks up that batch&apos;s independent lab results (identity, potency, heavy metals, microbials). Testing is a promise most brands make; publishing it is a reason to trust this one.</li>
+                <li><strong>For professionals:</strong> a partner program for trainers, dietitians and nutritionists, with an earnings calculator, a give-back option that passes the commission to clients, a dashboard preview and clear guidelines on disclosure and claims.</li>
+                <li><strong>Messages between visits:</strong> a shipping reminder with the same one-tap Skip, Pause and Edit as the account, an order confirmation that explains every pill, and a daily reminder text you can reply to.</li>
+              </ul>
+              <CaseGrid layout="two">
+                <Desktop name="lot" caption="Batch Results" path="lot/" />
+                <Desktop name="partners" caption="For Professionals" path="partners/" />
+              </CaseGrid>
+              <Desktop name="emails-full" caption="Emails and Messages" path="emails/" ratio="16 / 10" />
             </CaseSection>
 
             {/* 05 — Built in Real 3D */}
@@ -256,7 +290,7 @@ const Page = () => {
                   "Connect the commerce layer: subscriptions and payments (for example Shopify or Stripe Billing), real accounts, and reminder emails and texts.",
                   "Run moderated usability tests on the quiz and plan pages, and see where people hesitate or edit.",
                   "Test the copy of the recommendations with people who already take supplements.",
-                  "Add a cancellation flow that offers skip and pause first, and measure how often they're chosen instead.",
+                  "Measure how often each cancellation alternative is taken, and tune the offers by reason.",
                 ]}
               />
             </CaseSection>
