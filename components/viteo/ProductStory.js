@@ -89,7 +89,11 @@ export default function ProductStory({ burst }) {
       scene.environmentIntensity = 0.5;
       const key = new THREE.DirectionalLight(0xffffff, 1.1);
       key.position.set(-4, 6, 8);
-      scene.add(key, new THREE.AmbientLight(0xffffff, 0.15));
+      // A soft rim light opposite the key: as the pointer swings the key
+      // across, the far edges catch light, which sells the depth.
+      const rim = new THREE.DirectionalLight(0xdff4ff, 0.35);
+      rim.position.set(5, -3, 3);
+      scene.add(key, rim, new THREE.AmbientLight(0xffffff, 0.15));
       const camera = new THREE.PerspectiveCamera(FOV, 1, 10, 100000);
 
       const disposables = [];
@@ -232,6 +236,10 @@ export default function ProductStory({ burst }) {
           dockPose: POSE[kind],
           docks: dockEls(id),
           phase: i * 0.7, rate: 0.35 + ((i * 29) % 10) / 30, col: i % 3,
+          // Parallax depth around the box (the BURST scale: 1.45 ≈ the box's
+          // plane): near pills travel with the pointer, far ones against it,
+          // and near ones react faster, so the scene ripples when it stops.
+          depth: scale - 1.45, lag: { x: 0, y: 0 }, lagRate: Math.max(3.5, 8 + (scale - 1.45) * 30),
         });
       });
 
@@ -277,6 +285,15 @@ export default function ProductStory({ burst }) {
       // has risen to about mid-screen; grid columns stagger a little.
       const legT = (cy, col) => smooth(clamp01((vh * 1.02 - cy - col * vh * 0.05) / (vh * 0.48)));
 
+      const cartonLag = { x: 0, y: 0 };
+      // Eases a lag toward the pointer; returns whether it's still catching up.
+      const follow = (o, px, py, rate, dt) => {
+        const k = Math.min(1, dt * rate);
+        o.x += (px - o.x) * k;
+        o.y += (py - o.y) * k;
+        return Math.abs(px - o.x) > 0.001 || Math.abs(py - o.y) > 0.001;
+      };
+      let lagging = false;
       let hovered = false, spin = 0, frame = 0, last = performance.now(), time = 0, shown = false, settleUntil = 0;
       // The intro (IntroMoment.js, a GSAP timeline) writes each object's fall
       // into introState: p = progress (0 before it starts), drop = remaining
@@ -294,7 +311,9 @@ export default function ProductStory({ burst }) {
         const py = parseFloat(product.style.getPropertyValue("--py")) || 0;
         // The key light follows the pointer, the same "desk lamp" as the
         // hero's CSS light, so highlights and shading agree.
-        key.position.set(-4 + px * 7, 6 - py * 6, 8);
+        key.position.set(-4 + px * 14, 6 - py * 10, 8);
+        rim.position.set(5 - px * 10, -3 + py * 6, 3);
+        lagging = follow(cartonLag, px, py, 9, dt);
         const pr = product.getBoundingClientRect();
         const S = pr.width;
         const hr = hero.getBoundingClientRect();
@@ -310,14 +329,15 @@ export default function ProductStory({ burst }) {
           // While it tips and opens, the carton lags behind the scroll (up to
           // half its height) so its top, and the open lid, stay in view.
           const lag = Math.min(-hr.top, S * 0.5) * (1 - smooth(clamp01((away - 0.75) * 4)));
-          carton.position.set(cx + px * 0.014 * S, cy - py * 0.014 * S - Math.max(0, lag) + cFall.drop * S, 0);
+          const cpx = cartonLag.x, cpy = cartonLag.y;
+          carton.position.set(cx + cpx * 0.02 * S, cy - cpy * 0.02 * S - Math.max(0, lag) + cFall.drop * S, 0);
           carton.scale.setScalar(S);
           const tilt = smooth(clamp01(away * 2.2)); // fully tipped after a short scroll
           carton.rotation.set(
             // Scrolling away tips the top toward the viewer (about 45°) so you
             // look down into the carton as its lid opens; it squares up a bit too.
-            BASE_ROT.x + py * rad(6) + spin * Math.sin(time * 0.5) * 0.05 + tilt * rad(45),
-            BASE_ROT.y + px * rad(9) + spin * Math.sin(time * 0.35) * 0.16 + tilt * rad(14),
+            BASE_ROT.x + cpy * rad(14) + spin * Math.sin(time * 0.5) * 0.05 + tilt * rad(45),
+            BASE_ROT.y + cpx * rad(22) + spin * Math.sin(time * 0.35) * 0.16 + tilt * rad(14),
             // …and leans about 45° sideways, toward the pills, as if pouring.
             BASE_ROT.z - tilt * rad(45),
           );
@@ -328,15 +348,18 @@ export default function ProductStory({ burst }) {
         pills.forEach((pl, i) => {
           const h = pl.hero;
           const fall = introFall(introState.pills[i]);
+          if (follow(pl.lag, px, py, pl.lagRate, dt)) lagging = true;
+          const travel = (0.02 + pl.depth * 0.22) * S; // with the box, plus depth either way
           const heroPose = {
-            x: toWorld(pr.left + h.x * S, 0)[0] + px * h.scale * 0.026 * S,
-            y: toWorld(0, pr.top + h.y * S)[1] - py * h.scale * 0.026 * S + smooth(clamp01(away * 1.6)) * 40 + fall.drop * S,
+            x: toWorld(pr.left + h.x * S, 0)[0] + pl.lag.x * travel,
+            y: toWorld(0, pr.top + h.y * S)[1] - pl.lag.y * travel + smooth(clamp01(away * 1.6)) * 40 + fall.drop * S,
             // Lifted forward as the carton tips toward the viewer, so they stay in front of it.
             z: h.z * (S / 560) + smooth(clamp01(away * 2.2)) * S * 0.6,
             scale: h.scale * (S / 560),
             tilt: h.tilt - fall.turn,
-            rx: h.rx + spin * Math.sin(time * 0.6 + pl.phase) * 0.18,
-            ry: h.ry + spin * Math.cos(time * 0.5 + pl.phase) * 0.22,
+            // …and each turns toward the pointer, like the box.
+            rx: h.rx + pl.lag.y * 0.35 + spin * Math.sin(time * 0.6 + pl.phase) * 0.18,
+            ry: h.ry + pl.lag.x * 0.5 + spin * Math.cos(time * 0.5 + pl.phase) * 0.22,
           };
           const poses = [heroPose, ...pl.docks.map((d) => ({ ...dockPose(d), rx: pl.dockPose[0], ry: pl.dockPose[1] }))];
           // Find the current leg: the last dock it has started towards.
@@ -377,7 +400,7 @@ export default function ProductStory({ burst }) {
           root.classList.add("is-story"); // docks hide their images until a pill lands
         }
         // Positions only change with scroll, pointer or hover, so idle = no frames.
-        const busy = hovered || spin > 0.002 || now < settleUntil || introState.active;
+        const busy = hovered || spin > 0.002 || lagging || now < settleUntil || introState.active;
         if (busy && !document.hidden) frame = requestAnimationFrame(loop);
       };
 

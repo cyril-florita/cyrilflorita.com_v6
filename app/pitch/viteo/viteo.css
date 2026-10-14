@@ -588,6 +588,8 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
    reviews, and a band with what a client sees; plus the "Suggested by"
    banner on the plan page (Plan.js, ?pro=). */
 .dl-pro-proof { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-top: 28px !important; color: var(--dl-ink-2); }
+/* Bare text that can sit over the moving background's bright spread: full ink. */
+.dl.has-ambient .dl-pro-proof { color: var(--dl-ink); }
 .dl-pro-faces { display: inline-flex; }
 .dl-pro-faces span, .dl-pro-avatar {
   display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; flex: none;
@@ -629,8 +631,20 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 .dl-pro-list li { position: relative; padding-left: 20px; }
 .dl-pro-list li::before { content: ""; position: absolute; left: 0; top: 0.6em; width: 8px; height: 8px; border-radius: 2px; background: currentColor; }
 .dl-pro-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.dl-pro-steps li { position: relative; display: grid; gap: 8px; padding: 26px; overflow: hidden; }
-.dl-pro-step-n { font-family: var(--dl-font-display); font-weight: 800; font-size: 44px; line-height: 1; color: var(--dl-sun-deep); }
+.dl-pro-steps li { position: relative; isolation: isolate; display: grid; align-content: start; gap: 8px; padding: 92px 26px 26px; overflow: hidden; }
+.dl-pro-steps li > :not(.dl-pro-step-n) { position: relative; z-index: 1; }
+/* The step numeral is background, as on the landing's How it works: huge,
+   faint, whole, in the card's top-left corner. */
+.dl-pro-step-n {
+  position: absolute; z-index: 0; left: 0.08em; top: 0;
+  font-family: var(--dl-font-display), serif; font-weight: 800; font-size: 170px; line-height: 1; letter-spacing: -0.07em;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--dl-sun-deep) 30%, transparent), color-mix(in srgb, var(--dl-sun-deep) 4%, transparent) 85%);
+  /* The fill only paints inside the box, and the tight tracking pushes the
+     last digit's ink past it: pad the right so no digit is sliced off. */
+  padding-right: 0.12em;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  pointer-events: none; user-select: none;
+}
 .dl-pro-calc.dl-panel { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 40px; align-items: center; padding: 36px; }
 .dl-pro-calc-inputs { display: grid; gap: 26px; }
 .dl-pro-range { display: grid; gap: 10px; }
@@ -987,7 +1001,6 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 .dl-bigword > span { display: block; }
 /* The hero keeps a small label instead (unique to the hero): the eyebrow
    style, a step bigger. */
-.dl .dl-hero-eyebrow { font-size: 16px; }
 /* .is-row: size the word against the whole row (a container set on the
    row) instead of its own column, so it matches the others; it runs on
    behind the neighbouring column (Questions, behind the glass FAQ cards). */
@@ -1002,7 +1015,7 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 @media (min-width: 961px) { .dl-faq { padding-top: 152px; } }
 
 /* Steps: the cards step down left to right (progression), each with a huge
-   numeral set behind the copy, bleeding off the bottom-right edge. */
+   numeral set behind the copy, whole, in the top-left corner. */
 .dl-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px !important; align-items: start; }
 .dl-step { position: relative; overflow: hidden; isolation: isolate; min-height: 300px; }
 .dl-steps .dl-step:nth-child(2) { margin-top: 40px; }
@@ -1010,15 +1023,18 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 .dl-step h3 { position: relative; z-index: 1; font-size: 24px; line-height: 1.2; font-weight: 600; letter-spacing: -0.01em; max-width: 13em; }
 .dl-step p { position: relative; z-index: 1; color: var(--dl-ink-2); margin-top: 10px !important; max-width: 24em; }
 .dl-step-n {
-  position: absolute; z-index: 0; right: -0.04em; bottom: -0.2em;
+  position: absolute; z-index: 0; left: 0.08em; top: 0;
   font-family: var(--dl-font-display), serif; font-weight: 800; font-size: 210px; line-height: 1; letter-spacing: -0.07em;
   background: linear-gradient(180deg, color-mix(in srgb, var(--dl-sun-deep) 30%, transparent), color-mix(in srgb, var(--dl-sun-deep) 4%, transparent) 85%);
+  /* The fill only paints inside the box, and the tight tracking pushes the
+     last digit's ink past it: pad the right so no digit is sliced off. */
+  padding-right: 0.12em;
   -webkit-background-clip: text; background-clip: text; color: transparent;
   pointer-events: none; user-select: none;
   transition: translate 0.6s var(--dl-ease);
 }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .dl-step:hover .dl-step-n { translate: 0 -10px; }
+  .dl-step:hover .dl-step-n { translate: 6px 6px; }
 }
 .dl-ingredients { display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px 16px; margin-top: 72px !important; } /* row gap: room for the pills breaking out above each card */
 /* Ingredient card: the pill centred at the top, breaking out above the
@@ -1648,10 +1664,10 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 .dl-box {
   position: absolute; z-index: 1; left: 15%; top: -7%; width: 47%; height: 86%;
   --d: 15cqw; transform-style: preserve-3d;
-  /* Parallax: the box sits mid-depth, so it travels a little and turns
-     toward the pointer. */
-  translate: calc(var(--px) * 1.4cqw) calc(var(--py) * 1.4cqw);
-  transform: rotateY(calc(-26deg + var(--px) * 9deg)) rotateX(calc(-7deg - var(--py) * 6deg)) rotateZ(-5deg);
+  /* Parallax: the box is the pivot the scene turns around, so it travels a
+     little and turns well toward the pointer (enough to swing its side face). */
+  translate: calc(var(--px) * 2cqw) calc(var(--py) * 2cqw);
+  transform: rotateY(calc(-26deg + var(--px) * 22deg)) rotateX(calc(-7deg - var(--py) * 14deg)) rotateZ(-5deg);
 }
 .dl-box > div { position: absolute; backface-visibility: hidden; }
 .dl-box-front {
@@ -1696,8 +1712,9 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 }
 .dl-burst {
   position: absolute; z-index: 2; left: var(--x); top: var(--y);
-  /* Parallax: pills are nearer than the box; bigger (nearer) ones travel further. */
-  translate: calc(-50% + var(--px) * var(--s) * 2.6cqw) calc(-50% + var(--py) * var(--s) * 2.6cqw);
+  /* Parallax in depth around the box: a pill's size is its depth, so big
+     (near) pills travel with the pointer and small (far) ones against it. */
+  translate: calc(-50% + var(--px) * (2cqw + (var(--s) - 1.45) * 22cqw)) calc(-50% + var(--py) * (2cqw + (var(--s) - 1.45) * 22cqw));
   filter: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.55));
 }
 .dl .dl-burst .dl-pill { transform: rotate(var(--tilt, 0deg)) scale(calc(var(--s) * 1.3)); }
@@ -1835,6 +1852,28 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
     radial-gradient(ellipse 950px 700px at 12% 12%, color-mix(in srgb, var(--dl-glow-1) 30%, transparent) 0, transparent 70%) fixed,
     var(--dl-cream);
 }
+/* The moving background (AmbientShader.js, mounted in the layout, so every
+   page has it): a fixed canvas under the whole page. Until its first frame is
+   drawn (.has-ambient) the static background (the landing's gradients, the
+   other pages' plain cream) shows; then the page and frame go clear so it shows
+   through, and the glass cards frost it. Desktop with a mouse only. */
+.dl-ambient-canvas { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none; display: none; }
+.dl.has-ambient .dl-ambient-canvas { display: block; }
+.dl.has-ambient, .dl.has-ambient .dl-frame { background: transparent !important; }
+/* The moving light sits under text, so secondary text and the accent text
+   step a little further from the background while it runs (measured on the
+   rendered page: AA everywhere). Panels re-point these tokens themselves. */
+.dl.has-ambient[data-dl-mode="dark"] { --dl-ink-2: color-mix(in srgb, var(--dl-ink) 45%, #A7AEC2); }
+.dl.has-ambient[data-dl-theme="grove"][data-dl-mode="dark"] { --dl-ink-2: color-mix(in srgb, var(--dl-ink) 50%, #9DB1A4); }
+.dl.has-ambient[data-dl-theme="peach"][data-dl-mode="dark"] { --dl-ink-2: color-mix(in srgb, var(--dl-ink) 45%, #ABA9C0); }
+/* Light mode: the ribbon's coloured edge can sit under text on any page, so
+   secondary text steps a touch darker too. */
+.dl.has-ambient[data-dl-mode="light"] { --dl-ink-2: color-mix(in srgb, var(--dl-ink) 25%, var(--dl-ink-2)); }
+.dl.has-ambient[data-dl-mode="light"] { --dl-sun-deep: color-mix(in srgb, var(--dl-ink) 35%, var(--dl-display-accent, #1A6E7B)); }
+.dl.has-ambient[data-dl-mode="dark"] { --dl-sun-deep: color-mix(in srgb, #FFFFFF 30%, var(--dl-dark-accent-text, #7DE2DF)); }
+.dl.has-ambient[data-dl-theme="grove"][data-dl-mode="dark"] { --dl-sun-deep: color-mix(in srgb, #FFFFFF 25%, #A6EBC2); }
+.dl.has-ambient[data-dl-theme="peach"][data-dl-mode="dark"] { --dl-sun-deep: color-mix(in srgb, #FFFFFF 25%, #FFB894); }
+
 /* Its tinted sections turn clear (a hairline keeps their shape) so the glow
    reaches their glass cards without a seam at the section edge. */
 .dl-section-tint:has(.dl-glass) > .dl-wrap { background: transparent; box-shadow: none; }
@@ -1853,6 +1892,9 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28), inset 0 -1px 0 rgba(255, 255, 255, 0.06);
 }
 .dl-glass { --dl-well: rgba(255, 255, 255, 0.07); }
+/* Dark glass adds a white sheen, which lifts the background under its small
+   secondary text: that text steps lighter to keep AA (it measured ~4:1). */
+.dl[data-dl-mode="dark"] .dl-glass .dl-meta { color: color-mix(in srgb, var(--dl-ink) 55%, var(--dl-ink-2)); }
 .dl-glass .dl-chart-tip rect { fill: rgba(255, 255, 255, 0.14); }
 /* Light mode: frosted white glass with dark text (chart lines re-pointed to
    colors that read on white). */
@@ -2151,7 +2193,7 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
    hiding the side face until the fade ends and then popping it in. So the
    box only moves and turns; its faces fade (they inherit --io). */
 .dl.is-intro .dl-bento-art .dl-product > .dl-box {
-  translate: calc(var(--px, 0) * 1.4cqw) calc(var(--py, 0) * 1.4cqw + var(--iy, 0px)); rotate: var(--ir, 0deg);
+  translate: calc(var(--px, 0) * 2cqw) calc(var(--py, 0) * 2cqw + var(--iy, 0px)); rotate: var(--ir, 0deg);
 }
 .dl.is-intro .dl-bento-art .dl-product > .dl-box > * { opacity: var(--io, 1); }
 .dl.is-intro .dl-bento-art .dl-burst .dl-pill { translate: 0 var(--iy, 0px); rotate: var(--ir, 0deg); opacity: var(--io, 1); }

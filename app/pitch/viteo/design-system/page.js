@@ -40,7 +40,7 @@ const TYPE = [
   { cls: "dl-lede", label: "Lede · body font 18/28", sample: "Every item comes with a plain reason it's there." },
   { cls: "", label: "Body · body font 16/26", sample: "Skip, pause or swap from your account in a tap." },
   { cls: "dl-meta", label: "Meta · body font 14", sample: "2,000 IU · softgel · $5/mo" },
-  { cls: "dl-eyebrow", label: "Label · body font 13 caps (card labels, the hero)", sample: "Personalized daily vitamins" },
+  { cls: "dl-eyebrow", label: "Label · body font 13 caps (card labels)", sample: "Personalized daily vitamins" },
 ];
 
 // Icons, 24px grid, 2px stroke, round caps (the same drawings as in the product).
@@ -400,6 +400,7 @@ export default function DesignSystem() {
             <div><dt>Dialogs</dt><dd>0.35–0.5s: modal rise, pill morph onto the stage</dd></div>
             <div><dt>Pages</dt><dd>0.55s: view transitions, the printed pack glides between pages</dd></div>
             <div><dt>Intro</dt><dd>~1.75s on each landing visit, a GSAP timeline: the carton, then each pill at its own speed, bounce and spin; any click, key or scroll skips it</dd></div>
+            <div><dt>Background</dt><dd>A WebGPU shader (WebGL2 fallback) a slow, pulsing ribbon of the theme&apos;s light behind the glass, ~30fps at low resolution; desktop only, off for reduced motion</dd></div>
             <div><dt>Quiz finale</dt><dd>A GSAP timeline: pills fall into the pack one by one, the pack squashes to catch each, and the plan opens when the last lands</dd></div>
             <div><dt>Reduced motion</dt><dd>Everything above is off; the content is all there at once</dd></div>
           </dl>

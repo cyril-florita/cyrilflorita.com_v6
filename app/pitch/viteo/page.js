@@ -189,9 +189,6 @@ export default function Landing() {
               </span>
             </div>
             <div className="dl-bento-copy">
-              <p className="dl-eyebrow dl-hero-eyebrow">
-                Personalized daily vitamins
-              </p>
               <h1 className="dl-display">
                  Your routine, <em>with the right vitamins.</em>
               </h1>

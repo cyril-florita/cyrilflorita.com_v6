@@ -3,6 +3,7 @@ import { Outfit, Figtree, Plus_Jakarta_Sans, Inter, Fraunces, DM_Sans } from "ne
 import { Header, Footer, ToTop } from "@/components/viteo/ui";
 import Reveal from "@/components/viteo/Reveal";
 import ScrollMotion from "@/components/viteo/ScrollMotion";
+import AmbientShader from "@/components/viteo/AmbientShader";
 import "./viteo.css";
 
 // Viteo: a personalized-vitamin subscription, built as a design and dev
@@ -69,6 +70,9 @@ export default function ViteoLayout({ children }) {
       suppressHydrationWarning
     >
       <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+      {/* The moving background, on every page (desktop); it persists across
+          client-side page changes. */}
+      <AmbientShader />
       <div className="dl-frame">
         <Header />
         {/* Page changes animate (View Transitions): the content eases out and the
