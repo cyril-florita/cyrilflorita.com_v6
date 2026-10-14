@@ -77,7 +77,7 @@ const Page = () => {
             title="Viteo"
             summary={CASE_SUMMARIES["/viteo"]}
             facts={[
-              { label: "Project", value: "Design & dev pitch: a direct-to-consumer vitamin subscription, ready to build into a business" },
+              { label: "Project", value: "A personalized vitamin subscription, designed and built end to end as a design and dev pitch to an entrepreneur" },
               { label: "Role", value: "Product Designer & Front-End Developer" },
               { label: "Platform & Tools", value: "Web — Desktop, Tablet, Mobile · Next.js, React, three.js, CSS" },
               { label: "Try It Live", value: <a className="cyril-dark" href={LIVE} target="_blank" rel="noopener">cyrilflorita.com/pitch/viteo</a> },
@@ -140,6 +140,8 @@ const Page = () => {
               <p>Lighthouse scores, 3D scene included. Fixing what the first audit found took desktop performance from 72 to 95 and accessibility from 94 to 100. Every text color passes WCAG AA in all three themes, light and dark. At launch, the metrics to watch are quiz-to-checkout conversion, edits on the plan page, and skips and pauses against cancellations.</p>
 
               <Desktop name="landing" caption="Landing page" />
+              <p><strong>Depth under the pointer.</strong> On desktop, the pack is the pivot of the hero: near pills follow the cursor, far ones drift the other way, and the box turns far enough to show its side, then springs back into place.</p>
+              <Clip name="parallax" caption="Depth parallax under the pointer" />
               <p><strong>A story told by scrolling.</strong> The carton tips open and its pills fly down the page, landing in the steps and then their ingredient cards. Scrolling back reverses it.</p>
               <Clip name="scroll-story" caption="The scroll story" />
               <CaseGrid layout="two">
@@ -190,7 +192,7 @@ const Page = () => {
             {/* 03 — Design Approach */}
             <CaseSection id="approach" number={3} title="Design Approach">
               <h3 className="cyril-case-subheading">Mobile-First, Enhanced Upward</h3>
-              <p>People take quizzes and check off their pack on their phones, so the phone gets the complete product: one column, a sticky quiz bar, swipe rows, a full-screen quiz, bottom sheets and an app-style tab bar. Tablets add two columns. Desktops with a mouse add hover, a pointer-led light and the live 3D. Each layer checks what the device can do before it loads, so phones never download the 3D, and with reduced motion everything is simply there.</p>
+              <p>People take quizzes and check off their pack on their phones, so the phone gets the complete product: one column, a sticky quiz bar, swipe rows, a full-screen quiz, bottom sheets and an app-style tab bar. Tablets add two columns. Desktops with a mouse add hover, a pointer-led light, the moving background and the live 3D. Each layer checks what the device can do before it loads, so phones never download the 3D, and with reduced motion everything is simply there.</p>
               <CaseGrid layout="three">
                 <Phone name="landing" caption="Landing" />
                 <Phone name="ingredients" caption="Swipe rows" />
@@ -224,7 +226,7 @@ const Page = () => {
                 <li><strong>3D mapped to the layout:</strong> one transparent WebGL canvas where a 3D unit equals a CSS pixel, so the carton and pills are placed straight from the page layout, with nothing extra to keep in sync.</li>
                 <li><strong>Modelled from the catalog:</strong> each product&apos;s color and form generate its pill. The same code bakes the images used everywhere else, so a new product needs no new artwork.</li>
                 <li><strong>One GSAP timeline, two renderers:</strong> each object in the intro has one tween that drives both the 3D scene and the CSS fallback. Any click or scroll skips it, and the quiz finale moves on when its timeline completes, not on a guessed timer.</li>
-                <li><strong>A living background:</strong> a WebGPU shader (falling back to WebGL2) sweeps a slow, pulsing ribbon of the theme&apos;s light behind the glass cards. It draws at a third of the screen&apos;s resolution at 30fps, pauses when the tab is hidden, stays off on phones and for reduced motion, and keeps every text pair at AA contrast as the light moves.</li>
+                <li><strong>A living background:</strong> a WebGPU shader (falling back to WebGL2) sweeps a slow, pulsing silk ribbon of the theme&apos;s light behind every page. It draws at a third of the screen&apos;s resolution at 30fps, pauses when the tab is hidden, and stays off on phones and for reduced motion. Text can land anywhere on it, so in dark mode the shader caps its own brightness at the level where every text pair still passes AA, checked on every page as the light moves.</li>
                 <li><strong>Fast by design:</strong> three.js loads only on capable desktops, warms up behind a branded preloader so the intro never stutters, and draws only while something moves.</li>
                 <li><strong>Prototyped, not faked:</strong> sign-in, payment and cancellation are complete flows with loading, success and error states. Nothing is sent or charged, and the card form is locked to public test cards so it can never collect a real card.</li>
                 <li><strong>Accessible throughout:</strong> keyboard support, focus management in every dialog, pinch-zoom, and reduced motion respected everywhere.</li>
