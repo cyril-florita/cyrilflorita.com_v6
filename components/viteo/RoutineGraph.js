@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
+import { afterPreloader } from "./PageLoader";
 
 // The routine chart: days the pack was taken, month by month, as a smooth
 // line (plus an optional comparison line), with the highlighted month marked
@@ -21,12 +22,19 @@ export default function RoutineGraph({ labels, main, compare, max = 30, tip, tip
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    // In view, and only once the preloader has completely faded, so the
+    // draw-in isn't spent behind it (the account renders under it).
+    let cancel = () => {};
     const io = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { el.classList.add("is-drawn"); io.disconnect(); } },
+      ([e]) => {
+        if (!e.isIntersecting) return;
+        io.disconnect();
+        cancel = afterPreloader(() => el.classList.add("is-drawn"));
+      },
       { threshold: 0.35 },
     );
     io.observe(el);
-    return () => io.disconnect();
+    return () => { io.disconnect(); cancel(); };
   }, []);
 
   const n = labels.length;

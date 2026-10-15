@@ -46,13 +46,14 @@ const ev = async (expression) => {
 try {
   await send("Page.navigate", { url: `http://localhost:${port}/scripts/render-pills.html` });
   for (let i = 0; i < 100 && !(await ev("!!window.__ready")); i++) await new Promise((r) => setTimeout(r, 100));
-  const images = await ev("window.__render()");
   mkdirSync(OUT, { recursive: true });
-  for (const [pid, url] of Object.entries(images)) {
+  for (const id of await ev("window.__ids")) {
+    const [[pid, { url, w, h }]] = Object.entries(await ev(`window.__renderOne(${JSON.stringify(id)})`));
     const png = Buffer.from(url.split(",")[1], "base64");
-    await sharp(png).png({ compressionLevel: 9, palette: false }).toFile(join(OUT, `${pid}.png`));
-    const { width, height } = await sharp(png).metadata();
-    console.log(`img/viteo/pills/${pid}.png  ${width}×${height}`);
+    // Downscale the supersampled render (sharp premultiplies alpha, so the
+    // smoothed edges don't pick up a dark fringe).
+    await sharp(png).resize(w, h, { kernel: "lanczos3" }).png({ compressionLevel: 9, palette: false }).toFile(join(OUT, `${pid}.png`));
+    console.log(`img/viteo/pills/${pid}.png  ${w}×${h}`);
   }
 } finally {
   ws.close();

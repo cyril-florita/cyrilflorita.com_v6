@@ -1,6 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { afterPreloader } from "./PageLoader";
 
 // Page-wide scroll motion for Viteo (mounted once in the layout, re-run per
 // route). Two things, all off under reduced motion (scrolling itself stays
@@ -29,8 +30,9 @@ export default function ScrollMotion() {
     const io = new IntersectionObserver(
       (entries) => entries.forEach((e) => {
         if (!e.isIntersecting) return;
-        e.target.classList.add("is-drawn");
         io.unobserve(e.target);
+        // Only once the preloader has completely faded, so the draw-in plays in view.
+        cleanups.push(afterPreloader(() => e.target.classList.add("is-drawn")));
       }),
       { threshold: 0.35 },
     );

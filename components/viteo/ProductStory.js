@@ -9,8 +9,9 @@ import { introState } from "./introFall";
 //
 // 1. Hero: the Viteo carton (artwork printed on its faces) with the nine
 //    pills around it, at the CSS layout's positions (BURST in page.js). It
-//    follows the pointer (--px/--py from HeroParallax.js) and, while the hero
-//    is hovered, every piece spins slowly.
+//    follows the pointer (--px/--py from HeroParallax.js) and, while the
+//    product shot is hovered, the pills spin fast and wind down to slow, again
+//    and again for as long as the pointer stays.
 // 2. Scroll: the carton turns and its lid opens; each pill lifts off and
 //    flies, following the page, into its "dock": a slot in a How it works
 //    step (three of them stop there first), then its Ingredients card. Each
@@ -294,6 +295,11 @@ export default function ProductStory({ burst }) {
         return Math.abs(px - o.x) > 0.001 || Math.abs(py - o.y) > 0.001;
       };
       let lagging = false;
+      // Hovering the product shot itself (not the whole hero): the pills whip
+      // round fast, then wind down to a slow turn; still hovering when it has
+      // slowed, they're flung round again — a loop of fast-to-slow spins.
+      const SPIN_SLOW = 0.6, SPIN_FAST = 16, SPIN_DECAY = 0.55, SPIN_CYCLE = 2.8; // ×base rate, s
+      let spinSpeed = 0, spinCycle = 0;
       let hovered = false, spin = 0, frame = 0, last = performance.now(), time = 0, shown = false, settleUntil = 0;
       // The intro (IntroMoment.js, a GSAP timeline) writes each object's fall
       // into introState: p = progress (0 before it starts), drop = remaining
@@ -307,6 +313,10 @@ export default function ProductStory({ burst }) {
         last = now;
         time += dt;
         spin += ((hovered ? 1 : 0) - spin) * Math.min(1, dt * 2.5);
+        if (hovered) { spinCycle += dt; if (spinCycle > SPIN_CYCLE) spinCycle = 0; }
+        const spinTarget = hovered ? SPIN_SLOW + (SPIN_FAST - SPIN_SLOW) * Math.exp(-spinCycle / SPIN_DECAY) : 0;
+        // A quick attack (each kick lands in ~0.2s) and a gentle release.
+        spinSpeed += (spinTarget - spinSpeed) * Math.min(1, dt * (spinTarget > spinSpeed ? 12 : 2.5));
         const px = parseFloat(product.style.getPropertyValue("--px")) || 0;
         const py = parseFloat(product.style.getPropertyValue("--py")) || 0;
         // The key light follows the pointer, the same "desk lamp" as the
@@ -371,7 +381,7 @@ export default function ProductStory({ burst }) {
           const docked = leg > 0 && t >= 1;
           pl.docks.forEach((d, k) => d.classList.toggle("is-docked", docked && k === leg - 1));
           // Hover spin only at home; it unwinds as the pill leaves.
-          if (leg === 0) pl.spinAngle += pl.rate * spin * dt * (pl.form === "capsule" ? 1.6 : pl.form === "tablet" ? 1.4 : 1.2);
+          if (leg === 0) pl.spinAngle += pl.rate * spinSpeed * dt * (pl.form === "capsule" ? 1.6 : pl.form === "tablet" ? 1.4 : 1.2);
           const home = leg === 0 ? 1 : leg === 1 ? 1 - t : 0;
           pl.inner.rotation[pl.spinAxis] = pl.baseSpin + pl.spinAngle * home;
           if (leg > 0 && t >= 1) pl.spinAngle = 0;
@@ -400,7 +410,7 @@ export default function ProductStory({ burst }) {
           root.classList.add("is-story"); // docks hide their images until a pill lands
         }
         // Positions only change with scroll, pointer or hover, so idle = no frames.
-        const busy = hovered || spin > 0.002 || lagging || now < settleUntil || introState.active;
+        const busy = hovered || spin > 0.002 || spinSpeed > 0.01 || lagging || now < settleUntil || introState.active;
         if (busy && !document.hidden) frame = requestAnimationFrame(loop);
       };
 
@@ -410,14 +420,27 @@ export default function ProductStory({ burst }) {
       const onScroll = () => wake();
       const onWake = (e) => wake(e.detail?.ms ?? 900); // e.g. the intro (IntroMoment.js)
       window.addEventListener("dl:wake", onWake);
-      const onEnter = () => { hovered = true; wake(); };
+      // Hover = the pointer over the product shot (.dl-product's box; the 3D
+      // canvas lets pointer events through) or the hero's main CTA hovered or
+      // keyboard-focused — the same moments the shot scales up in CSS.
+      const cta = hero.querySelector(".dl-underline-cta");
+      const overShot = () => product.matches(":hover") || !!cta?.matches(":hover, :focus-visible");
+      const onEnter = () => { hovered = overShot(); if (hovered) spinCycle = 0; wake(); };
       const onLeave = () => { hovered = false; wake(1500); };
-      const onMove = () => wake(600);
+      const onMove = () => {
+        const now = overShot();
+        if (now && !hovered) spinCycle = 0; // a fresh entry starts with the fast spin
+        hovered = now;
+        wake(600);
+      };
       window.addEventListener("scroll", onScroll, { passive: true });
       window.addEventListener("resize", resize);
       hero.addEventListener("pointerenter", onEnter);
       hero.addEventListener("pointerleave", onLeave);
       hero.addEventListener("pointermove", onMove);
+      const onFocus = () => requestAnimationFrame(onMove); // :focus-visible settles after the event
+      cta?.addEventListener("focus", onFocus);
+      cta?.addEventListener("blur", onFocus);
       const onVis = () => !document.hidden && wake();
       document.addEventListener("visibilitychange", onVis);
       const mo = new MutationObserver(() => requestAnimationFrame(paintBox));
@@ -433,6 +456,8 @@ export default function ProductStory({ burst }) {
         hero.removeEventListener("pointerenter", onEnter);
         hero.removeEventListener("pointerleave", onLeave);
         hero.removeEventListener("pointermove", onMove);
+        cta?.removeEventListener("focus", onFocus);
+        cta?.removeEventListener("blur", onFocus);
         document.removeEventListener("visibilitychange", onVis);
         mo.disconnect();
         product.classList.remove("is-3d");

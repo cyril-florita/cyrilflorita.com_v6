@@ -13,7 +13,11 @@ import { PRODUCTS } from "/components/viteo/data.js";
 
 // Frame = the CSS pill box (world unit = 1 CSS px) plus PAD on every side;
 // the site scales the image up by the same factor so the pill fills its box.
-const PAD = 1.12, PX = 7; // output px per CSS px (sharp up to ~2.5× at 3× DPR)
+const PAD = 1.12, PX = 9; // output px per CSS px (sharp up to the 2.7× ingredient cards at 3× DPR)
+// Supersampling: drawn SS× larger and downscaled by render-pills.mjs, since
+// headless Chrome's software WebGL ignores `antialias` and the edges came out
+// hard (they read as a rough, dark rim once scaled up on the page).
+const SS = 4;
 const BOXES = { capsule: [46, 18], softgel: [40, 22], tablet: [26, 26], oblong: [42, 19] };
 // A little 3D attitude so each reads as an object, not a flat badge.
 const POSE = { capsule: [-0.32, 0.22, 0], softgel: [-0.38, 0.18, 0], tablet: [-0.35, 0.15, 0], oblong: [-0.4, 0.2, 0] };
@@ -24,9 +28,12 @@ renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.NeutralToneMapping;
 const pmrem = new THREE.PMREMGenerator(renderer);
 
-window.__render = async () => {
+// One pill per call: nine supersampled PNGs in a single CDP reply is many MB
+// and stalled the bake.
+window.__ids = Object.keys(PRODUCTS);
+window.__renderOne = async (pid) => {
   const out = {};
-  for (const p of Object.values(PRODUCTS)) {
+  for (const p of [PRODUCTS[pid]]) {
     const scene = new THREE.Scene();
     scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
     scene.environmentIntensity = 0.5;
@@ -43,9 +50,9 @@ window.__render = async () => {
     const w = bw * PAD, h = bh * PAD;
     const cam = new THREE.OrthographicCamera(-w / 2, w / 2, h / 2, -h / 2, 0.1, 200);
     cam.position.set(0, 0, 100);
-    renderer.setSize(Math.round(w * PX), Math.round(h * PX), false);
+    renderer.setSize(Math.round(w * PX) * SS, Math.round(h * PX) * SS, false);
     renderer.render(scene, cam);
-    out[p.id] = renderer.domElement.toDataURL("image/png");
+    out[p.id] = { url: renderer.domElement.toDataURL("image/png"), w: Math.round(w * PX), h: Math.round(h * PX) };
   }
   return out;
 };
