@@ -25,7 +25,7 @@ export default function PartnerHero({ headingAs: Heading = "h1", headingId, base
           <Heading id={headingId} className="dl-display">Your clients ask what to take. <em>Give them a clear answer.</em></Heading>
         </BigWordHead>
         <p className="dl-lede">
-          Viteo for trainers, dietitians and nutritionists: share a personalized pack that explains every pill, give
+          <strong>Viteo for trainers, dietitians and nutritionists:</strong> share a personalized pack that explains every pill, give
           your clients 15% off their first box, and earn on every box they keep.
         </p>
         <div className="dl-ds-row">
