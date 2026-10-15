@@ -1,6 +1,6 @@
 // Viteo's 3D pill models (three.js), shared by the live hero scene
 // (ProductStory.js) and the pill image renderer (scripts/render-pills.mjs,
-// which bakes them into public/img/viteo/pills/<id>.png for every other
+// which bakes them into public/img/viteo/pills/<id>.webp for every other
 // pill on the site). Plain ESM with THREE passed in, so the renderer can load
 // it straight in a browser without bundling.
 //

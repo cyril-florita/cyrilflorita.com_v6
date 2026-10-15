@@ -4,6 +4,7 @@ import "@css/plugins/swiper.min.css";
 import "@fonts/font-awesome/css/fa-subset.css";
 import "@scss/style.css";
 import Preloader from "@/components/Preloader";
+import SiteFonts from "./siteFonts";
 
 // The portfolio (every route in this group): its global styles and the
 // preloader / page-transition panel. Not a root layout — app/layout.js is —
@@ -13,6 +14,7 @@ import Preloader from "@/components/Preloader";
 export default function SiteGroupLayout({ children }) {
   return (
     <>
+      <SiteFonts />
       <Preloader />
       {children}
     </>

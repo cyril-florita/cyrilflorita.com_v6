@@ -26,7 +26,7 @@ import "./viteo.css";
 const outfit = Outfit({ subsets: ["latin"], variable: "--dl-font-grove-display", display: "swap", preload: false });
 const figtree = Figtree({ subsets: ["latin"], variable: "--dl-font-grove-body", display: "swap", preload: false });
 const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--dl-font-aqua-display", display: "swap" });
-const inter = Inter({ subsets: ["latin"], variable: "--dl-font-aqua-body", display: "swap" });
+const inter = Inter({ subsets: ["latin"], variable: "--dl-font-aqua-body", display: "swap", preload: false }); // body text: loads when used, not preloaded
 const fraunces = Fraunces({ subsets: ["latin"], axes: ["SOFT", "opsz"], style: ["normal", "italic"], variable: "--dl-font-peach-display", display: "swap", preload: false });
 const dmSans = DM_Sans({ subsets: ["latin"], variable: "--dl-font-peach-body", display: "swap", preload: false });
 

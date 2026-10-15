@@ -1,6 +1,8 @@
 "use client";
 import { useDlTheme, THEMES } from "./ui";
 import { useHydrated } from "./store";
+// Page-only styles (split out of viteo.css so the landing skips them).
+import "@/app/pitch/viteo/css/design-system.css";
 
 // Design-system bits that follow the active theme and mode: color swatches
 // with their live values, and the current font pairing.

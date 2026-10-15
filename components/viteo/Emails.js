@@ -1,6 +1,8 @@
 "use client";
 import { PRODUCTS, money } from "./data";
 import { BigWordHead, LogoMark, Pill } from "./ui";
+// Page-only styles (split out of viteo.css so the landing skips them).
+import "@/app/pitch/viteo/css/emails.css";
 
 // Lifecycle messages, designed on the same brand: the shipping reminder
 // (three days before a box ships, with one-tap skip, pause and edit, so the

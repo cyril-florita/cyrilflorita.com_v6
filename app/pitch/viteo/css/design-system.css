@@ -1,0 +1,106 @@
+/* Viteo: styles used only by the design-system page(s), split out of viteo.css so the landing
+   doesn't load them (rules keep their original relative order; shared tokens and
+   components stay in viteo.css, which the layout always loads first). Lot,
+   partners and payment styles stay in viteo.css: splitting them shifted their
+   layout, since they compete with later shared rules of equal specificity. */
+.dl-ds-head .dl-lede { margin-top: 20px; }
+.dl-ds-current { margin-top: 16px !important; }
+.dl-ds-nav { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.dl-ds-nav a { padding: 8px 16px; border-radius: 999px; border: 1.5px solid var(--dl-line); text-decoration: none; font-weight: 600; font-size: 14px; }
+.dl-ds-nav a:hover { border-color: var(--dl-sun); }
+.dl-ds-section { padding: 64px 0 8px; border-top: 1px solid var(--dl-line); margin-top: 56px; }
+.dl-ds-section > .dl-h2 { font-size: 34px; }
+.dl-ds-section > *:not(.dl-h2):not(.dl-section-lede) { margin-top: 28px; }
+.dl-ds-forms { display: grid; gap: 24px; max-width: 720px; }
+.dl-ds-forms .dl-form-grid { margin: 0; }
+.dl-ds-pills { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 18px; margin-bottom: 26px; }
+.dl-ds-pills li { display: grid; justify-items: center; gap: 14px; text-align: center; padding: 22px 8px; border-radius: 16px; background: var(--dl-paper); border: 1px solid var(--dl-line); }
+.dl-ds-card { max-width: 420px; display: grid; gap: 12px; }
+.dl-ds-card.dl-item { display: flex; }
+.dl-ds-sub { margin-top: 36px !important; margin-bottom: -12px !important; }
+.dl-ds-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 16px; }
+.dl-ds-grid-wide { grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); }
+.dl-ds-two { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+.dl-ds-two + .dl-ds-two { margin-top: 16px !important; }
+.dl-ds-tile { display: flex; flex-direction: column; gap: 16px; min-height: 140px; }
+.dl-ds-tile.dl-panel { padding: 24px; }
+.dl-ds-center { align-items: center; justify-content: center; text-align: center; }
+.dl-ds-brand { display: grid; gap: 16px; }
+.dl-ds-brand-card { display: grid; gap: 20px; padding: 32px; }
+.dl-ds-brand-card.dl-panel { padding: 32px; }
+.dl-ds-brand-stage { display: grid; place-items: center; min-height: 340px; }
+.dl-ds-brand-logo .dl-logo { font-size: clamp(64px, 11vw, 150px); gap: 0.28em; }
+.dl-ds-brand-logo .dl-logo svg { width: 1.2em; height: 1.2em; }
+.dl-ds-brand-variants { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.dl-ds-brand-variants > .dl-panel { display: grid; place-items: center; min-height: 140px; border-radius: 20px; border: 1px solid var(--dl-line); }
+.dl-ds-brand-variants .dl-logo { font-size: 40px; }
+.dl-ds-brand-variants .dl-logo svg { width: 48px; height: 48px; }
+.dl-ds-brand-mark svg { width: clamp(160px, 22vw, 260px); height: clamp(160px, 22vw, 260px); }
+.dl .dl-ds-pack { width: min(400px, 90%); perspective: 1400px; }
+@media (max-width: 680px) {
+  .dl-ds-brand-card, .dl-ds-brand-card.dl-panel { padding: 22px; }
+}
+@media (max-width: 680px) {
+  .dl-ds-brand-stage { min-height: 220px; }
+}
+@media (max-width: 680px) {
+  .dl-ds-brand-variants { grid-template-columns: 1fr; }
+}
+.dl-ds-surface { justify-content: space-between; }
+.dl-ds-glass-demo {
+  display: grid; padding: 18px; border-radius: 24px;
+  background: radial-gradient(circle at 30% 30%, var(--dl-glow-2), transparent 60%), radial-gradient(circle at 80% 80%, var(--dl-glow-1), transparent 55%), var(--dl-cream);
+}
+.dl-ds .dl-ds-static.dl-totop { position: static; opacity: 1; translate: none; pointer-events: auto; flex: none; }
+.dl-ds .dl-ds-static.dl-burger { display: inline-block; }
+.dl-ds-faq { display: grid; gap: 12px; max-width: 720px; }
+.dl-ds-overlay { display: grid; gap: 10px; align-content: start; }
+.dl-ds-modal { border-radius: 28px; background: var(--dl-paper); color: var(--dl-ink); box-shadow: var(--dl-shadow); border: 1px solid var(--dl-line); }
+.dl-ds-modal .dl-modal-close { pointer-events: none; }
+.dl .dl-ds-closeup { width: 100%; max-height: none; margin: 0; border-radius: 28px; overflow: hidden; translate: none; animation: none; }
+.dl-ds-closeup .dl-ing-sheet { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); }
+.dl-ds-closeup .dl-ing-stage { min-height: 260px; }
+.dl-ds-closeup .dl-ing-stage-pill { scale: 2.6; }
+.dl-ds-closeup .dl-ing-body { padding: 28px; }
+.dl-ds-closeup .dl-h2 { font-size: 26px; }
+.dl-ds-radius, .dl-ds-space { display: flex; flex-wrap: wrap; gap: 18px; align-items: flex-end; }
+.dl-ds-radius li, .dl-ds-space li { display: grid; justify-items: center; gap: 8px; text-align: center; }
+.dl-ds-radius li > span:first-child { width: 72px; height: 72px; border-radius: var(--r); border: 1.5px solid var(--dl-line-strong); background: var(--dl-paper); }
+.dl-ds-space li > span:first-child { width: var(--s); height: 28px; border-radius: 4px; background: var(--dl-sun); }
+.dl-ds-motion { display: grid; gap: 0; max-width: 760px; }
+.dl-ds-motion > div { display: grid; grid-template-columns: 160px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--dl-line); }
+.dl-ds-motion dt { font-weight: 600; }
+.dl-ds-motion dd { color: var(--dl-ink-2); }
+@media (max-width: 680px) {
+  .dl-ds-grid-wide { grid-template-columns: 1fr; }
+}
+@media (max-width: 680px) {
+  .dl-ds-closeup .dl-ing-sheet { grid-template-columns: 1fr; }
+}
+@media (max-width: 680px) {
+  .dl-ds-closeup .dl-ing-stage { min-height: 180px; }
+}
+@media (max-width: 680px) {
+  .dl-ds-motion > div { grid-template-columns: 1fr; gap: 4px; }
+}
+.dl-ds-head.dl-panel { padding: 48px; }
+.dl-ds-head.dl-panel { position: relative; }
+.dl-ds-head-logo { position: absolute; top: 44px; right: 48px; }
+.dl-ds-head-logo .dl-logo { font-size: 84px; gap: 16px; }
+.dl-ds-head-logo .dl-logo svg { width: 100px; height: 100px; }
+.dl-ds-head .dl-bigword-head { margin-right: 360px; }
+@media (max-width: 960px) {
+  .dl-ds-head-logo { position: static; display: block; margin-bottom: 22px; }
+}
+@media (max-width: 960px) {
+  .dl-ds-head-logo .dl-logo { font-size: 56px; gap: 12px; }
+}
+@media (max-width: 960px) {
+  .dl-ds-head-logo .dl-logo svg { width: 66px; height: 66px; }
+}
+@media (max-width: 960px) {
+  .dl-ds-head .dl-bigword-head { margin-right: 0; }
+}
+@media (max-width: 680px) {
+  .dl-ds-head.dl-panel { padding: 28px 20px; }
+}

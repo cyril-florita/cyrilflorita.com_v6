@@ -1,0 +1,28 @@
+/* Viteo: styles used only by the plan page(s), split out of viteo.css so the landing
+   doesn't load them (rules keep their original relative order; shared tokens and
+   components stay in viteo.css, which the layout always loads first). Lot,
+   partners and payment styles stay in viteo.css: splitting them shifted their
+   layout, since they compete with later shared rules of equal specificity. */
+.dl-plan { padding: 48px 0 40px; min-height: 60vh; }
+.dl-plan-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 32px; }
+.dl-plan-head > div:first-child { flex: 1 1 420px; min-width: 0; }
+.dl-plan-grid { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 28px; align-items: start; }
+.dl-plan-tray { display: grid; gap: 14px; justify-items: center; margin-bottom: 18px; }
+.dl-plan-tray .dl-tray { width: 100%; }
+.dl-plans { display: grid; gap: 10px; }
+.dl-plan-option {
+  display: grid; gap: 2px; text-align: left; padding: 14px 16px; border-radius: 14px;
+  border: 2px solid var(--dl-line); background: var(--dl-paper); cursor: pointer; font-weight: 600;
+  transition: border-color 0.2s, background 0.2s;
+}
+.dl-plan-option.is-on { border-color: var(--dl-sun); background: var(--dl-selected); }
+.dl-plan-tray { display: grid; grid-template-columns: auto 1fr; align-items: center; column-gap: 24px; }
+.dl-plan-tray > .dl-meta { grid-column: 1 / -1; }
+@media (max-width: 680px) { .dl-plan-tray { grid-template-columns: 1fr; } }
+.dl-plan-tray.dl-panel .dl-tray {
+  border: 0; border-radius: 999px; box-shadow: none;
+  background: radial-gradient(ellipse at 50% 40%, color-mix(in srgb, var(--dl-panel-on-ink) 16%, var(--dl-panel-ink)), var(--dl-panel-ink) 78%);
+}
+@media (max-width: 960px) {
+  .dl-plan-grid { grid-template-columns: 1fr; }
+}

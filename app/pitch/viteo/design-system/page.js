@@ -3,6 +3,9 @@ import { Arrow, BigWordHead, Button, Logo, LogoMark, Pill, PillTray, ProductBox,
 import { CurrentTheme, Swatches } from "@/components/viteo/DesignTokens";
 import RoutineGraph from "@/components/viteo/RoutineGraph";
 import Reviews from "@/components/viteo/Reviews";
+// Page-only styles (split out of viteo.css so the landing skips them).
+import "@/app/pitch/viteo/css/design-system.css";
+import "@/app/pitch/viteo/css/account.css";
 
 export const metadata = {
   title: "Design system",

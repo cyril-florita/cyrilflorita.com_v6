@@ -52,8 +52,10 @@ try {
     const png = Buffer.from(url.split(",")[1], "base64");
     // Downscale the supersampled render (sharp premultiplies alpha, so the
     // smoothed edges don't pick up a dark fringe).
-    await sharp(png).resize(w, h, { kernel: "lanczos3" }).png({ compressionLevel: 9, palette: false }).toFile(join(OUT, `${pid}.png`));
-    console.log(`img/viteo/pills/${pid}.png  ${w}×${h}`);
+    // WebP with full-quality alpha: ~5× smaller than PNG (the nine were
+    // 374KB as PNG, 73KB as WebP), which matters on the mobile landing.
+    await sharp(png).resize(w, h, { kernel: "lanczos3" }).webp({ quality: 88, alphaQuality: 100, effort: 6 }).toFile(join(OUT, `${pid}.webp`));
+    console.log(`img/viteo/pills/${pid}.webp  ${w}×${h}`);
   }
 } finally {
   ws.close();

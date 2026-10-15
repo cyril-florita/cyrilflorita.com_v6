@@ -21,7 +21,7 @@ import { CARTON_FALL, backStrength, introState, pillFall } from "./introFall";
 // (.dl.is-intro-pending). On desktop with a mouse, "ready" means the 3D scene
 // has compiled its shaders and uploaded its textures (ProductStory's
 // dl:3d-ready), so none of that work lands in the middle of the intro;
-// elsewhere, the web fonts. At least 2s, so the animation plays even on a fast connection; at most 4s.
+// elsewhere, the web fonts. At least 2s (0.6s on phones), so the animation plays even on a fast connection; at most 4s.
 
 const VARS = ["--iy", "--ir", "--is", "--io"];
 
@@ -127,7 +127,10 @@ export default function IntroMoment() {
       ? new Promise((r) => { if (window.__dl3dReady) r(); else window.addEventListener("dl:3d-ready", r, { once: true }); })
       : (document.fonts?.ready ?? Promise.resolve());
     const wait = (ms) => new Promise((r) => setTimeout(r, ms));
-    Promise.all([wait(2000), Promise.race([ready, wait(4000)])]).then(start);
+    // Phones get a shorter minimum (0.6s): a long cover hurts their load (Lighthouse's
+    // speed index on slow 4G); elsewhere the animation plays at least 2s.
+    const phone = window.matchMedia("(max-width: 680px)").matches;
+    Promise.all([wait(phone ? 600 : 2000), Promise.race([ready, wait(4000)])]).then(start);
     return () => {
       cancelled = true;
       stop();

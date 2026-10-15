@@ -7,6 +7,10 @@ import { Arrow, BigWordHead, Button, Pill, PillTray, PreviewNotice } from "./ui"
 import AccountTabs from "./AccountTabs";
 import RoutineGraph from "./RoutineGraph";
 import CancelFlow from "./CancelFlow";
+// Page-only styles (split out of viteo.css so the landing skips them).
+import "@/app/pitch/viteo/css/account.css";
+import "@/app/pitch/viteo/css/signin.css";
+import "@/app/pitch/viteo/css/plan.css";
 
 // The subscriber's account: next delivery (skip with undo, pause, resume),
 // the pack (remove / add, applied to the next box), delivery frequency,

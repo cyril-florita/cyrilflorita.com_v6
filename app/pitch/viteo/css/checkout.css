@@ -1,0 +1,22 @@
+/* Viteo: styles used only by the checkout page(s), split out of viteo.css so the landing
+   doesn't load them (rules keep their original relative order; shared tokens and
+   components stay in viteo.css, which the layout always loads first). Lot,
+   partners and payment styles stay in viteo.css: splitting them shifted their
+   layout, since they compete with later shared rules of equal specificity. */
+.dl-checkout { padding: 48px 0 40px; min-height: 60vh; }
+.dl-checkout-main { padding: 32px; }
+.dl-checkout-main h1:focus, .dl-confirm h1:focus { outline: none; }
+.dl-confirm { max-width: 640px; text-align: center; display: grid; gap: 18px; justify-items: center; padding-top: 40px; }
+.dl-confirm .dl-hero-actions { justify-content: center; margin-top: 8px; }
+.dl-confirm .dl-tray { width: 100%; }
+@media (min-width: 961px) and (prefers-reduced-motion: no-preference) {
+  .dl-confirm .dl-product-sm .dl-box { animation: dl-box-in 0.9s var(--dl-ease) both, dl-box-sway 8s ease-in-out 0.9s infinite; }
+}
+.dl-confirm.dl-panel { padding: 48px 32px; margin-top: 12px; }
+.dl-confirm.dl-panel .dl-tray {
+  border: 0; border-radius: 999px; box-shadow: none;
+  background: radial-gradient(ellipse at 50% 40%, color-mix(in srgb, var(--dl-panel-on-ink) 16%, var(--dl-panel-ink)), var(--dl-panel-ink) 78%);
+}
+@media (max-width: 680px) {
+  .dl-checkout-main { padding: 22px; }
+}

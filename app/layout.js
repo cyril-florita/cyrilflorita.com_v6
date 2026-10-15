@@ -13,6 +13,7 @@ const atkinson = Atkinson_Hyperlegible({
   subsets: ['latin'],
   variable: '--font-atkinson',
   display: 'swap',
+  preload: false, // preloaded for portfolio routes only (app/(site)/siteFonts.js), not on /pitch prototypes
 })
 
 const space_grotest = Space_Grotesk({
@@ -21,6 +22,7 @@ const space_grotest = Space_Grotesk({
   subsets: ['latin'],
   variable: '--font-space-grotesk',
   display: 'swap',
+  preload: false, // see app/(site)/siteFonts.js
 })
 
 export const viewport = {
@@ -111,14 +113,15 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="cyril-custom-scroll" suppressHydrationWarning={true}>
-        {/* Google Analytics */}
+        {/* Google Analytics: loaded once the page has finished loading
+            (lazyOnload), so its ~176KB stays off the critical path on mobile. */}
         <Script
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           src="https://www.googletagmanager.com/gtag/js?id=G-QQM967TF9Z"
         />
         <Script
           id="google-analytics-script"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];

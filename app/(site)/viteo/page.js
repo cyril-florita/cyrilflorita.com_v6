@@ -132,12 +132,12 @@ const Page = () => {
             <CaseSection id="results" number={2} title="Results & Impact">
               <p>Viteo hasn&apos;t launched, so there are no market numbers, and I won&apos;t invent any. What it delivers is a complete, working product rather than mockups, measured on the live site:</p>
               <CaseStats items={[
-                { value: "95", label: "Performance (desktop)" },
+                { value: "94", label: "Performance (desktop)" },
                 { value: "100", label: "Accessibility" },
                 { value: "100", label: "Best practices" },
                 { value: "100", label: "SEO" },
               ]} />
-              <p>Lighthouse scores, 3D scene included. Fixing what the first audit found took desktop performance from 72 to 95 and accessibility from 94 to 100. Every text color passes WCAG AA in all three themes, light and dark. At launch, the metrics to watch are quiz-to-checkout conversion, edits on the plan page, and skips and pauses against cancellations.</p>
+              <p>Lighthouse scores, 3D scene included. Fixing what the first audit found took desktop performance from 72 to 95 and accessibility from 94 to 100; with the moving background and page preloader added since, desktop holds at 94. Every text color passes WCAG AA in all three themes, light and dark. At launch, the metrics to watch are quiz-to-checkout conversion, edits on the plan page, and skips and pauses against cancellations.</p>
 
               <Desktop name="landing" caption="Landing page" />
               <p><strong>Depth under the pointer.</strong> On desktop, the pack is the pivot of the hero: near pills follow the cursor, far ones drift the other way, and the box turns far enough to show its side, then springs back into place.</p>

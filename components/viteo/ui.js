@@ -41,7 +41,7 @@ export const Logo = ({ small = false }) => (
   </span>
 );
 
-// One pill: the product's 3D render (public/img/viteo/pills/<id>.png, baked
+// One pill: the product's 3D render (public/img/viteo/pills/<id>.webp, baked
 // from components/viteo/pillModels.js by scripts/render-pills.mjs), sized by
 // its form's CSS box (capsule / softgel / tablet) and tilted per use.
 export const Pill = ({ id, size = "md", tilt = 0 }) => {
@@ -54,7 +54,7 @@ export const Pill = ({ id, size = "md", tilt = 0 }) => {
         "--c": p.color,
         "--c2": p.color2 || "#fffaf0",
         "--tilt": `${tilt}deg`,
-        "--img": `url(/img/viteo/pills/${id}.png)`,
+        "--img": `url(/img/viteo/pills/${id}.webp)`,
       }}
       aria-hidden="true"
     />
