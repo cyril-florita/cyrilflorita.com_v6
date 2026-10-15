@@ -85,7 +85,7 @@ export const PillTray = ({ ids, label = "Your daily pack", size = "lg" }) => (
 // under "Hero product shot" in viteo.css). Sized by its container: put it in
 // a .dl-product (landing hero), .dl-product-sm (order confirmation) or
 // .dl-product-xs (plan, checkout summary, quiz finale).
-// `owner` prints the customer's name on the pack ("Victoria's"). `morph`
+// `owner` prints the customer's name on the pack ("Cyril's"). `morph`
 // (default) names it for page transitions, so the same pack moves from page
 // to page; the landing hero turns it off (its 3D version takes over there).
 export const ProductBox = ({ name = "Morning pack", owner, morph = true }) => {

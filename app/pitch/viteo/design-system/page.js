@@ -83,6 +83,8 @@ export default function DesignSystem() {
     <div className="dl-ds">
       <div className="dl-wrap">
         <header className="dl-ds-head dl-panel dl-panel-1">
+          {/* The brand, top right (the deeper capsule colours on this light panel). */}
+          <span className="dl-ds-head-logo"><Logo /></span>
           <BigWordHead word="Design system">
             <h1 className="dl-display">Viteo, <em>in pieces.</em></h1>
           </BigWordHead>
@@ -120,7 +122,7 @@ export default function DesignSystem() {
             <div className="dl-card dl-panel dl-panel-dark dl-ds-brand-card">
               <span className="dl-pill-label">The printed pack</span>
               <div className="dl-ds-brand-stage">
-                <div className="dl-product dl-product-xs dl-ds-pack"><ProductBox owner="Victoria" morph={false} /></div>
+                <div className="dl-product dl-product-xs dl-ds-pack"><ProductBox owner="Cyril" morph={false} /></div>
               </div>
               <p className="dl-meta">The mark in the top corner, a vertical wordmark, and the customer&apos;s name above the pack name. The same artwork is printed onto the 3D carton.</p>
             </div>
@@ -190,7 +192,7 @@ export default function DesignSystem() {
         <Section id="forms" title="Forms" lede="Labels always visible above the field; errors in plain language right under it. Control boundaries are at least 3:1 against their surface.">
           <div className="dl-ds-forms">
             <div className="dl-form-grid">
-              <label className="dl-field dl-field-wide"><span>Email</span><input defaultValue="victoria@example.com" /></label>
+              <label className="dl-field dl-field-wide"><span>Email</span><input defaultValue="cyril@example.com" /></label>
               <label className="dl-field dl-field-wide has-error"><span>ZIP code</span><input defaultValue="913" /><span className="dl-error">Use a 5-digit ZIP code.</span></label>
             </div>
             <div className="dl-options">

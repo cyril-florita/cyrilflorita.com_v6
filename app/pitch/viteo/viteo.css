@@ -407,6 +407,12 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 .dl { --dl-logo-1: #C2F3F3; --dl-logo-2: #3ECBDD; }
 .dl[data-dl-theme="grove"] { --dl-logo-1: #CDF1DA; --dl-logo-2: #3E9E68; }
 .dl[data-dl-theme="peach"] { --dl-logo-1: #FFD9C4; --dl-logo-2: #E5713C; }
+/* On light surfaces (light mode, the pastel panels, the closing band) the pale
+   gradient capsule washes out, so the mark takes the printed pack's deeper
+   capsule colours (as on .dl-box). Dark surfaces keep the pale gradient. */
+.dl[data-dl-mode="light"], .dl :is(.dl-panel-1, .dl-panel-2, .dl-panel-3, .dl-cta-inner) { --dl-logo-1: #4FC3D2; --dl-logo-2: #1F7F8E; }
+.dl[data-dl-theme="grove"][data-dl-mode="light"], .dl[data-dl-theme="grove"] :is(.dl-panel-1, .dl-panel-2, .dl-panel-3, .dl-cta-inner) { --dl-logo-1: #5BBF85; --dl-logo-2: #1F7A4C; }
+.dl[data-dl-theme="peach"][data-dl-mode="light"], .dl[data-dl-theme="peach"] :is(.dl-panel-1, .dl-panel-2, .dl-panel-3, .dl-cta-inner) { --dl-logo-1: #F59466; --dl-logo-2: #B4471F; }
 /* Hover: each capsule spins a full turn around its own centre (the V's two
    arms, worked out from their base rotation), in opposite directions,
    staggered a beat, and settles back into the V. */
@@ -1954,6 +1960,19 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
    the page gutter outside it, so it never touches the frame edges. */
 .dl-wrap.dl-panel, .dl-wrap.dl-cta-inner { width: calc(100% - 48px); }
 .dl-ds-head.dl-panel { padding: 48px; }
+/* The logo sits top right of the page's header bento; the giant "Design system"
+   word and the heading keep clear of it. Stacked above them on phones. */
+.dl-ds-head.dl-panel { position: relative; }
+.dl-ds-head-logo { position: absolute; top: 44px; right: 48px; }
+.dl-ds-head-logo .dl-logo { font-size: 84px; gap: 16px; }
+.dl-ds-head-logo .dl-logo svg { width: 100px; height: 100px; }
+.dl-ds-head .dl-bigword-head { margin-right: 360px; }
+@media (max-width: 960px) {
+  .dl-ds-head-logo { position: static; display: block; margin-bottom: 22px; }
+  .dl-ds-head-logo .dl-logo { font-size: 56px; gap: 12px; }
+  .dl-ds-head-logo .dl-logo svg { width: 66px; height: 66px; }
+  .dl-ds-head .dl-bigword-head { margin-right: 0; }
+}
 .dl-confirm.dl-panel { padding: 48px 32px; margin-top: 12px; }
 /* The pack's pills sit on the hero's black backdrop (the panel's ink with a
    faint bloom) — a full-width stadium here, a disc on /partners/. */

@@ -68,17 +68,17 @@ export default function Partners() {
               <h3 className="dl-h2">Suggest a pack</h3>
               <ul className="dl-pro-list">
                 <li>Build a pack for a client and send it as a link</li>
-                <li>They see &ldquo;Suggested by Jane Doe, RD&rdquo; and can change anything</li>
+                <li>They see &ldquo;Suggested by Cyril Florita&rdquo; and can change anything</li>
                 <li>Practitioner pricing for your own pack, plus commission</li>
               </ul>
               <p className="dl-meta">Your suggestion arrives with each item&apos;s reason, just like a quiz result.</p>
             </article>
             {/* What a client sees when a professional suggests a pack. */}
-            <Link className="dl-panel dl-panel-1 dl-pro-track dl-pro-preview dl-pro-client" href={`${BASE}/plan/?pro=jane-doe`}>
+            <Link className="dl-panel dl-panel-1 dl-pro-track dl-pro-preview dl-pro-client" href={`${BASE}/plan/?pro=cyril-florita`}>
               <span className="dl-pill-label">What your client sees</span>
-              <span className="dl-pro-preview-by"><span className="dl-pro-avatar" aria-hidden="true">JD</span> <span>Suggested by <strong>Jane Doe, RD</strong></span></span>
+              <span className="dl-pro-preview-by"><span className="dl-pro-avatar" aria-hidden="true">CF</span> <span>Suggested by <strong>Cyril Florita</strong></span></span>
               <PillTray ids={["d3", "b12", "omega", "magnesium"]} label="Suggested pack" />
-              <span className="dl-meta">4 essentials, each with Jane&apos;s note · 15% off the first box</span>
+              <span className="dl-meta">4 essentials, each with Cyril&apos;s note · 15% off the first box</span>
               <span className="dl-textlink">Open the example <Arrow /></span>
             </Link>
           </div>
@@ -167,7 +167,7 @@ export default function Partners() {
               ))}
             </div>
             <div className="dl-ds-row">
-              <Button variant="secondary" size="sm" href={`${BASE}/plan/?pro=jane-doe`}>See a suggested pack</Button>
+              <Button variant="secondary" size="sm" href={`${BASE}/plan/?pro=cyril-florita`}>See a suggested pack</Button>
               <Button variant="ghost" size="sm">Copy my link</Button>
             </div>
           </div>

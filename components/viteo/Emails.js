@@ -69,7 +69,7 @@ export default function Emails() {
             <EmailHead />
             <div className="dl-email-body">
               <p className="dl-email-eyebrow">Ships Friday, Dec 18</p>
-              <h3 className="dl-email-h">Victoria&apos;s Morning pack is almost on its way.</h3>
+              <h3 className="dl-email-h">Cyril&apos;s Morning pack is almost on its way.</h3>
               <Tray />
               <p>Your next box ({PACK.length} essentials, 30 daily packs) ships on Friday and arrives by Monday. Want something different this time? You have until Thursday.</p>
               <div className="dl-email-actions">
@@ -89,11 +89,11 @@ export default function Emails() {
             <h2 className="dl-h3">Right after checkout</h2>
             <p>The receipt reads like the plan: every item with its reason, the delivery date, and what happens next, so the first email builds the same trust as the product.</p>
           </div>
-          <Inbox subject="You're all set, Victoria: order VT-204816" preheader="Your first box arrives Wed, Oct 21. Here's what's inside, and why." when="Mon, Oct 12">
+          <Inbox subject="You're all set, Cyril: order VT-204816" preheader="Your first box arrives Wed, Oct 21. Here's what's inside, and why." when="Mon, Oct 12">
             <EmailHead />
             <div className="dl-email-body">
               <p className="dl-email-eyebrow">Order VT-204816</p>
-              <h3 className="dl-email-h">You&apos;re all set, Victoria.</h3>
+              <h3 className="dl-email-h">You&apos;re all set, Cyril.</h3>
               <p>Your first box arrives on <strong>Wed, Oct 21</strong>. Here&apos;s what&apos;s inside your Morning pack, and why each one is there.</p>
               <ul className="dl-email-items">
                 {[
@@ -136,7 +136,7 @@ export default function Emails() {
           <figure className="dl-sms" aria-label="Sample text message conversation">
             <p className="dl-sms-head"><span className="dl-email-avatar" aria-hidden="true"><LogoMark /></span> Viteo</p>
             <div className="dl-sms-thread">
-              <p className="dl-sms-in">Morning, Victoria ☀︎ Time for today&apos;s pack: D3, B12, Omega-3 and Magnesium. Reply 1 once you&apos;ve taken it.</p>
+              <p className="dl-sms-in">Morning, Cyril ☀︎ Time for today&apos;s pack: D3, B12, Omega-3 and Magnesium. Reply 1 once you&apos;ve taken it.</p>
               <p className="dl-sms-out">1</p>
               <p className="dl-sms-in">Done ✓ That&apos;s a 5-day streak. See you tomorrow at 8:00.</p>
             </div>

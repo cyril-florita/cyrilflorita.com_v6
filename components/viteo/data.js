@@ -295,22 +295,24 @@ export const SAMPLE_LOTS = {
 };
 export const LOT_LAB = "An ISO/IEC 17025-accredited independent laboratory";
 
-// A sample partner (the partner program, /partners/): a registered dietitian
-// whose link (/plan/?pro=jane-doe) opens the pack she suggests, with her own
-// reason for each item, and 15% off the client's first box. Sample data.
+// A sample partner (the partner program, /partners/): the mockup's one
+// persona, Cyril Florita, also the signed-in sample customer. No professional
+// credential is claimed for a real person, so the role is marked as a sample.
+// The link (/plan/?pro=cyril-florita) opens the suggested pack, with a reason
+// for each item, and 15% off the client's first box. Sample data.
 export const PARTNERS = {
-  "jane-doe": {
-    id: "jane-doe",
-    name: "Jane Doe, RD",
-    first: "Jane",
-    role: "Registered dietitian",
+  "cyril-florita": {
+    id: "cyril-florita",
+    name: "Cyril Florita",
+    first: "Cyril",
+    role: "Sample partner profile",
     note: "A starting point for a plant-based routine with long days indoors. Change anything you like.",
     discount: 0.15,
     items: [
-      { id: "d3", why: "Jane's note: long days indoors mean less vitamin D from sunlight." },
-      { id: "b12", why: "Jane's note: B12 comes almost entirely from animal foods, so plant-based eaters usually add it." },
-      { id: "omega", why: "Jane's note: an algae source of EPA and DHA, since fish isn't on your menu." },
-      { id: "magnesium", why: "Jane's note: a gentle form, taken with dinner as part of winding down." },
+      { id: "d3", why: "Cyril's note: long days indoors mean less vitamin D from sunlight." },
+      { id: "b12", why: "Cyril's note: B12 comes almost entirely from animal foods, so plant-based eaters usually add it." },
+      { id: "omega", why: "Cyril's note: an algae source of EPA and DHA, since fish isn't on your menu." },
+      { id: "magnesium", why: "Cyril's note: a gentle form, taken with dinner as part of winding down." },
     ],
   },
 };

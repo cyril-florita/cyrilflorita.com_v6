@@ -42,8 +42,8 @@ const demoOrder = () => {
       ],
       plan: "two",
     },
-    name: "Victoria",
-    address: { name: "Victoria Rivera", line1: "1200 Sunset Ave", line2: "", city: "Santa Clarita", state: "CA", zip: "91350" },
+    name: "Cyril",
+    address: { name: "Cyril Florita", line1: "1200 Sunset Ave", line2: "", city: "Santa Clarita", state: "CA", zip: "91350" },
     next: next.toISOString(),
     paused: null,
     plan: "two",
@@ -97,7 +97,7 @@ export default function Account() {
               <Button href={`${BASE}/sign-in/?next=account`} size="lg">Sign in <Arrow /></Button>
               <Button
                 variant="ghost"
-                onClick={() => write("session", { email: (stored?.address?.email) || "victoria@example.com", name: stored?.name || "Victoria", method: "sample", since: new Date().toISOString() })}
+                onClick={() => write("session", { email: (stored?.address?.email) || "cyril@example.com", name: stored?.name || "Cyril", method: "sample", since: new Date().toISOString() })}
               >
                 Explore the sample account
               </Button>

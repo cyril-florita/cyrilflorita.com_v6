@@ -75,7 +75,7 @@ export default function SignIn() {
     setPasskey("done");
     await wait(500);
     setPasskey(null);
-    finish(email.trim() || "victoria@example.com", "passkey");
+    finish(email.trim() || "cyril@example.com", "passkey");
   };
 
   return (
