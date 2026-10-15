@@ -107,7 +107,7 @@
   --dl-control: #6F8579;
 }
 
-/* Aqua (default): Dark Knight #1A1D2E, Laguna #35ACBE, Cold Blue #7DE2DF,
+/* Aqua (default): Dark Knight #1A1D2E, Laguna #3ECBDD, Cold Blue #7DE2DF,
    Dr. White #F9FAFB; Plus Jakarta Sans + Inter. */
 .dl,
 .dl[data-dl-theme="aqua"] {
@@ -131,7 +131,7 @@
   --dl-selected: #E1F6F5;
   --dl-line: #E1E7EA;
   --dl-line-strong: #C6D2D7;
-  --dl-hover-line: #35ACBE;
+  --dl-hover-line: #3ECBDD;
   --dl-track: #E6EEF0;
   --dl-sage: #DDF5F4;
   --dl-sage-deep: #1A6E7B;
@@ -141,13 +141,13 @@
   --dl-on-band: #F9FAFB;
   --dl-on-band-accent: #7DE2DF;
   --dl-glow-1: #7DE2DF;
-  --dl-glow-2: #35ACBE;
+  --dl-glow-2: #3ECBDD;
   --dl-shade: 26, 29, 46;
   --dl-cta-shadow: rgba(26, 29, 46, 0.35);
   --dl-paused: #EFF5F6;
   --dl-page: #CFE6E8;
   --dl-panel-1: #A6E0E8; /* the original Aqua blue, kept for the main bento */
-  --dl-panel-2: #35ACBE;
+  --dl-panel-2: #3ECBDD;
   --dl-panel-3: #BFEFED;
   --dl-panel-ink: #1A1D2E;
   --dl-panel-ink-2: #23303D;
@@ -157,9 +157,9 @@
   --dl-dark-card: #1A1D2E;
   --dl-dark-ink: #F9FAFB;
   --dl-dark-ink-2: #A7AEC2;
-  --dl-dark-accent: #35ACBE;
+  --dl-dark-accent: #3ECBDD;
   --dl-control: #7A8797; /* form-control boundaries: ≥3:1 on paper */
-  --dl-display-accent: #267F89;
+  --dl-display-accent: #2E99A5;
 }
 
 .dl[data-dl-theme="aqua"][data-dl-mode="dark"] {
@@ -178,7 +178,7 @@
   --dl-selected: #1E3A45;
   --dl-line: #2C3146;
   --dl-line-strong: #3C4259;
-  --dl-hover-line: #35ACBE;
+  --dl-hover-line: #3ECBDD;
   --dl-track: #262B40;
   --dl-sage: #183A40;
   --dl-sage-deep: #7DE2DF;
@@ -188,7 +188,7 @@
   --dl-on-band: #F1F3F7;
   --dl-on-band-accent: #7DE2DF;
   --dl-glow-1: rgba(125, 226, 223, 0.4);
-  --dl-glow-2: rgba(53, 172, 190, 0.25);
+  --dl-glow-2: rgba(62, 203, 221, 0.25);
   --dl-shade: 0, 0, 0;
   --dl-cta-shadow: rgba(0, 0, 0, 0.6);
   --dl-paused: #1E2234;
@@ -196,7 +196,7 @@
   --dl-dark-card: #1F2335;
   --dl-dark-ink: #F1F3F7;
   --dl-dark-ink-2: #A7AEC2;
-  --dl-dark-accent: #35ACBE;
+  --dl-dark-accent: #3ECBDD;
   --dl-control: #737B98;
 }
 
@@ -404,7 +404,7 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 .dl-logo-sm { font-size: 21px; }
 .dl-logo-sm svg { width: 26px; height: 26px; }
 /* Logo accent capsule, per theme. */
-.dl { --dl-logo-1: #C2F3F3; --dl-logo-2: #35ACBE; }
+.dl { --dl-logo-1: #C2F3F3; --dl-logo-2: #3ECBDD; }
 .dl[data-dl-theme="grove"] { --dl-logo-1: #CDF1DA; --dl-logo-2: #3E9E68; }
 .dl[data-dl-theme="peach"] { --dl-logo-1: #FFD9C4; --dl-logo-2: #E5713C; }
 /* Hover: each capsule spins a full turn around its own centre (the V's two
@@ -540,7 +540,7 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
   font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 .dl-email-inbox { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 12px; padding: 16px 20px; background: #FFFFFF; border-bottom: 1px solid #E1E7EA; }
-.dl-email-avatar { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: #13151F; --dl-logo-ink: #F1F3F7; --dl-logo-1: #C2F3F3; --dl-logo-2: #35ACBE; }
+.dl-email-avatar { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: #13151F; --dl-logo-ink: #F1F3F7; --dl-logo-1: #C2F3F3; --dl-logo-2: #3ECBDD; }
 .dl-email-avatar svg { width: 24px; height: 24px; }
 .dl-email-from { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; }
 .dl-email-from span { color: #565C70; white-space: nowrap; }
@@ -634,7 +634,17 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 /* The card is the tile. Its fill is the old card's look — the panel's tint
    under white at 55% (--dl-panel-paper) — mixed opaque, since the tile sits on
    the page, not on a panel. */
-.dl .dl-pro-track.dl-pro-client { padding: 32px; align-content: start; color: var(--dl-panel-ink); background: color-mix(in srgb, var(--dl-panel-1) 45%, #FFFFFF); }
+.dl .dl-pro-track.dl-pro-client { display: flex; flex-direction: column; gap: 16px; padding: 32px; color: var(--dl-panel-ink); background: color-mix(in srgb, var(--dl-panel-1) 45%, #FFFFFF); }
+/* Laid out top to bottom: who suggested it, the pack on a black disc (as in the
+   hero) centred in the free height, then the note and the link at the foot. */
+.dl-pro-client .dl-tray {
+  flex: none; margin: auto; width: min(100%, 220px); aspect-ratio: 1; align-content: center; gap: 8px 12px;
+  padding: 0; border: 0; border-radius: 50%; box-shadow: none;
+  /* the hero art's black disc: the panel's ink with a faint bloom */
+  background: radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--dl-panel-on-ink) 16%, var(--dl-panel-ink)), var(--dl-panel-ink) 72%);
+}
+.dl-pro-client .dl-meta { margin-top: 4px; }
+.dl-pro-client .dl-tray-lg .dl-pill { transform: rotate(var(--tilt, 0deg)) scale(1.2); margin: 6px 8px; } /* smaller, to sit inside the disc */
 .dl-pro-track.dl-panel { padding: 32px; display: grid; gap: 14px; align-content: start; }
 .dl-pro-list { display: grid; gap: 8px; }
 .dl-pro-list li { position: relative; padding-left: 20px; }
@@ -1028,7 +1038,8 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 /* Steps: the cards step down left to right (progression), each with a huge
    numeral set behind the copy, whole, in the top-left corner. */
 .dl-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px !important; align-items: start; }
-.dl-step { position: relative; overflow: hidden; isolation: isolate; min-height: 300px; }
+/* Content (pill, title, text) sits at the bottom of the card, under the numeral. */
+.dl-step { position: relative; overflow: hidden; isolation: isolate; min-height: 300px; display: flex; flex-direction: column; justify-content: flex-end; }
 .dl-steps .dl-step:nth-child(2) { margin-top: 40px; }
 .dl-steps .dl-step:nth-child(3) { margin-top: 80px; }
 .dl-step h3 { position: relative; z-index: 1; font-size: 24px; line-height: 1.2; font-weight: 600; letter-spacing: -0.01em; max-width: 13em; }
@@ -1116,8 +1127,13 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 @media (prefers-reduced-motion: reduce) { .dl-faq-item::details-content { transition: none; } }
 .dl-faq-item p { margin-top: 10px !important; color: var(--dl-ink-2); }
 .dl-cta { padding: 24px 0 8px; }
-.dl-cta-inner { background: var(--dl-panel-1); color: var(--dl-panel-ink); border-radius: 32px; padding: 72px 56px !important; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 32px; }
+.dl-cta-inner { background: var(--dl-panel-2); color: var(--dl-panel-ink); border-radius: 32px; padding: 72px 56px !important; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 32px; }
 .dl-cta .dl-display { font-size: clamp(36px, 5vw, 64px); max-width: 12em; }
+/* The closing band is the "2 min" tile's scheme (--dl-panel-2); its highlighted
+   words take the theme's deep panel accent, a little toward the fill, not the
+   display accent (which is made for --dl-panel-1). */
+.dl-cta .dl-display em { color: color-mix(in srgb, var(--dl-panel-accent) 90%, var(--dl-panel-2)); }
+.dl[data-dl-theme="aqua"] .dl-cta .dl-display em { color: #FFFFFF; } /* Aqua: white on the cyan, by choice (about 1.9:1) */
 /* The band is the main bento colour in both modes (dark type, dark button),
    so its highlight matches the hero's. */
 .dl .dl-cta .dl-btn-primary { background: var(--dl-panel-ink); color: var(--dl-panel-on-ink); }
@@ -1881,6 +1897,8 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
    secondary text steps a touch darker too. */
 .dl.has-ambient[data-dl-mode="light"] { --dl-ink-2: color-mix(in srgb, var(--dl-ink) 25%, var(--dl-ink-2)); }
 .dl.has-ambient[data-dl-mode="light"] { --dl-sun-deep: color-mix(in srgb, var(--dl-ink) 35%, var(--dl-display-accent, #1A6E7B)); }
+/* Aqua's display accent (#2E99A5) is lighter than the deepened teal this was derived from. */
+.dl.has-ambient[data-dl-theme="aqua"][data-dl-mode="light"] { --dl-sun-deep: color-mix(in srgb, var(--dl-ink) 35%, #267F89); }
 .dl.has-ambient[data-dl-mode="dark"] { --dl-sun-deep: color-mix(in srgb, #FFFFFF 30%, var(--dl-dark-accent-text, #7DE2DF)); }
 .dl.has-ambient[data-dl-theme="grove"][data-dl-mode="dark"] { --dl-sun-deep: color-mix(in srgb, #FFFFFF 25%, #A6EBC2); }
 .dl.has-ambient[data-dl-theme="peach"][data-dl-mode="dark"] { --dl-sun-deep: color-mix(in srgb, #FFFFFF 25%, #FFB894); }
@@ -1937,7 +1955,12 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 .dl-wrap.dl-panel, .dl-wrap.dl-cta-inner { width: calc(100% - 48px); }
 .dl-ds-head.dl-panel { padding: 48px; }
 .dl-confirm.dl-panel { padding: 48px 32px; margin-top: 12px; }
-.dl-plan-tray.dl-panel .dl-tray, .dl-confirm.dl-panel .dl-tray { background: var(--dl-panel-paper); }
+/* The pack's pills sit on the hero's black backdrop (the panel's ink with a
+   faint bloom) — a full-width stadium here, a disc on /partners/. */
+.dl-plan-tray.dl-panel .dl-tray, .dl-confirm.dl-panel .dl-tray {
+  border: 0; border-radius: 999px; box-shadow: none;
+  background: radial-gradient(ellipse at 50% 40%, color-mix(in srgb, var(--dl-panel-on-ink) 16%, var(--dl-panel-ink)), var(--dl-panel-ink) 78%);
+}
 
 /* Steps as colored tiles. */
 .dl-steps .dl-step.dl-panel { padding: 32px; }
@@ -2116,7 +2139,7 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 /* Close-up stage colour, per theme: the dialog's own panel colour taken a
    step deeper toward the theme's stage tone, so the two halves match but
    read apart, and the stage stays light against the dark backdrop. */
-.dl { --dl-stage: #35ACBE; } /* Aqua: Laguna */
+.dl { --dl-stage: #3ECBDD; } /* Aqua: Laguna */
 .dl[data-dl-theme="grove"] { --dl-stage: #7CC79D; }
 .dl[data-dl-theme="peach"] { --dl-stage: #F29A70; } /* deeper apricot */
 .dl-ing-dialog { --dl-stage-bg: color-mix(in srgb, var(--dl-panel-1) 62%, var(--dl-stage)); }

@@ -142,7 +142,7 @@ export default function AmbientShader() {
       // edge shifts toward (Aqua stays in its blues: Laguna to cold blue, no
       // violet; Grove toward teal; Peach toward its periwinkle).
       const RIBBON = {
-        aqua: ["#35ACBE", "#A6E0E8", "#7DE2DF"],
+        aqua: null, // Aqua: the "2 min" tile's cyan (--dl-panel-2), read in palette()
         grove: ["#3E9E68", "#8BE0AE", "#62BFB4"],
         peach: ["#F29A70", "#FFD6C2", "#B7BCFB"],
       };
@@ -150,7 +150,10 @@ export default function AmbientShader() {
         const cs = getComputedStyle(root);
         const base = cs.getPropertyValue("--dl-cream").trim();
         const light = root.dataset.dlMode === "light";
-        const [a, b, c] = RIBBON[root.dataset.dlTheme] || RIBBON.aqua;
+        const theme = root.dataset.dlTheme in RIBBON ? root.dataset.dlTheme : "aqua";
+        // Aqua's wave is the cyan of its bento tiles, its lit band a paler tint of it.
+        const tile = cs.getPropertyValue("--dl-panel-2").trim() || "#3ECBDD";
+        const [a, b, c] = RIBBON[theme] || [tile, `color-mix(in srgb, ${tile} 70%, #FFFFFF)`, tile];
         const set = (u, css) => u.value.setRGB(...resolve(css, base), THREE.SRGBColorSpace);
         set(uBase, base); set(uA, a); set(uB, b); set(uC, c);
         set(uSheen, light ? b : `color-mix(in srgb, ${b} 70%, #FFFFFF)`);

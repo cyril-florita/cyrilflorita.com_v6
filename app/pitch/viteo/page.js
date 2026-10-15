@@ -283,7 +283,7 @@ export default function Landing() {
             {STEPS.map((s) => (
               <li
                 key={s.n}
-                className={`dl-panel dl-panel-${STEPS.indexOf(s) + 1} dl-step`}
+                className={`dl-panel dl-panel-${[2, 1, 3][STEPS.indexOf(s)]} dl-step`}
               >
                 {/* A pill docks here on its way down the page (ProductStory). */}
                 <span className="dl-step-pill" data-story-pill={s.pill}>

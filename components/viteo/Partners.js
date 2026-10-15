@@ -53,7 +53,7 @@ export default function Partners() {
         <section className="dl-pro-section" aria-labelledby="pro-tracks">
           <h2 id="pro-tracks" className="dl-sr">Two ways to partner</h2>
           <div className="dl-pro-tracks">
-            <article className="dl-card dl-panel dl-panel-2 dl-pro-track">
+            <article className="dl-card dl-panel dl-panel-3 dl-pro-track">
               <span className="dl-pill-label">Trainers and coaches</span>
               <h3 className="dl-h2">Share Viteo</h3>
               <ul className="dl-pro-list">
@@ -63,7 +63,7 @@ export default function Partners() {
               </ul>
               <p className="dl-meta">You share Viteo itself; your clients take the quiz and choose their own pack.</p>
             </article>
-            <article className="dl-card dl-panel dl-panel-3 dl-pro-track">
+            <article className="dl-card dl-panel dl-panel-2 dl-pro-track">
               <span className="dl-pill-label">Dietitians and nutritionists</span>
               <h3 className="dl-h2">Suggest a pack</h3>
               <ul className="dl-pro-list">
@@ -77,7 +77,7 @@ export default function Partners() {
             <Link className="dl-panel dl-panel-1 dl-pro-track dl-pro-preview dl-pro-client" href={`${BASE}/plan/?pro=jane-doe`}>
               <span className="dl-pill-label">What your client sees</span>
               <span className="dl-pro-preview-by"><span className="dl-pro-avatar" aria-hidden="true">JD</span> <span>Suggested by <strong>Jane Doe, RD</strong></span></span>
-              <PillTray ids={["d3", "b12", "omega", "magnesium"]} label="Suggested pack" size="sm" />
+              <PillTray ids={["d3", "b12", "omega", "magnesium"]} label="Suggested pack" />
               <span className="dl-meta">4 essentials, each with Jane&apos;s note · 15% off the first box</span>
               <span className="dl-textlink">Open the example <Arrow /></span>
             </Link>
