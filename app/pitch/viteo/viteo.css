@@ -1018,7 +1018,10 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
   font-family: var(--dl-font-display), serif; font-weight: 800; white-space: nowrap;
   font-size: min(168px, calc(100cqi / (var(--chars) * 0.6)));
   line-height: 0.82; letter-spacing: -0.06em;
-  margin: 0 0 -0.27em -.04em !important;
+  /* The fill only paints inside the box, and the tight tracking pushes the
+     last letter's ink past it ("Questions" lost its s): pad the right, and
+     cancel the padding with the margin so nothing shifts. */
+  margin: 0 -0.12em -0.27em -.04em !important; padding-right: 0.12em;
   background: linear-gradient(180deg, color-mix(in srgb, var(--dl-sun-deep) 26%, transparent), color-mix(in srgb, var(--dl-sun-deep) 3%, transparent) 92%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
   pointer-events: none; user-select: none;
