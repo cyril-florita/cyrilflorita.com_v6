@@ -599,13 +599,15 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 .dl-pro-faces span + span { margin-left: -8px; }
 .dl-pro-faces span:nth-child(2) { background: var(--dl-panel-2); }
 .dl-pro-faces span:nth-child(3) { background: var(--dl-panel-3); }
-.dl-pro-band.dl-panel { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: 40px; align-items: center; padding: 48px; border-radius: 32px; }
-.dl-pro-band-copy { display: grid; gap: 18px; }
-/* Links on the coloured band take the panel's ink (the accent text colour
-   is too light on Peach's periwinkle). */
-.dl .dl-pro-band .dl-textlink { color: var(--dl-panel-ink); }
-.dl-section:has(> .dl-wrap > .dl-pro-band) { padding-top: 8px; }
-.dl-pro-band .dl-h2 { max-width: 16em; }
+.dl-pro-home { padding-top: 8px; } /* the landing's "For professionals" section */
+/* The partners photo (public/img/viteo/partners-trainer.webp): a circle, one
+   asset on the landing band and the partners hero, always cropped from the
+   top (object-position top) so the smile stays in frame. */
+.dl-pro-photo { display: block; position: relative; width: 100%; overflow: hidden; isolation: isolate; border-radius: 50%; background: var(--dl-panel-ink); }
+/* A little ashy: desaturated and softened, then blended with `lighten` over the
+   panel's ink, so the photo's blacks become exactly the button's and text's
+   black (the ink is darker than nothing, lighter pixels pass through). */
+.dl-pro-photo img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0%; mix-blend-mode: lighten; filter: grayscale(0.35) contrast(0.94) brightness(1.04); }
 .dl .dl-pro-preview { display: grid; gap: 14px; padding: 24px; text-decoration: none; color: inherit; background: var(--dl-panel-paper); border-color: transparent; transition: translate 0.3s var(--dl-ease); }
 .dl .dl-pro-preview:hover { translate: 0 -3px; }
 .dl-pro-preview-by { display: flex; align-items: center; gap: 10px; }
@@ -616,16 +618,23 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 .dl-pro-suggested .dl-pro-avatar { width: 44px; height: 44px; font-size: 14px; box-shadow: none; background: var(--dl-sun-deep); color: var(--dl-paper); }
 .dl-pro-suggested > div { display: grid; gap: 4px; }
 .dl-pro-suggested-by { font-size: 16px; }
-@media (max-width: 960px) { .dl-pro-band.dl-panel { grid-template-columns: 1fr; padding: 32px 24px; } }
-@media (max-width: 680px) { .dl-pro-band.dl-panel { padding: 26px 20px; border-radius: 24px; } }
 
 /* Partners (Partners.js): Viteo for professionals. */
 .dl-pro { padding: 24px 0 72px; }
-.dl-pro-hero.dl-panel { padding: 56px; display: grid; gap: 22px; }
-.dl-pro-hero .dl-display { font-size: clamp(36px, 5vw, 64px); max-width: 16em; }
+.dl-pro-hero.dl-panel { padding: 56px; display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); gap: 56px; align-items: center; }
+.dl-pro-hero-copy { display: grid; gap: 22px; min-width: 0; }
+.dl-pro-hero .dl-pro-photo { height: auto; aspect-ratio: 1 / 1; max-width: 520px; justify-self: center; }
+.dl-pro-hero .dl-display { font-size: clamp(34px, 3.9vw, 54px); max-width: 16em; }
 .dl-pro-section { margin-top: 110px; }
 .dl-pro-section > .dl-bigword-head + * { margin-top: 28px; }
-.dl-pro-tracks { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+.dl-pro-tracks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+/* The tracks sit 16px under the hero, the same as the gap between the tiles. */
+.dl-pro-hero + .dl-pro-section { margin-top: 16px; }
+/* Third tile: the "what your client sees" card itself, a full tile. */
+/* The card is the tile. Its fill is the old card's look — the panel's tint
+   under white at 55% (--dl-panel-paper) — mixed opaque, since the tile sits on
+   the page, not on a panel. */
+.dl .dl-pro-track.dl-pro-client { padding: 32px; align-content: start; color: var(--dl-panel-ink); background: color-mix(in srgb, var(--dl-panel-1) 45%, #FFFFFF); }
 .dl-pro-track.dl-panel { padding: 32px; display: grid; gap: 14px; align-content: start; }
 .dl-pro-list { display: grid; gap: 8px; }
 .dl-pro-list li { position: relative; padding-left: 20px; }
@@ -670,6 +679,8 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 .dl-pro-sent { display: grid; gap: 8px; }
 @media (max-width: 960px) {
   .dl-pro-tracks, .dl-pro-bottom, .dl-pro-calc.dl-panel { grid-template-columns: 1fr; }
+  .dl-pro-hero.dl-panel { grid-template-columns: 1fr; gap: 32px; }
+  .dl-pro-hero .dl-pro-photo { max-width: 340px; }
   .dl-pro-steps, .dl-pro-rules { grid-template-columns: 1fr; }
   .dl-pro-stats { grid-template-columns: 1fr 1fr; }
 }

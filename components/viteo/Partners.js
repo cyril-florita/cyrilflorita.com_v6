@@ -1,7 +1,9 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 import { BASE, money } from "./data";
-import { Arrow, BigWordHead, Button, Pill } from "./ui";
+import PartnerHero from "./PartnerHero";
+import { Arrow, BigWordHead, Button, Pill, PillTray } from "./ui";
 
 // Viteo for professionals: personal trainers share Viteo with a link and a
 // code; nutrition professionals suggest a whole pack, which the client sees as
@@ -44,20 +46,8 @@ export default function Partners() {
   return (
     <div className="dl-pro">
       <div className="dl-wrap">
-        {/* Hero */}
-        <header className="dl-pro-hero dl-panel dl-panel-1">
-          <BigWordHead word="Partners">
-            <h1 className="dl-display">Your clients ask what to take. <em>Give them a clear answer.</em></h1>
-          </BigWordHead>
-          <p className="dl-lede">
-            Viteo for trainers, dietitians and nutritionists: share a personalized pack that explains every pill, give
-            your clients 15% off their first box, and earn on every box they keep.
-          </p>
-          <div className="dl-ds-row">
-            <Button href="#pro-apply">Apply to partner <Arrow /></Button>
-            <a className="dl-textlink" href="#pro-earnings">Estimate your earnings</a>
-          </div>
-        </header>
+        {/* Hero (shared with the landing: components/viteo/PartnerHero.js) */}
+        <PartnerHero eager />
 
         {/* Two tracks */}
         <section className="dl-pro-section" aria-labelledby="pro-tracks">
@@ -83,6 +73,14 @@ export default function Partners() {
               </ul>
               <p className="dl-meta">Your suggestion arrives with each item&apos;s reason, just like a quiz result.</p>
             </article>
+            {/* What a client sees when a professional suggests a pack. */}
+            <Link className="dl-panel dl-panel-1 dl-pro-track dl-pro-preview dl-pro-client" href={`${BASE}/plan/?pro=jane-doe`}>
+              <span className="dl-pill-label">What your client sees</span>
+              <span className="dl-pro-preview-by"><span className="dl-pro-avatar" aria-hidden="true">JD</span> <span>Suggested by <strong>Jane Doe, RD</strong></span></span>
+              <PillTray ids={["d3", "b12", "omega", "magnesium"]} label="Suggested pack" size="sm" />
+              <span className="dl-meta">4 essentials, each with Jane&apos;s note · 15% off the first box</span>
+              <span className="dl-textlink">Open the example <Arrow /></span>
+            </Link>
           </div>
         </section>
 
