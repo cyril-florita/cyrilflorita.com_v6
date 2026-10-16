@@ -79,7 +79,7 @@ preloader
         pointer-events: none;
 
         [data-theme="dark"] & {
-            opacity: 0.2;
+            opacity: 0.17;
         }
 
         @media screen and (max-width: 1200px) {
@@ -4622,7 +4622,7 @@ zoom viewer (components/ZoomViewer.js)
         }
 
         [data-theme="dark"] & {
-            opacity: 0.2;
+            opacity: 0.17;
         }
 
         @media screen and (max-width: 1200px) {
