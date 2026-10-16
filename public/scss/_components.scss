@@ -2556,6 +2556,78 @@ portfolio
     }
 }
 
+// Fiery hover frame: on desktop with a mouse, the tile's offset frame
+// (.cyril-cover::after) burns. A flame head (white-hot core → orange → deep
+// red tail) runs round the crisp 2px line over a dim ember base, and a
+// slightly blurred copy (::before) is the glow. Both read the registered
+// --fire-angle, which useFireFrame (PortfolioIsotope.js) animates on the
+// hovered tile only, at a constant speed along the frame. Under reduced
+// motion the frame just turns orange (the rule above).
+@property --fire-angle {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 0deg;
+}
+
+@keyframes cyril-fire-in {
+    from {
+        opacity: 0;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) and (min-width: 1201px) and (prefers-reduced-motion: no-preference) {
+    .cyril-portfolio-item .cyril-cover {
+        --fire-ember: rgba(var(--color-accent-rgb), 0.45);
+        --fire-core: #fff3c4;
+        --fire-hot: #ffc14d;
+        --fire-tail: #b3200c;
+        --fire: conic-gradient(from var(--fire-angle),
+                var(--fire-ember) 0deg,
+                var(--fire-ember) 130deg,
+                var(--fire-tail) 210deg,
+                var(--color-accent) 285deg,
+                var(--fire-hot) 335deg,
+                var(--fire-core) 355deg,
+                var(--fire-ember) 360deg);
+
+        &::before {
+            content: "";
+            position: absolute;
+            left: 12px;
+            top: 12px;
+            right: -12px;
+            bottom: -12px;
+            z-index: 1;
+            border: 3px solid transparent;
+            margin: -0.5px;
+            pointer-events: none;
+            opacity: 0;
+            transform: scale(0.96);
+        }
+    }
+
+    .cyril-portfolio-item:hover .cyril-cover {
+        &::after {
+            border-image: var(--fire) 1;
+            filter: drop-shadow(0 0 2px rgba(255, 150, 60, 0.9));
+        }
+
+        &::before {
+            border-image: var(--fire) 1;
+            filter: blur(1px) brightness(1.3);
+            opacity: 1;
+            animation: cyril-fire-in 0.4s ease-out;
+        }
+    }
+
+    // Light mode: a white-hot core vanishes on the pale page, so the flame
+    // burns a shade deeper.
+    :root:not([data-theme="dark"]) .cyril-portfolio-item .cyril-cover {
+        --fire-core: #ffb020;
+        --fire-hot: #ff8a1f;
+    }
+}
+
 // 3D phone thumbnail (GridPhone3D in TileMedia.js): a dark stage with a
 // phone-shaped device, rotated in perspective by GSAP. Overrides the tile
 // image rules (cover-fill, hover shrink) for the video inside.
