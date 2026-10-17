@@ -9,14 +9,17 @@ Cyril Florita's personal portfolio site — a statically-exported Next.js (App R
 ## Commands
 
 ```bash
-npm run dev      # next dev — local dev server
+npm run dev      # next dev + a Sass watcher (recompiles style.css when a .scss file is saved; skips the compile on start if style.css is current)
+npm run sass     # compile style.css once
 npm run build    # prebuild (thumbs + og) then next build — produces the static export in out/
 npm run start    # next start (rarely useful since the site is statically exported)
 npm run lint     # eslint (flat config in eslint.config.mjs — `next lint` no longer exists); `npm run lint:fix` autofixes
-npm run deploy   # npm run build && node deploy.js — builds (incl. prebuild), then SFTP-uploads out/ using SFTP_HOST/SFTP_PORT/SFTP_USERNAME/SFTP_PASSWORD from .env. `node deploy.js` alone only uploads the existing out/
+npm run deploy   # npm run build && node deploy.js — builds (incl. prebuild), then SFTP-uploads out/ using SFTP_HOST/SFTP_PORT/SFTP_USERNAME/SFTP_PASSWORD from .env. `node deploy.js` alone only uploads the existing out/; `node deploy.js --dry-run` lists what would change
 npm run thumbs   # WebP thumbnails + size manifest for public/img/portfolio
 npm run og       # 1200×630 share images (public/og/) + app icons
 ```
+
+Deploys are incremental: `deploy.js` keeps `.deploy-manifest.json` (path → content hash) on the server, uploads only new/changed files — assets first, HTML last, so pages never point at chunks that haven't arrived — then deletes files the previous deploy uploaded that the build no longer has (never files the manifest doesn't list). The manifest is written last, so an interrupted deploy just re-uploads next time; `.htaccess` denies public access to it. Don't upload `out/` by other means, or the manifest goes stale.
 
 `npm run build` runs both first (`prebuild`; they skip unchanged files), and `npm run deploy` goes through `npm run build`. Running `npx next build` directly skips them.
 
@@ -30,7 +33,7 @@ There is no test suite in this repo.
 
 ### SCSS
 
-Styles are authored in `public/scss/` (`_variables.scss`, `_common.scss`, `_components.scss`, entry point `style.scss`) and compiled to the checked-in `public/scss/style.css`, which is what `app/layout.js` actually imports (`@scss/style.css`). **After editing any `.scss` partial, recompile `style.css`:** `npx sass public/scss/style.scss public/scss/style.css --style=expanded --no-source-map`. Note that `_common.scss` generates the glitch-effect `@keyframes` with SCSS `random()`, so every full recompile rewrites those keyframes with new random values — that churn in the `style.css` diff is expected and harmless (the effect looks the same), so don't be alarmed by it when reviewing a diff.
+Styles are authored in `public/scss/` (`_variables.scss`, `_common.scss`, `_components.scss`, entry point `style.scss`) and compiled to the checked-in `public/scss/style.css`, which is what `app/layout.js` actually imports (`@scss/style.css`). **After editing any `.scss` partial, recompile `style.css`:** `npm run sass` (`sass public/scss/style.scss public/scss/style.css --style=expanded --no-source-map`; `sass` is a devDependency). `npm run dev` runs the same compile in watch mode, so it's automatic while the dev server is up. Note that `_common.scss` generates the glitch-effect `@keyframes` with SCSS `random()`, so every full recompile rewrites those keyframes with new random values — that churn in the `style.css` diff is expected and harmless (the effect looks the same), so don't be alarmed by it when reviewing a diff.
 
 ## Architecture
 

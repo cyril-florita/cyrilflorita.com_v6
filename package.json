@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "sass --watch public/scss/style.scss:public/scss/style.css --style=expanded --no-source-map & next dev",
     "prebuild": "node scripts/make-thumbs.mjs && node scripts/make-og.mjs",
     "build": "next build",
     "start": "next start",
@@ -11,7 +11,8 @@
     "lint:fix": "eslint --fix",
     "deploy": "npm run build && node deploy.js",
     "thumbs": "node scripts/make-thumbs.mjs",
-    "og": "node scripts/make-og.mjs"
+    "og": "node scripts/make-og.mjs",
+    "sass": "sass public/scss/style.scss public/scss/style.css --style=expanded --no-source-map"
   },
   "dependencies": {
     "dotenv": "^17.4.2",
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "eslint": "^9.39.5",
-    "eslint-config-next": "^16.3.6"
+    "eslint-config-next": "^16.3.6",
+    "sass": "^1.105.2"
   }
 }
