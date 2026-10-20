@@ -2,7 +2,6 @@ import { ViewTransition } from "react";
 import { Outfit, Figtree, Plus_Jakarta_Sans, Inter, Fraunces, DM_Sans } from "next/font/google";
 import { Header, Footer, ToTop } from "@/components/viteo/ui";
 import Reveal from "@/components/viteo/Reveal";
-import PageLoader from "@/components/viteo/PageLoader";
 import ScrollMotion from "@/components/viteo/ScrollMotion";
 import AmbientShader from "@/components/viteo/AmbientShader";
 import "./viteo.css";
@@ -60,7 +59,7 @@ export const viewport = { themeColor: "#13151F", maximumScale: 5, userScalable: 
 // page it also marks the intro as pending (unless reduced motion is on), so
 // the hero's objects are hidden from the first paint until the intro's
 // timeline starts (IntroMoment.js) instead of flashing in place first.
-const THEME_SCRIPT = `(function(){var e=document.currentScript.parentElement;try{var t=localStorage.getItem('dl-theme');var m=localStorage.getItem('dl-mode');if(t==='aqua'||t==='grove'||t==='peach')e.setAttribute('data-dl-theme',t);if(m==='light'||m==='dark')e.setAttribute('data-dl-mode',m);}catch(x){}try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)e.classList.add(location.pathname.replace(/\\/+$/,'')==='/pitch/viteo'?'is-intro-pending':'is-loading');}catch(x){}})();`;
+const THEME_SCRIPT = `(function(){var e=document.currentScript.parentElement;try{var t=localStorage.getItem('dl-theme');var m=localStorage.getItem('dl-mode');if(t==='aqua'||t==='grove'||t==='peach')e.setAttribute('data-dl-theme',t);if(m==='light'||m==='dark')e.setAttribute('data-dl-mode',m);}catch(x){}try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!location.hash&&location.pathname.replace(/\\/+$/,'')==='/pitch/viteo')e.classList.add('is-intro-pending');}catch(x){}})();`;
 
 export default function ViteoLayout({ children }) {
   return (
@@ -86,7 +85,6 @@ export default function ViteoLayout({ children }) {
       </div>
       <ToTop />
       <Reveal />
-      <PageLoader />
       <ScrollMotion />
     </div>
   );

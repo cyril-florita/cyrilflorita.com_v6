@@ -34,7 +34,9 @@ export default function IntroMoment() {
     if (!root) return;
     const art = root.querySelector(".dl-bento-art");
     const pre = root.querySelector(".dl-preloader");
-    if (!art || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    // No intro (or preloader) under reduced motion, or when the link points
+    // at a section further down (/pitch/viteo/#faq): go straight there.
+    if (!art || window.location.hash || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       root.classList.remove("is-intro-pending");
       return;
     }

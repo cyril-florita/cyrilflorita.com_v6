@@ -1,7 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { afterPreloader } from "./PageLoader";
+import { afterPreloader } from "./afterPreloader";
 
 // Page-wide scroll motion for Viteo (mounted once in the layout, re-run per
 // route). Two things, all off under reduced motion (scrolling itself stays

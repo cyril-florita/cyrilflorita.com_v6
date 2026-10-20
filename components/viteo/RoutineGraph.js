@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
-import { afterPreloader } from "./PageLoader";
+import { afterPreloader } from "./afterPreloader";
 
 // The routine chart: days the pack was taken, month by month, as a smooth
 // line (plus an optional comparison line), with the highlighted month marked

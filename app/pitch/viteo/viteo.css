@@ -2047,27 +2047,6 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 @keyframes dl-pre-spin-b { 0%, 12% { rotate: 0deg; } 78%, 100% { rotate: 360deg; } }
 .dl-preloader-word { font-family: var(--dl-font-display), sans-serif; font-size: 30px; font-weight: 700; letter-spacing: -0.035em; line-height: 1; }
 @keyframes dl-intro-failsafe { to { opacity: 1; } }
-/* The same preloader between pages (PageLoader.js): a curtain — on a link
-   click it slides down from the top over the page (the navigation runs once
-   it covers), and once the next page is in it slides back up (.is-leaving). Its own class, so the landing's
-   .is-intro-pending rules don't reach it, and its own view-transition-name,
-   so the route change's view transition (drawn above the whole page) keeps
-   it on top. On a first load (pre-paint .is-loading) it's up from the first
-   paint; the failsafe lifts it after 5s if the script never runs. */
-.dl-pageloader {
-  position: fixed; inset: 0; z-index: 200; display: grid;
-  place-content: center; justify-items: center; gap: 14px;
-  background: var(--dl-cream); color: var(--dl-ink);
-  view-transition-name: dl-pageloader;
-  translate: 0 -100%; visibility: hidden; pointer-events: none;
-}
-.dl-pageloader.is-on, .dl.is-loading .dl-pageloader { translate: 0 0; visibility: visible; pointer-events: auto; transition: translate 0.5s cubic-bezier(0.7, 0, 0.3, 1); }
-.dl-pageloader.is-leaving { translate: 0 -100%; visibility: visible; transition: translate 0.52s cubic-bezier(0.7, 0, 0.3, 1); }
-.dl.is-loading .dl-pageloader { transition: none; animation: dl-preloader-failsafe 0.4s ease 5s forwards; }
-.dl-pageloader.is-instant { transition: none; }
-:is(.dl-pageloader.is-on, .dl-pageloader.is-leaving, .dl.is-loading .dl-pageloader) .dl-logo-a { animation: dl-pre-spin-a 1.5s cubic-bezier(0.55, 0, 0.25, 1) infinite; }
-:is(.dl-pageloader.is-on, .dl-pageloader.is-leaving, .dl.is-loading .dl-pageloader) .dl-logo-b { animation: dl-pre-spin-b 1.5s cubic-bezier(0.55, 0, 0.25, 1) 0.08s infinite; }
-
 /* Each ingredient card's corner button: the bento corner style with a plus
    that turns when the card is hovered (or pressed), so it reads as "open". */
 /* Top right, level with the pill. */

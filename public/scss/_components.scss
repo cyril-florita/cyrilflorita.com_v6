@@ -68,7 +68,10 @@ preloader
         bottom: -50%;
         width: 200%;
         height: 200%;
-        background: transparent url(../img/bg-static.png) repeat 0 0;
+        // Flat fallback = the noise image's average grey (it's opaque, so
+        // it hides this once loaded): until the 365KB PNG arrives the layer
+        // already has its final tone, so nothing jumps from black to grey.
+        background: #b5b5b5 url(../img/bg-static.png) repeat 0 0;
         background-repeat: repeat;
         animation: bg-animation .2s infinite;
 
@@ -4611,7 +4614,10 @@ zoom viewer (components/ZoomViewer.js)
         left: -50%;
         width: 200%;
         height: 200%;
-        background: transparent url(../img/bg-static.png) repeat 0 0;
+        // Flat fallback = the noise image's average grey (it's opaque, so
+        // it hides this once loaded): until the 365KB PNG arrives the layer
+        // already has its final tone, so nothing jumps from black to grey.
+        background: #b5b5b5 url(../img/bg-static.png) repeat 0 0;
         animation: bg-animation .2s infinite;
         will-change: transform;
         opacity: var(--bg-static-opacity, 0.21);
