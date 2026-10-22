@@ -54,6 +54,36 @@ export function Header() {
   }, [open]);
   useEffect(() => setOpen(false), [pathname]); // eslint-disable-line react-hooks/set-state-in-effect
 
+  // Phones and tablets (the Menu-button header, ≤1080px): scrolling down
+  // slides the sticky header up out of view and the phone call bar down;
+  // scrolling up brings both back. Both stay near the top of the page, while
+  // the menu is open and while keyboard focus is in the header. The class
+  // lives on the .hs root; the CSS does the (gentle, reduced-motion-aware)
+  // movement.
+  useEffect(() => {
+    const root = document.querySelector(".hs");
+    const mq = window.matchMedia("(max-width: 1080px)");
+    if (!root) return;
+    const TOP = 96, STEP = 8;
+    let last = Math.max(0, window.scrollY), raf = 0;
+    const set = (hide) => root.classList.toggle("is-scroll-hidden", hide);
+    const check = () => {
+      raf = 0;
+      const y = Math.max(0, window.scrollY);
+      if (!mq.matches || open || y < TOP || root.querySelector(".hs-header")?.contains(document.activeElement)) { set(false); last = y; return; }
+      const d = y - last;
+      if (Math.abs(d) < STEP) return; // ignore jitter; keep the anchor until a real move
+      set(d > 0);
+      last = y;
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(check); };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    mq.addEventListener("change", check);
+    document.addEventListener("focusin", check);
+    check();
+    return () => { window.removeEventListener("scroll", onScroll); mq.removeEventListener("change", check); document.removeEventListener("focusin", check); cancelAnimationFrame(raf); set(false); };
+  }, [open]);
+
   const links = NAV.map((l) => (
     <li key={l.href}>
       <Link href={l.href} aria-current={pathname === norm(l.href) ? "page" : undefined}>{l.label}</Link>

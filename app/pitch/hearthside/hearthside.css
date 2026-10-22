@@ -221,6 +221,13 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
   .hs-header-actions { margin-left: auto; }
 }
 @media (min-width: 1081px) { .hs-menu { display: none; } }
+/* Phones and tablets: the header slides away while scrolling down and back
+   on the way up (Header in client.js sets .is-scroll-hidden on .hs); the
+   phone call bar does the same downward. */
+@media (max-width: 1080px) {
+  .hs-header { transition: translate 0.35s var(--hs-ease); }
+  .hs.is-scroll-hidden .hs-header { translate: 0 -100%; }
+}
 @media (max-width: 560px) {
   .hs-header-actions .hs-btn { display: none; }
   .hs-logo-name { font-size: 21px; }
@@ -696,9 +703,10 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
 /* The call bar: fixed to the bottom on phones. */
 .hs-callbar { display: none; }
 @media (max-width: 760px) {
-  .hs-callbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 45; display: grid; grid-template-columns: 1fr 1.4fr; gap: 10px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: color-mix(in srgb, var(--hs-page) 94%, transparent); backdrop-filter: blur(10px); border-top: 1px solid var(--hs-rule); transition: translate 0.3s var(--hs-ease), opacity 0.3s; }
+  .hs-callbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 45; display: grid; grid-template-columns: 1fr 1.4fr; gap: 10px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: color-mix(in srgb, var(--hs-page) 94%, transparent); backdrop-filter: blur(10px); border-top: 1px solid var(--hs-rule); transition: translate 0.35s var(--hs-ease), opacity 0.35s; }
   .hs-callbar .hs-btn { min-height: 52px; padding: 0 12px; }
   .hs-callbar.is-hidden { translate: 0 100%; opacity: 0; pointer-events: none; }
+  .hs.is-scroll-hidden .hs-callbar { translate: 0 100%; }
   .hs-shell { padding-bottom: calc(76px + env(safe-area-inset-bottom)); }
 }
 
