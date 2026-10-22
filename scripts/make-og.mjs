@@ -52,6 +52,7 @@ const IMAGES = {
   "35-day-generosity-challenge": ["/img/portfolio/chf-35-day-generosity_main.jpg", "cover", "top"],
   "giving-tuesday": ["/img/portfolio/chf-giving-tuesday_main.jpg", "cover", "top"],
   viteo: ["/img/portfolio/viteo_desktop-landing.jpg", "cover"],
+  hearthside: ["/img/portfolio/hearthside_desktop-home.jpg", "cover", "top"],
   "volunteer-leadership-team": ["/img/portfolio/chf-volunteer-leadership_main.jpg", "cover", "top"],
 };
 
