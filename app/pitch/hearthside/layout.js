@@ -4,8 +4,8 @@ import "./hearthside.css";
 // Hearthside Home Health: a fictional skilled home health agency and the
 // intake system behind its website, built as a design and dev pitch. Like
 // Viteo, it lives outside app/(site), so none of the portfolio's styles or
-// preloader load here. Light mode by default (the audience reads better on
-// light pages); dark mode follows the OS unless someone picks one.
+// preloader load here. Tide in light mode by default (the audience reads better
+// on light pages); dark mode only when someone picks it.
 //
 // Searchable, like Viteo: the public pages are in app/sitemap.js (HEARTHSIDE)
 // and set their own canonicals; the intake app and the status page are
@@ -34,9 +34,10 @@ export const metadata = {
 // Zoom stays available (the root layout locks it for the portfolio).
 export const viewport = { themeColor: "#F7F3EC", maximumScale: 5, userScalable: true };
 
-// Saved colour scheme (Tide by default; a saved "hearth", the removed warm scheme, falls back to it) and mode (else the OS
-// preference), applied before first paint.
-const MODE_SCRIPT = `(function(){var e=document.currentScript.parentElement;try{var t=localStorage.getItem('hs-theme');if(t==='shore')e.setAttribute('data-hs-theme',t);var m=localStorage.getItem('hs-mode');if(m!=='light'&&m!=='dark')m=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';e.setAttribute('data-hs-mode',m);}catch(x){}})();`;
+// Saved colour scheme (Tide by default; a saved "hearth", the removed warm
+// scheme, falls back to it) and mode (light by default, whatever the OS
+// prefers; dark only when someone picks it), applied before first paint.
+const MODE_SCRIPT = `(function(){var e=document.currentScript.parentElement;try{var t=localStorage.getItem('hs-theme');if(t==='shore')e.setAttribute('data-hs-theme',t);var m=localStorage.getItem('hs-mode');if(m!=='dark')m='light';e.setAttribute('data-hs-mode',m);}catch(x){}})();`;
 
 export default function HearthsideLayout({ children }) {
   return (

@@ -177,8 +177,9 @@ export function PageHead({ title, lede, children, photo }) {
         {lede && <p className="hs-lede">{lede}</p>}
         {children}
       </div>
-      {/* Optional banner photo: under the title row on desktop, first on phones. */}
-      {photo && <div className="hs-page-photo"><Photo {...photo} ratio="16 / 6" sizes="(max-width: 760px) 92vw, 1280px" /></div>}
+      {/* Optional banner photo: under the title row on desktop (16:6 unless the
+          photo passes its own ratio), first on phones. */}
+      {photo && <div className="hs-page-photo"><Photo ratio="16 / 6" sizes="(max-width: 760px) 92vw, 1280px" {...photo} /></div>}
     </header>
   );
 }

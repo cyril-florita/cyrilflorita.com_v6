@@ -29,7 +29,7 @@ export default function GettingStarted() {
   return (
     <div className="hs-wrap">
       <PageHead
-        photo={{ shot: "A nurse talks a care plan through with a patient and her daughter", src: "/img/hearthside/photos/step-4", alt: "A nurse talks a care plan through with an older woman and her daughter at home", position: "50% 30%" }}
+        photo={{ shot: "A nurse talks a care plan through with a patient and her daughter", src: "/img/hearthside/photos/step-4", alt: "A nurse talks a care plan through with an older woman and her daughter at home", position: "50% 9%", ratio: "16 / 8" }}
         title="How care begins"
         lede="From your first call to your first visit, usually in a few days. We'll tell you what's happening at every step, and we do the paperwork with your doctor's office."
       >
