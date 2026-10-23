@@ -75,7 +75,10 @@ export function Button({ href, children, variant = "primary", icon, size, ...res
     </>
   );
   if (!href) return <button className={cls} type="button" {...rest}>{body}</button>;
-  if (href.startsWith("tel:") || href.startsWith("http")) return <a className={cls} href={href} {...rest}>{body}</a>;
+  // Plain links for phone, email, external and same-page (#) targets: the
+  // client router would swallow a hash change (Careers' #apply-<role> links
+  // listen for it) and has no business with tel:/mailto:.
+  if (/^(tel:|mailto:|https?:|#)/.test(href)) return <a className={cls} href={href} {...rest}>{body}</a>;
   return <Link className={cls} href={href} {...rest}>{body}</Link>;
 }
 

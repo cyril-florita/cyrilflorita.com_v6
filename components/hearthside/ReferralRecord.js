@@ -103,7 +103,7 @@ export default function ReferralRecord() {
             <ol className="hs-timeline">
               {[...r.history].reverse().map((h, i) => (
                 <li key={i} className={h.who === "System" ? "is-system" : ""}>
-                  <span />
+                  {/* The dot is the li's ::before; the entry is its second column. */}
                   <div><p>{h.text}</p><small>{h.who} · {fmt(h.at)}</small></div>
                 </li>
               ))}

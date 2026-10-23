@@ -30,7 +30,7 @@ export function ModeSwitch() {
     setMode(next);
   };
   return (
-    <button className="hs-mode" type="button" onClick={toggle} aria-label={mode ? `Switch to ${next} mode` : "Switch colour mode"}>
+    <button className="hs-mode" type="button" onClick={toggle} aria-label={mode ? `Switch to ${next} mode` : "Switch color mode"}>
       <Icon name={mode === "dark" ? "sun" : "moon"} size={22} />
     </button>
   );
@@ -179,7 +179,7 @@ export function ThemeSwitch() {
   };
   return (
     <div className="hs-theme">
-      <span className="hs-theme-label" id="hs-theme-label">Colour scheme</span>
+      <span className="hs-theme-label" id="hs-theme-label">Color scheme</span>
       <div className="hs-theme-opts" role="radiogroup" aria-labelledby="hs-theme-label" onKeyDown={onKey}>
         {THEMES.map((t) => (
           <button key={t.id} data-id={t.id} type="button" role="radio" aria-checked={theme === t.id} tabIndex={theme === t.id ? 0 : -1}

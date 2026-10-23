@@ -15,7 +15,9 @@ export function CallbackForm() {
   const [f, setF] = useState({ name: "", phone: "", time: "morning", who: "family" });
   const [errors, setErrors] = useState({});
   const [done, setDone] = useState(false);
-  const set = (k) => (e) => setF({ ...f, [k]: e.target.value });
+  // Functional update: autofill can change several fields at once, and a
+  // snapshot of `f` would let the last field wipe the others.
+  const set = (k) => (e) => { const v = e.target.value; setF((prev) => ({ ...prev, [k]: v })); };
   const submit = (e) => {
     e.preventDefault();
     const err = {};
@@ -82,14 +84,24 @@ export function ApplyForm() {
   const [f, setF] = useState({ name: "", email: "", license: "" });
   const [errors, setErrors] = useState({});
   const [done, setDone] = useState(false);
-  // "Apply" links on the roles list are #apply-<role>.
+  // "Apply" links on the roles list are #apply-<role>: no element has that id,
+  // so this picks the role and brings the form into view itself (the page
+  // used to stay put), then puts the cursor in the first field.
   useEffect(() => {
-    const pick = () => { const m = window.location.hash.match(/^#apply-(\w+)/); if (m && ROLES.some((r) => r.id === m[1])) setRole(m[1]); };
+    const pick = () => {
+      const m = window.location.hash.match(/^#apply-(\w+)/);
+      if (!m || !ROLES.some((r) => r.id === m[1])) return;
+      setRole(m[1]);
+      const row = document.getElementById("apply");
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      row?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+      document.getElementById(`${id}-name`)?.focus({ preventScroll: true });
+    };
     pick();
     window.addEventListener("hashchange", pick);
     return () => window.removeEventListener("hashchange", pick);
-  }, []);
-  const set = (k) => (e) => setF({ ...f, [k]: e.target.value });
+  }, [id]);
+  const set = (k) => (e) => { const v = e.target.value; setF((prev) => ({ ...prev, [k]: v })); };
   const submit = (e) => {
     e.preventDefault();
     const err = {};

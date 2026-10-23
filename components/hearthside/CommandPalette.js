@@ -36,7 +36,7 @@ export default function CommandPalette() {
   const data = useIntake();
 
   useEffect(() => {
-    const show = () => { const d = ref.current; if (d && !d.open) { setQ(""); setActive(0); d.showModal(); } };
+    const show = () => { const d = ref.current; if (d && !d.open) { setQ(""); setActive(0); d.showModal(); inputRef.current?.focus(); } }; // autoFocus only fires on mount, and the dialog is mounted closed
     const onKey = (e) => { if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") { e.preventDefault(); show(); } };
     window.addEventListener("keydown", onKey);
     window.addEventListener("hs:palette", show);
@@ -81,7 +81,7 @@ export default function CommandPalette() {
       <div className="hs-cmd-box">
         <div className="hs-cmd-field">
           <Icon name="search" size={22} />
-          <input ref={inputRef} autoFocus value={q} onChange={(e) => { setQ(e.target.value); setActive(0); }} onKeyDown={onKeyDown}
+          <input ref={inputRef} value={q} onChange={(e) => { setQ(e.target.value); setActive(0); }} onKeyDown={onKeyDown}
             role="combobox" aria-expanded="true" aria-controls="hs-cmd-list" aria-activedescendant={flat.length ? `hs-cmd-${cur}` : undefined} aria-autocomplete="list"
             placeholder="Search referrals, screens, or actions" spellCheck={false} autoComplete="off" />
           <kbd>Esc</kbd>

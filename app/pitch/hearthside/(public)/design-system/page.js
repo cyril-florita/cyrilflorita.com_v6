@@ -6,7 +6,7 @@ import "@/app/pitch/hearthside/css/design-system.css";
 export const metadata = {
   title: "Design system",
   description:
-    "Hearthside Home Health's design system: an editorial grid, light and dark colour tokens measured to WCAG AAA for body text, type, buttons, forms, status labels, and photo placeholders. Designed and built by Cyril Florita.",
+    "Hearthside Home Health's design system: an editorial grid, light and dark color tokens measured to WCAG AAA for body text, type, buttons, forms, status labels, and photo placeholders. Designed and built by Cyril Florita.",
   alternates: { canonical: "/pitch/hearthside/design-system/" },
 };
 
@@ -134,7 +134,7 @@ export default function DesignSystem() {
 
       <Row id="color" label="Color" labelledBy="ds-color">
         <h2 id="ds-color">Color</h2>
-        <p className="hs-lede">Two colour schemes, each with light and dark: Tide (cool, the default) and Shore (warm and cool combined). Switch them in the footer; the tables below follow the scheme you pick. Text ratios are computed from the values and measured against the page.</p>
+        <p className="hs-lede">Two color schemes, each with light and dark: Tide (cool, the default) and Shore (warm and cool combined). Switch them in the footer; the tables below follow the scheme you pick. Text ratios are computed from the values and measured against the page.</p>
         <ul className="hs-ruled hs-ds-schemes">
           {SCHEMES.map((sc) => (
             <li key={sc.id}>
@@ -255,7 +255,7 @@ export default function DesignSystem() {
 
       <Row id="labels" label="Labels" labelledBy="ds-labels">
         <h2 id="ds-labels">Labels and notes</h2>
-        <p className="hs-lede">Status labels for the intake pipeline always pair colour with a word, so meaning never depends on colour alone. The sample label marks anything invented.</p>
+        <p className="hs-lede">Status labels for the intake pipeline always pair color with a word, so meaning never depends on color alone. The sample label marks anything invented.</p>
         <div className="hs-ds-row">
           <span className="hs-status">New</span>
           <span className="hs-status hs-status-accent">Assigned</span>
