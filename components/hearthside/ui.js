@@ -22,7 +22,10 @@ export function LogoMark({ size = 40, title }) {
 // The lockup: mark, a hairline, then the wordmark and its descriptor.
 export function Logo({ href = `${BASE}/` }) {
   return (
-    <Link className="hs-logo" href={href} aria-label="Hearthside Home Health, home">
+    // No prefetch: Home's prefetched data carries a high-priority preload of
+    // its hero photo, so every page with the logo downloaded it (151KB on
+    // phones). Home still loads on click.
+    <Link className="hs-logo" href={href} prefetch={false} aria-label="Hearthside Home Health, home">
       <LogoMark size={36} />
       <span className="hs-logo-rule" aria-hidden="true" />
       <span className="hs-logo-text">
@@ -122,7 +125,7 @@ export function Photo({ shot, ratio = "4 / 3", src, alt, position = "50% 50%", s
     const lqip = PHOTO_LQIP[src];
     return (
       <span className="hs-photo-frame" style={{ aspectRatio: ratio, backgroundImage: lqip ? `url(${lqip})` : undefined, backgroundPosition: position }}>
-        <img className="hs-photo-img" src={`${src}-1600.webp`} srcSet={`${src}-900.webp 900w, ${src}-1600.webp 1600w`} sizes={sizes}
+        <img className="hs-photo-img" src={`${src}-1600.webp`} srcSet={`${src}-600.webp 600w, ${src}-900.webp 900w, ${src}-1600.webp 1600w`} sizes={sizes}
           alt={alt ?? shot} loading="lazy" decoding="async" style={{ objectPosition: position, transformOrigin: position }} />
       </span>
     );

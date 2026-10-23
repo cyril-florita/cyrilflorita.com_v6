@@ -32,7 +32,7 @@ export default function IntakeShell({ children }) {
           <LogoMark size={30} />
           <span><b>Hearthside</b><small>Intake</small></span>
         </Link>
-        <button type="button" className="hs-app-search" onClick={openPalette} aria-keyshortcuts="Meta+K Control+K">
+        <button type="button" className="hs-app-search" onClick={openPalette} aria-label="Search" aria-keyshortcuts="Meta+K Control+K">
           <Icon name="search" size={20} /><span>Search</span><kbd aria-hidden="true">⌘K</kbd>
         </button>
         <nav aria-label="Intake">

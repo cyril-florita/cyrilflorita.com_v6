@@ -44,7 +44,7 @@ export default function GettingStarted() {
         <ol className="hs-ruled hs-swipe">
           {STEPS.map((s, i) => (
             <li key={s.title} className="hs-step">
-              <Photo shot={s.title} src={s.photo.src} alt={s.photo.alt} position={s.photo.position} sizes="(max-width: 760px) 92vw, 30vw" />
+              <Photo shot={s.title} src={s.photo.src} alt={s.photo.alt} position={s.photo.position} sizes="(max-width: 760px) 55vw, 30vw" />
               <span className="hs-step-n" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
               <h3>{s.title}</h3>
               <p>{s.text}</p>

@@ -21,7 +21,7 @@ function HeroArt() {
   return (
     <div className="hs-hero-art" style={{ backgroundImage: `url(${PHOTO_LQIP["/img/hearthside/photos/hero-care"]})` }}>
       <img className="hs-hero-img" src="/img/hearthside/photos/hero-care-1400.webp" width="1400" height="933"
-        srcSet="/img/hearthside/photos/hero-care-1400.webp 1400w, /img/hearthside/photos/hero-care-1536.webp 1536w" sizes="(max-width: 1440px) 100vw, 1280px"
+        srcSet="/img/hearthside/photos/hero-care-800.webp 800w, /img/hearthside/photos/hero-care-1400.webp 1400w, /img/hearthside/photos/hero-care-1536.webp 1536w" sizes="(max-width: 760px) 92vw, (max-width: 1440px) 100vw, 1280px"
         alt="A smiling nurse in blue scrubs sits with an older woman on her sofa while the woman's daughter rests a hand on her shoulder" fetchPriority="high" decoding="async" />
       <div className="hs-art-card">
         <span className="hs-art-dot" aria-hidden="true" />
@@ -146,7 +146,7 @@ export default function HearthsideHome() {
             const ph = s.photo;
             return (
               <li key={s.id} className="hs-service">
-                <Photo shot={ph.shot} src={ph.src} alt={ph.alt} position={ph.position} sizes="(max-width: 760px) 92vw, (max-width: 960px) 45vw, 28vw" />
+                <Photo shot={ph.shot} src={ph.src} alt={ph.alt} position={ph.position} sizes="(max-width: 760px) 55vw, (max-width: 960px) 45vw, 28vw" />
                 <h3><Icon name={s.icon} /><span>{s.name.slice(0, s.name.lastIndexOf(" "))} <span className="hs-l2">{s.name.slice(s.name.lastIndexOf(" ") + 1)}</span></span></h3>
                 <p>{s.short}</p>
               </li>
@@ -165,7 +165,7 @@ export default function HearthsideHome() {
         <ol className="hs-ruled hs-swipe">
           {STEPS.map((s, i) => (
             <li key={s.title} className="hs-step">
-              <Photo shot={s.title} src={s.photo.src} alt={s.photo.alt} position={s.photo.position} sizes="(max-width: 760px) 92vw, 30vw" />
+              <Photo shot={s.title} src={s.photo.src} alt={s.photo.alt} position={s.photo.position} sizes="(max-width: 760px) 55vw, 30vw" />
               <span className="hs-step-n" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
               <h3>{s.title}</h3>
               <p>{s.text}</p>
@@ -180,7 +180,7 @@ export default function HearthsideHome() {
         <ul className="hs-clinicians hs-swipe">
           {CLINICIANS.map((c) => (
             <li key={c.name} className="hs-clinician">
-              <Photo shot={`Portrait of ${c.name}`} src={c.photo} alt={`${c.name}, ${c.role.toLowerCase()}`} ratio="1 / 1" position="50% 30%" sizes="(max-width: 600px) 92vw, (max-width: 1100px) 45vw, 20vw" />
+              <Photo shot={`Portrait of ${c.name}`} src={c.photo} alt={`${c.name}, ${c.role.toLowerCase()}`} ratio="1 / 1" position="50% 30%" sizes="(max-width: 760px) 55vw, (max-width: 1100px) 45vw, 20vw" />
               <h3>{c.name.split(", ")[0]}<span className="hs-clinician-cred">{c.name.split(", ").slice(1).join(", ")}</span></h3>
               <p className="hs-clinician-role">{c.role}</p>
               <dl className="hs-clinician-meta">

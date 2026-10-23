@@ -86,7 +86,7 @@ export default function Proposal() {
         >
           <div className="hs-prop-ctas">
             <Button href={PITCH_MAILTO} icon="arrow">Email Cyril</Button>
-            <Button href={`${BASE}/`} variant="secondary">See the example site</Button>
+            <Button href={`${BASE}/`} variant="secondary" prefetch={false}>See the example site</Button>
           </div>
         </PageHead>
 
