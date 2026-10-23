@@ -270,7 +270,12 @@ export function Reveal() {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
     const fold = window.innerHeight; // anything peeking into the first screen stays visible (it signals more below)
-    const els = [...document.querySelectorAll(`main :is(${REVEAL})`)].filter((el) => el.getBoundingClientRect().top > fold);
+    // Cards in a sideways-scrolling row (the phone swipe rows) reveal as one
+    // row, not one by one: cards off to the right never scrolled into view
+    // vertically, so they stayed lowered and rose as they were swiped in, and
+    // their offset made the row itself scroll up and down by a few pixels.
+    const swipes = (el) => /auto|scroll/.test(getComputedStyle(el.parentElement).overflowX);
+    const els = [...new Set([...document.querySelectorAll(`main :is(${REVEAL})`)].map((el) => (swipes(el) ? el.parentElement : el)))].filter((el) => el.getBoundingClientRect().top > fold);
     const settle = (e) => { if (e.target === e.currentTarget && e.propertyName === "opacity") { e.target.classList.remove("hs-reveal", "is-in"); e.target.style.removeProperty("--hs-i"); e.target.removeEventListener("transitionend", settle); } };
     els.forEach((el) => {
       const sibs = [...el.parentElement.children].filter((c) => els.includes(c));
