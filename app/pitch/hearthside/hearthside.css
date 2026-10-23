@@ -1169,3 +1169,12 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
   .hs-bts-card b { font-size: 10px; }
   .hs-bts-toast { font-size: 12.5px; left: 10px; right: 10px; }
 }
+
+/* Page changes: the sticky header and the contact dock get their own
+   view-transition layers above the animating page (hs-main). Without them the
+   old and new page snapshots were drawn on top of the fixed bars, which looked
+   see-through mid-transition. Identical layers crossfade invisibly; a changed
+   nav highlight crossfades. */
+.hs-header { view-transition-name: hs-header; }
+.hs-dock-bar { view-transition-name: hs-dock; }
+::view-transition-group(hs-header), ::view-transition-group(hs-dock) { z-index: 2; }

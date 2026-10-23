@@ -263,3 +263,11 @@
   .hs-app-bar .hs-btn-quiet { min-height: 40px; font-size: 12.5px; letter-spacing: 0.04em; }
   .hs-app-bar .hs-mode { flex: none; }
 }
+
+/* Screen changes: the sidebar (the top bar on phones), the staff bar and the tab bar get
+   their own view-transition layers above the animating screen (hs-main), so
+   content never shows through them mid-transition. */
+.hs-app-side { view-transition-name: hs-app-side; }
+.hs-app-side nav { view-transition-name: hs-app-tabs; }
+.hs-app-bar { view-transition-name: hs-app-bar; }
+::view-transition-group(hs-app-side), ::view-transition-group(hs-app-tabs), ::view-transition-group(hs-app-bar) { z-index: 2; }

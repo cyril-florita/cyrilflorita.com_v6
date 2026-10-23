@@ -18,12 +18,15 @@ const PLAYED = new Set();
 const reduced = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const short = (id) => SERVICE_OPTIONS.find((s) => s.id === id)?.name.split(" ")[0];
 
-export function Card({ r, now, state }) {
+// `named`: the card gets its own view-transition layer only while an arrival
+// is playing (so it can travel between columns); at other times every card
+// moves with the screen, instead of flying separately on each screen change.
+export function Card({ r, now, state, named }) {
   const c = coordinator(r.coordinator);
   const miss = missingDocs(r).length;
   const late = isOverdue(r, now);
   return (
-    <Link href={`${BASE}/intake/referral/?id=${r.id}`} className={`hs-card-r${state ? ` is-${state}` : ""}`} style={{ viewTransitionName: `hs-${r.id}` }}>
+    <Link href={`${BASE}/intake/referral/?id=${r.id}`} className={`hs-card-r${state ? ` is-${state}` : ""}`} style={named ? { viewTransitionName: `hs-${r.id}` } : undefined}>
       <span className="hs-card-r-top"><span>{r.id}</span><span>{fmtAgo(r.createdAt, now)}</span></span>
       <b>{r.patient.name}</b>
       <p>{r.patient.town} · {r.services.map(short).join(", ")}<br />From {sourceName(r.source)}</p>
@@ -42,6 +45,7 @@ export default function IntakeBoard() {
   const [who, setWho] = useState("all");
   const [onlyLate, setOnlyLate] = useState(false);
   const [arriving, setArriving] = useState(null);
+  const [travel, setTravel] = useState(false); // cards carry view-transition names only while the arrival travels
   const [toasts, setToasts] = useState([]);
   const [now, setNow] = useState(() => Date.now());
   const boardRef = useRef(null);
@@ -86,13 +90,14 @@ export default function IntakeBoard() {
     const later = (ms, fn) => setTimeout(fn, ms);
     const toast = (icon, text) => setToasts((t) => [...t, { id: Math.random(), icon, text }]);
     setArriving({ id, state: "arriving" }); // eslint-disable-line react-hooks/set-state-in-effect
+    setTravel(r.stage === "new");
     toast("clipboard", `New referral ${id} from ${sourceName(r.source)}`);
     if (r.stage !== "new") { later(400, () => setArriving({ id, state: "landed" })); return; }
     const rt = route(r.patient.zip);
     later(reduced() ? 300 : 1800, () => {
       const run = () => flushSync(() => { assign(id); setArriving({ id, state: "landed" }); });
-      if (document.startViewTransition && !reduced()) document.startViewTransition(run);
-      else run();
+      if (document.startViewTransition && !reduced()) document.startViewTransition(run).finished.finally(() => setTravel(false));
+      else { run(); setTravel(false); }
       if (rt) toast("map", `Routed by rule: ${rt.rule} → ${coordinator(rt.coordinator).name}`);
     });
     later(reduced() ? 600 : 2800, () => toast("check", "Task created: first call, due within 2 hours"));
@@ -150,7 +155,7 @@ export default function IntakeBoard() {
             <section key={s.id} className="hs-col" data-stage={s.id} aria-labelledby={`col-${s.id}`}>
               <div className="hs-col-head"><h2 id={`col-${s.id}`}>{s.name}</h2><span>{cards.length}</span></div>
               <ul className="hs-col-list">
-                {cards.length ? cards.map((r) => <li key={r.id}><Card r={r} now={now} state={arriving?.id === r.id ? arriving.state : null} /></li>) : <li className="hs-col-empty"><Icon name="check" size={18} />Nothing here</li>}
+                {cards.length ? cards.map((r) => <li key={r.id}><Card r={r} now={now} state={arriving?.id === r.id ? arriving.state : null} named={travel} /></li>) : <li className="hs-col-empty"><Icon name="check" size={18} />Nothing here</li>}
               </ul>
             </section>
           );
