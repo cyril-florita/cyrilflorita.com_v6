@@ -382,20 +382,25 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
       on the root scroller (static where unsupported).
    The reveal uses transform and the scroll the separate scale / translate
    properties, so the two compose. The headline never moves. */
+/* Tablets and phones skip the opening (rise + zoom): the photo is the LCP
+   element, and the intro let a slow phone paint it only after the scripts
+   ran (PageSpeed mobile swung between ~81 and ~98, LCP 2.3–4.6s). They keep
+   the scroll push-in. */
 @media (prefers-reduced-motion: no-preference) {
-  .hs-hero-art { animation: hs-hero-open 1.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
-  .hs-hero-img {
-    animation: hs-hero-settle 2.6s cubic-bezier(0.16, 1, 0.3, 1) both, hs-hero-push linear both;
-    animation-timeline: auto, scroll(root);
-    animation-range: normal, 0 100vh;
-    will-change: transform;
-  }
+  .hs-hero-img { animation: hs-hero-push linear both; animation-timeline: scroll(root); animation-range: 0 100vh; }
   .hs-hero-art .hs-art-card { animation: hs-hero-card 0.9s 0.9s cubic-bezier(0.16, 1, 0.3, 1) both; }
 }
 @media (prefers-reduced-motion: no-preference) and (min-width: 961px) {
+  .hs-hero-art { animation: hs-hero-open 1.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
   /* The nurse and the patient: the point between their faces sits 44.6%
      across, 34% down the cropped photo; at 1.5× the two fill the frame. */
-  .hs-hero-img { transform-origin: 44.6% 34%; animation-name: hs-hero-settle, hs-hero-story; animation-range: normal, 0 45vh; } /* done while the faces are still on screen */
+  .hs-hero-img {
+    transform-origin: 44.6% 34%;
+    animation: hs-hero-settle 2.6s cubic-bezier(0.16, 1, 0.3, 1) both, hs-hero-story linear both;
+    animation-timeline: auto, scroll(root);
+    animation-range: normal, 0 45vh; /* done while the faces are still on screen */
+    will-change: transform;
+  }
   .hs-hero-tab { animation: hs-story-fade linear both; animation-timeline: scroll(root); animation-range: 0 35vh; }
   .hs-hero-art .hs-art-card { animation: hs-hero-card 0.9s 0.9s cubic-bezier(0.16, 1, 0.3, 1) both, hs-story-card linear both; animation-timeline: auto, scroll(root); animation-range: normal, 0 30vh; }
 }
