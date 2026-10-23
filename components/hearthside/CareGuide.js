@@ -9,8 +9,8 @@ import { Button } from "./ui";
 // coverage, and says so.
 
 const OPTIONS = [
-  { id: "medical", label: "Medical care at home", hint: "After a hospital stay, surgery, illness or injury: wound care, medications, therapy." },
-  { id: "daily", label: "Everyday help", hint: "Meals, housekeeping, errands, companionship or someone to be there." },
+  { id: "medical", label: "Medical care at home", hint: "After a hospital stay, surgery, illness, or injury: wound care, medications, therapy." },
+  { id: "daily", label: "Everyday help", hint: "Meals, housekeeping, errands, companionship, or someone to be there." },
   { id: "both", label: "Some of both", hint: "Medical needs, plus help with day-to-day life." },
   { id: "unsure", label: "I'm not sure yet", hint: "Something has changed and you're working out what's needed." },
 ];
@@ -23,7 +23,7 @@ const RESULTS = {
   },
   daily: {
     title: "That sounds like non-medical home care",
-    text: "Help with meals, housekeeping and companionship is non-medical home care, a different service that Hearthside doesn't provide. The Eldercare Locator (a public service of the U.S. Administration on Aging) can point you to local options, and our intake team is happy to help you think it through.",
+    text: "Help with meals, housekeeping, and companionship is non-medical home care, a different service that Hearthside doesn't provide. The Eldercare Locator (a public service of the U.S. Administration on Aging) can point you to local options, and our intake team is happy to help you think it through.",
     cta: "elsewhere",
   },
   both: {

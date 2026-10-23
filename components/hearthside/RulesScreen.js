@@ -5,7 +5,7 @@ import { DOCS, REGIONS, ROUTING_RULES, STAGES, STAGE_LIMIT_H, COORDINATORS } fro
 export default function RulesScreen() {
   return (
     <>
-      <div className="hs-app-head"><div><h1>Rules</h1><p>How new referrals are routed, followed up and flagged. Applied automatically to every referral.</p></div></div>
+      <div className="hs-app-head"><div><h1>Rules</h1><p>How new referrals are routed, followed up, and flagged. Applied automatically to every referral.</p></div></div>
       <div className="hs-rec">
         <div>
           <section className="hs-panel" aria-labelledby="ru-routing">

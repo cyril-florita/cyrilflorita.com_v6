@@ -214,6 +214,23 @@ export const TILE_MEDIA = {
     interval: 1250, fade: 600,
     shape: "wide",
   },
+  // Hearthside (design & dev pitch): the public site, then the intake system.
+  "/hearthside": {
+    kind: "slideshow", label: "Hearthside Home Health: the home page, services, care steps, a referral, and the intake board",
+    images: [
+      "/img/portfolio/hearthside_desktop-home.jpg",
+      "/img/portfolio/hearthside_desktop-services-row.jpg",
+      "/img/portfolio/hearthside_desktop-steps.jpg",
+      "/img/portfolio/hearthside_desktop-team.jpg",
+      "/img/portfolio/hearthside_desktop-referrals.jpg",
+      "/img/portfolio/hearthside_desktop-intake-arrive.jpg",
+      "/img/portfolio/hearthside_desktop-intake-record.jpg",
+      "/img/portfolio/hearthside_desktop-home-shore.jpg",
+      "/img/portfolio/hearthside_desktop-home-dark.jpg",
+    ],
+    interval: 1250, fade: 600,
+    shape: "wide",
+  },
   "/hunger-action-month-dashboard": {
     kind: "video", src: "/img/portfolio/chf-ham-dashboard_preview.mp4", poster: "/img/thumbs/portfolio/chf-ham-dashboard_preview-poster.webp", label: "Hunger Action Month Campaign Dashboard preview",
     shape: "square",

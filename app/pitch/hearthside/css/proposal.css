@@ -1,0 +1,64 @@
+/* Hearthside proposal (/pitch/hearthside/proposal/): a one-pager for agency
+   owners, in the site's editorial rows, printable to PDF. */
+
+.hs-prop-top { padding-block: 20px; }
+.hs-prop-top-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.hs-prop-top-actions { display: flex; align-items: center; gap: 12px; }
+.hs-proposal .hs-page-head { padding-top: 40px; }
+.hs-prop-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+
+.hs-prop-problems h3, .hs-prop-build h3 { font-size: 22px; }
+.hs-prop-problems p { margin-top: 10px; color: var(--hs-ink-2); }
+.hs-prop-build h3 { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
+.hs-prop-try { margin-top: 40px; color: var(--hs-ink-2); }
+
+.hs-prop-steps { display: grid; gap: 0; margin-top: 32px; list-style: none; }
+.hs-prop-steps li { display: grid; grid-template-columns: 72px minmax(0, 1fr) auto; gap: 8px 24px; align-items: baseline; padding-block: 24px; border-top: 1px solid color-mix(in srgb, var(--hs-rule) 60%, transparent); }
+.hs-prop-steps li:first-child { border-top: 0; padding-top: 0; }
+.hs-prop-n { font-family: var(--hs-font-display); font-size: 40px; font-weight: 300; line-height: 1; color: var(--hs-ember-text); }
+.hs-prop-steps h3 { font-size: 22px; }
+.hs-prop-steps p { margin-top: 6px; color: var(--hs-ink-2); max-width: 60ch; }
+.hs-prop-when { font-family: var(--hs-font-label); font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--hs-ink-2); white-space: nowrap; }
+
+.hs-prop-prices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 32px 0 0; }
+.hs-prop-prices > div { display: grid; align-content: start; gap: 12px; padding: 24px; border: 1.5px solid color-mix(in srgb, var(--hs-rule) 50%, transparent); border-radius: 8px 36px; }
+.hs-prop-prices dt { font-family: var(--hs-font-label); font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--hs-ink-2); }
+.hs-prop-prices dd { display: grid; gap: 10px; margin: 0; }
+.hs-prop-prices b { font-family: var(--hs-font-display); font-size: 30px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.1; }
+.hs-prop-prices span { color: var(--hs-ink-2); font-size: 16px; }
+.hs-prop-note { margin-top: 16px; }
+
+.hs-prop-needs { margin-top: 24px; }
+.hs-proposal .hs-band { margin-top: 24px; }
+.hs-prop-email { font-family: var(--hs-font-label); font-size: 15px !important; letter-spacing: 0.04em; }
+.hs-prop-foot { padding-block: 0 48px; color: var(--hs-ink-2); font-size: 15px; }
+
+@media (max-width: 960px) {
+  .hs-prop-prices { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  .hs-prop-top .hs-btn { display: none; } /* phones: no print button */
+  .hs-proposal .hs-page-head { padding-top: 16px; }
+  .hs-prop-steps li { grid-template-columns: 48px minmax(0, 1fr); }
+  .hs-prop-n { font-size: 30px; }
+  .hs-prop-when { grid-column: 2; }
+  .hs-prop-ctas .hs-btn { flex: 1 1 100%; }
+}
+
+/* Print: light colours, no controls, rows kept whole. */
+@media print {
+  /* Light Tide colours on paper, whatever mode is on screen. */
+  .hs.hs.hs { --hs-page: #fff; --hs-surface: #fff; --hs-sand: #E3EAEF; --hs-ink: #17212B; --hs-ink-2: #3F4D5A; --hs-rule: #B8C5D0; --hs-ember-text: #1B5480; --hs-sage: #2F6650; background: #fff; color: #17212B; }
+  .hs-prop-top-actions, .hs-prop-ctas, .hs-band-ctas, .hs-skip { display: none !important; }
+  .hs-row, .hs-prop-prices > div, .hs-prop-steps li, .hs-band { break-inside: avoid; }
+  .hs-row { padding-block: 20px; }
+  .hs-band { background: #fff !important; color: #17212B !important; border: 1.5px solid #B8C5D0; }
+  .hs-band :is(h2, p) { color: #17212B !important; }
+  a { color: inherit; }
+}
+
+/* Space between each row's heading and its content; three problems across. */
+.hs-prop-problems, .hs-proposal .hs-row-body > h2 + .hs-ruled { margin-top: 40px; }
+.hs-prop-problems { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 48px; }
+.hs-prop-build h3 .hs-icon { order: 2; }
+@media (max-width: 960px) { .hs-prop-problems { grid-template-columns: 1fr; } }

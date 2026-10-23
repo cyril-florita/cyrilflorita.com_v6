@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { flushSync } from "react-dom";
 import { BASE, NAV, PHONE } from "./data";
 import { Button, Icon, Logo } from "./ui";
 
@@ -39,30 +40,33 @@ const norm = (p) => (p || "/").replace(/\/+$/, "") || "/";
 
 export function Header() {
   const pathname = norm(usePathname());
-  const [open, setOpen] = useState(false);
-  const menuRef = useRef(null);
-  const btnRef = useRef(null);
+  const stripRef = useRef(null);
 
-  // The menu (≤1080px): Esc or a link closes it; focus moves in and back.
+  // Phones and tablets (≤1080px): the nav is a horizontal strip under the
+  // logo row that scrolls sideways. The current page's link is scrolled into
+  // view, and fades mark whichever edge has more links past it.
   useEffect(() => {
-    if (!open) return;
-    const onKey = (e) => e.key === "Escape" && setOpen(false);
-    document.addEventListener("keydown", onKey);
-    menuRef.current?.querySelector("a")?.focus();
-    const btn = btnRef.current;
-    return () => { document.removeEventListener("keydown", onKey); btn?.focus(); };
-  }, [open]);
-  useEffect(() => setOpen(false), [pathname]); // eslint-disable-line react-hooks/set-state-in-effect
+    const ul = stripRef.current;
+    if (!ul) return;
+    const edges = () => {
+      const start = ul.scrollLeft > 4, end = ul.scrollLeft + ul.clientWidth < ul.scrollWidth - 4;
+      for (const el of [ul, ul.parentElement]) { el.toggleAttribute("data-more-start", start); el.toggleAttribute("data-more-end", end); }
+    };
+    const current = ul.querySelector('[aria-current="page"]');
+    if (current && ul.scrollWidth > ul.clientWidth) ul.scrollTo({ left: current.parentElement.offsetLeft - 16 });
+    edges();
+    ul.addEventListener("scroll", edges, { passive: true });
+    window.addEventListener("resize", edges);
+    return () => { ul.removeEventListener("scroll", edges); window.removeEventListener("resize", edges); };
+  }, [pathname]);
 
-  // Phones and tablets (the Menu-button header, ≤1080px): scrolling down
-  // slides the sticky header up out of view and the phone call bar down;
-  // scrolling up brings both back. Both stay near the top of the page, while
-  // the menu is open and while keyboard focus is in the header. The class
+  // Scrolling down slides the sticky header up out of view and the contact
+  // dock down; scrolling up brings both back (every screen size). Both stay
+  // near the top of the page and while keyboard focus is in either. The class
   // lives on the .hs root; the CSS does the (gentle, reduced-motion-aware)
   // movement.
   useEffect(() => {
     const root = document.querySelector(".hs");
-    const mq = window.matchMedia("(max-width: 1080px)");
     if (!root) return;
     const TOP = 96, STEP = 8;
     let last = Math.max(0, window.scrollY), raf = 0;
@@ -70,7 +74,7 @@ export function Header() {
     const check = () => {
       raf = 0;
       const y = Math.max(0, window.scrollY);
-      if (!mq.matches || open || y < TOP || root.querySelector(".hs-header")?.contains(document.activeElement)) { set(false); last = y; return; }
+      if (y < TOP || document.activeElement?.closest?.(".hs-header, .hs-dock")) { set(false); last = y; return; }
       const d = y - last;
       if (Math.abs(d) < STEP) return; // ignore jitter; keep the anchor until a real move
       set(d > 0);
@@ -78,42 +82,28 @@ export function Header() {
     };
     const onScroll = () => { if (!raf) raf = requestAnimationFrame(check); };
     window.addEventListener("scroll", onScroll, { passive: true });
-    mq.addEventListener("change", check);
     document.addEventListener("focusin", check);
     check();
-    return () => { window.removeEventListener("scroll", onScroll); mq.removeEventListener("change", check); document.removeEventListener("focusin", check); cancelAnimationFrame(raf); set(false); };
-  }, [open]);
-
-  const links = NAV.map((l) => (
-    <li key={l.href}>
-      <Link href={l.href} aria-current={pathname === norm(l.href) ? "page" : undefined}>{l.label}</Link>
-    </li>
-  ));
+    return () => { window.removeEventListener("scroll", onScroll); document.removeEventListener("focusin", check); cancelAnimationFrame(raf); set(false); };
+  }, []);
 
   return (
     <header className="hs-header">
       <div className="hs-wrap hs-header-row">
         <Logo />
         <nav className="hs-nav" aria-label="Main">
-          <ul>{links}</ul>
+          <ul ref={stripRef}>
+            {NAV.map((l) => (
+              <li key={l.href}>
+                <Link href={l.href} aria-current={pathname === norm(l.href) ? "page" : undefined}>
+                  {l.short ? <><span className="hs-nav-full">{l.label}</span><span className="hs-nav-short">{l.short}</span></> : l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </nav>
         <div className="hs-header-actions">
-          <a className="hs-header-phone" href={PHONE.href}>
-            <Icon name="phone" size={18} />
-            <span>{PHONE.display}</span>
-          </a>
-          <Button href={`${BASE}/contact/`} size="sm">Request a call</Button>
-          <button ref={btnRef} className="hs-menu-btn" type="button" aria-expanded={open} aria-controls="hs-menu" onClick={() => setOpen((o) => !o)}>
-            <Icon name={open ? "close" : "menu"} size={24} />
-            <span>{open ? "Close" : "Menu"}</span>
-          </button>
-        </div>
-      </div>
-      <div id="hs-menu" ref={menuRef} className="hs-menu" hidden={!open}>
-        <ul>{links}</ul>
-        <div className="hs-menu-actions">
-          <Button href={`${BASE}/contact/`}>Request a call</Button>
-          <a className="hs-phone" href={PHONE.href}><Icon name="phone" size={20} /><span>{PHONE.display}</span></a>
+          <ModeSwitch />
         </div>
       </div>
     </header>
@@ -161,9 +151,11 @@ export function ZipCheck({ areas, compact, onResult }) {
 // Colour scheme: Tide (cool, the default) or Shore (warm and cool combined), saved as
 // localStorage `hs-theme` and applied before first paint by layout.js.
 // A radio group of swatches, in the preview bar with the other demo notes.
+// Each swatch: the scheme's page and its signature colour, light then dark
+// (hearthside.css shows the pair for the current mode).
 const THEMES = [
-  { id: "tide", name: "Tide", a: "#F2F5F7", b: "#1F5E8C" },
-  { id: "shore", name: "Shore", a: "#F6F2EA", b: "#1A2430" },
+  { id: "tide", name: "Tide", a: "#F2F5F7", b: "#1F5E8C", aDark: "#10161C", bDark: "#7FB6E0" },
+  { id: "shore", name: "Shore", a: "#F6F2EA", b: "#1A2430", aDark: "#121820", bDark: "#EE9466" },
 ];
 export function ThemeSwitch() {
   const [theme, setTheme] = useState("tide");
@@ -192,7 +184,7 @@ export function ThemeSwitch() {
         {THEMES.map((t) => (
           <button key={t.id} data-id={t.id} type="button" role="radio" aria-checked={theme === t.id} tabIndex={theme === t.id ? 0 : -1}
             className="hs-theme-opt" onClick={() => pick(t.id)}>
-            <span className="hs-theme-dot" style={{ "--a": t.a, "--b": t.b }} aria-hidden="true" />
+            <span className="hs-theme-dot" style={{ "--a": t.a, "--b": t.b, "--a-dark": t.aDark, "--b-dark": t.bDark }} aria-hidden="true" />
             <span className="hs-theme-name">{t.name}</span>
           </button>
         ))}
@@ -201,119 +193,202 @@ export function ThemeSwitch() {
   );
 }
 
-// Phones: the two things a worried family member needs most, always in thumb
-// reach. Hidden while any of the footer (its contact details, then the
-// agency-owner pitch at the very bottom) is on screen.
-export function CallBar() {
+// The contact dock: the site's one home for "talk to us" (the header carries
+// none). A floating pill on desktop, aligned with the content's left edge
+// (a back-to-top button sits on its right edge), a full-width bar on
+// tablets and phones. It changes with the page: families get the phone number
+// and Request a call; referral partners (the referral and status pages) get
+// the intake line and Refer a patient. It slides away with the header while
+// scrolling down (Header's .is-scroll-hidden), and steps aside while the
+// page's own opening buttons or the footer (same contacts) are on screen.
+const PARTNER_PAGES = ["/referrals", "/status"];
+export function ContactDock() {
+  const path = norm(usePathname()).replace(BASE, "") || "/";
+  const partner = PARTNER_PAGES.includes(path);
+  // Hidden while the footer is on screen, and while a page's own opening
+  // calls to action ([data-dock-hide]: the Home hero's buttons, a page head's
+  // buttons) are, so the same actions never show twice.
   const [hide, setHide] = useState(false);
   useEffect(() => {
     const foot = document.querySelector(".hs-footer");
     if (!foot || !("IntersectionObserver" in window)) return;
-    const io = new IntersectionObserver(([e]) => setHide(e.isIntersecting), { rootMargin: "0px 0px -40% 0px" });
-    io.observe(foot);
-    return () => io.disconnect();
+    const seen = new Map();
+    const update = () => setHide([...seen.values()].some(Boolean));
+    const footIo = new IntersectionObserver(([e]) => { seen.set(e.target, e.isIntersecting); update(); }, { rootMargin: "0px 0px -40% 0px" });
+    const ctaIo = new IntersectionObserver((es) => { es.forEach((e) => seen.set(e.target, e.isIntersecting)); update(); });
+    footIo.observe(foot);
+    document.querySelectorAll("[data-dock-hide]").forEach((el) => ctaIo.observe(el));
+    return () => { footIo.disconnect(); ctaIo.disconnect(); };
+  }, [path]);
+  // Back to top (desktop): shown once the page is a screen down, on the
+  // right edge of the content, opposite the dock.
+  const [far, setFar] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setFar(window.scrollY > window.innerHeight);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
+  const toTop = () => {
+    const smooth = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: smooth ? "smooth" : "auto" });
+    document.getElementById("main")?.focus({ preventScroll: true });
+  };
+  const tab = hide ? -1 : undefined;
   return (
-    <div className={`hs-callbar${hide ? " is-hidden" : ""}`} aria-hidden={hide || undefined}>
-      <a className="hs-btn hs-btn-secondary" href={PHONE.href} tabIndex={hide ? -1 : undefined}><Icon name="phone" size={20} />Call</a>
-      <Link className="hs-btn hs-btn-primary" href={`${BASE}/contact/`} tabIndex={hide ? -1 : undefined}>Request a call</Link>
+    <div className="hs-dock-bar">
+    <div className="hs-dock-shell">
+    <div className="hs-wrap hs-dock-row">
+    <div className={`hs-dock${hide ? " is-hidden" : ""}`} role="region" aria-label={partner ? "Referral contacts" : "Contact us"} aria-hidden={hide || undefined}>
+      <a className="hs-btn hs-btn-secondary hs-dock-phone" href={PHONE.href} tabIndex={tab}>
+        <Icon name="phone" size={20} />
+        <span className="hs-dock-label">{partner ? "Intake line" : "Call"}</span>
+        <span className="hs-dock-num">{PHONE.display}</span>
+      </a>
+      {partner
+        ? <Link className="hs-btn hs-btn-primary" href={path === "/referrals" ? "#refer" : `${BASE}/referrals/#refer`} tabIndex={tab}>Refer a patient</Link>
+        : <Link className="hs-btn hs-btn-primary" href={`${BASE}/contact/`} tabIndex={tab}>Request a call</Link>}
+    </div>
+    <button type="button" className={`hs-btn hs-btn-secondary hs-totop${far ? "" : " is-hidden"}`} onClick={toTop} aria-label="Back to top" tabIndex={far ? undefined : -1} aria-hidden={far ? undefined : true}>
+      <Icon name="up" size={22} />
+    </button>
+    </div>
+    </div>
     </div>
   );
 }
 
-// The Home hero's headline notch, contoured to its lines (after a reference):
-// instead of one page-coloured block, each line of the h1 gets its
-// own background hugging its length, as one staircase shape with rounded
-// corners, convex where a line ends and concave where the photo tucks in
-// (including where the shape meets the photo's left and bottom edges). Line
-// boxes depend on the wrap, so this measures them (Range client rects) and
-// draws the shape as one SVG path behind the text, redrawn on resize and once
-// fonts load. Without JS, or below 961px where the notch is ordinary flow,
-// the CSS block notch / no notch applies.
-const R = 26; // corner radius
-const PAD_X = 30; // past each line's last glyph
-const PAD_TOP = 22; // above the first line
-
-function linesOf(el, stage) {
-  const range = document.createRange();
-  range.selectNodeContents(el);
-  const rows = [];
-  for (const r of range.getClientRects()) {
-    if (!r.width || !r.height) continue;
-    const top = r.top - stage.top, bottom = r.bottom - stage.top, right = r.right - stage.left;
-    const row = rows.find((x) => Math.abs(x.top - top) < 4);
-    if (row) { row.right = Math.max(row.right, right); row.bottom = Math.max(row.bottom, bottom); }
-    else rows.push({ top, bottom, right });
-  }
-  return rows;
-}
-
-function contourPath(rows, H) {
-  const n = rows.length;
-  // Contiguous bands: each boundary sits midway between two lines.
-  const y = [rows[0].top - PAD_TOP];
-  for (let i = 1; i < n; i++) y.push((rows[i - 1].bottom + rows[i].top) / 2);
-  y.push(H);
-  const w = rows.map((r) => r.right + PAD_X);
-  const band = (i) => y[i + 1] - y[i];
-  let d = `M0 ${H} L0 ${y[0] - R}`;
-  // A quarter arc to (tx, ty) around (cx, cy); the sweep follows the turn.
-  const arc = (fx, fy, tx, ty, cx, cy, rr) => {
-    const sweep = (fx - cx) * (ty - cy) - (fy - cy) * (tx - cx) > 0 ? 1 : 0;
-    return ` L${fx} ${fy} A${rr} ${rr} 0 0 ${sweep} ${tx} ${ty}`;
-  };
-  // Where the shape meets the photo's left edge: the photo's corner rounds over it.
-  d += arc(0, y[0] - R, R, y[0], R, y[0] - R, R);
-  // The first line's top-right corner.
-  let r0 = Math.min(R, band(0) / 2);
-  d += arc(w[0] - r0, y[0], w[0], y[0] + r0, w[0] - r0, y[0] + r0, r0);
-  for (let i = 1; i < n; i++) {
-    const a = w[i - 1], b = w[i], yy = y[i];
-    const rr = Math.min(R, Math.abs(b - a) / 2, band(i - 1) / 2, band(i) / 2);
-    if (rr < 1) continue;
-    if (b > a) {
-      d += arc(a, yy - rr, a + rr, yy, a + rr, yy - rr, rr); // photo tucks in
-      d += arc(b - rr, yy, b, yy + rr, b - rr, yy + rr, rr); // line end
-    } else {
-      d += arc(a, yy - rr, a - rr, yy, a - rr, yy - rr, rr);
-      d += arc(b + rr, yy, b, yy + rr, b + rr, yy + rr, rr);
-    }
-  }
-  // Where the last line meets the photo's bottom edge.
-  const wl = w[n - 1], rl = Math.min(R, band(n - 1) / 2);
-  d += arc(wl, H - rl, wl + rl, H, wl + rl, H - rl, rl);
-  return `${d} Z`;
-}
-
-export function HeroContour() {
-  const ref = useRef(null);
+// Scroll reveals for the public pages: pieces below the fold fade and rise
+// into place as they scroll into view (styles under "Motion" in
+// hearthside.css), siblings in a short stagger. Only what starts below the
+// fold is hidden, only once this runs, and never under reduced motion; the
+// classes come off once a piece has settled, so its own transitions (hovers)
+// aren't delayed. Re-runs per page.
+const REVEAL = ".hs-row-body > :not(.hs-ruled):not(.hs-services):not(.hs-creds):not(.hs-clinicians), .hs-ruled > *, .hs-services > *, .hs-creds > *, .hs-clinicians > *, .hs-band";
+export function Reveal() {
+  const pathname = usePathname();
   useEffect(() => {
-    const svg = ref.current;
-    const stage = svg?.parentElement;
-    const notch = stage?.querySelector(".hs-hero-notch");
-    if (!stage || !notch) return;
-    let raf = 0;
-    const draw = () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        if (getComputedStyle(notch).position !== "absolute") { stage.classList.remove("is-contoured"); return; }
-        const box = stage.getBoundingClientRect();
-        const rows = [...notch.querySelectorAll("h1 > span")].flatMap((el) => linesOf(el, box)).sort((a, b) => a.top - b.top);
-        if (!rows.length) return;
-        const H = stage.querySelector(".hs-hero-art").getBoundingClientRect().bottom - box.top;
-        svg.setAttribute("viewBox", `0 0 ${box.width} ${box.height}`);
-        svg.firstChild.setAttribute("d", contourPath(rows, H));
-        stage.classList.add("is-contoured");
-      });
-    };
-    draw();
-    // The stage for width changes, the notch for anything that rewraps or
-    // changes the headline (a stale shape once outlived an edit to it).
-    const ro = new ResizeObserver(draw);
-    ro.observe(stage);
-    ro.observe(notch);
-    document.fonts?.ready.then(draw);
-    return () => { ro.disconnect(); cancelAnimationFrame(raf); stage.classList.remove("is-contoured"); };
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
+    const fold = window.innerHeight; // anything peeking into the first screen stays visible (it signals more below)
+    const els = [...document.querySelectorAll(`main :is(${REVEAL})`)].filter((el) => el.getBoundingClientRect().top > fold);
+    const settle = (e) => { if (e.target === e.currentTarget && e.propertyName === "opacity") { e.target.classList.remove("hs-reveal", "is-in"); e.target.style.removeProperty("--hs-i"); e.target.removeEventListener("transitionend", settle); } };
+    els.forEach((el) => {
+      const sibs = [...el.parentElement.children].filter((c) => els.includes(c));
+      el.style.setProperty("--hs-i", Math.min(sibs.indexOf(el), 5));
+      el.classList.add("hs-reveal");
+      el.addEventListener("transitionend", settle);
+    });
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px" });
+    els.forEach((el) => io.observe(el));
+    return () => { io.disconnect(); els.forEach((el) => { el.classList.remove("hs-reveal", "is-in"); el.style.removeProperty("--hs-i"); el.removeEventListener("transitionend", settle); }); };
+  }, [pathname]);
+  return null;
+}
+
+// "How can we help?" on phones: a segmented switch (two toggle buttons, the
+// chosen one in a leaf) above the two path cards, showing one card at a time
+// so both choices are visible without scrolling and the chosen card keeps its
+// points and buttons. Starts on families. Above 760px the switch is hidden
+// and both cards show side by side (hearthside.css, "How can we help?").
+export function PathSwitch({ labels, children }) {
+  const [active, setActive] = useState(0);
+  const id = useId();
+  // Switching: the raised thumb glides to the chosen option (CSS), and the
+  // card changes inside a view transition — the old one slides out and fades
+  // toward the side it came from, the new one slides in from the other side
+  // and its photo settles from a slight zoom (hearthside.css). Instant under
+  // reduced motion or without view transitions.
+  const choose = (i) => {
+    if (i === active) return;
+    document.documentElement.setAttribute("data-hs-path-dir", i > active ? "next" : "prev");
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!document.startViewTransition || reduce) return setActive(i);
+    document.startViewTransition(() => flushSync(() => setActive(i)));
+  };
+  return (
+    <>
+      <div className="hs-seg" role="group" aria-label="Who is this for?" data-active={active}>
+        {labels.map((l, i) => (
+          <button key={l} type="button" className="hs-seg-btn" aria-pressed={active === i} aria-controls={`${id}-paths`} onClick={() => choose(i)}>{l}</button>
+        ))}
+      </div>
+      <div id={`${id}-paths`} className="hs-ruled hs-paths" data-active={active}>{children}</div>
+    </>
+  );
+}
+
+// Desktop: a quiet "more below" cue at the bottom of the first screen, shown
+// only while the page is at the top and the next section (`target`) isn't
+// peeking into view; a gentle drift (still under reduced motion). Clicking it
+// scrolls to that section.
+export function ScrollCue({ target }) {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    const el = document.getElementById(target);
+    if (!el) return;
+    const check = () => setShow(window.scrollY < 40 && el.getBoundingClientRect().top > window.innerHeight - 24);
+    check();
+    window.addEventListener("scroll", check, { passive: true });
+    window.addEventListener("resize", check);
+    return () => { window.removeEventListener("scroll", check); window.removeEventListener("resize", check); };
+  }, [target]);
+  const go = () => document.getElementById(target)?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  return (
+    <button type="button" className={`hs-cue${show ? " is-shown" : ""}`} onClick={go} aria-label="Scroll to more" tabIndex={show ? 0 : -1} aria-hidden={show ? undefined : true}>
+      <Icon name="arrow" size={20} />
+    </button>
+  );
+}
+
+// Home's "Behind the scenes" demo, for agency owners: a mini intake board in
+// which one referral travels — it arrives in New (glowing), the ZIP rule
+// routes it to Assigned, then the first call moves it to Contact attempted —
+// with a toast for each step, on a loop. It runs only while on screen; under
+// reduced motion it shows the final state, still.
+const BTS_STEPS = [
+  { col: 0, toast: "New referral from Larkfield Medical Center" },
+  { col: 1, toast: "Routed by ZIP 91355 → Priya Shah" },
+  { col: 2, toast: "First call logged · 1 document requested" },
+];
+export function BehindTheScenes() {
+  const ref = useRef(null);
+  const [step, setStep] = useState(0);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setStep(2); return; } // eslint-disable-line react-hooks/set-state-in-effect
+    let timer = 0;
+    const run = () => { timer = window.setInterval(() => setStep((s) => (s + 1) % (BTS_STEPS.length + 1)), 1900); };
+    const io = new IntersectionObserver(([e]) => { window.clearInterval(timer); if (e.isIntersecting) run(); }, { threshold: 0.35 });
+    io.observe(el);
+    return () => { io.disconnect(); window.clearInterval(timer); };
   }, []);
-  return <svg ref={ref} className="hs-hero-contour" aria-hidden="true" focusable="false"><path /></svg>;
+  const s = Math.min(step, BTS_STEPS.length - 1);
+  const resetting = step === BTS_STEPS.length; // a beat where the card fades before looping
+  return (
+    <div ref={ref} className="hs-bts" aria-hidden="true">
+      <div className="hs-bts-bar"><span /><span /><span /><b>Hearthside intake</b></div>
+      <div className="hs-bts-board">
+        {["New", "Assigned", "Contacted"].map((c, i) => (
+          <div key={c} className="hs-bts-col">
+            <p className="hs-bts-head">{c}</p>
+            <div className="hs-bts-card is-static"><b>HS-2479{i}</b><span>{["Sherman Oaks", "Van Nuys", "Burbank"][i]}</span></div>
+          </div>
+        ))}
+        <div className={`hs-bts-card is-moving${resetting ? " is-out" : ""}${s === 0 ? " is-new" : ""}`} style={{ "--col": s }}>
+          <b>HS-24812</b><span>Valencia · Skilled nursing</span>
+          <i className={`hs-bts-avatar${s > 0 ? " is-on" : ""}`}>PS</i>
+        </div>
+      </div>
+      <p key={resetting ? "x" : s} className={`hs-bts-toast${resetting ? " is-out" : ""}`}>{BTS_STEPS[s].toast}</p>
+    </div>
+  );
+}
+
+// The proposal's "Save as PDF": the browser's print dialog (proposal.css has
+// the print styles).
+export function PrintButton() {
+  return (
+    <button type="button" className="hs-btn hs-btn-secondary hs-btn-sm" onClick={() => window.print()}>Save as PDF</button>
+  );
 }

@@ -1,6 +1,5 @@
 import { BASE, MEDICARE_CONDITIONS, MEDICARE_URL, PHONE, STEPS } from "@/components/hearthside/data";
-import { Button, Icon, PageHead, PhoneLink, Row } from "@/components/hearthside/ui";
-import Peeps, { STEP_FIGURES } from "@/components/hearthside/Peeps";
+import { Button, Icon, PageHead, PhoneLink, Row, Photo } from "@/components/hearthside/ui";
 
 export const metadata = {
   title: "Getting started",
@@ -20,17 +19,17 @@ const READY = [
 ];
 
 const FIRST_VISIT = [
-  ["Getting to know you", "Your nurse or therapist asks about your health, your goals and what a normal day looks like."],
+  ["Getting to know you", "Your nurse or therapist asks about your health, your goals, and what a normal day looks like."],
   ["Medications", "We review everything you take, including vitamins and over-the-counter medicines."],
-  ["Home safety", "We look at stairs, rugs, the bathroom and lighting, and suggest simple changes."],
-  ["Your plan", "We work with your doctor on a plan of care: which services, how often and for how long."],
+  ["Home safety", "We look at stairs, rugs, the bathroom, and lighting, and suggest simple changes."],
+  ["Your plan", "We work with your doctor on a plan of care: which services, how often, and for how long."],
 ];
 
 export default function GettingStarted() {
   return (
     <div className="hs-wrap">
       <PageHead
-        eyebrow="Getting started"
+        photo={{ shot: "A nurse talks a care plan through with a patient and her daughter", src: "/img/hearthside/photos/step-4", alt: "A nurse talks a care plan through with an older woman and her daughter at home", position: "50% 30%" }}
         title="How care begins"
         lede="From your first call to your first visit, usually in a few days. We'll tell you what's happening at every step, and we do the paperwork with your doctor's office."
       >
@@ -42,10 +41,10 @@ export default function GettingStarted() {
 
       <Row label="The steps" labelledBy="gs-steps">
         <h2 id="gs-steps" className="hs-visually-hidden">The steps</h2>
-        <ol className="hs-ruled">
+        <ol className="hs-ruled hs-swipe">
           {STEPS.map((s, i) => (
             <li key={s.title} className="hs-step">
-              <Peeps figures={STEP_FIGURES[i]} />
+              <Photo shot={s.title} src={s.photo.src} alt={s.photo.alt} position={s.photo.position} sizes="(max-width: 760px) 92vw, 30vw" />
               <span className="hs-step-n" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
               <h3>{s.title}</h3>
               <p>{s.text}</p>
@@ -86,7 +85,7 @@ export default function GettingStarted() {
             <h3 style={{ marginTop: 32 }}>Medicare Advantage and other plans</h3>
             <p className="hs-muted">We work with many Medicare Advantage and commercial plans. Some need approval before care starts; we handle that request with your doctor&rsquo;s office.</p>
             <h3 style={{ marginTop: 32 }}>What home health doesn&rsquo;t cover</h3>
-            <p className="hs-muted">Round-the-clock care, and non-medical help such as meals, housekeeping or companionship on their own.</p>
+            <p className="hs-muted">Round-the-clock care, and non-medical help such as meals, housekeeping, or companionship on their own.</p>
           </div>
           <div>
             <div className="hs-note">

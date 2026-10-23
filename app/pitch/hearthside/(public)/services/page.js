@@ -1,5 +1,5 @@
 import { BASE, SERVICES } from "@/components/hearthside/data";
-import { Button, Icon, PageHead, Row } from "@/components/hearthside/ui";
+import { Button, Icon, PageHead, Photo, Row } from "@/components/hearthside/ui";
 import CareGuide from "@/components/hearthside/CareGuide";
 
 export const metadata = {
@@ -11,19 +11,20 @@ export default function Services() {
   return (
     <div className="hs-wrap">
       <PageHead
-        eyebrow="Services"
+        photo={{ shot: "A nurse dresses a wound on a patient's arm at home", src: "/img/hearthside/photos/svc-nursing", alt: "A nurse in blue scrubs dresses a wound on an older man's forearm in his living room", position: "60% 35%" }}
         title="Skilled care, in your own home"
         lede="Home health is medical care your doctor orders, delivered by licensed clinicians who visit on a schedule. Here's what each kind of care covers, and how to tell whether home health is what you need."
       />
 
       <Row label="What we provide" labelledBy="sv-list">
         <h2 id="sv-list" className="hs-visually-hidden">What we provide</h2>
-        <ul className="hs-ruled">
+        {/* The same cards as Home's "Skilled care" section, with what each covers. */}
+        <ul className="hs-services">
           {SERVICES.map((s) => (
-            <li key={s.id} id={s.id} className="hs-service-detail">
-              <Icon name={s.icon} />
-              <h3>{s.name}</h3>
-              <p className="hs-muted">{s.lead}</p>
+            <li key={s.id} id={s.id} className="hs-service hs-service-detail">
+              <Photo shot={s.photo.shot} src={s.photo.src} alt={s.photo.alt} position={s.photo.position} sizes="(max-width: 760px) 92vw, (max-width: 960px) 45vw, 28vw" />
+              <h3><Icon name={s.icon} />{s.name}</h3>
+              <p>{s.lead}</p>
               <span className="hs-label">Often includes</span>
               <ul>{s.covers.map((c) => <li key={c}>{c}</li>)}</ul>
             </li>
@@ -35,7 +36,7 @@ export default function Services() {
         <div className="hs-two">
           <div className="hs-prose">
             <h2 id="sv-guide">Home health or home care?</h2>
-            <p>They sound alike but they&rsquo;re different services. <strong>Home health</strong> is skilled, medical care ordered by a doctor, such as nursing or therapy, usually for a period of recovery. <strong>Home care</strong> is non-medical help with daily life, like meals, housekeeping or companionship.</p>
+            <p>They sound alike but they&rsquo;re different services. <strong>Home health</strong> is skilled, medical care ordered by a doctor, such as nursing or therapy, usually for a period of recovery. <strong>Home care</strong> is non-medical help with daily life, like meals, housekeeping, or companionship.</p>
             <p>Medicare can cover home health when certain conditions are met. It generally doesn&rsquo;t cover ongoing non-medical help on its own.</p>
             <p><Button href={`${BASE}/getting-started/#coverage`} variant="quiet" icon="arrow">How coverage works</Button></p>
           </div>

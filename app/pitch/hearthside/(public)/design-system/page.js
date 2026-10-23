@@ -6,7 +6,7 @@ import "@/app/pitch/hearthside/css/design-system.css";
 export const metadata = {
   title: "Design system",
   description:
-    "Hearthside Home Health's design system: an editorial grid, light and dark colour tokens measured to WCAG AAA for body text, type, buttons, forms, status labels and photo placeholders. Designed and built by Cyril Florita.",
+    "Hearthside Home Health's design system: an editorial grid, light and dark colour tokens measured to WCAG AAA for body text, type, buttons, forms, status labels, and photo placeholders. Designed and built by Cyril Florita.",
   alternates: { canonical: "/pitch/hearthside/design-system/" },
 };
 
@@ -68,7 +68,7 @@ const STATUS_PAIRS = [
   ["Danger on Danger tint", "#A1342A", "#F7DEDA", "#F0998D", "#3D201C"],
 ];
 
-const SECTIONS = [["brand", "Brand"], ["layout", "Layout"], ["color", "Color"], ["type", "Type"], ["buttons", "Buttons"], ["forms", "Forms"], ["labels", "Labels"], ["imagery", "Imagery"], ["lists", "Lists"], ["principles", "Principles"]];
+const SECTIONS = [["brand", "Brand"], ["layout", "Layout"], ["color", "Color"], ["type", "Type"], ["buttons", "Buttons"], ["forms", "Forms"], ["labels", "Labels"], ["imagery", "Imagery"], ["lists", "Components"], ["principles", "Principles"]];
 
 function Ratio({ fg, bg }) {
   const r = ratio(fg, bg);
@@ -80,10 +80,9 @@ export default function DesignSystem() {
     <div className="hs-wrap hs-ds">
       <header className="hs-ds-head">
         <div>
-          <span className="hs-eyebrow">Hearthside Home Health</span>
           <h1>Design system</h1>
           <p className="hs-lede">
-            An editorial grid for a care brand: one calm background, sections divided by hairlines, a label column beside every section, and type that&rsquo;s large and easy to read. Light by default, with a full dark mode; body text meets WCAG AAA (7:1) in both.
+            An editorial grid for a care brand: one calm background, generous space between sections, a label column beside every section, and type that&rsquo;s large and easy to read. Light by default, with a full dark mode; body text meets WCAG AAA (7:1) in both.
           </p>
           <div className="hs-ds-mode">
             <ModeSwitch />
@@ -101,7 +100,7 @@ export default function DesignSystem() {
 
       <Row id="brand" label="Brand" labelledBy="ds-brand">
         <h2 id="ds-brand">A light left on</h2>
-        <p className="hs-lede">The mark is a plain H set in a leaf: the same shape that frames every photo and illustration on the site, with two corners swept wide and two kept tight. Simple enough to read at favicon size, and warm without trying.</p>
+        <p className="hs-lede">The mark is a plain H set in a leaf: the same shape that frames every photo, badge, and highlight on the site, with two corners swept wide and two kept tight. Simple enough to read at favicon size, and warm without trying.</p>
         <div className="hs-ruled hs-ds-brand">
           <div>
             <div className="hs-ds-logo-big"><LogoMark size={64} /><span><b>Hearthside</b><small>Home Health</small></span></div>
@@ -116,7 +115,7 @@ export default function DesignSystem() {
 
       <Row id="layout" label="Layout" labelledBy="ds-layout">
         <h2 id="ds-layout">The editorial grid</h2>
-        <p className="hs-lede">Every section is a row: a 240px label column, a hairline, then the content. Grids inside are divided by hairlines rather than boxed. The page sits in a frame of two vertical hairlines on wide screens; on phones the label stacks above its content.</p>
+        <p className="hs-lede">Every section is a row: a 240px label column, then the content. Grids inside are separated by space rather than boxes or rules, and only a light hairline marks where one section ends. On phones the label stacks above its content, and lists of like things become swipe rows.</p>
         <div className="hs-ds-layout" aria-hidden="true">
           <div className="hs-ds-layout-label"><span className="hs-label">Label</span></div>
           <div className="hs-ds-layout-body">
@@ -126,10 +125,10 @@ export default function DesignSystem() {
           </div>
         </div>
         <ul className="hs-ruled" style={{ marginTop: 32 }}>
-          <li><h3>Rows</h3><p className="hs-ds-muted"><code>&lt;Row label=&hellip;&gt;</code>: label column, hairline above, content beside. 40px above content, 80px below.</p></li>
-          <li><h3>Ruled grids</h3><p className="hs-ds-muted"><code>.hs-ruled</code>: two columns divided by hairlines; one column on phones.</p></li>
-          <li><h3>Feature rows</h3><p className="hs-ds-muted"><code>.hs-feature</code>: an intro column beside a large image and a 2×2 grid (not used on Home since the team photos moved into the service cards).</p></li>
-          <li><h3>Radius</h3><p className="hs-ds-muted">12px for images and panels, 6px for buttons and inputs, full circles only for icon buttons.</p></li>
+          <li><h3>Rows</h3><p className="hs-ds-muted"><code>&lt;Row label=&hellip;&gt;</code>: label column, hairline above, content beside. 60px above content, 112px below; tighter on phones.</p></li>
+          <li><h3>Grids</h3><p className="hs-ds-muted"><code>.hs-ruled</code>: two columns 80px apart, rows 56px apart, no rules; one column on phones.</p></li>
+          <li><h3>Swipe rows</h3><p className="hs-ds-muted"><code>.hs-swipe</code>: on phones, services, steps, clinicians, and quotes scroll sideways with snapping, the next card peeking in.</p></li>
+          <li><h3>Leaf radius</h3><p className="hs-ds-muted">Photos: 12px corners with two swept to 96px (64px on phones). Badges, highlights, and the switch use smaller leaves; buttons and inputs keep 6px.</p></li>
         </ul>
       </Row>
 
@@ -153,7 +152,8 @@ export default function DesignSystem() {
         {SCHEMES.map((sc) => (
           <div key={sc.id} className="hs-ds-for" data-for={sc.id}>
             <h3 className="hs-ds-sub">{sc.name} tokens</h3>
-            <div className="hs-ds-table-wrap">
+            {/* Focusable so keyboard users can scroll it sideways on narrow screens. */}
+            <div className="hs-ds-table-wrap" tabIndex={0} role="region" aria-label={`${sc.name} tokens`}>
               <table className="hs-ds-table">
                 <thead>
                   <tr><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th><th scope="col">Use</th></tr>
@@ -174,7 +174,7 @@ export default function DesignSystem() {
               </table>
             </div>
             <h3 className="hs-ds-sub">{sc.name} pairs</h3>
-            <div className="hs-ds-table-wrap">
+            <div className="hs-ds-table-wrap" tabIndex={0} role="region" aria-label={`${sc.name} contrast pairs`}>
               <table className="hs-ds-table">
                 <thead><tr><th scope="col">Pair</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
                 <tbody>
@@ -194,14 +194,14 @@ export default function DesignSystem() {
 
       <Row id="type" label="Type" labelledBy="ds-type">
         <h2 id="ds-type">Type</h2>
-        <p className="hs-lede">Hanken Grotesk for headings, large and bold. Host Grotesk for body text, never below 18px. DM Mono for small labels and button text, never below 14px.</p>
+        <p className="hs-lede">Hanken Grotesk for headings, large and bold. Host Grotesk for body text at 18px (16px on phones). DM Mono for small labels and button text, never below 14px.</p>
         <div className="hs-ds-type">
-          <div><span className="hs-label hs-ds-spec">Display · Hanken 600 · 44–76px</span><p className="hs-ds-display">Care at home, explained.</p></div>
-          <div><span className="hs-label hs-ds-spec">Heading 2 · Hanken 600 · 34–52px</span><p className="hs-ds-h2">How care begins</p></div>
+          <div><span className="hs-label hs-ds-spec">Display · Hanken 600 · 44–84px</span><p className="hs-ds-display">Care at home, explained.</p></div>
+          <div><span className="hs-label hs-ds-spec">Heading 2 · Hanken 600 · 34–54px</span><p className="hs-ds-h2">How care begins</p></div>
           <div><span className="hs-label hs-ds-spec">Feature title · Hanken 600 caps</span><p className="hs-ds-h2 hs-ds-caps">Care, close to home</p></div>
           <div><span className="hs-label hs-ds-spec">Heading 3 · Hanken 600 · 24px</span><p className="hs-ds-h3">A clinician visits your home</p></div>
           <div><span className="hs-label hs-ds-spec">Lede · Host 400 · 20px</span><p className="hs-lede" style={{ marginTop: 0 }}>Four steps from your first call to your first visit.</p></div>
-          <div><span className="hs-label hs-ds-spec">Body · Host 400 · 18px / 1.6</span><p>We confirm your address is in our service area, talk with your doctor&rsquo;s office and review your insurance before anything is scheduled.</p></div>
+          <div><span className="hs-label hs-ds-spec">Body · Host 400 · 18px / 1.6</span><p>We confirm your address is in our service area, talk with your doctor&rsquo;s office, and review your insurance before anything is scheduled.</p></div>
           <div><span className="hs-label hs-ds-spec">Label · DM Mono 500 · 14px caps</span><p className="hs-label">What we do</p></div>
           <div><span className="hs-label hs-ds-spec">Numerals · Hanken 300 · 56px</span><p className="hs-step-n">01 02 03 04</p></div>
         </div>
@@ -271,24 +271,38 @@ export default function DesignSystem() {
 
       <Row id="imagery" label="Imagery" labelledBy="ds-imagery">
         <h2 id="ds-imagery">Imagery</h2>
-        <p className="hs-lede">Large photos with 12px corners and a caption line: what on the left, where in mono on the right. Until the shoot, placeholders name the shot they&rsquo;re waiting for, so the page doubles as the shot list. The hero uses the lit-window illustration, and partner logos are illustrative marks.</p>
+        <p className="hs-lede">Leaf-shaped photos with one cool, slightly faded grade, so pictures from different sources read as one set. A tiny blurred preview shows while each loads, and on desktop each photo closes in on its subject as it scrolls up. Without a photo, the placeholder names the shot it&rsquo;s waiting for. Partner logos are illustrative marks.</p>
         <div className="hs-ruled">
           <figure className="hs-figure">
-            <Photo shot="A nurse checks a patient's blood pressure at the kitchen table, morning light" />
+            <Photo src={SERVICES[0].photo.src} alt={SERVICES[0].photo.alt} position={SERVICES[0].photo.position} sizes="(max-width: 760px) 92vw, 40vw" />
             <figcaption><span>Skilled nursing</span><span>Granada Hills</span></figcaption>
           </figure>
           <div className="hs-ds-logos"><PartnerLogos /></div>
         </div>
       </Row>
 
-      <Row id="lists" label="Lists" labelledBy="ds-lists">
-        <h2 id="ds-lists">Ruled lists</h2>
-        <p className="hs-lede">Services, steps and questions sit in hairline-ruled lists rather than cards.</p>
-        <ul className="hs-ruled">
-          {SERVICES.slice(0, 2).map((s) => (
-            <li key={s.id} className="hs-service"><Icon name={s.icon} /><h3>{s.name}</h3><p>{s.short}</p></li>
+      <Row id="lists" label="Components" labelledBy="ds-lists">
+        <h2 id="ds-lists">Cards, badges, and switches</h2>
+        <p className="hs-lede">Service cards are a leaf photo, the name with its icon flush right, then one line. Credentials are upright leaf badges. On phones, &ldquo;How can we help?&rdquo; becomes a two-way switch whose raised thumb glides between the choices, and the current page in the nav sits in a sand leaf.</p>
+        <ul className="hs-services">
+          {SERVICES.slice(0, 3).map((s) => (
+            <li key={s.id} className="hs-service">
+              <Photo src={s.photo.src} alt={s.photo.alt} position={s.photo.position} sizes="(max-width: 760px) 92vw, 28vw" />
+              <h3><Icon name={s.icon} /><span>{s.name}</span></h3>
+              <p>{s.short}</p>
+            </li>
           ))}
         </ul>
+        <ul className="hs-creds" style={{ marginTop: 56 }}>
+          {[["shield", "Medicare-certified"], ["clipboard", "State-licensed agency"], ["phone", "Intake answered seven days a week"]].map(([icon, text]) => (
+            <li key={text} className="hs-cred"><span className="hs-cred-icon"><Icon name={icon} size={24} /></span>{text}</li>
+          ))}
+        </ul>
+        <p className="hs-creds-note"><Sample /></p>
+        <div className="hs-ds-row" style={{ marginTop: 40 }}>
+          <span className="hs-ds-navleaf" aria-hidden="true"><span>Services</span><span className="is-on">Getting started</span><span>Careers</span></span>
+          <span className="hs-ds-seg" aria-hidden="true"><span className="is-on">For families</span><span>For professionals</span></span>
+        </div>
         <div className="hs-faq" style={{ marginTop: 40 }}>
           <details open><summary>{FAQS[0].q}</summary><p>{FAQS[0].a}</p></details>
           <details><summary>{FAQS[1].q}</summary><p>{FAQS[1].a}</p></details>
@@ -301,7 +315,7 @@ export default function DesignSystem() {
           <li><h3>Guide, never decide</h3><p className="hs-ds-muted">The site explains coverage and eligibility in general terms and routes people to a person. Clinical and coverage decisions stay with clinicians and the intake team.</p></li>
           <li><h3>Ask for less</h3><p className="hs-ds-muted">Minimal public forms; health details only in the secure intake system. No advertising pixels or session recording on intake pages.</p></li>
           <li><h3>Readable first</h3><p className="hs-ds-muted">18px+ body, AAA body text, 52px buttons, labels at 14px+ (not the tiny labels the editorial style usually uses), zoom always allowed, everything usable by keyboard.</p></li>
-          <li><h3>Calm by design</h3><p className="hs-ds-muted">One background, hairlines instead of boxes, one dark band per page. Motion is slow and stops entirely under reduced motion.</p></li>
+          <li><h3>Calm by design</h3><p className="hs-ds-muted">One background, space instead of boxes and rules, one dark band per page. Motion is slow and stops entirely under reduced motion.</p></li>
         </ul>
       </Row>
     </div>

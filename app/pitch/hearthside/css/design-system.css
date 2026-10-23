@@ -75,3 +75,11 @@
 .hs-ds-for { display: none; }
 .hs[data-hs-theme="tide"] .hs-ds-for[data-for="tide"],
 .hs[data-hs-theme="shore"] .hs-ds-for[data-for="shore"] { display: block; }
+
+/* Static replicas of the phone-only nav leaf and segmented switch. */
+.hs-ds-navleaf { display: inline-flex; gap: 4px; }
+.hs-ds-navleaf span { padding: 8px 14px; border-radius: 4px 16px; font-size: 17px; font-weight: 500; }
+.hs-ds-navleaf .is-on { background: var(--hs-ember-soft); font-weight: 600; }
+.hs-ds-seg { display: inline-grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; border-radius: 10px 22px; background: var(--hs-sand); }
+.hs-ds-seg span { display: grid; place-items: center; min-height: 48px; padding: 0 18px; border-radius: 6px 18px; color: var(--hs-ink-2); font-weight: 600; }
+.hs-ds-seg .is-on { background: var(--hs-page); color: var(--hs-ink); box-shadow: 0 2px 10px rgba(15, 25, 35, 0.12); }

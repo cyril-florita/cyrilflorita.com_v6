@@ -11,9 +11,8 @@ export default function Careers() {
   return (
     <div className="hs-wrap">
       <PageHead
-        eyebrow="Careers"
         title="Care for your neighbors"
-        lede="Nurses, therapists, aides and coordinators who want to do their best work close to home, with the time to do it well."
+        lede="Nurses, therapists, aides, and coordinators who want to do their best work close to home, with the time to do it well."
       >
         <div className="hs-hero-ctas" style={{ marginTop: 28 }}><Button href="#roles" icon="arrow">See open roles</Button></div>
       </PageHead>
@@ -31,8 +30,8 @@ export default function Careers() {
             </ul>
             <p><Sample>Sample benefits</Sample></p>
           </div>
-          {/* Age Cymru (@agecymru) on Unsplash, unsplash.com/photos/dMhB7w99ju8, Unsplash License; cool-graded. */}
-          <Photo shot="A nurse smiling with an older patient" alt="A nurse in blue scrubs smiles warmly beside an older woman who is laughing" src="/img/hearthside/photos/careers-nurse-smiling" position="55% 35%" ratio="16 / 10" sizes="(max-width: 960px) 92vw, 40vw" />
+          {/* Supplied by Cyril (AI-generated with Perplexity); same grade. */}
+          <Photo shot="A nurse and her patient smiling together at home" alt="A smiling nurse in blue scrubs, holding a tablet, sits beside an older woman on her sofa" src="/img/hearthside/photos/careers-nurse-smiling" position="50% 30%" ratio="16 / 10" sizes="(max-width: 960px) 92vw, 40vw" />
         </div>
       </Row>
 

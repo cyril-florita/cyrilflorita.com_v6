@@ -16,9 +16,9 @@ export default function Referrals() {
   return (
     <div className="hs-wrap">
       <PageHead
-        eyebrow="For referral partners"
+        photo={{ shot: "A clinician talks a care plan through with an older patient", src: "/img/hearthside/photos/pro-consult", alt: "A smiling nurse in blue scrubs talks with an older woman across a desk", position: "50% 35%" }}
         title="Refer a patient"
-        lede="For physicians, hospitals, discharge planners and senior communities. Send a referral securely, see it acknowledged right away, and follow it from received to start of care."
+        lede="For physicians, hospitals, discharge planners, and senior communities. Send a referral securely, see it acknowledged right away, and follow it from received to start of care."
       >
         <div className="hs-hero-ctas" style={{ marginTop: 28 }}>
           <Button href="#refer" icon="arrow">Start a referral</Button>

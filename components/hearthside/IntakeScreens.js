@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { BASE } from "./data";
 import { LIAISONS, OPEN_STAGES, PARTNER_ORGS, coordinator, fmtDue, isOverdue, missingDocs } from "./intake-data";
 import { toggleTask, useIntake } from "./store";
-import { Sample } from "./ui";
+import { Icon, Sample, Skeleton } from "./ui";
 
 const DAY = 24 * 3600e3;
 const useNow = () => {
@@ -17,7 +17,7 @@ const fmtDay = (d) => (d === 0 ? "today" : d > 0 ? `in ${d} day${d > 1 ? "s" : "
 // Partners: referral relationships, separate from individual intake.
 export function PartnersScreen() {
   const data = useIntake();
-  if (!data) return <p aria-busy="true">Loading…</p>;
+  if (!data) return <Skeleton blocks={3} />;
   const rows = PARTNER_ORGS.map((p) => {
     const rs = data.referrals.filter((r) => r.source === p.id);
     const admitted = rs.filter((r) => ["accepted", "soc"].includes(r.stage)).length;
@@ -26,7 +26,7 @@ export function PartnersScreen() {
   });
   return (
     <>
-      <div className="hs-app-head"><div><h1>Referral partners</h1><p>Relationships with the hospitals, practices and communities that refer to us. <Sample>Sample partners</Sample></p></div></div>
+      <div className="hs-app-head"><div><h1>Referral partners</h1><p>Relationships with the hospitals, practices, and communities that refer to us. <Sample>Sample partners</Sample></p></div></div>
       <div className="hs-table-wrap">
         <table className="hs-table hs-table-cards">
           <thead>
@@ -57,7 +57,7 @@ export function PartnersScreen() {
 export function TasksScreen() {
   const data = useIntake();
   const now = useNow();
-  if (!data) return <p aria-busy="true">Loading…</p>;
+  if (!data) return <Skeleton blocks={3} />;
   const tasks = [];
   for (const r of data.referrals.filter((x) => OPEN_STAGES.includes(x.stage))) {
     const who = coordinator(r.coordinator)?.name ?? "Unassigned";
@@ -78,6 +78,12 @@ export function TasksScreen() {
     <>
       <div className="hs-app-head"><div><h1>Tasks</h1><p>Follow-ups the rules created, and anything past its stage limit.</p></div></div>
       <div className="hs-tasks">
+        {groups[0][1].length === 0 && (
+          <div className="hs-empty" role="status">
+            <Icon name="check" size={28} />
+            <div><b>Nothing overdue</b><p>Every follow-up is within its time limit.</p></div>
+          </div>
+        )}
         {groups.map(([title, list]) => list.length > 0 && (
           <section key={title} className="hs-task-group" aria-label={title}>
             <h2>{title} · {list.length}</h2>

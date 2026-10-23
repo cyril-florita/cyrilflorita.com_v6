@@ -11,7 +11,6 @@ export default function ServiceArea() {
   return (
     <div className="hs-wrap">
       <PageHead
-        eyebrow="Service area"
         title="Where we provide care"
         lede="Across the San Fernando and Santa Clarita Valleys. Check your ZIP code to see if we serve your address."
       />

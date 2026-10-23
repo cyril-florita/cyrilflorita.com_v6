@@ -5,7 +5,7 @@ import { flushSync } from "react-dom";
 import { BASE } from "./data";
 import { COORDINATORS, OPEN_STAGES, STAGES, coordinator, fmtAgo, fmtDue, isOverdue, missingDocs, route, sourceName, SERVICE_OPTIONS } from "./intake-data";
 import { assign, useIntake } from "./store";
-import { Icon } from "./ui";
+import { Icon, Skeleton } from "./ui";
 
 // The pipeline board: open referrals by stage. Arriving from the referral
 // form (?arrive=HS-…), the new card drops into New and glows, then the
@@ -14,6 +14,7 @@ import { Icon } from "./ui";
 // missing documents. Reduced motion: the same steps, without the movement.
 
 const initials = (name) => name.split(" ").map((p) => p[0]).join("");
+const PLAYED = new Set();
 const reduced = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const short = (id) => SERVICE_OPTIONS.find((s) => s.id === id)?.name.split(" ")[0];
 
@@ -43,7 +44,6 @@ export default function IntakeBoard() {
   const [arriving, setArriving] = useState(null);
   const [toasts, setToasts] = useState([]);
   const [now, setNow] = useState(() => Date.now());
-  const ran = useRef(false);
   const boardRef = useRef(null);
   const [activeStage, setActiveStage] = useState(OPEN_STAGES[0]);
 
@@ -72,19 +72,22 @@ export default function IntakeBoard() {
 
   useEffect(() => { const t = setInterval(() => setNow(Date.now()), 30000); return () => clearInterval(t); }, []);
 
-  // The arrival sequence, once per page load.
+  // The arrival sequence, once per referral (PLAYED). Its timers are never
+  // cancelled: arriving client-side from the form, the board mounts with data
+  // already loaded, and an effect cleanup (React's dev double-mount, or a
+  // store update) used to clear them and leave the card stuck in New. A late
+  // setState after a real unmount is harmless, and assign() should run anyway.
   useEffect(() => {
-    if (!data || ran.current) return;
+    if (!data) return;
     const id = new URLSearchParams(window.location.search).get("arrive");
     const r = id && data.referrals.find((x) => x.id === id);
-    if (!r) return;
-    ran.current = true;
-    const timers = [];
-    const later = (ms, fn) => timers.push(setTimeout(fn, ms));
+    if (!r || PLAYED.has(id)) return;
+    PLAYED.add(id);
+    const later = (ms, fn) => setTimeout(fn, ms);
     const toast = (icon, text) => setToasts((t) => [...t, { id: Math.random(), icon, text }]);
     setArriving({ id, state: "arriving" }); // eslint-disable-line react-hooks/set-state-in-effect
     toast("clipboard", `New referral ${id} from ${sourceName(r.source)}`);
-    if (r.stage !== "new") { later(400, () => setArriving({ id, state: "landed" })); return () => timers.forEach(clearTimeout); }
+    if (r.stage !== "new") { later(400, () => setArriving({ id, state: "landed" })); return; }
     const rt = route(r.patient.zip);
     later(reduced() ? 300 : 1800, () => {
       const run = () => flushSync(() => { assign(id); setArriving({ id, state: "landed" }); });
@@ -96,10 +99,9 @@ export default function IntakeBoard() {
     const miss = missingDocs(r);
     if (miss.length) later(reduced() ? 900 : 3600, () => toast("info", `Missing: ${miss.map((d) => d.name).join(", ")}. Request task added.`));
     later(12000, () => setToasts([]));
-    return () => timers.forEach(clearTimeout);
   }, [data]);
 
-  if (!data) return <p aria-busy="true">Loading…</p>;
+  if (!data) return <Skeleton blocks={4} />;
   const open = data.referrals.filter((r) => OPEN_STAGES.includes(r.stage));
   const shown = open.filter((r) => (who === "all" || r.coordinator === who || (who === "none" && !r.coordinator)) && (!onlyLate || isOverdue(r, now)));
   const overdue = open.filter((r) => isOverdue(r, now)).length;
@@ -127,6 +129,13 @@ export default function IntakeBoard() {
         ))}
         <button type="button" className="hs-filter" aria-pressed={onlyLate} onClick={() => setOnlyLate(!onlyLate)}>Only overdue</button>
       </div>
+      {shown.length === 0 && open.length > 0 && (
+        <div className="hs-empty" role="status">
+          <Icon name="search" size={28} />
+          <div><b>No referrals match these filters</b><p>{onlyLate ? "Nothing is overdue for this coordinator." : "This coordinator has no open referrals."}</p></div>
+          <button type="button" className="hs-btn hs-btn-secondary hs-btn-sm" onClick={() => { setWho("all"); setOnlyLate(false); }}>Clear filters</button>
+        </div>
+      )}
       <div className="hs-stage-tabs" role="tablist" aria-label="Stages" ref={tabsRef}>
         {STAGES.filter((s) => OPEN_STAGES.includes(s.id)).map((s) => (
           <button key={s.id} type="button" role="tab" aria-selected={activeStage === s.id} className="hs-stage-tab" onClick={() => toStage(s.id)}>
@@ -141,7 +150,7 @@ export default function IntakeBoard() {
             <section key={s.id} className="hs-col" data-stage={s.id} aria-labelledby={`col-${s.id}`}>
               <div className="hs-col-head"><h2 id={`col-${s.id}`}>{s.name}</h2><span>{cards.length}</span></div>
               <ul className="hs-col-list">
-                {cards.length ? cards.map((r) => <li key={r.id}><Card r={r} now={now} state={arriving?.id === r.id ? arriving.state : null} /></li>) : <li className="hs-col-empty">Nothing here</li>}
+                {cards.length ? cards.map((r) => <li key={r.id}><Card r={r} now={now} state={arriving?.id === r.id ? arriving.state : null} /></li>) : <li className="hs-col-empty"><Icon name="check" size={18} />Nothing here</li>}
               </ul>
             </section>
           );

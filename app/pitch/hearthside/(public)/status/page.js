@@ -12,7 +12,6 @@ export default function Status() {
   return (
     <div className="hs-wrap">
       <PageHead
-        eyebrow="For referral partners"
         title="Referral status"
         lede="Where a referral stands, from received to start of care. No health details are shown here, so the link is safe to share with your team."
       />

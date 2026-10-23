@@ -39,7 +39,13 @@ export default function ReferralForm() {
       source, contact: org.contact.split(",")[0], services, payer: patient.payer, docs,
     });
     setSent({ id, at: Date.now() });
-    window.scrollTo({ top: document.getElementById("refer")?.offsetTop - 100, behavior: "smooth" });
+    // Bring the confirmation into view once it has replaced the (taller) form.
+    // offsetTop measured from the wrong parent and left people at the footer.
+    requestAnimationFrame(() => {
+      const el = document.getElementById("refer");
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 100, behavior: reduce ? "auto" : "smooth" });
+    });
   };
 
   if (sent) {

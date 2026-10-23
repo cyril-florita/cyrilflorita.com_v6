@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { BASE } from "./data";
 import { DECLINE_REASONS, DOCS, REGIONS, SERVICE_OPTIONS, coordinator, fmtDue, isOverdue, regionFor, sourceName, stageName } from "./intake-data";
 import { accept, decline, logCall, receiveDoc, startOfCare, useIntake } from "./store";
-import { Icon } from "./ui";
+import { Icon, Skeleton } from "./ui";
 
 // One referral, staff view: what's next and the actions that move it along,
 // its documents, details and the full activity log (the audit trail). Every
@@ -23,7 +23,7 @@ export default function ReferralRecord() {
     const t = setInterval(() => setNow(Date.now()), 30000);
     return () => clearInterval(t);
   }, []);
-  if (!data || id === null) return <p aria-busy="true">Loading…</p>;
+  if (!data || id === null) return <Skeleton blocks={2} />;
   const r = data.referrals.find((x) => x.id === id);
   if (!r) return <p>Referral not found. <Link href={`${BASE}/intake/`}>Back to the board</Link></p>;
 
@@ -129,7 +129,7 @@ export default function ReferralRecord() {
           <section className="hs-panel" aria-labelledby="rec-privacy">
             <h2 id="rec-privacy">Handling</h2>
             <div className="hs-panel-body">
-              <p className="hs-hint">Clinical assessment, eligibility and care documentation live in the clinical record system, not here. Notifications to staff and referrers carry a link and reference number only, never health details.</p>
+              <p className="hs-hint">Clinical assessment, eligibility, and care documentation live in the clinical record system, not here. Notifications to staff and referrers carry a link and reference number only, never health details.</p>
             </div>
           </section>
         </aside>

@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { COORDINATORS, DECLINE_REASONS, OPEN_STAGES, SOURCES, STAGES, STAGE_LIMIT_H, firstResponseH, hoursInStage, isOverdue } from "./intake-data";
 import { useIntake } from "./store";
-import { Sample } from "./ui";
+import { Sample, Skeleton } from "./ui";
 
 // Reports: one panel per question in the brief. Every chart is a single
 // series (one colour), labelled and valued in text beside each bar, so it
@@ -30,7 +30,7 @@ export default function ReportsScreen() {
   const data = useIntake();
   const [now, setNow] = useState(() => Date.now());
   useEffect(() => { const t = setInterval(() => setNow(Date.now()), 60000); return () => clearInterval(t); }, []);
-  if (!data) return <p aria-busy="true">Loading…</p>;
+  if (!data) return <Skeleton blocks={4} />;
   const rs = data.referrals;
 
   // 1. Sources

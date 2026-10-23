@@ -19,55 +19,62 @@ export const NAV = [
   { href: `${BASE}/services/`, label: "Services" },
   { href: `${BASE}/getting-started/`, label: "Getting started" },
   { href: `${BASE}/service-area/`, label: "Service area" },
-  { href: `${BASE}/referrals/`, label: "For referral partners" },
+  { href: `${BASE}/referrals/`, label: "For referral partners", short: "Referrals" }, // short: the phone nav strip
   { href: `${BASE}/careers/`, label: "Careers" },
 ];
 
-// Each service: a short line for the Home page, then what it covers and
-// who it's often for (Services page). General descriptions, no outcome claims.
+// Each service: its photo (user-supplied, AI-generated with Perplexity; Home
+// and Services cards), a short line for Home, then what it covers and who it's
+// often for (Services). General descriptions, no outcome claims.
 export const SERVICES = [
   {
     id: "nursing",
+    photo: { shot: "A nurse dresses a wound on a patient's arm in his living room", alt: "A nurse in blue scrubs and gloves dresses a wound on an older man's forearm in his living room", src: "/img/hearthside/photos/svc-nursing", position: "82% 30%" },
     name: "Skilled nursing",
-    short: "Wound care, medication management, injections and monitoring after a hospital stay.",
+    short: "Wound care, medication management, injections, and monitoring after a hospital stay.",
     icon: "nurse",
     lead: "Registered and licensed vocational nurses who visit on a schedule your doctor sets.",
-    covers: ["Wound and incision care", "Medication review and teaching", "Injections and IV therapy", "Monitoring heart failure, COPD or diabetes", "Teaching family members what to watch for"],
+    covers: ["Wound and incision care", "Medication review and teaching", "Injections and IV therapy", "Monitoring heart failure, COPD, or diabetes", "Teaching family members what to watch for"],
   },
   {
     id: "pt",
+    photo: { shot: "A physical therapist coaches a patient through arm exercises at home", alt: "A therapist kneels beside a smiling older woman lifting small hand weights in a chair in her living room", src: "/img/hearthside/photos/svc-pt", position: "50% 30%" },
     name: "Physical therapy",
-    short: "Rebuilding strength, balance and safe movement around your own home.",
+    short: "Rebuilding strength, balance, and safe movement around your own home.",
     icon: "pt",
-    lead: "Licensed physical therapists who work with you on the stairs, hallways and chairs you actually use.",
-    covers: ["Strength and balance after surgery or a fall", "Walking with a cane or walker", "Getting in and out of bed, chairs and the car", "A home exercise plan you can keep up"],
+    lead: "Licensed physical therapists who work with you on the stairs, hallways, and chairs you actually use.",
+    covers: ["Strength and balance after surgery or a fall", "Walking with a cane or walker", "Getting in and out of bed, chairs, and the car", "A home exercise plan you can keep up"],
   },
   {
     id: "ot",
+    photo: { shot: "An occupational therapist helps a patient cook in her own kitchen", alt: "A therapist in blue scrubs points into a mixing bowl as an older woman stirs it at her kitchen counter", src: "/img/hearthside/photos/svc-ot", position: "70% 30%" },
     name: "Occupational therapy",
-    short: "Making everyday tasks like dressing, bathing and cooking safer and easier.",
+    short: "Making everyday tasks like dressing, bathing, and cooking safer and easier.",
     icon: "ot",
     lead: "Occupational therapists who help you do everyday things safely, your way.",
-    covers: ["Bathing, dressing and grooming", "Kitchen and household tasks", "Energy-saving techniques", "Advice on grab bars and other equipment"],
+    covers: ["Bathing, dressing, and grooming", "Kitchen and household tasks", "Energy-saving techniques", "Advice on grab bars and other equipment"],
   },
   {
     id: "speech",
+    photo: { shot: "A speech therapist works through picture cards with a patient", alt: "A therapist holds up a picture card of a mug as an older man names it at the dining table", src: "/img/hearthside/photos/svc-speech", position: "85% 30%" },
     name: "Speech-language pathology",
-    short: "Help with speech, swallowing and memory after a stroke or illness.",
+    short: "Help with speech, swallowing, and memory after a stroke or illness.",
     icon: "speech",
-    lead: "Speech-language pathologists for speech, swallowing and thinking skills.",
+    lead: "Speech-language pathologists for speech, swallowing, and thinking skills.",
     covers: ["Speech and word-finding after a stroke", "Safer swallowing", "Memory and attention strategies", "Ways for family to communicate more easily"],
   },
   {
     id: "social",
+    photo: { shot: "A medical social worker goes through resources with a patient at home", alt: "A social worker in a blue shirt goes through a folder of resources with an older man in his living room", src: "/img/hearthside/photos/svc-social", position: "65% 30%" },
     name: "Medical social work",
-    short: "Connecting you with community resources, planning and emotional support.",
+    short: "Connecting you with community resources, planning, and emotional support.",
     icon: "social",
     lead: "Medical social workers who connect you with support beyond the medical.",
     covers: ["Community resources and benefits", "Planning for care at home", "Advance-care planning conversations", "Support for caregivers"],
   },
   {
     id: "aide",
+    photo: { shot: "A home health aide helps a patient after her shower", alt: "An aide in blue scrubs offers a rolled towel to a smiling older woman in a robe on a shower chair", src: "/img/hearthside/photos/svc-aide", position: "55% 30%" },
     name: "Home health aide",
     short: "Personal care such as bathing, as part of a skilled plan of care.",
     icon: "aide",
@@ -76,21 +83,27 @@ export const SERVICES = [
   },
 ];
 
+// How care begins: each step's photo (user-supplied, AI-generated with
+// Perplexity; named after the step) replaced the Open Peeps illustrations.
 export const STEPS = [
   {
     title: "You call us, or your doctor refers you",
-    text: "Call our intake team or ask your doctor, hospital or discharge planner to send a referral. Either way, we take it from there.",
+    photo: { src: "/img/hearthside/photos/step-1", alt: "An older woman smiles as she talks on the phone on her sofa", position: "50% 30%" },
+    text: "Call our intake team or ask your doctor, hospital, or discharge planner to send a referral. Either way, we take it from there.",
   },
   {
     title: "We check the details with you",
-    text: "We confirm your address is in our service area, talk with your doctor's office and review your insurance before anything is scheduled.",
+    photo: { src: "/img/hearthside/photos/step-2", alt: "An intake coordinator in a headset smiles at her computer screen", position: "50% 22%" },
+    text: "We confirm your address is in our service area, talk with your doctor's office, and review your insurance before anything is scheduled.",
   },
   {
     title: "A clinician visits your home",
-    text: "A nurse or therapist meets you at home, gets to know your needs and works with your doctor on a plan of care.",
+    photo: { src: "/img/hearthside/photos/step-3", alt: "A nurse with a clipboard talks with an older woman on her sofa", position: "50% 25%" },
+    text: "A nurse or therapist meets you at home, gets to know your needs, and works with your doctor on a plan of care.",
   },
   {
     title: "Care continues, and you stay informed",
+    photo: { src: "/img/hearthside/photos/step-4", alt: "A nurse talks a care plan through with an older woman and her daughter at home", position: "50% 30%" },
     text: "Visits follow your plan. You and your family always know who is coming, when, and who to call with questions.",
   },
 ];
@@ -99,7 +112,7 @@ export const STEPS = [
 // never as a decision.
 export const MEDICARE_CONDITIONS = [
   "You're under the care of a doctor, and getting services under a plan of care your doctor reviews regularly.",
-  "A doctor certifies that you need skilled care, such as intermittent nursing or physical, speech or occupational therapy.",
+  "A doctor certifies that you need skilled care, such as intermittent nursing or physical, speech, or occupational therapy.",
   "A doctor certifies that you're homebound: leaving home takes considerable effort.",
 ];
 export const MEDICARE_URL = "https://www.medicare.gov/coverage/home-health-services";
@@ -107,7 +120,7 @@ export const MEDICARE_URL = "https://www.medicare.gov/coverage/home-health-servi
 export const FAQS = [
   {
     q: "What's the difference between home health and home care?",
-    a: "Home health is skilled, medical care ordered by a doctor, such as nursing or therapy. Home care is non-medical help like companionship, meals or housekeeping. Hearthside provides home health. If you're looking for non-medical help, our intake team can point you to local options.",
+    a: "Home health is skilled, medical care ordered by a doctor, such as nursing or therapy. Home care is non-medical help like companionship, meals, or housekeeping. Hearthside provides home health. If you're looking for non-medical help, our intake team can point you to local options.",
   },
   {
     q: "Do I need a referral from my doctor?",
@@ -119,7 +132,7 @@ export const FAQS = [
   },
   {
     q: "What happens at the first visit?",
-    a: "A nurse or therapist comes to your home, reviews your health and medications, checks your home for safety and talks about your goals. The visit usually takes one to two hours. A family member is welcome to join.",
+    a: "A nurse or therapist comes to your home, reviews your health and medications, checks your home for safety, and talks about your goals. The visit usually takes one to two hours. A family member is welcome to join.",
   },
   {
     q: "How quickly can care start?",
@@ -182,10 +195,10 @@ export const AREAS = [
 // Careers (sample roles). Applications go to a separate hiring workflow,
 // never into patient intake.
 export const ROLES = [
-  { id: "rn", title: "Registered Nurse, Case Manager", area: "San Fernando Valley", type: "Full time", text: "Lead a caseload of patients at home: assessments, plans of care and coordination with physicians." },
+  { id: "rn", title: "Registered Nurse, Case Manager", area: "San Fernando Valley", type: "Full time", text: "Lead a caseload of patients at home: assessments, plans of care, and coordination with physicians." },
   { id: "pt", title: "Physical Therapist", area: "Santa Clarita Valley", type: "Full time or per visit", text: "Help patients rebuild strength and confidence in the homes they live in." },
   { id: "ot", title: "Occupational Therapist", area: "San Fernando Valley", type: "Per visit", text: "Make daily life safer and easier for patients recovering at home." },
-  { id: "slp", title: "Speech-Language Pathologist", area: "Both valleys", type: "Per visit", text: "Speech, swallowing and cognition therapy for patients after stroke and illness." },
+  { id: "slp", title: "Speech-Language Pathologist", area: "Both valleys", type: "Per visit", text: "Speech, swallowing, and cognition therapy for patients after stroke and illness." },
   { id: "hha", title: "Home Health Aide", area: "San Fernando Valley", type: "Part time", text: "Personal care visits as part of a patient's skilled plan of care." },
-  { id: "intake", title: "Intake Coordinator", area: "Van Nuys office", type: "Full time", text: "Be the first voice families and referral partners hear: route, screen and schedule new patients." },
+  { id: "intake", title: "Intake Coordinator", area: "Van Nuys office", type: "Full time", text: "Be the first voice families and referral partners hear: route, screen, and schedule new patients." },
 ];

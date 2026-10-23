@@ -11,7 +11,7 @@ export default function Contact() {
   return (
     <div className="hs-wrap">
       <PageHead
-        eyebrow="Contact"
+        photo={{ shot: "An older parent on the phone at home, her daughter beside her", src: "/img/hearthside/photos/family-phone", alt: "An older woman talks on the phone on her sofa while her daughter sits close", position: "50% 30%" }}
         title="Request a call"
         lede="Tell us how to reach you and our intake team will call within one business day. No forms about your medical history: we'll ask what we need when we talk."
       />

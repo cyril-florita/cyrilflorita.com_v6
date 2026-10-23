@@ -7,6 +7,8 @@
    in Host Grotesk, small labels in DM Mono. */
 
 .hs {
+  --hs-hill-2: #9DB2C6;           /* service-area map hills */
+  --hs-house: #22303D;            /* the dark closing band */
   /* Light (Tide, the default scheme): navy ink on misty blue-grey, a
      harbour-blue accent (the --hs-ember-* names predate it), Sage for status. */
   --hs-page: #F2F5F7;
@@ -31,11 +33,6 @@
   --hs-glow: #FFC27A;
   --hs-window: #D98A2B;         /* the logo's lit window: always warm */
   --hs-band-accent: #8CC2EA;    /* accent on the dark closing band */
-  --hs-dusk-1: #DDE7F0;
-  --hs-dusk-2: #C6D5E3;
-  --hs-hill-1: #B7C8D8;
-  --hs-hill-2: #9DB2C6;
-  --hs-house: #22303D;
   --hs-photo: #E1E8EE;          /* photo placeholders */
   --hs-photo-2: #D0DAE3;
   --hs-focus: #1F5FBF;
@@ -46,7 +43,14 @@
   --hs-radius: 12px;            /* images, panels */
   --hs-radius-sm: 6px;          /* buttons, inputs */
   --hs-label-col: 240px;
+  /* Motion: one family. --hs-ease for UI (hovers, bars), --hs-ease-soft for
+     slow photo drifts and reveals; three durations. All motion is off under
+     reduced motion. */
   --hs-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --hs-ease-soft: cubic-bezier(0.16, 1, 0.3, 1);
+  --hs-dur-fast: 0.2s;
+  --hs-dur: 0.35s;
+  --hs-dur-slow: 1.2s;
 
   min-height: 100vh;
   background: var(--hs-page);
@@ -59,6 +63,8 @@
 }
 
 .hs[data-hs-mode="dark"] {
+  --hs-hill-2: #161E27;           /* service-area map hills */
+  --hs-house: #0A0F14;            /* the dark closing band */
   --hs-page: #10161C;
   --hs-surface: #18212A;
   --hs-sand: #1F2A35;
@@ -80,11 +86,6 @@
   --hs-danger-bg: #3D201C;
   --hs-glow: #FFB25C;
   --hs-window: #F0A04A;
-  --hs-dusk-1: #1B2533;
-  --hs-dusk-2: #233041;
-  --hs-hill-1: #1E2833;
-  --hs-hill-2: #161E27;
-  --hs-house: #0A0F14;
   --hs-photo: #1D2630;
   --hs-photo-2: #25303B;
   --hs-focus: #8DB8FF;
@@ -99,6 +100,8 @@
    passes the same contrast targets. ThemeSwitch (client.js) sets it; the
    pre-paint script in layout.js applies the saved choice. */
 .hs[data-hs-theme="shore"] {
+  --hs-hill-2: #A1AFBC;           /* service-area map hills */
+  --hs-house: #1E2A36;            /* the dark closing band */
   --hs-page: #F6F2EA;
   --hs-surface: #FFFDF8;
   --hs-sand: #ECE5D8;
@@ -115,15 +118,12 @@
   --hs-glow: #FFB066;
   --hs-window: #C0602E;
   --hs-band-accent: #EE9466;
-  --hs-dusk-1: #F3DCC6;
-  --hs-dusk-2: #E3D3CB;
-  --hs-hill-1: #BCC6CF;
-  --hs-hill-2: #A1AFBC;
-  --hs-house: #1E2A36;
   --hs-photo: #E7E0D5;
   --hs-photo-2: #D3D6D8;
 }
 .hs[data-hs-theme="shore"][data-hs-mode="dark"] {
+  --hs-hill-2: #151C24;           /* service-area map hills */
+  --hs-house: #0A0E13;            /* the dark closing band */
   --hs-page: #121820;
   --hs-surface: #1A222C;
   --hs-sand: #222C37;
@@ -139,11 +139,6 @@
   --hs-ember-soft: #3A2419;
   --hs-glow: #FFA459;
   --hs-window: #EE9466;
-  --hs-dusk-1: #1C2431;
-  --hs-dusk-2: #2E2A33;
-  --hs-hill-1: #1D2630;
-  --hs-hill-2: #151C24;
-  --hs-house: #0A0E13;
   --hs-photo: #1E2630;
   --hs-photo-2: #2A2B30;
 }
@@ -156,19 +151,23 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
 
 .hs *, .hs *::before, .hs *::after { box-sizing: border-box; }
 :where(.hs) :is(h1, h2, h3, h4) { font-family: var(--hs-font-display); font-weight: 600; line-height: 1.08; letter-spacing: -0.03em; margin: 0; text-wrap: balance; }
-:where(.hs) h1 { font-size: clamp(44px, 5.4vw, 76px); line-height: 1.02; }
-:where(.hs) h2 { font-size: clamp(34px, 3.8vw, 52px); }
-:where(.hs) h3 { font-size: 24px; line-height: 1.2; font-weight: 600; letter-spacing: -0.015em; }
+:where(.hs) h1 { font-size: clamp(44px, 5.6vw, 80px); line-height: 1; letter-spacing: -0.035em; }
+:where(.hs) h2 { font-size: clamp(34px, 3.8vw, 54px); line-height: 1.04; letter-spacing: -0.032em; }
+:where(.hs) h3 { font-size: 24px; line-height: 1.2; font-weight: 600; letter-spacing: -0.02em; }
 :where(.hs) p { margin: 0; text-wrap: pretty; }
+/* No browser tap flash (the translucent blue box mobile browsers draw on
+   tap); instead each control shows its own pressed state below. */
+.hs :is(a, button, summary, label, input, select, textarea) { -webkit-tap-highlight-color: transparent; }
 :where(.hs) a { color: var(--hs-ember-text); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
-:where(.hs) a:hover { text-decoration-thickness: 2px; }
+:where(.hs) a { text-decoration-color: color-mix(in srgb, currentColor 40%, transparent); transition: text-decoration-color var(--hs-dur-fast) var(--hs-ease), text-underline-offset var(--hs-dur-fast) var(--hs-ease); }
+:where(.hs) a:hover { text-decoration-color: currentColor; text-underline-offset: 0.26em; }
 .hs :focus-visible { outline: 3px solid var(--hs-focus); outline-offset: 3px; border-radius: 4px; }
 .hs img { max-width: 100%; display: block; }
 :where(.hs) :is(ul, ol) { margin: 0; padding: 0; }
 
 /* The frame: content sits between two hairlines on wide screens. */
 .hs-shell { max-width: 1440px; margin-inline: auto; }
-@media (min-width: 1100px) { .hs-shell { width: calc(100% - 64px); border-inline: 1px solid var(--hs-rule); } }
+@media (min-width: 1100px) { .hs-shell { width: calc(100% - 64px); } } /* no framing hairlines down the sides (removed) */
 .hs-wrap { width: calc(100% - 96px); max-width: 1280px; margin-inline: auto; }
 @media (max-width: 1099px) { .hs-wrap { width: calc(100% - 64px); } }
 @media (max-width: 680px) { .hs-wrap { width: calc(100% - 32px); } }
@@ -184,12 +183,13 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
 .hs-label { font-family: var(--hs-font-label); font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1.4; color: var(--hs-ink); }
 .hs-eyebrow { display: block; margin-bottom: 16px; font-family: var(--hs-font-label); font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--hs-ember-text); }
 .hs-lede { margin-top: 20px; max-width: 58ch; color: var(--hs-ink-2); font-size: 20px; line-height: 1.55; }
-.hs-sample { display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px; border: 1px dashed var(--hs-control); border-radius: 4px; color: var(--hs-ink-2); font-family: var(--hs-font-label); font-size: 12.5px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; vertical-align: middle; white-space: nowrap; }
-.hs-sample::before { content: ""; width: 6px; height: 6px; background: var(--hs-ember); }
+.hs-sample { display: inline-flex; align-items: center; color: var(--hs-ink-2); font-family: var(--hs-font-label); font-size: 11.5px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.4; white-space: nowrap; }
+.hs-sample::before { content: "[\00a0"; }
+.hs-sample::after { content: "\00a0]"; }
 
 /* ---------- Header ---------- */
 .hs-header { position: sticky; top: 0; z-index: 40; background: color-mix(in srgb, var(--hs-page) 94%, transparent); backdrop-filter: blur(10px); }
-.hs-header-row { display: flex; align-items: center; gap: 20px; min-height: 80px; border-bottom: 1px solid var(--hs-rule); }
+.hs-header-row { display: flex; align-items: center; gap: 20px; min-height: 80px; } /* no rule under the header (removed at every size) */
 .hs-logo { display: inline-flex; align-items: center; gap: 14px; color: var(--hs-ink); text-decoration: none; flex: none; }
 .hs-logo-rule { width: 1px; height: 34px; background: var(--hs-rule); }
 .hs-logo-text { display: grid; line-height: 1; }
@@ -200,34 +200,52 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
 .hs-mark-h { fill: var(--hs-page); }
 .hs-nav { margin-left: auto; }
 .hs-nav ul { display: flex; gap: 2px; list-style: none; }
-.hs-nav a { display: block; padding: 10px 12px; border-radius: var(--hs-radius-sm); color: var(--hs-ink); text-decoration: none; font-weight: 500; font-size: 17px; white-space: nowrap; }
-.hs-nav a:hover { background: var(--hs-sand); }
-.hs-nav a[aria-current="page"] { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.35em; text-decoration-color: var(--hs-ember); }
-.hs-header-actions { display: flex; align-items: center; gap: 12px; }
-.hs-header-phone { display: inline-flex; align-items: center; gap: 6px; color: var(--hs-ink); font-weight: 600; text-decoration: none; white-space: nowrap; }
-.hs-header-phone:hover { text-decoration: underline; }
-.hs-mode, .hs-menu-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-width: 46px; min-height: 46px; padding: 0 12px; border: 1px solid var(--hs-control); border-radius: 999px; background: transparent; color: var(--hs-ink); font: inherit; font-weight: 600; cursor: pointer; }
-.hs-mode:hover, .hs-menu-btn:hover { background: var(--hs-sand); }
-.hs-menu-btn { display: none; border-radius: var(--hs-radius-sm); }
-.hs-menu { padding: 8px 0 24px; border-bottom: 1px solid var(--hs-rule); }
-.hs-menu ul { list-style: none; }
-.hs-menu li a { display: block; padding: 14px 0; border-bottom: 1px solid var(--hs-line); color: var(--hs-ink); text-decoration: none; font-family: var(--hs-font-display); font-size: 24px; font-weight: 600; letter-spacing: -0.02em; }
-.hs-menu li a[aria-current="page"] { color: var(--hs-ember-text); }
-.hs-menu-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; margin-top: 20px; }
-@media (max-width: 1340px) { .hs-header-phone { display: none; } }
+/* Nav links: plain text; the current page sits in a leaf — the logo's and
+   photos' shape (two corners swept, two tight) — filled with the quiet accent
+   tint, its label a touch heavier. Hover shows the same leaf in sand. */
+.hs-nav a { position: relative; isolation: isolate; display: flex; align-items: center; min-height: 46px; padding: 0 16px; color: var(--hs-ink); text-decoration: none; font-weight: 500; font-size: 17px; white-space: nowrap; }
+/* The leaf is drawn inside the link, half the link's vertical padding above
+   and below the label (inset 6px), so it hugs the text while the link keeps
+   its full 44–46px tap height. */
+.hs-nav a::before { content: ""; position: absolute; inset: 6px 0; z-index: -1; border-radius: 4px 16px; background: transparent; transition: background-color var(--hs-dur-fast) var(--hs-ease); }
+.hs-nav a:is(:hover, :active)::before { background: var(--hs-sand); }
+.hs-nav a[aria-current="page"]::before { background: var(--hs-ember-soft); }
+.hs-nav a[aria-current="page"] { font-weight: 600; }
+.hs-header-actions { display: flex; align-items: center; gap: 12px; margin-left: 40px; } /* light/dark (and the Menu button below 1081px), set apart from the nav */
+.hs-mode { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-width: 46px; min-height: 46px; padding: 0 12px; border: 1.5px solid var(--hs-ink); border-radius: var(--hs-radius-sm); background: transparent; color: var(--hs-ink); font: inherit; font-weight: 600; cursor: pointer; }
+.hs-mode:is(:hover, :active) { background: var(--hs-sand); }
+/* Pressed: buttons and the toggle dip slightly while held. */
+.hs :is(.hs-btn, .hs-mode, .hs-dock-phone, .hs-totop):active { scale: 0.97; }
+/* Phones and tablets: the nav becomes a second row under the logo, a strip of
+   links that scrolls sideways (Header in client.js scrolls the current page
+   into view and marks the edges that have more links past them, which fade). */
+.hs-nav-short { display: none; }
 @media (max-width: 1080px) {
-  .hs-nav { display: none; }
-  .hs-menu-btn { display: inline-flex; }
+  .hs-header-row { flex-wrap: wrap; row-gap: 0; min-height: 0; padding-top: 14px; }
   .hs-header-actions { margin-left: auto; }
+  .hs-nav { order: 3; flex: 0 0 100%; min-width: 0; margin: 6px 0 0; } /* min-width 0, or the strip grows to fit every link instead of scrolling */
+  .hs-nav ul { gap: 4px; overflow-x: auto; scrollbar-width: none; margin-inline: -16px; padding: 0 16px 8px; overscroll-behavior-x: contain; }
+  .hs-nav ul::-webkit-scrollbar { display: none; }
+  /* Fades mark the edges with more links past them, and a chevron on the
+     right says "swipe for more" (the nav carries the same data-more-*
+     attributes as the list, so the hint stays put while the list scrolls). */
+  .hs-nav { position: relative; }
+  .hs-nav ul[data-more-end] { mask-image: linear-gradient(to right, #000 calc(100% - 72px), transparent calc(100% - 28px)); }
+  .hs-nav ul[data-more-start] { mask-image: linear-gradient(to right, transparent 12px, #000 56px); }
+  .hs-nav ul[data-more-start][data-more-end] { mask-image: linear-gradient(to right, transparent 12px, #000 56px, #000 calc(100% - 72px), transparent calc(100% - 28px)); }
+  .hs-nav[data-more-end]::after { content: ""; position: absolute; right: 2px; top: 50%; width: 9px; height: 9px; margin-top: -9px; border-right: 2px solid var(--hs-ink); border-top: 2px solid var(--hs-ink); rotate: 45deg; pointer-events: none; }
+  .hs-nav li { flex: none; }
+  .hs-nav a { min-height: 44px; padding: 0 12px; font-size: 16px; }
 }
-@media (min-width: 1081px) { .hs-menu { display: none; } }
-/* Phones and tablets: the header slides away while scrolling down and back
-   on the way up (Header in client.js sets .is-scroll-hidden on .hs); the
-   phone call bar does the same downward. */
-@media (max-width: 1080px) {
-  .hs-header { transition: translate 0.35s var(--hs-ease); }
-  .hs.is-scroll-hidden .hs-header { translate: 0 -100%; }
+@media (max-width: 760px) {
+  .hs-nav-full { display: none; }
+  .hs-nav-short { display: inline; }
 }
+/* The header slides away while scrolling down and back on the way up
+   (Header in client.js sets .is-scroll-hidden on .hs); the contact dock does
+   the same downward. */
+.hs-header { transition: translate var(--hs-dur) var(--hs-ease); }
+.hs.is-scroll-hidden .hs-header { translate: 0 -100%; }
 @media (max-width: 560px) {
   .hs-header-actions .hs-btn { display: none; }
   .hs-logo-name { font-size: 21px; }
@@ -244,7 +262,8 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
 .hs-btn-quiet { min-height: 44px; padding: 0 2px; background: none; color: var(--hs-ember-text); }
 .hs-btn-quiet:hover { text-decoration: underline; text-underline-offset: 0.3em; }
 .hs-btn-sm { min-height: 44px; padding: 0 16px; font-size: 14px; }
-.hs-btn .hs-icon { transition: translate 0.2s var(--hs-ease); }
+.hs-btn { transition: background-color var(--hs-dur-fast) var(--hs-ease), color var(--hs-dur-fast) var(--hs-ease), border-color var(--hs-dur-fast) var(--hs-ease); }
+.hs-btn .hs-icon { transition: translate var(--hs-dur-fast) var(--hs-ease); }
 .hs-btn:hover .hs-icon { translate: 3px 0; }
 .hs-btn[disabled] { opacity: 0.45; cursor: not-allowed; }
 .hs-btn[disabled]:hover { background: var(--hs-ink); color: var(--hs-page); }
@@ -254,12 +273,12 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
 
 /* ---------- The editorial row: label column | content ---------- */
 .hs-row { display: grid; grid-template-columns: var(--hs-label-col) minmax(0, 1fr); border-top: 1px solid var(--hs-rule); }
-.hs-row-label { padding: 40px 32px 40px 0; }
+.hs-row-label { padding: 64px 32px 40px 0; }
 .hs-row-label .hs-label { position: sticky; top: 112px; display: block; }
-.hs-row-body { min-width: 0; padding: 40px 0 80px 40px; border-left: 1px solid var(--hs-rule); }
+.hs-row-body { min-width: 0; padding: 60px 0 112px 48px; } /* no hairline between the label column and the content (removed) */
 .hs-row-body > h2 { max-width: 20ch; }
-.hs-row-body > .hs-lede { margin-bottom: 40px; }
-.hs-row.is-tight .hs-row-body { padding-bottom: 40px; }
+.hs-row-body > .hs-lede { margin-bottom: 56px; }
+.hs-row.is-tight .hs-row-body { padding-bottom: 56px; }
 @media (max-width: 900px) {
   .hs-row { grid-template-columns: 1fr; }
   .hs-row-label { padding: 28px 0 0; }
@@ -268,56 +287,60 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
 }
 
 /* Ruled grids: cells divided by hairlines, no boxes. */
-.hs-ruled { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); list-style: none; }
-.hs-ruled > * { padding: 28px 32px 32px 0; border-bottom: 1px solid var(--hs-rule); }
-.hs-ruled > :nth-child(2n) { padding-left: 32px; padding-right: 0; border-left: 1px solid var(--hs-rule); }
-.hs-ruled > :nth-last-child(-n + 2):nth-child(2n + 1), .hs-ruled > :last-child { border-bottom: 0; }
-.hs-ruled > :nth-child(-n + 2) { padding-top: 8px; }
+/* Two columns divided by one vertical hairline; rows are separated by space,
+   not rules (fewer lines reads calmer). */
+.hs-ruled { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 56px; list-style: none; }
+.hs-ruled > * { padding: 0 40px 0 0; }
+.hs-ruled > :nth-child(2n) { padding-left: 40px; padding-right: 0; border-left: 1px solid var(--hs-rule); }
 @media (max-width: 700px) {
-  .hs-ruled { grid-template-columns: 1fr; }
-  .hs-ruled > *, .hs-ruled > :nth-child(2n) { padding: 24px 0; border-left: 0; border-bottom: 1px solid var(--hs-rule); }
-  .hs-ruled > :nth-child(-n + 2) { padding-top: 24px; }
-  .hs-ruled > :first-child { padding-top: 8px; }
-  .hs-ruled > :nth-last-child(-n + 2):nth-child(2n + 1) { border-bottom: 1px solid var(--hs-rule); }
-  .hs-ruled > :last-child { border-bottom: 0; }
+  .hs-ruled { grid-template-columns: 1fr; row-gap: 40px; }
+  .hs-ruled > *, .hs-ruled > :nth-child(2n) { padding: 0; border-left: 0; }
 }
 
 /* ---------- Hero ---------- */
-.hs-hero { padding-block: 40px 64px; }
+.hs-hero { padding-block: 40px 64px; container-type: inline-size; }
 .hs-hero h1 span { display: block; }
 .hs-hero .hs-lede { font-size: 21px; max-width: 640px; }
 .hs-hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
 .hs-hero-call { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin-top: 20px; color: var(--hs-ink-2); }
-.hs-hero-copy { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px 56px; align-items: start; margin-top: 40px; }
-.hs-hero-actions { justify-self: end; }
+.hs-hero-copy { margin-top: 40px; }
+/* Desktop: the buttons sit just under the photo on the right, level with the
+   headline's lower lines, which run past the photo's bottom edge. */
+.hs-hero-actions { position: absolute; right: 0; top: calc(var(--hs-hero-h) + 36px); z-index: 2; }
 
 /* The stage: a wide rectangular photo, the headline in a notch cut into its
    bottom-left corner, after a reference. The notch is the page colour with a
    rounded top-right corner; ::before and ::after draw the two inverse
    corners where it meets the photo (a quarter circle of photo inside a
    page-coloured square), so the photo reads as one shape wrapping the text. */
-.hs-hero-stage { --hs-notch-r: 28px; position: relative; }
-.hs-hero-art { position: relative; height: clamp(560px, 46vw, 680px); border-radius: var(--hs-notch-r); overflow: hidden; background: var(--hs-photo); }
-.hs-hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
-.hs-hero-notch { position: absolute; left: 0; bottom: 0; z-index: 1; max-width: min(64%, 820px); padding: 28px 40px 0 0; background: var(--hs-page); border-top-right-radius: var(--hs-notch-r); }
+/* Desktop: the hero is 808/1717 of its width tall (a wide crop), and the
+   photo (source 1536×1024) is positioned so its top edge just touches the
+   nurse's hair (76px down the source): 76/1536 over the 0.196 of the width
+   that overflows = 25.2%, at any width. */
+.hs-hero-stage { --hs-notch-r: 28px; --hs-hero-h: max(400px, min(calc(100cqw * 808 / 1717), calc(100svh - 330px))); position: relative; } /* capped by the screen height, so the next section peeks in on a laptop */
+.hs-hero-art { position: relative; height: var(--hs-hero-h); border-radius: var(--hs-notch-r); overflow: hidden; background: var(--hs-photo) center 30% / cover; } /* the inline background-image is the blurred preview */
+.hs-hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0%; } /* anchored at the photo's top, so the nurse's hair has its full headroom (the crop comes off the bottom) */
+/* The headline starts three quarters of the way down the photo and runs past
+   its bottom edge (pulled up into the photo by a negative margin, so the
+   page below makes room for it). */
+/* The headline overlaps the photo's foot in one page-coloured block (both
+   lines share its width — no per-line contour): "Compassionate" sits on the
+   photo, "care at home." straddles its bottom edge. The block rounds its
+   top-right corner, and two inverse corners join it to the photo: above its
+   left edge (::before) and where the photo's bottom meets its right side
+   (::after, placed at the overlap). */
+.hs-hero-notch { --hs-fs: clamp(48px, 5.6vw, 84px); --hs-overlap: calc(1.8 * var(--hs-fs)); position: relative; z-index: 1; width: fit-content; margin-top: calc(-1 * var(--hs-overlap)); padding: calc(0.32 * var(--hs-fs)) calc(0.64 * var(--hs-fs)) 0 0; /* no max-width: it squeezed the block narrower than "Compassionate" on smaller laptops, so the word ran into the photo */ /* padding in proportion to the type */ background: var(--hs-page); border-top-right-radius: var(--hs-notch-r); }
 .hs-hero-notch::before, .hs-hero-notch::after { content: ""; position: absolute; width: var(--hs-notch-r); height: var(--hs-notch-r); background: radial-gradient(circle at 100% 0, transparent calc(var(--hs-notch-r) - 0.5px), var(--hs-page) var(--hs-notch-r)); }
 .hs-hero-notch::before { left: 0; bottom: 100%; }
-.hs-hero-notch::after { left: 100%; bottom: 0; }
-.hs-hero-notch h1 { font-size: clamp(44px, 4.6vw, 70px); }
+.hs-hero-notch::after { left: 100%; top: calc(var(--hs-overlap) - var(--hs-notch-r)); }
+.hs-hero-notch h1 { font-size: var(--hs-fs); line-height: 1.04; letter-spacing: -0.04em; }
 /* The eyebrow, in a page-coloured tab cut into the photo's top-right corner:
    rounded bottom-left corner, and inverse corners where it meets the top
    and right edges (the same quarter-circle trick as the notch). */
-.hs-hero-tab { position: absolute; top: 0; right: 0; z-index: 1; margin: 0; padding: 0 0 16px 26px; background: var(--hs-page); border-bottom-left-radius: var(--hs-notch-r); }
+.hs-hero-tab { position: absolute; top: 0; right: 0; z-index: 1; margin: 0; padding: 14px 0 14px 26px; /* label centred: equal space above and below */ background: var(--hs-page); border-bottom-left-radius: var(--hs-notch-r); }
 .hs-hero-tab::before, .hs-hero-tab::after { content: ""; position: absolute; width: var(--hs-notch-r); height: var(--hs-notch-r); background: radial-gradient(circle at 0 100%, transparent calc(var(--hs-notch-r) - 0.5px), var(--hs-page) var(--hs-notch-r)); }
 .hs-hero-tab::before { right: 100%; top: 0; }
 .hs-hero-tab::after { right: 0; top: 100%; }
-/* HeroContour (client.js) swaps the block for a shape that hugs each line:
-   an SVG path in the page colour between the photo and the text. */
-.hs-hero-contour { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; overflow: visible; pointer-events: none; display: none; }
-.hs-hero-contour path { fill: var(--hs-page); }
-.hs-hero-stage.is-contoured .hs-hero-contour { display: block; }
-.hs-hero-stage.is-contoured .hs-hero-notch { z-index: 2; background: none; }
-.hs-hero-stage.is-contoured .hs-hero-notch::before, .hs-hero-stage.is-contoured .hs-hero-notch::after { display: none; }
 .hs-art-card { position: absolute; right: 20px; bottom: 20px; left: auto; display: flex; align-items: center; gap: 14px; max-width: 360px; padding: 14px 18px; background: var(--hs-surface); border: 1px solid var(--hs-line); border-radius: 10px; font-size: 16px; line-height: 1.4; }
 .hs-art-card strong { display: block; font-size: 17px; }
 .hs-art-card span { color: var(--hs-ink-2); }
@@ -329,14 +352,21 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
    headline; phones reverse that below (headline first). */
 @media (max-width: 960px) {
   .hs-hero { padding-block: 32px 48px; }
-  .hs-hero-stage { display: flex; flex-direction: column; gap: 28px; }
+  /* Tablets and phones: one column — photo, eyebrow, headline, lede, buttons. */
+  .hs-hero { display: flex; flex-direction: column; gap: 28px; }
+  .hs-hero-stage { display: contents; }
+  .hs-hero-art { order: 0; }
+  .hs-hero-tab { order: 1; }
+  .hs-hero-notch { order: 2; margin-top: 0; width: auto; }
+  .hs-hero-copy { order: 3; }
+  .hs-hero-actions { order: 4; position: static; }
   .hs-hero-art { height: auto; aspect-ratio: 16 / 10; border-radius: var(--hs-radius); }
+  .hs-hero-img { object-position: 50% 30%; } /* the desktop bottom-anchored crop is desktop only */
   .hs-hero-notch { position: static; max-width: none; padding: 0; background: none; border-radius: 0; }
   .hs-hero-notch::before, .hs-hero-notch::after { display: none; }
   .hs-hero-tab { position: static; padding: 0; background: none; border-radius: 0; margin-bottom: -12px; }
   .hs-hero-tab::before, .hs-hero-tab::after { display: none; }
-  .hs-hero-copy { grid-template-columns: 1fr; margin-top: 20px; }
-  .hs-hero-actions { justify-self: start; }
+  .hs-hero-copy { margin-top: 0; }
 }
 
 /* Making the hero feel premium, all CSS and all off under reduced motion:
@@ -344,12 +374,14 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
       zoom on a long expo ease-out, like a camera finding focus. It starts a
       third open so the photo paints at once (for LCP).
    2. The first-visit card rises in once the photo has landed.
-   3. Scroll: as the page moves off the hero, the photo slowly pushes in
-      (scale 1 → 1.12) and drifts up (a scroll-driven animation on the root
-      scroller; where unsupported, it stays still).
-   The reveal uses transform and the push-in the separate scale / translate
-   properties, so the two compose. The notch sits outside the clipped photo,
-   so the headline never moves. */
+   3. Scroll (tablets and phones): the photo slowly pushes in (scale 1 →
+      1.12) and drifts up as the page moves off the hero.
+   4. Scroll story (desktop): scrolling off the hero closes in on the nurse
+      and the patient (scale 1 → 1.5 around the point between their faces), while the area-label tab fades so the photo opens to a full
+      rectangle and the first-visit card slips away. Scroll-driven animations
+      on the root scroller (static where unsupported).
+   The reveal uses transform and the scroll the separate scale / translate
+   properties, so the two compose. The headline never moves. */
 @media (prefers-reduced-motion: no-preference) {
   .hs-hero-art { animation: hs-hero-open 1.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
   .hs-hero-img {
@@ -360,9 +392,19 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
   }
   .hs-hero-art .hs-art-card { animation: hs-hero-card 0.9s 0.9s cubic-bezier(0.16, 1, 0.3, 1) both; }
 }
+@media (prefers-reduced-motion: no-preference) and (min-width: 961px) {
+  /* The nurse and the patient: the point between their faces sits 44.6%
+     across, 34% down the cropped photo; at 1.5× the two fill the frame. */
+  .hs-hero-img { transform-origin: 44.6% 34%; animation-name: hs-hero-settle, hs-hero-story; animation-range: normal, 0 45vh; } /* done while the faces are still on screen */
+  .hs-hero-tab { animation: hs-story-fade linear both; animation-timeline: scroll(root); animation-range: 0 35vh; }
+  .hs-hero-art .hs-art-card { animation: hs-hero-card 0.9s 0.9s cubic-bezier(0.16, 1, 0.3, 1) both, hs-story-card linear both; animation-timeline: auto, scroll(root); animation-range: normal, 0 30vh; }
+}
 @keyframes hs-hero-open { from { clip-path: inset(34% 0 0 0); } to { clip-path: inset(0); } }
 @keyframes hs-hero-settle { from { transform: scale(1.18); } to { transform: scale(1); } }
 @keyframes hs-hero-push { from { scale: 1; translate: 0 0; } to { scale: 1.12; translate: 0 -4%; } }
+@keyframes hs-hero-story { from { scale: 1; } to { scale: 1.5; } }
+@keyframes hs-story-fade { to { opacity: 0; } }
+@keyframes hs-story-card { to { opacity: 0; translate: 0 24px; } }
 @keyframes hs-hero-card { from { opacity: 0; translate: 0 16px; } to { opacity: 1; translate: 0 0; } }
 
 /* ---------- Partner logos ---------- */
@@ -391,21 +433,19 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
 /* Home's service cards: the service's photo (leaf), icon + name, then the
    short description. Three equal columns (two on tablets, one on phones),
    with hairlines drawn in the gaps so every card is the same width. */
-.hs-services { --gap: 56px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px var(--gap); margin-top: 40px; list-style: none; }
+.hs-services { --gap: 56px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 96px var(--gap); margin-top: 40px; list-style: none; }
 .hs-service { position: relative; }
-.hs-service:not(:nth-child(3n + 1))::before { content: ""; position: absolute; top: 0; bottom: 0; left: calc(var(--gap) / -2); border-left: 1px solid var(--hs-rule); }
-.hs-service .hs-photo, .hs-service .hs-photo-img { aspect-ratio: 4 / 3; }
-.hs-service h3 { display: flex; align-items: center; gap: 12px; margin-top: 22px; }
+.hs-service :is(.hs-photo, .hs-photo-frame) { aspect-ratio: 4 / 3; }
+.hs-service-detail li { display: block; padding-left: 1.4em; text-indent: -1.4em; } /* the dash hangs, so wrapped lines align with the text */
+.hs-service h3 { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 22px; }
+.hs-service h3 .hs-icon { order: 2; } /* the icon sits flush right, the name left (every size) */
 .hs-service h3 .hs-icon { flex: none; width: 32px; height: 32px; color: var(--hs-ink); stroke-width: 1.3; }
 .hs-service p { margin-top: 10px; color: var(--hs-ink-2); }
 @media (max-width: 960px) {
   .hs-services { --gap: 48px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .hs-service:not(:nth-child(3n + 1))::before { content: none; }
-  .hs-service:nth-child(2n)::before { content: ""; position: absolute; top: 0; bottom: 0; left: calc(var(--gap) / -2); border-left: 1px solid var(--hs-rule); }
 }
 @media (max-width: 600px) {
-  .hs-services { grid-template-columns: 1fr; gap: 40px; margin-top: 28px; }
-  .hs-service:nth-child(2n)::before { content: none; }
+  .hs-services { grid-template-columns: 1fr; gap: 80px; margin-top: 28px; }
 }
 
 .hs-aside { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--hs-rule); color: var(--hs-ink-2); }
@@ -567,6 +607,8 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
 .hs-theme-opt { display: inline-flex; align-items: center; gap: 7px; min-height: 32px; padding: 0 10px 0 6px; border: 1px solid transparent; border-radius: 999px; background: none; color: var(--hs-ink); font: inherit; font-size: 14px; cursor: pointer; }
 .hs-theme-opt:hover { border-color: var(--hs-rule); }
 .hs-theme-opt[aria-checked="true"] { border-color: var(--hs-ink); font-weight: 600; }
+/* Each swatch shows its scheme's page and accent in the current mode. */
+.hs[data-hs-mode="dark"] .hs-theme-dot { background: linear-gradient(135deg, var(--a-dark) 50%, var(--b-dark) 50%); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25); }
 .hs-theme-dot { width: 18px; height: 18px; border-radius: 50%; background: linear-gradient(135deg, var(--a) 50%, var(--b) 50%); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15); }
 .hs-theme-opt { min-height: 40px; padding: 0 12px 0 8px; font-size: 15px; }
 
@@ -587,9 +629,9 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
 @media (max-width: 960px) { .hs-two { grid-template-columns: 1fr; gap: 32px; } }
 
 /* Service detail cards inside the ruled grid. */
-.hs-service-detail { display: grid; gap: 12px; }
-.hs-service-detail .hs-icon { width: 40px; height: 40px; stroke-width: 1.2; }
-.hs-service-detail ul { display: grid; gap: 6px; list-style: none; color: var(--hs-ink-2); }
+/* Services page: Home's service cards plus what each covers. */
+.hs-service-detail .hs-label { display: block; margin-top: 20px; }
+.hs-service-detail ul { display: grid; gap: 6px; margin-top: 10px; list-style: none; color: var(--hs-ink-2); }
 .hs-service-detail li::before { content: "—"; margin-right: 8px; color: var(--hs-ember-text); }
 .hs-service-detail .hs-label { color: var(--hs-ink-2); }
 
@@ -700,15 +742,45 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
    The site is designed for a phone in a worried hand: message before
    imagery, the call always in thumb reach, less scrolling. */
 
-/* The call bar: fixed to the bottom on phones. */
-.hs-callbar { display: none; }
-@media (max-width: 760px) {
-  .hs-callbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 45; display: grid; grid-template-columns: 1fr 1.4fr; gap: 10px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: color-mix(in srgb, var(--hs-page) 94%, transparent); backdrop-filter: blur(10px); border-top: 1px solid var(--hs-rule); transition: translate 0.35s var(--hs-ease), opacity 0.35s; }
-  .hs-callbar .hs-btn { min-height: 52px; padding: 0 12px; }
-  .hs-callbar.is-hidden { translate: 0 100%; opacity: 0; pointer-events: none; }
-  .hs.is-scroll-hidden .hs-callbar { translate: 0 100%; }
+/* The contact dock (ContactDock in client.js). Desktop: a compact pill
+   floating at the bottom centre, the phone number then one button. Tablets
+   and phones: a full-width bar, the phone as a button. */
+/* The bar spans the viewport (clicks pass through); its row is the page's
+   .hs-wrap, so the dock lines up with the content's left edge and the
+   back-to-top button with its right. */
+.hs-dock-bar { position: fixed; left: 0; right: 0; bottom: 20px; z-index: 45; pointer-events: none; }
+.hs-dock-shell { max-width: 1440px; margin-inline: auto; } /* mirrors .hs-shell (its frame and width), so the row matches the page's .hs-wrap */
+@media (min-width: 1100px) { .hs-dock-shell { width: calc(100% - 64px); } }
+.hs-dock-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; }
+.hs-dock-row > * { pointer-events: auto; }
+/* Desktop: no container of its own — the dock is two real buttons side by
+   side (the phone as a secondary button, Request a call as primary) and the
+   back-to-top is a square secondary button, all with the buttons' 52px
+   height, 6px corners and 1.5px ink border. Being afloat, the secondary ones
+   take a frosted page-colour fill and every one a soft shadow. */
+.hs-dock { display: flex; align-items: center; gap: 10px; transition: translate var(--hs-dur) var(--hs-ease), opacity var(--hs-dur) var(--hs-ease); }
+.hs-dock > *, .hs-totop { box-shadow: 0 10px 28px rgba(15, 25, 35, 0.14); }
+.hs[data-hs-mode="dark"] :is(.hs-dock > *, .hs-totop) { box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5); }
+:is(.hs-dock-phone, .hs-totop).hs-btn-secondary { background: color-mix(in srgb, var(--hs-page) 90%, transparent); backdrop-filter: blur(14px); }
+:is(.hs-dock-phone, .hs-totop).hs-btn-secondary:hover { background: var(--hs-sand); }
+.hs-dock-label { margin-right: 4px; }
+.hs-dock.is-hidden, .hs.is-scroll-hidden .hs-dock { translate: 0 calc(100% + 28px); opacity: 0; }
+.hs-dock.is-hidden, .hs-totop.is-hidden { pointer-events: none; }
+.hs-totop { width: 52px; padding: 0; margin-left: auto; transition: translate var(--hs-dur) var(--hs-ease), opacity var(--hs-dur) var(--hs-ease), background-color var(--hs-dur-fast) var(--hs-ease); }
+.hs-totop.is-hidden { translate: 0 calc(100% + 28px); opacity: 0; }
+:root:has(.hs) { scroll-padding-bottom: 96px; } /* focused elements never sit under the dock */
+@media (max-width: 1080px) {
+  .hs-dock-bar { bottom: 0; }
+  .hs-dock-row { display: block; width: 100%; }
+  .hs-totop { display: none; } /* phones and tablets: the bar and the header are enough */
+  /* Tablets and phones: a full-width bar holding the same two buttons. */
+  .hs-dock { display: grid; grid-template-columns: 1fr 1.4fr; gap: 10px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); border-top: 1px solid var(--hs-rule); background: color-mix(in srgb, var(--hs-page) 94%, transparent); backdrop-filter: blur(10px); }
+  .hs-dock > *, .hs[data-hs-mode="dark"] .hs-dock > * { box-shadow: none; }
+  .hs-dock .hs-btn { padding: 0 12px; }
+  .hs-dock.is-hidden, .hs.is-scroll-hidden .hs-dock { translate: 0 100%; }
   .hs-shell { padding-bottom: calc(76px + env(safe-area-inset-bottom)); }
 }
+@media (max-width: 560px) { .hs-dock-num { display: none; } }
 
 @media (max-width: 760px) {
   /* Hero: words and the call first, the illustration after, shorter. */
@@ -734,63 +806,358 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
   .hs-feature-grid { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 8px 0 40px; margin-inline: -16px; padding-inline: 16px; scrollbar-width: none; }
   .hs-feature-grid::-webkit-scrollbar { display: none; }
   .hs-feature-grid > * { flex: 0 0 82%; scroll-snap-align: center; margin: 0 !important; padding: 0 !important; border: 0 !important; }
-  .hs-feature-grid .hs-photo { aspect-ratio: 4 / 3.2 !important; }
 }
 
-/* ---------- Illustrations: Open Peeps (components/hearthside/Peeps.js) ----------
-   Figures are <use>s of the sprite public/img/hearthside/peeps.svg: lines in
-   currentColor, fills from these tokens (inherited into the sprite), so they
-   follow every scheme and mode. A warm disc behind each group is the lamplight. */
-.hs { --hs-peep-paper: var(--hs-surface); --hs-peep-tint-1: color-mix(in srgb, var(--hs-ember) 22%, var(--hs-surface)); --hs-peep-tint-2: color-mix(in srgb, var(--hs-ember) 45%, var(--hs-surface)); }
-.hs-peeps { --peeps-h: 260px; position: relative; display: flex; align-items: flex-end; justify-content: center; gap: 0; height: var(--peeps-h); color: var(--hs-ink); }
-.hs-peeps-disc { position: absolute; left: 50%; bottom: 10%; width: calc(var(--peeps-h) * 0.82); aspect-ratio: 1; translate: -50% 0; border-radius: calc(var(--peeps-h) * 0.05) calc(var(--peeps-h) * 0.28); background: color-mix(in srgb, var(--hs-glow) 70%, var(--hs-page)); }
-/* The disc is a leaf, like the photos: small corners top left and bottom
-   right, large quarter-circle sweeps top right and bottom left, scaled to
-   the scene so every size keeps the same proportions. */
-.hs[data-hs-mode="dark"] .hs-peeps-disc { background: color-mix(in srgb, var(--hs-glow) 32%, var(--hs-page)); }
-.hs-peep { position: relative; display: block; height: calc(var(--peeps-h) * var(--peep-h)); width: auto; margin-inline: -2%; overflow: visible; }
-.hs-peep.is-flipped { scale: -1 1; }
-.hs-path .hs-peeps { margin-bottom: 8px; }
-@media (max-width: 760px) { .hs-peeps { --peeps-h: 210px; } }
-/* Dark mode: the figures stay "printed" (dark lines, light fills) rather
-   than inverting, which would change how the people look, not just the
-   theme. They stand in the lamplight disc. */
-.hs[data-hs-mode="dark"] .hs-peeps { color: #1E1A16; --hs-peep-paper: #F5EFE6; --hs-peep-tint-1: color-mix(in srgb, var(--hs-ember) 30%, #F5EFE6); --hs-peep-tint-2: color-mix(in srgb, var(--hs-ember) 55%, #F5EFE6); }
-.hs[data-hs-mode="dark"] .hs-peeps-disc { background: color-mix(in srgb, var(--hs-glow) 45%, var(--hs-page)); }
-
-/* Steps: a small scene above each step's number. */
-.hs-step .hs-peeps { --peeps-h: 200px; justify-content: flex-start; margin: 4px 0 12px; }
-.hs-step .hs-peeps-disc { left: 0; translate: 0 0; width: calc(var(--peeps-h) * 0.78); bottom: 6%; }
-.hs-step .hs-peep.is-bust { margin-bottom: calc(var(--peeps-h) * 0.06); overflow: hidden; } /* waist-up figures sit on the backdrop's bottom edge, clipped there (the art runs past its box at the waist) */
-.hs-step .hs-peep:first-of-type { margin-left: calc(var(--peeps-h) * 0.12); }
-/* Desktop and tablet: the number sits top right, level with the scene. */
-@media (min-width: 761px) {
-  .hs-step { grid-template-columns: minmax(0, 1fr) auto; }
-  .hs-step .hs-peeps { grid-column: 1; grid-row: 1; }
-  .hs-step .hs-step-n { grid-column: 2; grid-row: 1; align-self: start; margin-top: 20px; }
-  .hs-step h3, .hs-step p { grid-column: 1 / -1; }
+/* ---------- How care begins: one photo per step ----------
+   Each step: its photo (leaf crop, 4:3) with the big step number level with
+   it on the right, then the title and text (Home and Getting started). The
+   photos replaced the Open Peeps illustrations. */
+.hs-path :is(.hs-photo, .hs-photo-frame) { margin-bottom: 10px; }
+.hs-step { grid-template-columns: minmax(0, 1fr) auto; column-gap: 24px; }
+.hs-step > :is(.hs-photo, .hs-photo-frame) { grid-column: 1; grid-row: 1; margin-bottom: 12px; }
+.hs-step .hs-step-n { grid-column: 2; grid-row: 1; align-self: start; }
+.hs-step h3, .hs-step p { grid-column: 1 / -1; }
+/* Every size: the step number sits inside the photo's bottom-right corner
+   in a page-coloured leaf tile (the photo's shape in small). */
+@media all {
+  .hs-step { position: relative; grid-template-columns: 1fr; container-type: inline-size; } /* cqw: the 4:3 photo is 75cqw tall */
+  .hs-step > :is(.hs-photo, .hs-photo-frame) { grid-column: 1; grid-row: 1; margin-bottom: 8px; }
+  .hs-step .hs-step-n { grid-column: auto; grid-row: auto; /* an absolute grid child placed in a column positions against that column, so unplace it */ --m: 16px; position: absolute; top: calc(75cqw - 56px - var(--m)); right: var(--m); z-index: 1; /* inside the photo's bottom-right (its tight corner), 16px in from both edges */ display: grid; place-items: center; width: 56px; height: 56px; border-radius: 4px 20px; background: var(--hs-page); font-size: 30px; font-weight: 400; letter-spacing: -0.03em; }
 }
-/* Phones: the scene sits beside the number and title, smaller, so the four
-   steps stay compact. */
 @media (max-width: 760px) {
-  .hs-step { grid-template-columns: minmax(0, 1fr) auto; column-gap: 12px; align-items: end; }
-  .hs-step .hs-peeps { --peeps-h: 150px; grid-column: 2; grid-row: 1 / span 2; margin: 0; min-width: calc(var(--peeps-h) * 0.82); justify-content: center; }
-  .hs-step .hs-peeps-disc { left: 50%; translate: -50% 0; }
-  .hs-step .hs-peep:first-of-type { margin-left: -2%; }
-  .hs-step .hs-step-n { grid-column: 1; grid-row: 1; }
-  .hs-step h3 { grid-column: 1; grid-row: 2; }
-  .hs-step p { grid-column: 1 / -1; }
 }
 
 /* A real photo in a Photo slot: same corners and ratio as the placeholder. */
-.hs-photo-img { display: block; width: 100%; height: auto; border-radius: var(--hs-radius); object-fit: cover; background: var(--hs-photo); }
-@media (max-width: 760px) { .hs-feature-grid .hs-photo-img { aspect-ratio: 4 / 3.2 !important; } }
+/* A photo's frame: the shape and clip, with a tiny blurred preview as its
+   background until the image paints over it (Photo in ui.js). */
+.hs-photo-frame { display: block; position: relative; overflow: clip; /* clip, not hidden: a hidden overflow makes the frame a scroll container, which would pin the photo's view() timeline */ border-radius: var(--hs-radius); background-color: var(--hs-photo); background-size: cover; isolation: isolate; }
+.hs-photo-img { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* Desktop: as a photo scrolls up through the screen, it slowly closes in on
+   its focal point (the same point it's framed on, `position` in Photo), like
+   the hero's scroll story. A view-timeline animation, so it follows the
+   scroll both ways; static where unsupported and under reduced motion. */
+@media (prefers-reduced-motion: no-preference) and (min-width: 961px) {
+  .hs-photo-img { animation: hs-photo-focus linear both; animation-timeline: view(); animation-range: cover 0% cover 100%; }
+}
+@keyframes hs-photo-focus { from { scale: 1; } to { scale: 1.15; } }
 
 /* Photos are leaves, after a reference: the top-right and bottom-left
    corners swept in a large circular curve, the other two keeping the 12px
    image radius. The sweep is a fixed size per slot (--hs-leaf), not a
    percentage, so it stays a true quarter circle at any ratio. A pill and a
    percentage (elliptical) leaf were tried first. Placeholders match. */
-.hs-photo-img, .hs-photo { --hs-leaf: 96px; border-radius: var(--hs-radius) var(--hs-leaf); }
-.hs-feature-grid > :first-child :is(.hs-photo-img, .hs-photo) { --hs-leaf: 160px; }
-@media (max-width: 760px) { .hs-photo-img, .hs-photo, .hs-feature-grid > :first-child :is(.hs-photo-img, .hs-photo) { --hs-leaf: 64px; } }
+.hs-photo-frame, .hs-photo { --hs-leaf: 96px; border-radius: var(--hs-radius) var(--hs-leaf); }
+@media (max-width: 760px) { .hs-photo-frame, .hs-photo { --hs-leaf: 64px; } }
+
+/* ---------- Motion: scroll reveals and page transitions ----------
+   Reveal (client.js) marks pieces below the fold .hs-reveal and adds
+   .is-in as each scrolls into view: a fade and a 18px rise on the soft
+   curve, siblings staggered by --hs-i. Nothing is hidden without JS or under
+   reduced motion. Moving between pages, the main column fades out a touch
+   upward, then the new one rises in (React <ViewTransition name="hs-main">). */
+@media (prefers-reduced-motion: no-preference) {
+  .hs-reveal { opacity: 0; translate: 0 18px; }
+  .hs-reveal.is-in { opacity: 1; translate: 0 0; transition: opacity 0.9s var(--hs-ease-soft), translate 0.9s var(--hs-ease-soft); transition-delay: calc(var(--hs-i, 0) * 80ms); }
+  /* In sequence, not a crossfade: the old page fades out first (0.18s), then
+     the new one fades and rises in (held invisible until then by the delay). */
+  ::view-transition-old(hs-main) { animation: hs-vt-out 0.18s cubic-bezier(0.4, 0, 1, 1) both; }
+  /* Curves written out: the transition's pseudo-elements hang off the root,
+     outside .hs, so the --hs-* motion tokens don't reach them. */
+  ::view-transition-new(hs-main) { animation: hs-vt-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both; }
+}
+@keyframes hs-vt-out { to { opacity: 0; translate: 0 -8px; } }
+@keyframes hs-vt-in { from { opacity: 0; translate: 0 16px; } }
+@media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
+
+/* ---------- Trust details (Home): credentials, clinicians, quotes ---------- */
+/* Credentials as badges: upright leaf-shaped tiles with a hairline border,
+   the icon top right in ink, the claim below. Five across
+   on desktop, a swipe row on phones. */
+.hs-creds { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; list-style: none; }
+.hs-cred { display: flex; flex-direction: column; justify-content: space-between; gap: 18px; min-height: 220px; padding: 22px 20px; border: 1.5px solid color-mix(in srgb, var(--hs-rule) 50%, transparent); border-radius: 8px 36px; color: var(--hs-ink); font-weight: 600; line-height: 1.3; text-wrap: balance; }
+.hs-cred-icon { align-self: flex-end; display: block; color: var(--hs-ink); line-height: 0; } /* top right, in ink, no tile */
+.hs-cred-icon .hs-icon { width: 36px; height: 36px; stroke-width: 1.4; }
+@media (max-width: 1100px) { .hs-creds { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.hs-creds-note { margin-top: 20px; }
+
+.hs-clinicians { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 80px; list-style: none; }
+.hs-clinician { display: flex; flex-direction: column; gap: 6px; }
+/* Each clinician's portrait: a square leaf with a gentler sweep (smaller
+   photos). The monogram style below is the fallback for a clinician without one. */
+.hs-clinician :is(.hs-photo-frame, .hs-photo) { --hs-leaf: 56px; margin-bottom: 16px; }
+.hs-clinician h3 { font-size: 21px; }
+.hs-clinician-role { margin-bottom: 14px; color: var(--hs-ink-2); }
+.hs-clinician-meta { display: grid; gap: 6px; margin: auto 0 0; /* pinned to the card's foot, so the rows line up */ padding-top: 14px; border-top: 1px solid var(--hs-line); font-size: 16px; }
+.hs-clinician-meta div { display: flex; justify-content: space-between; gap: 12px; }
+.hs-clinician-meta dt { font-family: var(--hs-font-label); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--hs-ink-2); }
+.hs-clinician-meta dd { margin: 0; text-align: right; color: var(--hs-ink); }
+
+.hs-quote { margin: 0; }
+.hs-quote blockquote { margin: 0; }
+.hs-quote p { font-family: var(--hs-font-display); font-size: clamp(19px, 1.6vw, 22px); font-weight: 600; line-height: 1.4; letter-spacing: -0.015em; text-wrap: pretty; color: var(--hs-ink); } /* bold, but paragraph-sized */
+.hs-quote figcaption { margin-top: 18px; color: var(--hs-ink-2); }
+.hs-quote figcaption::before { content: "— "; }
+
+@media (max-width: 1100px) { .hs-clinicians { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 80px 64px; } }
+@media (max-width: 600px) {
+  .hs-clinicians { grid-template-columns: 1fr; gap: 64px; }
+  .hs-creds { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 16px; margin-inline: -16px; padding: 4px 16px 8px; scrollbar-width: none; }
+  .hs-creds::-webkit-scrollbar { display: none; }
+  .hs-cred { flex: 0 0 40%; min-height: 196px; scroll-snap-align: start; padding: 18px 16px; }
+}
+
+/* ================= Phones: app-like =================
+   Mobile-first patterns on phones (≤760px), the way a well-made app lays a
+   screen out: the main image first, edge to edge and short, so the title,
+   text and buttons still fit in the first screen; long lists of like things
+   (service cards, care steps, clinicians, quotes) become horizontal swipe
+   rows with the next card peeking, instead of a long vertical scroll; tap
+   targets stay 44px+, and the contact dock covers the thumb zone. */
+@media (max-width: 760px) {
+  /* Home hero: photo first, within the page margins and leaf-shaped like the
+     other photos, 16:10, framed on the faces; then the area label, headline,
+     lede and full-width buttons. */
+  .hs-hero { padding-top: 16px; gap: 20px; }
+  .hs-hero-art { order: -3; aspect-ratio: 16 / 10; border-radius: var(--hs-radius) 64px; } /* inside the page margins, leaf-shaped like every other photo */
+  .hs-hero-img { object-position: 40% 22%; }
+  .hs-hero-tab { order: -2; margin-bottom: -8px; }
+  .hs-hero-notch { order: -1; }
+  .hs-hero h1 { font-size: 36px; }
+  .hs-hero-art .hs-art-card { display: none; } /* it covered half the short photo */
+
+  /* "How can we help?": shorter photos. */
+  .hs-path :is(.hs-photo, .hs-photo-frame) { aspect-ratio: 16 / 10 !important; } /* beats the Photo frame's inline ratio */
+
+  /* Swipe rows. */
+  .hs-swipe { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 16px; margin-inline: -16px; padding: 4px 16px 8px; scrollbar-width: none; overscroll-behavior-x: contain; }
+  .hs-swipe::-webkit-scrollbar { display: none; }
+  .hs-swipe > * { position: relative; flex: 0 0 82%; scroll-snap-align: start; padding: 0 !important; margin: 0 !important; border: 0 !important; } /* relative: overlays (a step's number) stay on their own card */
+  .hs-swipe > *::before { content: none !important; } /* no column hairlines in a row of cards */
+  .hs-clinicians.hs-swipe > *, .hs-services.hs-swipe > *, .hs-ruled.hs-swipe > .hs-step { flex-basis: 58%; } /* about half the next card shows, so the row clearly scrolls */
+  .hs-services.hs-swipe .hs-service h3 { font-size: 19px; gap: 8px; } /* fits the narrower card */
+  .hs-services.hs-swipe .hs-service h3 .hs-icon { width: 24px; height: 24px; }
+  /* Every title on two lines: the last word drops to its own line (page.js
+     splits the name), so the descriptions start level across the row. */
+  .hs-services.hs-swipe .hs-service h3 { align-items: flex-start; }
+  .hs-services.hs-swipe .hs-service h3 .hs-icon { margin-top: 4px; }
+  .hs-services.hs-swipe .hs-l2 { display: block; }
+  .hs-services.hs-swipe, .hs-clinicians.hs-swipe, .hs-ruled.hs-swipe:has(> .hs-step) { gap: 32px; } /* double the other rows' 16px */
+}
+
+/* "How can we help?" on phones: a segmented switch above the two cards
+   (PathSwitch in client.js) shows one card at a time, so both choices are
+   seen at once and the chosen card keeps its detail. (Side-by-side tiles
+   were tried first and dropped.) */
+.hs-seg { display: none; }
+.hs-paths { margin-top: 40px; }
+@media (max-width: 760px) {
+  .hs-seg { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 24px; padding: 4px; border-radius: 10px 22px; background: var(--hs-sand); }
+  /* The raised thumb is one element that glides between the options, with a
+     touch of overshoot, rather than two backgrounds swapping. */
+  .hs-seg::before { content: ""; position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc(50% - 6px); border-radius: 6px 18px; background: var(--hs-page); box-shadow: 0 2px 10px rgba(15, 25, 35, 0.12); transition: translate 0.55s cubic-bezier(0.34, 1.4, 0.5, 1); }
+  .hs-seg[data-active="1"]::before { translate: calc(100% + 4px) 0; }
+  .hs-seg-btn { position: relative; z-index: 1; min-height: 48px; padding: 0 8px; border: 0; border-radius: 6px 18px; background: none; color: var(--hs-ink-2); font: inherit; font-size: 16px; font-weight: 600; cursor: pointer; transition: color 0.3s var(--hs-ease); -webkit-tap-highlight-color: transparent; }
+  .hs-seg-btn[aria-pressed="true"] { color: var(--hs-ink); }
+  .hs-seg-btn:active { scale: 1; }
+  .hs-paths { view-transition-name: hs-paths; margin-top: 20px; }
+  .hs-paths[data-active="0"] > .hs-path:nth-child(2),
+  .hs-paths[data-active="1"] > .hs-path:nth-child(1) { display: none; }
+}
+
+/* Phones: a smaller text scale. The desktop sizes (18px body, 20–21px ledes)
+   read oversized on a 390px screen; phones get 16px body (the floor that
+   keeps inputs from zooming on iOS), 17px ledes and 15px footer text, with
+   line-height to match. Headings keep their own phone sizes. */
+@media (max-width: 760px) {
+  .hs { font-size: 16px; line-height: 1.55; }
+  .hs-lede, .hs-hero .hs-lede, .hs-band p, .hs-owner p { font-size: 17px; line-height: 1.5; }
+  .hs-footer { font-size: 15px; }
+  .hs-phone { font-size: 18px; }
+  .hs-footer-contact a { font-size: 17px; }
+  .hs-clinician h3 { font-size: 19px; }
+  .hs-area-list h3 { font-size: 18px; }
+  .hs-zip-row .hs-input { font-size: 18px; }
+  .hs-figure figcaption, .hs-art-card strong { font-size: 16px; }
+}
+
+/* Phones: every step title wraps onto two lines (a narrower measure, with
+   balanced lines), so short ones don't sit on one line above an empty gap
+   and the descriptions start level across the swipe row. */
+@media (max-width: 760px) { .hs-step h3 { max-width: 10.5em; text-wrap: balance; min-height: 2lh; } }
+
+/* The path card swap (PathSwitch): out toward the side it came from, in from
+   the other, the new photo settling from a slight zoom. Curves written out:
+   these pseudo-elements live outside .hs. */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-group(hs-paths) { animation-duration: 0.5s; }
+  ::view-transition-old(hs-paths) { animation: hs-path-out 0.28s cubic-bezier(0.4, 0, 1, 1) both; }
+  ::view-transition-new(hs-paths) { animation: hs-path-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both; }
+  html[data-hs-path-dir="prev"]::view-transition-old(hs-paths) { animation-name: hs-path-out-prev; }
+  html[data-hs-path-dir="prev"]::view-transition-new(hs-paths) { animation-name: hs-path-in-prev; }
+}
+@keyframes hs-path-out { to { opacity: 0; translate: -28px 0; } }
+@keyframes hs-path-in { from { opacity: 0; translate: 36px 0; scale: 0.985; } }
+@keyframes hs-path-out-prev { to { opacity: 0; translate: 28px 0; } }
+@keyframes hs-path-in-prev { from { opacity: 0; translate: -36px 0; scale: 0.985; } }
+
+/* FAQ accordion motion (every size): the answer's height eases open and
+   closed (::details-content + interpolate-size; instant where unsupported),
+   the answer fades and rises in as it opens, the +/× turns, and the row tints
+   on hover/press. Off under reduced motion. */
+.hs-faq { interpolate-size: allow-keywords; }
+.hs-faq summary { transition: color var(--hs-dur-fast) var(--hs-ease); }
+.hs-faq summary:hover { color: var(--hs-ember-text); }
+@media (prefers-reduced-motion: no-preference) {
+  .hs-faq details::details-content { block-size: 0; overflow: clip; transition: block-size 0.45s cubic-bezier(0.16, 1, 0.3, 1), content-visibility 0.45s allow-discrete; }
+  .hs-faq details[open]::details-content { block-size: auto; }
+  .hs-faq summary::after { transition: rotate 0.4s cubic-bezier(0.34, 1.4, 0.5, 1), background-color var(--hs-dur-fast) var(--hs-ease); }
+  .hs-faq details p { opacity: 0; translate: 0 -6px; transition: opacity 0.35s var(--hs-ease), translate 0.45s cubic-bezier(0.16, 1, 0.3, 1); }
+  .hs-faq details[open] p { opacity: 1; translate: 0 0; transition-delay: 0.08s; }
+}
+.hs-faq details[open] summary::after { background: var(--hs-sand); }
+
+/* Phones: smaller questions and answers. */
+@media (max-width: 760px) {
+  .hs-faq summary { padding: 18px 0; font-size: 18px; line-height: 1.3; gap: 12px; }
+  .hs-faq summary::after { width: 30px; height: 30px; font-size: 18px; }
+  .hs-faq details p { padding: 0 0 18px; font-size: 15px; line-height: 1.55; }
+}
+
+/* Phones: a tighter hero so the call-to-action buttons land in the first
+   screen — 12px between pieces, no extra margin under the area label or
+   above the lede, a 16:9 photo and a 32px headline. */
+@media (max-width: 760px) {
+  .hs-hero { gap: 12px; }
+  .hs-hero-tab { margin-bottom: 0; }
+  .hs-hero-tab .hs-eyebrow { margin-bottom: 0; }
+  .hs-hero-art { aspect-ratio: 16 / 9; }
+  .hs-hero h1 { font-size: 32px; }
+  .hs-hero-copy .hs-lede { margin-top: 0; }
+  .hs-hero-actions { margin-top: 4px; }
+}
+/* Headline and lede sit close, as one block (desktop 12px, phones 6px). */
+.hs-hero-copy { margin-top: 12px; }
+@media (max-width: 760px) { .hs-hero-copy { margin-top: -6px; } }
+
+/* Showing there's more below the hero (desktop): the hero's foot and the
+   Credentials row's top padding are tighter, so the badges peek into the
+   first screen on a typical laptop; where they still don't, a quiet cue
+   (ScrollCue) sits bottom centre. */
+@media (min-width: 961px) {
+  .hs-hero { padding-top: 12px; padding-bottom: 20px; } /* close under the nav */
+}
+.hs-cue { position: fixed; left: 50%; bottom: 22px; z-index: 44; display: none; place-items: center; width: 44px; height: 44px; translate: -50% 0; border: 1.5px solid var(--hs-ink); border-radius: 4px 16px; background: color-mix(in srgb, var(--hs-page) 90%, transparent); backdrop-filter: blur(10px); color: var(--hs-ink); cursor: pointer; opacity: 0; pointer-events: none; transition: opacity var(--hs-dur) var(--hs-ease); }
+.hs-cue .hs-icon { rotate: 90deg; }
+.hs-cue.is-shown { opacity: 1; pointer-events: auto; }
+@media (min-width: 1081px) { .hs-cue { display: grid; } }
+@media (prefers-reduced-motion: no-preference) { .hs-cue.is-shown .hs-icon { animation: hs-cue-drift 2.4s ease-in-out infinite; } }
+@keyframes hs-cue-drift { 0%, 100% { translate: 0 -2px; } 50% { translate: 0 3px; } }
+/* No rule between the hero and the first row (Credentials). */
+#hs-creds { border-top: 0; }
+
+/* More room between the service cards and the home-care note below them. */
+.hs-services + .hs-aside { margin-top: 96px; }
+@media (max-width: 760px) { .hs-services + .hs-aside { margin-top: 48px; } }
+/* How care begins: no column divider between the steps (space alone). */
+.hs-ruled > .hs-step:nth-child(2n) { border-left: 0; }
+/* …and the same 96px between rows of steps as between rows of service cards. */
+@media (min-width: 761px) { .hs-ruled:has(> .hs-step) { row-gap: 96px; } }
+/* The ruled grid pads its left items on the right (and right items on the
+   left), which left step 01's photo narrower than its box, so the number tile
+   (placed from the box's right edge) hung off the photo. Steps take no side
+   padding; the grid's column gap spaces them instead. */
+.hs-ruled > .hs-step { padding-inline: 0; }
+@media (min-width: 761px) { .hs-ruled:has(> .hs-step) { column-gap: 80px; } }
+/* Clinician cards (desktop, tablet): each card spans four rows of the grid as
+   a subgrid — portrait, name, role, details — so every card's details start
+   on the same line however the names and roles wrap; values stay on one
+   line. (Phones keep the swipe row.) */
+@media (min-width: 761px) {
+  .hs-clinician { display: grid; grid-row: span 4; grid-template-rows: subgrid; row-gap: 6px; align-content: start; }
+  .hs-clinician-meta { margin-top: 8px; align-self: start; }
+  .hs-clinician-meta dd { white-space: nowrap; }
+}
+
+/* Clinician name, then the credentials on their own line, quieter. */
+.hs-clinician-cred { display: block; margin-top: 2px; font-size: 0.8em; font-weight: 500; letter-spacing: 0; color: var(--hs-ink-2); }
+
+/* The contact dock's entrance (whenever it comes back on scroll up): the
+   dock springs up with a slight overshoot, its buttons follow in a short
+   stagger (Call, then the main action 80ms later), and on desktop their soft
+   shadow blooms as they land. Leaving stays quick and plain. Off under
+   reduced motion (the global rule stops every transition). */
+@media (prefers-reduced-motion: no-preference) {
+  .hs:not(.is-scroll-hidden) .hs-dock:not(.is-hidden) { transition: translate 0.55s cubic-bezier(0.34, 1.45, 0.5, 1), opacity 0.3s var(--hs-ease); }
+  .hs-dock > * { transition: translate 0.25s var(--hs-ease), opacity 0.2s var(--hs-ease), box-shadow 0.2s var(--hs-ease), background-color var(--hs-dur-fast) var(--hs-ease); }
+  .hs:not(.is-scroll-hidden) .hs-dock:not(.is-hidden) > * { transition: translate 0.6s cubic-bezier(0.34, 1.56, 0.5, 1), opacity 0.35s var(--hs-ease), box-shadow 0.7s var(--hs-ease-soft), background-color var(--hs-dur-fast) var(--hs-ease); }
+  .hs:not(.is-scroll-hidden) .hs-dock:not(.is-hidden) > :nth-child(2) { transition-delay: 80ms, 80ms, 200ms, 0s; }
+  .hs.is-scroll-hidden .hs-dock > *, .hs-dock.is-hidden > * { translate: 0 18px; opacity: 0; box-shadow: 0 0 0 rgba(15, 25, 35, 0); }
+}
+/* …and it leaves more slowly too: a soft 0.6s ease out, the main action
+   going first and Call 80ms after (the reverse of the entrance). */
+@media (prefers-reduced-motion: no-preference) {
+  .hs.is-scroll-hidden .hs-dock, .hs-dock.is-hidden { transition: translate 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1); }
+  .hs.is-scroll-hidden .hs-dock > *, .hs-dock.is-hidden > * { transition: translate 0.55s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s var(--hs-ease); }
+  .hs.is-scroll-hidden .hs-dock > :first-child, .hs-dock.is-hidden > :first-child { transition-delay: 80ms; }
+}
+
+.hs-hero-tab .hs-eyebrow { margin-bottom: 0; }
+
+/* ---------- Subpages, brought up to Home ---------- */
+/* Page heads: air under the nav (56px desktop, 40px tablets, 32px
+   phones), the same headline scale as Home's hero,
+   and an optional wide leaf banner photo (PageHead's photo prop) — under the
+   title row on desktop and tablets, first on phones (photo-first, app-style). */
+.hs-page-head { padding-block: 56px 48px; }
+@media (max-width: 960px) { .hs-page-head { padding-top: 40px; } }
+.hs-page-head h1 { font-size: clamp(44px, 5.6vw, 84px); line-height: 1.02; letter-spacing: -0.04em; }
+.hs-page-photo { grid-column: 1 / -1; }
+.hs-page-photo :is(.hs-photo, .hs-photo-frame) { --hs-leaf: 120px; }
+@media (max-width: 760px) {
+  .hs-page-head { padding-block: 32px 8px; gap: 16px; }
+  .hs-page-head h1 { font-size: 34px; }
+  .hs-page-photo { order: -1; }
+  .hs-page-photo :is(.hs-photo, .hs-photo-frame) { aspect-ratio: 16 / 9 !important; --hs-leaf: 56px; }
+}
+/* Ruled grids: no column hairline anywhere (as on Home's cards); an 80px
+   column gap spaces them instead. */
+.hs-ruled { column-gap: 80px; }
+.hs-ruled > *, .hs-ruled > :nth-child(2n) { padding-inline: 0; border-left: 0; }
+@media (max-width: 960px) { .hs-ruled { column-gap: 48px; } }
+
+/* ---------- Behind the scenes (Home): the intake board in motion ---------- */
+.hs-bts-row { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 56px; align-items: center; }
+.hs-bts { position: relative; padding: 14px 16px 64px; border: 1.5px solid color-mix(in srgb, var(--hs-rule) 60%, transparent); border-radius: 12px 48px; background: var(--hs-surface); box-shadow: 0 24px 60px rgba(15, 25, 35, 0.08); overflow: hidden; }
+.hs-bts-bar { display: flex; align-items: center; gap: 6px; padding-bottom: 12px; margin-bottom: 12px; border-bottom: 1px solid var(--hs-line); }
+.hs-bts-bar span { width: 9px; height: 9px; border-radius: 50%; background: var(--hs-line); }
+.hs-bts-bar b { margin-left: 8px; font-family: var(--hs-font-label); font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--hs-ink-2); }
+.hs-bts-board { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.hs-bts-col { display: grid; align-content: start; gap: 8px; min-height: 190px; padding: 10px; border-radius: 8px; background: var(--hs-sand); }
+.hs-bts-head { font-family: var(--hs-font-label); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--hs-ink-2); }
+.hs-bts-card { display: grid; gap: 2px; padding: 10px 12px; border-radius: 6px 14px; background: var(--hs-page); border: 1px solid var(--hs-line); font-size: 13px; line-height: 1.3; }
+.hs-bts-card b { font-family: var(--hs-font-label); font-size: 11.5px; font-weight: 500; letter-spacing: 0.04em; }
+.hs-bts-card span { color: var(--hs-ink-2); }
+.hs-bts-card.is-static { background: color-mix(in srgb, var(--hs-page) 60%, var(--hs-sand)); }
+/* The travelling card sits over the columns (each 1/3 of the board, minus
+   the gaps) and glides to its column, lifting while it moves. */
+.hs-bts-card.is-moving { position: absolute; top: 96px; left: calc(var(--col) * (100% + 10px) / 3 + 10px); width: calc((100% - 20px) / 3 - 20px); border-color: var(--hs-ember); box-shadow: 0 10px 24px rgba(15, 25, 35, 0.14); transition: left 0.8s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.4s var(--hs-ease); }
+.hs-bts-card.is-new { animation: hs-bts-glow 1.6s var(--hs-ease) both; }
+.hs-bts-card.is-out { opacity: 0; }
+@keyframes hs-bts-glow { from { box-shadow: 0 0 0 0 color-mix(in srgb, var(--hs-ember) 45%, transparent); } to { box-shadow: 0 0 0 10px transparent, 0 10px 24px rgba(15, 25, 35, 0.14); } }
+.hs-bts-avatar { position: absolute; top: 8px; right: 8px; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--hs-ember-soft); color: var(--hs-ember-text); font-family: var(--hs-font-label); font-size: 9px; font-style: normal; opacity: 0; scale: 0.6; transition: opacity 0.3s var(--hs-ease), scale 0.4s cubic-bezier(0.34, 1.56, 0.5, 1); }
+.hs-bts-avatar.is-on { opacity: 1; scale: 1; }
+.hs-bts-toast { position: absolute; left: 16px; right: 16px; bottom: 14px; padding: 10px 14px; border-radius: 6px 16px; background: var(--hs-ink); color: var(--hs-page); font-size: 14px; animation: hs-bts-toast 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.hs-bts-toast.is-out { opacity: 0; transition: opacity 0.3s; }
+@keyframes hs-bts-toast { from { opacity: 0; translate: 0 12px; } }
+@media (prefers-reduced-motion: reduce) { .hs-bts-card.is-moving { transition: none; } .hs-bts-card.is-new, .hs-bts-toast { animation: none; } }
+@media (max-width: 960px) { .hs-bts-row { grid-template-columns: 1fr; gap: 32px; } }
+@media (max-width: 760px) {
+  .hs-bts { padding: 12px 10px 60px; border-radius: 10px 32px; }
+  .hs-bts-board { gap: 6px; }
+  .hs-bts-col { min-height: 170px; padding: 8px 6px; }
+  .hs-bts-head { font-size: 9.5px; }
+  .hs-bts-card { padding: 8px; font-size: 11.5px; }
+  .hs-bts-card.is-moving { top: 88px; left: calc(var(--col) * (100% + 6px) / 3 + 6px); width: calc((100% - 12px) / 3 - 12px); }
+  .hs-bts-card b { font-size: 10px; }
+  .hs-bts-toast { font-size: 12.5px; left: 10px; right: 10px; }
+}

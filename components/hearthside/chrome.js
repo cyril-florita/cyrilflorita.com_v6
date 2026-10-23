@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { BASE, NAV, PHONE, PITCH_MAILTO, REFERRAL_FAX } from "./data";
 import { Button, Icon, LogoMark, Row } from "./ui";
-import { ModeSwitch, ThemeSwitch } from "./client";
+import { ThemeSwitch } from "./client";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -39,10 +39,9 @@ export function Footer() {
           Medicare information is general guidance; see{" "}
           <a href="https://www.medicare.gov/coverage/home-health-services">medicare.gov</a> for details. If this is an emergency, call 911.
         </p>
-        {/* Display controls, bottom right beside the legal lines. */}
+        {/* The colour scheme, bottom right beside the legal lines (light/dark is in the header). */}
         <div className="hs-footer-controls">
           <ThemeSwitch />
-          <ModeSwitch />
         </div>
         <p className="hs-footer-pitch">
           Design and Dev Pitch · © {year} <a href="/">Cyril Florita</a>. All rights reserved.
@@ -60,6 +59,7 @@ export function Footer() {
             <div className="hs-owner-ctas">
               <Button href={PITCH_MAILTO} icon="arrow">Email Cyril</Button>
               <Button href={`${BASE}/intake/`} variant="secondary">Try the intake demo</Button>
+              <Button href={`${BASE}/proposal/`} variant="secondary">Read the proposal</Button>
               <a className="hs-btn hs-btn-quiet" href="/">See more of Cyril&rsquo;s work</a>
             </div>
           </div>
