@@ -58,7 +58,7 @@
 }
 
 /* Space between each row's heading and its content; three problems across. */
-.hs-prop-problems, .hs-proposal .hs-row-body > h2 + .hs-ruled { margin-top: 40px; }
+.hs-prop-problems, .hs-proposal .hs-row-body > h2 + :is(.hs-ruled, .hs-note) { margin-top: 40px; }
 .hs-prop-problems { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 48px; }
 .hs-prop-build h3 .hs-icon { order: 2; }
 @media (max-width: 960px) { .hs-prop-problems { grid-template-columns: 1fr; } }

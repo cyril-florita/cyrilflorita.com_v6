@@ -26,7 +26,7 @@ export default function Services() {
               <h3><Icon name={s.icon} />{s.name}</h3>
               <p>{s.lead}</p>
               <span className="hs-label">Often includes</span>
-              <ul>{s.covers.map((c) => <li key={c}>{c}</li>)}</ul>
+              <ul className="hs-path-list">{s.covers.map((c) => <li key={c}><Icon name="check" size={20} />{c}</li>)}</ul>
             </li>
           ))}
         </ul>
