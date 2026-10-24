@@ -128,13 +128,14 @@ const Page = () => {
 
             {/* 02 — Results & Impact */}
             <CaseSection id="results" number={2} title="Results & Impact">
-              <p>Hearthside is a pitch, not a live agency, so there are no patient or referral numbers, and I won&apos;t invent any. What it delivers is a complete, working product, measured against the accessibility bar a care provider should meet:</p>
+              <p>Hearthside is a pitch, not a live agency, so there are no patient or referral numbers, and I won&apos;t invent any. What it delivers is a complete, working product, fast and accessible on the live site:</p>
               <CaseStats items={[
-                { value: "0", label: "Accessibility violations (axe)" },
-                { value: "7.9:1", label: "Lowest body text contrast" },
-                { value: "AAA", label: "Text in every scheme and mode" },
+                { value: "92", label: "Performance (mobile)" },
+                { value: "100", label: "Accessibility" },
+                { value: "100", label: "Best practices" },
+                { value: "100", label: "SEO" },
               ]} />
-              <p>An automated axe audit (WCAG A and AA, plus best practices) of all 14 public and intake pages, in light and dark mode, finds no violations. Body text passes AAA everywhere: at least 7.9:1 in both color schemes and both modes, with links and labels above 7:1 too. Buttons are 52px tall, every control works by keyboard, and every animation stops under reduced motion. At launch, the numbers to watch are time from referral to first call, referrals stalled by missing documents, and calls requested from the website.</p>
+              <p>PageSpeed Insights scores for the live home page on a phone; on desktop, Lighthouse scores it 99 to 100 for performance, and the referral and intake pages 100. A mobile pass (smaller photos for phones, no hero preload on other pages, and the photo shown straight away instead of after an opening animation) took mobile performance from 83 to 92. An automated axe audit (WCAG A and AA, plus best practices) of all 14 public and intake pages, in light and dark mode, finds no violations. Body text passes AAA everywhere: at least 7.9:1 in both color schemes and both modes, with links and labels above 7:1 too. Buttons are 52px tall, every control works by keyboard, and every animation stops under reduced motion. At launch, the numbers to watch are time from referral to first call, referrals stalled by missing documents, and calls requested from the website.</p>
 
               <Desktop name="home" caption="Home" />
               <p><strong>A calm first screen.</strong> One warm photo, one headline, and two clear actions: request a call, or refer a patient. Below it, credentials and the agency&apos;s promise come before anything else.</p>
