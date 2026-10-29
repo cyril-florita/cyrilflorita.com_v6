@@ -17,13 +17,14 @@ export function Footer() {
           <p className="hs-footer-contact">
             <a href={PHONE.href}><Icon name="phone" size={18} /> {PHONE.display}</a>
             <span>Referral fax {REFERRAL_FAX}</span>
+            <span>Office in Van Nuys, visits by appointment</span>
           </p>
         </div>
         <nav aria-label="Footer">
           <h2 className="hs-footer-head">Hearthside</h2>
           <ul>
             {NAV.map((l) => <li key={l.href}><Link href={l.href}>{l.label}</Link></li>)}
-            <li><Link href={`${BASE}/contact/`}>Request a call</Link></li>
+            <li><a href="#request-a-call">Request a call</a></li>
           </ul>
         </nav>
         <div>

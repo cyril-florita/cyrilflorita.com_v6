@@ -242,8 +242,7 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
   .hs-nav-short { display: inline; }
 }
 /* The header slides away while scrolling down and back on the way up
-   (Header in client.js sets .is-scroll-hidden on .hs); the contact dock does
-   the same downward. */
+   (Header in client.js sets .is-scroll-hidden on .hs). The contact dock stays. */
 .hs-header { transition: translate var(--hs-dur) var(--hs-ease); }
 .hs.is-scroll-hidden .hs-header { translate: 0 -100%; }
 @media (max-width: 560px) {
@@ -424,6 +423,7 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
 .hs-logos .is-serif b { font-family: Georgia, serif; font-weight: 400; font-size: 19px; }
 .hs-logos .is-mono b { font-family: var(--hs-font-label); font-weight: 500; font-size: 15px; letter-spacing: 0.04em; text-transform: uppercase; }
 .hs-logos-note { display: flex; align-items: center; gap: 12px; margin-top: 24px; color: var(--hs-ink-2); font-size: 16px; }
+.hs-logos-note + .hs-creds-note { margin-top: 12px; } /* the sample stamp, alone on the next line */
 
 /* ---------- Two paths ---------- */
 .hs-path { display: flex; flex-direction: column; gap: 14px; }
@@ -522,10 +522,22 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
 .hs-check { display: flex; align-items: flex-start; gap: 12px; font-weight: 400 !important; }
 .hs-check input { flex: none; width: 24px; height: 24px; margin: 2px 0 0; accent-color: var(--hs-ink); }
 
-.hs-zip { display: grid; gap: 10px; padding: 24px; border: 1px solid var(--hs-rule); border-radius: var(--hs-radius); }
+.hs-zip { display: grid; padding: 24px; border: 1px solid var(--hs-rule); border-radius: var(--hs-radius); }
+.hs-zip > label { margin-bottom: 10px; }
 .hs-zip-row { display: flex; gap: 10px; }
 .hs-zip-row .hs-input { max-width: 220px; font-size: 20px; letter-spacing: 0.05em; }
-.hs-zip-result { min-height: 1.6em; display: flex; align-items: flex-start; gap: 8px; }
+/* The answer takes no room until there is one, then the box eases open to its
+   height (grid rows 0fr → 1fr). Hidden while shut, so it isn't read or tabbed. */
+.hs-zip-reveal { display: grid; grid-template-rows: 0fr; }
+.hs-zip-reveal.is-open { grid-template-rows: 1fr; }
+.hs-zip-reveal > div { min-height: 0; overflow: hidden; visibility: hidden; opacity: 0; translate: 0 -4px; }
+.hs-zip-reveal.is-open > div { visibility: visible; opacity: 1; translate: 0 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .hs-zip-reveal { transition: grid-template-rows 0.4s var(--hs-ease); }
+  .hs-zip-reveal > div { transition: opacity 0.3s var(--hs-ease), translate 0.4s var(--hs-ease), visibility 0s 0.4s; }
+  .hs-zip-reveal.is-open > div { transition-delay: 0.08s, 0.08s, 0s; }
+}
+.hs-zip-result { display: flex; align-items: flex-start; gap: 8px; padding-top: 12px; }
 .hs-zip-result .hs-icon { flex: none; margin-top: 2px; }
 .hs-zip-result.is-yes { color: var(--hs-ink); font-weight: 600; }
 .hs-zip-result.is-no { color: var(--hs-ink); }
@@ -561,6 +573,8 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
 .hs-band .hs-btn-primary:hover { background: var(--hs-band-accent); color: #1B1410; }
 .hs-band .hs-btn-secondary { color: #F5EFE6; border-color: #F5EFE6; }
 .hs-band .hs-btn-secondary:hover { background: rgba(255, 255, 255, 0.08); }
+.hs-band .hs-btn-quiet { color: #F5EFE6; } /* the text link, light on the dark band */
+@media (max-width: 680px) { .hs-band-ctas .hs-btn:not(.hs-btn-quiet) { flex: 1 1 100%; } } /* phones: the two buttons full width, the link under them */
 .hs-band .hs-phone { color: #F5EFE6; }
 .hs-band .hs-phone .hs-icon { color: var(--hs-band-accent); }
 @media (max-width: 680px) { .hs-band { padding: 40px 24px; } }
@@ -774,10 +788,11 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
 .hs-dock { display: flex; align-items: center; gap: 10px; transition: translate var(--hs-dur) var(--hs-ease), opacity var(--hs-dur) var(--hs-ease); }
 .hs-dock > *, .hs-totop { box-shadow: 0 10px 28px rgba(15, 25, 35, 0.14); }
 .hs[data-hs-mode="dark"] :is(.hs-dock > *, .hs-totop) { box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5); }
-:is(.hs-dock-phone, .hs-totop).hs-btn-secondary { background: color-mix(in srgb, var(--hs-page) 90%, transparent); backdrop-filter: blur(14px); }
-:is(.hs-dock-phone, .hs-totop).hs-btn-secondary:hover { background: var(--hs-sand); }
+.hs-totop.hs-btn-secondary { background: color-mix(in srgb, var(--hs-page) 90%, transparent); backdrop-filter: blur(14px); }
+.hs-dock .hs-btn-secondary { background: var(--hs-page); } /* the white button: solid, so page text never shows through it */
+:is(.hs-dock .hs-btn-secondary, .hs-totop.hs-btn-secondary):hover { background: var(--hs-sand); }
 .hs-dock-label { margin-right: 4px; }
-.hs-dock.is-hidden, .hs.is-scroll-hidden .hs-dock { translate: 0 calc(100% + 28px); opacity: 0; }
+.hs-dock.is-hidden { translate: 0 calc(100% + 28px); opacity: 0; }
 .hs-dock.is-hidden, .hs-totop.is-hidden { pointer-events: none; }
 .hs-totop { width: 52px; padding: 0; margin-left: auto; transition: translate var(--hs-dur) var(--hs-ease), opacity var(--hs-dur) var(--hs-ease), background-color var(--hs-dur-fast) var(--hs-ease); }
 .hs-totop.is-hidden { translate: 0 calc(100% + 28px); opacity: 0; }
@@ -790,7 +805,7 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
   .hs-dock { display: grid; grid-template-columns: 1fr 1.4fr; gap: 10px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); border-top: 1px solid var(--hs-rule); background: color-mix(in srgb, var(--hs-page) 94%, transparent); backdrop-filter: blur(10px); }
   .hs-dock > *, .hs[data-hs-mode="dark"] .hs-dock > * { box-shadow: none; }
   .hs-dock .hs-btn { padding: 0 12px; }
-  .hs-dock.is-hidden, .hs.is-scroll-hidden .hs-dock { translate: 0 100%; }
+  .hs-dock.is-hidden { translate: 0 100%; }
   .hs-shell { padding-bottom: calc(76px + env(safe-area-inset-bottom)); }
 }
 @media (max-width: 560px) { .hs-dock-num { display: none; } }
@@ -843,16 +858,23 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
 /* A real photo in a Photo slot: same corners and ratio as the placeholder. */
 /* A photo's frame: the shape and clip, with a tiny blurred preview as its
    background until the image paints over it (Photo in ui.js). */
-.hs-photo-frame { display: block; position: relative; overflow: clip; /* clip, not hidden: a hidden overflow makes the frame a scroll container, which would pin the photo's view() timeline */ border-radius: var(--hs-radius); background-color: var(--hs-photo); background-size: cover; isolation: isolate; }
+.hs-photo-frame { display: block; position: relative; overflow: clip; /* clip, not hidden: a hidden overflow would make the frame a scroll container */ border-radius: var(--hs-radius); background-color: var(--hs-photo); background-size: cover; isolation: isolate; }
 .hs-photo-img { display: block; width: 100%; height: 100%; object-fit: cover; }
-/* Desktop: as a photo scrolls up through the screen, it slowly closes in on
-   its focal point (the same point it's framed on, `position` in Photo), like
-   the hero's scroll story. A view-timeline animation, so it follows the
-   scroll both ways; static where unsupported and under reduced motion. */
-@media (prefers-reduced-motion: no-preference) and (min-width: 961px) {
-  .hs-photo-img { animation: hs-photo-focus linear both; animation-timeline: view(); animation-range: cover 0% cover 100%; }
+/* Photos hold still as the page scrolls (the old scroll zoom made people
+   dizzy; only the Home hero keeps its scroll story). A photo that sits beside
+   a call to action eases in on its focal point (the point it's framed on,
+   `position` in Photo) while the button is hovered or keyboard-focused: the
+   path cards' photos and a page head's banner. Off under reduced motion; the
+   hover only where there is a hover (not sticky on touch). */
+@media (prefers-reduced-motion: no-preference) {
+  .hs-photo-img { transition: scale 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+  .hs-path:has(.hs-btn:focus-visible) .hs-photo-img,
+  .hs-page-head:has(:is(.hs-btn, .hs-phone):focus-visible) .hs-photo-img { scale: 1.1; }
 }
-@keyframes hs-photo-focus { from { scale: 1; } to { scale: 1.15; } }
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  .hs-path:has(.hs-btn:hover) .hs-photo-img,
+  .hs-page-head:has(:is(.hs-btn, .hs-phone):hover) .hs-photo-img { scale: 1.1; }
+}
 
 /* Photos are leaves, after a reference: the top-right and bottom-left
    corners swept in a large circular curve, the other two keeping the 12px
@@ -883,14 +905,14 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
 @media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
 
 /* ---------- Trust details (Home): credentials, clinicians, quotes ---------- */
-/* Credentials as badges: upright leaf-shaped tiles with a hairline border,
-   the icon top right in ink, the claim below. Five across
-   on desktop, a swipe row on phones. */
-.hs-creds { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; list-style: none; }
-.hs-cred { display: flex; flex-direction: column; justify-content: space-between; gap: 18px; min-height: 220px; padding: 22px 20px; border: 1.5px solid color-mix(in srgb, var(--hs-rule) 50%, transparent); border-radius: 8px 36px; color: var(--hs-ink); font-weight: 600; line-height: 1.3; text-wrap: balance; }
-.hs-cred-icon { align-self: flex-end; display: block; color: var(--hs-ink); line-height: 0; } /* top right, in ink, no tile */
-.hs-cred-icon .hs-icon { width: 36px; height: 36px; stroke-width: 1.4; }
-@media (max-width: 1100px) { .hs-creds { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+/* Credentials as badges: leaf-shaped cards with a hairline border, the icon
+   on the left in ink and the claim beside it (like the referral partners'
+   marks). Three across on desktop, two on tablets, a swipe row on phones. */
+.hs-creds { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; list-style: none; }
+.hs-cred { display: flex; align-items: center; gap: 18px; padding: 24px 26px; border: 1.5px solid color-mix(in srgb, var(--hs-rule) 50%, transparent); border-radius: 8px 36px; color: var(--hs-ink); font-weight: 600; line-height: 1.3; text-wrap: balance; }
+.hs-cred-icon { flex: none; display: block; color: var(--hs-ink); line-height: 0; } /* left, in ink, no tile */
+.hs-cred-icon .hs-icon { width: 34px; height: 34px; stroke-width: 1.4; }
+@media (max-width: 1100px) { .hs-creds { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .hs-creds-note { margin-top: 20px; }
 
 .hs-clinicians { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 80px; list-style: none; }
@@ -916,7 +938,8 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
   .hs-clinicians { grid-template-columns: 1fr; gap: 64px; }
   .hs-creds { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 16px; margin-inline: -16px; padding: 4px 16px 8px; scrollbar-width: none; }
   .hs-creds::-webkit-scrollbar { display: none; }
-  .hs-cred { flex: 0 0 40%; min-height: 196px; scroll-snap-align: start; padding: 18px 16px; }
+  .hs-cred { flex: 0 0 78%; scroll-snap-align: start; gap: 14px; padding: 18px 18px; }
+  .hs-cred-icon .hs-icon { width: 30px; height: 30px; }
 }
 
 /* ================= Phones: app-like =================
@@ -1100,18 +1123,19 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
    shadow blooms as they land. Leaving stays quick and plain. Off under
    reduced motion (the global rule stops every transition). */
 @media (prefers-reduced-motion: no-preference) {
-  .hs:not(.is-scroll-hidden) .hs-dock:not(.is-hidden) { transition: translate 0.55s cubic-bezier(0.34, 1.45, 0.5, 1), opacity 0.3s var(--hs-ease); }
+  .hs-dock:not(.is-hidden) { transition: translate 0.55s cubic-bezier(0.34, 1.45, 0.5, 1), opacity 0.3s var(--hs-ease); }
   .hs-dock > * { transition: translate 0.25s var(--hs-ease), opacity 0.2s var(--hs-ease), box-shadow 0.2s var(--hs-ease), background-color var(--hs-dur-fast) var(--hs-ease); }
-  .hs:not(.is-scroll-hidden) .hs-dock:not(.is-hidden) > * { transition: translate 0.6s cubic-bezier(0.34, 1.56, 0.5, 1), opacity 0.35s var(--hs-ease), box-shadow 0.7s var(--hs-ease-soft), background-color var(--hs-dur-fast) var(--hs-ease); }
-  .hs:not(.is-scroll-hidden) .hs-dock:not(.is-hidden) > :nth-child(2) { transition-delay: 80ms, 80ms, 200ms, 0s; }
-  .hs.is-scroll-hidden .hs-dock > *, .hs-dock.is-hidden > * { translate: 0 18px; opacity: 0; box-shadow: 0 0 0 rgba(15, 25, 35, 0); }
+  .hs-dock:not(.is-hidden) > * { transition: translate 0.6s cubic-bezier(0.34, 1.56, 0.5, 1), opacity 0.35s var(--hs-ease), box-shadow 0.7s var(--hs-ease-soft), background-color var(--hs-dur-fast) var(--hs-ease); }
+  .hs-dock:not(.is-hidden) > :nth-child(2) { transition-delay: 80ms, 80ms, 200ms, 0s; }
+  .hs-dock:not(.is-hidden) > :nth-child(3) { transition-delay: 160ms, 160ms, 280ms, 0s; }
+  .hs-dock.is-hidden > * { translate: 0 18px; opacity: 0; box-shadow: 0 0 0 rgba(15, 25, 35, 0); }
 }
 /* …and it leaves more slowly too: a soft 0.6s ease out, the main action
    going first and Call 80ms after (the reverse of the entrance). */
 @media (prefers-reduced-motion: no-preference) {
-  .hs.is-scroll-hidden .hs-dock, .hs-dock.is-hidden { transition: translate 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1); }
-  .hs.is-scroll-hidden .hs-dock > *, .hs-dock.is-hidden > * { transition: translate 0.55s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s var(--hs-ease); }
-  .hs.is-scroll-hidden .hs-dock > :first-child, .hs-dock.is-hidden > :first-child { transition-delay: 80ms; }
+  .hs-dock.is-hidden { transition: translate 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1); }
+  .hs-dock.is-hidden > * { transition: translate 0.55s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s var(--hs-ease); }
+  .hs-dock.is-hidden > :first-child { transition-delay: 80ms; }
 }
 
 .hs-hero-tab .hs-eyebrow { margin-bottom: 0; }
@@ -1140,10 +1164,11 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
 
 /* ---------- Behind the scenes (Home): the intake board in motion ---------- */
 .hs-bts-row { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 56px; align-items: center; }
-.hs-bts { position: relative; padding: 14px 16px 64px; border: 1.5px solid color-mix(in srgb, var(--hs-rule) 60%, transparent); border-radius: 12px 48px; background: var(--hs-surface); box-shadow: 0 24px 60px rgba(15, 25, 35, 0.08); overflow: hidden; }
+.hs-bts { position: relative; padding: 14px 16px 64px; border: 1.5px solid color-mix(in srgb, var(--hs-rule) 60%, transparent); border-radius: var(--hs-radius); background: var(--hs-surface); box-shadow: 0 24px 60px rgba(15, 25, 35, 0.08); overflow: hidden; }
 .hs-bts-bar { display: flex; align-items: center; gap: 6px; padding-bottom: 12px; margin-bottom: 12px; border-bottom: 1px solid var(--hs-line); }
 .hs-bts-bar span { width: 9px; height: 9px; border-radius: 50%; background: var(--hs-line); }
 .hs-bts-bar b { margin-left: 8px; font-family: var(--hs-font-label); font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--hs-ink-2); }
+.hs-bts-note { margin-top: 14px; }
 .hs-bts-board { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
 .hs-bts-col { display: grid; align-content: start; gap: 8px; min-height: 190px; padding: 10px; border-radius: 8px; background: var(--hs-sand); }
 .hs-bts-head { font-family: var(--hs-font-label); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--hs-ink-2); }
@@ -1165,7 +1190,7 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
 @media (prefers-reduced-motion: reduce) { .hs-bts-card.is-moving { transition: none; } .hs-bts-card.is-new, .hs-bts-toast { animation: none; } }
 @media (max-width: 960px) { .hs-bts-row { grid-template-columns: 1fr; gap: 32px; } }
 @media (max-width: 760px) {
-  .hs-bts { padding: 12px 10px 60px; border-radius: 10px 32px; }
+  .hs-bts { padding: 12px 10px 60px; }
   .hs-bts-board { gap: 6px; }
   .hs-bts-col { min-height: 170px; padding: 8px 6px; }
   .hs-bts-head { font-size: 9.5px; }
@@ -1183,3 +1208,19 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
 .hs-header { view-transition-name: hs-header; }
 .hs-dock-bar { view-transition-name: hs-dock; }
 ::view-transition-group(hs-header), ::view-transition-group(hs-dock) { z-index: 2; }
+
+/* Hero calls to action run 25% larger than the standard 52px button: Home's
+   hero and the subpage heads (52 → 65px tall, 15 → 19px type, a 25px arrow).
+   The floating dock keeps the standard size: it never shows while these are
+   on screen. */
+:is(.hs-hero-actions, .hs-page-head) .hs-btn:not(.hs-btn-quiet) { min-height: 65px; padding: 0 28px; gap: 12px; font-size: 19px; }
+:is(.hs-hero-actions, .hs-page-head) .hs-btn-quiet { font-size: 19px; }
+:is(.hs-hero-actions, .hs-page-head) .hs-btn .hs-icon { width: 25px; height: 25px; }
+
+/* Home hero: Call (black) and Request a call (white), with Refer a patient as
+   a text link under them. */
+.hs-hero-refer { margin-top: 10px; }
+/* Desktop dock: a third, white button for referral partners (tablets and
+   phones keep the two-button bar). */
+.hs-dock .hs-dock-refer { display: none; }
+@media (min-width: 1081px) { .hs-dock .hs-dock-refer { display: inline-flex; } }

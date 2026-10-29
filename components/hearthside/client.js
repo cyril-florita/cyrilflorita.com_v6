@@ -60,11 +60,12 @@ export function Header() {
     return () => { ul.removeEventListener("scroll", edges); window.removeEventListener("resize", edges); };
   }, [pathname]);
 
-  // Scrolling down slides the sticky header up out of view and the contact
-  // dock down; scrolling up brings both back (every screen size). Both stay
-  // near the top of the page and while keyboard focus is in either. The class
-  // lives on the .hs root; the CSS does the (gentle, reduced-motion-aware)
-  // movement.
+  // Scrolling down slides the sticky header up out of view; scrolling up
+  // brings it back (every screen size). It stays near the top of the page and
+  // while keyboard focus is in the header or the dock. The class lives on the
+  // .hs root; the CSS does the (gentle, reduced-motion-aware) movement. The
+  // contact dock does NOT follow: once the page's own opening calls to action
+  // have scrolled away, it stays put.
   useEffect(() => {
     const root = document.querySelector(".hs");
     if (!root) return;
@@ -116,6 +117,9 @@ export function ZipCheck({ areas, compact, onResult }) {
   const id = useId();
   const [zip, setZip] = useState("");
   const [result, setResult] = useState(null);
+  // The last message stays rendered while the result area folds shut, so the
+  // text doesn't vanish before the height finishes animating.
+  const [view, setView] = useState(null);
   const index = useMemo(() => {
     const m = new Map();
     for (const a of areas) for (const [town, zips] of a.communities) for (const z of zips) m.set(z, { town, area: a.name });
@@ -124,10 +128,11 @@ export function ZipCheck({ areas, compact, onResult }) {
   const check = (e) => {
     e.preventDefault();
     const z = zip.trim();
-    if (!/^\d{5}$/.test(z)) return setResult({ kind: "invalid" });
+    const show = (r) => { setResult(r); setView(r); };
+    if (!/^\d{5}$/.test(z)) return show({ kind: "invalid" });
     const hit = index.get(z);
     const res = hit ? { kind: "yes", z, ...hit } : { kind: "no", z };
-    setResult(res);
+    show(res);
     onResult?.(res);
   };
   return (
@@ -139,11 +144,17 @@ export function ZipCheck({ areas, compact, onResult }) {
           aria-describedby={`${id}-result`} />
         <button className="hs-btn hs-btn-secondary" type="submit">Check</button>
       </div>
-      <p id={`${id}-result`} className={`hs-zip-result${result ? ` is-${result.kind}` : ""}`} role="status">
-        {result?.kind === "yes" && <><Icon name="check" size={20} /> Yes, we serve {result.z} ({result.town}, {result.area}).</>}
-        {result?.kind === "no" && <><Icon name="info" size={20} /> {result.z} is outside our service area. Call us and we&rsquo;ll help you find an agency nearby.</>}
-        {result?.kind === "invalid" && <>Please enter a 5-digit ZIP code.</>}
-      </p>
+      {/* No space is reserved for the answer: this folds open to the message's
+          height (hearthside.css) only when there is one. */}
+      <div className={`hs-zip-reveal${result ? " is-open" : ""}`}>
+        <div>
+          <p id={`${id}-result`} className={`hs-zip-result${view ? ` is-${view.kind}` : ""}`} role="status">
+            {view?.kind === "yes" && <><Icon name="check" size={20} /> Yes, we serve {view.z} ({view.town}, {view.area}).</>}
+            {view?.kind === "no" && <><Icon name="info" size={20} /> {view.z} is outside our service area. Call us and we&rsquo;ll help you find an agency nearby.</>}
+            {view?.kind === "invalid" && <>Please enter a 5-digit ZIP code.</>}
+          </p>
+        </div>
+      </div>
     </form>
   );
 }
@@ -198,9 +209,11 @@ export function ThemeSwitch() {
 // (a back-to-top button sits on its right edge), a full-width bar on
 // tablets and phones. It changes with the page: families get the phone number
 // and Request a call; referral partners (the referral and status pages) get
-// the intake line and Refer a patient. It slides away with the header while
-// scrolling down (Header's .is-scroll-hidden), and steps aside while the
-// page's own opening buttons or the footer (same contacts) are on screen.
+// the intake line and Refer a patient. It appears once the page's own opening
+// buttons have scrolled out of view and then stays (it no longer slides away
+// with the header), stepping aside only while those buttons or the footer
+// (same contacts) are on screen. The phone is the filled (black) button and
+// the main action the outlined (white) one.
 const PARTNER_PAGES = ["/referrals", "/status"];
 export function ContactDock() {
   const path = norm(usePathname()).replace(BASE, "") || "/";
@@ -240,14 +253,20 @@ export function ContactDock() {
     <div className="hs-dock-shell">
     <div className="hs-wrap hs-dock-row">
     <div className={`hs-dock${hide ? " is-hidden" : ""}`} role="region" aria-label={partner ? "Referral contacts" : "Contact us"} aria-hidden={hide || undefined}>
-      <a className="hs-btn hs-btn-secondary hs-dock-phone" href={PHONE.href} tabIndex={tab}>
+      <a className="hs-btn hs-btn-primary hs-dock-phone" href={PHONE.href} tabIndex={tab}>
         <Icon name="phone" size={20} />
         <span className="hs-dock-label">{partner ? "Intake line" : "Call"}</span>
         <span className="hs-dock-num">{PHONE.display}</span>
       </a>
       {partner
-        ? <Link className="hs-btn hs-btn-primary" href={path === "/referrals" ? "#refer" : `${BASE}/referrals/#refer`} tabIndex={tab}>Refer a patient</Link>
-        : <Link className="hs-btn hs-btn-primary" href={`${BASE}/contact/`} tabIndex={tab}>Request a call</Link>}
+        ? <Link className="hs-btn hs-btn-secondary" href={path === "/referrals" ? "#refer" : `${BASE}/referrals/#refer`} tabIndex={tab}>Refer a patient</Link>
+        : (
+          <>
+            <a className="hs-btn hs-btn-secondary" href="#request-a-call" tabIndex={tab}>Request a call</a>
+            {/* Desktop only (hearthside.css): a third white button for referral partners. */}
+            <Link className="hs-btn hs-btn-secondary hs-dock-refer" href={`${BASE}/referrals/#refer`} tabIndex={tab}>Refer a patient</Link>
+          </>
+        )}
     </div>
     <button type="button" className={`hs-btn hs-btn-secondary hs-totop${far ? "" : " is-hidden"}`} onClick={toTop} aria-label="Back to top" tabIndex={far ? undefined : -1} aria-hidden={far ? undefined : true}>
       <Icon name="up" size={22} />

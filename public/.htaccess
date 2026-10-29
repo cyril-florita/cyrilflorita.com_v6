@@ -32,6 +32,10 @@ AddType application/manifest+json .webmanifest
 # Viteo moved from /lab/viteo/ to /pitch/viteo/ (mod_alias; no RewriteEngine).
 RedirectMatch 301 ^/lab/viteo(/.*)?$ /pitch/viteo$1
 
+# Hearthside's contact page became a modal on every page: the old URL goes to
+# Home, which opens it (?call).
+RedirectMatch 301 ^/pitch/hearthside/contact/?$ /pitch/hearthside/?call=1
+
 # deploy.js's record of deployed files: not for the public.
 <IfModule mod_authz_core.c>
   <Files ".deploy-manifest.json">

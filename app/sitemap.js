@@ -31,7 +31,7 @@ const PROJECTS = [
 const PITCH = ['/pitch/viteo/', '/pitch/viteo/quiz/', '/pitch/viteo/partners/', '/pitch/viteo/lot/', '/pitch/viteo/emails/', '/pitch/viteo/design-system/'];
 
 // Hearthside's public pages (the intake app and status page are noindex).
-const HEARTHSIDE = ['/pitch/hearthside/', '/pitch/hearthside/services/', '/pitch/hearthside/getting-started/', '/pitch/hearthside/service-area/', '/pitch/hearthside/referrals/', '/pitch/hearthside/careers/', '/pitch/hearthside/contact/', '/pitch/hearthside/design-system/'];
+const HEARTHSIDE = ['/pitch/hearthside/', '/pitch/hearthside/services/', '/pitch/hearthside/getting-started/', '/pitch/hearthside/service-area/', '/pitch/hearthside/referrals/', '/pitch/hearthside/careers/', '/pitch/hearthside/design-system/'];
 
 export default function sitemap() {
   return [

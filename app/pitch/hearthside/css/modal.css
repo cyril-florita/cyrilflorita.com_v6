@@ -1,0 +1,104 @@
+/* The request-a-call modal (CallbackModal.js, mounted in the public layout).
+   A plain rounded rectangle (no leaf). The form is the point: on desktop it sits beside a tall photo; on tablets
+   the photo shrinks to a slim banner above it; on phones (and short
+   landscape screens) the photo goes and the modal is a bottom sheet whose
+   content scrolls inside it, so the fields are always the first thing seen. */
+
+.hs-modal {
+  width: min(980px, calc(100vw - 48px)); max-width: none; max-height: none;
+  margin: auto; padding: 0; overflow: hidden;
+  border: 1.5px solid var(--hs-rule); border-radius: 16px;
+  background: var(--hs-surface); color: var(--hs-ink);
+  box-shadow: 0 30px 80px rgba(10, 20, 30, 0.3);
+}
+.hs[data-hs-mode="dark"] .hs-modal { box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6); }
+.hs-modal::backdrop { background: rgba(10, 18, 28, 0.5); backdrop-filter: blur(3px); }
+/* The page behind doesn't scroll (the gutter stays, so nothing shifts). */
+:root:has(.hs-modal[open]) { overflow: hidden; scrollbar-gutter: stable; }
+
+.hs-modal-box { position: relative; display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); max-height: min(760px, calc(100dvh - 48px)); }
+.hs-modal-photo { position: relative; min-height: 0; background: var(--hs-sand); }
+.hs-modal-photo .hs-photo-frame { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto !important; border-radius: 0; } /* the dialog's own corners clip it */
+.hs-modal-main { display: grid; gap: 20px; align-content: start; min-height: 0; padding: 44px 44px 32px; overflow-y: auto; overscroll-behavior: contain; }
+.hs-modal-main h2 { padding-right: 56px; font-size: clamp(30px, 3.4vw, 42px); outline: none; }
+.hs-modal-lede { margin-top: -6px; max-width: 54ch; color: var(--hs-ink-2); font-size: 17px; }
+.hs-modal-alt { padding-top: 16px; border-top: 1px solid var(--hs-line); color: var(--hs-ink-2); font-size: 15px; }
+.hs-modal-close { position: absolute; top: 16px; right: 16px; z-index: 2; display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 1.5px solid var(--hs-ink); border-radius: var(--hs-radius-sm); background: var(--hs-surface); color: var(--hs-ink); cursor: pointer; transition: background-color var(--hs-dur-fast) var(--hs-ease); }
+.hs-modal-close:hover { background: var(--hs-sand); }
+
+/* The form gives way to the confirmation: it fades up and out, then the
+   confirmation rises in with its check popping (Forms.js holds the height
+   between the two). */
+@media (prefers-reduced-motion: no-preference) {
+  .hs-form.is-leaving { animation: hs-swap-out 0.24s var(--hs-ease) both; }
+  .hs-modal .hs-done .hs-icon { animation: hs-swap-pop 0.6s cubic-bezier(0.34, 1.56, 0.5, 1) 0.12s both; }
+  .hs-modal .hs-done > :not(.hs-icon) { animation: hs-swap-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  .hs-modal .hs-done > :nth-child(3) { animation-delay: 0.08s; }
+  .hs-modal .hs-done > :nth-child(4) { animation-delay: 0.14s; }
+  .hs-modal .hs-done > :nth-child(n + 5) { animation-delay: 0.2s; }
+}
+@keyframes hs-swap-out { to { opacity: 0; translate: 0 -10px; } }
+@keyframes hs-swap-in { from { opacity: 0; translate: 0 14px; } }
+@keyframes hs-swap-pop { from { opacity: 0; scale: 0.4; } }
+
+/* A tighter form in here: two columns while there's room, less air between rows. */
+.hs-modal .hs-form { gap: 18px; }
+.hs-modal .hs-form-grid { gap: 16px 20px; }
+.hs-modal .hs-done { padding: 4px 0 0; border: 0; }
+.hs-modal .hs-done:focus { outline: none; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .hs-modal[open] { animation: hs-modal-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  .hs-modal[open]::backdrop { animation: hs-modal-fade 0.3s ease both; }
+}
+@keyframes hs-modal-in { from { opacity: 0; translate: 0 14px; scale: 0.985; } }
+@keyframes hs-modal-sheet { from { translate: 0 100%; } }
+@keyframes hs-modal-fade { from { opacity: 0; } }
+
+/* Tablets: the photo becomes a slim banner above the form. */
+@media (max-width: 900px) {
+  .hs-modal { width: min(760px, calc(100vw - 32px)); }
+  .hs-modal-box { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
+  .hs-modal-photo { height: 120px; }
+  .hs-modal-main { padding: 32px 36px 28px; }
+}
+
+/* Phones, and short landscape screens: no photo; a bottom sheet on phones. */
+@media (max-width: 700px) {
+  .hs-modal { width: 100%; margin: auto 0 0; border-width: 1.5px 0 0; border-radius: 16px 16px 0 0; }
+  .hs-modal-box { grid-template-rows: minmax(0, 1fr); max-height: min(94dvh, calc(100dvh - 16px)); }
+  .hs-modal-photo { display: none; }
+  .hs-modal-main { gap: 16px; padding: 28px 20px calc(24px + env(safe-area-inset-bottom)); }
+  .hs-modal-main h2 { font-size: 30px; }
+  .hs-modal-lede { margin-top: -4px; font-size: 16px; }
+  .hs-modal-close { top: 14px; right: 14px; }
+  .hs-modal .hs-form-grid { gap: 14px; }
+  @media (prefers-reduced-motion: no-preference) { .hs-modal[open] { animation-name: hs-modal-sheet; } }
+}
+@media (max-height: 560px) {
+  .hs-modal-photo { display: none; }
+  .hs-modal-box { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); max-height: calc(100dvh - 16px); }
+  .hs-modal-main { padding-block: 24px; }
+}
+
+/* Fields keep their own height (the chips beside the select make the row tall),
+   and the select's text fits its half of the row. */
+.hs-modal .hs-field { align-content: start; }
+.hs-modal .hs-select { font-size: 16px; padding-inline: 12px 34px; }
+
+/* Short phones (an iPhone SE is 667px tall) and landscape phones: trim what
+   isn't needed so the button is on screen without scrolling — the lede's
+   second sentence and the form's own note (the confirmation repeats both),
+   and a little height from each field. */
+@media (max-width: 700px) and (max-height: 760px), (max-height: 560px) {
+  .hs-modal-lede span, .hs-modal .hs-form > .hs-hint { display: none; }
+  .hs-modal-main { gap: 12px; }
+  .hs-modal .hs-form { gap: 14px; }
+  .hs-modal .hs-form-grid { gap: 12px 16px; }
+  .hs-modal .hs-field { gap: 6px; }
+  .hs-modal .hs-input, .hs-modal .hs-select { min-height: 48px; }
+}
+@media (max-height: 560px) {
+  .hs-modal-main h2 { font-size: 28px; }
+  .hs-modal-lede { display: none; }
+}

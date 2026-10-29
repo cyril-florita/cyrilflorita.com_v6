@@ -271,7 +271,7 @@ export default function DesignSystem() {
 
       <Row id="imagery" label="Imagery" labelledBy="ds-imagery">
         <h2 id="ds-imagery">Imagery</h2>
-        <p className="hs-lede">Leaf-shaped photos with one cool, slightly faded grade, so pictures from different sources read as one set. A tiny blurred preview shows while each loads, and on desktop each photo closes in on its subject as it scrolls up. Without a photo, the placeholder names the shot it&rsquo;s waiting for. Partner logos are illustrative marks.</p>
+        <p className="hs-lede">Leaf-shaped photos with one cool, slightly faded grade, so pictures from different sources read as one set. A tiny blurred preview shows while each loads, and a photo beside a call to action eases in on its subject while you point at the button. Without a photo, the placeholder names the shot it&rsquo;s waiting for. Partner logos are illustrative marks.</p>
         <div className="hs-ruled">
           <figure className="hs-figure">
             <Photo src={SERVICES[0].photo.src} alt={SERVICES[0].photo.alt} position={SERVICES[0].photo.position} sizes="(max-width: 760px) 92vw, 40vw" />
@@ -295,7 +295,7 @@ export default function DesignSystem() {
         </ul>
         <ul className="hs-creds" style={{ marginTop: 56 }}>
           {[["shield", "Medicare-certified"], ["clipboard", "State-licensed agency"], ["phone", "Intake answered seven days a week"]].map(([icon, text]) => (
-            <li key={text} className="hs-cred"><span className="hs-cred-icon"><Icon name={icon} size={24} /></span>{text}</li>
+            <li key={text} className="hs-cred"><span className="hs-cred-icon"><Icon name={icon} size={24} /></span><span>{text}</span></li>
           ))}
         </ul>
         <p className="hs-creds-note"><Sample /></p>

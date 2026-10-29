@@ -109,7 +109,7 @@ const Page = () => {
                 <li><strong>Service area map</strong> with a ZIP check that lights up the towns served</li>
                 <li><strong>Referral partner page</strong> with a document checklist and a secure referral form, in preview mode</li>
                 <li><strong>Referral status page</strong> a partner can share, with progress and no health details</li>
-                <li><strong>Careers and contact pages</strong> with short, minimal forms</li>
+                <li><strong>Careers page and a request-a-call form</strong> that opens in a modal from any page, both with short, minimal fields</li>
                 <li><strong>Intake board:</strong> every open referral by stage, with routing by ZIP, owners, and overdue flags</li>
                 <li><strong>Referral record:</strong> the next action, documents, details, and an activity log</li>
                 <li><strong>Tasks, partners, reports, and rules</strong> screens, with ⌘K search across all of it</li>
@@ -210,7 +210,7 @@ const Page = () => {
                 <li><strong>One store, three views:</strong> the referral form, the status page, and the intake app share one store in the browser, so a referral sent on the public site really does appear on the board and in its status link.</li>
                 <li><strong>Rules as data:</strong> stages, time limits, ZIP routing, and required documents are plain data, so the board, tasks, and reports all follow the same rules, and changing a rule needs no code.</li>
                 <li><strong>View transitions:</strong> the referral card travels between columns, pages hand over in sequence, and the phone switch slides its cards, all with the browser&apos;s View Transitions API and no animation library.</li>
-                <li><strong>Scroll-driven motion in CSS:</strong> the hero and every photo close in on their subject as they scroll, with no JavaScript on the scroll path.</li>
+                <li><strong>Scroll-driven motion in CSS:</strong> the home photo closes in on the nurse and patient as you scroll, with no JavaScript on the scroll path. Everywhere else photos hold still, and ease in only when you point at the button beside them.</li>
                 <li><strong>Private by design:</strong> public forms ask only what&apos;s needed to call back, the referral form can only send a generated sample, and the status page never shows health details.</li>
                 <li><strong>Accessible throughout:</strong> audited with axe, AAA body text in every scheme, native dialogs with focus management, keyboard search, and reduced motion respected everywhere.</li>
               </ul>

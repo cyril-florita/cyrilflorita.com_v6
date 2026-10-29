@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { BASE, PHONE, ROLES } from "./data";
 import { Button, Icon } from "./ui";
 
@@ -9,12 +9,22 @@ import { Button, Icon } from "./ui";
 
 const digits = (v) => v.replace(/\D/g, "");
 
-// "Request a call": name, phone, best time, who it's for.
-export function CallbackForm() {
+// "Request a call": name, phone, best time, who it's for. In the site's
+// request-a-call modal (CallbackModal.js), which passes `onClose` so the
+// confirmation can offer a Close button.
+export function CallbackForm({ onClose }) {
   const id = useId();
+  const doneRef = useRef(null);
   const [f, setF] = useState({ name: "", phone: "", time: "morning", who: "family" });
   const [errors, setErrors] = useState({});
-  const [done, setDone] = useState(false);
+  // form → leaving (the form fades out) → done (the confirmation fades in).
+  // While it fades, the wrapper holds the form's height so the dialog
+  // doesn't jump.
+  const [phase, setPhase] = useState("form");
+  const [held, setHeld] = useState(0);
+  const wrapRef = useRef(null);
+  const timer = useRef(0);
+  useEffect(() => () => clearTimeout(timer.current), []);
   // Functional update: autofill can change several fields at once, and a
   // snapshot of `f` would let the last field wipe the others.
   const set = (k) => (e) => { const v = e.target.value; setF((prev) => ({ ...prev, [k]: v })); };
@@ -25,20 +35,29 @@ export function CallbackForm() {
     if (digits(f.phone).length !== 10) err.phone = "Enter a 10-digit phone number, like (818) 675-0181.";
     setErrors(err);
     if (Object.keys(err).length) return document.getElementById(`${id}-${Object.keys(err)[0]}`)?.focus();
-    setDone(true);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return setPhase("done");
+    setHeld(wrapRef.current?.offsetHeight || 0);
+    setPhase("leaving");
+    timer.current = window.setTimeout(() => setPhase("done"), 240);
   };
-  if (done) {
+  // The submit button is gone once sent: bring focus to the confirmation.
+  useEffect(() => { if (phase === "done") doneRef.current?.focus({ preventScroll: true }); }, [phase]);
+  if (phase === "done") {
     return (
-      <div className="hs-done" role="status">
+      <div className="hs-swap" style={held ? { minHeight: held } : undefined}>
+      <div className="hs-done" role="status" tabIndex={-1} ref={doneRef}>
         <Icon name="check" />
         <h3>Thanks, {f.name.split(" ")[0]}. We&rsquo;ll call you {f.time === "morning" ? "tomorrow morning" : f.time === "afternoon" ? "tomorrow afternoon" : "as soon as we can"}.</h3>
         <p className="hs-muted">Our intake team calls back within one business day. If it&rsquo;s urgent, call us now at <a href={PHONE.href}>{PHONE.display}</a>. If it&rsquo;s an emergency, call 911.</p>
         <p className="hs-hint">Preview mode: this request wasn&rsquo;t sent anywhere.</p>
+        {onClose && <div><Button variant="secondary" onClick={onClose}>Close</Button></div>}
+      </div>
       </div>
     );
   }
   return (
-    <form className="hs-form" onSubmit={submit} noValidate>
+    <div className="hs-swap" ref={wrapRef} style={held ? { minHeight: held } : undefined}>
+    <form className={`hs-form${phase === "leaving" ? " is-leaving" : ""}`} onSubmit={submit} noValidate inert={phase === "leaving"}>
       <div className="hs-form-grid">
         <div className="hs-field">
           <label htmlFor={`${id}-name`}>Your name</label>
@@ -74,6 +93,7 @@ export function CallbackForm() {
         <span className="hs-hint">Preview mode: nothing is sent.</span>
       </div>
     </form>
+    </div>
   );
 }
 

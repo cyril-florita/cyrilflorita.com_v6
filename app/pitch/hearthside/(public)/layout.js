@@ -1,9 +1,11 @@
 import { ViewTransition } from "react";
 import { ContactDock, Header, Reveal } from "@/components/hearthside/client";
 import { Footer } from "@/components/hearthside/chrome";
+import CallbackModal from "@/components/hearthside/CallbackModal";
+import "@/app/pitch/hearthside/css/modal.css";
 
 // The public website: header, the editorial frame (hairlines down both sides
-// on wide screens) and footer, plus the contact dock (a floating pill on desktop, a bottom bar on tablets and phones). The intake system (../intake) has its own shell.
+// on wide screens) and footer, plus the contact dock (a floating pill on desktop, a bottom bar on tablets and phones) and the request-a-call modal. The intake system (../intake) has its own shell.
 export default function PublicLayout({ children }) {
   return (
     <div className="hs-shell">
@@ -15,6 +17,7 @@ export default function PublicLayout({ children }) {
       <Reveal />
       <Footer />
       <ContactDock />
+      <CallbackModal />
     </div>
   );
 }

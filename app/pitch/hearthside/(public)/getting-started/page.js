@@ -34,7 +34,7 @@ export default function GettingStarted() {
         lede="From your first call to your first visit, usually in a few days. We'll tell you what's happening at every step, and we do the paperwork with your doctor's office."
       >
         <div className="hs-hero-ctas" style={{ marginTop: 28 }}>
-          <Button href={`${BASE}/contact/`} icon="arrow">Request a call</Button>
+          <Button href="#request-a-call" icon="arrow">Request a call</Button>
           <PhoneLink />
         </div>
       </PageHead>

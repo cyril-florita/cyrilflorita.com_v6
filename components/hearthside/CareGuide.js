@@ -62,13 +62,13 @@ export default function CareGuide() {
             <div className="hs-hero-ctas">
               {r.cta === "home" ? (
                 <>
-                  <Button href={`${BASE}/contact/`} icon="arrow">Request a call</Button>
+                  <Button href="#request-a-call" icon="arrow">Request a call</Button>
                   <Button href={PHONE.href} variant="secondary">Call {PHONE.display}</Button>
                 </>
               ) : (
                 <>
                   <Button href="https://eldercare.acl.gov" variant="secondary" icon="external">Eldercare Locator</Button>
-                  <Button href={`${BASE}/contact/`} variant="quiet" icon="arrow">Talk it through with us</Button>
+                  <Button href="#request-a-call" variant="quiet" icon="arrow">Talk it through with us</Button>
                 </>
               )}
             </div>

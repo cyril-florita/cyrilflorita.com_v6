@@ -1,5 +1,5 @@
 import { BASE, FAQS, MEDICARE_CONDITIONS, MEDICARE_URL, PHONE, SERVICES, STEPS, AREAS } from "@/components/hearthside/data";
-import { Button, Icon, PartnerLogos, PhoneLink, Photo, Row, Sample } from "@/components/hearthside/ui";
+import { Button, Icon, PartnerLogos, Photo, Row, Sample } from "@/components/hearthside/ui";
 import { BehindTheScenes, PathSwitch, ScrollCue, ZipCheck } from "@/components/hearthside/client";
 import { PHOTO_LQIP } from "@/components/hearthside/photo-lqip";
 
@@ -70,13 +70,13 @@ export default function HearthsideHome() {
             <h1 id="hs-hero-title"><span>Compassionate</span> <span>care at home.</span></h1>
           </div>
           <div className="hs-hero-actions" data-dock-hide>
+            {/* In this order: Call (black), Request a call (white), then Refer a patient as a text link. */}
             <div className="hs-hero-ctas">
-              <Button href={`${BASE}/contact/`} icon="arrow">Request a call</Button>
-              <Button href={`${BASE}/referrals/`} variant="secondary">Refer a patient</Button>
+              <a className="hs-btn hs-btn-primary" href={PHONE.href}><Icon name="phone" size={20} />Call {PHONE.display}</a>
+              <Button href="#request-a-call" variant="secondary">Request a call</Button>
             </div>
-            <p className="hs-hero-call">
-              <span>Or call our intake team:</span>
-              <PhoneLink />
+            <p className="hs-hero-refer">
+              <Button href={`${BASE}/referrals/`} variant="quiet" icon="arrow">Refer a patient</Button>
             </p>
           </div>
         </div>
@@ -88,20 +88,21 @@ export default function HearthsideHome() {
       </section>
 
       <ScrollCue target="hs-creds" />
-      <Row id="hs-creds" label="Credentials" labelledBy="hs-creds-title" tight>
-        <h2 id="hs-creds-title" className="hs-visually-hidden">Credentials</h2>
+      <Row id="hs-creds" label="Why You Can Trust Us" labelledBy="hs-creds-title" tight>
+        <h2 id="hs-creds-title" className="hs-visually-hidden">Why you can trust us</h2>
         <ul className="hs-creds">
-          {CREDENTIALS.map((c) => <li key={c.text} className="hs-cred"><span className="hs-cred-icon"><Icon name={c.icon} size={24} /></span>{c.text}</li>)}
+          {CREDENTIALS.map((c) => <li key={c.text} className="hs-cred"><span className="hs-cred-icon"><Icon name={c.icon} size={24} /></span><span>{c.text}</span></li>)}
         </ul>
         <p className="hs-creds-note"><Sample /></p>
       </Row>
 
-      <Row label="Referral partners" tight>
+      <Row label="Partners Who Trust Us" tight>
         <PartnerLogos />
-        <p className="hs-logos-note"><Sample>Sample partners</Sample> Hospitals, physicians, and senior communities across the Valley refer patients to us.</p>
+        <p className="hs-logos-note">Hospitals, physicians, and senior communities across the Valley refer patients to us.</p>
+        <p className="hs-creds-note"><Sample>Sample partners</Sample></p>
       </Row>
 
-      <Row label="Start here" labelledBy="hs-paths-title">
+      <Row label="We're Here for You" labelledBy="hs-paths-title">
         <h2 id="hs-paths-title">How can we help?</h2>
         {/* Phones: a two-option switch above the cards shows one at a time
             (PathSwitch in client.js), so both choices are seen at once and the
@@ -118,7 +119,7 @@ export default function HearthsideHome() {
             </ul>
             <div className="hs-path-ctas">
               <Button href={`${BASE}/getting-started/`} icon="arrow">How care begins</Button>
-              <Button href={`${BASE}/contact/`} variant="quiet">Request a call</Button>
+              <Button href="#request-a-call" variant="quiet">Request a call</Button>
             </div>
           </article>
           <article className="hs-path">
@@ -159,7 +160,7 @@ export default function HearthsideHome() {
         </div>
       </Row>
 
-      <Row label="Getting started" labelledBy="hs-steps-title">
+      <Row label="We Make it Easy for You" labelledBy="hs-steps-title">
         <h2 id="hs-steps-title">How care begins</h2>
         <p className="hs-lede">Four steps from your first call to your first visit. We&rsquo;ll tell you what&rsquo;s happening at each one.</p>
         <ol className="hs-ruled hs-swipe">
@@ -251,9 +252,11 @@ export default function HearthsideHome() {
               <Button href={`${BASE}/intake/`} icon="arrow">Try the intake demo</Button>
               <Button href={`${BASE}/referrals/#refer`} variant="secondary">Send a test referral</Button>
             </div>
-            <p style={{ marginTop: 18 }}><Sample>Sample data</Sample></p>
           </div>
-          <BehindTheScenes />
+          <div>
+            <BehindTheScenes />
+            <p className="hs-bts-note"><Sample>Sample data</Sample></p>
+          </div>
         </div>
       </Row>
 
@@ -287,10 +290,11 @@ export default function HearthsideHome() {
       <section className="hs-band" aria-labelledby="hs-band-title">
         <h2 id="hs-band-title">Not sure where to start? Start with a call.</h2>
         <p>Our intake team will listen, answer your questions, and tell you what happens next. No forms about your medical history: we&rsquo;ll ask what we need when we talk.</p>
+        {/* The same order as the hero: Call (filled), Request a call (outlined), Refer a patient (text link). */}
         <div className="hs-band-ctas">
-          <Button href={`${BASE}/contact/`} icon="arrow">Request a call</Button>
-          <Button href={`${BASE}/referrals/`} variant="secondary">Refer a patient</Button>
-          <PhoneLink />
+          <a className="hs-btn hs-btn-primary" href={PHONE.href}><Icon name="phone" size={20} />Call {PHONE.display}</a>
+          <Button href="#request-a-call" variant="secondary">Request a call</Button>
+          <Button href={`${BASE}/referrals/`} variant="quiet" icon="arrow">Refer a patient</Button>
         </div>
       </section>
     </div>

@@ -120,7 +120,8 @@ export function Row({ label, labelledBy, children, tight, id }) {
 export function Photo({ shot, ratio = "4 / 3", src, alt, position = "50% 50%", sizes = "(max-width: 900px) 92vw, 60vw" }) {
   // A real photo sits in a frame (the leaf shape, clipping), which paints a
   // tiny blurred preview (photo-lqip.js) until the image arrives, and lets the
-  // image close in on its focal point as it scrolls by (hearthside.css).
+  // image ease in on its focal point while a call to action beside it is
+  // hovered (hearthside.css).
   if (src) {
     const lqip = PHOTO_LQIP[src];
     return (

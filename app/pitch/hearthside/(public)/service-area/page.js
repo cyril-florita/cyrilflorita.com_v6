@@ -26,7 +26,7 @@ export default function ServiceArea() {
           </div>
           <div className="hs-hero-ctas" style={{ marginTop: 0 }}>
             <Button href={PHONE.href} icon="arrow">Call {PHONE.display}</Button>
-            <Button href={`${BASE}/contact/`} variant="secondary">Request a call</Button>
+            <Button href="#request-a-call" variant="secondary">Request a call</Button>
           </div>
         </div>
       </Row>
