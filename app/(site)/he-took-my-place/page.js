@@ -91,7 +91,7 @@ const Page = () => {
           <CaseNext
             href="/viteo"
             title="Viteo"
-            category="Product Design & Development · Pitch"
+            category="Product Design & Development"
             onBack={handleBackToPortfolio}
           />
 

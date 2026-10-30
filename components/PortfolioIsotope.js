@@ -528,7 +528,7 @@ const PortfolioIsotope = () => {
                   <h3>Case Study</h3>
                 </div>
                 <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Product Design &amp; Development · Pitch</p>
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Product Design &amp; Development</p>
                   <h4 className="cyril-up">Viteo</h4>
                 </div>
               </div>
@@ -544,7 +544,7 @@ const PortfolioIsotope = () => {
                   <h3>Case Study</h3>
                 </div>
                 <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Product Design &amp; Development · Pitch</p>
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Product Design &amp; Development</p>
                   <h4 className="cyril-up">Hearthside</h4>
                 </div>
               </div>

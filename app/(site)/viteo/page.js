@@ -263,7 +263,7 @@ const Page = () => {
           <CaseNext
             href="/hearthside"
             title="Hearthside"
-            category="Product Design & Development · Pitch"
+            category="Product Design & Development"
             onBack={handleBackToPortfolio}
           />
 
