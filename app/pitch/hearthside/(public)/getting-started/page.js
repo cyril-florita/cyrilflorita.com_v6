@@ -1,5 +1,6 @@
 import { BASE, MEDICARE_CONDITIONS, MEDICARE_URL, PHONE, STEPS } from "@/components/hearthside/data";
 import { Button, Icon, PageHead, PhoneLink, Row, Photo } from "@/components/hearthside/ui";
+import { StepStory } from "@/components/hearthside/client";
 
 export const metadata = {
   title: "Getting started",
@@ -30,7 +31,7 @@ export default function GettingStarted() {
     <div className="hs-wrap">
       <PageHead
         photo={{ shot: "A nurse talks a care plan through with a patient and her daughter", src: "/img/hearthside/photos/step-4", alt: "A nurse talks a care plan through with an older woman and her daughter at home", position: "50% 9%", ratio: "16 / 8" }}
-        title="How care begins"
+        title={<>How <em className="hs-title-em">care begins</em></>}
         lede="From your first call to your first visit, usually in a few days. We'll tell you what's happening at every step, and we do the paperwork with your doctor's office."
       >
         <div className="hs-hero-ctas" style={{ marginTop: 28 }}>
@@ -41,6 +42,8 @@ export default function GettingStarted() {
 
       <Row label="The steps" labelledBy="gs-steps">
         <h2 id="gs-steps" className="hs-visually-hidden">The steps</h2>
+        {/* Desktop: the pinned scroll story, as on Home (StepStory). */}
+        <StepStory>
         <ol className="hs-ruled hs-swipe">
           {STEPS.map((s, i) => (
             <li key={s.title} className="hs-step">
@@ -51,6 +54,7 @@ export default function GettingStarted() {
             </li>
           ))}
         </ol>
+        </StepStory>
       </Row>
 
       <Row label="Have ready" labelledBy="gs-ready">
@@ -65,6 +69,8 @@ export default function GettingStarted() {
         </div>
       </Row>
 
+      {/* A sand chapter for the first visit (hearthside.css, .hs-chapter). */}
+      <div className="hs-chapter is-sand">
       <Row label="The first visit" labelledBy="gs-first">
         <h2 id="gs-first">What happens at the first visit</h2>
         <p className="hs-lede">It usually takes one to two hours, at your home. A family member is welcome to join.</p>
@@ -72,6 +78,7 @@ export default function GettingStarted() {
           {FIRST_VISIT.map(([t, d]) => <li key={t}><h3>{t}</h3><p className="hs-muted">{d}</p></li>)}
         </ul>
       </Row>
+      </div>
 
       <Row id="coverage" label="Insurance & payment" labelledBy="gs-coverage">
         <div className="hs-coverage">

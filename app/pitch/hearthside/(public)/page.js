@@ -1,6 +1,6 @@
 import { BASE, FAQS, MEDICARE_CONDITIONS, MEDICARE_URL, PHONE, SERVICES, STEPS, AREAS } from "@/components/hearthside/data";
 import { Button, Icon, PartnerLogos, Photo, Row, Sample } from "@/components/hearthside/ui";
-import { BehindTheScenes, PathSwitch, ScrollCue, ZipCheck } from "@/components/hearthside/client";
+import { BehindTheScenes, PathSwitch, ScrollCue, StepStory, ZipCheck } from "@/components/hearthside/client";
 import { PHOTO_LQIP } from "@/components/hearthside/photo-lqip";
 
 export const metadata = {
@@ -38,18 +38,19 @@ function HeroArt() {
 // Trust details (all sample content): credentials, the clinicians who visit
 // (portraits supplied by Cyril, AI-generated with Perplexity),
 // and what families say. Fictional but specific; no outcome claims.
+// Credentials as editorial figures: a large lead, then the rest of the
+// sentence (each reads as one line to a screen reader).
 const CREDENTIALS = [
-  { icon: "shield", text: "Medicare-certified" },
-  { icon: "clipboard", text: "State-licensed home health agency" },
-  { icon: "check", text: "Bonded and insured" },
-  { icon: "map", text: "Serving both valleys since 2009" },
-  { icon: "phone", text: "Intake answered seven days a week" },
+  { value: "Since 2009", text: "serving the San Fernando and Santa Clarita Valleys" },
+  { value: "7 days", text: "a week, a person answers our intake line" },
+  { value: "Medicare", text: "certified and state-licensed home health agency" },
+  { value: "Bonded", text: "and insured, every clinician who visits" },
 ];
 const CLINICIANS = [
-  { photo: "/img/hearthside/photos/team-maria-reyes", initials: "MR", name: "Maria Reyes, RN", role: "Nurse case manager", area: "Granada Hills", languages: "English, Spanish", years: 14 },
-  { photo: "/img/hearthside/photos/team-david-okafor", initials: "DO", name: "David Okafor, PT, DPT", role: "Physical therapist", area: "Valencia", languages: "English", years: 9 },
-  { photo: "/img/hearthside/photos/team-ani-petrosyan", initials: "AP", name: "Ani Petrosyan, OTR/L", role: "Occupational therapist", area: "Burbank", languages: "English, Armenian", years: 11 },
-  { photo: "/img/hearthside/photos/team-grace-atienza", initials: "GA", name: "Grace Atienza, CCC-SLP", role: "Speech-language pathologist", area: "Sherman Oaks", languages: "English, Tagalog", years: 8 },
+  { photo: "/img/hearthside/photos/team-maria-reyes", initials: "MR", name: "Maria Reyes, RN", role: "Nurse case manager", area: "Granada Hills", languages: "English, Spanish", years: 14, note: "I tell families what I\u2019m checking, and why, every visit." },
+  { photo: "/img/hearthside/photos/team-david-okafor", initials: "DO", name: "David Okafor, PT, DPT", role: "Physical therapist", area: "Valencia", languages: "English", years: 9, note: "Progress is the walk to the mailbox, then around the block." },
+  { photo: "/img/hearthside/photos/team-ani-petrosyan", initials: "AP", name: "Ani Petrosyan, OTR/L", role: "Occupational therapist", area: "Burbank", languages: "English, Armenian", years: 11, note: "The goal is your morning routine, done your way." },
+  { photo: "/img/hearthside/photos/team-grace-atienza", initials: "GA", name: "Grace Atienza, CCC-SLP", role: "Speech-language pathologist", area: "Sherman Oaks", languages: "English, Tagalog", years: 8, note: "We practice with the words and foods you use every day." },
 ];
 const QUOTES = [
   { text: "The hospital sent the referral on a Tuesday, and Hearthside called me that afternoon. From then on, I always knew who was coming and when.", who: "Daughter of a patient, Santa Clarita" },
@@ -67,7 +68,7 @@ export default function HearthsideHome() {
           <HeroArt />
           <p className="hs-hero-tab"><span className="hs-eyebrow">Skilled home health · San Fernando &amp; Santa Clarita Valleys</span></p>
           <div className="hs-hero-notch">
-            <h1 id="hs-hero-title"><span>Compassionate</span> <span>care at home.</span></h1>
+            <h1 id="hs-hero-title"><span><em className="hs-hero-em">Compassionate</em></span> <span><em className="hs-hero-em">care at home.</em></span></h1>
           </div>
           <div className="hs-hero-actions" data-dock-hide>
             {/* In this order: Call (black), Request a call (white), then Refer a patient as a text link. */}
@@ -91,7 +92,7 @@ export default function HearthsideHome() {
       <Row id="hs-creds" label="Why You Can Trust Us" labelledBy="hs-creds-title" tight>
         <h2 id="hs-creds-title" className="hs-visually-hidden">Why you can trust us</h2>
         <ul className="hs-creds">
-          {CREDENTIALS.map((c) => <li key={c.text} className="hs-cred"><span className="hs-cred-icon"><Icon name={c.icon} size={24} /></span><span>{c.text}</span></li>)}
+          {CREDENTIALS.map((c) => <li key={c.value} className="hs-cred"><span className="hs-cred-value">{c.value}</span> <span className="hs-cred-text">{c.text}</span></li>)}
         </ul>
         <p className="hs-creds-note"><Sample /></p>
       </Row>
@@ -118,7 +119,8 @@ export default function HearthsideHome() {
               <li><Icon name="check" size={20} />A short call, no forms about your medical history</li>
             </ul>
             <div className="hs-path-ctas">
-              <Button href={`${BASE}/getting-started/`} icon="arrow">How care begins</Button>
+              {/* For families the main action is the phone, as in the hero. */}
+              <a className="hs-btn hs-btn-primary" href={PHONE.href}><Icon name="phone" size={20} />Call {PHONE.display}</a>
               <Button href="#request-a-call" variant="quiet">Request a call</Button>
             </div>
           </article>
@@ -138,6 +140,11 @@ export default function HearthsideHome() {
           </article>
         </PathSwitch>
       </Row>
+
+      {/* A pause in big type, with no label column: the page's one statement. */}
+      <section className="hs-statement" aria-label="Our promise">
+        <p>Coming home from the hospital is a big day. <em className="hs-statement-em">We make the next part simple.</em></p>
+      </section>
 
       <Row label="What we do" labelledBy="hs-services-title">
         <h2 id="hs-services-title">Skilled care, in your own home</h2>
@@ -163,6 +170,10 @@ export default function HearthsideHome() {
       <Row label="We Make it Easy for You" labelledBy="hs-steps-title">
         <h2 id="hs-steps-title">How care begins</h2>
         <p className="hs-lede">Four steps from your first call to your first visit. We&rsquo;ll tell you what&rsquo;s happening at each one.</p>
+        {/* Desktop: a pinned scroll story (StepStory in client.js) — the four
+            steps play through in one sticky frame. Elsewhere, and under
+            reduced motion, the grid (a swipe row on phones). */}
+        <StepStory>
         <ol className="hs-ruled hs-swipe">
           {STEPS.map((s, i) => (
             <li key={s.title} className="hs-step">
@@ -173,14 +184,25 @@ export default function HearthsideHome() {
             </li>
           ))}
         </ol>
+        </StepStory>
       </Row>
+
+      {/* A full-bleed photo between chapters: edge to edge, no frame, one line
+          over it. Opens the clinicians row. */}
+      <div className="hs-bleed">
+        <Photo shot="A nurse and her patient smiling together at home" src="/img/hearthside/photos/careers-nurse-smiling" alt="A smiling nurse in blue scrubs, holding a tablet, sits beside an older woman on her sofa" ratio="21 / 9" position="50% 28%" sizes="100vw" />
+        <p className="hs-bleed-line">You&rsquo;ll know your clinician&rsquo;s name before the first visit.</p>
+      </div>
 
       <Row label="Our clinicians" labelledBy="hs-team-title">
         <h2 id="hs-team-title">The people who visit</h2>
-        <p className="hs-lede">Nurses and therapists who live and work in the Valley. You&rsquo;ll know your clinician&rsquo;s name before the first visit.</p>
+        <p className="hs-lede">Nurses and therapists who live and work in the Valley, matched to you by where you live and the care your doctor orders.</p>
         <ul className="hs-clinicians hs-swipe">
           {CLINICIANS.map((c) => (
             <li key={c.name} className="hs-clinician">
+              {/* Their own line: over the portrait on hover or focus where
+                  there's a mouse, under the role on touch screens. */}
+              <p className="hs-clinician-note">&ldquo;{c.note}&rdquo;</p>
               <Photo shot={`Portrait of ${c.name}`} src={c.photo} alt={`${c.name}, ${c.role.toLowerCase()}`} ratio="1 / 1" position="50% 30%" sizes="(max-width: 760px) 55vw, (max-width: 1100px) 45vw, 20vw" />
               <h3>{c.name.split(", ")[0]}<span className="hs-clinician-cred">{c.name.split(", ").slice(1).join(", ")}</span></h3>
               <p className="hs-clinician-role">{c.role}</p>
@@ -194,6 +216,24 @@ export default function HearthsideHome() {
         </ul>
         <p className="hs-creds-note"><Sample /></p>
       </Row>
+
+      {/* What families say, larger, in a sand chapter. */}
+      <div className="hs-chapter is-sand">
+      <Row label="In their words" labelledBy="hs-quotes-title">
+        <h2 id="hs-quotes-title" className="hs-visually-hidden">What families say</h2>
+        <ul className="hs-ruled hs-swipe">
+          {QUOTES.map((q) => (
+            <li key={q.who}>
+              <figure className="hs-quote">
+                <blockquote><p>&ldquo;{q.text}&rdquo;</p></blockquote>
+                <figcaption>{q.who}</figcaption>
+              </figure>
+            </li>
+          ))}
+        </ul>
+        <p className="hs-creds-note"><Sample /></p>
+      </Row>
+      </div>
 
       <Row label="Insurance & payment" labelledBy="hs-coverage-title">
         <div className="hs-coverage">
@@ -242,7 +282,9 @@ export default function HearthsideHome() {
         </div>
       </Row>
 
-      {/* For agency owners: the system behind the site, in motion. */}
+      {/* For agency owners: the system behind the site, in motion, in a dark
+          full-bleed chapter (.hs-chapter.is-dark re-points the tokens). */}
+      <div className="hs-chapter is-dark">
       <Row label="Behind the scenes" labelledBy="hs-bts-title">
         <div className="hs-bts-row">
           <div>
@@ -259,21 +301,7 @@ export default function HearthsideHome() {
           </div>
         </div>
       </Row>
-
-      <Row label="In their words" labelledBy="hs-quotes-title">
-        <h2 id="hs-quotes-title" className="hs-visually-hidden">What families say</h2>
-        <ul className="hs-ruled hs-swipe">
-          {QUOTES.map((q) => (
-            <li key={q.who}>
-              <figure className="hs-quote">
-                <blockquote><p>&ldquo;{q.text}&rdquo;</p></blockquote>
-                <figcaption>{q.who}</figcaption>
-              </figure>
-            </li>
-          ))}
-        </ul>
-        <p className="hs-creds-note"><Sample /></p>
-      </Row>
+      </div>
 
       <Row label="Questions" labelledBy="hs-faq-title">
         <h2 id="hs-faq-title" style={{ marginBottom: 32 }}>What families ask us most</h2>
@@ -287,7 +315,12 @@ export default function HearthsideHome() {
         </div>
       </Row>
 
+      {/* The payoff of "a light left on": as the band comes into view the H in
+          its mark lights amber and a warm glow spreads from it (BandLight in
+          client.js; hearthside.css, "A light left on"). */}
       <section className="hs-band" aria-labelledby="hs-band-title">
+        <span className="hs-band-glow" aria-hidden="true" />
+        <span className="hs-band-window" aria-hidden="true" />
         <h2 id="hs-band-title">Not sure where to start? Start with a call.</h2>
         <p>Our intake team will listen, answer your questions, and tell you what happens next. No forms about your medical history: we&rsquo;ll ask what we need when we talk.</p>
         {/* The same order as the hero: Call (filled), Request a call (outlined), Refer a patient (text link). */}

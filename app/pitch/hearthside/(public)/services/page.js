@@ -12,7 +12,7 @@ export default function Services() {
     <div className="hs-wrap">
       <PageHead
         photo={{ shot: "A nurse dresses a wound on a patient's arm at home", src: "/img/hearthside/photos/svc-nursing", alt: "A nurse in blue scrubs dresses a wound on an older man's forearm in his living room", position: "60% 35%" }}
-        title="Skilled care, in your own home"
+        title={<>Skilled care, <em className="hs-title-em">in your own home</em></>}
         lede="Home health is medical care your doctor orders, delivered by licensed clinicians who visit on a schedule. Here's what each kind of care covers, and how to tell whether home health is what you need."
       />
 
@@ -44,6 +44,8 @@ export default function Services() {
         </div>
       </Row>
 
+      {/* A sand chapter to close the page (hearthside.css, .hs-chapter). */}
+      <div className="hs-chapter is-sand">
       <Row label="How visits work" labelledBy="sv-visits">
         <h2 id="sv-visits">Visits that fit around your life</h2>
         <ul className="hs-ruled" style={{ marginTop: 32 }}>
@@ -53,6 +55,7 @@ export default function Services() {
           <li><h3>One number to call</h3><p className="hs-muted">Questions between visits go to the same intake team that set up your care.</p></li>
         </ul>
       </Row>
+      </div>
     </div>
   );
 }

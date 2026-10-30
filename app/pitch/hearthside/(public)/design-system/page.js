@@ -37,35 +37,35 @@ const TOKENS = [
   ["--hs-ember", "Accent", "Button hover, highlights"],
   ["--hs-ember-text", "Accent text", "Eyebrows, links", true],
   ["--hs-sage", "Sage", "Success and status", true],
-  ["--hs-window", "Warm accent", "A warm note kept in every scheme (the old logo's lit window)"],
+  ["--hs-window", "Warm accent", "A light left on: the hero's first-visit dot and the closing band's lit mark; never text on a light ground"],
 ];
 const SCHEMES = [
   {
-    id: "tide", name: "Tide", note: "The default. Cool: misty blue-grey pages, navy ink, a harbour-blue accent.",
+    id: "tide", name: "Tide", note: "Cool: misty blue-grey pages, navy ink, a harbour-blue accent.",
     v: {
-      "--hs-page": ["#F2F5F7", "#10161C"], "--hs-surface": ["#FBFCFD", "#18212A"], "--hs-sand": ["#E3EAEF", "#1F2A35"],
-      "--hs-ink": ["#17212B", "#EEF3F7"], "--hs-ink-2": ["#3F4D5A", "#C3CFDA"], "--hs-rule": ["#B8C5D0", "#3A4958"],
-      "--hs-control": ["#75838F", "#7F8E9C"], "--hs-ember": ["#1F5E8C", "#7FB6E0"], "--hs-ember-text": ["#1B5480", "#93C3E8"],
+      "--hs-page": ["#F2F5F7", "#1E2A36"], "--hs-surface": ["#FBFCFD", "#253340"], "--hs-sand": ["#E3EAEF", "#2A3846"],
+      "--hs-ink": ["#1E2A36", "#E3EDF8"], "--hs-ink-2": ["#3F4D5A", "#C3CFDA"], "--hs-rule": ["#B8C5D0", "#455565"],
+      "--hs-control": ["#75838F", "#8593A1"], "--hs-ember": ["#1F5E8C", "#7FB6E0"], "--hs-ember-text": ["#1B5480", "#93C3E8"],
       "--hs-sage": ["#2F6650", "#93C9AC"], "--hs-window": ["#D98A2B", "#F0A04A"],
     },
-    pairs: [["Page on Ink (primary button)", "#F2F5F7", "#17212B", "#10161C", "#EEF3F7"], ["Text on Accent (button hover)", "#FFFFFF", "#1F5E8C", "#0D1720", "#7FB6E0"], ["Accent text on Accent tint", "#1B5480", "#DCE8F2", "#93C3E8", "#1B2E40"], ["Ink 2 on Alt surface", "#3F4D5A", "#E3EAEF", "#C3CFDA", "#1F2A35"]],
+    pairs: [["Page on Ink (primary button)", "#F2F5F7", "#1E2A36", "#1E2A36", "#E3EDF8"], ["Text on Accent (button hover)", "#FFFFFF", "#1F5E8C", "#0D1720", "#7FB6E0"], ["Accent text on Accent tint", "#1B5480", "#DCE8F2", "#93C3E8", "#2A4560"], ["Ink 2 on Alt surface", "#3F4D5A", "#E3EAEF", "#C3CFDA", "#2A3846"]],
   },
   {
-    id: "shore", name: "Shore", note: "Warm and cool combined. Light: warm linen pages, navy ink, a harbour-blue accent, a peach sky over blue hills. Dark: navy pages, warm ink, the ember accent.",
+    id: "shore", name: "Shore", note: "The default, in dark mode. Warm and cool combined. Light: warm linen pages, navy ink, a harbour-blue accent, a peach sky over blue hills. Dark: navy pages, warm ink, the ember accent.",
     v: {
-      "--hs-page": ["#F6F2EA", "#121820"], "--hs-surface": ["#FFFDF8", "#1A222C"], "--hs-sand": ["#ECE5D8", "#222C37"],
-      "--hs-ink": ["#1A2430", "#F4EEE5"], "--hs-ink-2": ["#3E4956", "#CFC7BB"], "--hs-rule": ["#C7BDAD", "#3C4856"],
-      "--hs-control": ["#7C8089", "#848C96"], "--hs-ember": ["#1F5E8C", "#EE9466"], "--hs-ember-text": ["#1B5480", "#F4A77F"],
+      "--hs-page": ["#F6F2EA", "#1E2A36"], "--hs-surface": ["#FFFDF8", "#253240"], "--hs-sand": ["#ECE5D8", "#2B3745"],
+      "--hs-ink": ["#1E2A36", "#F4EEE5"], "--hs-ink-2": ["#3E4956", "#CFC7BB"], "--hs-rule": ["#C7BDAD", "#485564"],
+      "--hs-control": ["#7C8089", "#8A929C"], "--hs-ember": ["#1F5E8C", "#EE9466"], "--hs-ember-text": ["#1B5480", "#F4A77F"],
       "--hs-sage": ["#2F6650", "#93C9AC"], "--hs-window": ["#C0602E", "#EE9466"],
     },
-    pairs: [["Page on Ink (primary button)", "#F6F2EA", "#1A2430", "#121820", "#F4EEE5"], ["Text on Accent (button hover)", "#FFFFFF", "#1F5E8C", "#1B1410", "#EE9466"], ["Accent text on Accent tint", "#1B5480", "#DCE6EE", "#F4A77F", "#3A2419"], ["Ink 2 on Alt surface", "#3E4956", "#ECE5D8", "#CFC7BB", "#222C37"]],
+    pairs: [["Page on Ink (primary button)", "#F6F2EA", "#1E2A36", "#1E2A36", "#F4EEE5"], ["Text on Accent (button hover)", "#FFFFFF", "#1F5E8C", "#1B1410", "#EE9466"], ["Accent text on Accent tint", "#1B5480", "#DCE6EE", "#F4A77F", "#4A2F22"], ["Ink 2 on Alt surface", "#3E4956", "#ECE5D8", "#CFC7BB", "#2B3745"]],
   },
 ];
 // Status colours are shared by both schemes.
 const STATUS_PAIRS = [
-  ["Sage on Sage tint (status)", "#2F6650", "#DDEBE2", "#93C9AC", "#1F3329"],
-  ["Warning on Warning tint", "#7A5200", "#F7E8C6", "#E9C177", "#3A2E16"],
-  ["Danger on Danger tint", "#A1342A", "#F7DEDA", "#F0998D", "#3D201C"],
+  ["Sage on Sage tint (status)", "#2F6650", "#DDEBE2", "#93C9AC", "#27443A"],
+  ["Warning on Warning tint", "#7A5200", "#F7E8C6", "#E9C177", "#45381C"],
+  ["Danger on Danger tint", "#A1342A", "#F7DEDA", "#F0998D", "#4A2A26"],
 ];
 
 const SECTIONS = [["brand", "Brand"], ["layout", "Layout"], ["color", "Color"], ["type", "Type"], ["buttons", "Buttons"], ["forms", "Forms"], ["labels", "Labels"], ["imagery", "Imagery"], ["lists", "Components"], ["principles", "Principles"]];
@@ -82,7 +82,7 @@ export default function DesignSystem() {
         <div>
           <h1>Design system</h1>
           <p className="hs-lede">
-            An editorial grid for a care brand: one calm background, generous space between sections, a label column beside every section, and type that&rsquo;s large and easy to read. Light by default, with a full dark mode; body text meets WCAG AAA (7:1) in both.
+            An editorial grid for a care brand: one calm background, generous space between sections, a label column beside every section, and type that&rsquo;s large and easy to read. Dark by default, with a full light mode; body text meets WCAG AAA (7:1) in both.
           </p>
           <div className="hs-ds-mode">
             <ModeSwitch />
@@ -134,7 +134,7 @@ export default function DesignSystem() {
 
       <Row id="color" label="Color" labelledBy="ds-color">
         <h2 id="ds-color">Color</h2>
-        <p className="hs-lede">Two color schemes, each with light and dark: Tide (cool, the default) and Shore (warm and cool combined). Switch them in the footer; the tables below follow the scheme you pick. Text ratios are computed from the values and measured against the page.</p>
+        <p className="hs-lede">Two color schemes, each with light and dark: Tide (cool) and Shore (warm and cool combined, the default, in dark mode). Switch them in the footer; the tables below follow the scheme you pick. Text ratios are computed from the values and measured against the page.</p>
         <ul className="hs-ruled hs-ds-schemes">
           {SCHEMES.map((sc) => (
             <li key={sc.id}>

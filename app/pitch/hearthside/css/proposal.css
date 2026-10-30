@@ -48,12 +48,12 @@
 /* Print: light colours, no controls, rows kept whole. */
 @media print {
   /* Light Tide colours on paper, whatever mode is on screen. */
-  .hs.hs.hs { --hs-page: #fff; --hs-surface: #fff; --hs-sand: #E3EAEF; --hs-ink: #17212B; --hs-ink-2: #3F4D5A; --hs-rule: #B8C5D0; --hs-ember-text: #1B5480; --hs-sage: #2F6650; background: #fff; color: #17212B; }
+  .hs.hs.hs { --hs-page: #fff; --hs-surface: #fff; --hs-sand: #E3EAEF; --hs-ink: #1E2A36; --hs-ink-2: #3F4D5A; --hs-rule: #B8C5D0; --hs-ember-text: #1B5480; --hs-sage: #2F6650; background: #fff; color: #1E2A36; }
   .hs-prop-top-actions, .hs-prop-ctas, .hs-band-ctas, .hs-skip { display: none !important; }
   .hs-row, .hs-prop-prices > div, .hs-prop-steps li, .hs-band { break-inside: avoid; }
   .hs-row { padding-block: 20px; }
-  .hs-band { background: #fff !important; color: #17212B !important; border: 1.5px solid #B8C5D0; }
-  .hs-band :is(h2, p) { color: #17212B !important; }
+  .hs-band { background: #fff !important; color: #1E2A36 !important; border: 1.5px solid #B8C5D0; }
+  .hs-band :is(h2, p) { color: #1E2A36 !important; }
   a { color: inherit; }
 }
 

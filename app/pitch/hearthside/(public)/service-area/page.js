@@ -11,7 +11,7 @@ export default function ServiceArea() {
   return (
     <div className="hs-wrap">
       <PageHead
-        title="Where we provide care"
+        title={<>Where we <em className="hs-title-em">provide care</em></>}
         lede="Across the San Fernando and Santa Clarita Valleys. Check your ZIP code to see if we serve your address."
       />
       <Row label="The map" labelledBy="sa-map">

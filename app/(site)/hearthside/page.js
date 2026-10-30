@@ -113,7 +113,7 @@ const Page = () => {
                 <li><strong>Intake board:</strong> every open referral by stage, with routing by ZIP, owners, and overdue flags</li>
                 <li><strong>Referral record:</strong> the next action, documents, details, and an activity log</li>
                 <li><strong>Tasks, partners, reports, and rules</strong> screens, with ⌘K search across all of it</li>
-                <li><strong>Design system</strong> with two color schemes, each in light and dark</li>
+                <li><strong>Design system</strong> with two color schemes, each in light and dark (Shore dark is the default)</li>
               </ul>
               <p>It makes no clinical or coverage decisions and stores nothing outside your browser; the copy is written as if the agency opened tomorrow.</p>
               <div className="cyril-case-cta cyril-case-cta-inline">
@@ -123,7 +123,7 @@ const Page = () => {
                 </div>
                 <a className="cyril-button" href={LIVE} target="_blank" rel="noopener">Try Hearthside live <Arrow /></a>
               </div>
-              <Clip name="hero" caption="The home page: the photo closes in on the nurse and patient as you scroll" />
+              <Clip name="hero" caption="The home page: the headline rises in, then the photo closes in on the nurse and patient as you scroll" />
             </CaseSection>
 
             {/* 02 — Results & Impact */}
@@ -135,18 +135,25 @@ const Page = () => {
                 { value: "100", label: "Best practices" },
                 { value: "100", label: "SEO" },
               ]} />
-              <p>PageSpeed Insights scores for the live home page on a phone; on desktop, Lighthouse scores it 99 to 100 for performance, and the referral and intake pages 100. A mobile pass (smaller photos for phones, no hero preload on other pages, and the photo shown straight away instead of after an opening animation) took mobile performance from 83 to 92. An automated axe audit (WCAG A and AA, plus best practices) of all 14 public and intake pages, in light and dark mode, finds no violations. Body text passes AAA everywhere: at least 7.9:1 in both color schemes and both modes, with links and labels above 7:1 too. Buttons are 52px tall, every control works by keyboard, and every animation stops under reduced motion. At launch, the numbers to watch are time from referral to first call, referrals stalled by missing documents, and calls requested from the website.</p>
+              <p>PageSpeed Insights scores for the live home page on a phone; on desktop, Lighthouse scores it 99 to 100 for performance, and the referral and intake pages 100. A mobile pass (smaller photos for phones, no hero preload on other pages, and the photo shown straight away instead of after an opening animation) took mobile performance from 83 to 92. An automated axe audit (WCAG A and AA, plus best practices) of all 14 public and intake pages, in light and dark mode, finds no violations. Body text passes AAA everywhere: at least 7.9:1 on the page and 7.1:1 on the tinted sections, in both color schemes and both modes, with links and labels above 7:1 too. Buttons are 52px tall, every control works by keyboard, and every animation stops under reduced motion. At launch, the numbers to watch are time from referral to first call, referrals stalled by missing documents, and calls requested from the website.</p>
 
               <Desktop name="home" caption="Home" />
-              <p><strong>A calm first screen.</strong> One warm photo, one headline, and two clear actions: request a call, or refer a patient. Below it, credentials and the agency&apos;s promise come before anything else.</p>
+              <p><strong>A calm first screen.</strong> One warm photo, one headline set in a soft serif, and the actions in order of urgency: call now, request a call, or refer a patient. Below it, the agency&apos;s credentials read as four large figures, and its referral partners as a quiet row of marks.</p>
               <p><strong>Two audiences, two paths.</strong> &ldquo;How can we help?&rdquo; splits families from professionals right away, and each path says what happens next.</p>
               <Desktop name="paths" caption="How can we help?" />
+              <p><strong>A page with a rhythm.</strong> Instead of the same section over and over, the home page has loud and quiet moments: one line set huge, a photo that runs edge to edge, a sand chapter for what families say, and a dark one for the system behind the site. Headings rise in word by word as they arrive.</p>
               <CaseGrid layout="two">
+                <Desktop name="statement" caption="One statement, set huge" />
                 <Desktop name="services-row" caption="What we do" />
-                <Desktop name="steps" caption="How care begins" />
+                <Desktop name="quotes" caption="In their words" />
+                <Desktop name="bts" caption="Behind the scenes" />
               </CaseGrid>
-              <p><strong>People, not stock photos.</strong> The clinicians who visit are introduced by name, with where they visit and the languages they speak, so families know who&apos;s coming before the doorbell rings.</p>
+              <p><strong>How care begins, as a story.</strong> On a desktop, the four steps play through in one pinned frame as you scroll: each photo opens through the leaf, the step&apos;s number and text rise in, and a rail fills as you go. Phones and tablets get a swipe row instead.</p>
+              <Clip name="steps" caption="How care begins, pinned as you scroll" />
+              <p><strong>People, not stock photos.</strong> The clinicians who visit are introduced by name, with where they visit and the languages they speak, so families know who&apos;s coming before the doorbell rings. Point at one and they say, in their own words, what a visit is like.</p>
               <Desktop name="team" caption="The people who visit" />
+              <p><strong>A light left on.</strong> The brand&apos;s idea, made literal with one warm accent used twice: the first-visit dot in the hero, and the closing band, where the H in the logo flickers on like a porch light and a warm glow spreads from it as you arrive.</p>
+              <Desktop name="band" caption="The closing band, lit" />
 
               <p><strong>Answers that guide, never decide.</strong> The services and getting-started pages explain what home health covers in plain language, link to Medicare for the rules, and end every section with a person to call. The service area map lights up as you type a ZIP code.</p>
               <CaseGrid layout="two">
@@ -175,9 +182,9 @@ const Page = () => {
             {/* 03 — Design Approach */}
             <CaseSection id="approach" number={3} title="Design Approach">
               <h3 className="cyril-case-subheading">Calm, Editorial, and Warm</h3>
-              <p>People land on a home health site during a hard week, so the design does less: one background, generous space, a label column beside every section, and large, plain type. One shape ties it together: the leaf, two corners swept wide and two kept tight, which frames every photo and badge and forms the logo. Every photo gets the same cool, softly faded grade, so pictures from different sources read as one set.</p>
+              <p>People land on a home health site during a hard week, so the design does less: generous space, a label column beside every section, and large, plain type, broken by a few full-width chapters so the page has a pace. One shape ties it together: the leaf, two corners swept wide and two kept tight, which frames every photo and forms the logo, and photos open through it as they appear. A soft serif carries the warm words (the headline, quotes, the clinicians&apos; own lines) beside a plain sans for everything else. Every photo gets the same cool, softly faded grade, so pictures from different sources read as one set.</p>
               <h3 className="cyril-case-subheading">Phone-First</h3>
-              <p>Families search on their phones, often from a hospital hallway. On a phone, each page opens with its photo and headline, the nav becomes a strip you swipe sideways, lists of like things become swipe rows, and &ldquo;How can we help?&rdquo; becomes a two-way switch, so both choices fit on one screen. A call bar stays within reach, and steps out of the way while you scroll down. The intake system becomes an app with a bottom tab bar and one board stage per screen.</p>
+              <p>Families search on their phones, often from a hospital hallway. On a phone, each page opens with its photo and headline, the nav becomes a strip you swipe sideways, lists of like things become swipe rows, and &ldquo;How can we help?&rdquo; becomes a two-way switch, so both choices fit on one screen. A call bar appears once the page&apos;s own buttons scroll away, and stays within reach. The intake system becomes an app with a bottom tab bar and one board stage per screen.</p>
               <CaseGrid layout="three">
                 <Phone name="home" caption="Home" />
                 <Phone name="services-row" caption="Swipe rows" />
@@ -193,12 +200,12 @@ const Page = () => {
               </CaseGrid>
 
               <h3 className="cyril-case-subheading">One System, Two Schemes</h3>
-              <p>Every color and font comes from tokens, so an agency can take on its own look without touching a component. Two schemes prove it: Tide (cool blue, the default) and Shore (warm linen and navy), each in light and dark. The design system page renders the real components and computes every contrast ratio from the same tokens, so it can&apos;t drift from the product.</p>
+              <p>Every color and font comes from tokens, so an agency can take on its own look without touching a component. Two schemes prove it: Shore (warm ink on navy, the default in dark mode) and Tide (cool blue), each in light and dark, and switching between them crossfades instead of flickering. The design system page renders the real components and computes every contrast ratio from the same tokens, so it can&apos;t drift from the product.</p>
               <CaseGrid layout="two">
-                <Desktop name="home" caption="Tide · Light" />
-                <Desktop name="home-dark" caption="Tide · Dark" />
+                <Desktop name="home" caption="Shore · Dark (the default)" />
                 <Desktop name="home-shore" caption="Shore · Light" />
-                <Desktop name="home-shore-dark" caption="Shore · Dark" />
+                <Desktop name="home-dark" caption="Tide · Dark" />
+                <Desktop name="home-tide" caption="Tide · Light" />
               </CaseGrid>
               <Desktop name="design-system-full" caption="Design system" path="design-system/" ratio="16 / 10" />
             </CaseSection>
@@ -211,6 +218,7 @@ const Page = () => {
                 <li><strong>Rules as data:</strong> stages, time limits, ZIP routing, and required documents are plain data, so the board, tasks, and reports all follow the same rules, and changing a rule needs no code.</li>
                 <li><strong>View transitions:</strong> the referral card travels between columns, pages hand over in sequence, and the phone switch slides its cards, all with the browser&apos;s View Transitions API and no animation library.</li>
                 <li><strong>Scroll-driven motion in CSS:</strong> the home photo closes in on the nurse and patient as you scroll, with no JavaScript on the scroll path. Everywhere else photos hold still, and ease in only when you point at the button beside them.</li>
+                <li><strong>Motion that stays calm:</strong> headings reveal word by word, the steps story picks its step from scroll progress with a little hysteresis so it never flips back and forth, and hover effects wait for the mouse to actually move, so cards sliding under a still cursor don&apos;t flash.</li>
                 <li><strong>Private by design:</strong> public forms ask only what&apos;s needed to call back, the referral form can only send a generated sample, and the status page never shows health details.</li>
                 <li><strong>Accessible throughout:</strong> audited with axe, AAA body text in every scheme, native dialogs with focus management, keyboard search, and reduced motion respected everywhere.</li>
               </ul>

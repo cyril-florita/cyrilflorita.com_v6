@@ -14,7 +14,7 @@
   --hs-page: #F2F5F7;
   --hs-surface: #FBFCFD;
   --hs-sand: #E3EAEF;
-  --hs-ink: #17212B;
+  --hs-ink: #1E2A36;            /* bluish navy (was #17212B); also the dark-mode page */
   --hs-ink-2: #3F4D5A;
   --hs-line: #D3DCE3;           /* hairlines inside components */
   --hs-rule: #B8C5D0;           /* the layout's section and column rules */
@@ -63,31 +63,31 @@
 }
 
 .hs[data-hs-mode="dark"] {
-  --hs-hill-2: #161E27;           /* service-area map hills */
-  --hs-house: #243341;            /* the closing band: lifted above the dark page, so it stays visible */
-  --hs-page: #10161C;
-  --hs-surface: #18212A;
-  --hs-sand: #1F2A35;
-  --hs-ink: #EEF3F7;
+  --hs-hill-2: #273644;           /* service-area map hills */
+  --hs-house: #141D26;            /* the closing band and dark chapter: deeper than the page, edged with a faint line */
+  --hs-page: #1E2A36;             /* the light mode's ink */
+  --hs-surface: #253340;
+  --hs-sand: #2A3846;
+  --hs-ink: #E3EDF8;              /* white with a blue tint (as Shore's dark ink is warm) */
   --hs-ink-2: #C3CFDA;
-  --hs-line: #2C3A47;
-  --hs-rule: #3A4958;
-  --hs-control: #7F8E9C;
+  --hs-line: #34434F;
+  --hs-rule: #455565;
+  --hs-control: #8593A1;
   --hs-ember: #7FB6E0;
   --hs-ember-hover: #93C3E8;
   --hs-ember-text: #93C3E8;
   --hs-on-ember: #0D1720;
-  --hs-ember-soft: #1B2E40;
+  --hs-ember-soft: #2A4560;
   --hs-sage: #93C9AC;
-  --hs-sage-bg: #1F3329;
+  --hs-sage-bg: #27443A;
   --hs-warn: #E9C177;
-  --hs-warn-bg: #3A2E16;
+  --hs-warn-bg: #45381C;
   --hs-danger: #F0998D;
-  --hs-danger-bg: #3D201C;
+  --hs-danger-bg: #4A2A26;
   --hs-glow: #FFB25C;
   --hs-window: #F0A04A;
-  --hs-photo: #1D2630;
-  --hs-photo-2: #25303B;
+  --hs-photo: #26323F;
+  --hs-photo-2: #2F3C4A;
   --hs-focus: #8DB8FF;
   color-scheme: dark;
 }
@@ -105,7 +105,7 @@
   --hs-page: #F6F2EA;
   --hs-surface: #FFFDF8;
   --hs-sand: #ECE5D8;
-  --hs-ink: #1A2430;
+  --hs-ink: #1E2A36;
   --hs-ink-2: #3E4956;
   --hs-line: #DDD4C5;
   --hs-rule: #C7BDAD;
@@ -122,32 +122,32 @@
   --hs-photo-2: #D3D6D8;
 }
 .hs[data-hs-theme="shore"][data-hs-mode="dark"] {
-  --hs-hill-2: #151C24;           /* service-area map hills */
-  --hs-house: #263240;            /* the closing band: lifted above the dark page, so it stays visible */
-  --hs-page: #121820;
-  --hs-surface: #1A222C;
-  --hs-sand: #222C37;
+  --hs-hill-2: #263442;           /* service-area map hills */
+  --hs-house: #141B23;            /* the closing band and dark chapter: deeper than the page */
+  --hs-page: #1E2A36;
+  --hs-surface: #253240;
+  --hs-sand: #2B3745;
   --hs-ink: #F4EEE5;
   --hs-ink-2: #CFC7BB;
-  --hs-line: #2D3844;
-  --hs-rule: #3C4856;
-  --hs-control: #848C96;
+  --hs-line: #36424F;
+  --hs-rule: #485564;
+  --hs-control: #8A929C;
   --hs-ember: #EE9466;
   --hs-ember-hover: #F4A77F;
   --hs-ember-text: #F4A77F;
   --hs-on-ember: #1B1410;
-  --hs-ember-soft: #3A2419;
+  --hs-ember-soft: #4A2F22;
   --hs-glow: #FFA459;
   --hs-window: #EE9466;
-  --hs-photo: #1E2630;
-  --hs-photo-2: #2A2B30;
+  --hs-photo: #27313D;
+  --hs-photo-2: #30343B;
 }
 
 /* The page behind .hs matches it (the portfolio's body styles don't load). */
 body:has(.hs) { margin: 0; background: #F2F5F7; }
-body:has(.hs[data-hs-mode="dark"]) { background: #10161C; }
+body:has(.hs[data-hs-mode="dark"]) { background: #1E2A36; }
 body:has(.hs[data-hs-theme="shore"]) { background: #F6F2EA; }
-body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820; }
+body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36; }
 
 .hs *, .hs *::before, .hs *::after { box-sizing: border-box; }
 :where(.hs) :is(h1, h2, h3, h4) { font-family: var(--hs-font-display); font-weight: 600; line-height: 1.08; letter-spacing: -0.03em; margin: 0; text-wrap: balance; }
@@ -188,7 +188,7 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
 .hs-sample::after { content: "\00a0]"; }
 
 /* ---------- Header ---------- */
-.hs-header { position: sticky; top: 0; z-index: 40; background: color-mix(in srgb, var(--hs-page) 94%, transparent); backdrop-filter: blur(10px); }
+.hs-header { position: sticky; top: 0; z-index: 40; background: color-mix(in srgb, var(--hs-page) 97%, transparent); } /* no backdrop blur: it re-blurred the scaling hero photo every scroll frame (jitter); at 94% it was barely visible */
 .hs-header-row { display: flex; align-items: center; gap: 20px; min-height: 80px; } /* no rule under the header (removed at every size) */
 .hs-logo { display: inline-flex; align-items: center; gap: 14px; color: var(--hs-ink); text-decoration: none; flex: none; }
 .hs-logo-rule { width: 1px; height: 34px; background: var(--hs-rule); }
@@ -343,7 +343,7 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
 .hs-art-card { position: absolute; right: 20px; bottom: 20px; left: auto; display: flex; align-items: center; gap: 14px; max-width: 360px; padding: 14px 18px; background: var(--hs-surface); border: 1px solid var(--hs-line); border-radius: 10px; font-size: 16px; line-height: 1.4; }
 .hs-art-card strong { display: block; font-size: 17px; }
 .hs-art-card span { color: var(--hs-ink-2); }
-.hs-art-dot { flex: none; width: 12px; height: 12px; border-radius: 50%; background: var(--hs-ink); box-shadow: 0 0 0 5px var(--hs-sand); }
+.hs-art-dot { flex: none; width: 12px; height: 12px; border-radius: 50%; background: var(--hs-window); box-shadow: 0 0 0 5px color-mix(in srgb, var(--hs-glow) 30%, transparent), 0 0 16px 4px color-mix(in srgb, var(--hs-glow) 40%, transparent); } /* the warm accent: a light left on (see "A light left on") */
 @media (max-width: 600px) {
   .hs-art-card { left: 12px; right: 12px; bottom: 12px; padding: 12px 14px; font-size: 15px; }
 }
@@ -387,22 +387,38 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
    the scroll push-in. */
 @media (prefers-reduced-motion: no-preference) {
   .hs-hero-img { animation: hs-hero-push linear both; animation-timeline: scroll(root); animation-range: 0 100vh; }
-  .hs-hero-art .hs-art-card { animation: hs-hero-card 0.9s 0.9s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  .hs-hero-art .hs-art-card { animation: hs-hero-card 0.9s 0.9s cubic-bezier(0.16, 1, 0.3, 1) backwards; }
 }
 @media (prefers-reduced-motion: no-preference) and (min-width: 961px) {
-  .hs-hero-art { animation: hs-hero-open 1.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  .hs-hero-art { animation: hs-hero-open 1.4s cubic-bezier(0.16, 1, 0.3, 1) backwards; } /* backwards: once open, no clip-path stays on the photo (it masked the scroll zoom every frame) */
   /* The nurse and the patient: the point between their faces sits 44.6%
      across, 34% down the cropped photo; at 1.5× the two fill the frame. */
   .hs-hero-img {
     transform-origin: 44.6% 34%;
-    animation: hs-hero-settle 2.6s cubic-bezier(0.16, 1, 0.3, 1) both, hs-hero-story linear both;
+    animation: hs-hero-settle 2.6s cubic-bezier(0.16, 1, 0.3, 1) backwards, hs-hero-story linear both;
     animation-timeline: auto, scroll(root);
     animation-range: normal, 0 45vh; /* done while the faces are still on screen */
     will-change: transform;
   }
   .hs-hero-tab { animation: hs-story-fade linear both; animation-timeline: scroll(root); animation-range: 0 35vh; }
-  .hs-hero-art .hs-art-card { animation: hs-hero-card 0.9s 0.9s cubic-bezier(0.16, 1, 0.3, 1) both, hs-story-card linear both; animation-timeline: auto, scroll(root); animation-range: normal, 0 30vh; }
+  .hs-hero-art .hs-art-card { animation: hs-hero-card 0.9s 0.9s cubic-bezier(0.16, 1, 0.3, 1) backwards, hs-story-card linear both; animation-timeline: auto, scroll(root); animation-range: normal, 0 30vh; }
 }
+/* The hero's words (desktop): CSS only, so it starts with the first paint and
+   can't stick. Each headline line rises out of its own mask as the photo
+   opens, then the lede, the two buttons and the referral link fade up in a
+   short stagger; all done by ~1.5s. Tablets, phones and reduced motion show
+   it still (the photo is the LCP element, not the text). */
+@media (prefers-reduced-motion: no-preference) and (min-width: 961px) {
+  .hs-hero h1 > span { overflow: clip; padding: 0 0.12em 0.18em 0; margin: 0 -0.12em -0.18em 0; }
+  .hs-hero h1 > span > em { display: inline-block; animation: hs-line-in 1.15s cubic-bezier(0.16, 1, 0.3, 1) 0.2s backwards; }
+  .hs-hero h1 > span + span > em { animation-delay: 0.34s; }
+  .hs-hero-copy .hs-lede, .hs-hero-ctas > *, .hs-hero-refer { animation: hs-fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.62s backwards; }
+  .hs-hero-ctas > :first-child { animation-delay: 0.72s; }
+  .hs-hero-ctas > :nth-child(2) { animation-delay: 0.8s; }
+  .hs-hero-refer { animation-delay: 0.88s; }
+}
+@keyframes hs-line-in { from { translate: 0 112%; } }
+@keyframes hs-fade-up { from { opacity: 0; translate: 0 14px; } }
 @keyframes hs-hero-open { from { clip-path: inset(34% 0 0 0); } to { clip-path: inset(0); } }
 @keyframes hs-hero-settle { from { transform: scale(1.18); } to { transform: scale(1); } }
 @keyframes hs-hero-push { from { scale: 1; translate: 0 0; } to { scale: 1.12; translate: 0 -4%; } }
@@ -412,16 +428,29 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
 @keyframes hs-hero-card { from { opacity: 0; translate: 0 16px; } to { opacity: 1; translate: 0 0; } }
 
 /* ---------- Partner logos ---------- */
-.hs-logos { display: grid; grid-template-columns: repeat(6, auto); align-items: center; justify-content: space-between; gap: 24px 20px; list-style: none; }
-@media (max-width: 1240px) { .hs-logos { grid-template-columns: repeat(3, auto); } }
-@media (max-width: 560px) { .hs-logos { grid-template-columns: repeat(2, auto); } }
-.hs-logos li { display: inline-flex; align-items: center; gap: 10px; color: var(--hs-ink); opacity: 0.85; }
-.hs-logos svg { flex: none; width: 28px; height: 28px; }
-.hs-logo-word { display: grid; line-height: 1.05; }
-.hs-logo-word b { font-weight: 700; font-size: 16px; letter-spacing: -0.01em; }
-.hs-logo-word small { font-family: var(--hs-font-label); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--hs-ink-2); }
-.hs-logos .is-serif b { font-family: Georgia, serif; font-weight: 400; font-size: 19px; }
-.hs-logos .is-mono b { font-family: var(--hs-font-label); font-weight: 500; font-size: 15px; letter-spacing: 0.04em; text-transform: uppercase; }
+/* Partner marks: three across in two rows, divided by the same hairlines as
+   the credentials above (so the two rows read as related), larger than they
+   were (marks 40px, names 21px) but still quieter than the figures. Two
+   across on phones. */
+.hs-logos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 36px; list-style: none; }
+.hs-logos li { display: flex; align-items: center; gap: 14px; padding: 4px 28px; border-left: 1px solid var(--hs-rule); color: var(--hs-ink); }
+.hs-logos li:nth-child(3n + 1) { padding-left: 0; border-left: 0; }
+.hs-logos svg { flex: none; width: 40px; height: 40px; }
+.hs-logo-word { display: grid; gap: 3px; line-height: 1.05; }
+.hs-logo-word b { font-weight: 700; font-size: 21px; letter-spacing: -0.015em; }
+.hs-logo-word small { font-family: var(--hs-font-label); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--hs-ink-2); }
+.hs-logos .is-serif b { font-family: Georgia, serif; font-weight: 400; font-size: 24px; }
+.hs-logos .is-mono b { font-family: var(--hs-font-label); font-weight: 500; font-size: 19px; letter-spacing: 0.04em; text-transform: uppercase; }
+@media (max-width: 560px) {
+  .hs-logos { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 28px; }
+  .hs-logos li, .hs-logos li:nth-child(3n + 1) { padding: 2px 0 2px 16px; border-left: 1px solid var(--hs-rule); gap: 10px; }
+  .hs-logos li:nth-child(2n + 1) { padding-left: 0; border-left: 0; }
+  .hs-logos svg { width: 30px; height: 30px; }
+  .hs-logo-word b { font-size: 17px; }
+  .hs-logos .is-serif b { font-size: 19px; }
+  .hs-logos .is-mono b { font-size: 15px; }
+  .hs-logo-word small { font-size: 10.5px; }
+}
 .hs-logos-note { display: flex; align-items: center; gap: 12px; margin-top: 24px; color: var(--hs-ink-2); font-size: 16px; }
 .hs-logos-note + .hs-creds-note { margin-top: 12px; } /* the sample stamp, alone on the next line */
 
@@ -795,7 +824,7 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
 .hs-dock.is-hidden { translate: 0 calc(100% + 28px); opacity: 0; }
 .hs-dock.is-hidden, .hs-totop.is-hidden { pointer-events: none; }
 .hs-totop { width: 52px; padding: 0; margin-left: auto; transition: translate var(--hs-dur) var(--hs-ease), opacity var(--hs-dur) var(--hs-ease), background-color var(--hs-dur-fast) var(--hs-ease); }
-.hs-totop.is-hidden { translate: 0 calc(100% + 28px); opacity: 0; }
+.hs-totop.is-hidden { translate: 0 calc(100% + 28px); opacity: 0; visibility: hidden; transition-property: translate, opacity, visibility; transition-duration: var(--hs-dur), var(--hs-dur), 0s; transition-delay: 0s, 0s, var(--hs-dur); } /* hidden for real once faded (its frost blur cost every scroll frame) */
 :root:has(.hs) { scroll-padding-bottom: 96px; } /* focused elements never sit under the dock */
 @media (max-width: 1080px) {
   .hs-dock-bar { bottom: 0; }
@@ -872,8 +901,8 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
   .hs-page-head:has(:is(.hs-btn, .hs-phone):focus-visible) .hs-photo-img { scale: 1.1; }
 }
 @media (prefers-reduced-motion: no-preference) and (hover: hover) {
-  .hs-path:has(.hs-btn:hover) .hs-photo-img,
-  .hs-page-head:has(:is(.hs-btn, .hs-phone):hover) .hs-photo-img { scale: 1.1; }
+  main[data-hover] .hs-path:has(.hs-btn:hover) .hs-photo-img,
+  main[data-hover] .hs-page-head:has(:is(.hs-btn, .hs-phone):hover) .hs-photo-img { scale: 1.1; } /* only after real pointer movement (ScrollCalm) */
 }
 
 /* Photos are leaves, after a reference: the top-right and bottom-left
@@ -905,14 +934,18 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
 @media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
 
 /* ---------- Trust details (Home): credentials, clinicians, quotes ---------- */
-/* Credentials as badges: leaf-shaped cards with a hairline border, the icon
-   on the left in ink and the claim beside it (like the referral partners'
-   marks). Three across on desktop, two on tablets, a swipe row on phones. */
-.hs-creds { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; list-style: none; }
-.hs-cred { display: flex; align-items: center; gap: 18px; padding: 24px 26px; border: 1.5px solid color-mix(in srgb, var(--hs-rule) 50%, transparent); border-radius: 8px 36px; color: var(--hs-ink); font-weight: 600; line-height: 1.3; text-wrap: balance; }
-.hs-cred-icon { flex: none; display: block; color: var(--hs-ink); line-height: 0; } /* left, in ink, no tile */
-.hs-cred-icon .hs-icon { width: 34px; height: 34px; stroke-width: 1.4; }
-@media (max-width: 1100px) { .hs-creds { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+/* Credentials as editorial figures: four columns divided by hairlines, each a
+   large lead ("Since 2009", "7 days") over the rest of its sentence. Two by
+   two on tablets and phones. */
+.hs-creds { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); list-style: none; }
+.hs-cred { display: grid; align-content: start; gap: 12px; padding: 4px 28px 8px; border-left: 1px solid var(--hs-rule); }
+.hs-cred:first-child { padding-left: 0; border-left: 0; }
+.hs-cred-value { font-family: var(--hs-font-display); font-size: clamp(34px, 3.2vw, 48px); font-weight: 600; line-height: 1; letter-spacing: -0.04em; color: var(--hs-ink); white-space: nowrap; }
+.hs-cred-text { max-width: 24ch; color: var(--hs-ink-2); font-size: 17px; line-height: 1.45; text-wrap: pretty; }
+@media (max-width: 1100px) {
+  .hs-creds { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 40px; }
+  .hs-cred:nth-child(odd) { padding-left: 0; border-left: 0; }
+}
 .hs-creds-note { margin-top: 20px; }
 
 .hs-clinicians { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 80px; list-style: none; }
@@ -936,10 +969,10 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
 @media (max-width: 1100px) { .hs-clinicians { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 80px 64px; } }
 @media (max-width: 600px) {
   .hs-clinicians { grid-template-columns: 1fr; gap: 64px; }
-  .hs-creds { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 16px; margin-inline: -16px; padding: 4px 16px 8px; scrollbar-width: none; }
-  .hs-creds::-webkit-scrollbar { display: none; }
-  .hs-cred { flex: 0 0 78%; scroll-snap-align: start; gap: 14px; padding: 18px 18px; }
-  .hs-cred-icon .hs-icon { width: 30px; height: 30px; }
+  .hs-creds { row-gap: 32px; }
+  .hs-cred { padding-inline: 20px 0; gap: 8px; }
+  .hs-cred-value { font-size: 32px; }
+  .hs-cred-text { font-size: 15px; }
 }
 
 /* ================= Phones: app-like =================
@@ -1042,7 +1075,7 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
    on hover/press. Off under reduced motion. */
 .hs-faq { interpolate-size: allow-keywords; }
 .hs-faq summary { transition: color var(--hs-dur-fast) var(--hs-ease); }
-.hs-faq summary:hover { color: var(--hs-ember-text); }
+main[data-hover] .hs-faq summary:hover { color: var(--hs-ember-text); }
 @media (prefers-reduced-motion: no-preference) {
   .hs-faq details::details-content { block-size: 0; overflow: clip; transition: block-size 0.45s cubic-bezier(0.16, 1, 0.3, 1), content-visibility 0.45s allow-discrete; }
   .hs-faq details[open]::details-content { block-size: auto; }
@@ -1084,7 +1117,8 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
 }
 .hs-cue { position: fixed; left: 50%; bottom: 22px; z-index: 44; display: none; place-items: center; width: 44px; height: 44px; translate: -50% 0; border: 1.5px solid var(--hs-ink); border-radius: 4px 16px; background: color-mix(in srgb, var(--hs-page) 90%, transparent); backdrop-filter: blur(10px); color: var(--hs-ink); cursor: pointer; opacity: 0; pointer-events: none; transition: opacity var(--hs-dur) var(--hs-ease); }
 .hs-cue .hs-icon { rotate: 90deg; }
-.hs-cue.is-shown { opacity: 1; pointer-events: auto; }
+.hs-cue { visibility: hidden; transition: opacity var(--hs-dur) var(--hs-ease), visibility 0s var(--hs-dur); } /* hidden for real when faded, so its backdrop blur isn't computed while scrolling */
+.hs-cue.is-shown { opacity: 1; pointer-events: auto; visibility: visible; transition-delay: 0s; }
 @media (min-width: 1081px) { .hs-cue { display: grid; } }
 @media (prefers-reduced-motion: no-preference) { .hs-cue.is-shown .hs-icon { animation: hs-cue-drift 2.4s ease-in-out infinite; } }
 @keyframes hs-cue-drift { 0%, 100% { translate: 0 -2px; } 50% { translate: 0 3px; } }
@@ -1224,3 +1258,205 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #121820;
    phones keep the two-button bar). */
 .hs-dock .hs-dock-refer { display: none; }
 @media (min-width: 1081px) { .hs-dock .hs-dock-refer { display: inline-flex; } }
+
+/* ---------- Rhythm: chapters, a statement, a full-bleed pause ----------
+   Home breaks its run of label rows with three kinds of moment: one line set
+   huge with no label column (.hs-statement), a photo edge to edge
+   (.hs-bleed), and full-bleed chapters with their own ground — dark for
+   Behind the scenes, sand for In their words (.hs-chapter). Chapters and the
+   bleed reach the window's edges from inside .hs-wrap (negative margins of
+   50% − 50vw); .hs clips the scrollbar's sliver of overflow. */
+.hs { overflow-x: clip; }
+.hs-chapter, .hs-bleed { margin-inline: calc(50% - 50vw); padding-inline: calc(50vw - 50%); }
+.hs-chapter > .hs-row, .hs-chapter + .hs-row, .hs-bleed + .hs-row { border-top: 0; }
+.hs-chapter > .hs-row > .hs-row-label { padding-top: 104px; }
+.hs-chapter > .hs-row > .hs-row-body { padding-block: 96px 128px; }
+.hs-chapter.is-sand { background: var(--hs-sand); }
+/* The dark chapter: the dark-mode tokens over the closing band's colour, so
+   every component inside (buttons, the mini intake board) follows. Text pairs
+   on it: ink 12:1+, ink-2 8:1+, accent text 7:1+ in both schemes and modes. */
+.hs .hs-chapter.is-dark {
+  --hs-page: var(--hs-house);
+  --hs-surface: color-mix(in srgb, #000 24%, var(--hs-house));
+  --hs-sand: color-mix(in srgb, #fff 7%, var(--hs-house));
+  --hs-ink: #E3EDF8;              /* white with a blue tint (as Shore's dark ink is warm) */
+  --hs-ink-2: #C3CFDA;
+  --hs-line: color-mix(in srgb, #fff 12%, var(--hs-house));
+  --hs-rule: color-mix(in srgb, #fff 22%, var(--hs-house));
+  --hs-control: #8B9AA8;
+  --hs-ember: #7FB6E0;
+  --hs-ember-hover: #93C3E8;
+  --hs-ember-text: #93C3E8;
+  --hs-on-ember: #0D1720;
+  --hs-ember-soft: color-mix(in srgb, #7FB6E0 18%, var(--hs-house));
+  --hs-focus: #8DB8FF;
+  background: var(--hs-page);
+  color: var(--hs-ink);
+  color-scheme: dark;
+}
+.hs[data-hs-theme="shore"] .hs-chapter.is-dark {
+  --hs-ink: #F4EEE5;
+  --hs-ink-2: #CFC7BB;
+  --hs-ember: #EE9466;
+  --hs-ember-hover: #F4A77F;
+  --hs-ember-text: #F4A77F;
+  --hs-on-ember: #1B1410;
+  --hs-ember-soft: color-mix(in srgb, #EE9466 18%, var(--hs-house));
+}
+.hs-chapter.is-dark .hs-bts { box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35); }
+.hs-chapter.is-sand .hs-quote p { font-size: clamp(24px, 2.5vw, 36px); line-height: 1.28; letter-spacing: -0.025em; }
+.hs-chapter.is-sand .hs-quote figcaption { margin-top: 28px; }
+
+/* The statement: one line, huge, starting at the content column. */
+.hs-statement { padding: 152px 0 160px calc(var(--hs-label-col) + 48px); } /* level with the rows' content */
+.hs-statement p { max-width: 17ch; font-family: var(--hs-font-display); font-size: clamp(44px, 6.2vw, 96px); font-weight: 600; line-height: 1.02; letter-spacing: -0.04em; text-wrap: balance; color: var(--hs-ink); }
+.hs-statement-em { color: var(--hs-ink-2); }
+
+/* The full-bleed pause: the photo edge to edge, no frame, its line in large
+   type over a soft scrim at the foot. */
+.hs-bleed { position: relative; padding-inline: 0; }
+.hs-bleed .hs-photo-frame { border-radius: 0; max-height: 82vh; }
+.hs-bleed .hs-photo-img { width: 100%; height: 100%; object-fit: cover; }
+.hs-bleed::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10, 16, 22, 0.8), rgba(10, 16, 22, 0.38) 45%, transparent 70%); /* white line on it: ≥4:1 at its brightest (large text needs 3:1) */ pointer-events: none; }
+.hs-bleed-line { position: absolute; z-index: 1; left: max(48px, calc(50% - 640px)); bottom: 64px; max-width: 18ch; font-family: var(--hs-font-display); font-size: clamp(30px, 3.6vw, 56px); font-weight: 600; line-height: 1.06; letter-spacing: -0.032em; text-wrap: balance; color: #fff; }
+
+@media (max-width: 1099px) { .hs-bleed-line { left: 32px; bottom: 40px; } }
+@media (max-width: 900px) {
+  .hs-statement { padding: 96px 0 104px; }
+  .hs-chapter > .hs-row > .hs-row-label { padding-top: 64px; }
+  .hs-chapter > .hs-row > .hs-row-body { padding-block: 16px 72px; }
+}
+@media (max-width: 680px) {
+  .hs-statement { padding: 72px 0 80px; }
+  .hs-statement p { font-size: 40px; }
+  .hs-bleed .hs-photo-frame { aspect-ratio: 4 / 5 !important; }
+  .hs-bleed-line { left: 16px; right: 16px; bottom: 28px; font-size: 30px; }
+  .hs-chapter.is-sand .hs-quote p { font-size: 22px; }
+}
+
+/* ---------- A light left on ----------
+   The brand idea, made visible with one warm accent (--hs-window / --hs-glow,
+   amber in Tide, terracotta-amber in Shore), used sparingly and never for
+   text on a light ground: the hero's first-visit dot (it breathes slowly on
+   desktop), and the closing band, whose mark lights up as it scrolls in — the
+   H fills amber with a short flicker, like a bulb, then a warm glow spreads
+   from it (BandLight in client.js sets data-light off → on; lit without JS
+   and under reduced motion). Photos open through a leaf as they reveal. */
+.hs-band { isolation: isolate; --hs-mr: 64px; --hs-mt: 64px; --hs-ms: 120px; --hs-gs: clamp(560px, 70vw, 1100px); } /* mark offset and size; glow size */
+.hs-band-window, .hs-band-glow { position: absolute; pointer-events: none; }
+.hs-band-window { right: var(--hs-mr); top: var(--hs-mt); width: var(--hs-ms); height: var(--hs-ms); background: var(--hs-glow); -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M12.5 11h4.4v6.9h6.2V11h4.4v18h-4.4v-7.1h-6.2V29h-4.4Z'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M12.5 11h4.4v6.9h6.2V11h4.4v18h-4.4v-7.1h-6.2V29h-4.4Z'/%3E%3C/svg%3E") center / contain no-repeat; }
+/* The glow: centred on the mark, behind everything in the band. Its peak
+   stays around the mark; text on its fringe keeps ≥7:1. */
+.hs-band-glow { z-index: -1; width: var(--hs-gs); height: var(--hs-gs); right: calc(var(--hs-mr) + var(--hs-ms) / 2 - var(--hs-gs) / 2); top: calc(var(--hs-mt) + var(--hs-ms) / 2 - var(--hs-gs) / 2); border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--hs-glow) 44%, transparent), color-mix(in srgb, var(--hs-glow) 12%, transparent) 22%, color-mix(in srgb, var(--hs-glow) 4%, transparent) 50%, transparent 80%); }
+@media (max-width: 960px) { .hs-band { --hs-mr: 48px; --hs-mt: 48px; --hs-ms: 88px; --hs-gs: 600px; } }
+@media (max-width: 680px) { .hs-band { --hs-mr: 24px; --hs-mt: 24px; --hs-ms: 48px; --hs-gs: 400px; } }
+.hs-band[data-light="off"] .hs-band-window { opacity: 0; }
+.hs-band[data-light="off"] .hs-band-glow { opacity: 0; scale: 0.6; }
+@media (prefers-reduced-motion: no-preference) {
+  .hs-band[data-light="on"] .hs-band-window { animation: hs-light-on 0.9s linear 0.5s both; }
+  .hs-band[data-light="on"] .hs-band-glow { animation: hs-glow-on 2.2s cubic-bezier(0.16, 1, 0.3, 1) 1.1s both; }
+  @keyframes hs-light-on { 0% { opacity: 0; } 12% { opacity: 0.7; } 20% { opacity: 0.15; } 34% { opacity: 0.9; } 42% { opacity: 0.4; } 60%, 100% { opacity: 1; } }
+  @keyframes hs-glow-on { from { opacity: 0; scale: 0.6; } to { opacity: 1; scale: 1; } }
+  /* The hero's dot breathes, slowly, on desktop only. */
+  @media (min-width: 961px) {
+    /* A glow ring that scales and fades (GPU-only; a box-shadow animation
+       repainted every frame). */
+    .hs-art-dot { position: relative; }
+    .hs-art-dot::after { content: ""; position: absolute; inset: -9px; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--hs-glow) 55%, transparent), transparent); opacity: 0; animation: hs-dot-breathe 3.6s ease-in-out infinite; }
+    @keyframes hs-dot-breathe { 50% { opacity: 1; scale: 1.35; } }
+  }
+  /* Leaf reveal: photos (and the full-bleed pause) open from a smaller leaf
+     to their frame as their piece reveals, the image settling from a slight
+     zoom. Timed with the reveal's fade, so the classes come off together. */
+  .hs-reveal .hs-photo-frame { clip-path: inset(9% 12% round var(--hs-radius) var(--hs-leaf)); }
+  .hs-reveal .hs-photo-img { scale: 1.14; }
+  .hs-reveal.is-in .hs-photo-frame { clip-path: inset(0 round var(--hs-radius) var(--hs-leaf)); transition: clip-path 0.9s var(--hs-ease-soft) calc(var(--hs-i, 0) * 80ms); }
+  .hs-reveal.is-in .hs-photo-img { scale: 1; transition: scale 0.9s var(--hs-ease-soft) calc(var(--hs-i, 0) * 80ms); }
+  .hs-bleed.hs-reveal { translate: none; clip-path: inset(10% 14% round var(--hs-radius) 96px); }
+  .hs-bleed.hs-reveal .hs-photo-frame { clip-path: none; }
+  .hs-bleed.hs-reveal.is-in { clip-path: inset(0 round 0 0); transition: clip-path 0.9s var(--hs-ease-soft), opacity 0.9s var(--hs-ease-soft); }
+}
+/* The band's heading and lede stay clear of the mark at every width (at
+   961–1100px the lede used to run under it). */
+.hs-band h2 { max-width: min(18ch, 100% - var(--hs-ms) - 40px); padding-right: 0; }
+.hs-band > p { max-width: min(60ch, 100% - var(--hs-ms) - 40px); }
+@media (max-width: 680px) { .hs-band h2 { max-width: calc(100% - var(--hs-ms) - 8px); } .hs-band > p { max-width: none; } }
+
+/* ---------- Editorial accents: a serif, word reveals, clinicians' lines ----------
+   Fraunces (--hs-font-serif, layout.js) is the one serif, kept to a
+   few places: the statement's second sentence (italic), family quotes and
+   the clinicians' own lines. */
+.hs { --hs-font-quote: var(--hs-font-serif), Georgia, serif; }
+/* Every use of the serif is set tight (-0.05em, the user's choice). */
+:is(.hs-statement-em, .hs-hero-em, .hs-title-em, .hs-quote p, .hs-clinician-note, .hs-steps-story.is-story .hs-step .hs-step-n) { letter-spacing: -0.05em; }
+/* The Home hero's headline and the key words of each page title, in the serif italic. */
+:is(.hs-hero-em, .hs-title-em) { font-family: var(--hs-font-quote); font-style: italic; font-weight: 400; font-size: 1.04em; }
+.hs-statement-em { font-family: var(--hs-font-quote); font-style: italic; font-weight: 400; font-size: 1.04em; }
+.hs-quote p { font-family: var(--hs-font-quote); font-weight: 400; }
+.hs-chapter.is-sand .hs-quote p { font-size: clamp(26px, 2.6vw, 38px); line-height: 1.2; }
+@media (max-width: 680px) { .hs-chapter.is-sand .hs-quote p { font-size: 26px; } }
+
+/* Word reveal (SplitHeads in client.js): each word rises out of its own mask,
+   35ms apart. The mask's padding keeps descenders and italic overhangs. */
+.hs-split .hs-w { display: inline-block; overflow: clip; vertical-align: top; padding: 0 0.08em 0.14em 0; margin: 0 -0.08em -0.14em 0; }
+.hs-split .hs-w > span { display: inline-block; }
+@media (prefers-reduced-motion: no-preference) {
+  .hs-split .hs-w > span { translate: 0 110%; }
+  .hs-split.is-in .hs-w > span { translate: 0 0; transition: translate 1s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--wi, 0) * 35ms); }
+}
+
+/* Clinicians' own lines: over the portrait's foot, rising in on hover or
+   keyboard focus where there's a mouse; on touch screens, a plain line under
+   the role. The card is a positioning box (the note sits over its photo, the
+   first row). */
+.hs-clinician { position: relative; }
+.hs-clinician-note { order: 3; margin: 0 0 12px; font-family: var(--hs-font-quote); font-style: italic; font-size: 19px; line-height: 1.3; color: var(--hs-ink); }
+.hs-clinician-meta { order: 4; } /* the note (order 3) sits between the role and the details */
+@media (min-width: 761px) and (not ((hover: hover) and (pointer: fine))) { .hs-clinician { grid-row: span 5; } .hs-clinician-note { grid-row: 4; } }
+@media (hover: hover) and (pointer: fine) {
+  .hs-clinician-note { position: absolute; z-index: 1; left: 0; right: 0; top: 0; aspect-ratio: 1; display: flex; align-items: flex-end; margin: 0; padding: 14px 14px 16px; border-radius: var(--hs-radius) 56px; background: linear-gradient(to top, rgba(10, 16, 22, 0.86), rgba(10, 16, 22, 0.5) 60%, rgba(10, 16, 22, 0.15)); color: #fff; font-size: 18px; line-height: 1.25; opacity: 0; pointer-events: none; transition: opacity 0.35s var(--hs-ease); }
+  main[data-hover] .hs-clinician:hover .hs-clinician-note, .hs-clinician:focus-within .hs-clinician-note { opacity: 1; } /* hover only after real pointer movement (ScrollCalm) */
+  .hs-clinician .hs-photo-img { transition: scale 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+  main[data-hover] .hs-clinician:hover .hs-photo-img { scale: 1.06; }
+}
+
+/* ---------- How care begins: the pinned story (desktop) ----------
+   StepStory (client.js) adds .is-story at ≥1081px without reduced motion.
+   The wrapper is tall (one stretch of scroll per step); the list sticks in
+   view and its four steps share one place, photo left and text right. The
+   step on show (data-on) opens through the leaf as its number and text rise
+   in; the one leaving fades. A rail under the text fills with --hs-p. */
+.hs-steps-story.is-story { --hs-story-top: 120px; height: calc(var(--hs-story-h, 560px) + 4 * 55vh); }
+.hs-steps-story.is-story > ol { position: sticky; top: var(--hs-story-top); display: grid; grid-template-columns: 1fr; padding-bottom: 40px; }
+.hs-steps-story.is-story .hs-step { grid-area: 1 / 1; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); grid-template-rows: auto auto 1fr; column-gap: 64px; align-content: center; padding: 0; border: 0; container-type: normal; opacity: 0; pointer-events: none; transition: opacity 0.5s var(--hs-ease) 0.1s; }
+.hs-steps-story.is-story .hs-step[data-on] { opacity: 1; pointer-events: auto; transition-delay: 0s; }
+.hs-steps-story.is-story .hs-step > .hs-photo-frame { grid-column: 1; grid-row: 1 / 4; margin: 0; clip-path: inset(7% 9% round var(--hs-radius) var(--hs-leaf)); transition: clip-path 1s cubic-bezier(0.16, 1, 0.3, 1); }
+.hs-steps-story.is-story .hs-step > .hs-photo-frame .hs-photo-img { scale: 1.12; transition: scale 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+.hs-steps-story.is-story .hs-step[data-on] > .hs-photo-frame { clip-path: inset(0 round var(--hs-radius) var(--hs-leaf)); }
+.hs-steps-story.is-story .hs-step[data-on] > .hs-photo-frame .hs-photo-img { scale: 1; }
+.hs-steps-story.is-story .hs-step .hs-step-n { position: static; grid-column: 2; grid-row: 1; align-self: end; width: auto; height: auto; display: block; margin-bottom: 20px; background: none; border-radius: 0; font-family: var(--hs-font-quote); font-style: italic; font-size: 112px; font-weight: 400; line-height: 0.9; letter-spacing: -0.02em; color: var(--hs-ember-text); }
+.hs-steps-story.is-story .hs-step h3 { grid-column: 2; grid-row: 2; font-size: 34px; letter-spacing: -0.025em; }
+.hs-steps-story.is-story .hs-step p { grid-column: 2; grid-row: 3; align-self: start; margin-top: 16px; max-width: 34ch; font-size: 19px; }
+.hs-steps-story.is-story .hs-step :is(.hs-step-n, h3, p) { translate: 0 22px; opacity: 0; transition: translate 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s var(--hs-ease); }
+.hs-steps-story.is-story .hs-step[data-on] :is(.hs-step-n, h3, p) { translate: 0 0; opacity: 1; }
+.hs-steps-story.is-story .hs-step[data-on] h3 { transition-delay: 0.08s; }
+.hs-steps-story.is-story .hs-step[data-on] p { transition-delay: 0.16s; }
+/* The rail: a track under the text column, filling as the story goes.
+   StepStory sets --hs-p on the list itself (not the page), so updating it
+   restyles only the list (it must inherit to reach the ::after). */
+@property --hs-p { syntax: "<number>"; inherits: true; initial-value: 0; }
+.hs-steps-story.is-story > ol::before { content: ""; position: absolute; bottom: 0; left: calc((100% - 64px) * 1.25 / 2.25 + 64px); right: 0; height: 3px; border-radius: 3px; background: var(--hs-rule); }
+.hs-steps-story.is-story > ol::after { content: ""; position: absolute; bottom: 0; left: calc((100% - 64px) * 1.25 / 2.25 + 64px); right: 0; height: 3px; border-radius: 3px; background: var(--hs-ink); transform-origin: 0 50%; scale: var(--hs-p) 1; }
+
+/* ---------- Calm switching and scrolling ----------
+   switchLook (client.js) adds .hs-switching for the moment light/dark or the
+   colour scheme changes, so nothing fades a beat behind the page, and
+   crossfades the two looks in a view transition (data-hs-vt="look"), which
+   overrides the page-change animations for that one transition. While a
+   mouse scrolls, main ignores the pointer (ScrollCalm). */
+.hs.hs-switching, .hs.hs-switching *, .hs.hs-switching *::before, .hs.hs-switching *::after { transition: none !important; }
+html[data-hs-vt="look"]::view-transition-group(*) { animation: none !important; }
+html[data-hs-vt="look"]::view-transition-old(*) { animation: hs-look-out 0.3s ease both !important; }
+html[data-hs-vt="look"]::view-transition-new(*) { animation: hs-look-in 0.3s ease both !important; }
+@keyframes hs-look-out { to { opacity: 0; } }
+@keyframes hs-look-in { from { opacity: 0; } }

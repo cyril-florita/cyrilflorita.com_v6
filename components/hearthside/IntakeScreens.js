@@ -27,7 +27,8 @@ export function PartnersScreen() {
   return (
     <>
       <div className="hs-app-head"><div><h1>Referral partners</h1><p>Relationships with the hospitals, practices, and communities that refer to us. <Sample>Sample partners</Sample></p></div></div>
-      <div className="hs-table-wrap">
+      {/* Focusable and named: the wide table scrolls sideways on tablets. */}
+      <div className="hs-table-wrap" tabIndex={0} role="region" aria-label="Referral partners table">
         <table className="hs-table hs-table-cards">
           <thead>
             <tr><th scope="col">Organization</th><th scope="col">Liaison</th><th scope="col">Last contact</th><th scope="col">Next follow-up</th><th scope="col" className="num">Referrals</th><th scope="col" className="num">Open</th><th scope="col" className="num">Admitted</th><th scope="col">Not admitted</th></tr>

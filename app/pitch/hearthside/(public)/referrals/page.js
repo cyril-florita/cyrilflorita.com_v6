@@ -17,7 +17,7 @@ export default function Referrals() {
     <div className="hs-wrap">
       <PageHead
         photo={{ shot: "A clinician talks a care plan through with an older patient", src: "/img/hearthside/photos/pro-consult", alt: "A smiling nurse in blue scrubs talks with an older woman across a desk", position: "50% 35%" }}
-        title="Refer a patient"
+        title={<>Refer a <em className="hs-title-em">patient</em></>}
         lede="For physicians, hospitals, discharge planners, and senior communities. Send a referral securely, see it acknowledged right away, and follow it from received to start of care."
       >
         <div className="hs-hero-ctas" style={{ marginTop: 28 }}>
@@ -26,6 +26,8 @@ export default function Referrals() {
         </div>
       </PageHead>
 
+      {/* A dark chapter for referral partners (hearthside.css, .hs-chapter). */}
+      <div className="hs-chapter is-dark">
       <Row label="Why partners refer" labelledBy="rf-why">
         <h2 id="rf-why" className="hs-visually-hidden">Why partners refer to us</h2>
         <ul className="hs-ruled">
@@ -35,6 +37,7 @@ export default function Referrals() {
           <li><h3>A straight answer</h3><p className="hs-muted">If we can&rsquo;t accept a referral, we tell you why and suggest agencies that can, so your patient isn&rsquo;t left waiting.</p></li>
         </ul>
       </Row>
+      </div>
 
       <Row id="checklist" label="Checklist" labelledBy="rf-check">
         <div className="hs-two">

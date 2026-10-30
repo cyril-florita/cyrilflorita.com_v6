@@ -6,8 +6,27 @@ import { flushSync } from "react-dom";
 import { BASE, NAV, PHONE } from "./data";
 import { Button, Icon, Logo } from "./ui";
 
+// Switching light/dark or the colour scheme: every colour changes at once.
+// Colour transitions (buttons, links, the nav leaf) are suspended for the
+// switch — they used to fade a beat behind the page, which read as a flicker —
+// and where view transitions exist the two looks crossfade (0.3s; instant
+// under reduced motion).
+function switchLook(apply) {
+  const root = document.querySelector(".hs");
+  const run = () => {
+    root?.classList.add("hs-switching");
+    flushSync(apply);
+    void root?.offsetWidth; // apply the new colours with transitions off
+    requestAnimationFrame(() => requestAnimationFrame(() => root?.classList.remove("hs-switching")));
+  };
+  if (!document.startViewTransition || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return run();
+  const html = document.documentElement;
+  html.setAttribute("data-hs-vt", "look");
+  document.startViewTransition(run).finished.finally(() => html.removeAttribute("data-hs-vt"));
+}
+
 // Light / dark, saved as localStorage `hs-mode`. The pre-paint script in
-// layout.js applies the saved choice (else the OS preference) before first
+// layout.js applies the saved choice (else dark, the default) before first
 // paint; this keeps the button in sync and saves changes.
 export function ModeSwitch() {
   const [mode, setMode] = useState(null);
@@ -16,19 +35,18 @@ export function ModeSwitch() {
   useEffect(() => {
     const root = document.querySelector(".hs");
     if (!root) return;
-    const read = () => setMode(root.getAttribute("data-hs-mode") || "light");
+    const read = () => setMode(root.getAttribute("data-hs-mode") || "dark");
     read();
     const mo = new MutationObserver(read);
     mo.observe(root, { attributes: true, attributeFilter: ["data-hs-mode"] });
     return () => mo.disconnect();
   }, []);
   const next = mode === "dark" ? "light" : "dark";
-  const toggle = () => {
-    const root = document.querySelector(".hs");
-    root?.setAttribute("data-hs-mode", next);
+  const toggle = () => switchLook(() => {
+    document.querySelector(".hs")?.setAttribute("data-hs-mode", next);
     try { localStorage.setItem("hs-mode", next); } catch {}
     setMode(next);
-  };
+  });
   return (
     <button className="hs-mode" type="button" onClick={toggle} aria-label={mode ? `Switch to ${next} mode` : "Switch color mode"}>
       <Icon name={mode === "dark" ? "sun" : "moon"} size={22} />
@@ -159,24 +177,27 @@ export function ZipCheck({ areas, compact, onResult }) {
   );
 }
 
-// Colour scheme: Tide (cool, the default) or Shore (warm and cool combined), saved as
+// Colour scheme: Tide (cool) or Shore (warm and cool combined, the default), saved as
 // localStorage `hs-theme` and applied before first paint by layout.js.
 // A radio group of swatches, in the preview bar with the other demo notes.
 // Each swatch: the scheme's page and its signature colour, light then dark
 // (hearthside.css shows the pair for the current mode).
 const THEMES = [
-  { id: "tide", name: "Tide", a: "#F2F5F7", b: "#1F5E8C", aDark: "#10161C", bDark: "#7FB6E0" },
-  { id: "shore", name: "Shore", a: "#F6F2EA", b: "#1A2430", aDark: "#121820", bDark: "#EE9466" },
+  { id: "tide", name: "Tide", a: "#F2F5F7", b: "#1F5E8C", aDark: "#1E2A36", bDark: "#7FB6E0" },
+  { id: "shore", name: "Shore", a: "#F6F2EA", b: "#1E2A36", aDark: "#1E2A36", bDark: "#EE9466" },
 ];
 export function ThemeSwitch() {
-  const [theme, setTheme] = useState("tide");
+  const [theme, setTheme] = useState("shore");
   useEffect(() => {
-    setTheme(document.querySelector(".hs")?.getAttribute("data-hs-theme") || "tide"); // eslint-disable-line react-hooks/set-state-in-effect
+    setTheme(document.querySelector(".hs")?.getAttribute("data-hs-theme") || "shore"); // eslint-disable-line react-hooks/set-state-in-effect
   }, []);
   const pick = (id) => {
-    document.querySelector(".hs")?.setAttribute("data-hs-theme", id);
-    try { localStorage.setItem("hs-theme", id); } catch {}
-    setTheme(id);
+    if (id === theme) return;
+    switchLook(() => {
+      document.querySelector(".hs")?.setAttribute("data-hs-theme", id);
+      try { localStorage.setItem("hs-theme", id); } catch {}
+      setTheme(id);
+    });
   };
   // Arrow keys move between options, as in any radio group.
   const onKey = (e) => {
@@ -221,16 +242,20 @@ export function ContactDock() {
   // Hidden while the footer is on screen, and while a page's own opening
   // calls to action ([data-dock-hide]: the Home hero's buttons, a page head's
   // buttons) are, so the same actions never show twice.
-  const [hide, setHide] = useState(false);
+  // Starts hidden and shows once the observers have reported: it used to be
+  // rendered visible, so on pages with opening buttons it popped up on load
+  // and slid away again.
+  const [hide, setHide] = useState(true);
   useEffect(() => {
     const foot = document.querySelector(".hs-footer");
-    if (!foot || !("IntersectionObserver" in window)) return;
+    if (!foot || !("IntersectionObserver" in window)) return setHide(false); // eslint-disable-line react-hooks/set-state-in-effect
+    const ctas = [...document.querySelectorAll("[data-dock-hide]")];
     const seen = new Map();
-    const update = () => setHide([...seen.values()].some(Boolean));
+    const update = () => { if (seen.size > ctas.length) setHide([...seen.values()].some(Boolean)); };
     const footIo = new IntersectionObserver(([e]) => { seen.set(e.target, e.isIntersecting); update(); }, { rootMargin: "0px 0px -40% 0px" });
     const ctaIo = new IntersectionObserver((es) => { es.forEach((e) => seen.set(e.target, e.isIntersecting)); update(); });
     footIo.observe(foot);
-    document.querySelectorAll("[data-dock-hide]").forEach((el) => ctaIo.observe(el));
+    ctas.forEach((el) => ctaIo.observe(el));
     return () => { footIo.disconnect(); ctaIo.disconnect(); };
   }, [path]);
   // Back to top (desktop): shown once the page is a screen down, on the
@@ -283,7 +308,7 @@ export function ContactDock() {
 // fold is hidden, only once this runs, and never under reduced motion; the
 // classes come off once a piece has settled, so its own transitions (hovers)
 // aren't delayed. Re-runs per page.
-const REVEAL = ".hs-row-body > :not(.hs-ruled):not(.hs-services):not(.hs-creds):not(.hs-clinicians), .hs-ruled > *, .hs-services > *, .hs-creds > *, .hs-clinicians > *, .hs-band";
+const REVEAL = ".hs-row-body > :not(.hs-ruled):not(.hs-services):not(.hs-creds):not(.hs-clinicians):not(h2):not(.hs-steps-story), .hs-ruled > *, .hs-services > *, .hs-creds > *, .hs-clinicians > *, .hs-bleed, .hs-band"; // row headings and the statement reveal word by word (SplitHeads)
 export function Reveal() {
   const pathname = usePathname();
   useEffect(() => {
@@ -294,7 +319,7 @@ export function Reveal() {
     // vertically, so they stayed lowered and rose as they were swiped in, and
     // their offset made the row itself scroll up and down by a few pixels.
     const swipes = (el) => /auto|scroll/.test(getComputedStyle(el.parentElement).overflowX);
-    const els = [...new Set([...document.querySelectorAll(`main :is(${REVEAL})`)].map((el) => (swipes(el) ? el.parentElement : el)))].filter((el) => el.getBoundingClientRect().top > fold);
+    const els = [...new Set([...document.querySelectorAll(`main :is(${REVEAL})`)].map((el) => (swipes(el) ? el.parentElement : el)))].filter((el) => el.getBoundingClientRect().top > fold && !el.closest(".hs-steps-story.is-story"));
     const settle = (e) => { if (e.target === e.currentTarget && e.propertyName === "opacity") { e.target.classList.remove("hs-reveal", "is-in"); e.target.style.removeProperty("--hs-i"); e.target.removeEventListener("transitionend", settle); } };
     els.forEach((el) => {
       const sibs = [...el.parentElement.children].filter((c) => els.includes(c));
@@ -307,6 +332,191 @@ export function Reveal() {
     return () => { io.disconnect(); els.forEach((el) => { el.classList.remove("hs-reveal", "is-in"); el.style.removeProperty("--hs-i"); el.removeEventListener("transitionend", settle); }); };
   }, [pathname]);
   return null;
+}
+
+// The closing band's light: a band below the fold starts dark
+// (data-light="off") and lights as it comes well into view — the H in its
+// mark flickers on amber, then a warm glow spreads from it. Without JS, or
+// under reduced motion, the band is simply lit. Re-runs per page.
+export function BandLight() {
+  const pathname = usePathname();
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
+    const bands = [...document.querySelectorAll("main .hs-band:has(.hs-band-window)")].filter((b) => b.getBoundingClientRect().top > window.innerHeight);
+    bands.forEach((b) => b.setAttribute("data-light", "off"));
+    const io = new IntersectionObserver((es) => es.forEach((e) => {
+      if (e.isIntersecting) { e.target.setAttribute("data-light", "on"); io.unobserve(e.target); }
+    }), { threshold: 0.6 });
+    bands.forEach((b) => io.observe(b));
+    return () => { io.disconnect(); bands.forEach((b) => b.removeAttribute("data-light")); };
+  }, [pathname]);
+  return null;
+}
+
+// Headings that reveal word by word: each word rises out of a mask, in a
+// short stagger, as the heading scrolls in (row headings and the statement).
+// Only headings below the fold, never under reduced motion; a heading's own
+// text becomes its accessible name and the word spans are hidden from
+// assistive tech (the statement, a paragraph, keeps its words readable).
+const SPLIT = "main .hs-row-body > h2:not(.hs-visually-hidden), main .hs-statement p";
+export function SplitHeads() {
+  const pathname = usePathname();
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
+    // Already split by an earlier run (effects run twice in dev) but not yet
+    // shown: observe again rather than leave it hidden.
+    const els = [...document.querySelectorAll(SPLIT)].filter((el) => !el.classList.contains("is-in") && (el.classList.contains("hs-split") || el.getBoundingClientRect().top > window.innerHeight));
+    els.filter((el) => !el.classList.contains("hs-split")).forEach((el) => {
+      const heading = el.tagName === "H2";
+      if (heading) el.setAttribute("aria-label", el.textContent.replace(/\s+/g, " ").trim());
+      let i = 0;
+      const walk = (node) => [...node.childNodes].forEach((n) => {
+        if (n.nodeType === 1) return walk(n);
+        if (n.nodeType !== 3) return;
+        const frag = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) return frag.append(part);
+          const mask = document.createElement("span");
+          mask.className = "hs-w";
+          if (heading) mask.setAttribute("aria-hidden", "true");
+          const word = document.createElement("span");
+          word.textContent = part;
+          word.style.setProperty("--wi", Math.min(i++, 14));
+          mask.append(word);
+          frag.append(mask);
+        });
+        n.replaceWith(frag);
+      });
+      walk(el);
+      el.classList.add("hs-split");
+    });
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -10% 0px" });
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, [pathname]);
+  return null;
+}
+
+// Sideways-scrolling rows (the phone swipe rows) are focusable while they
+// actually scroll, so keyboard users can scroll them too, and named after
+// their section's heading. Re-checked on resize.
+export function SwipeRows() {
+  const pathname = usePathname();
+  useEffect(() => {
+    const sync = () => document.querySelectorAll("main .hs-swipe").forEach((el) => {
+      if (el.scrollWidth > el.clientWidth + 1) {
+        el.tabIndex = 0;
+        if (!el.hasAttribute("aria-label")) el.setAttribute("aria-label", el.closest("section")?.querySelector("h2")?.textContent.trim() || "Cards");
+      } else el.removeAttribute("tabindex");
+    });
+    sync();
+    window.addEventListener("resize", sync);
+    return () => window.removeEventListener("resize", sync);
+  }, [pathname]);
+  return null;
+}
+
+// Hover that only follows the hand. Cards passing under a still cursor used
+// to flash their hover states as the page scrolled back and forth (the path
+// cards' and clinicians' photo zooms, the clinicians' lines) — it read as a
+// glitch. So the photo and overlay hover effects need data-hover on main,
+// which only real pointer movement sets (and not within 200ms of a scroll)
+// and any scroll clears; the browser's own after-scroll mouse events don't
+// move, so they don't count. Attributes change only when the state does —
+// an earlier version also toggled pointer-events on main at every scroll,
+// which restyled the whole page and made trackpad scrolling jittery.
+export function ScrollCalm() {
+  useEffect(() => {
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    let lx = -1, ly = -1, lastScroll = 0;
+    const main = () => document.getElementById("main");
+    const scroll = () => {
+      lastScroll = performance.now();
+      const m = main();
+      if (m?.hasAttribute("data-hover")) m.removeAttribute("data-hover");
+    };
+    const move = (e) => {
+      const moved = Math.abs(e.clientX - lx) + Math.abs(e.clientY - ly) > 2;
+      lx = e.clientX; ly = e.clientY;
+      if (!moved || performance.now() - lastScroll < 200) return;
+      const m = main();
+      if (m && !m.hasAttribute("data-hover")) m.setAttribute("data-hover", "");
+    };
+    window.addEventListener("wheel", scroll, { passive: true });
+    window.addEventListener("scroll", scroll, { passive: true });
+    window.addEventListener("pointermove", move, { passive: true });
+    return () => { window.removeEventListener("wheel", scroll); window.removeEventListener("scroll", scroll); window.removeEventListener("pointermove", move); };
+  }, []);
+  return null;
+}
+
+// How care begins on desktop: a pinned scroll story. The steps sit stacked
+// in one sticky frame while the wrapper scrolls past; scroll progress picks
+// the step on show (data-on), whose photo opens through the leaf as its text
+// rises in, and a rail fills as the story goes (--hs-p). Only on desktop
+// (≥1081px) without reduced motion; otherwise the plain grid. All four steps
+// stay in the accessibility tree (hidden steps are transparent, not removed).
+export function StepStory({ children }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const mq = window.matchMedia("(min-width: 1081px) and (prefers-reduced-motion: no-preference)");
+    const frame = el.firstElementChild;
+    const all = [...el.querySelectorAll(".hs-step")];
+    // Scroll work stays cheap: geometry is measured on resize only, the
+    // listener is attached only while the story is near the screen, and the
+    // rail's progress is a non-inherited custom property on the list alone
+    // (registered in CSS), so updating it restyles nothing else.
+    let raf = 0, top = 0, span = 1, startY = 0, lastP = -1;
+    const measure = () => {
+      top = parseFloat(getComputedStyle(frame).top) || 0;
+      startY = el.getBoundingClientRect().top + window.scrollY;
+      span = Math.max(1, el.offsetHeight - frame.offsetHeight);
+    };
+    const update = () => {
+      raf = 0;
+      const p = Math.min(1, Math.max(0, (window.scrollY + top - startY) / span));
+      // Hysteresis: a step changes only once the scroll is clearly past the
+      // boundary (6% of a step), so small scrolls up and down around one
+      // don't flip the steps back and forth.
+      const x = p * all.length;
+      let on = all.findIndex((li) => li.hasAttribute("data-on"));
+      if (on < 0) on = Math.min(all.length - 1, Math.floor(x));
+      else if (x >= on + 1.06 || x <= on - 0.06) on = Math.min(all.length - 1, Math.max(0, Math.floor(x)));
+      if (Math.abs(p - lastP) > 0.002) { frame.style.setProperty("--hs-p", p.toFixed(3)); lastP = p; }
+      all.forEach((li, k) => { if (li.hasAttribute("data-on") !== (k === on)) li.toggleAttribute("data-on", k === on); });
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
+    const onResize = () => { measure(); onScroll(); };
+    let near = false;
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting === near) return;
+      near = e.isIntersecting;
+      if (near && el.classList.contains("is-story")) { measure(); update(); window.addEventListener("scroll", onScroll, { passive: true }); }
+      else window.removeEventListener("scroll", onScroll);
+    }, { rootMargin: "50% 0px" });
+    const apply = () => {
+      const on = mq.matches;
+      el.classList.toggle("is-story", on);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+      io.disconnect(); near = false;
+      if (on) {
+        measure(); update();
+        window.addEventListener("resize", onResize);
+        io.observe(el);
+      } else {
+        all.forEach((li) => li.removeAttribute("data-on"));
+        frame.style.removeProperty("--hs-p");
+      }
+    };
+    apply();
+    mq.addEventListener("change", apply);
+    return () => { mq.removeEventListener("change", apply); io.disconnect(); window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", onResize); cancelAnimationFrame(raf); };
+  }, []);
+  return <div ref={ref} className="hs-steps-story">{children}</div>;
 }
 
 // "How can we help?" on phones: a segmented switch (two toggle buttons, the
