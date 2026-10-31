@@ -241,7 +241,9 @@ export function ContactDock() {
   const partner = PARTNER_PAGES.includes(path);
   // Hidden while the footer is on screen, and while a page's own opening
   // calls to action ([data-dock-hide]: the Home hero's buttons, a page head's
-  // buttons) are, so the same actions never show twice.
+  // buttons) are, so the same actions never show twice. A [data-dock-after]
+  // section (Home's How can we help?, which offers the same choices) keeps it
+  // hidden until the reader has scrolled past it: on screen or still below.
   // Starts hidden and shows once the observers have reported: it used to be
   // rendered visible, so on pages with opening buttons it popped up on load
   // and slid away again.
@@ -249,11 +251,14 @@ export function ContactDock() {
   useEffect(() => {
     const foot = document.querySelector(".hs-footer");
     if (!foot || !("IntersectionObserver" in window)) return setHide(false); // eslint-disable-line react-hooks/set-state-in-effect
-    const ctas = [...document.querySelectorAll("[data-dock-hide]")];
+    const ctas = [...document.querySelectorAll("[data-dock-hide], [data-dock-after]")];
     const seen = new Map();
     const update = () => { if (seen.size > ctas.length) setHide([...seen.values()].some(Boolean)); };
     const footIo = new IntersectionObserver(([e]) => { seen.set(e.target, e.isIntersecting); update(); }, { rootMargin: "0px 0px -40% 0px" });
-    const ctaIo = new IntersectionObserver((es) => { es.forEach((e) => seen.set(e.target, e.isIntersecting)); update(); });
+    const ctaIo = new IntersectionObserver((es) => {
+      es.forEach((e) => seen.set(e.target, e.isIntersecting || (e.target.hasAttribute("data-dock-after") && e.boundingClientRect.top > (e.rootBounds?.bottom ?? window.innerHeight))));
+      update();
+    });
     footIo.observe(foot);
     ctas.forEach((el) => ctaIo.observe(el));
     return () => { footIo.disconnect(); ctaIo.disconnect(); };
@@ -356,9 +361,11 @@ export function SplitHeads() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
     const els = [...document.querySelectorAll(SPLIT)].filter((el) => !el.closest(SPLIT_SKIP));
     // Effects run twice in dev: headings an earlier run split are reused.
+    // Labels first (innerText needs layout), before any heading is rewritten.
+    const labels = new Map(els.filter((el) => !el.classList.contains("hs-split") && /^H[1-6]$/.test(el.tagName)).map((el) => [el, el.innerText.replace(/\s+/g, " ").trim()])); // innerText keeps the break between a name and its credentials
     els.filter((el) => !el.classList.contains("hs-split")).forEach((el) => {
-      const heading = /^H[1-6]$/.test(el.tagName); // a paragraph (the photo line) keeps its words readable instead
-      if (heading) el.setAttribute("aria-label", el.innerText.replace(/\s+/g, " ").trim()); // innerText keeps the break between a name and its credentials
+      const heading = labels.has(el); // a paragraph (the photo line) keeps its words readable instead
+      if (heading) el.setAttribute("aria-label", labels.get(el));
       let i = 0;
       const walk = (node) => [...node.childNodes].forEach((n) => {
         if (n.nodeType === 1) return walk(n);
@@ -379,10 +386,15 @@ export function SplitHeads() {
         n.replaceWith(frag);
       });
       walk(el);
-      // On screen already: shown in the same frame, so nothing drops in.
-      const r = el.getBoundingClientRect();
+    });
+    // On screen already: shown in the same frame, so nothing drops in. Read
+    // every heading's position after all the writes, in one layout pass (a
+    // read per heading between writes forced a layout each).
+    const fresh = els.filter((el) => !el.classList.contains("hs-split"));
+    const rects = fresh.map((el) => el.getBoundingClientRect());
+    fresh.forEach((el, i) => {
       el.classList.add("hs-split");
-      if (r.top < window.innerHeight && r.bottom > 0) el.classList.add("is-in");
+      if (rects[i].top < window.innerHeight && rects[i].bottom > 0) el.classList.add("is-in");
     });
     const io = new IntersectionObserver((es) => es.forEach((e) => {
       if (e.isIntersecting) e.target.classList.add("is-in");
@@ -410,23 +422,25 @@ export function LineReveal() {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
     if (/design-system/.test(pathname)) return;
-    // A flex or grid paragraph made of several stacked items (the footer's
-    // phone / fax / office lines) is left alone: wrapping its items into one
-    // line ran them together. Only "icon + text" rows get wrapped (below).
-    const stacked = (el) => /flex|grid/.test(getComputedStyle(el).display) && [...el.children].filter((c) => !c.matches("svg, .hs-icon")).length > 1;
-    const els = [...document.querySelectorAll(LINES)].filter((el) => !el.closest(LINES_SKIP) && !el.querySelector(":scope > .hs-sample:only-child") && el.textContent.trim().length > 12 && !stacked(el));
-    const number = (el) => {
-      let line = -1, top = null;
-      el.querySelectorAll(".hs-lw").forEach((w) => {
-        const t = w.getClientRects()[0]?.top ?? 0;
-        if (top === null || t - top > 4) { line++; top = t; }
-        w.style.setProperty("--li", Math.min(line, 12));
+    // Kept off the load path (a mobile Lighthouse run showed it as one
+    // ~460ms task): nothing happens until the page is idle — a paragraph not
+    // yet split simply shows as plain text — then paragraphs are split only
+    // as they come within a screen of view, in batches that write every
+    // paragraph first, measure every word in one layout pass, then write the
+    // line numbers (reading and writing per paragraph forced a layout each).
+    const prepared = [];
+    let prep, io, idle, t = 0;
+    const measure = (list) => {
+      const tops = list.map((el) => [...el.querySelectorAll(".hs-lw")].map((w) => [w, w.getClientRects()[0]?.top ?? 0]));
+      tops.forEach((words) => {
+        let line = -1, top = null;
+        words.forEach(([w, tp]) => { if (top === null || tp - top > 4) { line++; top = tp; } w.style.setProperty("--li", Math.min(line, 12)); });
       });
     };
-    els.filter((el) => !el.classList.contains("hs-lines")).forEach((el) => {
+    const split = (el, flex) => {
       // A flex or grid item (a checklist row: icon + text) gets its text in
       // one wrapper first, or every word would become its own flex item.
-      if (/flex|grid/.test(getComputedStyle(el).display)) {
+      if (flex) {
         const wrap = document.createElement("span");
         [...el.childNodes].filter((n) => !(n.nodeType === 1 && n.matches("svg, .hs-icon"))).forEach((n) => wrap.append(n));
         el.append(wrap);
@@ -446,22 +460,46 @@ export function LineReveal() {
         n.replaceWith(frag);
       });
       walk(el);
-      number(el);
-      const r = el.getBoundingClientRect();
-      el.classList.add("hs-lines");
-      if (r.top < window.innerHeight && r.bottom > 0) el.classList.add("is-read");
-    });
-    // Its own class (is-read): Reveal also uses is-in and strips it when its
-    // block fade settles, which hid paragraphs again.
-    const io = new IntersectionObserver((es) => es.forEach((e) => {
-      if (e.isIntersecting) e.target.classList.add("is-read");
-      else if (e.boundingClientRect.top > (e.rootBounds?.bottom ?? window.innerHeight)) e.target.classList.remove("is-read");
-    }), { rootMargin: "0px 0px -6% 0px" });
-    els.forEach((el) => io.observe(el));
-    let t = 0;
-    const onResize = () => { clearTimeout(t); t = setTimeout(() => els.forEach(number), 150); };
+    };
+    const start = () => {
+      // A flex or grid paragraph made of several stacked items (the footer's
+      // phone / fax / office lines) is left alone: wrapping its items into one
+      // line ran them together. Only "icon + text" rows get wrapped. (Reads
+      // only, before any writes.)
+      const els = [...document.querySelectorAll(LINES)].filter((el) => !el.closest(LINES_SKIP) && !el.querySelector(":scope > .hs-sample:only-child") && el.textContent.trim().length > 12);
+      const flex = new Map(els.map((el) => [el, /flex|grid/.test(getComputedStyle(el).display)]));
+      const todo = els.filter((el) => !(flex.get(el) && [...el.children].filter((c) => !c.matches("svg, .hs-icon")).length > 1));
+      // Its own class (is-read): Reveal also uses is-in and strips it when its
+      // block fade settles, which hid paragraphs again.
+      io = new IntersectionObserver((es) => es.forEach((e) => {
+        if (e.isIntersecting) e.target.classList.add("is-read");
+        else if (e.boundingClientRect.top > (e.rootBounds?.bottom ?? window.innerHeight)) e.target.classList.remove("is-read");
+      }), { rootMargin: "0px 0px -6% 0px" });
+      prep = new IntersectionObserver((es) => {
+        const batch = es.filter((e) => e.isIntersecting).map((e) => e.target).filter((el) => !el.classList.contains("hs-lines"));
+        if (!batch.length) return;
+        batch.forEach((el) => { prep.unobserve(el); split(el, flex.get(el)); });
+        measure(batch);
+        const h = window.innerHeight;
+        const rects = batch.map((el) => el.getBoundingClientRect());
+        batch.forEach((el, i) => {
+          el.classList.add("hs-lines");
+          if (rects[i].top < h && rects[i].bottom > 0) el.classList.add("is-read"); // already on screen: shown at once
+          io.observe(el);
+          prepared.push(el);
+        });
+      }, { rootMargin: "0px 0px 100% 0px" });
+      // Effects run twice in dev: paragraphs an earlier run split are reused.
+      todo.filter((el) => el.classList.contains("hs-lines")).forEach((el) => { io.observe(el); prepared.push(el); });
+      todo.filter((el) => !el.classList.contains("hs-lines")).forEach((el) => prep.observe(el));
+    };
+    idle = "requestIdleCallback" in window ? requestIdleCallback(start, { timeout: 1500 }) : setTimeout(start, 300);
+    const onResize = () => { clearTimeout(t); t = setTimeout(() => measure(prepared), 150); };
     window.addEventListener("resize", onResize);
-    return () => { io.disconnect(); window.removeEventListener("resize", onResize); clearTimeout(t); };
+    return () => {
+      ("cancelIdleCallback" in window ? cancelIdleCallback : clearTimeout)(idle);
+      prep?.disconnect(); io?.disconnect(); window.removeEventListener("resize", onResize); clearTimeout(t);
+    };
   }, [pathname]);
   return null;
 }

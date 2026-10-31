@@ -114,6 +114,7 @@ const Page = () => {
                 <li><strong>Referral record:</strong> the next action, documents, details, and an activity log</li>
                 <li><strong>Tasks, partners, reports, and rules</strong> screens, with ⌘K search across all of it</li>
                 <li><strong>Design system</strong> with two color schemes, each in light and dark (Shore dark is the default)</li>
+                <li><strong>A one-page proposal</strong> for real agency owners: what they get, the steps, typical timelines, price ranges, and how patient data stays private</li>
               </ul>
               <p>It makes no clinical or coverage decisions and stores nothing outside your browser; the copy is written as if the agency opened tomorrow.</p>
               <div className="cyril-case-cta cyril-case-cta-inline">
@@ -139,11 +140,11 @@ const Page = () => {
 
               <Desktop name="home" caption="Home" />
               <p><strong>A calm first screen.</strong> One warm photo, one headline set in a soft serif, and the actions in order of urgency: call now, request a call, or refer a patient. Below it, the agency&apos;s credentials read as four large figures, and its referral partners as a quiet row of marks.</p>
-              <p><strong>Two audiences, two paths.</strong> &ldquo;How can we help?&rdquo; splits families from professionals right away, and each path says what happens next.</p>
+              <p><strong>Two audiences, two paths.</strong> &ldquo;How can we help?&rdquo; opens with one plain sentence, set huge (&ldquo;Coming home from the hospital is a big day. We make the next part simple.&rdquo;), then splits families from professionals: two choices, each just a photo, who it&apos;s for, and the next step. Families are offered a call; professionals, a referral and the checklist that goes with it.</p>
               <Desktop name="paths" caption="How can we help?" />
-              <p><strong>A page with a rhythm.</strong> Instead of the same section over and over, the home page has loud and quiet moments: one line set huge, a photo that runs edge to edge, a sand chapter for what families say, and a dark one for the system behind the site. Headings rise in word by word as they arrive.</p>
+              <p><strong>A page with a rhythm.</strong> Instead of the same section over and over, the home page has loud and quiet moments: full-width chapters on a sand ground, a photo that runs edge to edge with one line set beside it in a leaf, a chapter for what families say, and a dark one for the system behind the site. Headings rise in word by word and paragraphs line by line as they arrive, and play again when you scroll back to them.</p>
               <CaseGrid layout="two">
-                <Desktop name="statement" caption="One statement, set huge" />
+                <Desktop name="statement" caption="How can we help? opens the conversation" />
                 <Desktop name="services-row" caption="What we do" />
                 <Desktop name="quotes" caption="In their words" />
                 <Desktop name="bts" caption="Behind the scenes" />
@@ -152,8 +153,8 @@ const Page = () => {
               <Clip name="steps" caption="How care begins, pinned as you scroll" />
               <p><strong>People, not stock photos.</strong> The clinicians who visit are introduced by name, with where they visit and the languages they speak, so families know who&apos;s coming before the doorbell rings. Point at one and they say, in their own words, what a visit is like.</p>
               <Desktop name="team" caption="The people who visit" />
-              <p><strong>A light left on.</strong> The brand&apos;s idea, made literal with one warm accent used twice: the first-visit dot in the hero, and the closing band, where the H in the logo flickers on like a porch light and a warm glow spreads from it as you arrive.</p>
-              <Desktop name="band" caption="The closing band, lit" />
+              <p><strong>One way to start, everywhere.</strong> Every call to action follows the same order with the same icons: call first, then request a call, then refer a patient. The main pages end on the same closing band, navy in light mode and the page&apos;s light color in dark mode, with the logo&apos;s leaf in its corner and its buttons rising in after the heading.</p>
+              <Desktop name="band" caption="The closing band" />
 
               <p><strong>Answers that guide, never decide.</strong> The services and getting-started pages explain what home health covers in plain language, link to Medicare for the rules, and end every section with a person to call. The service area map lights up as you type a ZIP code.</p>
               <CaseGrid layout="two">
@@ -218,7 +219,7 @@ const Page = () => {
                 <li><strong>Rules as data:</strong> stages, time limits, ZIP routing, and required documents are plain data, so the board, tasks, and reports all follow the same rules, and changing a rule needs no code.</li>
                 <li><strong>View transitions:</strong> the referral card travels between columns, pages hand over in sequence, and the phone switch slides its cards, all with the browser&apos;s View Transitions API and no animation library.</li>
                 <li><strong>Scroll-driven motion in CSS:</strong> the home photo closes in on the nurse and patient as you scroll, with no JavaScript on the scroll path. Everywhere else photos hold still, and ease in only when you point at the button beside them.</li>
-                <li><strong>Motion that stays calm:</strong> headings reveal word by word, the steps story picks its step from scroll progress with a little hysteresis so it never flips back and forth, and hover effects wait for the mouse to actually move, so cards sliding under a still cursor don&apos;t flash.</li>
+                <li><strong>Motion that stays calm:</strong> headings reveal word by word and paragraphs line by line (as plain inline text, so screen readers and links are untouched), the steps story picks its step from scroll progress with a little hysteresis so it never flips back and forth, hover effects wait for the mouse to actually move, so cards sliding under a still cursor don&apos;t flash, and button hovers fade a layer on the GPU rather than repainting, after a screen recording caught Chrome showing one stale frame mid-hover.</li>
                 <li><strong>Private by design:</strong> public forms ask only what&apos;s needed to call back, the referral form can only send a generated sample, and the status page never shows health details.</li>
                 <li><strong>Accessible throughout:</strong> audited with axe, AAA body text in every scheme, native dialogs with focus management, keyboard search, and reduced motion respected everywhere.</li>
               </ul>

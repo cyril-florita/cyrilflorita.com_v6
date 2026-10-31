@@ -101,7 +101,7 @@ export default function HearthsideHome() {
           two choices as cards on the page colour, each just its tag, photo
           (16:9, the whole frame), title, and buttons. Phones keep the
           two-way switch (PathSwitch) above one card. */}
-      <section className="hs-chapter is-sand hs-help" aria-labelledby="hs-paths-title">
+      <section className="hs-chapter is-sand hs-help" aria-labelledby="hs-paths-title" data-dock-after>
         <div className="hs-help-head">
           <p className="hs-help-label">How can we help?</p>
           <h2 id="hs-paths-title">Coming home from the hospital is a big day. <em className="hs-statement-em">We make the next part simple.</em></h2>
