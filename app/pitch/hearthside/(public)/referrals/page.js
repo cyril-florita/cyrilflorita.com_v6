@@ -26,8 +26,6 @@ export default function Referrals() {
         </div>
       </PageHead>
 
-      {/* A dark chapter for referral partners (hearthside.css, .hs-chapter). */}
-      <div className="hs-chapter is-dark">
       <Row label="Why partners refer" labelledBy="rf-why">
         <h2 id="rf-why" className="hs-visually-hidden">Why partners refer to us</h2>
         <ul className="hs-ruled">
@@ -37,7 +35,6 @@ export default function Referrals() {
           <li><h3>A straight answer</h3><p className="hs-muted">If we can&rsquo;t accept a referral, we tell you why and suggest agencies that can, so your patient isn&rsquo;t left waiting.</p></li>
         </ul>
       </Row>
-      </div>
 
       <Row id="checklist" label="Checklist" labelledBy="rf-check">
         <div className="hs-two">

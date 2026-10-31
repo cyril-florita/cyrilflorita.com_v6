@@ -1255,6 +1255,7 @@ main[data-hover] .hs-faq summary:hover { color: var(--hs-ember-text); }
 html:has(> body > .hs), html:has(.hs) { overflow-x: clip; }
 .hs-chapter, .hs-bleed { margin-inline: calc(50% - 50vw); padding-inline: calc(50vw - 50%); }
 .hs-chapter > .hs-row, .hs-chapter + .hs-row, .hs-bleed + .hs-row { border-top: 0; }
+.hs-page-head + .hs-row { border-top: 0; } /* subpages: no hairline under the page head */
 .hs-chapter > .hs-row > .hs-row-label { padding-top: 104px; }
 .hs-chapter > .hs-row > .hs-row-body { padding-block: 96px 128px; }
 .hs-chapter.is-sand { background: var(--hs-sand); }

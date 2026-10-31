@@ -19,8 +19,6 @@ export default function Careers() {
         <div className="hs-hero-ctas hs-mt-32"><Button href="#roles" icon="arrow">See open roles</Button></div>
       </PageHead>
 
-      {/* A sand chapter for what the work is like (hearthside.css, .hs-chapter). */}
-      <div className="hs-chapter is-sand">
       <Row label="The work" labelledBy="cr-work">
         <div className="hs-prose">
           <h2 id="cr-work">What the work is really like</h2>
@@ -34,7 +32,6 @@ export default function Careers() {
           <p><Sample>Sample benefits</Sample></p>
         </div>
       </Row>
-      </div>
 
       <Row id="roles" label="Open roles" labelledBy="cr-roles">
         <h2 id="cr-roles" className="hs-mb-32">Open roles <Sample /></h2>
