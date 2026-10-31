@@ -60,7 +60,7 @@ const SCHEMES = [
       "--hs-glow": ["#FFC27A", "#FFB25C"], "--hs-house": ["#22303D", "#141D26"], "--hs-focus": ["#1F5FBF", "#8DB8FF"], "--hs-photo": ["#E1E8EE", "#26323F"], "--hs-hill-2": ["#9DB2C6", "#273644"],
     },
     band: { bg: ["#22303D", "#F2F5F7"], ink: ["#E3EDF8", "#1E2A36"], ink2: ["#C3CFDA", "#3F4D5A"], accent: ["#93C3E8", "#1B5480"] },
-    pairs: [["Page on Ink (primary button)", "#F2F5F7", "#1E2A36", "#1E2A36", "#E3EDF8"], ["Text on Accent (button hover)", "#FFFFFF", "#1F5E8C", "#0D1720", "#7FB6E0"], ["Current page / accent label", "#1B5480", "#DCE8F2", "#93C3E8", "#2A4560"], ["Ink 2 on Alt surface", "#3F4D5A", "#E3EAEF", "#C3CFDA", "#2A3846"]],
+    pairs: [["Page on Ink (primary button)", "#F2F5F7", "#1E2A36", "#1E2A36", "#E3EDF8"], ["Label on Accent (button hover)", "#F2F5F7", "#1F5E8C", "#1E2A36", "#7FB6E0"], ["Current page / accent label", "#1B5480", "#DCE8F2", "#93C3E8", "#2A4560"], ["Ink 2 on Alt surface", "#3F4D5A", "#E3EAEF", "#C3CFDA", "#2A3846"]],
   },
   {
     id: "shore", name: "Shore", note: "The default, in dark mode. Warm and cool combined. Light: warm linen pages, navy ink, a harbor-blue accent. Dark: navy pages, warm ink, a peach accent.",
@@ -73,7 +73,7 @@ const SCHEMES = [
       "--hs-glow": ["#FFB066", "#FFA459"], "--hs-house": ["#1E2A36", "#141B23"], "--hs-focus": ["#1F5FBF", "#8DB8FF"], "--hs-photo": ["#E7E0D5", "#27313D"], "--hs-hill-2": ["#A1AFBC", "#263442"],
     },
     band: { bg: ["#1E2A36", "#F6F2EA"], ink: ["#F4EEE5", "#1E2A36"], ink2: ["#CFC7BB", "#3E4956"], accent: ["#F4A77F", "#B0401A"] },
-    pairs: [["Page on Ink (primary button)", "#F6F2EA", "#1E2A36", "#1E2A36", "#F4EEE5"], ["Text on Accent (button hover)", "#FFFFFF", "#1F5E8C", "#1B1410", "#EE9466"], ["Current page / accent label (dark: on the peach)", "#1B5480", "#DCE6EE", "#1B1410", "#EE9466"], ["Ink 2 on Alt surface", "#3E4956", "#ECE5D8", "#CFC7BB", "#2B3745"]],
+    pairs: [["Page on Ink (primary button)", "#F6F2EA", "#1E2A36", "#1E2A36", "#F4EEE5"], ["Label on Accent (button hover)", "#F6F2EA", "#1F5E8C", "#1E2A36", "#EE9466"], ["Current page / accent label (dark: on the peach)", "#1B5480", "#DCE6EE", "#1B1410", "#EE9466"], ["Ink 2 on Alt surface", "#3E4956", "#ECE5D8", "#CFC7BB", "#2B3745"]],
   },
 ];
 // Status colors are shared by both schemes.

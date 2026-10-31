@@ -263,9 +263,20 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
    Still 52px tall (44px small): bigger targets than the reference. */
 .hs-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 22px; border-radius: var(--hs-radius-sm); border: 1.5px solid transparent; font-family: var(--hs-font-label); font-size: 15px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; line-height: 1.2; text-decoration: none; cursor: pointer; transition: background-color 0.2s, color 0.2s, border-color 0.2s; white-space: nowrap; }
 .hs-btn-primary { background: var(--hs-ink); color: var(--hs-page); }
-.hs-btn-primary:hover { background: var(--hs-ember); color: var(--hs-on-ember); }
+.hs-btn-primary:hover { background: var(--hs-ink); } /* the hover fill is ::before (below) */
+/* The primary's hover fill is a layer that fades in over the ink, not a
+   change of background-color: an opacity fade runs on the compositor, so
+   the button itself is never repainted on hover. With a background-color
+   transition Chrome (macOS, GPU) sometimes showed one stale frame of the
+   resting colour mid-hover — a flash like a flickering bulb, found frame by
+   frame in a screen recording. The label keeps its colour (≥6.2:1 on the
+   hover fill in every look). */
+.hs-btn-primary { position: relative; isolation: isolate; }
+.hs-btn-primary::before { content: ""; position: absolute; inset: -1.5px; z-index: -1; border-radius: inherit; background: var(--hs-ember); opacity: 0; transition: opacity var(--hs-dur-fast) var(--hs-ease); pointer-events: none; }
+.hs-btn-primary:hover::before { opacity: 1; }
+.hs-btn-primary[disabled]::before { display: none; }
 .hs-btn-secondary { background: transparent; color: var(--hs-ink); border-color: var(--hs-ink); }
-.hs-btn-secondary:hover { background: var(--hs-sand); }
+.hs-btn-secondary:hover { background: var(--hs-sand); color: var(--hs-ember); border-color: var(--hs-ember); } /* on hover, border, label and icon take the primary's hover colour (≥5.2:1 in every look) */
 .hs-btn-quiet { min-height: 44px; padding: 0 2px; background: none; color: var(--hs-ember-text); }
 .hs-btn-quiet:hover { text-decoration: underline; text-underline-offset: 0.3em; }
 .hs-btn-sm { min-height: 44px; padding: 0 16px; font-size: 14px; }
@@ -599,9 +610,10 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
 .hs-band p { position: relative; margin-top: 16px; max-width: 60ch; color: var(--hb-ink-2); font-size: 20px; }
 .hs-band-ctas { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; margin-top: 32px; }
 .hs-band .hs-btn-primary { background: var(--hb-ink); color: var(--hb-bg); }
-.hs-band .hs-btn-primary:hover { background: var(--hb-hover); color: var(--hb-hover-ink); }
+.hs-band .hs-btn-primary:hover { background: var(--hb-ink); }
+.hs-band .hs-btn-primary::before { background: var(--hb-hover); }
 .hs-band .hs-btn-secondary { color: var(--hb-ink); border-color: var(--hb-ink); }
-.hs-band .hs-btn-secondary:hover { background: color-mix(in srgb, var(--hb-ink) 9%, transparent); }
+.hs-band .hs-btn-secondary:hover { background: color-mix(in srgb, var(--hb-ink) 9%, transparent); color: var(--hb-hover); border-color: var(--hb-hover); }
 .hs-band .hs-btn-quiet { color: var(--hb-accent); } /* the text link, in the scheme's accent */
 @media (max-width: 680px) { .hs-band-ctas .hs-btn:not(.hs-btn-quiet) { flex: 1 1 100%; } } /* phones: the two buttons full width, the link under them */
 @media (max-width: 680px) { .hs-band { padding: 40px 24px; } }
@@ -815,9 +827,9 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
 .hs-dock { display: flex; align-items: center; gap: 10px; transition: translate var(--hs-dur) var(--hs-ease), opacity var(--hs-dur) var(--hs-ease); }
 .hs-dock > *, .hs-totop { box-shadow: 0 10px 28px rgba(15, 25, 35, 0.14); }
 .hs[data-hs-mode="dark"] :is(.hs-dock > *, .hs-totop) { box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5); }
-.hs-totop.hs-btn-secondary { background: color-mix(in srgb, var(--hs-page) 90%, transparent); backdrop-filter: blur(14px); }
+.hs-totop.hs-btn-secondary { background: var(--hs-page); } /* solid, not frosted: a backdrop blur on screen made Chrome repaint neighbouring buttons mid-hover (a flash) */
 .hs-dock .hs-btn-secondary { background: var(--hs-page); } /* the white button: solid, so page text never shows through it */
-:is(.hs-dock .hs-btn-secondary, .hs-totop.hs-btn-secondary):hover { background: var(--hs-sand); }
+:is(.hs-dock .hs-btn-secondary, .hs-totop.hs-btn-secondary):hover { background: var(--hs-sand); color: var(--hs-ember); border-color: var(--hs-ember); }
 .hs-dock-label { margin-right: 4px; }
 .hs-dock.is-hidden { translate: 0 calc(100% + 28px); opacity: 0; }
 .hs-dock.is-hidden, .hs-totop.is-hidden { pointer-events: none; }
@@ -1106,7 +1118,7 @@ main[data-hover] .hs-faq summary:hover { color: var(--hs-ember-text); }
 @media (min-width: 961px) {
   .hs-hero { padding-top: 12px; padding-bottom: 20px; } /* close under the nav */
 }
-.hs-cue { position: fixed; left: 50%; bottom: 22px; z-index: 44; display: none; place-items: center; width: 44px; height: 44px; translate: -50% 0; border: 1.5px solid var(--hs-ink); border-radius: 4px 16px; background: color-mix(in srgb, var(--hs-page) 90%, transparent); backdrop-filter: blur(10px); color: var(--hs-ink); cursor: pointer; opacity: 0; pointer-events: none; transition: opacity var(--hs-dur) var(--hs-ease); }
+.hs-cue { position: fixed; left: 50%; bottom: 22px; z-index: 44; display: none; place-items: center; width: 44px; height: 44px; translate: -50% 0; border: 1.5px solid var(--hs-ink); border-radius: 4px 16px; background: var(--hs-page); color: var(--hs-ink); cursor: pointer; opacity: 0; pointer-events: none; transition: opacity var(--hs-dur) var(--hs-ease); }
 .hs-cue .hs-icon { rotate: 90deg; }
 .hs-cue { visibility: hidden; transition: opacity var(--hs-dur) var(--hs-ease), visibility 0s var(--hs-dur); } /* hidden for real when faded, so its backdrop blur isn't computed while scrolling */
 .hs-cue.is-shown { opacity: 1; pointer-events: auto; visibility: visible; transition-delay: 0s; }
