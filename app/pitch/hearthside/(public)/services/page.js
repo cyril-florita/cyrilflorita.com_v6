@@ -48,7 +48,7 @@ export default function Services() {
       <div className="hs-chapter is-sand">
       <Row label="How visits work" labelledBy="sv-visits">
         <h2 id="sv-visits">Visits that fit around your life</h2>
-        <ul className="hs-ruled" style={{ marginTop: 32 }}>
+        <ul className="hs-ruled hs-mt-32">
           <li><h3>Scheduled, not round-the-clock</h3><p className="hs-muted">Clinicians visit for set appointments, often a few times a week, following the plan your doctor approves.</p></li>
           <li><h3>Your doctor stays in charge</h3><p className="hs-muted">We send updates to your doctor and adjust the plan with them as you progress.</p></li>
           <li><h3>Family in the loop</h3><p className="hs-muted">With your permission, a family member can get visit times and updates.</p></li>

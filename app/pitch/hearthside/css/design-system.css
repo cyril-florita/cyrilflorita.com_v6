@@ -71,11 +71,12 @@
    the active scheme only. */
 .hs-ds-schemes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .hs-ds-schemes > * { padding: 8px 24px 8px 0; border-bottom: 0; }
-.hs-ds-schemes > * + * { padding-left: 24px; border-left: 1px solid var(--hs-rule); }
+.hs-ds-schemes > * + * { padding-right: 0; }
 .hs-ds-swatches { display: flex; height: 36px; border-radius: 6px; overflow: hidden; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08); }
 .hs-ds-swatches + .hs-ds-swatches { margin-top: 6px; margin-bottom: 16px; }
 .hs-ds-swatches span { flex: 1; }
 @media (max-width: 900px) { .hs-ds-schemes { grid-template-columns: 1fr; } .hs-ds-schemes > * + * { padding-left: 0; border-left: 0; padding-top: 24px; border-top: 1px solid var(--hs-rule); } }
+@media (max-width: 700px) { .hs-ds-schemes > * + * { padding: 0; border-top: 0; } } /* phones: stacked on the grid's row gap alone */
 .hs-ds-for { display: none; }
 .hs[data-hs-theme="tide"] .hs-ds-for[data-for="tide"],
 .hs[data-hs-theme="shore"] .hs-ds-for[data-for="shore"] { display: block; }

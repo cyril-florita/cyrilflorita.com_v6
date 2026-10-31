@@ -20,7 +20,7 @@ export default function Referrals() {
         title={<>Refer a <em className="hs-title-em">patient</em></>}
         lede="For physicians, hospitals, discharge planners, and senior communities. Send a referral securely, see it acknowledged right away, and follow it from received to start of care."
       >
-        <div className="hs-hero-ctas" style={{ marginTop: 28 }}>
+        <div className="hs-hero-ctas hs-mt-32">
           <Button href="#refer" lead="refer">Start a referral</Button>
           <Button href="#checklist" variant="secondary" lead="checklist">See the checklist</Button>
         </div>
@@ -53,14 +53,14 @@ export default function Referrals() {
       </Row>
 
       <Row id="refer" label="Secure referral" labelledBy="rf-form">
-        <h2 id="rf-form" style={{ marginBottom: 32 }}>Send a referral</h2>
+        <h2 id="rf-form" className="hs-mb-32">Send a referral</h2>
         <ReferralForm />
       </Row>
 
       <Row label="Your contacts" labelledBy="rf-contacts" tight>
         <h2 id="rf-contacts" className="hs-visually-hidden">Your contacts</h2>
         <ul className="hs-ruled">
-          {LIAISONS.map((l) => <li key={l.id}><h3>{l.name}</h3><p className="hs-muted">{l.role}</p><p style={{ marginTop: 10 }}><Sample /></p></li>)}
+          {LIAISONS.map((l) => <li key={l.id}><h3>{l.name}</h3><p className="hs-muted">{l.role}</p><p className="hs-mt-8"><Sample /></p></li>)}
           <li><h3>Intake line</h3><p className="hs-muted"><a href={PHONE.href}>{PHONE.display}</a>, {HOURS}, with on-call coverage after hours.</p></li>
           <li><h3>Referral fax</h3><p className="hs-muted">{REFERRAL_FAX}, if your system can&rsquo;t use the secure form. We&rsquo;ll confirm receipt by phone.</p></li>
         </ul>

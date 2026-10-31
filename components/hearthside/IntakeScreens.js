@@ -49,7 +49,7 @@ export function PartnersScreen() {
           </tbody>
         </table>
       </div>
-      <p className="hs-hint" style={{ marginTop: 14 }}>&ldquo;Admitted&rdquo; counts referrals accepted or started; the rate uses only referrals with a decision.</p>
+      <p className="hs-hint hs-mt-16">&ldquo;Admitted&rdquo; counts referrals accepted or started; the rate uses only referrals with a decision.</p>
     </>
   );
 }

@@ -15,7 +15,7 @@ export function Footer() {
           </div>
           <p>Skilled home health care across the San Fernando and Santa Clarita Valleys.</p>
           <p className="hs-footer-contact">
-            <a href={PHONE.href}><Icon name="phone" size={18} /> {PHONE.display}</a>
+            <a href={PHONE.href}><Icon name="phone" size={20} /> {PHONE.display}</a>
             <span>Referral fax {REFERRAL_FAX}</span>
             <span>Office in Van Nuys, visits by appointment</span>
           </p>

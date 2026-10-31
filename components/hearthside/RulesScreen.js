@@ -32,7 +32,7 @@ export default function RulesScreen() {
             <h2 id="ru-regions">Regions</h2>
             <div className="hs-panel-body">
               {Object.entries(REGIONS).map(([id, r]) => (
-                <div key={id} style={{ marginBottom: 16 }}>
+                <div key={id} className="hs-mb-16">
                   <b>{r.name}</b> · {COORDINATORS.find((c) => c.region === id).name}
                   <p className="hs-hint">{r.towns.join(", ")}</p>
                 </div>

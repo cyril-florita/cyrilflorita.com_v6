@@ -299,7 +299,7 @@ export function ContactDock() {
         )}
     </div>
     <button type="button" className={`hs-btn hs-btn-secondary hs-totop${far ? "" : " is-hidden"}`} onClick={toTop} aria-label="Back to top" tabIndex={far ? undefined : -1} aria-hidden={far ? undefined : true}>
-      <Icon name="up" size={22} className="hs-btn-lead" /> {/* doesn't nudge on hover */}
+      <Icon name="up" size={20} className="hs-btn-lead" /> {/* doesn't nudge on hover */}
     </button>
     </div>
     </div>

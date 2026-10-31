@@ -319,9 +319,11 @@ const PortfolioIsotope = () => {
     }
     if (target && !target.matches(filterSelector(filterKey))) {
       const k = filterFor(target);
-      if (k) setFilterKey(k);
+      // Needs the rendered tiles (and sessionStorage / the hash), so it can't
+      // be the initial state of a statically exported page; one switch on mount.
+      if (k) setFilterKey(k); // eslint-disable-line react-hooks/set-state-in-effect
     }
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps -- mount only: the filter the page opened with
 
   // Project links: remember the filter (restored on the way back), then
   // wipe the transition panel in before the client-side route change.

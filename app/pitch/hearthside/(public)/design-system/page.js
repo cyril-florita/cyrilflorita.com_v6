@@ -139,7 +139,7 @@ export default function DesignSystem() {
             <div className="hs-ds-layout-grid"><span /><span /><span /><span /></div>
           </div>
         </div>
-        <ul className="hs-ruled" style={{ marginTop: 32 }}>
+        <ul className="hs-ruled hs-mt-32">
           <li><h3>Rows</h3><p className="hs-ds-muted"><code>&lt;Row label=&hellip;&gt;</code>: label column, hairline above, content beside. 60px above content, 112px below; tighter on phones.</p></li>
           <li><h3>Grids</h3><p className="hs-ds-muted"><code>.hs-ruled</code>: two columns 80px apart, rows 56px apart, no rules; one column on phones.</p></li>
           <li><h3>Swipe rows</h3><p className="hs-ds-muted"><code>.hs-swipe</code>: on phones, services, steps, clinicians, and quotes scroll sideways with snapping, the next card peeking in.</p></li>
@@ -204,7 +204,7 @@ export default function DesignSystem() {
               </table>
             </div>
             <h3 className="hs-ds-sub">{sc.name} closing band</h3>
-            <p className="hs-ds-muted" style={{ marginBottom: 16 }}>The band (<code>--hb-*</code>) is navy in light mode and inverts to the scheme&rsquo;s light page in dark mode, so it stands out from the page either way. Ratios against the band.</p>
+            <p className="hs-ds-muted hs-mb-16">The band (<code>--hb-*</code>) is navy in light mode and inverts to the scheme&rsquo;s light page in dark mode, so it stands out from the page either way. Ratios against the band.</p>
             <div className="hs-ds-table-wrap" tabIndex={0} role="region" aria-label={`${sc.name} closing band`}>
               <table className="hs-ds-table">
                 <thead><tr><th scope="col">Band</th><th scope="col">Light mode</th><th scope="col">Dark mode</th></tr></thead>
@@ -230,7 +230,7 @@ export default function DesignSystem() {
           <div><span className="hs-label hs-ds-spec">Heading 2 · Hanken 600 · 34–54px</span><p className="hs-ds-h2">How care begins</p></div>
           <div><span className="hs-label hs-ds-spec">Accent line · Fraunces italic</span><p className="hs-ds-h2">Coming home is a big day. <em className="hs-statement-em">We make the next part simple.</em></p></div>
           <div><span className="hs-label hs-ds-spec">Heading 3 · Hanken 600 · 24px</span><p className="hs-ds-h3">A clinician visits your home</p></div>
-          <div><span className="hs-label hs-ds-spec">Lede · Host 400 · 20px</span><p className="hs-lede" style={{ marginTop: 0 }}>Four steps from your first call to your first visit.</p></div>
+          <div><span className="hs-label hs-ds-spec">Lede · Host 400 · 20px</span><p className="hs-lede hs-mt-0">Four steps from your first call to your first visit.</p></div>
           <div><span className="hs-label hs-ds-spec">Body · Host 400 · 18px / 1.6</span><p>We confirm your address is in our service area, talk with your doctor&rsquo;s office, and review your insurance before anything is scheduled.</p></div>
           <div><span className="hs-label hs-ds-spec">Label · DM Mono 500 · 14px caps</span><p className="hs-label">What we do</p></div>
           <div><span className="hs-label hs-ds-spec">Quote · Fraunces italic · 26–38px</span><p className="hs-ds-quote">&ldquo;They called back within the hour.&rdquo;</p></div>
@@ -295,7 +295,7 @@ export default function DesignSystem() {
           <Sample />
           <Sample>Placeholder credential</Sample>
         </div>
-        <div className="hs-note" style={{ marginTop: 28, maxWidth: 640 }}><Icon name="info" /><p><strong>Note.</strong> For guidance that isn&rsquo;t a decision, like what Medicare generally covers.</p></div>
+        <div className="hs-note hs-mt-32" style={{ maxWidth: 640 }}><Icon name="info" /><p><strong>Note.</strong> For guidance that isn&rsquo;t a decision, like what Medicare generally covers.</p></div>
       </Row>
 
       <Row id="imagery" label="Imagery" labelledBy="ds-imagery">
@@ -322,15 +322,15 @@ export default function DesignSystem() {
             </li>
           ))}
         </ul>
-        <ul className="hs-creds" style={{ marginTop: 56 }}>
+        <ul className="hs-creds hs-mt-56">
           {CREDENTIALS.map((c) => <li key={c.value} className="hs-cred"><span className="hs-cred-value">{c.value}</span> <span className="hs-cred-text">{c.text}</span></li>)}
         </ul>
         <p className="hs-creds-note"><Sample /></p>
-        <div className="hs-ds-row" style={{ marginTop: 40 }}>
+        <div className="hs-ds-row hs-mt-40">
           <span className="hs-ds-navleaf" aria-hidden="true"><span>Services</span><span className="is-on">Getting started</span><span>Careers</span></span>
           <span className="hs-ds-seg" aria-hidden="true"><span className="is-on">For families</span><span>For professionals</span></span>
         </div>
-        <div className="hs-faq" style={{ marginTop: 40 }}>
+        <div className="hs-faq hs-mt-40">
           <details open><summary>{FAQS[0].q}</summary><p>{FAQS[0].a}</p></details>
           <details><summary>{FAQS[1].q}</summary><p>{FAQS[1].a}</p></details>
         </div>
@@ -343,14 +343,14 @@ export default function DesignSystem() {
           <li><h3>Clinicians</h3><p className="hs-ds-muted">A square leaf portrait, the name with credentials on a quieter line, role, then visits, languages, and experience on one line across the row. Their own words show on hover with a mouse, inline on touch.</p></li>
           <li><h3>Contact dock</h3><p className="hs-ds-muted">The site&rsquo;s one home for &ldquo;talk to us&rdquo;: Call and the page&rsquo;s main action, floating once the page&rsquo;s own buttons scroll away, plus back to top on desktop. Families get Request a call; referral pages get Refer a patient.</p></li>
         </ul>
-        <div className="hs-ds-row" style={{ marginTop: 32 }}>
+        <div className="hs-ds-row hs-mt-32">
           <Sample /><Sample>Sample patient</Sample><Sample>Sample data</Sample><Sample>Sample partners</Sample>
         </div>
       </Row>
 
       <Row id="principles" label="Principles" labelledBy="ds-principles">
         <h2 id="ds-principles">Principles</h2>
-        <ul className="hs-ruled" style={{ marginTop: 32 }}>
+        <ul className="hs-ruled hs-mt-32">
           <li><h3>Guide, never decide</h3><p className="hs-ds-muted">The site explains coverage and eligibility in general terms and routes people to a person. Clinical and coverage decisions stay with clinicians and the intake team.</p></li>
           <li><h3>Ask for less</h3><p className="hs-ds-muted">Minimal public forms; health details only in the secure intake system. No advertising pixels or session recording on intake pages.</p></li>
           <li><h3>Readable first</h3><p className="hs-ds-muted">18px+ body, AAA body text, 52px buttons, labels at 14px+ (not the tiny labels the editorial style usually uses), zoom always allowed, everything usable by keyboard.</p></li>

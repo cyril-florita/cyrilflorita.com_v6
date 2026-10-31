@@ -24,7 +24,7 @@ export default function ServiceArea() {
             <h2 id="sa-outside">Not in our area?</h2>
             <p>Call us anyway. We&rsquo;ll help you find a home health agency that serves your address, and your doctor&rsquo;s office can usually suggest one too.</p>
           </div>
-          <div className="hs-hero-ctas" style={{ marginTop: 0 }}>
+          <div className="hs-hero-ctas hs-mt-0">
             <CallButton />
             <Button href="#request-a-call" variant="secondary" lead="callback">Request a call</Button>
           </div>

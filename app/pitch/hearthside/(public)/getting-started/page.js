@@ -34,7 +34,7 @@ export default function GettingStarted() {
         title={<>How <em className="hs-title-em">care begins</em></>}
         lede="From your first call to your first visit, usually in a few days. We'll tell you what's happening at every step, and we do the paperwork with your doctor's office."
       >
-        <div className="hs-hero-ctas" style={{ marginTop: 28 }}>
+        <div className="hs-hero-ctas hs-mt-32">
           {/* As on Home: Call first (filled, phone icon), then Request a call. */}
           <CallButton />
           <Button href="#request-a-call" variant="secondary" lead="callback">Request a call</Button>
@@ -85,14 +85,14 @@ export default function GettingStarted() {
         <div className="hs-coverage">
           <div>
             <h2 id="gs-coverage">Coverage, in plain language</h2>
-            <h3 style={{ marginTop: 32 }}>Medicare</h3>
-            <p style={{ marginTop: 10 }}>Medicare covers home health care when certain conditions are met. Generally:</p>
+            <h3 className="hs-mt-32">Medicare</h3>
+            <p className="hs-mt-8">Medicare covers home health care when certain conditions are met. Generally:</p>
             <ul className="hs-checks">
               {MEDICARE_CONDITIONS.map((c) => <li key={c}><Icon name="check" size={20} />{c}</li>)}
             </ul>
-            <h3 style={{ marginTop: 32 }}>Medicare Advantage and other plans</h3>
+            <h3 className="hs-mt-32">Medicare Advantage and other plans</h3>
             <p className="hs-muted">We work with many Medicare Advantage and commercial plans. Some need approval before care starts; we handle that request with your doctor&rsquo;s office.</p>
-            <h3 style={{ marginTop: 32 }}>What home health doesn&rsquo;t cover</h3>
+            <h3 className="hs-mt-32">What home health doesn&rsquo;t cover</h3>
             <p className="hs-muted">Round-the-clock care, and non-medical help such as meals, housekeeping, or companionship on their own.</p>
           </div>
           <div>

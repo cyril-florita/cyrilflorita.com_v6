@@ -369,7 +369,7 @@ const ZoomViewer = () => {
       window.removeEventListener("wheel", onWheel);
       window.removeEventListener("resize", onResize);
     };
-  }, [view]);
+  }, [view]); // eslint-disable-line react-hooks/exhaustive-deps -- close/go are recreated every render; the listeners are re-attached per view
 
   // Pointer gestures on the image: click-to-zoom with a mouse (the view
   // follows the pointer while zoomed); pinch, double-tap, pan, swipe, and

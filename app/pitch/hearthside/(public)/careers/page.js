@@ -16,7 +16,7 @@ export default function Careers() {
         // Supplied by Cyril (AI-generated with Perplexity); same grade.
         photo={{ shot: "A nurse and her patient smiling together at home", src: "/img/hearthside/photos/careers-nurse-smiling", alt: "A smiling nurse in blue scrubs, holding a tablet, sits beside an older woman on her sofa", position: "50% 10%" }}
       >
-        <div className="hs-hero-ctas" style={{ marginTop: 28 }}><Button href="#roles" icon="arrow">See open roles</Button></div>
+        <div className="hs-hero-ctas hs-mt-32"><Button href="#roles" icon="arrow">See open roles</Button></div>
       </PageHead>
 
       {/* A sand chapter for what the work is like (hearthside.css, .hs-chapter). */}
@@ -25,7 +25,7 @@ export default function Careers() {
         <div className="hs-prose">
           <h2 id="cr-work">What the work is really like</h2>
           <p>Home health means driving between patients&rsquo; homes, working on your own for much of the day, and seeing the difference you make in the place people actually live. It&rsquo;s independent, and it&rsquo;s never the same twice.</p>
-          <ul className="hs-list" style={{ marginTop: 8 }}>
+          <ul className="hs-list hs-mt-8">
             <li><Icon name="check" size={20} />Caseloads planned around where you live, to keep drive time down</li>
             <li><Icon name="check" size={20} />Mileage reimbursed, with a company tablet and phone</li>
             <li><Icon name="check" size={20} />Mentoring for clinicians new to home health</li>
@@ -37,7 +37,7 @@ export default function Careers() {
       </div>
 
       <Row id="roles" label="Open roles" labelledBy="cr-roles">
-        <h2 id="cr-roles" style={{ marginBottom: 32 }}>Open roles <Sample /></h2>
+        <h2 id="cr-roles" className="hs-mb-32">Open roles <Sample /></h2>
         <ul className="hs-roles">
           {ROLES.map((r) => (
             <li key={r.id} className="hs-role">

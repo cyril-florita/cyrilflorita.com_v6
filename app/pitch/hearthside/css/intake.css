@@ -47,7 +47,7 @@
 .hs-col-head span { font-family: var(--hs-font-label); font-size: 13px; color: var(--hs-ink-2); }
 .hs-col-list { display: grid; gap: 10px; align-content: start; min-height: 220px; padding: 12px; list-style: none; }
 .hs-col-empty { padding: 8px 2px; color: var(--hs-ink-2); font-size: 14px; }
-.hs-card-r { position: relative; display: grid; gap: 8px; padding: 14px; border: 1px solid var(--hs-rule); border-radius: 10px; background: var(--hs-surface); color: var(--hs-ink); text-decoration: none; transition: border-color 0.15s, translate 0.15s; }
+.hs-card-r { position: relative; display: grid; gap: 8px; padding: 14px; border: 1px solid var(--hs-rule); border-radius: 6px 18px; background: var(--hs-surface); color: var(--hs-ink); text-decoration: none; transition: border-color 0.15s, translate 0.15s; }
 .hs-card-r:hover { border-color: var(--hs-ink); }
 .hs-card-r-top { display: flex; justify-content: space-between; gap: 8px; font-family: var(--hs-font-label); font-size: 12.5px; letter-spacing: 0.04em; color: var(--hs-ink-2); }
 .hs-card-r b { font-family: var(--hs-font-display); font-size: 18px; font-weight: 600; letter-spacing: -0.015em; }
@@ -64,7 +64,7 @@
 
 /* Toasts */
 .hs-toasts { position: fixed; right: 24px; bottom: 24px; z-index: 60; display: grid; gap: 10px; width: min(380px, calc(100vw - 32px)); list-style: none; }
-.hs-toast { display: flex; gap: 12px; padding: 14px 16px; border-radius: 10px; background: var(--hs-ink); color: var(--hs-page); font-size: 15px; line-height: 1.4; animation: hs-toast 0.35s var(--hs-ease) both; }
+.hs-toast { display: flex; gap: 12px; padding: 14px 16px; border-radius: 6px 16px; background: var(--hs-ink); color: var(--hs-page); font-size: 15px; line-height: 1.4; animation: hs-toast 0.35s var(--hs-ease) both; }
 .hs-toast .hs-icon { flex: none; margin-top: 1px; }
 @keyframes hs-toast { from { opacity: 0; translate: 0 12px; } }
 
@@ -238,7 +238,7 @@
 .hs-col-empty { display: flex; align-items: center; gap: 8px; }
 
 /* Motion: cards lift on hover; filters ease. */
-.hs-card-r { border-radius: 6px 18px; transition: border-color var(--hs-dur-fast) var(--hs-ease), translate var(--hs-dur) var(--hs-ease), box-shadow var(--hs-dur) var(--hs-ease); }
+.hs-card-r { transition: border-color var(--hs-dur-fast) var(--hs-ease), translate var(--hs-dur) var(--hs-ease), box-shadow var(--hs-dur) var(--hs-ease); }
 @media (hover: hover) { .hs-card-r:hover { translate: 0 -2px; box-shadow: 0 10px 24px rgba(10, 20, 30, 0.08); } }
 .hs-filter { transition: background-color var(--hs-dur-fast) var(--hs-ease), color var(--hs-dur-fast) var(--hs-ease), border-color var(--hs-dur-fast) var(--hs-ease); }
 .hs-app :is(.hs-filter, .hs-card-r, .hs-app-search, .hs-stage-tab, .hs-app-side nav a) { -webkit-tap-highlight-color: transparent; }

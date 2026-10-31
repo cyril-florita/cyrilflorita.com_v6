@@ -142,7 +142,7 @@ export default function ReferralForm() {
 
       <label className="hs-check"><input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} /> The patient or their representative agreed to this referral.</label>
       {error && <p className="hs-error" role="alert">{error}</p>}
-      <div className="hs-hero-ctas" style={{ marginTop: 0 }}>
+      <div className="hs-hero-ctas hs-mt-0">
         <Button type="submit" lead="refer">Send referral securely</Button>
       </div>
     </form>

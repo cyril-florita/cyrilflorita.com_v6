@@ -1,34 +1,15 @@
 "use client";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
 import Nav from "./Nav";
+import { useHeroState } from "./domState";
 import { cyrilUtility } from "@/public/utility/index";
 
 const Header = () => {
   const pathname = usePathname();
-  const [isAtHeroTop, setIsAtHeroTop] = useState(false);
-
   // Disable the logo link whenever we're on "/" and already at the hero
   // (the very top) — clicking it there would be a no-op anyway.
-  useEffect(() => {
-    if (pathname !== '/') {
-      setIsAtHeroTop(false);
-      return;
-    }
-
-    const hero = document.getElementById('intro');
-    if (!hero) return;
-
-    const checkAtTop = () => {
-      setIsAtHeroTop(!hero.classList.contains('cyril-hero-exit'));
-    };
-
-    checkAtTop();
-
-    const observer = new MutationObserver(checkAtTop);
-    observer.observe(hero, { attributes: true, attributeFilter: ['class'] });
-    return () => observer.disconnect();
-  }, [pathname]);
+  const hero = useHeroState(pathname);
+  const isAtHeroTop = pathname === "/" && hero === "top";
 
   const handleIntroClick = async (e) => {
     e.preventDefault();

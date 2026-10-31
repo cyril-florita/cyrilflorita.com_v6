@@ -232,7 +232,7 @@ export default function HearthsideHome() {
         <div className="hs-coverage">
           <div>
             <h2 id="hs-coverage-title">Will Medicare cover home health?</h2>
-            <p style={{ marginTop: 24 }}>Medicare covers home health care when certain conditions are met. Generally:</p>
+            <p className="hs-mt-24">Medicare covers home health care when certain conditions are met. Generally:</p>
             <ul className="hs-checks">
               {MEDICARE_CONDITIONS.map((c) => <li key={c}><Icon name="check" size={20} />{c}</li>)}
             </ul>
@@ -256,7 +256,7 @@ export default function HearthsideHome() {
         <div className="hs-area">
           <div>
             <h2 id="hs-area-title">Where we provide care</h2>
-            <p className="hs-lede" style={{ marginBottom: 32 }}>Across the San Fernando and Santa Clarita Valleys.</p>
+            <p className="hs-lede hs-mb-32">Across the San Fernando and Santa Clarita Valleys.</p>
             <div className="hs-area-list">
               {AREAS.map((a) => (
                 <div key={a.id}>
@@ -268,7 +268,7 @@ export default function HearthsideHome() {
           </div>
           <div>
             <ZipCheck areas={AREAS} />
-            <p className="hs-hint" style={{ marginTop: 14 }}>
+            <p className="hs-hint hs-mt-16">
               Outside these areas? <a href={PHONE.href}>Call us</a> and we&rsquo;ll help you find an agency nearby.
             </p>
           </div>
@@ -283,7 +283,7 @@ export default function HearthsideHome() {
           <div>
             <h2 id="hs-bts-title">Every referral, tracked from the first call</h2>
             <p className="hs-lede">The intake system behind this site routes each referral to the right coordinator by ZIP code, logs every call, and flags what&rsquo;s missing, so nothing waits in an inbox.</p>
-            <div className="hs-hero-ctas" style={{ marginTop: 28 }}>
+            <div className="hs-hero-ctas hs-mt-32">
               <Button href={`${BASE}/intake/`} icon="arrow">Try the intake demo</Button>
               <Button href={`${BASE}/referrals/#refer`} variant="secondary" lead="refer">Send a test referral</Button>
             </div>
@@ -297,7 +297,7 @@ export default function HearthsideHome() {
       </div>
 
       <Row label="Questions" labelledBy="hs-faq-title">
-        <h2 id="hs-faq-title" style={{ marginBottom: 32 }}>What families ask us most</h2>
+        <h2 id="hs-faq-title" className="hs-mb-32">What families ask us most</h2>
         <div className="hs-faq">
           {FAQS.map((f) => (
             <details key={f.q}>

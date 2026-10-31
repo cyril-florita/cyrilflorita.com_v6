@@ -261,7 +261,7 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
 /* ---------- Buttons ---------- */
 /* Primary: ink fill, like the reference's black buttons; labels in mono caps.
    Still 52px tall (44px small): bigger targets than the reference. */
-.hs-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 22px; border-radius: var(--hs-radius-sm); border: 1.5px solid transparent; font-family: var(--hs-font-label); font-size: 15px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; line-height: 1.2; text-decoration: none; cursor: pointer; transition: background-color 0.2s, color 0.2s, border-color 0.2s; white-space: nowrap; }
+.hs-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 22px; border-radius: var(--hs-radius-sm); border: 1.5px solid transparent; font-family: var(--hs-font-label); font-size: 15px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; line-height: 1.2; text-decoration: none; cursor: pointer; white-space: nowrap; }
 .hs-btn-primary { background: var(--hs-ink); color: var(--hs-page); }
 .hs-btn-primary:hover { background: var(--hs-ink); } /* the hover fill is ::before (below) */
 /* The primary's hover fill is a layer that fades in over the ink, not a
@@ -301,23 +301,20 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
   .hs-row-body { padding: 16px 0 56px; border-left: 0; }
 }
 
-/* Ruled grids: cells divided by hairlines, no boxes. */
-/* Two columns divided by one vertical hairline; rows are separated by space,
-   not rules (fewer lines reads calmer). */
-.hs-ruled { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 56px; list-style: none; }
-.hs-ruled > * { padding: 0 40px 0 0; }
-.hs-ruled > :nth-child(2n) { padding-left: 40px; padding-right: 0; border-left: 1px solid var(--hs-rule); }
-@media (max-width: 700px) {
-  .hs-ruled { grid-template-columns: 1fr; row-gap: 40px; }
-  .hs-ruled > *, .hs-ruled > :nth-child(2n) { padding: 0; border-left: 0; }
-}
+/* Ruled grids (the name predates it: there are no rules any more): two
+   columns spaced by an 80px gap (48px on tablets), rows by 56px; one column
+   on phones. Cells carry no padding or hairline of their own. */
+.hs-ruled { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 80px; row-gap: 56px; list-style: none; }
+@media (max-width: 960px) { .hs-ruled { column-gap: 48px; } }
+@media (max-width: 700px) { .hs-ruled { grid-template-columns: 1fr; row-gap: 40px; } }
 
 /* ---------- Hero ---------- */
 .hs-hero { padding-block: 40px 64px; container-type: inline-size; }
 .hs-hero h1 span { display: block; }
 .hs-hero .hs-lede { font-size: 21px; max-width: 640px; }
 .hs-hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
-.hs-hero-copy { margin-top: 40px; }
+.hs-hero-copy { margin-top: 12px; } /* headline and lede sit close, as one block */
+@media (max-width: 760px) { .hs-hero-copy { margin-top: -6px; } }
 /* Desktop: the buttons sit just under the photo on the right, level with the
    headline's lower lines, which run past the photo's bottom edge. */
 .hs-hero-actions { position: absolute; right: 0; top: calc(var(--hs-hero-h) + 36px); z-index: 2; }
@@ -355,7 +352,7 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
 .hs-hero-tab::before, .hs-hero-tab::after { content: ""; position: absolute; width: var(--hs-notch-r); height: var(--hs-notch-r); background: radial-gradient(circle at 0 100%, transparent calc(var(--hs-notch-r) - 0.5px), var(--hs-page) var(--hs-notch-r)); }
 .hs-hero-tab::before { right: 100%; top: 0; }
 .hs-hero-tab::after { right: 0; top: 100%; }
-.hs-art-card { position: absolute; right: 20px; bottom: 20px; left: auto; display: flex; align-items: center; gap: 14px; max-width: 360px; padding: 14px 18px; background: var(--hs-surface); border: 1px solid var(--hs-line); border-radius: 10px; font-size: 16px; line-height: 1.4; }
+.hs-art-card { position: absolute; right: 20px; bottom: 20px; left: auto; display: flex; align-items: center; gap: 14px; max-width: 360px; padding: 14px 18px; background: var(--hs-surface); border: 1px solid var(--hs-line); border-radius: 6px 22px; font-size: 16px; line-height: 1.4; }
 .hs-art-card strong { display: block; font-size: 17px; }
 .hs-art-card span { color: var(--hs-ink-2); }
 .hs-art-dot { flex: none; width: 12px; height: 12px; border-radius: 50%; background: var(--hs-window); box-shadow: 0 0 0 5px color-mix(in srgb, var(--hs-glow) 30%, transparent), 0 0 16px 4px color-mix(in srgb, var(--hs-glow) 40%, transparent); } /* the warm accent: a light left on (see "A light left on") */
@@ -380,7 +377,6 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
   .hs-hero-notch::before, .hs-hero-notch::after { display: none; }
   .hs-hero-tab { position: static; padding: 0; background: none; border-radius: 0; margin-bottom: -12px; }
   .hs-hero-tab::before, .hs-hero-tab::after { display: none; }
-  .hs-hero-copy { margin-top: 0; }
 }
 
 /* Making the hero feel premium, all CSS and all off under reduced motion:
@@ -604,8 +600,8 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
    (picked with the user). Headings keep clear of the mark, which takes the
    band's ink (in dark mode the band inverts: see --hb-* above). */
 .hs-band::before { content: ""; position: absolute; right: 64px; top: 64px; width: 120px; height: 120px; background: var(--hb-ink); -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath fill-rule='evenodd' d='M3.5 0H25a15 15 0 0 1 15 15v21.5a3.5 3.5 0 0 1-3.5 3.5H15A15 15 0 0 1 0 25V3.5A3.5 3.5 0 0 1 3.5 0ZM12.5 11h4.4v6.9h6.2V11h4.4v18h-4.4v-7.1h-6.2V29h-4.4Z'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath fill-rule='evenodd' d='M3.5 0H25a15 15 0 0 1 15 15v21.5a3.5 3.5 0 0 1-3.5 3.5H15A15 15 0 0 1 0 25V3.5A3.5 3.5 0 0 1 3.5 0ZM12.5 11h4.4v6.9h6.2V11h4.4v18h-4.4v-7.1h-6.2V29h-4.4Z'/%3E%3C/svg%3E") center / contain no-repeat; pointer-events: none; }
-@media (max-width: 960px) { .hs-band { border-radius: 20px 80px; } .hs-band::before { top: 48px; right: 48px; width: 88px; height: 88px; } .hs-band h2 { padding-right: 120px; } }
-@media (max-width: 680px) { .hs-band { border-radius: 10px 50px; } .hs-band::before { top: 24px; right: 24px; width: 48px; height: 48px; } .hs-band h2 { padding-right: 56px; } }
+@media (max-width: 960px) { .hs-band { border-radius: 20px 80px; } .hs-band::before { top: 48px; right: 48px; width: 88px; height: 88px; } }
+@media (max-width: 680px) { .hs-band { border-radius: 10px 50px; } .hs-band::before { top: 24px; right: 24px; width: 48px; height: 48px; } }
 .hs-band h2 { position: relative; max-width: 18ch; color: var(--hb-ink); }
 .hs-band p { position: relative; margin-top: 16px; max-width: 60ch; color: var(--hb-ink-2); font-size: 20px; }
 .hs-band-ctas { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; margin-top: 32px; }
@@ -680,9 +676,8 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
 
 /* ================= Public subpages ================= */
 .hs-page-head { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 48px; align-items: end; padding-block: 56px 48px; }
-.hs-page-head h1 { font-size: clamp(42px, 5vw, 68px); }
 .hs-page-head .hs-lede { margin-top: 0; }
-@media (max-width: 900px) { .hs-page-head { grid-template-columns: 1fr; gap: 20px; padding-block: 32px; } }
+@media (max-width: 900px) { .hs-page-head { grid-template-columns: 1fr; gap: 20px; } }
 
 /* Prose inside a row body. */
 .hs-prose { display: grid; gap: 16px; max-width: 70ch; }
@@ -854,8 +849,6 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
   .hs-hero { padding-block: 24px 40px; }
   .hs-hero-tab { order: -2; }
   .hs-hero-notch { order: -1; } /* phones: eyebrow and headline first, then the photo */
-  .hs-hero-art { aspect-ratio: 4 / 3; }
-  .hs-hero h1 { font-size: 40px; }
   .hs-hero .hs-lede { font-size: 19px; }
   .hs-hero-ctas .hs-btn { flex: 1 1 100%; }
   .hs-eyebrow { font-size: 13px; }
@@ -864,8 +857,6 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
   .hs-row-body { padding: 12px 0 44px; }
   .hs-row-label { padding-top: 24px; }
   .hs-row-body > .hs-lede { margin-bottom: 24px; }
-  .hs-page-head { padding-block: 24px 16px; }
-  .hs-page-head h1 { font-size: 38px; }
   .hs-path h3 { font-size: 24px; }
   .hs-band { margin-bottom: 48px; }
 
@@ -992,11 +983,11 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
      other photos, 16:10, framed on the faces; then the area label, headline,
      lede and full-width buttons. */
   .hs-hero { padding-top: 16px; gap: 20px; }
-  .hs-hero-art { order: -3; aspect-ratio: 16 / 10; border-radius: var(--hs-radius) 64px; } /* inside the page margins, leaf-shaped like every other photo */
+  .hs-hero-art { order: -3; aspect-ratio: 16 / 9; border-radius: var(--hs-radius) 64px; } /* inside the page margins, leaf-shaped like every other photo */
   .hs-hero-img { object-position: 40% 22%; }
-  .hs-hero-tab { order: -2; margin-bottom: -8px; }
+  .hs-hero-tab { order: -2; margin-bottom: 0; }
   .hs-hero-notch { order: -1; }
-  .hs-hero h1 { font-size: 36px; }
+  .hs-hero h1 { font-size: 32px; }
   .hs-hero-art .hs-art-card { display: none; } /* it covered half the short photo */
 
   /* "How can we help?": shorter photos. */
@@ -1100,16 +1091,9 @@ main[data-hover] .hs-faq summary:hover { color: var(--hs-ember-text); }
    above the lede, a 16:9 photo and a 32px headline. */
 @media (max-width: 760px) {
   .hs-hero { gap: 12px; }
-  .hs-hero-tab { margin-bottom: 0; }
-  .hs-hero-tab .hs-eyebrow { margin-bottom: 0; }
-  .hs-hero-art { aspect-ratio: 16 / 9; }
-  .hs-hero h1 { font-size: 32px; }
   .hs-hero-copy .hs-lede { margin-top: 0; }
   .hs-hero-actions { margin-top: 4px; }
 }
-/* Headline and lede sit close, as one block (desktop 12px, phones 6px). */
-.hs-hero-copy { margin-top: 12px; }
-@media (max-width: 760px) { .hs-hero-copy { margin-top: -6px; } }
 
 /* Showing there's more below the hero (desktop): the hero's foot and the
    Credentials row's top padding are tighter, so the badges peek into the
@@ -1118,9 +1102,8 @@ main[data-hover] .hs-faq summary:hover { color: var(--hs-ember-text); }
 @media (min-width: 961px) {
   .hs-hero { padding-top: 12px; padding-bottom: 20px; } /* close under the nav */
 }
-.hs-cue { position: fixed; left: 50%; bottom: 22px; z-index: 44; display: none; place-items: center; width: 44px; height: 44px; translate: -50% 0; border: 1.5px solid var(--hs-ink); border-radius: 4px 16px; background: var(--hs-page); color: var(--hs-ink); cursor: pointer; opacity: 0; pointer-events: none; transition: opacity var(--hs-dur) var(--hs-ease); }
+.hs-cue { position: fixed; left: 50%; bottom: 22px; z-index: 44; display: none; place-items: center; width: 44px; height: 44px; translate: -50% 0; border: 1.5px solid var(--hs-ink); border-radius: 4px 16px; background: var(--hs-page); color: var(--hs-ink); cursor: pointer; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity var(--hs-dur) var(--hs-ease), visibility 0s var(--hs-dur); } /* hidden for real once faded */
 .hs-cue .hs-icon { rotate: 90deg; }
-.hs-cue { visibility: hidden; transition: opacity var(--hs-dur) var(--hs-ease), visibility 0s var(--hs-dur); } /* hidden for real when faded, so its backdrop blur isn't computed while scrolling */
 .hs-cue.is-shown { opacity: 1; pointer-events: auto; visibility: visible; transition-delay: 0s; }
 @media (min-width: 1081px) { .hs-cue { display: grid; } }
 @media (prefers-reduced-motion: no-preference) { .hs-cue.is-shown .hs-icon { animation: hs-cue-drift 2.4s ease-in-out infinite; } }
@@ -1131,15 +1114,8 @@ main[data-hover] .hs-faq summary:hover { color: var(--hs-ember-text); }
 /* More room between the service cards and the home-care note below them. */
 .hs-services + .hs-aside { margin-top: 96px; }
 @media (max-width: 760px) { .hs-services + .hs-aside { margin-top: 48px; } }
-/* How care begins: no column divider between the steps (space alone). */
-.hs-ruled > .hs-step:nth-child(2n) { border-left: 0; }
 /* …and the same 96px between rows of steps as between rows of service cards. */
 @media (min-width: 761px) { .hs-ruled:has(> .hs-step) { row-gap: 96px; } }
-/* The ruled grid pads its left items on the right (and right items on the
-   left), which left step 01's photo narrower than its box, so the number tile
-   (placed from the box's right edge) hung off the photo. Steps take no side
-   padding; the grid's column gap spaces them instead. */
-.hs-ruled > .hs-step { padding-inline: 0; }
 @media (min-width: 761px) { .hs-ruled:has(> .hs-step) { column-gap: 80px; } }
 /* Clinician cards (desktop, tablet): each card spans four rows of the grid as
    a subgrid — portrait, name, role, details — so every card's details start
@@ -1183,9 +1159,8 @@ main[data-hover] .hs-faq summary:hover { color: var(--hs-ember-text); }
    phones), the same headline scale as Home's hero,
    and an optional wide leaf banner photo (PageHead's photo prop) — under the
    title row on desktop and tablets, first on phones (photo-first, app-style). */
-.hs-page-head { padding-block: 56px 48px; }
 @media (max-width: 960px) { .hs-page-head { padding-top: 40px; } }
-.hs-page-head h1 { font-size: clamp(44px, 5.6vw, 84px); line-height: 1.02; letter-spacing: -0.04em; }
+.hs-page-head h1 { font-size: clamp(44px, 5.6vw, 84px); line-height: 1.02; } /* letter-spacing: the serif title rule (−0.05em) */
 .hs-page-photo { grid-column: 1 / -1; }
 .hs-page-photo :is(.hs-photo, .hs-photo-frame) { --hs-leaf: 120px; }
 @media (max-width: 760px) {
@@ -1194,11 +1169,6 @@ main[data-hover] .hs-faq summary:hover { color: var(--hs-ember-text); }
   .hs-page-photo { order: -1; }
   .hs-page-photo :is(.hs-photo, .hs-photo-frame) { aspect-ratio: 16 / 9 !important; --hs-leaf: 56px; }
 }
-/* Ruled grids: no column hairline anywhere (as on Home's cards); an 80px
-   column gap spaces them instead. */
-.hs-ruled { column-gap: 80px; }
-.hs-ruled > *, .hs-ruled > :nth-child(2n) { padding-inline: 0; border-left: 0; }
-@media (max-width: 960px) { .hs-ruled { column-gap: 48px; } }
 
 /* ---------- Behind the scenes (Home): the intake board in motion ---------- */
 .hs-bts-row { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 56px; align-items: center; }
@@ -1320,7 +1290,7 @@ html:has(> body > .hs), html:has(.hs) { overflow-x: clip; }
   --hs-ember-soft: color-mix(in srgb, #EE9466 18%, var(--hs-house));
 }
 .hs-chapter.is-dark .hs-bts { box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35); }
-.hs-chapter.is-sand .hs-quote p { font-size: clamp(24px, 2.5vw, 36px); line-height: 1.28; letter-spacing: -0.025em; }
+.hs-chapter.is-sand .hs-quote p { font-size: clamp(26px, 2.6vw, 38px); line-height: 1.2; letter-spacing: -0.05em; } /* the serif's spacing, restated: this selector outranks the shared serif rule */
 .hs-chapter.is-sand .hs-quote figcaption { margin-top: 28px; }
 
 
@@ -1342,7 +1312,7 @@ html:has(> body > .hs), html:has(.hs) { overflow-x: clip; }
 @media (max-width: 680px) {
   .hs-bleed .hs-photo-frame { aspect-ratio: 4 / 5 !important; }
   .hs-bleed-line { left: 16px; right: 16px; bottom: 16px; max-width: none; padding: 16px 20px 18px; border-radius: 10px 36px; font-size: 22px; }
-  .hs-chapter.is-sand .hs-quote p { font-size: 22px; }
+  .hs-chapter.is-sand .hs-quote p { font-size: 26px; }
 }
 
 /* ---------- A light left on ----------
@@ -1376,7 +1346,7 @@ html:has(> body > .hs), html:has(.hs) { overflow-x: clip; }
 }
 /* The band's heading and lede stay clear of the mark at every width (at
    961–1100px the lede used to run under it). */
-.hs-band h2 { max-width: min(18ch, 100% - var(--hs-ms) - 40px); padding-right: 0; }
+.hs-band h2 { max-width: min(18ch, 100% - var(--hs-ms) - 40px); }
 .hs-band > p { max-width: min(60ch, 100% - var(--hs-ms) - 40px); }
 @media (max-width: 680px) { .hs-band h2 { max-width: calc(100% - var(--hs-ms) - 8px); } .hs-band > p { max-width: none; } }
 
@@ -1391,8 +1361,6 @@ html:has(> body > .hs), html:has(.hs) { overflow-x: clip; }
 :is(.hs-hero-em, .hs-title-em) { font-family: var(--hs-font-quote); font-style: italic; font-weight: 400; font-size: 1.04em; }
 .hs-statement-em { font-family: var(--hs-font-quote); font-style: italic; font-weight: 400; font-size: 1em; } /* the same size as the sentence above */
 .hs-quote p { font-family: var(--hs-font-quote); font-weight: 400; }
-.hs-chapter.is-sand .hs-quote p { font-size: clamp(26px, 2.6vw, 38px); line-height: 1.2; }
-@media (max-width: 680px) { .hs-chapter.is-sand .hs-quote p { font-size: 26px; } }
 
 /* Word reveal (SplitHeads in client.js): each word rises out of its own mask,
    35ms apart. The mask's padding keeps descenders and italic overhangs. */
@@ -1690,3 +1658,17 @@ html[data-hs-vt="look"]::view-transition-new(*) { animation: hs-look-in 0.3s eas
    "How visits work"): room above it, as a row's bottom padding gives on Home. */
 .hs-chapter + .hs-band { margin-top: 80px; }
 @media (max-width: 680px) { .hs-chapter + .hs-band { margin-top: 48px; } }
+
+/* ---------- Spacing utilities ----------
+   One 8px scale for the one-off gaps that used to be inline styles (in ten
+   different values). !important, since they stand in for inline styles,
+   which always won. */
+.hs-mt-0 { margin-top: 0 !important; }
+.hs-mt-8 { margin-top: 8px !important; }
+.hs-mt-16 { margin-top: 16px !important; }
+.hs-mt-24 { margin-top: 24px !important; }
+.hs-mt-32 { margin-top: 32px !important; }
+.hs-mt-40 { margin-top: 40px !important; }
+.hs-mt-56 { margin-top: 56px !important; }
+.hs-mb-16 { margin-bottom: 16px !important; }
+.hs-mb-32 { margin-bottom: 32px !important; }

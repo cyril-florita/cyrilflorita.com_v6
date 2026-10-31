@@ -1,6 +1,7 @@
 "use client";
 import { usePathname } from "next/navigation";
-import { Fragment, useState, useEffect } from "react";
+import { Fragment } from "react";
+import { useHeroState, useIsCasePage, useTopSectionActive } from "./domState";
 import { cyrilUtility } from "@/public/utility/index";
 
 const Nav = () => {
@@ -10,49 +11,16 @@ const Nav = () => {
   // both here and in cyrilUtility (root "/" never gets a trailing slash).
   const rawPathname = usePathname();
   const pathname = rawPathname.length > 1 ? rawPathname.replace(/\/$/, '') : rawPathname;
-  const [isTopSectionActive, setIsTopSectionActive] = useState(false);
-  const [isPortfolioActive, setIsPortfolioActive] = useState(false);
-
-  // Project (Work) pages are the ones using the case-study layout — checked
-  // on the page itself rather than by URL, so other routes (e.g. the 404
-  // page, served at any missing URL) don't light up "My Work".
-  const [isProjectPage, setIsProjectPage] = useState(false);
-  useEffect(() => {
-    setIsProjectPage(!!document.querySelector('.cyril-case-page'));
-  }, [pathname]);
-
-  // Track whether the hero has been exited on "/", so "My Work" only lights
-  // up once the user has actually scrolled/clicked their way to it — never
-  // just because they're on "/".
-  useEffect(() => {
-    if (pathname !== '/') {
-      setIsPortfolioActive(false);
-      return;
-    }
-
-    const hero = document.getElementById('intro');
-    const checkPortfolioActive = () => {
-      setIsPortfolioActive(!!hero && hero.classList.contains('cyril-hero-exit'));
-    };
-
-    checkPortfolioActive();
-
-    if (!hero) return;
-
-    const observer = new MutationObserver(checkPortfolioActive);
-    observer.observe(hero, { attributes: true, attributeFilter: ['class'] });
-    return () => observer.disconnect();
-  }, [pathname]);
-
-  // Initial check on mount
-  useEffect(() => {
-    if (pathname === '/about-me') {
-      const topSection = document.querySelector("#background");
-      if (topSection) {
-        setIsTopSectionActive(topSection.classList.contains('cyril-active'));
-      }
-    }
-  }, []);
+  // "My Work" lights up on project pages (the ones using the case-study
+  // layout — checked on the page itself rather than by URL, so other routes,
+  // e.g. the 404 page served at any missing URL, don't count), and on "/"
+  // only once the user has actually scrolled/clicked past the hero — never
+  // just because they're on "/". "About Me" is disabled while its top
+  // section is the active one.
+  const isProjectPage = useIsCasePage();
+  const hero = useHeroState(pathname);
+  const isPortfolioActive = pathname === "/" && hero === "exited";
+  const isTopSectionActive = useTopSectionActive(pathname);
 
   // Update handleIntroClick to match Header.js behavior
   const handleIntroClick = async (e) => {
@@ -87,24 +55,6 @@ const Nav = () => {
       });
     }
   };
-
-  useEffect(() => {
-    const checkTopSectionActive = () => {
-      if (pathname === '/about-me') {
-        const topSection = document.querySelector("#background");
-        setIsTopSectionActive(topSection?.classList.contains('cyril-active'));
-      } else {
-        setIsTopSectionActive(false);
-      }
-    };
-
-    checkTopSectionActive();
-
-    if (pathname === '/about-me') {
-      window.addEventListener('scroll', checkTopSectionActive);
-      return () => window.removeEventListener('scroll', checkTopSectionActive);
-    }
-  }, [pathname]);
 
   return (
     <Fragment>

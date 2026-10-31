@@ -49,11 +49,11 @@ export default function StatusTracker() {
   return (
     <div>
       <p className="hs-label">Reference {r.id}</p>
-      <h2 style={{ marginTop: 10 }}>
+      <h2 className="hs-mt-8">
         {declined ? "We couldn't accept this referral" : ["Received", "Under review", "Accepted", "Care has started"][step]}
       </h2>
       {declined ? (
-        <div className="hs-note" style={{ marginTop: 24, maxWidth: 720 }}>
+        <div className="hs-note hs-mt-24" style={{ maxWidth: 720 }}>
           <Icon name="info" />
           <p><strong>Reason: {r.declineReason}.</strong> We&rsquo;ve contacted your team with other agencies that can help. Call us if you&rsquo;d like to talk it through.</p>
         </div>

@@ -161,7 +161,7 @@ export default function IntakeBoard() {
           );
         })}
       </div>
-      <p className="hs-hint" style={{ marginTop: 14 }}>Closed: {data.referrals.filter((r) => r.stage === "soc").length} started care, {data.referrals.filter((r) => r.stage === "declined").length} not accepted. See <Link href={`${BASE}/intake/reports/`}>Reports</Link>.</p>
+      <p className="hs-hint hs-mt-16">Closed: {data.referrals.filter((r) => r.stage === "soc").length} started care, {data.referrals.filter((r) => r.stage === "declined").length} not accepted. See <Link href={`${BASE}/intake/reports/`}>Reports</Link>.</p>
       <ul className="hs-toasts" aria-live="polite">
         {toasts.map((t) => <li key={t.id} className="hs-toast"><Icon name={t.icon} size={20} />{t.text}</li>)}
       </ul>
