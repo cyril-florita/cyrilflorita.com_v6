@@ -1469,6 +1469,7 @@ html[data-hs-vt="look"]::view-transition-new(*) { animation: hs-look-in 0.3s eas
   .hs-help-head .hs-lede { margin-top: 18px; }
   .hs-help .hs-path :is(.hs-photo, .hs-photo-frame) { --hs-leaf: 44px; }
   .hs-help .hs-path-tag { display: none; } /* the switch above already says who it's for */
+  .hs-help .hs-paths { margin-top: 24px; } /* space between the switch and the chosen card's photo */
   .hs-help .hs-seg { background: color-mix(in srgb, var(--hs-ink) 9%, var(--hs-sand)); } /* the switch's track, a shade deeper than the sand; its thumb stays the page colour */
 }
 
