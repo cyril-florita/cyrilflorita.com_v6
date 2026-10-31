@@ -1,6 +1,6 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { PHONE } from "./data";
+import { HOURS, PHONE } from "./data";
 import { CallbackForm } from "./Forms";
 import { Icon, Photo } from "./ui";
 
@@ -85,10 +85,10 @@ export default function CallbackModal() {
             </div>
             <div className="hs-modal-main">
               <h2 id="hs-cb-title" tabIndex={-1}>Request a call</h2>
-              <p className="hs-modal-lede">Tell us how to reach you and our intake team will call within one business day.<span> No forms about your medical history: we&rsquo;ll ask what we need when we talk.</span></p>
+              <p className="hs-modal-lede">Tell us how to reach you and our intake team will call the same or next day.<span> No forms about your medical history: we&rsquo;ll ask what we need when we talk.</span></p>
               <CallbackForm onClose={close} />
               <p className="hs-modal-alt">
-                Prefer to call? <a href={PHONE.href}>{PHONE.display}</a>, Monday to Friday, 8 am to 6 pm. In an emergency, call 911.
+                Prefer to call? <a href={PHONE.href}>{PHONE.display}</a>, {HOURS}. In an emergency, call 911.
               </p>
             </div>
           </>

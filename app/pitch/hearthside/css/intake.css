@@ -271,3 +271,9 @@
 .hs-app-side nav { view-transition-name: hs-app-tabs; }
 .hs-app-bar { view-transition-name: hs-app-bar; }
 ::view-transition-group(hs-app-side), ::view-transition-group(hs-app-tabs), ::view-transition-group(hs-app-bar) { z-index: 2; }
+
+/* Shore dark: the peach itself, not its brown-looking tint (see the same
+   block at the end of hearthside.css). */
+.hs[data-hs-theme="shore"][data-hs-mode="dark"] .hs-card-r:is(.is-arriving, .is-landed) { box-shadow: 0 0 0 2px var(--hs-surface), 0 0 0 4px var(--hs-ember); }
+.hs[data-hs-theme="shore"][data-hs-mode="dark"] .hs-cmd-item[aria-selected="true"] { background: var(--hs-ember); color: var(--hs-on-ember); }
+.hs[data-hs-theme="shore"][data-hs-mode="dark"] .hs-cmd-item[aria-selected="true"] :is(small, .hs-icon, kbd) { color: var(--hs-on-ember); }

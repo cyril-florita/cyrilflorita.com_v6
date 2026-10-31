@@ -1,16 +1,16 @@
 /* Hearthside Home Health: tokens and components, all scoped under .hs.
    Layout: an editorial grid. One background colour, sections divided by
    hairline rules, a narrow label column beside each section's content, large
-   bold headlines, few boxes. Light mode is the default; every text pair is
+   bold headlines, few boxes. Shore in dark mode is the default; every text pair is
    measured (body text ≥7:1, AAA; accent and status text ≥4.5:1; control
    boundaries ≥3:1) in both modes. Headings in Hanken Grotesk, body text 18px+
    in Host Grotesk, small labels in DM Mono. */
 
 .hs {
   --hs-hill-2: #9DB2C6;           /* service-area map hills */
-  --hs-house: #22303D;            /* the dark closing band */
-  /* Light (Tide, the default scheme): navy ink on misty blue-grey, a
-     harbour-blue accent (the --hs-ember-* names predate it), Sage for status. */
+  --hs-house: #22303D;            /* the closing band (light mode) and the dark chapter */
+  /* Light Tide (the base values; Shore and dark mode re-point them): navy
+     ink on misty blue-grey, a harbor-blue accent (the --hs-ember-* names predate it), Sage for status. */
   --hs-page: #F2F5F7;
   --hs-surface: #FBFCFD;
   --hs-sand: #E3EAEF;
@@ -32,7 +32,6 @@
   --hs-danger-bg: #F7DEDA;
   --hs-glow: #FFC27A;
   --hs-window: #D98A2B;         /* the logo's lit window: always warm */
-  --hs-band-accent: #8CC2EA;    /* accent on the dark closing band */
   --hs-photo: #E1E8EE;          /* photo placeholders */
   --hs-photo-2: #D0DAE3;
   --hs-focus: #1F5FBF;
@@ -64,7 +63,7 @@
 
 .hs[data-hs-mode="dark"] {
   --hs-hill-2: #273644;           /* service-area map hills */
-  --hs-house: #141D26;            /* the closing band and dark chapter: deeper than the page, edged with a faint line */
+  --hs-house: #141D26;            /* the dark chapter: deeper than the page (the band inverts in dark mode) */
   --hs-page: #1E2A36;             /* the light mode's ink */
   --hs-surface: #253340;
   --hs-sand: #2A3846;
@@ -93,7 +92,8 @@
 }
 
 /* ---------- Colour schemes ----------
-   data-hs-theme on .hs: tide (cool blue, the default, above) and shore
+   data-hs-theme on .hs: tide (cool blue, the base values above) and shore
+   (the default, in dark mode;
    (warm linen pages with navy ink and a blue accent in light; navy pages
    with warm ink and the ember accent in dark). A warm Hearth scheme was the
    original default and has been removed. Each has light and dark; each
@@ -101,7 +101,7 @@
    pre-paint script in layout.js applies the saved choice. */
 .hs[data-hs-theme="shore"] {
   --hs-hill-2: #A1AFBC;           /* service-area map hills */
-  --hs-house: #1E2A36;            /* the dark closing band */
+  --hs-house: #1E2A36;            /* the closing band (light mode) and the dark chapter */
   --hs-page: #F6F2EA;
   --hs-surface: #FFFDF8;
   --hs-sand: #ECE5D8;
@@ -117,13 +117,12 @@
   --hs-ember-soft: #DCE6EE;
   --hs-glow: #FFB066;
   --hs-window: #C0602E;
-  --hs-band-accent: #EE9466;
   --hs-photo: #E7E0D5;
   --hs-photo-2: #D3D6D8;
 }
 .hs[data-hs-theme="shore"][data-hs-mode="dark"] {
   --hs-hill-2: #263442;           /* service-area map hills */
-  --hs-house: #141B23;            /* the closing band and dark chapter: deeper than the page */
+  --hs-house: #141B23;            /* the dark chapter: deeper than the page (the band inverts in dark mode) */
   --hs-page: #1E2A36;
   --hs-surface: #253240;
   --hs-sand: #2B3745;
@@ -186,10 +185,16 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
 .hs-sample { display: inline-flex; align-items: center; color: var(--hs-ink-2); font-family: var(--hs-font-label); font-size: 11.5px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.4; white-space: nowrap; }
 .hs-sample::before { content: "[\00a0"; }
 .hs-sample::after { content: "\00a0]"; }
+:is(legend, .hs-label) > .hs-sample { margin-left: 8px; } /* beside a legend or record label */
 
 /* ---------- Header ---------- */
 .hs-header { position: sticky; top: 0; z-index: 40; background: color-mix(in srgb, var(--hs-page) 97%, transparent); } /* no backdrop blur: it re-blurred the scaling hero photo every scroll frame (jitter); at 94% it was barely visible */
-.hs-header-row { display: flex; align-items: center; gap: 20px; min-height: 80px; } /* no rule under the header (removed at every size) */
+.hs-header-row { display: flex; align-items: center; gap: 20px; min-height: 80px; }
+/* Desktop: the header's bar runs the full window width (it sits inside the
+   1440px shell, so it reaches out with negative margins and pads back in);
+   its inner .hs-wrap keeps the page's width, so the logo and nav still line
+   up with the content. The root clips the scrollbar sliver. */
+@media (min-width: 1100px) { .hs-header { margin-inline: calc(50% - 50vw); padding-inline: calc(50vw - 50%); } } /* no rule under the header (removed at every size) */
 .hs-logo { display: inline-flex; align-items: center; gap: 14px; color: var(--hs-ink); text-decoration: none; flex: none; }
 .hs-logo-rule { width: 1px; height: 34px; background: var(--hs-rule); }
 .hs-logo-text { display: grid; line-height: 1; }
@@ -210,8 +215,12 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
 .hs-nav a::before { content: ""; position: absolute; inset: 6px 0; z-index: -1; border-radius: 4px 16px; background: transparent; transition: background-color var(--hs-dur-fast) var(--hs-ease); }
 .hs-nav a:is(:hover, :active)::before { background: var(--hs-sand); }
 .hs-nav a[aria-current="page"]::before { background: var(--hs-ember-soft); }
+/* Shore dark: the soft tint of its peach over the navy page reads as brown, so
+   the current page's leaf takes the peach itself, with dark text (7.9:1). */
+.hs[data-hs-theme="shore"][data-hs-mode="dark"] .hs-nav a[aria-current="page"]::before { background: var(--hs-ember); }
+.hs[data-hs-theme="shore"][data-hs-mode="dark"] .hs-nav a[aria-current="page"] { color: var(--hs-on-ember); }
 .hs-nav a[aria-current="page"] { font-weight: 600; }
-.hs-header-actions { display: flex; align-items: center; gap: 12px; margin-left: 40px; } /* light/dark (and the Menu button below 1081px), set apart from the nav */
+.hs-header-actions { display: flex; align-items: center; gap: 12px; margin-left: 40px; } /* the light/dark toggle, set apart from the nav */
 .hs-mode { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-width: 46px; min-height: 46px; padding: 0 12px; border: 1.5px solid var(--hs-ink); border-radius: var(--hs-radius-sm); background: transparent; color: var(--hs-ink); font: inherit; font-weight: 600; cursor: pointer; }
 .hs-mode:is(:hover, :active) { background: var(--hs-sand); }
 /* Pressed: buttons and the toggle dip slightly while held. */
@@ -246,7 +255,6 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
 .hs-header { transition: translate var(--hs-dur) var(--hs-ease); }
 .hs.is-scroll-hidden .hs-header { translate: 0 -100%; }
 @media (max-width: 560px) {
-  .hs-header-actions .hs-btn { display: none; }
   .hs-logo-name { font-size: 21px; }
 }
 
@@ -263,12 +271,9 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
 .hs-btn-sm { min-height: 44px; padding: 0 16px; font-size: 14px; }
 .hs-btn { transition: background-color var(--hs-dur-fast) var(--hs-ease), color var(--hs-dur-fast) var(--hs-ease), border-color var(--hs-dur-fast) var(--hs-ease); }
 .hs-btn .hs-icon { transition: translate var(--hs-dur-fast) var(--hs-ease); }
-.hs-btn:hover .hs-icon { translate: 3px 0; }
+.hs-btn:hover .hs-icon:not(.hs-btn-lead) { translate: 3px 0; } /* trailing arrows nudge; leading icons (Request a call, Refer a patient) stay put */
 .hs-btn[disabled] { opacity: 0.45; cursor: not-allowed; }
 .hs-btn[disabled]:hover { background: var(--hs-ink); color: var(--hs-page); }
-.hs-phone { display: inline-flex; align-items: center; gap: 8px; color: var(--hs-ink); font-weight: 600; font-size: 20px; text-decoration: none; }
-.hs-phone:hover { text-decoration: underline; }
-.hs-phone .hs-icon { color: var(--hs-ember-text); }
 
 /* ---------- The editorial row: label column | content ---------- */
 .hs-row { display: grid; grid-template-columns: var(--hs-label-col) minmax(0, 1fr); border-top: 1px solid var(--hs-rule); }
@@ -301,7 +306,6 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
 .hs-hero h1 span { display: block; }
 .hs-hero .hs-lede { font-size: 21px; max-width: 640px; }
 .hs-hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
-.hs-hero-call { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin-top: 20px; color: var(--hs-ink-2); }
 .hs-hero-copy { margin-top: 40px; }
 /* Desktop: the buttons sit just under the photo on the right, level with the
    headline's lower lines, which run past the photo's bottom edge. */
@@ -486,24 +490,10 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
 .hs-aside p { max-width: 64ch; }
 
 /* ---------- Featured (team): intro column | photos ---------- */
-.hs-feature { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 2fr); border-top: 1px solid var(--hs-rule); }
-.hs-feature-intro { padding: 40px 40px 56px 0; }
-.hs-feature-intro h2 { font-size: clamp(36px, 3.8vw, 52px); text-transform: uppercase; letter-spacing: -0.01em; line-height: 1; }
-.hs-feature-intro p { margin-top: 18px; color: var(--hs-ink-2); }
-.hs-feature-intro .hs-btn { margin-top: 28px; }
-.hs-feature-intro .hs-sample { margin-top: 20px; }
-.hs-feature-grid { display: grid; grid-template-columns: 1fr 1fr; padding: 40px 0 56px 40px; border-left: 1px solid var(--hs-rule); }
-.hs-feature-grid > :first-child { grid-column: 1 / -1; padding-bottom: 28px; margin-bottom: 28px; border-bottom: 1px solid var(--hs-rule); }
-.hs-feature-grid > :nth-child(2n) { padding-right: 28px; }
-.hs-feature-grid > :nth-child(2n + 3) { padding-left: 28px; border-left: 1px solid var(--hs-rule); }
-.hs-feature-grid > :nth-child(n + 4) { margin-top: 28px; padding-top: 28px; border-top: 1px solid var(--hs-rule); }
 .hs-figure { margin: 0; }
 .hs-figure figcaption { display: flex; justify-content: space-between; gap: 12px; margin-top: 12px; font-size: 17px; }
 .hs-figure figcaption span:last-child { font-family: var(--hs-font-label); font-size: 13px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--hs-ink-2); text-align: right; }
 @media (max-width: 960px) {
-  .hs-feature { grid-template-columns: 1fr; }
-  .hs-feature-intro { padding: 32px 0 8px; }
-  .hs-feature-grid { padding: 24px 0 56px; border-left: 0; }
 }
 
 
@@ -554,7 +544,7 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
 .hs-zip { display: grid; padding: 24px; border: 1px solid var(--hs-rule); border-radius: var(--hs-radius); }
 .hs-zip > label { margin-bottom: 10px; }
 .hs-zip-row { display: flex; gap: 10px; }
-.hs-zip-row .hs-input { max-width: 220px; font-size: 20px; letter-spacing: 0.05em; }
+.hs-zip-row .hs-input { max-width: 220px; } /* the standard field size, like every form (it was 20px, letter-spaced) */
 /* The answer takes no room until there is one, then the box eases open to its
    height (grid rows 0fr → 1fr). Hidden while shut, so it isn't read or tabbed. */
 .hs-zip-reveal { display: grid; grid-template-rows: 0fr; }
@@ -583,29 +573,37 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
 .hs-faq details p { padding: 0 48px 24px 0; color: var(--hs-ink-2); max-width: 70ch; }
 
 /* ---------- Closing band ---------- */
-.hs-band { position: relative; overflow: hidden; margin-block: 0 80px; padding: 64px; border-radius: 35px 110px; background: var(--hs-house); color: #F5EFE6; }
+/* The band's colours come from its scheme × mode (--hb-*, set below): a navy
+   band with the scheme's dark-mode ink and accent in light mode, inverted to
+   the scheme's light page with navy ink in dark mode. Shore keeps its warm
+   ink and peach (light) / terracotta (dark) accents, Tide its blue-tinted ink
+   and blues. Every text pair ≥5:1. */
+.hs {
+  --hb-bg: var(--hs-house); --hb-ink: #E3EDF8; --hb-ink-2: #C3CFDA; --hb-accent: #93C3E8; --hb-hover: #8CC2EA; --hb-hover-ink: #1E2A36; --hb-focus: #8DB8FF;
+}
+.hs[data-hs-theme="shore"] { --hb-ink: #F4EEE5; --hb-ink-2: #CFC7BB; --hb-accent: #F4A77F; --hb-hover: #EE9466; --hb-hover-ink: #1B1410; --hb-focus: #F4A77F; }
+.hs[data-hs-mode="dark"] { --hb-bg: #F2F5F7; --hb-ink: #1E2A36; --hb-ink-2: #3F4D5A; --hb-accent: #1B5480; --hb-hover: #1F5E8C; --hb-hover-ink: #FFFFFF; --hb-focus: #1F5FBF; }
+.hs[data-hs-theme="shore"][data-hs-mode="dark"] { --hb-bg: #F6F2EA; --hb-ink: #1E2A36; --hb-ink-2: #3E4956; --hb-accent: #B0401A; --hb-hover: #B0401A; --hb-hover-ink: #FFFFFF; --hb-focus: #B0401A; }
+.hs-band { --hs-focus: var(--hb-focus); position: relative; overflow: hidden; margin-block: 0 80px; padding: 64px; border-radius: 35px 110px; background: var(--hb-bg); color: var(--hb-ink); }
 /* The closing band is a leaf, like the photos, with the logo mark floating
    at its top right: a white leaf with the H knocked out, so the H takes the
    band's own colour (a CSS mask of the LogoMark paths, evenodd). The band is
    a leaf too, its tight corners about a quarter of its swept ones like the
    mark's: 35px 110px on desktop, 20px 80px on tablets, 10px 50px on phones
-   (picked with the user). Headings keep clear of the mark. In dark mode the band is lifted above the page
-   (--hs-house) and edged with a faint line, so it never sinks into it. */
-.hs-band::before { content: ""; position: absolute; right: 64px; top: 64px; width: 120px; height: 120px; background: #fff; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath fill-rule='evenodd' d='M3.5 0H25a15 15 0 0 1 15 15v21.5a3.5 3.5 0 0 1-3.5 3.5H15A15 15 0 0 1 0 25V3.5A3.5 3.5 0 0 1 3.5 0ZM12.5 11h4.4v6.9h6.2V11h4.4v18h-4.4v-7.1h-6.2V29h-4.4Z'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath fill-rule='evenodd' d='M3.5 0H25a15 15 0 0 1 15 15v21.5a3.5 3.5 0 0 1-3.5 3.5H15A15 15 0 0 1 0 25V3.5A3.5 3.5 0 0 1 3.5 0ZM12.5 11h4.4v6.9h6.2V11h4.4v18h-4.4v-7.1h-6.2V29h-4.4Z'/%3E%3C/svg%3E") center / contain no-repeat; pointer-events: none; }
-.hs[data-hs-mode="dark"] .hs-band { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1); }
+   (picked with the user). Headings keep clear of the mark, which takes the
+   band's ink (in dark mode the band inverts: see --hb-* above). */
+.hs-band::before { content: ""; position: absolute; right: 64px; top: 64px; width: 120px; height: 120px; background: var(--hb-ink); -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath fill-rule='evenodd' d='M3.5 0H25a15 15 0 0 1 15 15v21.5a3.5 3.5 0 0 1-3.5 3.5H15A15 15 0 0 1 0 25V3.5A3.5 3.5 0 0 1 3.5 0ZM12.5 11h4.4v6.9h6.2V11h4.4v18h-4.4v-7.1h-6.2V29h-4.4Z'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath fill-rule='evenodd' d='M3.5 0H25a15 15 0 0 1 15 15v21.5a3.5 3.5 0 0 1-3.5 3.5H15A15 15 0 0 1 0 25V3.5A3.5 3.5 0 0 1 3.5 0ZM12.5 11h4.4v6.9h6.2V11h4.4v18h-4.4v-7.1h-6.2V29h-4.4Z'/%3E%3C/svg%3E") center / contain no-repeat; pointer-events: none; }
 @media (max-width: 960px) { .hs-band { border-radius: 20px 80px; } .hs-band::before { top: 48px; right: 48px; width: 88px; height: 88px; } .hs-band h2 { padding-right: 120px; } }
 @media (max-width: 680px) { .hs-band { border-radius: 10px 50px; } .hs-band::before { top: 24px; right: 24px; width: 48px; height: 48px; } .hs-band h2 { padding-right: 56px; } }
-.hs-band h2 { position: relative; max-width: 18ch; color: #F5EFE6; }
-.hs-band p { position: relative; margin-top: 16px; max-width: 60ch; color: #D9CFC2; font-size: 20px; }
+.hs-band h2 { position: relative; max-width: 18ch; color: var(--hb-ink); }
+.hs-band p { position: relative; margin-top: 16px; max-width: 60ch; color: var(--hb-ink-2); font-size: 20px; }
 .hs-band-ctas { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; margin-top: 32px; }
-.hs-band .hs-btn-primary { background: #F5EFE6; color: #1B1410; }
-.hs-band .hs-btn-primary:hover { background: var(--hs-band-accent); color: #1B1410; }
-.hs-band .hs-btn-secondary { color: #F5EFE6; border-color: #F5EFE6; }
-.hs-band .hs-btn-secondary:hover { background: rgba(255, 255, 255, 0.08); }
-.hs-band .hs-btn-quiet { color: #F5EFE6; } /* the text link, light on the dark band */
+.hs-band .hs-btn-primary { background: var(--hb-ink); color: var(--hb-bg); }
+.hs-band .hs-btn-primary:hover { background: var(--hb-hover); color: var(--hb-hover-ink); }
+.hs-band .hs-btn-secondary { color: var(--hb-ink); border-color: var(--hb-ink); }
+.hs-band .hs-btn-secondary:hover { background: color-mix(in srgb, var(--hb-ink) 9%, transparent); }
+.hs-band .hs-btn-quiet { color: var(--hb-accent); } /* the text link, in the scheme's accent */
 @media (max-width: 680px) { .hs-band-ctas .hs-btn:not(.hs-btn-quiet) { flex: 1 1 100%; } } /* phones: the two buttons full width, the link under them */
-.hs-band .hs-phone { color: #F5EFE6; }
-.hs-band .hs-phone .hs-icon { color: var(--hs-band-accent); }
 @media (max-width: 680px) { .hs-band { padding: 40px 24px; } }
 
 /* ---------- Footer ---------- */
@@ -661,13 +659,12 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
 .hs-theme { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
 .hs-theme-label { font-family: var(--hs-font-label); font-size: 13px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--hs-ink-2); white-space: nowrap; }
 .hs-theme-opts { display: flex; gap: 4px; }
-.hs-theme-opt { display: inline-flex; align-items: center; gap: 7px; min-height: 32px; padding: 0 10px 0 6px; border: 1px solid transparent; border-radius: 999px; background: none; color: var(--hs-ink); font: inherit; font-size: 14px; cursor: pointer; }
+.hs-theme-opt { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 0 12px 0 8px; border: 1px solid transparent; border-radius: 999px; background: none; color: var(--hs-ink); font: inherit; font-size: 15px; cursor: pointer; }
 .hs-theme-opt:hover { border-color: var(--hs-rule); }
 .hs-theme-opt[aria-checked="true"] { border-color: var(--hs-ink); font-weight: 600; }
 /* Each swatch shows its scheme's page and accent in the current mode. */
 .hs[data-hs-mode="dark"] .hs-theme-dot { background: linear-gradient(135deg, var(--a-dark) 50%, var(--b-dark) 50%); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25); }
 .hs-theme-dot { width: 18px; height: 18px; border-radius: 50%; background: linear-gradient(135deg, var(--a) 50%, var(--b) 50%); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15); }
-.hs-theme-opt { min-height: 40px; padding: 0 12px 0 8px; font-size: 15px; }
 
 /* ================= Public subpages ================= */
 .hs-page-head { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 48px; align-items: end; padding-block: 56px 48px; }
@@ -712,6 +709,7 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
 .hs-map-land { fill: var(--hs-sand); }
 .hs-map-mtn { fill: color-mix(in srgb, var(--hs-hill-2) 55%, var(--hs-sand)); }
 .hs-map-area { fill: color-mix(in srgb, var(--hs-ember) 12%, transparent); stroke: var(--hs-ember); stroke-width: 1.5; stroke-dasharray: 5 4; }
+.hs[data-hs-theme="shore"][data-hs-mode="dark"] .hs-map-area { fill: color-mix(in srgb, var(--hs-ink) 8%, transparent); } /* a peach tint over navy reads brown; the peach stays on the dashed edge */
 .hs-map-road { fill: none; stroke: var(--hs-rule); stroke-width: 2; }
 .hs-map-dot { fill: var(--hs-ink); }
 .hs-map-dot.is-hit { fill: var(--hs-ember); }
@@ -743,7 +741,7 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
 .hs-docs .hs-doc-name { display: flex; align-items: center; gap: 12px; }
 .hs-docs .hs-icon { flex: none; }
 .hs-doc-file { font-family: var(--hs-font-label); font-size: 13px; color: var(--hs-ink-2); }
-.hs-doc-toggle { min-height: 40px; padding: 0 14px; border: 1.5px solid var(--hs-control); border-radius: var(--hs-radius-sm); background: none; color: var(--hs-ink); font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+.hs-doc-toggle { min-height: 44px; padding: 0 14px; border: 1.5px solid var(--hs-control); border-radius: var(--hs-radius-sm); background: none; color: var(--hs-ink); font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; white-space: nowrap; }
 .hs-doc-toggle[aria-pressed="true"] { border-color: var(--hs-ink); color: var(--hs-ink); }
 
 /* Acknowledgement after a referral */
@@ -798,9 +796,9 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
    The site is designed for a phone in a worried hand: message before
    imagery, the call always in thumb reach, less scrolling. */
 
-/* The contact dock (ContactDock in client.js). Desktop: a compact pill
-   floating at the bottom centre, the phone number then one button. Tablets
-   and phones: a full-width bar, the phone as a button. */
+/* The contact dock (ContactDock in client.js). Desktop: buttons floating
+   at the content's left edge, back-to-top at its right. Tablets and phones:
+   a full-width bar, the phone as a button. */
 /* The bar spans the viewport (clicks pass through); its row is the page's
    .hs-wrap, so the dock lines up with the content's left edge and the
    back-to-top button with its right. */
@@ -810,7 +808,7 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
 .hs-dock-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; }
 .hs-dock-row > * { pointer-events: auto; }
 /* Desktop: no container of its own — the dock is two real buttons side by
-   side (the phone as a secondary button, Request a call as primary) and the
+   side (the phone as the filled primary, Request a call outlined) and the
    back-to-top is a square secondary button, all with the buttons' 52px
    height, 6px corners and 1.5px ink border. Being afloat, the secondary ones
    take a frosted page-colour fill and every one a soft shadow. */
@@ -860,9 +858,6 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
   .hs-band { margin-bottom: 48px; }
 
   /* Team photos: a swipe row, the next photo peeking. */
-  .hs-feature-grid { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 8px 0 40px; margin-inline: -16px; padding-inline: 16px; scrollbar-width: none; }
-  .hs-feature-grid::-webkit-scrollbar { display: none; }
-  .hs-feature-grid > * { flex: 0 0 82%; scroll-snap-align: center; margin: 0 !important; padding: 0 !important; border: 0 !important; }
 }
 
 /* ---------- How care begins: one photo per step ----------
@@ -881,8 +876,6 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
   .hs-step > :is(.hs-photo, .hs-photo-frame) { grid-column: 1; grid-row: 1; margin-bottom: 8px; }
   .hs-step .hs-step-n { grid-column: auto; grid-row: auto; /* an absolute grid child placed in a column positions against that column, so unplace it */ --m: 16px; position: absolute; top: calc(75cqw - 56px - var(--m)); right: var(--m); z-index: 1; /* inside the photo's bottom-right (its tight corner), 16px in from both edges */ display: grid; place-items: center; width: 56px; height: 56px; border-radius: 4px 20px; background: var(--hs-page); font-size: 30px; font-weight: 400; letter-spacing: -0.03em; }
 }
-@media (max-width: 760px) {
-}
 
 /* A real photo in a Photo slot: same corners and ratio as the placeholder. */
 /* A photo's frame: the shape and clip, with a tiny blurred preview as its
@@ -898,11 +891,11 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
 @media (prefers-reduced-motion: no-preference) {
   .hs-photo-img { transition: scale 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
   .hs-path:has(.hs-btn:focus-visible) .hs-photo-img,
-  .hs-page-head:has(:is(.hs-btn, .hs-phone):focus-visible) .hs-photo-img { scale: 1.1; }
+  .hs-page-head:has(.hs-btn:focus-visible) .hs-photo-img { scale: 1.1; }
 }
 @media (prefers-reduced-motion: no-preference) and (hover: hover) {
   main[data-hover] .hs-path:has(.hs-btn:hover) .hs-photo-img,
-  main[data-hover] .hs-page-head:has(:is(.hs-btn, .hs-phone):hover) .hs-photo-img { scale: 1.1; } /* only after real pointer movement (ScrollCalm) */
+  main[data-hover] .hs-page-head:has(.hs-btn:hover) .hs-photo-img { scale: 1.1; } /* only after real pointer movement (ScrollCalm) */
 }
 
 /* Photos are leaves, after a reference: the top-right and bottom-left
@@ -995,7 +988,7 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
   .hs-hero-art .hs-art-card { display: none; } /* it covered half the short photo */
 
   /* "How can we help?": shorter photos. */
-  .hs-path :is(.hs-photo, .hs-photo-frame) { aspect-ratio: 16 / 10 !important; } /* beats the Photo frame's inline ratio */
+  .hs-path :is(.hs-photo, .hs-photo-frame) { aspect-ratio: 32 / 15 !important; } /* beats the Photo frame's inline ratio; 25% shorter than the old 16:10 */
 
   /* Swipe rows. */
   .hs-swipe { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 16px; margin-inline: -16px; padding: 4px 16px 8px; scrollbar-width: none; overscroll-behavior-x: contain; }
@@ -1041,11 +1034,9 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
   .hs { font-size: 16px; line-height: 1.55; }
   .hs-lede, .hs-hero .hs-lede, .hs-band p, .hs-owner p { font-size: 17px; line-height: 1.5; }
   .hs-footer { font-size: 15px; }
-  .hs-phone { font-size: 18px; }
   .hs-footer-contact a { font-size: 17px; }
   .hs-clinician h3 { font-size: 19px; }
   .hs-area-list h3 { font-size: 18px; }
-  .hs-zip-row .hs-input { font-size: 18px; }
   .hs-figure figcaption, .hs-art-card strong { font-size: 16px; }
 }
 
@@ -1151,7 +1142,8 @@ main[data-hover] .hs-faq summary:hover { color: var(--hs-ember-text); }
 /* Clinician name, then the credentials on their own line, quieter. */
 .hs-clinician-cred { display: block; margin-top: 2px; font-size: 0.8em; font-weight: 500; letter-spacing: 0; color: var(--hs-ink-2); }
 
-/* The contact dock's entrance (whenever it comes back on scroll up): the
+/* The contact dock's entrance (once the page's opening buttons scroll away;
+   it then stays put until they or the footer come back): the
    dock springs up with a slight overshoot, its buttons follow in a short
    stagger (Call, then the main action 80ms later), and on desktop their soft
    shadow blooms as they land. Leaving stays quick and plain. Off under
@@ -1250,6 +1242,13 @@ main[data-hover] .hs-faq summary:hover { color: var(--hs-ember-text); }
 :is(.hs-hero-actions, .hs-page-head) .hs-btn:not(.hs-btn-quiet) { min-height: 65px; padding: 0 28px; gap: 12px; font-size: 19px; }
 :is(.hs-hero-actions, .hs-page-head) .hs-btn-quiet { font-size: 19px; }
 :is(.hs-hero-actions, .hs-page-head) .hs-btn .hs-icon { width: 25px; height: 25px; }
+/* Phones: the Home hero's calls to action are regular size, like every other
+   button (the larger size is for wider screens). */
+@media (max-width: 760px) {
+  .hs-hero-actions .hs-btn:not(.hs-btn-quiet) { min-height: 52px; padding: 0 22px; gap: 10px; font-size: 15px; }
+  .hs-hero-actions .hs-btn-quiet { font-size: 15px; }
+  .hs-hero-actions .hs-btn .hs-icon { width: 20px; height: 20px; }
+}
 
 /* Home hero: Call (black) and Request a call (white), with Refer a patient as
    a text link under them. */
@@ -1260,13 +1259,18 @@ main[data-hover] .hs-faq summary:hover { color: var(--hs-ember-text); }
 @media (min-width: 1081px) { .hs-dock .hs-dock-refer { display: inline-flex; } }
 
 /* ---------- Rhythm: chapters, a statement, a full-bleed pause ----------
-   Home breaks its run of label rows with three kinds of moment: one line set
-   huge with no label column (.hs-statement), a photo edge to edge
+   Home breaks its run of label rows with a centred chapter intro (.hs-help,
+   its second sentence in .hs-statement-em), a photo edge to edge
    (.hs-bleed), and full-bleed chapters with their own ground — dark for
    Behind the scenes, sand for In their words (.hs-chapter). Chapters and the
    bleed reach the window's edges from inside .hs-wrap (negative margins of
    50% − 50vw); .hs clips the scrollbar's sliver of overflow. */
-.hs { overflow-x: clip; }
+/* The full-bleed pieces' sliver of sideways overflow (100vw includes a
+   classic scrollbar) is clipped at the root, which the browser treats as the
+   viewport. It used to be clipped on .hs, an ancestor of the sticky header,
+   row labels and steps story, and Chrome then positioned those on the main
+   thread, so they shook against a smooth trackpad scroll. */
+html:has(> body > .hs), html:has(.hs) { overflow-x: clip; }
 .hs-chapter, .hs-bleed { margin-inline: calc(50% - 50vw); padding-inline: calc(50vw - 50%); }
 .hs-chapter > .hs-row, .hs-chapter + .hs-row, .hs-bleed + .hs-row { border-top: 0; }
 .hs-chapter > .hs-row > .hs-row-label { padding-top: 104px; }
@@ -1307,56 +1311,38 @@ main[data-hover] .hs-faq summary:hover { color: var(--hs-ember-text); }
 .hs-chapter.is-sand .hs-quote p { font-size: clamp(24px, 2.5vw, 36px); line-height: 1.28; letter-spacing: -0.025em; }
 .hs-chapter.is-sand .hs-quote figcaption { margin-top: 28px; }
 
-/* The statement: one line, huge, starting at the content column. */
-.hs-statement { padding: 152px 0 160px calc(var(--hs-label-col) + 48px); } /* level with the rows' content */
-.hs-statement p { max-width: 17ch; font-family: var(--hs-font-display); font-size: clamp(44px, 6.2vw, 96px); font-weight: 600; line-height: 1.02; letter-spacing: -0.04em; text-wrap: balance; color: var(--hs-ink); }
-.hs-statement-em { color: var(--hs-ink-2); }
 
-/* The full-bleed pause: the photo edge to edge, no frame, its line in large
-   type over a soft scrim at the foot. */
+/* The full-bleed pause: the photo edge to edge, no frame, its line in a
+   page-coloured leaf panel at the foot. */
 .hs-bleed { position: relative; padding-inline: 0; }
 .hs-bleed .hs-photo-frame { border-radius: 0; max-height: 82vh; }
 .hs-bleed .hs-photo-img { width: 100%; height: 100%; object-fit: cover; }
-.hs-bleed::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10, 16, 22, 0.8), rgba(10, 16, 22, 0.38) 45%, transparent 70%); /* white line on it: ≥4:1 at its brightest (large text needs 3:1) */ pointer-events: none; }
-.hs-bleed-line { position: absolute; z-index: 1; left: max(48px, calc(50% - 640px)); bottom: 64px; max-width: 18ch; font-family: var(--hs-font-display); font-size: clamp(30px, 3.6vw, 56px); font-weight: 600; line-height: 1.06; letter-spacing: -0.032em; text-wrap: balance; color: #fff; }
+/* The line sits in a solid leaf-shaped panel on the page colour (the user
+   doesn't want gradients over photos to carry text), so it reads in ink at
+   full contrast in every scheme and mode. */
+.hs-bleed-line { position: absolute; z-index: 1; left: max(48px, calc(50% - 640px)); bottom: 56px; max-width: min(560px, calc(100% - 96px)); margin: 0; padding: 28px 36px 30px; border-radius: var(--hs-radius) 56px; background: var(--hs-page); color: var(--hs-ember-text); font-family: var(--hs-font-quote); font-style: italic; font-size: clamp(28px, 3vw, 48px); font-weight: 400; line-height: 1.1; text-wrap: balance; } /* the serif italic (letter-spacing with the other serif uses) */
 
 @media (max-width: 1099px) { .hs-bleed-line { left: 32px; bottom: 40px; } }
 @media (max-width: 900px) {
-  .hs-statement { padding: 96px 0 104px; }
   .hs-chapter > .hs-row > .hs-row-label { padding-top: 64px; }
   .hs-chapter > .hs-row > .hs-row-body { padding-block: 16px 72px; }
 }
 @media (max-width: 680px) {
-  .hs-statement { padding: 72px 0 80px; }
-  .hs-statement p { font-size: 40px; }
   .hs-bleed .hs-photo-frame { aspect-ratio: 4 / 5 !important; }
-  .hs-bleed-line { left: 16px; right: 16px; bottom: 28px; font-size: 30px; }
+  .hs-bleed-line { left: 16px; right: 16px; bottom: 16px; max-width: none; padding: 16px 20px 18px; border-radius: 10px 36px; font-size: 22px; }
   .hs-chapter.is-sand .hs-quote p { font-size: 22px; }
 }
 
 /* ---------- A light left on ----------
-   The brand idea, made visible with one warm accent (--hs-window / --hs-glow,
-   amber in Tide, terracotta-amber in Shore), used sparingly and never for
+   One warm accent (--hs-window / --hs-glow), used sparingly and never for
    text on a light ground: the hero's first-visit dot (it breathes slowly on
-   desktop), and the closing band, whose mark lights up as it scrolls in — the
-   H fills amber with a short flicker, like a bulb, then a warm glow spreads
-   from it (BandLight in client.js sets data-light off → on; lit without JS
-   and under reduced motion). Photos open through a leaf as they reveal. */
-.hs-band { isolation: isolate; --hs-mr: 64px; --hs-mt: 64px; --hs-ms: 120px; --hs-gs: clamp(560px, 70vw, 1100px); } /* mark offset and size; glow size */
-.hs-band-window, .hs-band-glow { position: absolute; pointer-events: none; }
-.hs-band-window { right: var(--hs-mr); top: var(--hs-mt); width: var(--hs-ms); height: var(--hs-ms); background: var(--hs-glow); -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M12.5 11h4.4v6.9h6.2V11h4.4v18h-4.4v-7.1h-6.2V29h-4.4Z'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M12.5 11h4.4v6.9h6.2V11h4.4v18h-4.4v-7.1h-6.2V29h-4.4Z'/%3E%3C/svg%3E") center / contain no-repeat; }
-/* The glow: centred on the mark, behind everything in the band. Its peak
-   stays around the mark; text on its fringe keeps ≥7:1. */
-.hs-band-glow { z-index: -1; width: var(--hs-gs); height: var(--hs-gs); right: calc(var(--hs-mr) + var(--hs-ms) / 2 - var(--hs-gs) / 2); top: calc(var(--hs-mt) + var(--hs-ms) / 2 - var(--hs-gs) / 2); border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--hs-glow) 44%, transparent), color-mix(in srgb, var(--hs-glow) 12%, transparent) 22%, color-mix(in srgb, var(--hs-glow) 4%, transparent) 50%, transparent 80%); }
-@media (max-width: 960px) { .hs-band { --hs-mr: 48px; --hs-mt: 48px; --hs-ms: 88px; --hs-gs: 600px; } }
-@media (max-width: 680px) { .hs-band { --hs-mr: 24px; --hs-mt: 24px; --hs-ms: 48px; --hs-gs: 400px; } }
-.hs-band[data-light="off"] .hs-band-window { opacity: 0; }
-.hs-band[data-light="off"] .hs-band-glow { opacity: 0; scale: 0.6; }
+   desktop). The closing band's lit mark, glow and aperture heading were
+   removed on 2026-10-30 at the user's request. Photos open through a leaf as
+   they reveal. --hs-ms is the band mark's size, which keeps its text clear. */
+.hs-band { --hs-ms: 120px; }
+@media (max-width: 960px) { .hs-band { --hs-ms: 88px; } }
+@media (max-width: 680px) { .hs-band { --hs-ms: 48px; } }
 @media (prefers-reduced-motion: no-preference) {
-  .hs-band[data-light="on"] .hs-band-window { animation: hs-light-on 0.9s linear 0.5s both; }
-  .hs-band[data-light="on"] .hs-band-glow { animation: hs-glow-on 2.2s cubic-bezier(0.16, 1, 0.3, 1) 1.1s both; }
-  @keyframes hs-light-on { 0% { opacity: 0; } 12% { opacity: 0.7; } 20% { opacity: 0.15; } 34% { opacity: 0.9; } 42% { opacity: 0.4; } 60%, 100% { opacity: 1; } }
-  @keyframes hs-glow-on { from { opacity: 0; scale: 0.6; } to { opacity: 1; scale: 1; } }
   /* The hero's dot breathes, slowly, on desktop only. */
   @media (min-width: 961px) {
     /* A glow ring that scales and fades (GPU-only; a box-shadow animation
@@ -1388,10 +1374,10 @@ main[data-hover] .hs-faq summary:hover { color: var(--hs-ember-text); }
    the clinicians' own lines. */
 .hs { --hs-font-quote: var(--hs-font-serif), Georgia, serif; }
 /* Every use of the serif is set tight (-0.05em, the user's choice). */
-:is(.hs-statement-em, .hs-hero-em, .hs-title-em, .hs-quote p, .hs-clinician-note, .hs-steps-story.is-story .hs-step .hs-step-n) { letter-spacing: -0.05em; }
+:is(.hs-statement-em, .hs-hero-em, .hs-title-em, .hs-bleed-line, .hs-quote p, .hs-clinician-note, .hs-steps-story.is-story .hs-step .hs-step-n) { letter-spacing: -0.05em; }
 /* The Home hero's headline and the key words of each page title, in the serif italic. */
 :is(.hs-hero-em, .hs-title-em) { font-family: var(--hs-font-quote); font-style: italic; font-weight: 400; font-size: 1.04em; }
-.hs-statement-em { font-family: var(--hs-font-quote); font-style: italic; font-weight: 400; font-size: 1.04em; }
+.hs-statement-em { font-family: var(--hs-font-quote); font-style: italic; font-weight: 400; font-size: 1em; } /* the same size as the sentence above */
 .hs-quote p { font-family: var(--hs-font-quote); font-weight: 400; }
 .hs-chapter.is-sand .hs-quote p { font-size: clamp(26px, 2.6vw, 38px); line-height: 1.2; }
 @media (max-width: 680px) { .hs-chapter.is-sand .hs-quote p { font-size: 26px; } }
@@ -1414,7 +1400,11 @@ main[data-hover] .hs-faq summary:hover { color: var(--hs-ember-text); }
 .hs-clinician-meta { order: 4; } /* the note (order 3) sits between the role and the details */
 @media (min-width: 761px) and (not ((hover: hover) and (pointer: fine))) { .hs-clinician { grid-row: span 5; } .hs-clinician-note { grid-row: 4; } }
 @media (hover: hover) and (pointer: fine) {
-  .hs-clinician-note { position: absolute; z-index: 1; left: 0; right: 0; top: 0; aspect-ratio: 1; display: flex; align-items: flex-end; margin: 0; padding: 14px 14px 16px; border-radius: var(--hs-radius) 56px; background: linear-gradient(to top, rgba(10, 16, 22, 0.86), rgba(10, 16, 22, 0.5) 60%, rgba(10, 16, 22, 0.15)); color: #fff; font-size: 18px; line-height: 1.25; opacity: 0; pointer-events: none; transition: opacity 0.35s var(--hs-ease); }
+  /* The portrait-sized box holds the line at its foot in a solid leaf panel
+     on the page colour (no gradient over the photo). */
+  .hs-clinician-note { position: absolute; z-index: 1; left: 0; right: 0; top: 0; aspect-ratio: 1; display: flex; align-items: flex-end; margin: 0; padding: 8px; color: var(--hs-ink); font-size: 17px; line-height: 1.25; opacity: 0; pointer-events: none; transition: opacity 0.35s var(--hs-ease); }
+  .hs-clinician-note > span { display: block; padding: 10px 12px 12px; border-radius: 6px 22px; background: var(--hs-page); translate: 0 6px; transition: translate 0.35s var(--hs-ease); }
+  main[data-hover] .hs-clinician:hover .hs-clinician-note > span, .hs-clinician:focus-within .hs-clinician-note > span { translate: 0 0; }
   main[data-hover] .hs-clinician:hover .hs-clinician-note, .hs-clinician:focus-within .hs-clinician-note { opacity: 1; } /* hover only after real pointer movement (ScrollCalm) */
   .hs-clinician .hs-photo-img { transition: scale 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
   main[data-hover] .hs-clinician:hover .hs-photo-img { scale: 1.06; }
@@ -1426,17 +1416,21 @@ main[data-hover] .hs-faq summary:hover { color: var(--hs-ember-text); }
    view and its four steps share one place, photo left and text right. The
    step on show (data-on) opens through the leaf as its number and text rise
    in; the one leaving fades. A rail under the text fills with --hs-p. */
-.hs-steps-story.is-story { --hs-story-top: 120px; height: calc(var(--hs-story-h, 560px) + 4 * 55vh); }
-.hs-steps-story.is-story > ol { position: sticky; top: var(--hs-story-top); display: grid; grid-template-columns: 1fr; padding-bottom: 40px; }
+.hs-steps-story.is-story { --hs-story-top: 96px; height: calc(var(--hs-story-h, 560px) + 4 * 55vh); }
+/* The sticky frame is the story's first child: on Home a wrapper holding the
+   heading, its lede and the list (so they stay in view while the steps play),
+   on Getting started the list itself. */
+.hs-steps-story.is-story > :first-child { position: sticky; top: var(--hs-story-top); }
+.hs-steps-story.is-story ol { position: relative; display: grid; grid-template-columns: 1fr; padding-bottom: 0; } /* the rail sits on its bottom edge, level with the photo's foot */
 .hs-steps-story.is-story .hs-step { grid-area: 1 / 1; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); grid-template-rows: auto auto 1fr; column-gap: 64px; align-content: center; padding: 0; border: 0; container-type: normal; opacity: 0; pointer-events: none; transition: opacity 0.5s var(--hs-ease) 0.1s; }
 .hs-steps-story.is-story .hs-step[data-on] { opacity: 1; pointer-events: auto; transition-delay: 0s; }
-.hs-steps-story.is-story .hs-step > .hs-photo-frame { grid-column: 1; grid-row: 1 / 4; margin: 0; clip-path: inset(7% 9% round var(--hs-radius) var(--hs-leaf)); transition: clip-path 1s cubic-bezier(0.16, 1, 0.3, 1); }
+.hs-steps-story.is-story .hs-step > .hs-photo-frame { grid-column: 1; grid-row: 1 / 4; align-self: stretch; margin: 0; /* at least its 4:3, taller when the text is, so its foot always meets the rail */ clip-path: inset(7% 9% round var(--hs-radius) var(--hs-leaf)); transition: clip-path 1s cubic-bezier(0.16, 1, 0.3, 1); }
 .hs-steps-story.is-story .hs-step > .hs-photo-frame .hs-photo-img { scale: 1.12; transition: scale 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
 .hs-steps-story.is-story .hs-step[data-on] > .hs-photo-frame { clip-path: inset(0 round var(--hs-radius) var(--hs-leaf)); }
 .hs-steps-story.is-story .hs-step[data-on] > .hs-photo-frame .hs-photo-img { scale: 1; }
-.hs-steps-story.is-story .hs-step .hs-step-n { position: static; grid-column: 2; grid-row: 1; align-self: end; width: auto; height: auto; display: block; margin-bottom: 20px; background: none; border-radius: 0; font-family: var(--hs-font-quote); font-style: italic; font-size: 112px; font-weight: 400; line-height: 0.9; letter-spacing: -0.02em; color: var(--hs-ember-text); }
+.hs-steps-story.is-story .hs-step .hs-step-n { position: static; grid-column: 2; grid-row: 1; align-self: end; width: auto; height: auto; display: block; margin-bottom: 20px; background: none; border-radius: 0; font-family: var(--hs-font-quote); font-style: italic; font-size: 112px; font-weight: 400; line-height: 0.9; color: var(--hs-ember-text); } /* letter-spacing: the serif rule above */
 .hs-steps-story.is-story .hs-step h3 { grid-column: 2; grid-row: 2; font-size: 34px; letter-spacing: -0.025em; }
-.hs-steps-story.is-story .hs-step p { grid-column: 2; grid-row: 3; align-self: start; margin-top: 16px; max-width: 34ch; font-size: 19px; }
+.hs-steps-story.is-story .hs-step p { grid-column: 2; grid-row: 3; align-self: start; margin-top: 16px; margin-bottom: 28px; max-width: 34ch; font-size: 19px; }
 .hs-steps-story.is-story .hs-step :is(.hs-step-n, h3, p) { translate: 0 22px; opacity: 0; transition: translate 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s var(--hs-ease); }
 .hs-steps-story.is-story .hs-step[data-on] :is(.hs-step-n, h3, p) { translate: 0 0; opacity: 1; }
 .hs-steps-story.is-story .hs-step[data-on] h3 { transition-delay: 0.08s; }
@@ -1445,8 +1439,8 @@ main[data-hover] .hs-faq summary:hover { color: var(--hs-ember-text); }
    StepStory sets --hs-p on the list itself (not the page), so updating it
    restyles only the list (it must inherit to reach the ::after). */
 @property --hs-p { syntax: "<number>"; inherits: true; initial-value: 0; }
-.hs-steps-story.is-story > ol::before { content: ""; position: absolute; bottom: 0; left: calc((100% - 64px) * 1.25 / 2.25 + 64px); right: 0; height: 3px; border-radius: 3px; background: var(--hs-rule); }
-.hs-steps-story.is-story > ol::after { content: ""; position: absolute; bottom: 0; left: calc((100% - 64px) * 1.25 / 2.25 + 64px); right: 0; height: 3px; border-radius: 3px; background: var(--hs-ink); transform-origin: 0 50%; scale: var(--hs-p) 1; }
+.hs-steps-story.is-story ol::before { content: ""; position: absolute; bottom: 0; left: calc((100% - 64px) * 1.25 / 2.25 + 64px); right: 0; height: 10px; border-radius: 10px; background: var(--hs-rule); }
+.hs-steps-story.is-story ol::after { content: ""; position: absolute; bottom: 0; left: calc((100% - 64px) * 1.25 / 2.25 + 64px); right: 0; height: 10px; border-radius: 10px; background: var(--hs-ember-text); transform-origin: 0 50%; scale: var(--hs-p) 1; } /* the fill matches the step numeral */
 
 /* ---------- Calm switching and scrolling ----------
    switchLook (client.js) adds .hs-switching for the moment light/dark or the
@@ -1460,3 +1454,227 @@ html[data-hs-vt="look"]::view-transition-old(*) { animation: hs-look-out 0.3s ea
 html[data-hs-vt="look"]::view-transition-new(*) { animation: hs-look-in 0.3s ease both !important; }
 @keyframes hs-look-out { to { opacity: 0; } }
 @keyframes hs-look-in { from { opacity: 0; } }
+
+/* ---------- How can we help? (Home): one section, two clear choices ----------
+   Its own full-width sand ground (.hs-chapter.is-sand), out of the label-row
+   pattern: a centred intro — a small "How can we help?" label, the page's
+   statement as the heading (second sentence in the serif italic), a lede —
+   then two cards on the page colour (leaf corners), each opening with a tag
+   that says who it's for; photo, title and points, buttons pinned to the
+   foot. Phones keep the two-way switch above one card (PathSwitch). */
+.hs-help { padding-block: 120px 128px; }
+.hs-help-head { display: grid; justify-items: center; max-width: 1200px; margin: 0 auto 64px; text-align: center; }
+.hs-help-label { margin: 0 0 24px; font-family: var(--hs-font-label); font-size: 15px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--hs-ink); }
+.hs-help-head h2 { max-width: 24ch; font-size: clamp(44px, 6.2vw, 92px); line-height: 1.02; letter-spacing: -0.04em; text-wrap: balance; }
+/* The two sentences on their own lines, no extra gap between them. */
+.hs-help-head h2 .hs-statement-em { display: block; text-wrap: balance; }
+.hs-help-head .hs-lede { margin: 28px 0 0; max-width: 46ch; color: var(--hs-ember-text); } /* the accent (6:1+ on the sand); the heading stays ink */
+.hs-help .hs-paths { margin-top: 0; column-gap: 64px; row-gap: 56px; } /* no card ground: space alone separates the two choices */
+.hs-help .hs-paths > .hs-path, .hs-help .hs-paths > .hs-path:nth-child(2n) { padding: 0; border: 0; background: none; }
+.hs-help .hs-path { gap: 16px; }
+.hs-help .hs-path :is(.hs-photo, .hs-photo-frame) { --hs-leaf: 64px; margin-bottom: 8px; }
+.hs-help .hs-path h3 { font-size: clamp(26px, 2.4vw, 34px); max-width: 24ch; }
+.hs-path-tag { display: inline-flex; align-items: center; gap: 10px; margin: 0; font-family: var(--hs-font-label); font-size: 15px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--hs-ink); }
+.hs-path-tag .hs-icon { flex: none; }
+.hs-help .hs-path-ctas { padding-top: 20px; }
+@media (max-width: 900px) {
+  .hs-help { padding-block: 80px 88px; }
+  .hs-help-head { margin-bottom: 40px; }
+}
+@media (max-width: 760px) {
+  .hs-help { padding-block: 56px 64px; }
+  .hs-help-label { margin-bottom: 16px; font-size: 13px; }
+  .hs-help-head h2 { font-size: 36px; }
+  .hs-help-head .hs-lede { margin-top: 18px; }
+  .hs-help .hs-path :is(.hs-photo, .hs-photo-frame) { --hs-leaf: 44px; }
+  .hs-help .hs-path-tag { display: none; } /* the switch above already says who it's for */
+  .hs-help .hs-seg { background: color-mix(in srgb, var(--hs-ink) 9%, var(--hs-sand)); } /* the switch's track, a shade deeper than the sand; its thumb stays the page colour */
+}
+
+/* Home's How care begins: the heading and lede inside the story's frame keep
+   the row's look; while pinned the gap under the lede tightens, and on short
+   windows the lede steps aside so the steps aren't cut off. */
+.hs-story-frame > h2 { max-width: 20ch; }
+.hs-story-frame > .hs-lede { margin-bottom: 56px; }
+.hs-steps-story.is-story .hs-story-frame > .hs-lede { margin-bottom: 32px; }
+@media (max-height: 760px) { .hs-steps-story.is-story .hs-story-frame > .hs-lede { display: none; } }
+
+/* ---------- Paragraphs, line by line (LineReveal in client.js) ----------
+   Words are inline spans numbered by line (--li); each line fades in and
+   rises 12px (relative offset, so links keep their underline), 60ms after the
+   line above. Nothing is hidden without JS or under reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .hs-lines .hs-lw { position: relative; }
+  .hs-lines:not(.is-read) .hs-lw { opacity: 0; top: 12px; }
+  .hs-lines.is-read .hs-lw { transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1) calc(0.15s + var(--li, 0) * 60ms), top 0.7s cubic-bezier(0.16, 1, 0.3, 1) calc(0.15s + var(--li, 0) * 60ms); } /* a beat after the heading above starts */
+}
+
+
+/* ---------- The closing band, choreographed ----------
+   Its heading rises word by word and its lede line by line (SplitHeads,
+   LineReveal); keyed to the heading, the mark settles in (fades up from 0.85×)
+   and the three calls to action fade up 14px in a short stagger after the
+   lede, like the hero's buttons — and they reset and replay with the heading.
+   Only once the heading has been split, so nothing hides without JS or under
+   reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .hs-band::before { transition: opacity 0.8s var(--hs-ease-soft), scale 1s var(--hs-ease-soft); }
+  .hs-band-ctas > * { transition: background-color var(--hs-dur-fast) var(--hs-ease), color var(--hs-dur-fast) var(--hs-ease), border-color var(--hs-dur-fast) var(--hs-ease), opacity 0.7s var(--hs-ease-soft) var(--d, 0s), translate 0.8s var(--hs-ease-soft) var(--d, 0s); } /* colours keep the buttons' own quick hover; only the entrance waits (--d) */
+  .hs-band:has(> h2.hs-split:not(.is-in))::before { opacity: 0; scale: 0.85; transition: none; }
+  .hs-band:has(> h2.hs-split:not(.is-in)) .hs-band-ctas > * { opacity: 0; translate: 0 14px; transition: none; }
+  .hs-band:has(> h2.is-in)::before { transition-delay: 0.15s; }
+  .hs-band:has(> h2.is-in) .hs-band-ctas > :nth-child(1) { --d: 0.45s; }
+  .hs-band:has(> h2.is-in) .hs-band-ctas > :nth-child(2) { --d: 0.53s; }
+  .hs-band:has(> h2.is-in) .hs-band-ctas > :nth-child(3) { --d: 0.61s; }
+}
+
+/* ---------- FAQ, staggered ----------
+   The questions fade up 14px one after another (70ms apart, after the
+   heading starts rising), keyed to the row's heading like the closing band,
+   so they reset and replay with it. Reveal no longer fades the list as one
+   block. Nothing hides unless the heading was split (no JS, reduced motion). */
+@media (prefers-reduced-motion: no-preference) {
+  .hs-faq > details { transition: opacity 0.7s var(--hs-ease-soft), translate 0.8s var(--hs-ease-soft); transition-delay: calc(0.25s + var(--qi, 0) * 70ms); }
+  .hs-row-body:has(> h2.hs-split:not(.is-in)) .hs-faq > details { opacity: 0; translate: 0 14px; transition: none; }
+  .hs-faq > details:nth-child(2) { --qi: 1; } .hs-faq > details:nth-child(3) { --qi: 2; } .hs-faq > details:nth-child(4) { --qi: 3; }
+  .hs-faq > details:nth-child(5) { --qi: 4; } .hs-faq > details:nth-child(6) { --qi: 5; } .hs-faq > details:nth-child(n+7) { --qi: 6; }
+}
+
+/* ---------- Shore dark: the peach itself, not its tint ----------
+   In Shore dark the accent's soft tint (--hs-ember-soft) mixes peach toward
+   the navy page and reads as brown. Wherever it was a fill or a glow, Shore
+   dark uses the peach itself (with --hs-on-ember text, 7.9:1): the nav's
+   current page (above), accent status labels, the status tracker's current
+   step ring, the mini board's avatars (in the dark chapter, in both modes),
+   and in the intake app (css/intake.css) the arriving card's glow and the
+   ⌘K palette's selected row. */
+.hs[data-hs-theme="shore"][data-hs-mode="dark"] .hs-status-accent { background: var(--hs-ember); color: var(--hs-on-ember); }
+.hs[data-hs-theme="shore"][data-hs-mode="dark"] .hs-track li.is-now .hs-track-dot { box-shadow: 0 0 0 3px var(--hs-page), 0 0 0 6px var(--hs-ember); }
+.hs[data-hs-theme="shore"][data-hs-mode="dark"] .hs-bts-avatar,
+.hs[data-hs-theme="shore"] .hs-chapter.is-dark .hs-bts-avatar { background: var(--hs-ember); color: var(--hs-on-ember); }
+
+/* Every other page's h1 (PageHead) is set in the serif italic, like the Home
+   hero's headline (its .hs-title-em key words simply match the rest now). */
+:is(.hs-page-head, .hs-ds-head) h1 { font-family: var(--hs-font-quote); font-style: italic; font-weight: 400; letter-spacing: -0.05em; } /* the design system's title too */
+
+/* ---------- The footer, animated like the page ----------
+   Its headings rise word by word and its paragraphs line by line (SplitHeads
+   and LineReveal include .hs-footer); keyed to their headings, the link list
+   under "Hearthside" fades up one link after another and the agency-owner
+   buttons in a stagger, replaying with the heading. Nothing hides unless the
+   heading was split. */
+@media (prefers-reduced-motion: no-preference) {
+  .hs-footer nav li { transition: opacity 0.7s var(--hs-ease-soft), translate 0.8s var(--hs-ease-soft); }
+  .hs-owner-ctas > * { transition: background-color var(--hs-dur-fast) var(--hs-ease), color var(--hs-dur-fast) var(--hs-ease), border-color var(--hs-dur-fast) var(--hs-ease), opacity 0.7s var(--hs-ease-soft) var(--d, 0s), translate 0.8s var(--hs-ease-soft) var(--d, 0s); }
+  .hs-footer nav:has(h2.hs-split:not(.is-in)) li { opacity: 0; translate: 0 10px; transition: none; }
+  .hs-footer nav li { transition-delay: calc(0.15s + var(--fi, 0) * 50ms); }
+  .hs-footer nav li:nth-child(2) { --fi: 1; } .hs-footer nav li:nth-child(3) { --fi: 2; } .hs-footer nav li:nth-child(4) { --fi: 3; }
+  .hs-footer nav li:nth-child(5) { --fi: 4; } .hs-footer nav li:nth-child(6) { --fi: 5; } .hs-footer nav li:nth-child(n+7) { --fi: 6; }
+  .hs-owner:has(h2.hs-split:not(.is-in)) .hs-owner-ctas > * { opacity: 0; translate: 0 14px; transition: none; }
+  .hs-owner:has(h2.is-in) .hs-owner-ctas > :nth-child(1) { --d: 0.45s; }
+  .hs-owner:has(h2.is-in) .hs-owner-ctas > :nth-child(2) { --d: 0.53s; }
+  .hs-owner:has(h2.is-in) .hs-owner-ctas > :nth-child(3) { --d: 0.61s; }
+  .hs-owner:has(h2.is-in) .hs-owner-ctas > :nth-child(4) { --d: 0.69s; }
+}
+
+/* ---------- Buttons and lists in rows, with their heading ----------
+   Every page: a row's buttons fade up 12px a beat after its heading starts
+   rising (0.4s), and Careers' open roles one after another (60ms apart) —
+   keyed to the row's heading like the closing band and the FAQ, so they
+   reset and replay with it. Nothing hides unless the heading was split. */
+@media (prefers-reduced-motion: no-preference) {
+  .hs-row .hs-row-body .hs-btn { transition: background-color var(--hs-dur-fast) var(--hs-ease), color var(--hs-dur-fast) var(--hs-ease), border-color var(--hs-dur-fast) var(--hs-ease), opacity 0.7s var(--hs-ease-soft) 0.4s, translate 0.8s var(--hs-ease-soft) 0.4s; }
+  .hs-row:has(h2.hs-split:not(.is-in)) .hs-row-body .hs-btn { opacity: 0; translate: 0 12px; transition: none; }
+  .hs-roles > li { transition: opacity 0.7s var(--hs-ease-soft), translate 0.8s var(--hs-ease-soft); transition-delay: calc(0.2s + var(--ri, 0) * 60ms); }
+  .hs-row:has(h2.hs-split:not(.is-in)) .hs-roles > li { opacity: 0; translate: 0 14px; transition: none; }
+  .hs-roles > li:nth-child(2) { --ri: 1; } .hs-roles > li:nth-child(3) { --ri: 2; } .hs-roles > li:nth-child(4) { --ri: 3; }
+  .hs-roles > li:nth-child(5) { --ri: 4; } .hs-roles > li:nth-child(n+6) { --ri: 5; }
+}
+
+/* ---------- Page heads: an entrance like the Home hero's (desktop) ----------
+   CSS only, so it starts with the first paint and can't flash: the title
+   rises in, the lede then the buttons fade up in a short stagger, and the
+   banner photo opens from a third (clip-path) while settling from a slight
+   zoom — the Home hero's moves, a little quicker. Desktop (≥961px) without
+   reduced motion; tablets and phones show the head still (the photo is the
+   LCP element there). Backwards fill, so nothing is left on the elements. */
+@media (prefers-reduced-motion: no-preference) and (min-width: 961px) {
+  .hs-title-split .hs-w > span { animation: hs-line-in 1.1s cubic-bezier(0.16, 1, 0.3, 1) calc(0.1s + var(--wi, 0) * 70ms) backwards; } /* word by word, each out of its own mask, like the Home hero's lines */
+  :is(.hs-page-head, .hs-ds-head) .hs-lede { animation: hs-fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.35s backwards; }
+  .hs-page-head .hs-btn { animation: hs-fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s backwards; }
+  .hs-page-head .hs-btn ~ .hs-btn { animation-delay: 0.58s; }
+  .hs-page-photo .hs-photo-frame { animation: hs-hero-open 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.15s backwards; }
+  .hs-page-photo .hs-photo-img { animation: hs-head-settle 2s cubic-bezier(0.16, 1, 0.3, 1) 0.15s backwards; }
+}
+@keyframes hs-head-settle { from { scale: 1.12; } }
+
+/* Page titles' word masks (titleWords in ui.js), at every size; the rise
+   itself plays on desktop only (Page heads, above). */
+.hs-title-split .hs-w { display: inline-block; overflow: clip; vertical-align: top; padding: 0 0.1em 0.16em 0; margin: 0 -0.1em -0.16em 0; }
+.hs-title-split .hs-w > span { display: inline-block; }
+
+/* ---------- Our own radios and checkboxes ----------
+   The browser's controls draw a dark grey fill in dark mode (brown against the
+   navy). These are drawn by us: a ring / rounded square in the control colour
+   (≥3:1 against the page); chosen, an ink ring with an ink dot / an ink fill
+   with a page-coloured check. The same in every scheme and mode. (Chips keep
+   their hidden input.) */
+.hs input:is([type="radio"], [type="checkbox"]):not(.hs-chip input) { -webkit-appearance: none; appearance: none; flex: none; display: inline-grid; place-content: center; width: 22px; height: 22px; margin: 2px 0 0; border: 1.5px solid var(--hs-control); background: transparent; cursor: pointer; transition: border-color var(--hs-dur-fast) var(--hs-ease), background-color var(--hs-dur-fast) var(--hs-ease); }
+.hs input[type="radio"]:not(.hs-chip input) { border-radius: 50%; }
+.hs input[type="radio"]:not(.hs-chip input):checked { border-color: var(--hs-ink); background: radial-gradient(circle, var(--hs-ink) 0 4.5px, transparent 5.5px); }
+.hs input[type="checkbox"]:not(.hs-chip input) { border-radius: 5px; }
+.hs input[type="checkbox"]:not(.hs-chip input):checked { border-color: var(--hs-ink); background: var(--hs-ink) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F2F5F7' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12.5 4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 16px no-repeat; }
+.hs[data-hs-theme="shore"]:not([data-hs-mode="dark"]) input[type="checkbox"]:not(.hs-chip input):checked { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F6F2EA' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12.5 4.5 4.5L19 7.5'/%3E%3C/svg%3E"); } /* Shore's linen */
+.hs[data-hs-mode="dark"] input[type="checkbox"]:not(.hs-chip input):checked { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231E2A36' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12.5 4.5 4.5L19 7.5'/%3E%3C/svg%3E"); }
+.hs input:is([type="radio"], [type="checkbox"]):not(.hs-chip input):hover { border-color: var(--hs-ink); }
+.hs input:is([type="radio"], [type="checkbox"]):not(.hs-chip input):disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* The care guide's options (Services' "Which care fits?") fade up one after
+   another (60ms apart, from 0.25s), keyed to the row's heading like the FAQ,
+   so they reset and replay with it. */
+@media (prefers-reduced-motion: no-preference) {
+  .hs-guide legend, .hs-guide-opt { transition: opacity 0.7s var(--hs-ease-soft), translate 0.8s var(--hs-ease-soft), border-color var(--hs-dur-fast) var(--hs-ease), background-color var(--hs-dur-fast) var(--hs-ease); transition-delay: calc(0.25s + var(--gi, 0) * 60ms), calc(0.25s + var(--gi, 0) * 60ms), 0s, 0s; }
+  .hs-row:has(h2.hs-split:not(.is-in)) :is(.hs-guide legend, .hs-guide-opt) { opacity: 0; translate: 0 14px; transition: none; }
+  .hs-guide-opt:nth-child(1) { --gi: 1; } .hs-guide-opt:nth-child(2) { --gi: 2; } .hs-guide-opt:nth-child(3) { --gi: 3; } .hs-guide-opt:nth-child(n+4) { --gi: 4; }
+}
+
+/* ---------- Why you can trust us: the last beat of the page load ----------
+   Home's credentials row is on screen at load on desktop, so it joins the
+   hero's entrance as its final beat: its label fades up, then each figure is
+   uncovered by a mask sliding left to right (150ms apart, its contents
+   drifting in a little behind the mask, the divider coming with its column),
+   then the Sample stamp. CSS only, desktop (≥961px), no reduced motion,
+   backwards fill. */
+@media (prefers-reduced-motion: no-preference) and (min-width: 961px) {
+  #hs-creds .hs-row-label { animation: hs-fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.05s backwards; }
+  .hs-creds > .hs-cred { animation: hs-mask-slide 1s cubic-bezier(0.65, 0, 0.35, 1) backwards; }
+  .hs-creds > .hs-cred > * { animation: hs-mask-drift 1.2s cubic-bezier(0.16, 1, 0.3, 1) backwards; }
+  .hs-creds > .hs-cred:nth-child(1), .hs-creds > .hs-cred:nth-child(1) > * { animation-delay: 1.15s; }
+  .hs-creds > .hs-cred:nth-child(2), .hs-creds > .hs-cred:nth-child(2) > * { animation-delay: 1.3s; }
+  .hs-creds > .hs-cred:nth-child(3), .hs-creds > .hs-cred:nth-child(3) > * { animation-delay: 1.45s; }
+  .hs-creds > .hs-cred:nth-child(4), .hs-creds > .hs-cred:nth-child(4) > * { animation-delay: 1.6s; }
+  #hs-creds .hs-creds-note { animation: hs-fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2s backwards; }
+}
+@keyframes hs-mask-slide { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes hs-mask-drift { from { translate: -24px 0; } }
+
+/* ---------- Partners Who Trust Us: the same sliding mask ----------
+   MaskRows (client.js) adds .hs-mask to the marks list and toggles .is-in as
+   it scrolls in (replaying when it drops back below the screen; at page load,
+   after the credentials). The row label fades up, then each mark is
+   uncovered left to right, 100ms apart, its contents drifting in behind. */
+@media (prefers-reduced-motion: no-preference) {
+  .hs-logos.hs-mask > li { clip-path: inset(0 100% 0 0); }
+  .hs-logos.hs-mask > li > * { translate: -24px 0; }
+  .hs-logos.hs-mask.is-in > li { clip-path: inset(0 0 0 0); transition: clip-path 1s cubic-bezier(0.65, 0, 0.35, 1) calc(0.15s + var(--mi, 0) * 100ms); }
+  .hs-logos.hs-mask.is-in > li > * { translate: 0 0; transition: translate 1.2s cubic-bezier(0.16, 1, 0.3, 1) calc(0.15s + var(--mi, 0) * 100ms); }
+  .hs-logos > li:nth-child(2) { --mi: 1; } .hs-logos > li:nth-child(3) { --mi: 2; } .hs-logos > li:nth-child(4) { --mi: 3; }
+  .hs-logos > li:nth-child(5) { --mi: 4; } .hs-logos > li:nth-child(6) { --mi: 5; }
+  .hs-row:has(.hs-logos.hs-mask) .hs-row-label { transition: opacity 0.8s var(--hs-ease-soft), translate 0.8s var(--hs-ease-soft); }
+  .hs-row:has(.hs-logos.hs-mask:not(.is-in)) .hs-row-label { opacity: 0; translate: 0 14px; transition: none; }
+}
+
+/* The closing band after a full-bleed chapter (Services ends on its sand
+   "How visits work"): room above it, as a row's bottom padding gives on Home. */
+.hs-chapter + .hs-band { margin-top: 80px; }
+@media (max-width: 680px) { .hs-chapter + .hs-band { margin-top: 48px; } }

@@ -1,5 +1,5 @@
-import { AREAS, FAQS, SERVICES } from "@/components/hearthside/data";
-import { Button, Icon, LogoMark, PartnerLogos, PhoneLink, Photo, Row, Sample } from "@/components/hearthside/ui";
+import { AREAS, BASE, CREDENTIALS, FAQS, SERVICES } from "@/components/hearthside/data";
+import { Button, CallBand, CallButton, Icon, LogoMark, PartnerLogos, Photo, Row, Sample, titleWords } from "@/components/hearthside/ui";
 import { ModeSwitch, ZipCheck } from "@/components/hearthside/client";
 import "@/app/pitch/hearthside/css/design-system.css";
 
@@ -25,7 +25,7 @@ const ratio = (a, b) => {
 const grade = (r) => (r >= 7 ? "AAA" : r >= 4.5 ? "AA" : r >= 3 ? "3:1 UI" : "Decorative");
 
 // Every scheme's tokens, [light, dark], mirroring hearthside.css. Text rows
-// (measure: true) are checked against that scheme's page colour.
+// (measure: true) are checked against that scheme's page color.
 const TOKENS = [
   ["--hs-page", "Page", "The one page background"],
   ["--hs-surface", "Surface", "Inputs, floating cards"],
@@ -34,34 +34,49 @@ const TOKENS = [
   ["--hs-ink-2", "Ink 2", "Secondary text", true],
   ["--hs-rule", "Rule", "Section and column hairlines (decorative)"],
   ["--hs-control", "Control", "Input and control borders", true],
-  ["--hs-ember", "Accent", "Button hover, highlights"],
-  ["--hs-ember-text", "Accent text", "Eyebrows, links", true],
-  ["--hs-sage", "Sage", "Success and status", true],
-  ["--hs-window", "Warm accent", "A light left on: the hero's first-visit dot and the closing band's lit mark; never text on a light ground"],
+  ["--hs-line", "Line", "Hairlines inside components (inputs, tables)"],
+  ["--hs-ember", "Accent", "Button hover, highlights; in Shore dark, the peach fill of the current page and accent labels"],
+  ["--hs-ember-hover", "Accent hover", "Links and accent text on hover"],
+  ["--hs-on-ember", "On accent", "Text on an accent fill"],
+  ["--hs-ember-text", "Accent text", "Links, the How can we help? lede, step numerals, the steps rail", true],
+  ["--hs-ember-soft", "Accent tint", "The nav's current-page leaf and accent labels (not used in Shore dark, where the peach itself is)"],
+  ["--hs-sage", "Sage", "Finished statuses only (Accepted, Start of care)", true],
+  ["--hs-window", "Warm accent", "A light left on: the hero's first-visit dot, never text on a light ground"],
+  ["--hs-glow", "Glow", "The first-visit dot's breathing glow"],
+  ["--hs-house", "House", "The closing band in light mode and the dark chapter (Behind the scenes)"],
+  ["--hs-focus", "Focus", "Focus rings (≥3:1 against the page)"],
+  ["--hs-photo", "Photo", "Photo placeholders"],
+  ["--hs-hill-2", "Map", "The service-area map's hills"],
 ];
 const SCHEMES = [
   {
-    id: "tide", name: "Tide", note: "Cool: misty blue-grey pages, navy ink, a harbour-blue accent.",
+    id: "tide", name: "Tide", note: "Cool: misty blue-gray pages, navy ink, a harbor-blue accent. Dark: navy pages, blue-tinted ink, a sky-blue accent.",
     v: {
       "--hs-page": ["#F2F5F7", "#1E2A36"], "--hs-surface": ["#FBFCFD", "#253340"], "--hs-sand": ["#E3EAEF", "#2A3846"],
       "--hs-ink": ["#1E2A36", "#E3EDF8"], "--hs-ink-2": ["#3F4D5A", "#C3CFDA"], "--hs-rule": ["#B8C5D0", "#455565"],
       "--hs-control": ["#75838F", "#8593A1"], "--hs-ember": ["#1F5E8C", "#7FB6E0"], "--hs-ember-text": ["#1B5480", "#93C3E8"],
       "--hs-sage": ["#2F6650", "#93C9AC"], "--hs-window": ["#D98A2B", "#F0A04A"],
+      "--hs-line": ["#D3DCE3", "#34434F"], "--hs-ember-hover": ["#184B70", "#93C3E8"], "--hs-on-ember": ["#FFFFFF", "#0D1720"], "--hs-ember-soft": ["#DCE8F2", "#2A4560"],
+      "--hs-glow": ["#FFC27A", "#FFB25C"], "--hs-house": ["#22303D", "#141D26"], "--hs-focus": ["#1F5FBF", "#8DB8FF"], "--hs-photo": ["#E1E8EE", "#26323F"], "--hs-hill-2": ["#9DB2C6", "#273644"],
     },
-    pairs: [["Page on Ink (primary button)", "#F2F5F7", "#1E2A36", "#1E2A36", "#E3EDF8"], ["Text on Accent (button hover)", "#FFFFFF", "#1F5E8C", "#0D1720", "#7FB6E0"], ["Accent text on Accent tint", "#1B5480", "#DCE8F2", "#93C3E8", "#2A4560"], ["Ink 2 on Alt surface", "#3F4D5A", "#E3EAEF", "#C3CFDA", "#2A3846"]],
+    band: { bg: ["#22303D", "#F2F5F7"], ink: ["#E3EDF8", "#1E2A36"], ink2: ["#C3CFDA", "#3F4D5A"], accent: ["#93C3E8", "#1B5480"] },
+    pairs: [["Page on Ink (primary button)", "#F2F5F7", "#1E2A36", "#1E2A36", "#E3EDF8"], ["Text on Accent (button hover)", "#FFFFFF", "#1F5E8C", "#0D1720", "#7FB6E0"], ["Current page / accent label", "#1B5480", "#DCE8F2", "#93C3E8", "#2A4560"], ["Ink 2 on Alt surface", "#3F4D5A", "#E3EAEF", "#C3CFDA", "#2A3846"]],
   },
   {
-    id: "shore", name: "Shore", note: "The default, in dark mode. Warm and cool combined. Light: warm linen pages, navy ink, a harbour-blue accent, a peach sky over blue hills. Dark: navy pages, warm ink, the ember accent.",
+    id: "shore", name: "Shore", note: "The default, in dark mode. Warm and cool combined. Light: warm linen pages, navy ink, a harbor-blue accent. Dark: navy pages, warm ink, a peach accent.",
     v: {
       "--hs-page": ["#F6F2EA", "#1E2A36"], "--hs-surface": ["#FFFDF8", "#253240"], "--hs-sand": ["#ECE5D8", "#2B3745"],
       "--hs-ink": ["#1E2A36", "#F4EEE5"], "--hs-ink-2": ["#3E4956", "#CFC7BB"], "--hs-rule": ["#C7BDAD", "#485564"],
       "--hs-control": ["#7C8089", "#8A929C"], "--hs-ember": ["#1F5E8C", "#EE9466"], "--hs-ember-text": ["#1B5480", "#F4A77F"],
       "--hs-sage": ["#2F6650", "#93C9AC"], "--hs-window": ["#C0602E", "#EE9466"],
+      "--hs-line": ["#DDD4C5", "#36424F"], "--hs-ember-hover": ["#184B70", "#F4A77F"], "--hs-on-ember": ["#FFFFFF", "#1B1410"], "--hs-ember-soft": ["#DCE6EE", "#4A2F22"],
+      "--hs-glow": ["#FFB066", "#FFA459"], "--hs-house": ["#1E2A36", "#141B23"], "--hs-focus": ["#1F5FBF", "#8DB8FF"], "--hs-photo": ["#E7E0D5", "#27313D"], "--hs-hill-2": ["#A1AFBC", "#263442"],
     },
-    pairs: [["Page on Ink (primary button)", "#F6F2EA", "#1E2A36", "#1E2A36", "#F4EEE5"], ["Text on Accent (button hover)", "#FFFFFF", "#1F5E8C", "#1B1410", "#EE9466"], ["Accent text on Accent tint", "#1B5480", "#DCE6EE", "#F4A77F", "#4A2F22"], ["Ink 2 on Alt surface", "#3E4956", "#ECE5D8", "#CFC7BB", "#2B3745"]],
+    band: { bg: ["#1E2A36", "#F6F2EA"], ink: ["#F4EEE5", "#1E2A36"], ink2: ["#CFC7BB", "#3E4956"], accent: ["#F4A77F", "#B0401A"] },
+    pairs: [["Page on Ink (primary button)", "#F6F2EA", "#1E2A36", "#1E2A36", "#F4EEE5"], ["Text on Accent (button hover)", "#FFFFFF", "#1F5E8C", "#1B1410", "#EE9466"], ["Current page / accent label (dark: on the peach)", "#1B5480", "#DCE6EE", "#1B1410", "#EE9466"], ["Ink 2 on Alt surface", "#3E4956", "#ECE5D8", "#CFC7BB", "#2B3745"]],
   },
 ];
-// Status colours are shared by both schemes.
+// Status colors are shared by both schemes.
 const STATUS_PAIRS = [
   ["Sage on Sage tint (status)", "#2F6650", "#DDEBE2", "#93C9AC", "#27443A"],
   ["Warning on Warning tint", "#7A5200", "#F7E8C6", "#E9C177", "#45381C"],
@@ -80,7 +95,7 @@ export default function DesignSystem() {
     <div className="hs-wrap hs-ds">
       <header className="hs-ds-head">
         <div>
-          <h1>Design system</h1>
+          <h1 className="hs-title-split" aria-label="Design system">{titleWords("Design system")}</h1>
           <p className="hs-lede">
             An editorial grid for a care brand: one calm background, generous space between sections, a label column beside every section, and type that&rsquo;s large and easy to read. Dark by default, with a full light mode; body text meets WCAG AAA (7:1) in both.
           </p>
@@ -188,40 +203,54 @@ export default function DesignSystem() {
                 </tbody>
               </table>
             </div>
+            <h3 className="hs-ds-sub">{sc.name} closing band</h3>
+            <p className="hs-ds-muted" style={{ marginBottom: 16 }}>The band (<code>--hb-*</code>) is navy in light mode and inverts to the scheme&rsquo;s light page in dark mode, so it stands out from the page either way. Ratios against the band.</p>
+            <div className="hs-ds-table-wrap" tabIndex={0} role="region" aria-label={`${sc.name} closing band`}>
+              <table className="hs-ds-table">
+                <thead><tr><th scope="col">Band</th><th scope="col">Light mode</th><th scope="col">Dark mode</th></tr></thead>
+                <tbody>
+                  {[["Ink (heading)", "ink"], ["Ink 2 (lede)", "ink2"], ["Accent (text link)", "accent"]].map(([name, k]) => (
+                    <tr key={k}>
+                      <th scope="row">{name}</th>
+                      {[0, 1].map((m) => <td key={m}><span className="hs-ds-pair" style={{ color: sc.band[k][m], background: sc.band.bg[m] }}>Aa</span><Ratio fg={sc.band[k][m]} bg={sc.band.bg[m]} /></td>)}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         ))}
       </Row>
 
       <Row id="type" label="Type" labelledBy="ds-type">
         <h2 id="ds-type">Type</h2>
-        <p className="hs-lede">Hanken Grotesk for headings, large and bold. Host Grotesk for body text at 18px (16px on phones). DM Mono for small labels and button text, never below 14px.</p>
+        <p className="hs-lede">Fraunces italic for page titles and the editorial accents. Hanken Grotesk for section headings, large and bold. Host Grotesk for body text at 18px (16px on phones). DM Mono for small labels and button text, never below 14px.</p>
         <div className="hs-ds-type">
-          <div><span className="hs-label hs-ds-spec">Display · Hanken 600 · 44–84px</span><p className="hs-ds-display">Care at home, explained.</p></div>
+          <div><span className="hs-label hs-ds-spec">Page title · Fraunces 400 italic · 44–84px · −0.05em</span><p className="hs-ds-display">Compassionate care at home.</p></div>
           <div><span className="hs-label hs-ds-spec">Heading 2 · Hanken 600 · 34–54px</span><p className="hs-ds-h2">How care begins</p></div>
-          <div><span className="hs-label hs-ds-spec">Feature title · Hanken 600 caps</span><p className="hs-ds-h2 hs-ds-caps">Care, close to home</p></div>
+          <div><span className="hs-label hs-ds-spec">Accent line · Fraunces italic</span><p className="hs-ds-h2">Coming home is a big day. <em className="hs-statement-em">We make the next part simple.</em></p></div>
           <div><span className="hs-label hs-ds-spec">Heading 3 · Hanken 600 · 24px</span><p className="hs-ds-h3">A clinician visits your home</p></div>
           <div><span className="hs-label hs-ds-spec">Lede · Host 400 · 20px</span><p className="hs-lede" style={{ marginTop: 0 }}>Four steps from your first call to your first visit.</p></div>
           <div><span className="hs-label hs-ds-spec">Body · Host 400 · 18px / 1.6</span><p>We confirm your address is in our service area, talk with your doctor&rsquo;s office, and review your insurance before anything is scheduled.</p></div>
           <div><span className="hs-label hs-ds-spec">Label · DM Mono 500 · 14px caps</span><p className="hs-label">What we do</p></div>
-          <div><span className="hs-label hs-ds-spec">Numerals · Hanken 300 · 56px</span><p className="hs-step-n">01 02 03 04</p></div>
+          <div><span className="hs-label hs-ds-spec">Quote · Fraunces italic · 26–38px</span><p className="hs-ds-quote">&ldquo;They called back within the hour.&rdquo;</p></div>
+          <div><span className="hs-label hs-ds-spec">Step numerals · Fraunces italic · 112px</span><p className="hs-ds-numerals">1 2 3 4</p></div>
         </div>
       </Row>
 
       <Row id="buttons" label="Buttons" labelledBy="ds-buttons">
         <h2 id="ds-buttons">Buttons</h2>
-        <p className="hs-lede">Ink-filled, square-cornered, labels in mono caps, like the layout&rsquo;s editorial voice. Still 52px tall (44px small), well above the 24px minimum, because a shaky hand on a phone is our everyday user.</p>
-        <ul className="hs-ruled">
-          <li className="hs-ds-row"><Button icon="arrow">Request a call</Button><Button variant="secondary">Refer a patient</Button></li>
-          <li className="hs-ds-row"><Button size="sm">Join our team</Button><Button variant="quiet" icon="arrow">See the checklist</Button></li>
-          <li className="hs-ds-row"><PhoneLink /><ModeSwitch /></li>
-          <li className="hs-ds-row"><Button disabled>Unavailable</Button></li>
+        <p className="hs-lede">Ink-filled or outlined, 6px corners, labels in mono caps. 52px tall (44px small; 65px in the hero and page heads on tablets and up), well above the 24px minimum, because a shaky hand on a phone is our everyday user.</p>
+        <ul className="hs-ruled hs-ds-btn-rules">
+          <li><div className="hs-ds-row"><CallButton /><Button href="#request-a-call" variant="secondary" lead="callback">Request a call</Button><Button href={`${BASE}/referrals/`} variant="quiet" lead="refer">Refer a patient</Button></div>
+            <p className="hs-ds-muted">The order everywhere a call is offered: Call first and filled, with the phone; Request a call outlined, with the calendar; Refer a patient as a text link, with the person-plus.</p></li>
+          <li><div className="hs-ds-row"><Button href={`${BASE}/referrals/#checklist`} variant="secondary" lead="checklist">See the checklist</Button><Button href={`${BASE}/getting-started/`} variant="quiet" icon="arrow">How care begins</Button></div>
+            <p className="hs-ds-muted">Lead icons name the action and stay still. A trailing arrow means the link takes you somewhere, and nudges on hover; buttons that act in place (submit, shuffle, mail) have none.</p></li>
+          <li><div className="hs-ds-row"><Button size="sm">Join our team</Button><Button disabled>Unavailable</Button><ModeSwitch /></div>
+            <p className="hs-ds-muted">Small (44px) for dense spots like the intake app; disabled at half opacity; the light/dark toggle matches the buttons&rsquo; border and corners.</p></li>
         </ul>
-        <div className="hs-band hs-ds-band-mini">
-          <div className="hs-band-ctas" style={{ marginTop: 0 }}>
-            <Button icon="arrow">Request a call</Button>
-            <Button variant="secondary">Refer a patient</Button>
-            <PhoneLink />
-          </div>
+        <div className="hs-ds-band">
+          <CallBand id="ds-band" title="Not sure where to start? Start with a call." lede="The closing band: the last section before the footer on Home, Services, and Getting started, with the calls to action in the hero's order." />
         </div>
       </Row>
 
@@ -282,8 +311,8 @@ export default function DesignSystem() {
       </Row>
 
       <Row id="lists" label="Components" labelledBy="ds-lists">
-        <h2 id="ds-lists">Cards, badges, and switches</h2>
-        <p className="hs-lede">Service cards are a leaf photo, the name with its icon flush right, then one line. Credentials are upright leaf badges. On phones, &ldquo;How can we help?&rdquo; becomes a two-way switch whose raised thumb glides between the choices, and the current page in the nav sits in a sand leaf.</p>
+        <h2 id="ds-lists">Cards, figures, and switches</h2>
+        <p className="hs-lede">Service cards are a leaf photo, the name with its icon flush right, then one line. Credentials are editorial figures: a large lead, then the rest of the sentence. On phones, &ldquo;How can we help?&rdquo; becomes a two-way switch whose raised thumb glides between the choices, and the current page in the nav sits in an accent leaf (the peach itself in Shore dark).</p>
         <ul className="hs-services">
           {SERVICES.slice(0, 3).map((s) => (
             <li key={s.id} className="hs-service">
@@ -294,9 +323,7 @@ export default function DesignSystem() {
           ))}
         </ul>
         <ul className="hs-creds" style={{ marginTop: 56 }}>
-          {[["shield", "Medicare-certified"], ["clipboard", "State-licensed agency"], ["phone", "Intake answered seven days a week"]].map(([icon, text]) => (
-            <li key={text} className="hs-cred"><span className="hs-cred-icon"><Icon name={icon} size={24} /></span><span>{text}</span></li>
-          ))}
+          {CREDENTIALS.map((c) => <li key={c.value} className="hs-cred"><span className="hs-cred-value">{c.value}</span> <span className="hs-cred-text">{c.text}</span></li>)}
         </ul>
         <p className="hs-creds-note"><Sample /></p>
         <div className="hs-ds-row" style={{ marginTop: 40 }}>
@@ -307,6 +334,18 @@ export default function DesignSystem() {
           <details open><summary>{FAQS[0].q}</summary><p>{FAQS[0].a}</p></details>
           <details><summary>{FAQS[1].q}</summary><p>{FAQS[1].a}</p></details>
         </div>
+        <h3 className="hs-ds-sub">Page patterns</h3>
+        <ul className="hs-ruled">
+          <li><h3>Chapters</h3><p className="hs-ds-muted"><code>.hs-chapter</code>: full-bleed sections that break the run of rows. Sand (How can we help?, In their words, a sub-page&rsquo;s middle row) or dark (Behind the scenes), never side by side, since in dark mode the two are close.</p></li>
+          <li><h3>Path cards</h3><p className="hs-ds-muted"><code>.hs-path</code>: a tag with its icon (families, clinician), a 16:9 photo, a title, and the calls to action pinned to the foot. On phones only the chosen card shows, under the switch.</p></li>
+          <li><h3>Full-bleed pause</h3><p className="hs-ds-muted"><code>.hs-bleed</code>: one photo edge to edge, its line in the serif italic in a page-colored leaf panel at the foot. Never a gradient over a photo to carry text.</p></li>
+          <li><h3>Steps</h3><p className="hs-ds-muted">A 4:3 leaf photo with the number in a page-colored leaf tile in its tight corner. On desktop the list pins and plays as a scroll story with a large serif numeral and a rail that fills as you go.</p></li>
+          <li><h3>Clinicians</h3><p className="hs-ds-muted">A square leaf portrait, the name with credentials on a quieter line, role, then visits, languages, and experience on one line across the row. Their own words show on hover with a mouse, inline on touch.</p></li>
+          <li><h3>Contact dock</h3><p className="hs-ds-muted">The site&rsquo;s one home for &ldquo;talk to us&rdquo;: Call and the page&rsquo;s main action, floating once the page&rsquo;s own buttons scroll away, plus back to top on desktop. Families get Request a call; referral pages get Refer a patient.</p></li>
+        </ul>
+        <div className="hs-ds-row" style={{ marginTop: 32 }}>
+          <Sample /><Sample>Sample patient</Sample><Sample>Sample data</Sample><Sample>Sample partners</Sample>
+        </div>
       </Row>
 
       <Row id="principles" label="Principles" labelledBy="ds-principles">
@@ -315,7 +354,7 @@ export default function DesignSystem() {
           <li><h3>Guide, never decide</h3><p className="hs-ds-muted">The site explains coverage and eligibility in general terms and routes people to a person. Clinical and coverage decisions stay with clinicians and the intake team.</p></li>
           <li><h3>Ask for less</h3><p className="hs-ds-muted">Minimal public forms; health details only in the secure intake system. No advertising pixels or session recording on intake pages.</p></li>
           <li><h3>Readable first</h3><p className="hs-ds-muted">18px+ body, AAA body text, 52px buttons, labels at 14px+ (not the tiny labels the editorial style usually uses), zoom always allowed, everything usable by keyboard.</p></li>
-          <li><h3>Calm by design</h3><p className="hs-ds-muted">One background, space instead of boxes and rules, one dark band per page. Motion is slow and stops entirely under reduced motion.</p></li>
+          <li><h3>Calm by design</h3><p className="hs-ds-muted">One background, space instead of boxes and rules, a chapter or two for rhythm, one closing band. Motion is slow and stops entirely under reduced motion.</p></li>
         </ul>
       </Row>
     </div>

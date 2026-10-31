@@ -1,4 +1,4 @@
-import { BASE, PHONE, REFERRAL_FAX } from "@/components/hearthside/data";
+import { BASE, HOURS, PHONE, REFERRAL_FAX } from "@/components/hearthside/data";
 import { DOCS, LIAISONS } from "@/components/hearthside/intake-data";
 import { Button, Icon, PageHead, Row, Sample } from "@/components/hearthside/ui";
 import ReferralForm from "@/components/hearthside/ReferralForm";
@@ -21,8 +21,8 @@ export default function Referrals() {
         lede="For physicians, hospitals, discharge planners, and senior communities. Send a referral securely, see it acknowledged right away, and follow it from received to start of care."
       >
         <div className="hs-hero-ctas" style={{ marginTop: 28 }}>
-          <Button href="#refer" icon="arrow">Start a referral</Button>
-          <Button href="#checklist" variant="secondary">See the checklist</Button>
+          <Button href="#refer" lead="refer">Start a referral</Button>
+          <Button href="#checklist" variant="secondary" lead="checklist">See the checklist</Button>
         </div>
       </PageHead>
 
@@ -61,7 +61,7 @@ export default function Referrals() {
         <h2 id="rf-contacts" className="hs-visually-hidden">Your contacts</h2>
         <ul className="hs-ruled">
           {LIAISONS.map((l) => <li key={l.id}><h3>{l.name}</h3><p className="hs-muted">{l.role}</p><p style={{ marginTop: 10 }}><Sample /></p></li>)}
-          <li><h3>Intake line</h3><p className="hs-muted"><a href={PHONE.href}>{PHONE.display}</a>, Monday to Friday 8 am to 6 pm, with on-call coverage after hours.</p></li>
+          <li><h3>Intake line</h3><p className="hs-muted"><a href={PHONE.href}>{PHONE.display}</a>, {HOURS}, with on-call coverage after hours.</p></li>
           <li><h3>Referral fax</h3><p className="hs-muted">{REFERRAL_FAX}, if your system can&rsquo;t use the secure form. We&rsquo;ll confirm receipt by phone.</p></li>
         </ul>
       </Row>

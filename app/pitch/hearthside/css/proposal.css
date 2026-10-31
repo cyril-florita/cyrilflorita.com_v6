@@ -13,11 +13,15 @@
 .hs-prop-try { margin-top: 40px; color: var(--hs-ink-2); }
 
 .hs-prop-steps { display: grid; gap: 0; margin-top: 32px; list-style: none; }
-.hs-prop-steps li { display: grid; grid-template-columns: 72px minmax(0, 1fr) auto; gap: 8px 24px; align-items: baseline; padding-block: 24px; border-top: 1px solid color-mix(in srgb, var(--hs-rule) 60%, transparent); }
+.hs-prop-steps li { display: grid; grid-template-columns: 72px minmax(0, 1fr) auto; gap: 8px 24px; align-items: start; padding-block: 24px; border-top: 1px solid color-mix(in srgb, var(--hs-rule) 60%, transparent); }
 .hs-prop-steps li:first-child { border-top: 0; padding-top: 0; }
 .hs-prop-n { font-family: var(--hs-font-display); font-size: 40px; font-weight: 300; line-height: 1; color: var(--hs-ember-text); }
 .hs-prop-steps h3 { font-size: 22px; }
-.hs-prop-steps p { margin-top: 6px; color: var(--hs-ink-2); max-width: 60ch; }
+.hs-prop-steps p { margin-top: 14px; color: var(--hs-ink-2); max-width: 60ch; }
+/* The numeral, the title and the duration share one top line: each is
+   trimmed to its capital height, so their letters' tops align (the numeral is
+   nearly twice the title's size, so baselines left it towering above). */
+.hs-prop-n, .hs-prop-steps h3, .hs-prop-when { text-box: trim-both cap alphabetic; }
 .hs-prop-when { font-family: var(--hs-font-label); font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--hs-ink-2); white-space: nowrap; }
 
 .hs-prop-prices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 32px 0 0; }

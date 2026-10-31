@@ -1,5 +1,5 @@
-import { BASE, FAQS, MEDICARE_CONDITIONS, MEDICARE_URL, PHONE, SERVICES, STEPS, AREAS } from "@/components/hearthside/data";
-import { Button, Icon, PartnerLogos, Photo, Row, Sample } from "@/components/hearthside/ui";
+import { BASE, CREDENTIALS, FAQS, MEDICARE_CONDITIONS, MEDICARE_URL, PHONE, SERVICES, STEPS, AREAS } from "@/components/hearthside/data";
+import { Button, CallBand, CallButton, Icon, PartnerLogos, Photo, Row, Sample } from "@/components/hearthside/ui";
 import { BehindTheScenes, PathSwitch, ScrollCue, StepStory, ZipCheck } from "@/components/hearthside/client";
 import { PHOTO_LQIP } from "@/components/hearthside/photo-lqip";
 
@@ -38,14 +38,6 @@ function HeroArt() {
 // Trust details (all sample content): credentials, the clinicians who visit
 // (portraits supplied by Cyril, AI-generated with Perplexity),
 // and what families say. Fictional but specific; no outcome claims.
-// Credentials as editorial figures: a large lead, then the rest of the
-// sentence (each reads as one line to a screen reader).
-const CREDENTIALS = [
-  { value: "Since 2009", text: "serving the San Fernando and Santa Clarita Valleys" },
-  { value: "7 days", text: "a week, a person answers our intake line" },
-  { value: "Medicare", text: "certified and state-licensed home health agency" },
-  { value: "Bonded", text: "and insured, every clinician who visits" },
-];
 const CLINICIANS = [
   { photo: "/img/hearthside/photos/team-maria-reyes", initials: "MR", name: "Maria Reyes, RN", role: "Nurse case manager", area: "Granada Hills", languages: "English, Spanish", years: 14, note: "I tell families what I\u2019m checking, and why, every visit." },
   { photo: "/img/hearthside/photos/team-david-okafor", initials: "DO", name: "David Okafor, PT, DPT", role: "Physical therapist", area: "Valencia", languages: "English", years: 9, note: "Progress is the walk to the mailbox, then around the block." },
@@ -73,11 +65,11 @@ export default function HearthsideHome() {
           <div className="hs-hero-actions" data-dock-hide>
             {/* In this order: Call (black), Request a call (white), then Refer a patient as a text link. */}
             <div className="hs-hero-ctas">
-              <a className="hs-btn hs-btn-primary" href={PHONE.href}><Icon name="phone" size={20} />Call {PHONE.display}</a>
-              <Button href="#request-a-call" variant="secondary">Request a call</Button>
+              <CallButton />
+              <Button href="#request-a-call" variant="secondary" lead="callback">Request a call</Button>
             </div>
             <p className="hs-hero-refer">
-              <Button href={`${BASE}/referrals/`} variant="quiet" icon="arrow">Refer a patient</Button>
+              <Button href={`${BASE}/referrals/`} variant="quiet" lead="refer">Refer a patient</Button>
             </p>
           </div>
         </div>
@@ -103,47 +95,44 @@ export default function HearthsideHome() {
         <p className="hs-creds-note"><Sample>Sample partners</Sample></p>
       </Row>
 
-      <Row label="We're Here for You" labelledBy="hs-paths-title">
-        <h2 id="hs-paths-title">How can we help?</h2>
+      {/* How can we help?: one section on its own full-width sand ground,
+          out of the label-row pattern — a centred intro (a small "How can we
+          help?" label, the page's statement as the heading, a lede), then the
+          two choices as cards on the page colour, each just its tag, photo
+          (16:9, the whole frame), title, and buttons. Phones keep the
+          two-way switch (PathSwitch) above one card. */}
+      <section className="hs-chapter is-sand hs-help" aria-labelledby="hs-paths-title">
+        <div className="hs-help-head">
+          <p className="hs-help-label">How can we help?</p>
+          <h2 id="hs-paths-title">Coming home from the hospital is a big day. <em className="hs-statement-em">We make the next part simple.</em></h2>
+          <p className="hs-lede">Two ways in, depending on who you are.</p>
+        </div>
         {/* Phones: a two-option switch above the cards shows one at a time
             (PathSwitch in client.js), so both choices are seen at once and the
             chosen card keeps its detail. Desktop and tablet show both cards. */}
         <PathSwitch labels={["For families", "For professionals"]}>
           <article className="hs-path">
+            <p className="hs-path-tag"><Icon name="families" size={22} />For families</p>
             {/* Supplied by Cyril (AI-generated with Perplexity); same grade. */}
-            <Photo shot="An older parent on the phone at home, her daughter beside her" src="/img/hearthside/photos/family-phone" alt="An older woman talks on the phone on her sofa while her daughter sits close, holding her arm" position="45% 30%" sizes="(max-width: 760px) 92vw, 40vw" />
+            <Photo shot="An older parent on the phone at home, her daughter beside her" src="/img/hearthside/photos/family-phone" alt="An older woman talks on the phone on her sofa while her daughter sits close, holding her arm" position="45% 30%" ratio="16 / 9" sizes="(max-width: 760px) 92vw, 40vw" />
             <h3>I&rsquo;m looking for care for myself or someone I love</h3>
-            <ul className="hs-path-list">
-              <li><Icon name="check" size={20} />Plain answers about what home health covers</li>
-              <li><Icon name="check" size={20} />We work with your doctor, so you don&rsquo;t have to chase paperwork</li>
-              <li><Icon name="check" size={20} />A short call, no forms about your medical history</li>
-            </ul>
             <div className="hs-path-ctas">
               {/* For families the main action is the phone, as in the hero. */}
-              <a className="hs-btn hs-btn-primary" href={PHONE.href}><Icon name="phone" size={20} />Call {PHONE.display}</a>
-              <Button href="#request-a-call" variant="quiet">Request a call</Button>
+              <CallButton />
+              <Button href="#request-a-call" variant="quiet" lead="callback">Request a call</Button>
             </div>
           </article>
           <article className="hs-path">
+            <p className="hs-path-tag"><Icon name="clinician" size={22} />For professionals</p>
             {/* Supplied by Cyril (AI-generated with Perplexity); same grade. */}
-            <Photo shot="A clinician talking a care plan through with an older patient at her desk" src="/img/hearthside/photos/pro-consult" alt="A smiling nurse in blue scrubs talks with an older woman across a desk with a laptop and paperwork" position="45% 30%" sizes="(max-width: 760px) 92vw, 40vw" />
+            <Photo shot="A clinician talking a care plan through with an older patient at her desk" src="/img/hearthside/photos/pro-consult" alt="A smiling nurse in blue scrubs talks with an older woman across a desk with a laptop and paperwork" position="45% 30%" ratio="16 / 9" sizes="(max-width: 760px) 92vw, 40vw" />
             <h3>I&rsquo;m a physician, hospital, or discharge planner</h3>
-            <ul className="hs-path-list">
-              <li><Icon name="check" size={20} />A referral checklist and secure document submission</li>
-              <li><Icon name="check" size={20} />Confirmation when your referral arrives</li>
-              <li><Icon name="check" size={20} />A status link you can check, from received to start of care</li>
-            </ul>
             <div className="hs-path-ctas">
-              <Button href={`${BASE}/referrals/`} icon="arrow">Refer a patient</Button>
-              <Button href={`${BASE}/referrals/#checklist`} variant="quiet">See the checklist</Button>
+              <Button href={`${BASE}/referrals/`} lead="refer">Refer a patient</Button>
+              <Button href={`${BASE}/referrals/#checklist`} variant="quiet" lead="checklist">See the checklist</Button>
             </div>
           </article>
         </PathSwitch>
-      </Row>
-
-      {/* A pause in big type, with no label column: the page's one statement. */}
-      <section className="hs-statement" aria-label="Our promise">
-        <p>Coming home from the hospital is a big day. <em className="hs-statement-em">We make the next part simple.</em></p>
       </section>
 
       <Row label="What we do" labelledBy="hs-services-title">
@@ -168,12 +157,14 @@ export default function HearthsideHome() {
       </Row>
 
       <Row label="We Make it Easy for You" labelledBy="hs-steps-title">
+        {/* Desktop: a pinned scroll story (StepStory in client.js) — the
+            heading, its lede and the four steps stick together as one frame
+            while the steps play through. Elsewhere, and under reduced motion,
+            the grid (a swipe row on phones). */}
+        <StepStory>
+        <div className="hs-story-frame">
         <h2 id="hs-steps-title">How care begins</h2>
         <p className="hs-lede">Four steps from your first call to your first visit. We&rsquo;ll tell you what&rsquo;s happening at each one.</p>
-        {/* Desktop: a pinned scroll story (StepStory in client.js) — the four
-            steps play through in one sticky frame. Elsewhere, and under
-            reduced motion, the grid (a swipe row on phones). */}
-        <StepStory>
         <ol className="hs-ruled hs-swipe">
           {STEPS.map((s, i) => (
             <li key={s.title} className="hs-step">
@@ -184,11 +175,13 @@ export default function HearthsideHome() {
             </li>
           ))}
         </ol>
+        </div>
         </StepStory>
       </Row>
 
-      {/* A full-bleed photo between chapters: edge to edge, no frame, one line
-          over it. Opens the clinicians row. */}
+      {/* A full-bleed photo between chapters: edge to edge, no frame, its one
+          line in a page-coloured leaf panel (no gradient over the photo).
+          Opens the clinicians row. */}
       <div className="hs-bleed">
         <Photo shot="A nurse and her patient smiling together at home" src="/img/hearthside/photos/careers-nurse-smiling" alt="A smiling nurse in blue scrubs, holding a tablet, sits beside an older woman on her sofa" ratio="21 / 9" position="50% 28%" sizes="100vw" />
         <p className="hs-bleed-line">You&rsquo;ll know your clinician&rsquo;s name before the first visit.</p>
@@ -200,12 +193,12 @@ export default function HearthsideHome() {
         <ul className="hs-clinicians hs-swipe">
           {CLINICIANS.map((c) => (
             <li key={c.name} className="hs-clinician">
-              {/* Their own line: over the portrait on hover or focus where
-                  there's a mouse, under the role on touch screens. */}
-              <p className="hs-clinician-note">&ldquo;{c.note}&rdquo;</p>
               <Photo shot={`Portrait of ${c.name}`} src={c.photo} alt={`${c.name}, ${c.role.toLowerCase()}`} ratio="1 / 1" position="50% 30%" sizes="(max-width: 760px) 55vw, (max-width: 1100px) 45vw, 20vw" />
               <h3>{c.name.split(", ")[0]}<span className="hs-clinician-cred">{c.name.split(", ").slice(1).join(", ")}</span></h3>
               <p className="hs-clinician-role">{c.role}</p>
+              {/* Their own line, after who they are (so screen readers hear the name first): over the portrait on hover or focus where
+                  there's a mouse, under the role on touch screens. */}
+              <p className="hs-clinician-note"><span>&ldquo;{c.note}&rdquo;</span></p>
               <dl className="hs-clinician-meta">
                 <div><dt>Visits</dt><dd>{c.area}</dd></div>
                 <div><dt>Speaks</dt><dd>{c.languages}</dd></div>
@@ -292,7 +285,7 @@ export default function HearthsideHome() {
             <p className="hs-lede">The intake system behind this site routes each referral to the right coordinator by ZIP code, logs every call, and flags what&rsquo;s missing, so nothing waits in an inbox.</p>
             <div className="hs-hero-ctas" style={{ marginTop: 28 }}>
               <Button href={`${BASE}/intake/`} icon="arrow">Try the intake demo</Button>
-              <Button href={`${BASE}/referrals/#refer`} variant="secondary">Send a test referral</Button>
+              <Button href={`${BASE}/referrals/#refer`} variant="secondary" lead="refer">Send a test referral</Button>
             </div>
           </div>
           <div>
@@ -315,21 +308,10 @@ export default function HearthsideHome() {
         </div>
       </Row>
 
-      {/* The payoff of "a light left on": as the band comes into view the H in
-          its mark lights amber and a warm glow spreads from it (BandLight in
-          client.js; hearthside.css, "A light left on"). */}
-      <section className="hs-band" aria-labelledby="hs-band-title">
-        <span className="hs-band-glow" aria-hidden="true" />
-        <span className="hs-band-window" aria-hidden="true" />
-        <h2 id="hs-band-title">Not sure where to start? Start with a call.</h2>
-        <p>Our intake team will listen, answer your questions, and tell you what happens next. No forms about your medical history: we&rsquo;ll ask what we need when we talk.</p>
-        {/* The same order as the hero: Call (filled), Request a call (outlined), Refer a patient (text link). */}
-        <div className="hs-band-ctas">
-          <a className="hs-btn hs-btn-primary" href={PHONE.href}><Icon name="phone" size={20} />Call {PHONE.display}</a>
-          <Button href="#request-a-call" variant="secondary">Request a call</Button>
-          <Button href={`${BASE}/referrals/`} variant="quiet" icon="arrow">Refer a patient</Button>
-        </div>
-      </section>
+      <CallBand
+        title="Not sure where to start? Start with a call."
+        lede={<>Our intake team will listen, answer your questions, and tell you what happens next. No forms about your medical history: we&rsquo;ll ask what we need when we talk.</>}
+      />
     </div>
   );
 }

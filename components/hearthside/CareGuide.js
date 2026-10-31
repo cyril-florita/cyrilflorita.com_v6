@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { BASE, PHONE } from "./data";
-import { Button } from "./ui";
+import { Button, CallButton } from "./ui";
 
 // "Which kind of care fits?" One question, and a plain answer that points to
 // the right next step. It explains the difference between skilled home
@@ -62,13 +62,13 @@ export default function CareGuide() {
             <div className="hs-hero-ctas">
               {r.cta === "home" ? (
                 <>
-                  <Button href="#request-a-call" icon="arrow">Request a call</Button>
-                  <Button href={PHONE.href} variant="secondary">Call {PHONE.display}</Button>
+                  <CallButton />
+                  <Button href="#request-a-call" variant="secondary" lead="callback">Request a call</Button>
                 </>
               ) : (
                 <>
                   <Button href="https://eldercare.acl.gov" variant="secondary" icon="external">Eldercare Locator</Button>
-                  <Button href="#request-a-call" variant="quiet" icon="arrow">Talk it through with us</Button>
+                  <Button href="#request-a-call" variant="quiet" lead="callback">Talk it through with us</Button>
                 </>
               )}
             </div>

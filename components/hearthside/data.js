@@ -9,11 +9,23 @@ export const BASE = "/pitch/hearthside";
 // the referral fax stays a fictional 555-01xx number (reserved for fiction).
 export const PHONE = { display: "(818) 675-0181", href: "tel:+18186750181" };
 export const REFERRAL_FAX = "(818) 555-0187";
+// When a person answers the intake line (the credentials row, the callback
+// modal and the referrals page all read it, so they never disagree).
+export const HOURS = "7 days a week, 8 am to 6 pm";
 
 // The footer's pitch to agency owners: Cyril's email (same as the portfolio's
 // ContactBand), with a prefilled subject.
 export const PITCH_EMAIL = "cyril.florita@pm.me";
 export const PITCH_MAILTO = `mailto:${PITCH_EMAIL}?subject=${encodeURIComponent("Hearthside: a website and intake system for our agency")}`;
+
+// Credentials as editorial figures: a large lead, then the rest of the
+// sentence (each reads as one line to a screen reader).
+export const CREDENTIALS = [
+  { value: "Since 2009", text: "serving the San Fernando and Santa Clarita Valleys" },
+  { value: "7 days", text: "a week, a person answers our intake line" },
+  { value: "Medicare", text: "certified and state-licensed home health agency" },
+  { value: "Bonded", text: "and insured, every clinician who visits" },
+];
 
 export const NAV = [
   { href: `${BASE}/services/`, label: "Services" },

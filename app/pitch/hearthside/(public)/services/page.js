@@ -1,5 +1,5 @@
 import { BASE, SERVICES } from "@/components/hearthside/data";
-import { Button, Icon, PageHead, Photo, Row } from "@/components/hearthside/ui";
+import { Button, CallBand, Icon, PageHead, Photo, Row } from "@/components/hearthside/ui";
 import CareGuide from "@/components/hearthside/CareGuide";
 
 export const metadata = {
@@ -56,6 +56,8 @@ export default function Services() {
         </ul>
       </Row>
       </div>
+      {/* The closing "start with a call" band, as on Home: the last section before the footer. */}
+      <CallBand title="Not sure which care fits? Start with a call." lede={<>Tell us what&rsquo;s going on. Our intake team will tell you whether home health fits, what your coverage looks like, and what happens next.</>} />
     </div>
   );
 }

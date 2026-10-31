@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { BASE } from "./data";
 import { DECLINE_REASONS, DOCS, REGIONS, SERVICE_OPTIONS, coordinator, fmtDue, isOverdue, regionFor, sourceName, stageName } from "./intake-data";
 import { accept, decline, logCall, receiveDoc, startOfCare, useIntake } from "./store";
-import { Icon, Skeleton } from "./ui";
+import { Icon, Sample, Skeleton } from "./ui";
 
 // One referral, staff view: what's next and the actions that move it along,
 // its documents, details and the full activity log (the audit trail). Every
@@ -36,7 +36,7 @@ export default function ReferralRecord() {
     <>
       <p><Link href={`${BASE}/intake/`}>← Board</Link></p>
       <header className="hs-rec-head">
-        <span className="hs-label">{r.id} <span className="hs-sample" style={{ marginLeft: 8 }}>Sample</span></span>
+        <span className="hs-label">{r.id} <Sample>Sample patient</Sample></span>
         <h1>{r.patient.name}, {r.patient.age}</h1>
         <div className="hs-rec-meta">
           <span className={`hs-status ${STAGE_TONE[r.stage]}`}>{stageName(r.stage)}</span>

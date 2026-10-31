@@ -1,5 +1,5 @@
 import { ROLES } from "@/components/hearthside/data";
-import { Button, PageHead, Row, Sample } from "@/components/hearthside/ui";
+import { Button, Icon, PageHead, Row, Sample } from "@/components/hearthside/ui";
 import { ApplyForm } from "@/components/hearthside/Forms";
 
 export const metadata = {
@@ -26,10 +26,10 @@ export default function Careers() {
           <h2 id="cr-work">What the work is really like</h2>
           <p>Home health means driving between patients&rsquo; homes, working on your own for much of the day, and seeing the difference you make in the place people actually live. It&rsquo;s independent, and it&rsquo;s never the same twice.</p>
           <ul className="hs-list" style={{ marginTop: 8 }}>
-            <li>Caseloads planned around where you live, to keep drive time down</li>
-            <li>Mileage reimbursed, with a company tablet and phone</li>
-            <li>Mentoring for clinicians new to home health</li>
-            <li>Paid continuing education every year</li>
+            <li><Icon name="check" size={20} />Caseloads planned around where you live, to keep drive time down</li>
+            <li><Icon name="check" size={20} />Mileage reimbursed, with a company tablet and phone</li>
+            <li><Icon name="check" size={20} />Mentoring for clinicians new to home health</li>
+            <li><Icon name="check" size={20} />Paid continuing education every year</li>
           </ul>
           <p><Sample>Sample benefits</Sample></p>
         </div>

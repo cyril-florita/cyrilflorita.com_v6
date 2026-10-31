@@ -54,7 +54,7 @@ export default function AreaMap() {
             );
           })}
         </svg>
-        <figcaption className="hs-map-note">Stylised, not to scale</figcaption>
+        <figcaption className="hs-map-note">Stylized, not to scale</figcaption>
       </figure>
       <div className="hs-two">
         <ZipCheck areas={AREAS} onResult={(r) => setHit(r.kind === "yes" ? r.town : null)} />

@@ -1,5 +1,5 @@
 import { BASE, MEDICARE_CONDITIONS, MEDICARE_URL, PHONE, STEPS } from "@/components/hearthside/data";
-import { Button, Icon, PageHead, PhoneLink, Row, Photo } from "@/components/hearthside/ui";
+import { Button, CallButton, CallBand, Icon, PageHead, Photo, Row } from "@/components/hearthside/ui";
 import { StepStory } from "@/components/hearthside/client";
 
 export const metadata = {
@@ -35,8 +35,9 @@ export default function GettingStarted() {
         lede="From your first call to your first visit, usually in a few days. We'll tell you what's happening at every step, and we do the paperwork with your doctor's office."
       >
         <div className="hs-hero-ctas" style={{ marginTop: 28 }}>
-          <Button href="#request-a-call" icon="arrow">Request a call</Button>
-          <PhoneLink />
+          {/* As on Home: Call first (filled, phone icon), then Request a call. */}
+          <CallButton />
+          <Button href="#request-a-call" variant="secondary" lead="callback">Request a call</Button>
         </div>
       </PageHead>
 
@@ -108,6 +109,8 @@ export default function GettingStarted() {
           </div>
         </div>
       </Row>
+      {/* The closing "start with a call" band, as on Home: the last section before the footer. */}
+      <CallBand title="Ready when you are. Start with a call." lede={<>Our intake team checks your coverage and sets up the first visit with your doctor&rsquo;s office. No forms about your medical history: we&rsquo;ll ask what we need when we talk.</>} />
     </div>
   );
 }

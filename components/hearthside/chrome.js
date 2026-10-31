@@ -58,9 +58,9 @@ export function Footer() {
               <p>Hearthside is a concept: a website families can actually use, and the referral intake system behind it, from first call to start of care. If you&rsquo;d like your agency&rsquo;s site and intake to work like this, let&rsquo;s talk.</p>
             </div>
             <div className="hs-owner-ctas">
-              <Button href={PITCH_MAILTO} icon="arrow">Email Cyril</Button>
-              <Button href={`${BASE}/intake/`} variant="secondary">Try the intake demo</Button>
-              <Button href={`${BASE}/proposal/`} variant="secondary">Read the proposal</Button>
+              <Button href={PITCH_MAILTO} lead="mail">Email Cyril</Button>
+              <Button href={`${BASE}/intake/`} variant="secondary" icon="arrow">Try the intake demo</Button>
+              <Button href={`${BASE}/proposal/`} variant="secondary" icon="arrow">Read the proposal</Button>
               <a className="hs-btn hs-btn-quiet" href="/">See more of Cyril&rsquo;s work</a>
             </div>
           </div>

@@ -1,5 +1,5 @@
 import { BASE, PHONE } from "@/components/hearthside/data";
-import { Button, PageHead, Row } from "@/components/hearthside/ui";
+import { Button, CallButton, PageHead, Row } from "@/components/hearthside/ui";
 import AreaMap from "@/components/hearthside/AreaMap";
 
 export const metadata = {
@@ -25,8 +25,8 @@ export default function ServiceArea() {
             <p>Call us anyway. We&rsquo;ll help you find a home health agency that serves your address, and your doctor&rsquo;s office can usually suggest one too.</p>
           </div>
           <div className="hs-hero-ctas" style={{ marginTop: 0 }}>
-            <Button href={PHONE.href} icon="arrow">Call {PHONE.display}</Button>
-            <Button href="#request-a-call" variant="secondary">Request a call</Button>
+            <CallButton />
+            <Button href="#request-a-call" variant="secondary" lead="callback">Request a call</Button>
           </div>
         </div>
       </Row>

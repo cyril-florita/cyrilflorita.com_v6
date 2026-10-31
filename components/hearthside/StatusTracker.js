@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { BASE, PHONE } from "./data";
 import { coordinator, sourceName } from "./intake-data";
 import { STATUS_STEPS, statusStep, useIntake } from "./store";
-import { Button, Icon } from "./ui";
+import { Button, CallButton, Icon } from "./ui";
 
 // The referrer's status page: where a referral stands, like package
 // tracking. Progress only: no diagnosis, documents or clinical notes, so the
@@ -74,7 +74,7 @@ export default function StatusTracker() {
         <div><dt>Coordinator</dt><dd>{c ? c.name : "Being assigned"}</dd></div>
       </dl>
       <div className="hs-hero-ctas">
-        <Button href={PHONE.href} variant="secondary">Call intake {PHONE.display}</Button>
+        <CallButton>Call intake {PHONE.display}</CallButton>
         <Button href={`${BASE}/intake/referral/?id=${r.id}`} variant="quiet" icon="arrow">See the staff view (demo)</Button>
       </div>
     </div>

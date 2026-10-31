@@ -48,7 +48,7 @@ export function CallbackForm({ onClose }) {
       <div className="hs-done" role="status" tabIndex={-1} ref={doneRef}>
         <Icon name="check" />
         <h3>Thanks, {f.name.split(" ")[0]}. We&rsquo;ll call you {f.time === "morning" ? "tomorrow morning" : f.time === "afternoon" ? "tomorrow afternoon" : "as soon as we can"}.</h3>
-        <p className="hs-muted">Our intake team calls back within one business day. If it&rsquo;s urgent, call us now at <a href={PHONE.href}>{PHONE.display}</a>. If it&rsquo;s an emergency, call 911.</p>
+        <p className="hs-muted">Our intake team calls back the same or next day. If it&rsquo;s urgent, call us now at <a href={PHONE.href}>{PHONE.display}</a>. If it&rsquo;s an emergency, call 911.</p>
         <p className="hs-hint">Preview mode: this request wasn&rsquo;t sent anywhere.</p>
         {onClose && <div><Button variant="secondary" onClick={onClose}>Close</Button></div>}
       </div>
@@ -89,7 +89,7 @@ export function CallbackForm({ onClose }) {
       {f.who === "pro" && <p className="hs-preview-note"><Icon name="info" /><span>Referring a patient? Use the <a href={`${BASE}/referrals/#refer`}>secure referral form</a> so documents go straight to intake.</span></p>}
       <p className="hs-hint">We only need this to call you back. Please don&rsquo;t include medical details here; we&rsquo;ll ask what we need when we talk.</p>
       <div className="hs-hero-ctas" style={{ marginTop: 0 }}>
-        <Button type="submit" icon="arrow">Request a call</Button>
+        <Button type="submit" lead="callback">Request a call</Button>
         <span className="hs-hint">Preview mode: nothing is sent.</span>
       </div>
     </form>
@@ -167,7 +167,7 @@ export function ApplyForm() {
         </div>
       </div>
       <div className="hs-hero-ctas" style={{ marginTop: 0 }}>
-        <Button type="submit" icon="arrow">Apply for this role</Button>
+        <Button type="submit">Apply for this role</Button>
         <span className="hs-hint">Preview mode: nothing is sent.</span>
       </div>
     </form>

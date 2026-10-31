@@ -3,7 +3,7 @@ import { useState } from "react";
 import { BASE } from "./data";
 import { DOCS, PARTNER_ORGS, SERVICE_OPTIONS, samplePatient } from "./intake-data";
 import { submitReferral } from "./store";
-import { Button, Icon } from "./ui";
+import { Button, Icon, Sample } from "./ui";
 
 // The secure referral form, in preview mode: the patient is a generated
 // sample (read-only fields, "New sample patient" shuffles them), so no real
@@ -64,7 +64,7 @@ export default function ReferralForm() {
         <div className="hs-copy"><code>cyrilflorita.com{status}</code></div>
         <div className="hs-ack-actions">
           <Button href={`${BASE}/intake/?arrive=${sent.id}`} icon="arrow">Watch it arrive in intake</Button>
-          <Button href={status} variant="secondary">Check status</Button>
+          <Button href={status} variant="secondary" icon="arrow">Check status</Button>
           <Button variant="quiet" onClick={() => { setSent(null); shuffle(); setConsent(false); }}>Send another</Button>
         </div>
         <p className="hs-hint">Preview mode: this referral exists only in your browser, for the demo.</p>
@@ -96,7 +96,7 @@ export default function ReferralForm() {
       </fieldset>
 
       <fieldset>
-        <legend>Patient <span className="hs-sample" style={{ marginLeft: 8 }}>Sample patient</span></legend>
+        <legend>Patient <Sample>Sample patient</Sample></legend>
         <div className="hs-form-grid">
           <div className="hs-field"><label htmlFor="rf-name">Name</label><input id="rf-name" className="hs-input" value={patient.name} readOnly /></div>
           <div className="hs-field"><label htmlFor="rf-age">Age</label><input id="rf-age" className="hs-input" value={patient.age} readOnly /></div>
@@ -104,7 +104,7 @@ export default function ReferralForm() {
           <div className="hs-field"><label htmlFor="rf-payer">Insurance</label><input id="rf-payer" className="hs-input" value={patient.payer} readOnly /></div>
           <div className="hs-field is-wide"><label htmlFor="rf-reason">Reason for referral</label><input id="rf-reason" className="hs-input" value={patient.reason} readOnly /></div>
         </div>
-        <div><Button variant="quiet" icon="arrow" onClick={shuffle}>New sample patient</Button></div>
+        <div><Button variant="quiet" onClick={shuffle}>New sample patient</Button></div>
       </fieldset>
 
       <fieldset>
@@ -143,7 +143,7 @@ export default function ReferralForm() {
       <label className="hs-check"><input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} /> The patient or their representative agreed to this referral.</label>
       {error && <p className="hs-error" role="alert">{error}</p>}
       <div className="hs-hero-ctas" style={{ marginTop: 0 }}>
-        <Button type="submit" icon="arrow">Send referral securely</Button>
+        <Button type="submit" lead="refer">Send referral securely</Button>
       </div>
     </form>
   );

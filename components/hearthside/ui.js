@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Children, cloneElement, isValidElement } from "react";
 import { BASE, PHONE } from "./data";
 import { PHOTO_LQIP } from "./photo-lqip";
 
@@ -44,10 +45,18 @@ const ICONS = {
   social: <><circle cx="8.5" cy="8" r="3" /><circle cx="16.5" cy="9" r="2.5" /><path d="M3 20a5.5 5.5 0 0 1 11 0M14 15.2a4.5 4.5 0 0 1 7 3.8" /></>,
   aide: <><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z" /></>,
   phone: <path d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5L16 14l4 1.5V19a1.5 1.5 0 0 1-1.5 1.5A15.5 15.5 0 0 1 3.5 5.5 1.5 1.5 0 0 1 5 4Z" />,
+  mail: <><rect x="3" y="5" width="18" height="14" rx="2.5" /><path d="m4 7 8 6 8-6" /></>, // Email Cyril
+  callback: <><rect x="4" y="5" width="16" height="15" rx="2.5" /><path d="M4 10h16M8.5 3v4M15.5 3v4" /><path d="M9 14.5l2 2 4-4" /></>, // Request a call: a calendar with a check — "book a time" (chosen from eight on 2026-10-30)
   arrow: <path d="M5 12h14M13 6l6 6-6 6" />,
   up: <path d="M12 19V5M6 11l6-6 6 6" />,
   family: <><path d="M4 11.5 12 5l8 6.5" /><path d="M6 10v9.5h12V10" /><path d="M10 19.5v-5h4v5" /></>,
   clipboard: <><rect x="5" y="5" width="14" height="16" rx="2" /><path d="M9 5V3.5h6V5M9 11h6M9 15h4" /></>,
+  families: <><circle cx="9" cy="8" r="3" /><circle cx="16.5" cy="9" r="2.5" /><path d="M3.5 20a5.5 5.5 0 0 1 11 0M14 15.2a4.5 4.5 0 0 1 7 3.8" /></>, // the "For families" tag: two people (chosen from eight on 2026-10-30)
+  clinician: <><circle cx="12" cy="7" r="3.5" /><path d="M5 21a7 7 0 0 1 14 0" /><path d="M12 15.5v3M10.5 17h3" /></>, // the "For professionals" tag: a person with a cross on their chest (chosen from eight)
+  website: <><rect x="3" y="4" width="15" height="12" rx="2" /><path d="M3 8h15" /><path d="m13 12 7.5 3-3.2 1.2L16 19.5Z" /></>, // the proposal's "Your website": a page with a cursor (chosen 2026-10-30)
+  dashboard: <><rect x="3" y="4" width="18" height="16" rx="2" /><path d="M7 16v-3M11 16V9M15 16v-5M19 16" /><path d="M3 8h18" /></>, // the proposal's "Your intake system": one screen for the pipeline (chosen 2026-10-30)
+  checklist: <><path d="M10 6h10M10 12h10M10 18h10" /><path d="m3.5 6 1.5 1.5L7.5 5M3.5 12l1.5 1.5L7.5 11M3.5 18l1.5 1.5 2.5-2.5" /></>, // See the checklist: lines with check marks (chosen from eight on 2026-10-30)
+  refer: <><circle cx="10" cy="8" r="3.5" /><path d="M3.5 20a6.5 6.5 0 0 1 13 0M19 8v6M16 11h6" /></>, // Refer a patient: a person with a plus — "a new patient" (chosen from eight on 2026-10-30)
   shield: <><path d="M12 3 5 6v5.5c0 4.4 3 8 7 9.5 4-1.5 7-5.1 7-9.5V6Z" /><path d="m9 12 2 2 4-4" /></>,
   map: <><path d="M12 21s-6-5.6-6-11a6 6 0 0 1 12 0c0 5.4-6 11-6 11Z" /><circle cx="12" cy="10" r="2.2" /></>,
   check: <path d="m5 12.5 4.5 4.5L19 7.5" />,
@@ -68,11 +77,15 @@ export function Icon({ name, size = 24, className = "" }) {
   );
 }
 
-// variant: primary (ember fill) | secondary (outlined) | quiet (text link look)
-export function Button({ href, children, variant = "primary", icon, size, ...rest }) {
+// variant: primary (ink fill) | secondary (outlined) | quiet (text link look)
+// lead: an icon before the label (phone, callback, refer, checklist), which
+// stays still; icon: a trailing arrow, only on links that go somewhere, which
+// nudges on hover.
+export function Button({ href, children, variant = "primary", icon, lead, size, ...rest }) {
   const cls = `hs-btn hs-btn-${variant}${size ? ` hs-btn-${size}` : ""}`;
   const body = (
     <>
+      {lead && <Icon name={lead} size={20} className="hs-btn-lead" />}
       {children}
       {icon && <Icon name={icon} size={20} />}
     </>
@@ -85,13 +98,11 @@ export function Button({ href, children, variant = "primary", icon, size, ...res
   return <Link className={cls} href={href} {...rest}>{body}</Link>;
 }
 
-export function PhoneLink({ className = "" }) {
-  return (
-    <a className={`hs-phone ${className}`} href={PHONE.href}>
-      <Icon name="phone" size={20} />
-      <span>{PHONE.display}</span>
-    </a>
-  );
+// The call button: "Call (818) 675-0181" with the phone leading — filled and
+// first wherever a call is offered (hero, path card, closing band, page heads,
+// care guide); `children` overrides the label ("Call intake …").
+export function CallButton({ variant = "primary", children, ...rest }) {
+  return <Button href={PHONE.href} variant={variant} lead="phone" {...rest}>{children ?? `Call ${PHONE.display}`}</Button>;
 }
 
 // The honest marker on invented content (credentials, people, data).
@@ -115,8 +126,8 @@ export function Row({ label, labelledBy, children, tight, id }) {
 // "/img/hearthside/photos/name", exported as -900.webp and -1600.webp by the
 // grading step) it renders the real image, cropped to `ratio` around
 // `position`; without it, a quiet block that says what the shot should be, so
-// the page doubles as the shot list. Photos are warm-graded to sit with the
-// illustrations and never share a component with them.
+// the page doubles as the shot list. Every photo gets the same cool, faded grade
+// at export (see CLAUDE.md).
 export function Photo({ shot, ratio = "4 / 3", src, alt, position = "50% 50%", sizes = "(max-width: 900px) 92vw, 60vw" }) {
   // A real photo sits in a frame (the leaf shape, clipping), which paints a
   // tiny blurred preview (photo-lqip.js) until the image arrives, and lets the
@@ -172,13 +183,53 @@ export function PartnerLogos() {
   );
 }
 
+// The closing "start with a call" band (Home, Services, Getting started):
+// the page's last section before the footer. Heading and lede per page; the
+// calls to action in the hero's order — Call (filled, phone), Request a call
+// (outlined, calendar), Refer a patient (text link, person-plus). Styles and
+// choreography: .hs-band in hearthside.css.
+export function CallBand({ id = "hs-band-title", title, lede }) {
+  return (
+    <section className="hs-band" aria-labelledby={id}>
+      <h2 id={id}>{title}</h2>
+      <p>{lede}</p>
+      <div className="hs-band-ctas">
+        <CallButton />
+        <Button href="#request-a-call" variant="secondary" lead="callback">Request a call</Button>
+        <Button href={`${BASE}/referrals/`} variant="quiet" lead="refer">Refer a patient</Button>
+      </div>
+    </section>
+  );
+}
+
+// A title's words, each in its own mask (rendered on the server, so the
+// page head's entrance can be CSS from the first paint — see "Page heads" in
+// hearthside.css). Keeps nested elements (the serif em) and numbers the words
+// (--wi) for the stagger; titleText gives the plain text for aria-label.
+export function titleWords(node, n = { i: 0 }) {
+  if (typeof node === "string") {
+    return node.split(/(\s+)/).map((part, k) => (!part || /^\s+$/.test(part)) ? part : (
+      <span key={k} className="hs-w" aria-hidden="true"><span style={{ "--wi": n.i++ }}>{part}</span></span>
+    ));
+  }
+  if (Array.isArray(node)) return node.map((c, k) => <span key={k} style={{ display: "contents" }}>{titleWords(c, n)}</span>);
+  if (isValidElement(node)) return cloneElement(node, {}, ...Children.toArray(titleWords(node.props.children, n)));
+  return node;
+}
+export function titleText(node) {
+  if (typeof node === "string" || typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(titleText).join("");
+  if (isValidElement(node)) return titleText(node.props.children);
+  return "";
+}
+
 // A subpage's opening: the title on the left, lede on the right,
 // and optionally a wide banner photo (first on phones, app-style).
 export function PageHead({ title, lede, children, photo }) {
   return (
     <header className={`hs-page-head${photo ? " has-photo" : ""}`}>
       <div>
-        <h1>{title}</h1>
+        <h1 className="hs-title-split" aria-label={titleText(title)}>{titleWords(title)}</h1>
       </div>
       <div data-dock-hide={children ? "" : undefined}>
         {lede && <p className="hs-lede">{lede}</p>}

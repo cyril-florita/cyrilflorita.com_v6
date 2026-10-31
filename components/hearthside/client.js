@@ -279,22 +279,22 @@ export function ContactDock() {
     <div className="hs-wrap hs-dock-row">
     <div className={`hs-dock${hide ? " is-hidden" : ""}`} role="region" aria-label={partner ? "Referral contacts" : "Contact us"} aria-hidden={hide || undefined}>
       <a className="hs-btn hs-btn-primary hs-dock-phone" href={PHONE.href} tabIndex={tab}>
-        <Icon name="phone" size={20} />
+        <Icon name="phone" size={20} className="hs-btn-lead" />
         <span className="hs-dock-label">{partner ? "Intake line" : "Call"}</span>
         <span className="hs-dock-num">{PHONE.display}</span>
       </a>
       {partner
-        ? <Link className="hs-btn hs-btn-secondary" href={path === "/referrals" ? "#refer" : `${BASE}/referrals/#refer`} tabIndex={tab}>Refer a patient</Link>
+        ? <Link className="hs-btn hs-btn-secondary" href={path === "/referrals" ? "#refer" : `${BASE}/referrals/#refer`} tabIndex={tab}><Icon name="refer" size={20} className="hs-btn-lead" />Refer a patient</Link>
         : (
           <>
-            <a className="hs-btn hs-btn-secondary" href="#request-a-call" tabIndex={tab}>Request a call</a>
+            <a className="hs-btn hs-btn-secondary" href="#request-a-call" tabIndex={tab}><Icon name="callback" size={20} className="hs-btn-lead" />Request a call</a>
             {/* Desktop only (hearthside.css): a third white button for referral partners. */}
-            <Link className="hs-btn hs-btn-secondary hs-dock-refer" href={`${BASE}/referrals/#refer`} tabIndex={tab}>Refer a patient</Link>
+            <Link className="hs-btn hs-btn-secondary hs-dock-refer" href={`${BASE}/referrals/#refer`} tabIndex={tab}><Icon name="refer" size={20} className="hs-btn-lead" />Refer a patient</Link>
           </>
         )}
     </div>
     <button type="button" className={`hs-btn hs-btn-secondary hs-totop${far ? "" : " is-hidden"}`} onClick={toTop} aria-label="Back to top" tabIndex={far ? undefined : -1} aria-hidden={far ? undefined : true}>
-      <Icon name="up" size={22} />
+      <Icon name="up" size={22} className="hs-btn-lead" /> {/* doesn't nudge on hover */}
     </button>
     </div>
     </div>
@@ -308,7 +308,7 @@ export function ContactDock() {
 // fold is hidden, only once this runs, and never under reduced motion; the
 // classes come off once a piece has settled, so its own transitions (hovers)
 // aren't delayed. Re-runs per page.
-const REVEAL = ".hs-row-body > :not(.hs-ruled):not(.hs-services):not(.hs-creds):not(.hs-clinicians):not(h2):not(.hs-steps-story), .hs-ruled > *, .hs-services > *, .hs-creds > *, .hs-clinicians > *, .hs-bleed, .hs-band"; // row headings and the statement reveal word by word (SplitHeads)
+const REVEAL = ".hs-row-body > :not(.hs-ruled):not(.hs-services):not(.hs-creds):not(.hs-clinicians):not(h2):not(h3):not(.hs-steps-story):not(.hs-faq), .hs-ruled > *, .hs-services > *, .hs-creds > *, .hs-clinicians > *, .hs-bleed, .hs-band"; // row headings and the statement reveal word by word (SplitHeads)
 export function Reveal() {
   const pathname = usePathname();
   useEffect(() => {
@@ -319,7 +319,12 @@ export function Reveal() {
     // vertically, so they stayed lowered and rose as they were swiped in, and
     // their offset made the row itself scroll up and down by a few pixels.
     const swipes = (el) => /auto|scroll/.test(getComputedStyle(el.parentElement).overflowX);
-    const els = [...new Set([...document.querySelectorAll(`main :is(${REVEAL})`)].map((el) => (swipes(el) ? el.parentElement : el)))].filter((el) => el.getBoundingClientRect().top > fold && !el.closest(".hs-steps-story.is-story"));
+    // Text-only blocks (a paragraph, a list, the closing band, a column of
+    // heading and copy) are left to their own word and line reveals
+    // (SplitHeads, LineReveal): a block fade on top hid those, which played
+    // underneath it. Blocks with a photo or a widget keep the fade.
+    const textOnly = (el) => el.matches("p, ul, ol, .hs-band") || (!el.querySelector("img, .hs-photo-frame, .hs-photo, .hs-bts, .hs-logos, .hs-zip, .hs-faq, form, svg.hs-map, .hs-area-map, table") && !!el.querySelector("p, h2, h3, li"));
+    const els = [...new Set([...document.querySelectorAll(`main :is(${REVEAL})`)].map((el) => (swipes(el) ? el.parentElement : el)))].filter((el) => el.getBoundingClientRect().top > fold && !el.closest(".hs-steps-story.is-story") && !textOnly(el));
     const settle = (e) => { if (e.target === e.currentTarget && e.propertyName === "opacity") { e.target.classList.remove("hs-reveal", "is-in"); e.target.style.removeProperty("--hs-i"); e.target.removeEventListener("transitionend", settle); } };
     els.forEach((el) => {
       const sibs = [...el.parentElement.children].filter((c) => els.includes(c));
@@ -334,41 +339,26 @@ export function Reveal() {
   return null;
 }
 
-// The closing band's light: a band below the fold starts dark
-// (data-light="off") and lights as it comes well into view — the H in its
-// mark flickers on amber, then a warm glow spreads from it. Without JS, or
-// under reduced motion, the band is simply lit. Re-runs per page.
-export function BandLight() {
-  const pathname = usePathname();
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
-    const bands = [...document.querySelectorAll("main .hs-band:has(.hs-band-window)")].filter((b) => b.getBoundingClientRect().top > window.innerHeight);
-    bands.forEach((b) => b.setAttribute("data-light", "off"));
-    const io = new IntersectionObserver((es) => es.forEach((e) => {
-      if (e.isIntersecting) { e.target.setAttribute("data-light", "on"); io.unobserve(e.target); }
-    }), { threshold: 0.6 });
-    bands.forEach((b) => io.observe(b));
-    return () => { io.disconnect(); bands.forEach((b) => b.removeAttribute("data-light")); };
-  }, [pathname]);
-  return null;
-}
-
-// Headings that reveal word by word: each word rises out of a mask, in a
-// short stagger, as the heading scrolls in (row headings and the statement).
-// Only headings below the fold, never under reduced motion; a heading's own
-// text becomes its accessible name and the word spans are hidden from
-// assistive tech (the statement, a paragraph, keeps its words readable).
-const SPLIT = "main .hs-row-body > h2:not(.hs-visually-hidden), main .hs-statement p";
+// Every heading in the page content (h1–h3: page titles, section headings,
+// card and step titles) reveals word by word — each word rises out of its own
+// mask, 35ms apart — as it scrolls into view, and replays: a heading that drops
+// back below the screen (scrolling up past it) resets, so it plays again on
+// the way down. Headings already on screen when the page opens show at once
+// (they join the cycle after). Not the Home hero (its own entrance) or the
+// pinned steps' titles (they animate with each step); never under reduced
+// motion. A heading's text becomes its accessible name and the word spans are
+// hidden from assistive tech.
+const SPLIT = "main :is(h1, h2, h3):not(.hs-visually-hidden), main .hs-bleed-line, .hs-footer h2"; // plus the line over the full-bleed photo, set like a headline, and the footer's headings
+const SPLIT_SKIP = ".hs-hero, .hs-steps-story.is-story .hs-step, .hs-title-split"; // page titles are split on the server
 export function SplitHeads() {
   const pathname = usePathname();
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
-    // Already split by an earlier run (effects run twice in dev) but not yet
-    // shown: observe again rather than leave it hidden.
-    const els = [...document.querySelectorAll(SPLIT)].filter((el) => !el.classList.contains("is-in") && (el.classList.contains("hs-split") || el.getBoundingClientRect().top > window.innerHeight));
+    const els = [...document.querySelectorAll(SPLIT)].filter((el) => !el.closest(SPLIT_SKIP));
+    // Effects run twice in dev: headings an earlier run split are reused.
     els.filter((el) => !el.classList.contains("hs-split")).forEach((el) => {
-      const heading = el.tagName === "H2";
-      if (heading) el.setAttribute("aria-label", el.textContent.replace(/\s+/g, " ").trim());
+      const heading = /^H[1-6]$/.test(el.tagName); // a paragraph (the photo line) keeps its words readable instead
+      if (heading) el.setAttribute("aria-label", el.innerText.replace(/\s+/g, " ").trim()); // innerText keeps the break between a name and its credentials
       let i = 0;
       const walk = (node) => [...node.childNodes].forEach((n) => {
         if (n.nodeType === 1) return walk(n);
@@ -389,11 +379,117 @@ export function SplitHeads() {
         n.replaceWith(frag);
       });
       walk(el);
+      // On screen already: shown in the same frame, so nothing drops in.
+      const r = el.getBoundingClientRect();
       el.classList.add("hs-split");
+      if (r.top < window.innerHeight && r.bottom > 0) el.classList.add("is-in");
     });
-    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -10% 0px" });
+    const io = new IntersectionObserver((es) => es.forEach((e) => {
+      if (e.isIntersecting) e.target.classList.add("is-in");
+      else if (e.boundingClientRect.top > (e.rootBounds?.bottom ?? window.innerHeight)) e.target.classList.remove("is-in"); // left below the screen: replay next time
+    }), { rootMargin: "0px 0px -10% 0px" });
     els.forEach((el) => io.observe(el));
     return () => io.disconnect();
+  }, [pathname]);
+  return null;
+}
+
+// Paragraphs and list items reveal line by line: each line fades in and rises
+// 12px, 60ms after the one above, so a whole paragraph is readable in about
+// half a second (word by word made people wait to read). Words become plain
+// inline spans (screen readers read the paragraph as before; links keep
+// their underline), grouped into lines by where they sit; the lines are
+// re-measured on resize. Replays like the headings: a paragraph that drops
+// back below the screen resets. On-screen ones at load show at once. Not the
+// hero, forms, the pinned steps, the hover notes or the design-system page;
+// never under reduced motion.
+const LINES = "main :is(p, .hs-list li, .hs-checks li, .hs-path-list li), .hs-footer p";
+const LINES_SKIP = ".hs-hero, .hs-bleed-line, form, .hs-steps-story.is-story .hs-step, .hs-clinician-note, .hs-bts, .hs-zip, .hs-faq, .hs-dock, .hs-sample, .hs-help-label, .hs-path-tag";
+export function LineReveal() {
+  const pathname = usePathname();
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
+    if (/design-system/.test(pathname)) return;
+    // A flex or grid paragraph made of several stacked items (the footer's
+    // phone / fax / office lines) is left alone: wrapping its items into one
+    // line ran them together. Only "icon + text" rows get wrapped (below).
+    const stacked = (el) => /flex|grid/.test(getComputedStyle(el).display) && [...el.children].filter((c) => !c.matches("svg, .hs-icon")).length > 1;
+    const els = [...document.querySelectorAll(LINES)].filter((el) => !el.closest(LINES_SKIP) && !el.querySelector(":scope > .hs-sample:only-child") && el.textContent.trim().length > 12 && !stacked(el));
+    const number = (el) => {
+      let line = -1, top = null;
+      el.querySelectorAll(".hs-lw").forEach((w) => {
+        const t = w.getClientRects()[0]?.top ?? 0;
+        if (top === null || t - top > 4) { line++; top = t; }
+        w.style.setProperty("--li", Math.min(line, 12));
+      });
+    };
+    els.filter((el) => !el.classList.contains("hs-lines")).forEach((el) => {
+      // A flex or grid item (a checklist row: icon + text) gets its text in
+      // one wrapper first, or every word would become its own flex item.
+      if (/flex|grid/.test(getComputedStyle(el).display)) {
+        const wrap = document.createElement("span");
+        [...el.childNodes].filter((n) => !(n.nodeType === 1 && n.matches("svg, .hs-icon"))).forEach((n) => wrap.append(n));
+        el.append(wrap);
+      }
+      const walk = (node) => [...node.childNodes].forEach((n) => {
+        if (n.nodeType === 1) { if (!n.matches("svg, .hs-icon, .hs-sample, br")) walk(n); return; }
+        if (n.nodeType !== 3) return;
+        const frag = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) return frag.append(part);
+          const w = document.createElement("span");
+          w.className = "hs-lw";
+          w.textContent = part;
+          frag.append(w);
+        });
+        n.replaceWith(frag);
+      });
+      walk(el);
+      number(el);
+      const r = el.getBoundingClientRect();
+      el.classList.add("hs-lines");
+      if (r.top < window.innerHeight && r.bottom > 0) el.classList.add("is-read");
+    });
+    // Its own class (is-read): Reveal also uses is-in and strips it when its
+    // block fade settles, which hid paragraphs again.
+    const io = new IntersectionObserver((es) => es.forEach((e) => {
+      if (e.isIntersecting) e.target.classList.add("is-read");
+      else if (e.boundingClientRect.top > (e.rootBounds?.bottom ?? window.innerHeight)) e.target.classList.remove("is-read");
+    }), { rootMargin: "0px 0px -6% 0px" });
+    els.forEach((el) => io.observe(el));
+    let t = 0;
+    const onResize = () => { clearTimeout(t); t = setTimeout(() => els.forEach(number), 150); };
+    window.addEventListener("resize", onResize);
+    return () => { io.disconnect(); window.removeEventListener("resize", onResize); clearTimeout(t); };
+  }, [pathname]);
+  return null;
+}
+
+// Sliding-mask rows: the partner marks are uncovered left to right, one after
+// another, as their row scrolls into view, and replay when it drops back
+// below the screen (like the headings). On screen at page load, they play as
+// the last beat of the entrance (after "Why you can trust us"). CSS does the
+// animation ("Partners Who Trust Us" in hearthside.css); this only toggles
+// .is-in. Never under reduced motion.
+const MASKS = "main .hs-logos";
+export function MaskRows() {
+  const pathname = usePathname();
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
+    const els = [...document.querySelectorAll(MASKS)];
+    const timers = [];
+    els.forEach((el) => {
+      el.classList.add("hs-mask");
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0) timers.push(setTimeout(() => el.classList.add("is-in"), 1500));
+    });
+    const io = new IntersectionObserver((es) => es.forEach((e) => {
+      if (e.isIntersecting) { if (performance.now() > 1600) e.target.classList.add("is-in"); }
+      else if (e.boundingClientRect.top > (e.rootBounds?.bottom ?? window.innerHeight)) e.target.classList.remove("is-in");
+    }), { rootMargin: "0px 0px -10% 0px" });
+    els.forEach((el) => io.observe(el));
+    return () => { io.disconnect(); timers.forEach(clearTimeout); };
   }, [pathname]);
   return null;
 }
@@ -429,16 +525,21 @@ export function SwipeRows() {
 export function ScrollCalm() {
   useEffect(() => {
     if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
-    let lx = -1, ly = -1, lastScroll = 0;
+    let lx = -1, ly = -1, lastScroll = 0, btn = null;
     const main = () => document.getElementById("main");
     const scroll = () => {
-      lastScroll = performance.now();
       const m = main();
-      if (m?.hasAttribute("data-hover")) m.removeAttribute("data-hover");
+      if (!m?.hasAttribute("data-hover")) return void (lastScroll = performance.now());
+      // A nudge of the trackpad that leaves the pointer on the same button
+      // keeps its hover (clearing it made the card's photo zoom out and back).
+      if (btn && document.elementFromPoint(lx, ly)?.closest(".hs-btn") === btn) return;
+      lastScroll = performance.now();
+      m.removeAttribute("data-hover");
     };
     const move = (e) => {
       const moved = Math.abs(e.clientX - lx) + Math.abs(e.clientY - ly) > 2;
       lx = e.clientX; ly = e.clientY;
+      btn = e.target.closest?.(".hs-btn") ?? null;
       if (!moved || performance.now() - lastScroll < 200) return;
       const m = main();
       if (m && !m.hasAttribute("data-hover")) m.setAttribute("data-hover", "");
@@ -475,8 +576,13 @@ export function StepStory({ children }) {
       startY = el.getBoundingClientRect().top + window.scrollY;
       span = Math.max(1, el.offsetHeight - frame.offsetHeight);
     };
+    // Below the screen, no step is on, so step 1 plays its entrance (the
+    // photo opening, the numeral and text rising) as the story scrolls in —
+    // the first time and every time the reader comes back down to it.
+    const reset = () => all.forEach((li) => li.removeAttribute("data-on"));
     const update = () => {
       raf = 0;
+      if (el.getBoundingClientRect().top > window.innerHeight * 0.8) return reset();
       const p = Math.min(1, Math.max(0, (window.scrollY + top - startY) / span));
       // Hysteresis: a step changes only once the scroll is clearly past the
       // boundary (6% of a step), so small scrolls up and down around one
@@ -495,7 +601,10 @@ export function StepStory({ children }) {
       if (e.isIntersecting === near) return;
       near = e.isIntersecting;
       if (near && el.classList.contains("is-story")) { measure(); update(); window.addEventListener("scroll", onScroll, { passive: true }); }
-      else window.removeEventListener("scroll", onScroll);
+      else {
+        window.removeEventListener("scroll", onScroll);
+        if (e.boundingClientRect.top > 0) reset(); // left below the screen: replay next time
+      }
     }, { rootMargin: "50% 0px" });
     const apply = () => {
       const on = mq.matches;

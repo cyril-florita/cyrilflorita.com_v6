@@ -1,5 +1,5 @@
 import { ViewTransition } from "react";
-import { BandLight, ContactDock, Header, Reveal, ScrollCalm, SplitHeads, SwipeRows } from "@/components/hearthside/client";
+import { ContactDock, Header, LineReveal, MaskRows, Reveal, ScrollCalm, SplitHeads, SwipeRows } from "@/components/hearthside/client";
 import { Footer } from "@/components/hearthside/chrome";
 import CallbackModal from "@/components/hearthside/CallbackModal";
 import "@/app/pitch/hearthside/css/modal.css";
@@ -15,8 +15,9 @@ export default function PublicLayout({ children }) {
         <main id="main" tabIndex={-1}>{children}</main>
       </ViewTransition>
       <Reveal />
-      <BandLight />
       <SplitHeads />
+      <LineReveal />
+      <MaskRows />
       <SwipeRows />
       <ScrollCalm />
       <Footer />

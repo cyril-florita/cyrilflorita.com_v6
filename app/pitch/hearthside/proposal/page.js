@@ -25,7 +25,7 @@ const PROBLEMS = [
 const BUILD = [
   {
     title: "Your website",
-    icon: "family",
+    icon: "website",
     points: [
       "Pages for families: services, how care begins, your clinicians, coverage guidance, and FAQ",
       "Pages for referral partners: a document checklist, a referral form, and a status link they can share",
@@ -36,7 +36,7 @@ const BUILD = [
   },
   {
     title: "Your intake system",
-    icon: "clipboard",
+    icon: "dashboard",
     points: [
       "A board of every open referral, by stage, with an owner and a time limit for each",
       "Routing by ZIP code to the right coordinator, with the first-call task created for them",
@@ -85,7 +85,7 @@ export default function Proposal() {
           lede="Hearthside is a working example: a website families can actually use, and the intake system that takes each referral from first call to start of care. Here’s how I’d build the same for your agency."
         >
           <div className="hs-prop-ctas">
-            <Button href={PITCH_MAILTO} icon="arrow">Email Cyril</Button>
+            <Button href={PITCH_MAILTO} lead="mail">Email Cyril</Button>
             <Button href={`${BASE}/`} variant="secondary" prefetch={false}>See the example site</Button>
           </div>
         </PageHead>
@@ -155,8 +155,8 @@ export default function Proposal() {
           <h2 id="pr-band">Let&rsquo;s look at your intake together.</h2>
           <p>A 30-minute call: you tell me how referrals reach you today, and I&rsquo;ll show you where this would help. No pitch deck.</p>
           <div className="hs-band-ctas">
-            <Button href={PITCH_MAILTO} icon="arrow">Email Cyril</Button>
-            <Button href={`${BASE}/intake/`} variant="secondary">Try the intake demo</Button>
+            <Button href={PITCH_MAILTO} lead="mail">Email Cyril</Button>
+            <Button href={`${BASE}/intake/`} variant="secondary" icon="arrow">Try the intake demo</Button>
           </div>
           <p className="hs-prop-email">{PITCH_EMAIL}</p>
         </section>

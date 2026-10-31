@@ -5,7 +5,7 @@ import { flushSync } from "react-dom";
 import { BASE } from "./data";
 import { COORDINATORS, OPEN_STAGES, STAGES, coordinator, fmtAgo, fmtDue, isOverdue, missingDocs, route, sourceName, SERVICE_OPTIONS } from "./intake-data";
 import { assign, useIntake } from "./store";
-import { Icon, Skeleton } from "./ui";
+import { Button, Icon, Skeleton } from "./ui";
 
 // The pipeline board: open referrals by stage. Arriving from the referral
 // form (?arrive=HS-…), the new card drops into New and glows, then the
@@ -120,7 +120,7 @@ export default function IntakeBoard() {
           <h1>Intake board</h1>
           <p>Every open referral, from first contact to start of care.</p>
         </div>
-        <Link className="hs-btn hs-btn-secondary hs-btn-sm" href={`${BASE}/referrals/#refer`}>Send a test referral</Link>
+        <Button href={`${BASE}/referrals/#refer`} variant="secondary" size="sm" lead="refer">Send a test referral</Button>
       </div>
       <div className="hs-kpis">
         <div className="hs-kpi"><b>{open.length}</b><span>Open referrals</span></div>
