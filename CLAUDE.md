@@ -57,7 +57,7 @@ Styles are authored in `public/scss/` (`_variables.scss`, `_common.scss`, `_comp
 - Theme is a `data-theme="light"|"dark"` attribute on `<html>`, driving CSS custom properties defined in `public/scss/_variables.scss` (`:root` = light, `[data-theme="dark"]` overrides).
 - Because navigation is a hard reload (see above) and the default `:root` is light, `app/layout.js` inlines a plain (non-`next/script`) synchronous `<script>` as the first child of `<head>` that reads `localStorage.getItem('theme')` and sets `data-theme` on `<html>` **before first paint**, to avoid a light-mode flash. This must stay a raw `<script>` tag directly in `<head>` — using `next/script` (even with `strategy="beforeInteractive"`) gets serialized into the RSC/flight payload instead of emitted as a literal blocking script tag in this Next.js version's static export, which reintroduces the flash.
 - `components/ClientThemeProvider.js` (mounted once in `app/layout.js`, wraps the whole tree) re-applies the theme on mount, swaps `.theme-aware-image` `<img>` sources between `data-light-src`/`data-dark-src`, and listens for OS `prefers-color-scheme` changes (only when the user hasn't explicitly chosen a theme via the toggle).
-- `layout/ThemeToggle.js` is the actual light/dark switch button; it writes `data-theme` + `localStorage.theme` directly.
+- `layout/ThemeToggle.js` is the actual light/dark switch button; it writes `data-theme` + `localStorage.theme` directly. Its icon is an inline SVG outline sun/moon, the same as Viteo's and Hearthside's (since 2026-10-31; it was Font Awesome's solid `fa-sun`/`fa-moon`).
 
 ### Portfolio grid filtering (Isotope)
 

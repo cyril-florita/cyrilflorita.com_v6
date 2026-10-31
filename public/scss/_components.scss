@@ -1258,14 +1258,13 @@ social panel
         border-bottom: 2px solid var(--color-frameshadow);
     }
 
-    i {
+    svg {
         display: block;
         margin: 0 auto;
-        font-size: 20px;
-        width: 30px;
+        width: 24px;
+        height: 24px;
         color: var(--color-text);
         transition: variables.$tr;
-        text-align: center;
     }
 
     @media screen and (max-width: 1200px) {
