@@ -29,6 +29,17 @@ AddType application/manifest+json .webmanifest
   </ElseIf>
 </IfModule>
 
+# No spelling correction under /.well-known/: the host's mod_speling answered
+# a missing /.well-known/ai-catalog.json with a "300 Multiple Choices" HTML
+# page (listing look-alike paths), which Lighthouse's Agentic Browsing audit
+# read as an invalid AI catalog. A plain 404 there means "no catalog" (not
+# applicable). Elsewhere it stays on, since it fixes wrong-case URLs.
+<IfModule mod_speling.c>
+  <If "%{REQUEST_URI} =~ m#^/\.well-known/#">
+    CheckSpelling Off
+  </If>
+</IfModule>
+
 # Viteo moved from /lab/viteo/ to /pitch/viteo/ (mod_alias; no RewriteEngine).
 RedirectMatch 301 ^/lab/viteo(/.*)?$ /pitch/viteo$1
 
