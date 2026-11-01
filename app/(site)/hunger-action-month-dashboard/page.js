@@ -131,6 +131,7 @@ const Page = () => {
                 learned={[
                   "Agreeing on what to measure and how to validate it before building anything meant the dashboard could show numbers people could trust.",
                   "Reading only cached data traded a little freshness for reliability, so a slow analytics service can never take the website down.",
+                  "Putting giving from Classy and behavior from Google Analytics 4 in one view showed patterns neither tool showed alone, such as email donations being worth about 2.7 times a paid-social donation.",
                 ]}
                 next={[
                   "Show checkout starts, completions, and the leading form errors side by side, so friction is visible while a campaign is still running.",

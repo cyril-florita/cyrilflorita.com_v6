@@ -142,8 +142,8 @@ const Page = () => {
               <CaseLearnings
                 learned={[
                 "Naming three specific gaps up front (visual appeal, information hierarchy, call to action) kept every design decision tied to a problem worth solving.",
-                "A relaunch raises practical questions about accounts and the old app, so I answer them on the page itself in an FAQ instead of leaving visitors to wonder.",
-                "Placing the download buttons at both the top and the bottom of the page means the next step is always one tap away.",
+                "A relaunch is a moment of doubt for people who used the old app, so the page has to answer their practical questions (will my account carry over, what happens to my activity) as well as sell the new one.",
+                "A page built for one action should offer it wherever a visitor might be ready, which is why both store buttons sit beside the headline and again in the closing band.",
                 ]}
               />
             </CaseSection>

@@ -142,9 +142,6 @@ const Page = () => {
                   "When leadership asked to remove the hero overlay, showing that white text wouldn't hold up without it was how I made the case for keeping it.",
                   "Reusing button styles and the gradient treatment from the ministry's other pages made the new page read as part of one site.",
                 ]}
-                reflection={
-                  <p>Three approvers, twenty-plus comment threads, and one date that never moved: the project was as much about managing the review as building the page. Flagging dependencies early, making the case for the choices I could stand behind, and building on the ministry&apos;s existing button styles and gradient treatment kept the page on schedule and looking like part of one site.</p>
-                }
               />
             </CaseSection>
 

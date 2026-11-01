@@ -83,7 +83,7 @@ const Page = () => {
 
             {/* 03 — Reflection */}
             <CaseSection id="reflection" number={3} title="Reflection">
-              <p>I would always include this piece as part of my portfolio, even though it&apos;s not a professional one. It&apos;s a great way to showcase my skills and creativity from when I was just a beginner learning layout, typography, color theory, and various design styles, and I made it in Adobe Illustrator and Photoshop, the industry-standard tools of the time.</p>
+              <p>I keep this piece in my portfolio even though it isn&apos;t professional work. I made it for an Illustration class in Adobe Illustrator and Photoshop, while I was still learning layout, typography, and color theory, and it&apos;s the earliest piece I have where what I believe shaped what I made.</p>
             </CaseSection>
 
           </CaseLayout>

@@ -214,8 +214,8 @@ const Page = () => {
               <CaseLearnings
                 learned={[
                   "Owning branding, UX/UI design, and front-end development together let me keep the logo, artwork, and episode pages consistent with each other.",
-                  "Keeping the global media player playing while visitors browse meant designing the navigation around the main task: listening and watching.",
-                  "Creating episode assets in-house, inside one brand system, kept the episodes consistent while giving each its own look.",
+                  "On a podcast site the main task is listening, so a player that keeps going while visitors browse shaped the navigation more than any single page layout.",
+                  "Keeping the brand itself muted, with color coming from the episode photography, let each episode look distinct while the show still reads as one brand.",
                 ]}
               />
             </CaseSection>
