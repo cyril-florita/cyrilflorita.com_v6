@@ -87,11 +87,10 @@
 .hs-modal .hs-select { font-size: 16px; padding-inline: 12px 34px; }
 
 /* Short phones (an iPhone SE is 667px tall) and landscape phones: trim what
-   isn't needed so the button is on screen without scrolling — the lede's
-   second sentence and the form's own note (the confirmation repeats both),
-   and a little height from each field. */
+   isn't needed so the button is on screen without scrolling — the form's own
+   note (the confirmation repeats it) and a little height from each field. */
 @media (max-width: 700px) and (max-height: 760px), (max-height: 560px) {
-  .hs-modal-lede span, .hs-modal .hs-form > .hs-hint { display: none; }
+  .hs-modal .hs-form > .hs-hint { display: none; }
   .hs-modal-main { gap: 12px; }
   .hs-modal .hs-form { gap: 14px; }
   .hs-modal .hs-form-grid { gap: 12px 16px; }
