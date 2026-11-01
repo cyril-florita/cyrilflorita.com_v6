@@ -4,7 +4,7 @@ import { BehindTheScenes, PathSwitch, ScrollCue, StepStory, ZipCheck } from "@/c
 import { PHOTO_LQIP } from "@/components/hearthside/photo-lqip";
 
 export const metadata = {
-  title: { absolute: "Hearthside Home Health — Skilled care at home | Design & dev pitch by Cyril Florita" },
+  title: { absolute: "Hearthside Home Health · Skilled care at home | Design & dev pitch by Cyril Florita" },
   alternates: { canonical: "/pitch/hearthside/" },
 };
 
@@ -40,13 +40,13 @@ function HeroArt() {
 // and what families say. Fictional but specific; no outcome claims.
 const CLINICIANS = [
   { photo: "/img/hearthside/photos/team-maria-reyes", initials: "MR", name: "Maria Reyes, RN", role: "Nurse case manager", area: "Granada Hills", languages: "English, Spanish", years: 14, note: "I tell families what I\u2019m checking, and why, every visit." },
-  { photo: "/img/hearthside/photos/team-david-okafor", initials: "DO", name: "David Okafor, PT, DPT", role: "Physical therapist", area: "Valencia", languages: "English", years: 9, note: "Progress is the walk to the mailbox, then around the block." },
-  { photo: "/img/hearthside/photos/team-ani-petrosyan", initials: "AP", name: "Ani Petrosyan, OTR/L", role: "Occupational therapist", area: "Burbank", languages: "English, Armenian", years: 11, note: "The goal is your morning routine, done your way." },
+  { photo: "/img/hearthside/photos/team-david-okafor", initials: "DO", name: "David Okafor, PT, DPT", role: "Physical therapist", area: "Valencia", languages: "English", years: 9, note: "We start with the walk to the mailbox, then go around the block." },
+  { photo: "/img/hearthside/photos/team-ani-petrosyan", initials: "AP", name: "Ani Petrosyan, OTR/L", role: "Occupational therapist", area: "Burbank", languages: "English, Armenian", years: 11, note: "We practice your morning routine, the way you do it." },
   { photo: "/img/hearthside/photos/team-grace-atienza", initials: "GA", name: "Grace Atienza, CCC-SLP", role: "Speech-language pathologist", area: "Sherman Oaks", languages: "English, Tagalog", years: 8, note: "We practice with the words and foods you use every day." },
 ];
 const QUOTES = [
-  { text: "The hospital sent the referral on a Tuesday, and Hearthside called me that afternoon. From then on, I always knew who was coming and when.", who: "Daughter of a patient, Santa Clarita" },
-  { text: "Our therapist worked on Dad\u2019s own hallway and stairs, not a clinic\u2019s. He started looking forward to the visits.", who: "Son of a patient, Van Nuys" },
+  { text: "The hospital sent the referral on a Tuesday, and Hearthside called me that afternoon.", who: "Daughter of a patient, Santa Clarita" },
+  { text: "Our therapist worked on Dad\u2019s own hallway and stairs. He started looking forward to the visits.", who: "Son of a patient, Van Nuys" },
 ];
 
 export default function HearthsideHome() {
@@ -75,13 +75,13 @@ export default function HearthsideHome() {
         </div>
         <div className="hs-hero-copy">
           <p className="hs-lede">
-            Nurses and therapists who come to you after a hospital stay, illness, or injury. We&rsquo;ll guide every next step.
+            Nurses and therapists who come to you after a hospital stay, illness, or injury, and an intake team that tells you what happens next.
           </p>
         </div>
       </section>
 
       <ScrollCue target="hs-creds" />
-      <Row id="hs-creds" label="Why You Can Trust Us" labelledBy="hs-creds-title" tight>
+      <Row id="hs-creds" label="Credentials" labelledBy="hs-creds-title" tight>
         <h2 id="hs-creds-title" className="hs-visually-hidden">Why you can trust us</h2>
         <ul className="hs-creds">
           {CREDENTIALS.map((c) => <li key={c.value} className="hs-cred"><span className="hs-cred-value">{c.value}</span> <span className="hs-cred-text">{c.text}</span></li>)}
@@ -89,7 +89,7 @@ export default function HearthsideHome() {
         <p className="hs-creds-note"><Sample /></p>
       </Row>
 
-      <Row label="Partners Who Trust Us" tight>
+      <Row label="Who refers to us" tight>
         <PartnerLogos />
         <p className="hs-logos-note">Hospitals, physicians, and senior communities across the Valley refer patients to us.</p>
         <p className="hs-creds-note"><Sample>Sample partners</Sample></p>
@@ -104,7 +104,7 @@ export default function HearthsideHome() {
       <section className="hs-chapter is-sand hs-help" aria-labelledby="hs-paths-title" data-dock-after>
         <div className="hs-help-head">
           <p className="hs-help-label">How can we help?</p>
-          <h2 id="hs-paths-title">Coming home from the hospital is a big day. <em className="hs-statement-em">We make the next part simple.</em></h2>
+          <h2 id="hs-paths-title">Coming home from the hospital is a big day. <em className="hs-statement-em">We&rsquo;ll set up what comes next with your doctor.</em></h2>
           <p className="hs-lede">Two ways in, depending on who you are.</p>
         </div>
         {/* Phones: a two-option switch above the cards shows one at a time
@@ -137,7 +137,7 @@ export default function HearthsideHome() {
 
       <Row label="What we do" labelledBy="hs-services-title">
         <h2 id="hs-services-title">Skilled care, in your own home</h2>
-        <p className="hs-lede">Home health is medical care your doctor orders, delivered by registered nurses and licensed therapists who live and work in the Valley, visiting on a schedule so you can recover where you&rsquo;re most comfortable.</p>
+        <p className="hs-lede">Home health is medical care your doctor orders. Registered nurses and licensed therapists visit you at home on a set schedule.</p>
         <ul className="hs-services hs-swipe">
           {SERVICES.map((s) => {
             const ph = s.photo;
@@ -156,7 +156,7 @@ export default function HearthsideHome() {
         </div>
       </Row>
 
-      <Row label="We Make it Easy for You" labelledBy="hs-steps-title">
+      <Row label="How care begins" labelledBy="hs-steps-title">
         {/* Desktop: a pinned scroll story (StepStory in client.js) — the
             heading, its lede and the four steps stick together as one frame
             while the steps play through. Elsewhere, and under reduced motion,
@@ -282,7 +282,7 @@ export default function HearthsideHome() {
         <div className="hs-bts-row">
           <div>
             <h2 id="hs-bts-title">Every referral, tracked from the first call</h2>
-            <p className="hs-lede">The intake system behind this site routes each referral to the right coordinator by ZIP code, logs every call, and flags what&rsquo;s missing, so nothing waits in an inbox.</p>
+            <p className="hs-lede">The intake system behind this site routes each referral to the right coordinator by ZIP code, logs every call, and flags what&rsquo;s missing.</p>
             <div className="hs-hero-ctas hs-mt-32">
               <Button href={`${BASE}/intake/`} icon="arrow">Try the intake demo</Button>
               <Button href={`${BASE}/referrals/#refer`} variant="secondary" lead="refer">Send a test referral</Button>
@@ -310,7 +310,7 @@ export default function HearthsideHome() {
 
       <CallBand
         title="Not sure where to start? Start with a call."
-        lede={<>Our intake team will listen, answer your questions, and tell you what happens next. No forms about your medical history: we&rsquo;ll ask what we need when we talk.</>}
+        lede={<>Our intake team will listen, answer your questions, and tell you what happens next.</>}
       />
     </div>
   );

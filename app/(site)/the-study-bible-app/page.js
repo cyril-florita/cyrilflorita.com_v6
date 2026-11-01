@@ -32,7 +32,7 @@ const SECTIONS = [
   { id: "research", label: "Research & Goals" },
   { id: "design", label: "Mapping & Designing" },
   { id: "prototyping", label: "Prototyping & Handoff" },
-  { id: "learnings", label: "Learning and Reflection" },
+  { id: "learnings", label: "Learning & Next Steps" },
 ];
 
 const Page = () => {
@@ -90,8 +90,8 @@ const Page = () => {
 
             {/* 01 — Overview */}
             <CaseSection id="overview" number={1} title="Overview">
-              <p>The legacy Study Bible app offered unparalleled theological depth and matched the physical MacArthur Study Bible, but it was fraught with critical usability issues. As a UX designer at Grace to You, I led its redesign, released as <strong>The MacArthur Study Bible</strong> app: a rich digital resource for readers, students, and teachers who rely on John MacArthur&apos;s faithful teaching and commentary.</p>
-              <p>The aim was not just to fix the legacy app, but to let users do everything they can with the physical Bible, and more and better. Not flashy, not overdone: simple, clean, yet delightful.</p>
+              <p>The legacy Study Bible app had deep theological content and matched the physical MacArthur Study Bible, but it had critical usability issues. As a UX designer at Grace to You, I led its redesign, released as <strong>The MacArthur Study Bible</strong> app: a rich digital resource for readers, students, and teachers who rely on John MacArthur&apos;s faithful teaching and commentary.</p>
+              <p>The aim was to fix the legacy app and let users do everything they can with the physical Bible, and more. I wanted it simple, clean, and pleasant to use.</p>
               <CaseFigure src={`${P}project-timeline.jpg`} alt="The Study Bible app project flow, from research to public release" caption="Project flow" />
             </CaseSection>
 
@@ -120,10 +120,10 @@ const Page = () => {
               </ul>
               <p>To address these, I set four UX goals:</p>
               <ul className="cyril-case-list">
-                <li><strong>Streamlined Navigation:</strong> Search, books and chapters, translations, audio, bookmarks, text settings, John&apos;s notes, highlights, favorites, and personal notes, all within a tap or two.</li>
-                <li><strong>Enhanced Reading &amp; Study Experience:</strong> Better text layout, fewer distractions when scrolling, and easy access to John&apos;s notes.</li>
-                <li><strong>More Intuitive Access to Tools &amp; Features:</strong> Note-taking, highlights, favorites, and bookmarks reachable with a tap on the verse or a long-press.</li>
-                <li><strong>Seamless Syncing &amp; Personalization:</strong> A content management experience consistent with the GTY website and the GTY app, in line with GTY&apos;s effort to improve consistency across its platforms.</li>
+                <li><strong>Streamlined navigation:</strong> Search, books and chapters, translations, audio, bookmarks, text settings, John&apos;s notes, highlights, favorites, and personal notes, all within a tap or two.</li>
+                <li><strong>Better reading and study:</strong> Better text layout, fewer distractions when scrolling, and easy access to John&apos;s notes.</li>
+                <li><strong>Easier access to tools:</strong> Note-taking, highlights, favorites, and bookmarks reachable with a tap on the verse or a long-press.</li>
+                <li><strong>Syncing and personalization:</strong> A content management experience consistent with the GTY website and the GTY app, in line with GTY&apos;s effort to improve consistency across its platforms.</li>
               </ul>
             </CaseSection>
 
@@ -131,7 +131,7 @@ const Page = () => {
             <CaseSection id="design" number={4} title="Mapping &amp; Designing">
               <p>Before designing a single screen, I mapped every piece of content and every component into one tree: the home menu, the Bible text and its navigation, John&apos;s notes, search, and the account and &ldquo;more&rdquo; screens. It became the blueprint for the navigation and the prototype that followed.</p>
               <CaseFigure src={`${P}content-tree.jpg`} alt="The Study Bible app content and component tree" caption="Content & component tree" />
-              <p><strong>Reading the Bible.</strong> The text stays front and center, with translation, audio, text settings, and book-and-chapter navigation a tap away&mdash;by grid, list, or recent passages.</p>
+              <p><strong>Reading the Bible.</strong> The text stays front and center, with translation, audio, text settings, and book-and-chapter navigation a tap away, by grid, list, or recent passages.</p>
               <CaseGrid layout="three">
                 <Screen name="bible-text" caption="Bible text" />
                 <Screen name="bible-text-reference" caption="Bible text with references" />
@@ -182,13 +182,13 @@ const Page = () => {
                 <CaseVideo src="/img/portfolio/tsba_proto_4_bible-nav.mp4" caption="Prototype: Bible navigation" size="phone" />
                 <CaseVideo src="/img/portfolio/tsba_proto_5_johns-notes_main.mp4" caption="Prototype: John's notes" size="phone" />
               </CaseGrid>
-              <p>Feedback from the stakeholders, Digital Platforms team, and testers was overwhelmingly positive: users found the navigation intuitive, the Bible text less distracting, and their beloved tools working as they expected.</p>
+              <p>Feedback from the stakeholders, Digital Platforms team, and testers was positive: users found the navigation intuitive, the Bible text less distracting, and their favorite tools working as they expected.</p>
               <p>Once the high-fidelity prototype was validated, I focused on a smooth development handoff, to minimize ambiguity, accelerate build time, and reduce rework. With the guidance of the Senior Software Architect, I set up prototype walkthroughs with the developers and gave them a style guide and the prototype itself as references.</p>
               <CaseFigure src={`${P}prototype-handoff-file.jpg`} alt="The Study Bible app handoff file in Axure: the color guide and the full page tree of the prototype" caption="Handoff file: color guide and prototype page tree" />
             </CaseSection>
 
             {/* 06 — Learning and Reflection */}
-            <CaseSection id="learnings" number={6} title="Learning and Reflection">
+            <CaseSection id="learnings" number={6} title="Learning &amp; Next Steps">
               <CaseLearnings
                 learned={[
                   "Testing an interactive prototype with users before handoff grounded the team's choices in real feedback and built trust among stakeholders.",
@@ -201,7 +201,6 @@ const Page = () => {
                   "Keep aligning content management with the GTY website and GTY app so the experience stays consistent.",
                 ]}
               />
-              <p>I was privileged to work on this project at Grace to You. My responsibility ended after the development handoff, but the aim all along was for the app to be more than another Bible-reading tool: a simple, focused place to study, consistent with the GTY platforms ecosystem.</p>
             </CaseSection>
 
           </CaseLayout>

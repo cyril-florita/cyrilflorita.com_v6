@@ -21,7 +21,7 @@ const SECTIONS = [
   { id: "overview", label: "Overview" },
   { id: "results", label: "Results & Impact" },
   { id: "approach", label: "Design and Development Approach" },
-  { id: "learnings", label: "Learning and Reflection" },
+  { id: "learnings", label: "Learning" },
 ];
 
 // The walkthrough shows parts of the full-page screenshot, top to bottom.
@@ -94,26 +94,26 @@ const Page = () => {
             <CaseSection id="overview" number={1} title="Overview">
               <p>The Grace to You App landing page was functional but didn&apos;t draw users in. As a designer and developer at Grace to You, I was tasked with improving its user experience so that more visitors download and use the app. Reviewing the page, I found three gaps:</p>
               <ul className="cyril-case-list">
-                <li><strong>Visual Appeal:</strong> The design lacked the appeal to draw users in.</li>
-                <li><strong>Information Hierarchy:</strong> The apps&apos; benefits weren&apos;t immediately apparent.</li>
-                <li><strong>Call to Action:</strong> The download call to action needed more prominence.</li>
+                <li><strong>Visual appeal:</strong> The design lacked the appeal to draw users in.</li>
+                <li><strong>Information hierarchy:</strong> The apps&apos; benefits weren&apos;t immediately apparent.</li>
+                <li><strong>Call to action:</strong> The download call to action needed more prominence.</li>
               </ul>
               <CaseVideo url="gty.org" src="/img/portfolio/gty-app-landing_min.mp4" caption="GTY App Landing Page" />
             </CaseSection>
 
             {/* 02 — Results & Impact */}
             <CaseSection id="results" number={2} title="Results & Impact">
-              <p>The refreshed landing page is more visually appealing and easier to use, so visitors can quickly see the apps&apos; benefits and are encouraged to download them. The strategic content placement and clear call-to-action buttons carry that experience.</p>
+              <p>The refreshed landing page is more visually appealing and easier to use, so visitors can quickly see the apps&apos; benefits and are encouraged to download them. Reorganized content and clearer download buttons do most of that work.</p>
             </CaseSection>
 
             {/* 03 — Design and Development Approach */}
             <CaseSection id="approach" number={3} title="Design and Development Approach">
               <p>I answered each gap directly:</p>
               <ul className="cyril-case-list">
-                <li><strong>Modernized Visual Design:</strong> A cleaner, more contemporary design with better use of whitespace for readability, using high-quality images and icons to show the apps&apos; interfaces and features, and a font consistent with GTY&apos;s style guide.</li>
-                <li><strong>Strategic Content Placement:</strong> Content reorganized to highlight the benefits of the apps, such as access to John MacArthur&apos;s teachings, convenient listening schedules, and devotionals.</li>
-                <li><strong>Clear Call-to-Action:</strong> Prominent, visually distinct download buttons for each app.</li>
-                <li><strong>Responsive Design:</strong> A fully responsive page across desktops, tablets, and smartphones.</li>
+                <li><strong>Modernized visual design:</strong> A cleaner, more contemporary design with better use of whitespace for readability, using high-quality images and icons to show the apps&apos; interfaces and features, and a font consistent with GTY&apos;s style guide.</li>
+                <li><strong>Content placement:</strong> Content reorganized to highlight the benefits of the apps, such as access to John MacArthur&apos;s teachings, convenient listening schedules, and devotionals.</li>
+                <li><strong>Clear call to action:</strong> Prominent, visually distinct download buttons for each app.</li>
+                <li><strong>Responsive design:</strong> A fully responsive page across desktops, tablets, and smartphones.</li>
               </ul>
 
               <h3 className="cyril-case-subheading">Page Walkthrough</h3>
@@ -138,16 +138,13 @@ const Page = () => {
             </CaseSection>
 
             {/* 04 — Learning and Reflection */}
-            <CaseSection id="learnings" number={4} title="Learning and Reflection">
+            <CaseSection id="learnings" number={4} title="Learning">
               <CaseLearnings
                 learned={[
                 "Naming three specific gaps up front (visual appeal, information hierarchy, call to action) kept every design decision tied to a problem worth solving.",
                 "A relaunch raises practical questions about accounts and the old app, so I answer them on the page itself in an FAQ instead of leaving visitors to wonder.",
                 "Placing the download buttons at both the top and the bottom of the page means the next step is always one tap away.",
                 ]}
-                reflection={
-                  <p>This project highlighted the importance of a user-centric approach in web design and development, ensuring that the end product meets the needs and expectations of the target audience.</p>
-                }
               />
             </CaseSection>
 

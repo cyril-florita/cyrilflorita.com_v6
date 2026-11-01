@@ -1,6 +1,6 @@
 // Server layout so this route can export metadata (page.js is a client component).
 const title = "GTY Resources";
-const description = "Clean, modern graphics for Grace to You that highlight products being promoted, offered for free, or sold at a discount, clearly communicating the value of…";
+const description = "Graphics for Grace to You's free offers, sales, and product launches, each built to show the product and state the offer plainly.";
 const url = "/gty-resources/";
 const images = [{ url: "/og/gty-resources.jpg", width: 1200, height: 630, alt: "GTY Resources" }];
 

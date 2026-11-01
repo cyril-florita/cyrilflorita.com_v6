@@ -96,7 +96,7 @@ const Page = () => {
 
             {/* 01 — Overview */}
             <CaseSection id="overview" number={1} title="Overview">
-              <p>Every post on the Grace to You blog needed a header graphic: the image at the top of the article and the one people see when it&apos;s shared. Over dozens of posts, my goal was to create graphics that not only attract attention but also visually encapsulate the essence of the blog post, making the content inviting and memorable for readers.</p>
+              <p>Every post on the Grace to You blog needed a header graphic: the image at the top of the article and the one people see when it&apos;s shared. Over dozens of posts, my goal was a graphic that catches the eye and captures the post&apos;s one main idea.</p>
             </CaseSection>
 
             {/* 02 — Results & Impact */}

@@ -1,6 +1,6 @@
 // Server layout so this route can export metadata (page.js is a client component).
 const title = "GTY App Landing Page";
-const description = "Improving the user experience of the Grace to You App landing page to create a more engaging, informative, and user-friendly experience that encourages users…";
+const description = "A redesigned landing page for the Grace to You app, with its benefits up front and download buttons at the top and bottom, so more visitors download and use it.";
 const url = "/gty-app-landing/";
 const images = [{ url: "/og/gty-app-landing.jpg", width: 1200, height: 630, alt: "GTY App Landing Page" }];
 

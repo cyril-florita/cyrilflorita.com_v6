@@ -28,12 +28,12 @@ const RESULTS = {
   },
   both: {
     title: "Many families use both",
-    text: "Home health can cover the medical side while a home care agency helps with daily life. Start with a call: we'll talk through what home health can do and what you may need alongside it.",
+    text: "Home health can take care of the medical side while a home care agency helps with daily life. Start with a call: we'll talk through what home health can do and what you may need alongside it.",
     cta: "home",
   },
   unsure: {
     title: "Start with a conversation",
-    text: "That's very common. Call our intake team or request a call back: we'll ask a few questions, explain your options in plain language and, if home health fits, work with your doctor on next steps.",
+    text: "That's very common. Call our intake team or request a call back: we'll ask a few questions, explain your options and, if home health fits, work with your doctor on next steps.",
     cta: "home",
   },
 };

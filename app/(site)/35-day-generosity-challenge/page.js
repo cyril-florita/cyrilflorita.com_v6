@@ -88,7 +88,7 @@ const Page = () => {
 
             {/* 02 — Results & Impact */}
             <CaseSection id="results" number={2} title="Results &amp; Impact">
-              <p>The landing page became the central hub for more than 35 daily devotional emails, bringing recipients back to a living web experience that changed every week. The five blog posts gave engaged readers somewhere to go deeper, tying email, web, and content into one cohesive story.</p>
+              <p>The landing page was the central hub for more than 35 daily devotional emails, and it changed every week. The five blog posts gave engaged readers somewhere to go deeper.</p>
             </CaseSection>
 
             {/* 03 — Building the Page */}
@@ -99,7 +99,7 @@ const Page = () => {
               <CaseFigure src="/img/portfolio/chf-35-day-generosity_weekly-challenge.jpg" alt="This week's challenge card" caption="This week's challenge" />
 
               <h3 className="cyril-case-subheading">A Page That Changes Every Week</h3>
-              <p>The centerpiece is a set of five tiles, one for each week, that together tell the story of the journey:</p>
+              <p>The page is built around five tiles, one for each week:</p>
               <ul className="cyril-case-list">
                 <li><strong>Three states per tile.</strong> Upcoming weeks stay muted and locked, the current week is highlighted with its challenge, and completed weeks get a checkmark while staying readable.</li>
                 <li><strong>A rotating hero.</strong> The top of the page swaps each week to that week&apos;s focus, challenge, and imagery, built as its own module so it could change without touching the rest of the layout.</li>
@@ -109,7 +109,7 @@ const Page = () => {
               <CaseFigure src="/img/portfolio/chf-35-day-generosity_weekly-tiles.jpg" alt="Weekly challenge tiles" caption="Weekly tiles: completed, current & upcoming" ratio="4 / 3" />
 
               <h3 className="cyril-case-subheading">Designed for Every Screen</h3>
-              <p>With most supporters arriving from their inboxes, the page had to feel just as considered on a phone as on a desktop.</p>
+              <p>With most supporters arriving from their inboxes, the page had to work as well on a phone as on a desktop.</p>
               <CaseGrid layout="three">
                 <CaseFigure src="/img/portfolio/chf-35-day-generosity_desktop.jpg" alt="35-Day Generosity Challenge on desktop" caption="Desktop" ratio="3 / 5" />
                 <CaseFigure src="/img/portfolio/chf-35-day-generosity_tablet.jpg" alt="35-Day Generosity Challenge on tablet" caption="Tablet" ratio="3 / 5" />
@@ -136,9 +136,9 @@ const Page = () => {
             <CaseSection id="learnings" number={5} title="Learning & Next Steps">
               <CaseLearnings
                 learned={[
-                  "Adapting the Giving Tuesday milestone tracker into a five-step weekly challenge taught me how much a proven pattern speeds up a build with no mockup.",
-                  "A month of review across four stakeholders and more than 20 rounds of feedback showed me that designing in code means the review process needs to be part of the build.",
-                  "Building the hero as its own module and preparing each week as an unpublished revision taught me to structure a page so it can change weekly without touching the rest of the layout or the live page.",
+                  "Adapting the Giving Tuesday milestone tracker into a five-step weekly challenge sped up a build that had no mockup.",
+                  "A month of review across four stakeholders and more than 20 rounds of feedback made it clear that when the design happens in code, review has to be planned into the build.",
+                  "Building the hero as its own module and preparing each week as an unpublished revision let the page change weekly without touching the rest of the layout or the live page.",
                 ]}
                 next={[
                   "Reuse the weekly tile states and rotating hero module for other multi-week campaigns.",

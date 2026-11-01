@@ -109,7 +109,7 @@ const Page = () => {
                 <li><strong>Checkout</strong> in four steps, with simulated Apple Pay / Google Pay and test-card payments, including a declined card</li>
                 <li><strong>Passwordless sign-in</strong> by email link or passkey, and sign-out</li>
                 <li><strong>Account:</strong> skip, pause, swap and undo; a daily check-in; a routine tracker</li>
-                <li><strong>Honest cancellation</strong> that offers one fitting alternative, never a maze</li>
+                <li><strong>Honest cancellation</strong> that offers one fitting alternative, with the way out right beside it</li>
                 <li><strong>Ingredient close-ups</strong> in 3D, with dose, form and when the quiz adds each one</li>
                 <li><strong>Batch results:</strong> independent lab results by lot code</li>
                 <li><strong>Partner program</strong> for trainers, dietitians and nutritionists, whose suggested packs open for clients with their notes and a first-box discount</li>
@@ -160,7 +160,7 @@ const Page = () => {
               </CaseGrid>
               <Clip name="quiz-finale" caption="The finale: each pill drops into your pack" path="quiz/" />
 
-              <p><strong>Plan, checkout and payment.</strong> Every item says why it&apos;s there and can be removed or swapped. Checkout is four short steps with plain-language errors. Payment is fully prototyped but safe by design: a wallet sheet, and a card form locked to public test cards, so no real card can ever be entered. A declined test card shows the error path.</p>
+              <p><strong>Plan, checkout and payment.</strong> Every item says why it&apos;s there and can be removed or swapped. Checkout is four short steps with plain-language errors. Payment is fully prototyped but safe: a wallet sheet, and a card form locked to public test cards, so no real card can ever be entered. A declined test card shows the error path.</p>
               <Desktop name="plan-full" caption="Your plan" path="plan/" ratio="16 / 10" />
               <CaseGrid layout="two">
                 <Desktop name="checkout-details" caption="Details" path="checkout/" />
@@ -207,7 +207,7 @@ const Page = () => {
               </CaseGrid>
 
               <h3 className="cyril-case-subheading">One Design System, Three Brands</h3>
-              <p>Every color and font comes from tokens, so the product can change its whole look without touching a component. Three themes prove it: Aqua (the default), Grove and Peach, each with its own palette and type, in light and dark. A living design system page renders the real components, so it can&apos;t drift from the product.</p>
+              <p>Every color and font comes from tokens, so the product can change its whole look without touching a component. Three themes prove it: Aqua (the default), Grove and Peach, each with its own palette and type, in light and dark. A living design system page renders the real components, so it always matches the product.</p>
               <CaseGrid layout="two">
                 <Desktop name="landing" caption="Aqua · Dark" />
                 <Desktop name="hero-aqua-light" caption="Aqua · Light" />
@@ -227,9 +227,9 @@ const Page = () => {
                 <li><strong>Modelled from the catalog:</strong> each product&apos;s color and form generate its pill. The same code bakes the images used everywhere else, so a new product needs no new artwork.</li>
                 <li><strong>One GSAP timeline, two renderers:</strong> each object in the intro has one tween that drives both the 3D scene and the CSS fallback. Any click or scroll skips it, and the quiz finale moves on when its timeline completes, not on a guessed timer.</li>
                 <li><strong>A living background:</strong> a WebGPU shader (falling back to WebGL2) sweeps a slow, pulsing silk ribbon of the theme&apos;s light behind every page. It draws at a third of the screen&apos;s resolution at 30fps, pauses when the tab is hidden, and stays off on phones and for reduced motion. Text can land anywhere on it, so in dark mode the shader caps its own brightness at the level where every text pair still passes AA, checked on every page as the light moves.</li>
-                <li><strong>Fast by design:</strong> three.js loads only on capable desktops, warms up behind a branded preloader so the intro never stutters, and draws only while something moves.</li>
+                <li><strong>Performance:</strong> three.js loads only on capable desktops, warms up behind a branded preloader so the intro never stutters, and draws only while something moves.</li>
                 <li><strong>Prototyped, not faked:</strong> sign-in, payment and cancellation are complete flows with loading, success and error states. Nothing is sent or charged, and the card form is locked to public test cards so it can never collect a real card.</li>
-                <li><strong>Accessible throughout:</strong> keyboard support, focus management in every dialog, pinch-zoom, and reduced motion respected everywhere.</li>
+                <li><strong>Accessibility:</strong> keyboard support, focus management in every dialog, pinch-zoom, and reduced motion respected everywhere.</li>
               </ul>
             </CaseSection>
 

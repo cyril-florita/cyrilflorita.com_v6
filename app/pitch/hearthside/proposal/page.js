@@ -17,7 +17,7 @@ export const metadata = {
 };
 
 const PROBLEMS = [
-  ["Families can’t tell what fits", "Home health, home care, and hospice blur together, and coverage reads like fine print. People call the agency that made it easiest to understand."],
+  ["Families can’t tell what fits", "Home health, home care, and hospice blur together, and coverage reads like fine print. Families tend to call the agency that explains it most clearly."],
   ["Referrals arrive by fax and voicemail", "Discharge planners send a patient and hear nothing back, so next time they send them somewhere that answers."],
   ["Intake lives in inboxes", "Nobody can see who owns a referral, what’s missing, or what’s overdue until a patient falls through."],
 ];
@@ -40,7 +40,7 @@ const BUILD = [
     points: [
       "A board of every open referral, by stage, with an owner and a time limit for each",
       "Routing by ZIP code to the right coordinator, with the first-call task created for them",
-      "Missing documents flagged and requested, not chased by email",
+      "Missing documents flagged and requested through the secure portal",
       "Referral records with the next action, documents, and an activity log",
       "Tasks, partner follow-ups, and reports on speed, sources, and outcomes",
     ],
@@ -82,7 +82,7 @@ export default function Proposal() {
       <main id="main" tabIndex={-1} className="hs-wrap">
         <PageHead
           title="A website and intake system for your agency"
-          lede="Hearthside is a working example: a website families can actually use, and the intake system that takes each referral from first call to start of care. Here’s how I’d build the same for your agency."
+          lede="Hearthside is a working example: a website families can use, and the intake system that takes each referral from first call to start of care. Here’s how I’d build the same for your agency."
         >
           <div className="hs-prop-ctas">
             <Button href={PITCH_MAILTO} lead="mail">Email Cyril</Button>
@@ -98,7 +98,7 @@ export default function Proposal() {
         </Row>
 
         <Row label="What you get" labelledBy="pr-build">
-          <h2 id="pr-build">One system, from first click to first visit</h2>
+          <h2 id="pr-build">A website and an intake system, built together</h2>
           <div className="hs-ruled">
             {BUILD.map((b) => (
               <div key={b.title} className="hs-prop-build">
@@ -111,7 +111,7 @@ export default function Proposal() {
         </Row>
 
         <Row label="How we work" labelledBy="pr-steps">
-          <h2 id="pr-steps">Four steps, one person accountable</h2>
+          <h2 id="pr-steps">Four steps, with one person doing the work</h2>
           <ol className="hs-prop-steps">
             {STEPS.map(([t, d, when], i) => (
               <li key={t}>
@@ -133,11 +133,11 @@ export default function Proposal() {
               </div>
             ))}
           </dl>
-          <p className="hs-hint hs-prop-note">Ranges, not quotes: discovery ends with a fixed price for your agency.</p>
+          <p className="hs-hint hs-prop-note">These are ranges. Discovery ends with a fixed price for your agency.</p>
         </Row>
 
         <Row label="Privacy" labelledBy="pr-privacy">
-          <h2 id="pr-privacy">Patient information, handled properly</h2>
+          <h2 id="pr-privacy">Patient information: HIPAA-compliant hosting, staff sign-in, and an audit log</h2>
           <div className="hs-note"><Icon name="shield" /><p>The example stores nothing: its referral form can only send a generated sample patient, and everything stays in your browser. A live intake system holds protected health information, so it runs on HIPAA-compliant hosting under a business associate agreement, with sign-in for staff, role-based access, and an audit log. Public pages never collect health details, and the status link partners share shows progress only.</p></div>
         </Row>
 

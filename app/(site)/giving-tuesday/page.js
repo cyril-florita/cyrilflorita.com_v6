@@ -83,7 +83,7 @@ const Page = () => {
                 <li>a conversion-focused rebuild</li>
                 <li>a corporate gift-match version with a live donation tracker</li>
                 <li>hourly updates on the day itself</li>
-                <li>a post-campaign page that kept giving momentum alive</li>
+                <li>a post-campaign page that sent late donors to the year-end campaign</li>
               </ul>
             </CaseSection>
 
@@ -110,7 +110,7 @@ const Page = () => {
               <h3 className="cyril-case-subheading">The Match and the Live Tracker</h3>
               <p>When a corporate gift-match was confirmed mid-November, the page needed a new story. I built an entirely new version within a week:</p>
               <ul className="cyril-case-list">
-                <li><strong>A live progress tracker</strong> showing donations climbing toward each match milestone throughout the day, turning giving into a shared goal and adding real urgency.</li>
+                <li><strong>A live progress tracker</strong> showing donations climbing toward each match milestone throughout the day.</li>
                 <li><strong>Milestone cards</strong> marking each threshold, from the match itself to the final stretch goal, each one unlocking as the total rose.</li>
                 <li><strong>A timed launch.</strong> The match version was scheduled to go live the night before, so it was ready when the first morning email reached inboxes. A lighter teaser update bridged the gap in the days before.</li>
               </ul>
@@ -127,9 +127,9 @@ const Page = () => {
               <p>On the day itself, I updated the page every hour, from the first email to the last: moving the tracker forward as totals climbed, refreshing the copy, and celebrating each milestone as it fell. I worked in real time with the communications and executive team to adjust urgency messaging to the pace of giving, and made sure every update reached visitors the moment it was published.</p>
 
               <h3 className="cyril-case-subheading">After the Day</h3>
-              <p>Once the campaign ended, the page still had traffic, and every visitor who arrived ready to give was an opportunity. So I designed and built a post-campaign version:</p>
+              <p>Once the campaign ended, the page still had traffic, including people ready to give. So I designed and built a post-campaign version:</p>
               <ul className="cyril-case-list">
-                <li><strong>From urgency to gratitude.</strong> The page became a thank-you, celebrating what donors made possible.</li>
+                <li><strong>A thank-you.</strong> The page thanked donors for what they made possible.</li>
                 <li><strong>No dead ends.</strong> The Giving Tuesday form was retired, and a popup caught anyone still trying to give and pointed them to the year-end campaign, so no donation intent was lost.</li>
                 <li><strong>On time.</strong> Scheduled to go live at 6 AM the morning after, bridging straight into the year-end season.</li>
               </ul>
@@ -141,8 +141,8 @@ const Page = () => {
 <CaseLearnings
                 learned={[
                   "With the timeline too tight for a design comp, I learned that building straight from the content strategy in code can work when every decision serves one goal.",
-                  "When the corporate gift-match was confirmed mid-November, I had to build a new version within a week, which showed me the value of a page structured so a new story can be swapped in quickly.",
-                  "Retiring the form after the day and catching late visitors with a popup taught me to plan for the traffic that arrives after a campaign ends.",
+                  "When the corporate gift-match was confirmed mid-November, I had a week to build a new version, and a page structured so a new story could be swapped in quickly made that possible.",
+                  "Retiring the form after the day and catching late visitors with a popup kept that intent from being lost; I now plan for the traffic that arrives after a campaign ends.",
                 ]}
                 next={[
                   "Reuse the live tracker and milestone cards for future matched giving campaigns, as I already adapted the tracker for the 35-Day Generosity Challenge.",

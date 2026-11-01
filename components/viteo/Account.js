@@ -42,7 +42,7 @@ const demoOrder = () => {
         { id: "d3", why: "You spend most of the day indoors." },
         { id: "b12", why: "You eat mostly or fully plant-based." },
         { id: "omega", why: "Fish isn't part of your diet." },
-        { id: "magnesium", why: "You'd like help winding down." },
+        { id: "magnesium", why: "You picked winding down." },
       ],
       plan: "two",
     },

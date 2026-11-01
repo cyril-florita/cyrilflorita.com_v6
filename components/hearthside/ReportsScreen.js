@@ -90,7 +90,7 @@ export default function ReportsScreen() {
           <h2 id="rp-5">Why are referrals not accepted?</h2>
           <p>Reasons recorded when a referral was not accepted.</p>
           {reasons.length ? <Bars rows={reasons} tone={() => "muted"} /> : <p className="hs-hint hs-mt-16">No referrals declined yet.</p>}
-          <p className="hs-report-note">A reason is required to close a referral as not accepted, so this list is complete. It feeds the conversation with each partner.</p>
+          <p className="hs-report-note">A reason is required to close a referral as not accepted, so this list is complete. Liaisons use it in their follow-ups with each partner.</p>
         </section>
       </div>
     </>

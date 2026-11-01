@@ -15,7 +15,7 @@ import "@/app/pitch/viteo/css/account.css";
 const REASONS = [
   { id: "cost", label: "It costs more than I'd like" },
   { id: "surplus", label: "I still have plenty left" },
-  { id: "break", label: "I'm taking a break or travelling" },
+  { id: "break", label: "I'm taking a break or traveling" },
   { id: "changed", label: "My needs have changed" },
   { id: "other", label: "Something else" },
 ];

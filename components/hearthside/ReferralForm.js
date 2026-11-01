@@ -58,7 +58,7 @@ export default function ReferralForm() {
         <ul className="hs-list">
           <li><Icon name="check" size={20} />It&rsquo;s routed to the intake coordinator for the patient&rsquo;s area right away.</li>
           <li><Icon name="check" size={20} />They call the patient or family, usually within two hours during business hours.</li>
-          <li><Icon name="check" size={20} />If anything is missing, we&rsquo;ll ask through the secure portal, not by email.</li>
+          <li><Icon name="check" size={20} />If anything is missing, we&rsquo;ll request it through the secure portal.</li>
           <li><Icon name="check" size={20} />The status link shows progress without any health details, so it&rsquo;s safe to share with your team.</li>
         </ul>
         <div className="hs-copy"><code>cyrilflorita.com{status}</code></div>

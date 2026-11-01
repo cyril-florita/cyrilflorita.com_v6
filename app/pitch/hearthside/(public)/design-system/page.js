@@ -115,7 +115,7 @@ export default function DesignSystem() {
 
       <Row id="brand" label="Brand" labelledBy="ds-brand">
         <h2 id="ds-brand">A light left on</h2>
-        <p className="hs-lede">The mark is a plain H set in a leaf: the same shape that frames every photo, badge, and highlight on the site, with two corners swept wide and two kept tight. Simple enough to read at favicon size, and warm without trying.</p>
+        <p className="hs-lede">The mark is a plain H set in a leaf: the same shape that frames every photo, badge, and highlight on the site, with two corners swept wide and two kept tight. It reads at favicon size.</p>
         <div className="hs-ruled hs-ds-brand">
           <div>
             <div className="hs-ds-logo-big"><LogoMark size={64} /><span><b>Hearthside</b><small>Home Health</small></span></div>
@@ -130,7 +130,7 @@ export default function DesignSystem() {
 
       <Row id="layout" label="Layout" labelledBy="ds-layout">
         <h2 id="ds-layout">The editorial grid</h2>
-        <p className="hs-lede">Every section is a row: a 240px label column, then the content. Grids inside are separated by space rather than boxes or rules, and only a light hairline marks where one section ends. On phones the label stacks above its content, and lists of like things become swipe rows.</p>
+        <p className="hs-lede">Every section is a row: a 240px label column, then the content. Grids inside are separated by space alone, and only a light hairline marks where one section ends. On phones the label stacks above its content, and lists of like things become swipe rows.</p>
         <div className="hs-ds-layout" aria-hidden="true">
           <div className="hs-ds-layout-label"><span className="hs-label">Label</span></div>
           <div className="hs-ds-layout-body">
@@ -228,7 +228,7 @@ export default function DesignSystem() {
         <div className="hs-ds-type">
           <div><span className="hs-label hs-ds-spec">Page title · Fraunces 400 italic · 44–84px · −0.05em</span><p className="hs-ds-display">Compassionate care at home.</p></div>
           <div><span className="hs-label hs-ds-spec">Heading 2 · Hanken 600 · 34–54px</span><p className="hs-ds-h2">How care begins</p></div>
-          <div><span className="hs-label hs-ds-spec">Accent line · Fraunces italic</span><p className="hs-ds-h2">Coming home is a big day. <em className="hs-statement-em">We make the next part simple.</em></p></div>
+          <div><span className="hs-label hs-ds-spec">Accent line · Fraunces italic</span><p className="hs-ds-h2">Coming home is a big day. <em className="hs-statement-em">We&rsquo;ll set up what comes next with your doctor.</em></p></div>
           <div><span className="hs-label hs-ds-spec">Heading 3 · Hanken 600 · 24px</span><p className="hs-ds-h3">A clinician visits your home</p></div>
           <div><span className="hs-label hs-ds-spec">Lede · Host 400 · 20px</span><p className="hs-lede hs-mt-0">Four steps from your first call to your first visit.</p></div>
           <div><span className="hs-label hs-ds-spec">Body · Host 400 · 18px / 1.6</span><p>We confirm your address is in our service area, talk with your doctor&rsquo;s office, and review your insurance before anything is scheduled.</p></div>
@@ -240,7 +240,7 @@ export default function DesignSystem() {
 
       <Row id="buttons" label="Buttons" labelledBy="ds-buttons">
         <h2 id="ds-buttons">Buttons</h2>
-        <p className="hs-lede">Ink-filled or outlined, 6px corners, labels in mono caps. 52px tall (44px small; 65px in the hero and page heads on tablets and up), well above the 24px minimum, because a shaky hand on a phone is our everyday user.</p>
+        <p className="hs-lede">Ink-filled or outlined, 6px corners, labels in mono caps. 52px tall (44px small; 65px in the hero and page heads on tablets and up), well above the 24px minimum, because many visitors use a phone with an unsteady hand.</p>
         <ul className="hs-ruled hs-ds-btn-rules">
           <li><div className="hs-ds-row"><CallButton /><Button href="#request-a-call" variant="secondary" lead="callback">Request a call</Button><Button href={`${BASE}/referrals/`} variant="quiet" lead="refer">Refer a patient</Button></div>
             <p className="hs-ds-muted">The order everywhere a call is offered: Call first and filled, with the phone; Request a call outlined, with the calendar; Refer a patient as a text link, with the person-plus.</p></li>
@@ -274,7 +274,7 @@ export default function DesignSystem() {
                 <option value="morning">Morning (9 am–12 pm)</option>
                 <option value="afternoon">Afternoon (12–5 pm)</option>
               </select>
-              <p className="hs-hint">We call within one business day.</p>
+              <p className="hs-hint">We call the same or next day.</p>
             </div>
             <label className="hs-check"><input type="checkbox" defaultChecked /> I&rsquo;m calling for a family member</label>
           </div>
@@ -351,10 +351,10 @@ export default function DesignSystem() {
       <Row id="principles" label="Principles" labelledBy="ds-principles">
         <h2 id="ds-principles">Principles</h2>
         <ul className="hs-ruled hs-mt-32">
-          <li><h3>Guide, never decide</h3><p className="hs-ds-muted">The site explains coverage and eligibility in general terms and routes people to a person. Clinical and coverage decisions stay with clinicians and the intake team.</p></li>
+          <li><h3>Explain, then hand off</h3><p className="hs-ds-muted">The site explains coverage and eligibility in general terms and routes people to a person. Clinical and coverage decisions stay with clinicians and the intake team.</p></li>
           <li><h3>Ask for less</h3><p className="hs-ds-muted">Minimal public forms; health details only in the secure intake system. No advertising pixels or session recording on intake pages.</p></li>
           <li><h3>Readable first</h3><p className="hs-ds-muted">18px+ body, AAA body text, 52px buttons, labels at 14px+ (not the tiny labels the editorial style usually uses), zoom always allowed, everything usable by keyboard.</p></li>
-          <li><h3>Calm by design</h3><p className="hs-ds-muted">One background, space instead of boxes and rules, a chapter or two for rhythm, one closing band. Motion is slow and stops entirely under reduced motion.</p></li>
+          <li><h3>Calm layout</h3><p className="hs-ds-muted">One background, space instead of boxes and rules, a chapter or two for rhythm, one closing band. Motion is slow and stops entirely under reduced motion.</p></li>
         </ul>
       </Row>
     </div>

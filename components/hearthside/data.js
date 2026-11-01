@@ -81,7 +81,7 @@ export const SERVICES = [
     name: "Medical social work",
     short: "Connecting you with community resources, planning, and emotional support.",
     icon: "social",
-    lead: "Medical social workers who connect you with support beyond the medical.",
+    lead: "Medical social workers who help with benefits, planning, and support for caregivers.",
     covers: ["Community resources and benefits", "Planning for care at home", "Advance-care planning conversations", "Support for caregivers"],
   },
   {
@@ -140,7 +140,7 @@ export const FAQS = [
   },
   {
     q: "Will Medicare cover my care?",
-    a: "Medicare covers home health when certain conditions are met. We'll review your coverage with you before care begins, so there are no surprises. Medicare.gov explains the conditions in detail.",
+    a: "Medicare covers home health when certain conditions are met. We'll review your coverage with you before care begins. Medicare.gov explains the conditions in detail.",
   },
   {
     q: "What happens at the first visit?",
@@ -208,9 +208,9 @@ export const AREAS = [
 // never into patient intake.
 export const ROLES = [
   { id: "rn", title: "Registered Nurse, Case Manager", area: "San Fernando Valley", type: "Full time", text: "Lead a caseload of patients at home: assessments, plans of care, and coordination with physicians." },
-  { id: "pt", title: "Physical Therapist", area: "Santa Clarita Valley", type: "Full time or per visit", text: "Help patients rebuild strength and confidence in the homes they live in." },
+  { id: "pt", title: "Physical Therapist", area: "Santa Clarita Valley", type: "Full time or per visit", text: "Strength, balance, and mobility therapy in patients' homes." },
   { id: "ot", title: "Occupational Therapist", area: "San Fernando Valley", type: "Per visit", text: "Make daily life safer and easier for patients recovering at home." },
   { id: "slp", title: "Speech-Language Pathologist", area: "Both valleys", type: "Per visit", text: "Speech, swallowing, and cognition therapy for patients after stroke and illness." },
   { id: "hha", title: "Home Health Aide", area: "San Fernando Valley", type: "Part time", text: "Personal care visits as part of a patient's skilled plan of care." },
-  { id: "intake", title: "Intake Coordinator", area: "Van Nuys office", type: "Full time", text: "Be the first voice families and referral partners hear: route, screen, and schedule new patients." },
+  { id: "intake", title: "Intake Coordinator", area: "Van Nuys office", type: "Full time", text: "Answer calls from families and referral partners, and route, screen, and schedule new patients." },
 ];

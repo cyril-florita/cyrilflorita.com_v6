@@ -12,7 +12,7 @@ export default function Careers() {
     <div className="hs-wrap">
       <PageHead
         title={<>Care for <em className="hs-title-em">your neighbors</em></>}
-        lede="Nurses, therapists, aides, and coordinators who want to do their best work close to home, with the time to do it well."
+        lede="Nurses, therapists, aides, and coordinators who want to work close to home."
         // Supplied by Cyril (AI-generated with Perplexity); same grade.
         photo={{ shot: "A nurse and her patient smiling together at home", src: "/img/hearthside/photos/careers-nurse-smiling", alt: "A smiling nurse in blue scrubs, holding a tablet, sits beside an older woman on her sofa", position: "50% 10%" }}
       >
@@ -21,8 +21,8 @@ export default function Careers() {
 
       <Row label="The work" labelledBy="cr-work">
         <div className="hs-prose">
-          <h2 id="cr-work">What the work is really like</h2>
-          <p>Home health means driving between patients&rsquo; homes, working on your own for much of the day, and seeing the difference you make in the place people actually live. It&rsquo;s independent, and it&rsquo;s never the same twice.</p>
+          <h2 id="cr-work">What the work is like</h2>
+          <p>Home health means driving between patients&rsquo; homes and working on your own for much of the day, in the places your patients live.</p>
           <ul className="hs-list hs-mt-8">
             <li><Icon name="check" size={20} />Caseloads planned around where you live, to keep drive time down</li>
             <li><Icon name="check" size={20} />Mileage reimbursed, with a company tablet and phone</li>

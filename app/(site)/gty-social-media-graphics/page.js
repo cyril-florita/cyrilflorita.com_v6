@@ -96,13 +96,12 @@ const Page = () => {
 
             {/* 01 — Overview */}
             <CaseSection id="overview" number={1} title="Overview">
-              <p>These quote graphics are tailored for social media sharing: concise, impactful quotes built to capture attention in a fast-scrolling feed, with the GTY.org address placed so viewers know exactly where to go for more. By presenting thought-provoking quotes in visually appealing formats, they aim to spark conversations, encourage shares, and drive traffic to the GTY website, expanding the reach of its resources.</p>
-              <p>Consistent branding, with the &ldquo;Grace to You&rdquo; logo and the GTY.org URL prominently displayed, reinforces brand recognition. Each design credits John MacArthur and specifies the source material, which maintains credibility and encourages viewers to explore the original context of the quotes.</p>
+              <p>These are quote graphics for Grace to You&apos;s social media: short quotes from John MacArthur, set to stop a fast-scrolling feed, with the Grace to You logo and the GTY.org address placed so viewers know where to go for more. Each one credits John MacArthur and names the source, so readers can find the original context.</p>
             </CaseSection>
 
             {/* 02 — Results & Impact */}
             <CaseSection id="results" number={2} title="Results & Impact">
-              <p>Each post could look fresh in the feed, yet every one credits its source and points back to GTY.org, turning a moment of scrolling into a path to the original teaching.</p>
+              <p>Each post could look fresh in the feed, yet every one credits its source and points back to GTY.org.</p>
             </CaseSection>
 
             {/* 03 — Design System */}

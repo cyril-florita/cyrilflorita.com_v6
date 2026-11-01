@@ -28,9 +28,9 @@ export const PRODUCTS = {
     form: "tablet",
     color: "#E58E73",
     price: 4,
-    blurb: "Methylcobalamin, a ready-to-use form of B12. It comes almost entirely from animal foods, so most plant-based eaters supplement it.",
+    blurb: "Methylcobalamin, a form of vitamin B12. B12 comes almost entirely from animal foods, so plant-based diets contain little of it.",
     // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
-    reasons: ["You eat mostly or fully plant-based.", "You'd like steadier energy through the day."],
+    reasons: ["You eat mostly or fully plant-based.", "You picked steady energy."],
     pairs: ["omega"],
   },
   omega: {
@@ -53,9 +53,9 @@ export const PRODUCTS = {
     color: "#B9A6E0",
     color2: "#F4EFFB",
     price: 6,
-    blurb: "Magnesium bound to glycine, a form known for being easy on the stomach. Most people take it in the evening.",
+    blurb: "Magnesium bound to glycine. Usually taken in the evening.",
     // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
-    reasons: ["You'd like help winding down.", "You mentioned restless nights.", "You train hard most weeks."],
+    reasons: ["You picked winding down.", "You mentioned restless nights.", "You train hard most weeks."],
     pairs: [],
   },
   c: {
@@ -65,7 +65,7 @@ export const PRODUCTS = {
     form: "tablet",
     color: "#F29E4C",
     price: 4,
-    blurb: "250 mg of buffered vitamin C, a moderate everyday amount that's gentle enough to take on an empty stomach.",
+    blurb: "Buffered vitamin C at 250 mg, a moderate everyday amount.",
     // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
     reasons: ["You picked busy-season support.", "It rounds out packs that would otherwise have fewer than three items."],
     pairs: ["zinc"],
@@ -77,7 +77,7 @@ export const PRODUCTS = {
     form: "tablet",
     color: "#9FB7C9",
     price: 4,
-    blurb: "Zinc picolinate, a well-absorbed form, at 15 mg. Usually paired with vitamin C.",
+    blurb: "Zinc picolinate, 15 mg. Usually paired with vitamin C.",
     // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
     reasons: ["You picked busy-season support (it joins vitamin C)."],
     pairs: ["c"],
@@ -90,9 +90,9 @@ export const PRODUCTS = {
     color: "#8FBF7F",
     color2: "#F1F7EE",
     price: 8,
-    blurb: "Five well-studied strains, 10 billion CFU at expiry, in a delayed-release capsule built to get past stomach acid.",
+    blurb: "Five strains, 10 billion CFU at expiry, in a delayed-release capsule.",
     // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
-    reasons: ["You'd like to focus on digestion."],
+    reasons: ["You picked digestion."],
     pairs: [],
   },
   biotin: {
@@ -103,7 +103,7 @@ export const PRODUCTS = {
     form: "tablet",
     color: "#E7A9C0",
     price: 5,
-    blurb: "Vitamin B7. A popular addition for people whose routine centres on hair and nails.",
+    blurb: "Vitamin B7. The quiz adds it when you pick hair & nails.",
     // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
     reasons: ["You picked hair & nails."],
     pairs: [],
@@ -116,9 +116,9 @@ export const PRODUCTS = {
     color: "#6E9CCF",
     color2: "#EEF4FB",
     price: 7,
-    blurb: "An amino acid found naturally in green tea. Many people take it alongside their morning coffee.",
+    blurb: "An amino acid found naturally in green tea.",
     // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
-    reasons: ["You'd like calm focus."],
+    reasons: ["You picked calm focus."],
     pairs: [],
   },
 };
@@ -129,7 +129,7 @@ export const QUESTIONS = [
   {
     id: "name",
     type: "text",
-    title: "First, what's your first name?",
+    title: "What's your first name?",
     sub: "We print it on your pack, so it's easy to spot.",
     placeholder: "Your first name",
   },
@@ -227,16 +227,16 @@ export const recommend = (a, { fill = true } = {}) => {
   if (a.sun === "rarely" || a.sun === "some") add("d3", a.sun === "rarely" ? "You spend most of the day indoors." : "Your daily time outside is on the short side.");
   if (a.diet === "vegan" || a.diet === "vegetarian") add("b12", "You eat mostly or fully plant-based.");
   if (a.diet === "vegan" || a.diet === "vegetarian" || a.fish === "rarely") add("omega", a.fish === "rarely" ? "Oily fish rarely makes it onto your plate." : "Fish isn't part of your diet.");
-  if (a.sleep === "restless" || goals.includes("sleep")) add("magnesium", goals.includes("sleep") ? "You'd like help winding down." : "You mentioned restless nights.");
+  if (a.sleep === "restless" || goals.includes("sleep")) add("magnesium", goals.includes("sleep") ? "You picked winding down." : "You mentioned restless nights.");
   if (a.activity === "intense" && !picks.find((p) => p.id === "magnesium")) add("magnesium", "You train hard most weeks.");
   if (goals.includes("immune")) {
     add("c", "You picked busy-season support.");
-    add("zinc", "Pairs with vitamin C for your busy-season goal.");
+    add("zinc", "You picked busy-season support (it joins vitamin C).");
   }
-  if (goals.includes("digestion")) add("probiotic", "You'd like to focus on digestion.");
+  if (goals.includes("digestion")) add("probiotic", "You picked digestion.");
   if (goals.includes("hair")) add("biotin", "You picked hair & nails.");
-  if (goals.includes("focus")) add("theanine", "You'd like calm focus.");
-  if (goals.includes("energy") && !picks.find((p) => p.id === "b12")) add("b12", "You'd like steadier energy through the day.");
+  if (goals.includes("focus")) add("theanine", "You picked calm focus.");
+  if (goals.includes("energy") && !picks.find((p) => p.id === "b12")) add("b12", "You picked steady energy.");
   // Always at least three, so every pack feels complete.
   if (fill) ["d3", "omega", "c"].forEach((id) => {
     if (picks.length < 3) add(id, "A well-rounded everyday addition.");
@@ -264,13 +264,13 @@ export const money = (n) => `$${n.toLocaleString("en-US", { minimumFractionDigit
 
 // Sample people for the landing page — clearly fictional.
 export const SAMPLE_REVIEWS = [
-  { name: "Maya R.", text: "The quiz took two minutes, and for once I know why every pill is in my pack.", plan: "Vegan · 4 items" },
-  { name: "Jordan T.", text: "I travel a lot. Skipping a month is one tap, and that's why I've stayed.", plan: "Every 2 months" },
-  { name: "Priya S.", text: "It flagged that I should check with my doctor about the medication I take. I appreciated that.", plan: "Morning pack" },
-  { name: "Daniel K.", text: "I swapped one item for another in about ten seconds. No email thread, no phone call.", plan: "Evening pack" },
-  { name: "Aisha M.", text: "Seeing my name on the box sounds small, but it's the first routine I've actually kept up with.", plan: "Every 3 months" },
-  { name: "Tomás L.", text: "The reminder lands right when I'm making coffee, and checking the day off is weirdly satisfying.", plan: "Morning pack · 5 items" },
-  { name: "Grace H.", text: "I moved apartments mid-subscription. Changing the address took a minute, and the next box just showed up.", plan: "Every 2 months" },
+  { name: "Maya R.", text: "Quiz took two minutes. For once I actually know why each pill is in there.", plan: "Vegan · 4 items" },
+  { name: "Jordan T.", text: "I travel a lot, so skipping a month in one tap matters.", plan: "Every 2 months" },
+  { name: "Priya S.", text: "Liked that it told me to check with my doctor about my meds first.", plan: "Morning pack" },
+  { name: "Daniel K.", text: "Swapped one item for another in about ten seconds, from my account.", plan: "Evening pack" },
+  { name: "Aisha M.", text: "My name's on the box. Silly, but it's the first routine I've stuck with.", plan: "Every 3 months" },
+  { name: "Tomás L.", text: "The reminder comes while I'm making coffee. Reply 1, done.", plan: "Morning pack · 5 items" },
+  { name: "Grace H.", text: "Moved apartments halfway through. Changed the address and the next box came to the new place.", plan: "Every 2 months" },
 ];
 
 // Batch results (/lot/): sample lots, so the transparency page can be tried.
@@ -312,7 +312,7 @@ export const PARTNERS = {
       { id: "d3", why: "Cyril's note: long days indoors mean less vitamin D from sunlight." },
       { id: "b12", why: "Cyril's note: B12 comes almost entirely from animal foods, so plant-based eaters usually add it." },
       { id: "omega", why: "Cyril's note: an algae source of EPA and DHA, since fish isn't on your menu." },
-      { id: "magnesium", why: "Cyril's note: a gentle form, taken with dinner as part of winding down." },
+      { id: "magnesium", why: "Cyril's note: magnesium glycinate, taken with dinner." },
     ],
   },
 };

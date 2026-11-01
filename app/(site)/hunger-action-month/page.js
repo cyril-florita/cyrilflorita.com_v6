@@ -130,12 +130,12 @@ const Page = () => {
 
             {/* 04 — Tracking & Attribution */}
             <CaseSection id="tracking" number={4} title="Tracking & Attribution">
-              <p>The centerpiece was a complete event-tracking layer in Google Tag Manager and Google Analytics 4, documented in an implementation report for the communications team, plus the plan for how every inbound link is tagged.</p>
+              <p>The core of the work was a complete event-tracking layer in Google Tag Manager and Google Analytics 4, documented in an implementation report for the communications team, plus the plan for how every inbound link is tagged.</p>
               <ul className="cyril-case-list">
                 <li><strong>Built on what was there.</strong> I aligned with the site&apos;s existing one-tag pattern, so each new interaction needed only a few new variables.</li>
-                <li><strong>Seven custom events, and donations as ecommerce.</strong> Events cover page views, call-to-action clicks, trust-badge clicks, graphic downloads, caption copies, and newsletter sign-ups. Checkout starts and completed donations are tracked through tag configuration alone, with no changes to the giving form.</li>
+                <li><strong>Six custom events, and donations as ecommerce.</strong> Events cover page views, call-to-action clicks, trust-badge clicks, graphic downloads, caption copies, and newsletter sign-ups. Checkout starts and completed donations are tracked through tag configuration alone, with no changes to the giving form.</li>
                 <li><strong>One link plan for every channel.</strong> 17 tagged links across eight channels, from email, social, and paid ads to search, print, QR codes, and internal placements, each with approved source and medium pairs, implementation notes for its owner, and one shared link generator validated against the plan.</li>
-                <li><strong>Clean and verified.</strong> Donors&apos; personal details never reach analytics, donations are kept apart from other purchases, and all nine events were confirmed end to end in debug tools.</li>
+                <li><strong>Clean and verified.</strong> Donors&apos; personal details never reach analytics, donations are kept apart from other purchases, and all eight events (the six custom events, plus checkout starts and completed donations) were confirmed end to end in debug tools.</li>
               </ul>
               <p>To follow the campaign live, I also built a private dashboard. Read about it in the <CaseLink href="/hunger-action-month-dashboard"><strong>Hunger Action Month Campaign Dashboard</strong></CaseLink> case study.</p>
             </CaseSection>
@@ -155,8 +155,8 @@ const Page = () => {
             <CaseSection id="learnings" number={6} title="Learning &amp; Next Steps">
               <CaseLearnings
                 learned={[
-                  "Measure value, not just volume: email sent far less traffic and was worth far more per donation.",
-                  "Interest isn't completion: monthly giving drew interest but few completions, so that flow needs testing.",
+                  "Value per donation matters as much as traffic: email sent far less traffic and was worth far more per donation.",
+                  "Monthly giving drew interest but few completions, so that flow needs testing.",
                   "The page earned trust without the badges or the newsletter, so those elements deserve a rethink.",
                 ]}
                 next={[

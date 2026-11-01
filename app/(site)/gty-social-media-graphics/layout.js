@@ -1,6 +1,6 @@
 // Server layout so this route can export metadata (page.js is a client component).
 const title = "GTY Social Media Graphics";
-const description = "Quote graphics tailored for social media sharing, designed to drive engagement and direct traffic back to the Grace to You website.";
+const description = "Quote graphics for Grace to You's social media, built from a small set of layouts that credit each source and point back to GTY.org.";
 const url = "/gty-social-media-graphics/";
 const images = [{ url: "/og/gty-social-media-graphics.jpg", width: 1200, height: 630, alt: "GTY Social Media Graphics" }];
 

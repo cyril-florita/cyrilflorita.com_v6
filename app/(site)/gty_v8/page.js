@@ -24,7 +24,7 @@ const SECTIONS = [
   { id: "research", label: "Research & Information Architecture" },
   { id: "design-process", label: "Design Process" },
   { id: "development", label: "Development & Features" },
-  { id: "learnings", label: "Learning and Reflection" },
+  { id: "learnings", label: "Learning" },
 ];
 
 const Page = () => {
@@ -102,7 +102,7 @@ const Page = () => {
 
             {/* 02 — Results & Impact */}
             <CaseSection id="results" number={2} title="Results & Impact">
-              <p>The redesign serves the ministry&apos;s loyal and new audience while carrying its 50+ year legacy forward:</p>
+              <p>The redesign serves both the ministry&apos;s loyal audience and new visitors:</p>
               <CaseStats items={[
                 { value: "+38%", label: "Engagement, mobile users" },
                 { value: "50%", label: "More usage time, desktop" },
@@ -117,18 +117,17 @@ const Page = () => {
                 <li><strong>27% faster page loads</strong> across the board</li>
                 <li><strong>Significantly improved accessibility,</strong> with Lighthouse ratings over 90</li>
               </ul>
-              <p>More than metrics, the site now reflects the clarity, simplicity, quality, and timelessness of John MacArthur&apos;s preaching and teaching.</p>
             </CaseSection>
 
             {/* 03 — Research & Information Architecture */}
             <CaseSection id="research" number={3} title="Research &amp; Information Architecture">
 
               <h3 className="cyril-case-subheading">Discovery &amp; UX Strategy</h3>
-              <p>Under the leadership of the Digital Platforms Coordinator, I started with a deep dive into user behavior: demographics, traffic sources and patterns, device usage, content consumption, bounce rates, and feedback from the customer service team. GTY has a loyal audience, many of whom aren&apos;t tech-savvy, so the new experience needed to feel intuitive, lightweight, and content-focused. I concentrated on four things:</p>
+              <p>Under the leadership of the Digital Platforms Coordinator, I started by studying user behavior: demographics, traffic sources and patterns, device usage, content consumption, bounce rates, and feedback from the customer service team. GTY has a loyal audience, many of whom aren&apos;t tech-savvy, so the new experience needed to feel intuitive, lightweight, and content-focused. I concentrated on four things:</p>
               <ul className="cyril-case-list">
-                <li><strong>Accessibility &amp; Responsiveness:</strong> The previous experience wasn&apos;t WCAG-compliant, especially for elderly users, or mobile-friendly.</li>
-                <li><strong>Content Organization and Findability:</strong> With decades of sermons and resources, the information architecture needed a major overhaul.</li>
-                <li><strong>Aesthetic Sophistication and Simplicity:</strong> The brand is built on depth and clarity, and the interface had to match.</li>
+                <li><strong>Accessibility and responsiveness:</strong> The previous experience wasn&apos;t WCAG-compliant, especially for elderly users, or mobile-friendly.</li>
+                <li><strong>Content organization and findability:</strong> With decades of sermons and resources, the information architecture needed a major overhaul.</li>
+                <li><strong>Simplicity:</strong> The brand is built on depth and clarity, and the interface had to match.</li>
                 <li><strong>Performance:</strong> The previous site was sluggish, making streaming or reading difficult in low-bandwidth areas.</li>
               </ul>
 
@@ -175,10 +174,10 @@ const Page = () => {
               <CaseFigure src="/img/portfolio/gty8_user-stories-3.jpg" alt="GTY 8 User Stories 3" caption="User Stories 3" />
 
               <h3 className="cyril-case-subheading">Producing Mockups</h3>
-              <p>Mockups were where the planned ideas began to take visual shape and where design and function started working in harmony. I aimed for two things:</p>
+              <p>Mockups were where the planned ideas began to take visual shape. I aimed for two things:</p>
               <ul className="cyril-case-list">
-                <li><strong>Project Team and Stakeholder Alignment:</strong> With the Digital Platforms Coordinator&apos;s supervision, I held collaborative sessions with managers, content creators, and engineers to clarify goals, user needs, and brand voice, which avoided unnecessary revisions later.</li>
-                <li><strong>Clean, Minimal, yet Sophisticated Design:</strong> I designed the UI to feel intuitive and elegant, with every element having a purpose and no clutter. Minimal, but not bland, so users focus on the content while the layout and navigation subtly guide them.</li>
+                <li><strong>Team and stakeholder alignment:</strong> With the Digital Platforms Coordinator&apos;s supervision, I held collaborative sessions with managers, content creators, and engineers to clarify goals, user needs, and brand voice, which avoided unnecessary revisions later.</li>
+                <li><strong>A clean, minimal design:</strong> I designed the UI so every element has a purpose and nothing clutters the page, so users focus on the content while the layout and navigation guide them.</li>
               </ul>
               <CaseFigure src="/img/portfolio/gty8_design_0 - init.gif" alt="GTY 8 Initial Mockups" caption="Initial Mockups" frame="browser" url="gty.org" />
               <CaseFigure src="/img/portfolio/gty8_design_rev-1.gif" alt="GTY 8 Revision 1" caption="Revision #1" frame="browser" url="gty.org" />
@@ -195,7 +194,7 @@ const Page = () => {
                 <CaseFigure src="/img/portfolio/gty8_design_rev-6_4.jpg" alt="GTY 8 Revision 6.4" caption="Revision #6.4" ratio="3 / 4" />
               </CaseGrid>
 
-              <h3 className="cyril-case-subheading">Visual Direction&mdash;Font, Color, and Layout Choices</h3>
+              <h3 className="cyril-case-subheading">Visual Direction: Font, Color, and Layout Choices</h3>
               <p>Working with GTY&apos;s design agency partner, WeKreative, I proposed fonts that they immediately loved and approved, chosen for legibility and clarity across digital and print: Google&apos;s Lora (serif) for long-format content such as blog posts, articles, transcripts, and devotionals, and Lato (sans-serif) for titles and short copy. WeKreative provided the color palette to keep the site aligned with GTY&apos;s print brand.</p>
               <CaseGrid layout="two">
                 <CaseFigure src="/img/portfolio/gty8_fonts.jpg" alt="GTY 8 Fonts" caption="Fonts" ratio="3 / 4" />
@@ -203,7 +202,7 @@ const Page = () => {
               </CaseGrid>
 
               <h3 className="cyril-case-subheading">Style Guide</h3>
-              <p>Once the design language was solid, I compiled a detailed style guide covering typography rules, color palette, spacing systems, and interaction patterns. It became the single source of truth for the team, ensuring consistency across pages, devices, and future iterations.</p>
+              <p>Once the design language was solid, I compiled a detailed style guide covering typography rules, color palette, spacing systems, and interaction patterns. It became the team&apos;s reference for keeping pages and devices consistent, then and in later iterations.</p>
               <CaseFigure src="/img/portfolio/gty8_style-guide-creation.jpg" alt="GTY 8 Style Guide Creation" caption="Style Guide Creation" ratio="3 / 4" size="text" />
             </CaseSection>
 
@@ -246,12 +245,12 @@ const Page = () => {
               <CaseVideo src="/img/portfolio/gty8_account.mp4" caption="Account Pages" url="gty.org" />
               <ul className="cyril-case-list">
                 <li>I used HandlebarsJS to mock up and template the data and content, so I could design and develop freely without interfering with the back-end work. The Software Engineer and Software Developer focused on the back end while I cut up the pages.</li>
-                <li><strong>Subtle, yet Pleasing UI Micro-interactions:</strong> Button animations, hover effects, and component and page transitions make the user&apos;s journey more delightful.</li>
+                <li><strong>Micro-interactions:</strong> Button animations, hover effects, and component and page transitions.</li>
               </ul>
               <CaseVideo src="/img/portfolio/gty8_micro-interactions.mp4" caption="Micro-interactions" url="gty.org" />
 
               <h3 className="cyril-case-subheading">Custom Media Player with Smart Transcript</h3>
-              <p>A custom-built player replaced the Flash-based one, a cornerstone feature that directly supports the ministry&apos;s mission of distributing biblical teaching:</p>
+              <p>A custom-built player replaced the Flash-based one:</p>
               <ul className="cyril-case-list">
                 <li><strong>Cross-device compatibility,</strong> including iOS and Android</li>
                 <li><strong>Background playback continuity,</strong> persisting when navigating between pages or switching browser tabs</li>
@@ -274,7 +273,7 @@ const Page = () => {
                 <li><strong>Progress Tracking:</strong> Resume playback across sessions via session and authenticated access</li>
                 <li><strong>Content Playlists:</strong> User-specific sermon collections persisting across devices</li>
                 <li><strong>Notification Preferences:</strong> Customizable alerts for new content releases</li>
-                <li><strong>Cross-Device Synchronization:</strong> Seamless transition between web and mobile app experiences</li>
+                <li><strong>Cross-Device Synchronization:</strong> Moving between the website and the mobile apps without losing your place</li>
               </ul>
               <p>The account system required secure OAuth and GDPR-compliant data practices, including granular consent management, which meant substantial back-end changes such as data encryption at rest and in transit.</p>
 
@@ -295,16 +294,13 @@ const Page = () => {
             </CaseSection>
 
             {/* 06 — Learning and Reflection */}
-            <CaseSection id="learnings" number={6} title="Learning and Reflection">
+            <CaseSection id="learnings" number={6} title="Learning">
 <CaseLearnings
                 learned={[
                 "Mocking up data with HandlebarsJS let me design and cut up pages while the engineers built the back end, so I'd use mock data again to keep front-end and back-end work from blocking each other.",
                 "Taking a full UI inventory before any wireframes showed what had grown inconsistently across departments, which is why I now start redesigns by taking stock of what already exists.",
                 "The account system needed secure OAuth and GDPR-compliant data practices that meant substantial back-end changes, so compliance requirements are worth raising with the engineers at the start.",
                 ]}
-                reflection={
-                  <p>Working on version 8 reminded me that the best UX isn&apos;t flashy&mdash;it&apos;s subtle and almost invisible. I&apos;m privileged to have contributed, on a small team juggling other projects, to the craftsmanship, information architecture, user-centric decisions, and technology that made this platform more responsive, accessible, usable, and modern, while staying true to the ministry&apos;s commitment of &ldquo;Unleashing God&apos;s Truth, One Verse at a Time.&rdquo;</p>
-                }
               />
             </CaseSection>
 

@@ -1,6 +1,6 @@
 // Server layout so this route can export metadata (page.js is a client component).
 const title = "The Study Bible App Logo";
-const description = "Creating a visual identity for The Study Bible app: a simple, versatile logo that communicates usability, clarity, and a sense of illumination.";
+const description = "A visual identity for The Study Bible app: a simple, versatile logo of a book, a pen, and a rising sun, tested for clarity at small sizes.";
 const url = "/the-study-bible-app-logo/";
 const images = [{ url: "/og/the-study-bible-app-logo.jpg", width: 1200, height: 630, alt: "The Study Bible App Logo" }];
 

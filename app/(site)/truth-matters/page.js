@@ -29,7 +29,7 @@ const SECTIONS = [
   { id: "results", label: "Results & Impact" },
   { id: "brand", label: "Brand Identity" },
   { id: "ux-web", label: "UX, Web & Podcast Integration" },
-  { id: "learnings", label: "Learning and Reflection" },
+  { id: "learnings", label: "Learning" },
 ];
 
 // Brand guide data. Colors are sampled from the delivered logo and website;
@@ -139,19 +139,19 @@ const Page = () => {
 
             {/* 01 — Overview */}
             <CaseSection id="overview" number={1} title="Overview">
-              <p>The Truth Matters Podcast is a media production by Grace to You. In each episode, host Darrell Harrison welcomes a guest to explore a featured resource from the Grace to You collection&mdash;whether it's a book, sermon, or blog series by John MacArthur&mdash;and why it still matters for the church today.</p>
-              <p>The show needed a digital experience as grounded and compelling as the content itself, with every touchpoint&mdash;from the logo to the episode pages&mdash;telling a consistent story. As the Product Designer and Developer, I brought together three roles I love: branding, UX/UI design, and front-end development.</p>
+              <p>The Truth Matters Podcast is a media production by Grace to You. In each episode, host Darrell Harrison welcomes a guest to explore a featured resource from the Grace to You collection (a book, sermon, or blog series by John MacArthur) and why it still matters for the church today.</p>
+              <p>The show needed a brand and website in its own tone, with the logo, artwork, and episode pages telling one consistent story. As the Product Designer and Developer, I brought together three roles I love: branding, UX/UI design, and front-end development.</p>
             </CaseSection>
 
             {/* 02 — Results & Impact */}
             <CaseSection id="results" number={2} title="Results &amp; Impact">
-              <p>The result is a brand and website that feel as grounded as the content: a minimal, strong logo with a muted palette, and a clean, content-first WordPress site built with SEO and accessibility in mind. A global media player keeps playback uninterrupted while visitors browse, with clear &ldquo;Listen/Play,&rdquo; &ldquo;Share,&rdquo; and &ldquo;Subscribe&rdquo; calls to action and a responsive layout for listeners on the go.</p>
+              <p>The result is a brand and website in the show&apos;s own tone: a minimal, strong logo with a muted palette, and a clean, content-first WordPress site built with SEO and accessibility in mind. A global media player keeps playback uninterrupted while visitors browse, with clear &ldquo;Listen/Play,&rdquo; &ldquo;Share,&rdquo; and &ldquo;Subscribe&rdquo; calls to action and a responsive layout for listeners on the go.</p>
             </CaseSection>
 
             {/* 03 — Brand Identity */}
             <CaseSection id="brand" number={3} title="Brand Identity">
               <h3 className="cyril-case-subheading">Concept</h3>
-              <p>I wanted the branding to echo the tone of the podcast&mdash;casual, yet theologically serious and grounded in biblical truth. The logo is minimal yet strong, reflecting the clarity and conviction you would expect from Grace to You: no hype, just truth.</p>
+              <p>I wanted the branding to echo the tone of the podcast: casual, yet theologically serious and grounded in biblical truth. The logo is a speech bubble with the name cut out of it, in solid black.</p>
               <CaseFigure src="/img/portfolio/main_truth-matters-podcast.jpg" alt="Truth Matters Podcast Wide" caption="Truth Matters Podcast" />
               <CaseGrid layout="two">
                 <CaseFigure src="/img/portfolio/truth-matters_logo.jpg" alt="Truth Matters Podcast Logo" caption="Logo" />
@@ -190,7 +190,7 @@ const Page = () => {
               </CaseGrid>
 
               <h3 className="cyril-case-subheading">Graphics &amp; Supporting Media</h3>
-              <p>Each episode has its own hero imagery and thematic layout, reflecting the subject matter while staying true to the brand system. I created all the assets in-house, including episode thumbnails, podcast artwork, website banners, and social share images, cohesive yet distinctive for each episode.</p>
+              <p>Each episode has its own hero imagery and thematic layout, reflecting the subject matter while staying true to the brand system. I created all the assets in-house, including episode thumbnails, podcast artwork, website banners, and social share images, each one distinct but clearly part of the show.</p>
               <CaseGrid layout="two">
                 <CaseFigure src="/img/portfolio/truth-matters_youtube-thumb-1.jpg" alt="Truth Matters Podcast YouTube Thumb 1" caption="YouTube Thumbnail 1" />
                 <CaseFigure src="/img/portfolio/truth-matters_youtube-thumb-2.jpg" alt="Truth Matters Podcast YouTube Thumb 2" caption="YouTube Thumbnail 2" />
@@ -204,22 +204,19 @@ const Page = () => {
 
             {/* 04 — UX, Web & Podcast Integration */}
             <CaseSection id="ux-web" number={4} title="UX, Web &amp; Podcast Integration">
-              <p>With leadership from the Digital Platforms Director and collaboration with the Senior Software Architect, I developed the site on WordPress for practical content publication and management. It is clean, minimal, content-first, and easy to navigate, built with a focus on SEO and accessibility so the podcast is easily discoverable, playable, and engaging for all audiences. Visitors can leave a comment or share an episode on social media, and the fully responsive experience works seamlessly on mobile&mdash;because I knew a lot of listeners would be discovering it on the go.</p>
-              <p>The homepage showcases the most recent episodes with a global media player for immediate listening/watching that is not interrupted while navigating the site, keeping visitors focused on consuming great content. A sidebar menu and clear CTAs &#40;&ldquo;Listen/Play,&rdquo; &ldquo;Share,&rdquo; and &ldquo;Subscribe&rdquo;&#41; give straightforward access to episodes anywhere in the site.</p>
+              <p>With leadership from the Digital Platforms Director and collaboration with the Senior Software Architect, I developed the site on WordPress for practical content publication and management. It is clean, minimal, content-first, and easy to navigate, built with a focus on SEO and accessibility so the podcast is easily discoverable, playable, and engaging for all audiences. Visitors can leave a comment or share an episode on social media, and the layout is fully responsive, since I expected many listeners to find the show on the go.</p>
+              <p>The homepage shows the most recent episodes, with a global media player for listening or watching that keeps playing while visitors move around the site. A sidebar menu and clear CTAs &#40;&ldquo;Listen/Play,&rdquo; &ldquo;Share,&rdquo; and &ldquo;Subscribe&rdquo;&#41; give straightforward access to episodes anywhere in the site.</p>
               <CaseFigure src="/img/portfolio/truth-matters_website.png" alt="Truth Matters Podcast Website" caption="Website" ratio="3 / 4" size="text" />
             </CaseSection>
 
             {/* 05 — Learning and Reflection */}
-            <CaseSection id="learnings" number={5} title="Learning and Reflection">
+            <CaseSection id="learnings" number={5} title="Learning">
               <CaseLearnings
                 learned={[
-                  "Owning branding, UX/UI design, and front-end development together made it possible to keep every touchpoint, from the logo to the episode pages, telling one consistent story.",
-                  "Keeping the global media player uninterrupted while visitors browse showed me how navigation can be designed around the main task of listening and watching.",
-                  "Creating episode assets in-house showed me how a brand system can keep episodes cohesive yet distinctive.",
+                  "Owning branding, UX/UI design, and front-end development together let me keep the logo, artwork, and episode pages consistent with each other.",
+                  "Keeping the global media player playing while visitors browse meant designing the navigation around the main task: listening and watching.",
+                  "Creating episode assets in-house, inside one brand system, kept the episodes consistent while giving each its own look.",
                 ]}
-                reflection={
-                  <p>As the Product Designer &amp; Web Developer behind the Truth Matters Podcast, I embraced the challenge of creating a digital experience that felt as grounded and compelling as the content itself. My goal was to ensure every touchpoint&mdash;from the logo to the episode pages&mdash;told a consistent story, uniting branding, UX/UI design, and front-end development into a cohesive whole.</p>
-                }
               />
             </CaseSection>
 

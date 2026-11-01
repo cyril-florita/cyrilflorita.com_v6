@@ -127,10 +127,10 @@ const Page = () => {
             <CaseSection id="deadline" number={4} title="Holding the Deadline">
               <p>With the flyers already printed, the launch date couldn&apos;t move, even as pieces of the project did. Three approvers signed off, and more than 20 review threads were resolved along the way:</p>
               <ul className="cyril-case-list">
-                <li><strong>A registration link that didn&apos;t exist yet.</strong> The brief called for an Open House button, but no registration had been set up. I flagged it early; after a week of cross-team follow-up, the button came off the page&mdash;and when the registration went live the next day, I had it back up and linked that same morning.</li>
+                <li><strong>A registration link that didn&apos;t exist yet.</strong> The brief called for an Open House button, but no registration had been set up. I flagged it early; after a week of cross-team follow-up, the button came off the page, and when the registration went live the next day, I had it back up and linked that same morning.</li>
                 <li><strong>Launch now, backfill later.</strong> The volunteer story section was built with placeholder content and flagged, so the team could launch on time and add a real story afterward.</li>
                 <li><strong>The right photo.</strong> When a reviewer noticed the original hero image prominently showed another organization&apos;s branding, I swapped in a photo centered on the ministry&apos;s own work.</li>
-                <li><strong>Collaboration with conviction.</strong> When leadership and the designer felt the page read differently from the rest of the site, I adopted the designer&apos;s button styles while keeping the choices I could defend&mdash;like the oversized open-quote treatment, a pattern used on well-established sites.</li>
+                <li><strong>Collaboration with conviction.</strong> When leadership and the designer felt the page read differently from the rest of the site, I adopted the designer&apos;s button styles while keeping the choices I could defend, like the oversized open-quote treatment, a pattern used on well-established sites.</li>
               </ul>
             </CaseSection>
 

@@ -27,7 +27,6 @@ const SECTIONS = [
   { id: "results", label: "Results & Impact" },
   { id: "process", label: "Concept & Design Process" },
   { id: "brand-guide", label: "Brand Guide" },
-  { id: "reflection", label: "Reflection" },
 ];
 
 // Brand guide data. Colors are sampled from the delivered artwork; crop boxes
@@ -123,36 +122,36 @@ const Page = () => {
 
             {/* 01 — Overview */}
             <CaseSection id="overview" number={1} title="Overview">
-              <p>As a designer at Grace to You, my approach to the Patricia MacArthur Pastoral Care Fund logo was to create a visual identity that feels both personal and nurturing, reflecting the fund's mission.</p>
+              <p>As a designer at Grace to You, I created the logo for the Patricia MacArthur Pastoral Care Fund. It needed to feel personal and caring, like the fund itself.</p>
             </CaseSection>
 
             {/* 02 — Results & Impact */}
             <CaseSection id="results" number={2} title="Results &amp; Impact">
-              <p>The balance of modern minimalism and classic script ensures the design feels both contemporary and enduring, resonating with a broad audience while conveying stewardship and care. The logo was presented at the GTY Volunteer Appreciation Christmas Party.</p>
+              <p>The logo is a line drawing of two poppies and a handwritten name, framed in a circle. It was presented at the GTY Volunteer Appreciation Christmas Party.</p>
               <CaseFigure src={PRESENTATION} alt="The Patricia MacArthur Pastoral Care Fund Logo Presentation" caption="Logo Presentation at the GTY Volunteer Appreciation Christmas Party" />
             </CaseSection>
 
             {/* 03 — Concept & Design Process */}
             <CaseSection id="process" number={3} title="Concept &amp; Design Process">
               <h3 className="cyril-case-subheading">Crafting Stewardship &amp; Care</h3>
-              <p>Every element of the mark was chosen to carry part of that mission:</p>
+              <p>The mark is built from four parts:</p>
               <ul className="cyril-case-list">
-                <li>A pair of poppy flowers as the central motif, for their symbolism of remembrance, care, and gentle strength</li>
-                <li>A continuous line drawing style to convey unity and ongoing support</li>
-                <li>A circular frame that reinforces a sense of wholeness and protection</li>
-                <li>A handwritten script for &ldquo;Patricia MacArthur&rdquo; that adds a personal, human touch, making the logo feel approachable and heartfelt</li>
+                <li>A pair of poppy flowers as the central motif, chosen as a symbol of remembrance</li>
+                <li>A continuous line drawing style</li>
+                <li>A circular frame around the flowers and the name</li>
+                <li>A handwritten script for &ldquo;Patricia MacArthur&rdquo; that gives the logo a personal touch</li>
               </ul>
             </CaseSection>
 
             {/* 04 — Brand Guide */}
             <CaseSection id="brand-guide" number={4} title="Brand Guide">
               <h3 className="cyril-case-subheading">Logo Versions</h3>
-              <p>The color variations&mdash;ranging from soft, natural hues on a white background to elegant gold on black&mdash;keep the logo versatile and impactful across different settings and materials, maintaining brand consistency while allowing for contextual flexibility.</p>
-              <p>The full-color version with red and yellow poppies and a green base is vibrant and uplifting, ideal for print and digital use where warmth and visibility are needed.</p>
+              <p>The logo comes in several color versions, from soft, natural hues on a white background to gold on black, so it works across print, screen, and different materials.</p>
+              <p>The full-color version with red and yellow poppies and a green base is for print and digital use on light backgrounds, where warmth and visibility are needed.</p>
               <CaseFigure src={LOGO_LIGHT} alt="The Patricia MacArthur Pastoral Care Fund Logo - Light Version" caption="Full-Color Version" />
-              <p>The gold-on-black variant offers a sophisticated, timeless look suitable for formal events or commemorative materials.</p>
+              <p>The gold-on-black version is for formal events and commemorative materials.</p>
               <CaseFigure src={LOGO_GOLD} alt="The Patricia MacArthur Pastoral Care Fund Logo - Dark Version" caption="Gold on Black Version" />
-              <p>Including Patricia MacArthur&apos;s portrait in one version personalizes the brand further, honoring her legacy and making the fund&apos;s purpose immediately clear.</p>
+              <p>One version includes Patricia MacArthur&apos;s portrait, which makes the fund&apos;s purpose clear at a glance.</p>
               <CaseFigure src={LOGO_PORTRAIT} alt="The Patricia MacArthur Pastoral Care Fund Logo - Portrait - Dark Version" caption="Portrait on Black Version" />
               <h3 className="cyril-case-subheading">Clear Space &amp; Size</h3>
               <p>The emblem works like a seal. It needs room around it, and its finest lines (the script and the web address) set how small it can go.</p>
@@ -178,12 +177,6 @@ const Page = () => {
                 <CaseFigure src="/img/portfolio/patricia-macarthur_merch-tote.jpg" alt="Patricia MacArthur Pastoral Care Fund tote bag" caption="Tote" />
               </CaseGrid>
             </CaseSection>
-
-            {/* 05 — Reflection */}
-            <CaseSection id="reflection" number={5} title="Reflection">
-              <p>Throughout, the balance of modern minimalism and classic script was the thread, keeping the design contemporary and enduring.</p>
-            </CaseSection>
-
           </CaseLayout>
 
           <CaseNext

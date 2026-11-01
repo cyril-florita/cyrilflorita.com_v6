@@ -53,12 +53,12 @@ export default function Emails() {
     <div className="dl-emails">
       <div className="dl-wrap">
         <BigWordHead word="Messages">
-          <h1 className="dl-h2">The product doesn&apos;t stop at the website.</h1>
+          <h1 className="dl-h2">The emails and texts between visits.</h1>
           <p className="dl-bigword-note"><span className="dl-code" data-lot="Lot 06">Sample content</span></p>
         </BigWordHead>
         <p className="dl-section-lede">
-          The messages people get between visits, designed on the same brand. The shipping reminder carries the same
-          one-tap controls as the account, so skipping or pausing never takes more than a tap, even from the inbox.
+          The messages people get between visits, in the same design. The shipping reminder has the account&apos;s Skip
+          and Pause, so a change takes one tap from the inbox.
         </p>
 
         <section className="dl-emails-row">
@@ -89,7 +89,7 @@ export default function Emails() {
           <div className="dl-emails-note">
             <span className="dl-pill-label">Order confirmation</span>
             <h2 className="dl-h3">Right after checkout</h2>
-            <p>The receipt reads like the plan: every item with its reason, the delivery date, and what happens next, so the first email builds the same trust as the product.</p>
+            <p>The receipt reads like the plan: every item with its reason, the delivery date, and what happens next.</p>
           </div>
           <Inbox subject="You're all set, Cyril: order VT-204816" preheader="Your first box arrives Wed, Oct 21. Here's what's inside, and why." when="Mon, Oct 12">
             <EmailHead />
@@ -102,7 +102,7 @@ export default function Emails() {
                   ["d3", "You spend most of the day indoors."],
                   ["b12", "You eat mostly or fully plant-based."],
                   ["omega", "Fish isn't part of your diet."],
-                  ["magnesium", "You'd like help winding down."],
+                  ["magnesium", "You picked winding down."],
                 ].map(([id, why]) => (
                   <li key={id}>
                     <Pill id={id} size="sm" tilt={-20} />

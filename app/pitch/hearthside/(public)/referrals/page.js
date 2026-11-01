@@ -41,7 +41,7 @@ export default function Referrals() {
           <div className="hs-prose">
             <h2 id="rf-check">Referral checklist</h2>
             <p>What helps us accept a referral quickly. Only the first five are required, and you don&rsquo;t need them all to send: we&rsquo;ll request anything missing.</p>
-            <p>Patients must live in our <a href={`${BASE}/service-area/`}>service area</a>, be under a physician&rsquo;s care, and need intermittent skilled services.</p>
+            <p>Patients must live in our <a href={`${BASE}/service-area/`}>service area</a>, be under a physician&rsquo;s care, be homebound, and need intermittent skilled services.</p>
           </div>
           <ul className="hs-list">
             {DOCS.map((d) => <li key={d.id}><Icon name={d.required ? "check" : "info"} size={20} />{d.name}{!d.required && " (optional)"}</li>)}

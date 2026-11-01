@@ -121,7 +121,7 @@ const Page = () => {
               <ul className="cyril-case-list">
                 <li><strong>Fetched in the background.</strong> Analytics data is gathered on a schedule, outside of anyone&apos;s visit.</li>
                 <li><strong>Served from a cache.</strong> The dashboard only reads data that&apos;s already been saved, so it loads instantly and can&apos;t tie up the site.</li>
-                <li><strong>Last good numbers, not downtime.</strong> If the analytics service is slow or unavailable, the dashboard shows slightly older numbers and logs the failure quietly, and the website stays up.</li>
+                <li><strong>Fallback to the last good numbers.</strong> If the analytics service is slow or unavailable, the dashboard shows slightly older numbers and logs the failure quietly, and the website stays up.</li>
               </ul>
             </CaseSection>
 

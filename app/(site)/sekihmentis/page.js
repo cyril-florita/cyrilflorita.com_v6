@@ -71,7 +71,7 @@ const Page = () => {
 
             {/* 01 — Overview */}
             <CaseSection id="overview" number={1} title="Overview">
-              <p>MySpace? Yes, it&apos;s been a minute since MySpace dominated the social media scene. But MySpace crawled, so that Facebook, Twitter, etc. could walk and run. Back then, if you could customize your profile page and make it look great, you could set yourself apart from the rest. Customization showcased not only your uniqueness and your design skillz ;&#41; but also your HTML, CSS, and JavaScript chops&mdash;even if just for fun.</p>
+              <p>MySpace? Yes, it&apos;s been a minute since MySpace dominated the social media scene. But MySpace crawled, so that Facebook, Twitter, etc. could walk and run. Back then, if you could customize your profile page and make it look great, you could set yourself apart from the rest. Customization showcased not only your uniqueness and your design skillz ;&#41; but also your HTML, CSS, and JavaScript chops, even if just for fun.</p>
               <p>So I designed this piece as the background graphic for my MySpace profile. &ldquo;SekihMentis&rdquo; was my screen name in those days, and being a big fan of Transformers and guns, I thought it would be cool to have a grungy &ldquo;Transformers: Autobots Big Gun&rdquo; theme.</p>
             </CaseSection>
 
@@ -82,7 +82,7 @@ const Page = () => {
 
             {/* 03 — Reflection */}
             <CaseSection id="reflection" number={3} title="Reflection">
-              <p>I would always include this piece as part of my portfolio, even though it&apos;s not a professional one. It&apos;s a fun way to showcase my skills and creativity from when I was just a beginner learning layout, typography, color theory, and various design styles, and it exhibits my ability to design with the industry-standard tools of the time, Adobe Illustrator and Photoshop.</p>
+              <p>I would always include this piece as part of my portfolio, even though it&apos;s not a professional one. It&apos;s a fun way to showcase my skills and creativity from when I was just a beginner learning layout, typography, color theory, and various design styles, and I made it in Adobe Illustrator and Photoshop, the industry-standard tools of the time.</p>
             </CaseSection>
 
           </CaseLayout>

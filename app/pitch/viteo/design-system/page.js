@@ -92,10 +92,9 @@ export default function DesignSystem() {
             <h1 className="dl-display">Viteo, <em>in pieces.</em></h1>
           </BigWordHead>
           <p className="dl-lede">
-            Three themes on one set of components. Aqua is crisp and graphic: navy ink on pastel blocks. Grove is
-            fresh and botanical: a mint page, a leaf-green accent and a characterful grotesque. Peach is warm and
-            editorial: a peach bento with periwinkle and apricot-gold blocks on navy ink, set in a soft serif. Each has dark
-            and light modes, and every sample below is the real component.
+            Three themes on one set of components. Aqua: navy ink on pastel blocks. Grove: a mint page, a
+            leaf-green accent and a grotesque display face. Peach: a peach bento with periwinkle and apricot-gold blocks
+            on navy ink, in a soft serif. Each has dark and light modes, and every sample below is the real component.
           </p>
           <CurrentTheme />
           <nav className="dl-ds-nav" aria-label="On this page">
@@ -115,12 +114,12 @@ export default function DesignSystem() {
                 <div className="dl-panel dl-panel-2"><Logo /></div>
                 <div className="dl-panel dl-panel-dark"><Logo /></div>
               </div>
-              <p className="dl-meta">Wordmark in the display font, lowercase, tight tracking. On panels the ink and accent re-colour themselves.</p>
+              <p className="dl-meta">Wordmark in the display font, lowercase, tight tracking. On panels the ink and accent re-color themselves.</p>
             </div>
             <div className="dl-card dl-panel dl-panel-1 dl-ds-brand-card">
               <span className="dl-pill-label">Mark</span>
               <div className="dl-ds-brand-stage"><span className="dl-logo dl-ds-brand-mark"><LogoMark /></span></div>
-              <p className="dl-meta">Two capsules: one in the theme&apos;s accent gradient, one in ink. Hover it: each capsule spins a full turn around its own centre and settles back into the V.</p>
+              <p className="dl-meta">Two capsules: one in the theme&apos;s accent gradient, one in ink. Hover it: each capsule spins a full turn around its own center and settles back into the V.</p>
             </div>
             <div className="dl-card dl-panel dl-panel-dark dl-ds-brand-card">
               <span className="dl-pill-label">The printed pack</span>
@@ -166,9 +165,9 @@ export default function DesignSystem() {
           </div>
         </Section>
 
-        <Section id="icons" title="Icon buttons" lede="One square spec for every icon-only button: 52px, 18px corners, a 22px icon on a 24px grid. The border and hover tint come from the text colour, so they're white-based on dark surfaces and ink-based on light or coloured ones. Hover adds a faint tint and darkens the border.">
+        <Section id="icons" title="Icon buttons" lede="One square spec for every icon-only button: 52px, 18px corners, a 22px icon on a 24px grid. The border and hover tint come from the text color, so they're white-based on dark surfaces and ink-based on light or colored ones. Hover adds a faint tint and darkens the border.">
           <div className="dl-ds-grid dl-ds-grid-wide">
-            {[["", "On the page"], ["dl-panel dl-panel-1", "On the main bento"], ["dl-panel dl-panel-2", "On a colour block"], ["dl-panel dl-panel-dark", "On a dark panel"]].map(([cls, label]) => (
+            {[["", "On the page"], ["dl-panel dl-panel-1", "On the main bento"], ["dl-panel dl-panel-2", "On a color block"], ["dl-panel dl-panel-dark", "On a dark panel"]].map(([cls, label]) => (
               <div key={label} className={`dl-card dl-ds-tile ${cls}`}>
                 <span className="dl-pill-label">{label}</span>
                 <div className="dl-ds-row">
@@ -216,13 +215,13 @@ export default function DesignSystem() {
 
         <Section id="surfaces" title="Surfaces" lede="A bento of panels on one full-bleed background. Each panel re-points the ink, accent and paper tokens, so any component inside it stays readable. Glass is a clear, blurred pane over the page's ambient light.">
           <div className="dl-ds-grid">
-            {[["dl-panel dl-panel-1", "Panel 1 · main bento"], ["dl-panel dl-panel-2", "Panel 2 · colour block"], ["dl-panel dl-panel-3", "Panel 3 · soft block"], ["dl-panel dl-panel-dark", "Dark panel"], ["", "Paper card"]].map(([cls, label]) => (
+            {[["dl-panel dl-panel-1", "Panel 1 · main bento"], ["dl-panel dl-panel-2", "Panel 2 · color block"], ["dl-panel dl-panel-3", "Panel 3 · soft block"], ["dl-panel dl-panel-dark", "Dark panel"], ["", "Paper card"]].map(([cls, label]) => (
               <div key={label} className={`dl-card dl-ds-tile dl-ds-surface ${cls}`}>
                 <div className="dl-bento-card-top">
                   <span className="dl-pill-label">{label}</span>
                   <span className="dl-corner" aria-hidden="true"><Icon name="arrow" /></span>
                 </div>
-                <p className="dl-meta">Text, labels and buttons re-colour themselves to suit.</p>
+                <p className="dl-meta">Text, labels and buttons re-color themselves to suit.</p>
               </div>
             ))}
             <div className="dl-ds-glass-demo">
@@ -234,7 +233,7 @@ export default function DesignSystem() {
           </div>
         </Section>
 
-        <Section id="pills" title="Pills" lede="Modelled in 3D from each product's color and form, live in the hero and close-ups, and baked into images everywhere else by a script, so a new product needs no new artwork.">
+        <Section id="pills" title="Pills" lede="Modeled in 3D from each product's color and form, live in the hero and close-ups, and baked into images everywhere else by a script, so a new product needs no new artwork.">
           <ul className="dl-ds-pills">
             {Object.values(PRODUCTS).map((p) => (
               <li key={p.id}>
@@ -246,7 +245,7 @@ export default function DesignSystem() {
           <PillTray ids={["d3", "omega", "magnesium", "b12"]} label="Pill tray example" />
         </Section>
 
-        <Section id="data" title="Data" lede="Charts only ever show whether the pack was taken, never health outcomes. Lines draw in when they scroll into view; a month still in progress is dashed and labelled so far, so it never reads as a drop.">
+        <Section id="data" title="Data" lede="Charts only ever show whether the pack was taken, never health outcomes. Lines draw in when they scroll into view; a month still in progress is dashed and labeled so far, so it never reads as a drop.">
           <div className="dl-ds-two">
             <div className="dl-card dl-panel dl-panel-dark dl-ds-tile">
               <span className="dl-pill-label">Comparison · two series</span>
@@ -303,7 +302,7 @@ export default function DesignSystem() {
           </div>
         </Section>
 
-        <Section id="disclosure" title="Disclosure & navigation" lede="Accordions animate their height (instant where unsupported). The carousel is a native scroll-snap track with prev/next, mouse drag and position dots that follow the text colour like the icon buttons (white-based in dark mode, ink-based in light). The theme switcher saves the choice for the next visit.">
+        <Section id="disclosure" title="Disclosure & navigation" lede="Accordions animate their height (instant where unsupported). The carousel is a native scroll-snap track with prev/next, mouse drag and position dots that follow the text color like the icon buttons (white-based in dark mode, ink-based in light). The theme switcher saves the choice for the next visit.">
           <Sub>Accordion</Sub>
           <div className="dl-ds-faq">
             <details className="dl-glass dl-faq-item" open>
@@ -354,7 +353,7 @@ export default function DesignSystem() {
                     <p className="dl-eyebrow">Capsule</p>
                     <h3 className="dl-h2">Magnesium Glycinate</h3>
                     <p className="dl-meta">200 mg · $6/mo</p>
-                    <p>Magnesium bound to glycine, a form known for being easy on the stomach.</p>
+                    <p>Magnesium bound to glycine. Usually taken in the evening.</p>
                   </div>
                 </div>
               </div>
@@ -363,7 +362,7 @@ export default function DesignSystem() {
           </div>
         </Section>
 
-        <Section id="labels" title="Labels & stamps" lede="Labels never look like buttons: no pill shape, border or fill. Sample and preview content is stamped like a batch code, in the accent text colour.">
+        <Section id="labels" title="Labels & stamps" lede="Labels never look like buttons: no pill shape, border or fill. Sample and preview content is stamped like a batch code, in the accent text color.">
           <div className="dl-ds-grid">
             <div className="dl-card dl-ds-tile"><span className="dl-code" data-lot="Lot 02">Sample content</span><span className="dl-meta">Stamp · sample or preview content</span></div>
             <div className="dl-card dl-ds-tile"><span className="dl-pill-label">Your routine tracker</span><span className="dl-meta">Card label</span></div>

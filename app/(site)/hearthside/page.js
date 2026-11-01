@@ -151,7 +151,7 @@ const Page = () => {
               </CaseGrid>
               <p><strong>How care begins, as a story.</strong> On a desktop, the four steps play through in one pinned frame as you scroll: each photo opens through the leaf, the step&apos;s number and text rise in, and a rail fills as you go. Phones and tablets get a swipe row instead.</p>
               <Clip name="steps" caption="How care begins, pinned as you scroll" />
-              <p><strong>People, not stock photos.</strong> The clinicians who visit are introduced by name, with where they visit and the languages they speak, so families know who&apos;s coming before the doorbell rings. Point at one and they say, in their own words, what a visit is like.</p>
+              <p><strong>The people who visit.</strong> The clinicians who visit are introduced by name, with where they visit and the languages they speak, so families know who&apos;s coming before the doorbell rings. Point at one and they say, in their own words, what a visit is like.</p>
               <Desktop name="team" caption="The people who visit" />
               <p><strong>One way to start, everywhere.</strong> Every call to action follows the same order with the same icons: call first, then request a call, then refer a patient. The main pages end on the same closing band, navy in light mode and the page&apos;s light color in dark mode, with the logo&apos;s leaf in its corner and its buttons rising in after the heading.</p>
               <Desktop name="band" caption="The closing band" />
@@ -201,7 +201,7 @@ const Page = () => {
               </CaseGrid>
 
               <h3 className="cyril-case-subheading">One System, Two Schemes</h3>
-              <p>Every color and font comes from tokens, so an agency can take on its own look without touching a component. Two schemes prove it: Shore (warm ink on navy, the default in dark mode) and Tide (cool blue), each in light and dark, and switching between them crossfades instead of flickering. The design system page renders the real components and computes every contrast ratio from the same tokens, so it can&apos;t drift from the product.</p>
+              <p>Every color and font comes from tokens, so an agency can take on its own look without touching a component. Two schemes prove it: Shore (warm ink on navy, the default in dark mode) and Tide (cool blue), each in light and dark, and switching between them crossfades instead of flickering. The design system page renders the real components and computes every contrast ratio from the same tokens, so it always matches the product.</p>
               <CaseGrid layout="two">
                 <Desktop name="home" caption="Shore · Dark (the default)" />
                 <Desktop name="home-shore" caption="Shore · Light" />
@@ -220,8 +220,8 @@ const Page = () => {
                 <li><strong>View transitions:</strong> the referral card travels between columns, pages hand over in sequence, and the phone switch slides its cards, all with the browser&apos;s View Transitions API and no animation library.</li>
                 <li><strong>Scroll-driven motion in CSS:</strong> the home photo closes in on the nurse and patient as you scroll, with no JavaScript on the scroll path. Everywhere else photos hold still, and ease in only when you point at the button beside them.</li>
                 <li><strong>Motion that stays calm:</strong> headings reveal word by word and paragraphs line by line (as plain inline text, so screen readers and links are untouched), the steps story picks its step from scroll progress with a little hysteresis so it never flips back and forth, hover effects wait for the mouse to actually move, so cards sliding under a still cursor don&apos;t flash, and button hovers fade a layer on the GPU rather than repainting, after a screen recording caught Chrome showing one stale frame mid-hover.</li>
-                <li><strong>Private by design:</strong> public forms ask only what&apos;s needed to call back, the referral form can only send a generated sample, and the status page never shows health details.</li>
-                <li><strong>Accessible throughout:</strong> audited with axe, AAA body text in every scheme, native dialogs with focus management, keyboard search, and reduced motion respected everywhere.</li>
+                <li><strong>Privacy:</strong> public forms ask only what&apos;s needed to call back, the referral form can only send a generated sample, and the status page never shows health details.</li>
+                <li><strong>Accessibility:</strong> audited with axe, AAA body text in every scheme, native dialogs with focus management, keyboard search, and reduced motion respected everywhere.</li>
               </ul>
             </CaseSection>
 
@@ -229,9 +229,9 @@ const Page = () => {
             <CaseSection id="learnings" number={5} title="Learning & Next Steps">
               <CaseLearnings
                 learned={[
-                  "Designing the website and the intake system together made the hand-off the product: the moment a referral leaves one and lands in the other is what an owner remembers.",
+                  "Designing the website and the intake system together put the focus on the hand-off: the moment a referral leaves one and lands in the other is what an owner remembers.",
                   "Writing guidance that never decides (coverage, eligibility, which kind of care) took as much care as the layout, and it's what keeps a site like this trustworthy.",
-                  "Building phone-first changed the content, not just the layout: swipe rows and the two-way switch forced every card to say less, and the desktop got better for it.",
+                  "Building phone-first changed the content as well as the layout: swipe rows and the two-way switch forced every card to say less, and the desktop got better for it.",
                 ]}
                 next={[
                   "Connect intake to the agency's real systems: a HIPAA-compliant backend under a business associate agreement, e-fax intake, and the clinical record.",

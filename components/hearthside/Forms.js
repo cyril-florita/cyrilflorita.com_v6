@@ -87,7 +87,7 @@ export function CallbackForm({ onClose }) {
         </fieldset>
       </div>
       {f.who === "pro" && <p className="hs-preview-note"><Icon name="info" /><span>Referring a patient? Use the <a href={`${BASE}/referrals/#refer`}>secure referral form</a> so documents go straight to intake.</span></p>}
-      <p className="hs-hint">We only need this to call you back. Please don&rsquo;t include medical details here; we&rsquo;ll ask what we need when we talk.</p>
+      <p className="hs-hint">We only need this to call you back. Please don&rsquo;t include medical details; we&rsquo;ll ask what we need on the phone.</p>
       <div className="hs-hero-ctas hs-mt-0">
         <Button type="submit" lead="callback">Request a call</Button>
         <span className="hs-hint">Preview mode: nothing is sent.</span>

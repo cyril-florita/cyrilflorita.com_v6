@@ -23,7 +23,7 @@ const SECTIONS = [
   { id: "results", label: "Results & Impact" },
   { id: "designing-for-the-room", label: "Designing for the Room & Visual Language" },
   { id: "the-screens", label: "The Screens" },
-  { id: "learnings", label: "Learning and Reflection" },
+  { id: "learnings", label: "Learning" },
 ];
 
 // Interface colors, sampled from the dashboard screens.
@@ -96,7 +96,7 @@ const Page = () => {
 
             {/* 02 — Results & Impact */}
             <CaseSection id="results" number={2} title="Results & Impact">
-              <p>The TV dashboard is now prominently displayed in the volunteer room and the hallways of the Grace to You office, giving volunteers, staff, and visitors immediate insight into key metrics and activities of the website and apps. It improved internal awareness and coordination during live events and boosted morale by visually reinforcing the ministry&apos;s global reach. Team feedback emphasized how easy it was to &ldquo;just glance at the screen and know what&apos;s going on.&rdquo;</p>
+              <p>The TV dashboard is now prominently displayed in the volunteer room and the hallways of the Grace to You office, so volunteers, staff, and visitors can see the website and app activity at a glance. It improved internal awareness and coordination during live events, and boosted morale by showing the ministry&apos;s global reach. Team feedback emphasized how easy it was to &ldquo;just glance at the screen and know what&apos;s going on.&rdquo;</p>
             </CaseSection>
 
             {/* 03 — Designing for the Room & Visual Language */}
@@ -136,25 +136,22 @@ const Page = () => {
               <CaseFigure src="/img/portfolio/gty-dashboard-3.jpg" alt="GTY Dashboard - Screen 3" caption="Website Usage Activities" />
 
               <h3 className="cyril-case-subheading">Global Reach</h3>
-              <p>The most striking screen is also the simplest: a dark world map with a pin for every active user. Pins are colored by where people are listening and reading, gty.org, gracia.org or The Study Bible app, and a panel at the bottom gives the live count for each in the same colors. It makes the ministry&apos;s reach visible in a way a table of numbers can&apos;t.</p>
+              <p>The simplest screen is this one: a dark world map with a pin for every active user. Pins are colored by where people are listening and reading, gty.org, gracia.org or The Study Bible app, and a panel at the bottom gives the live count for each in the same colors. It makes the ministry&apos;s reach visible in a way a table of numbers can&apos;t.</p>
               <CaseFigure src="/img/portfolio/gty-dashboard-4.jpg" alt="GTY Dashboard - Screen 4" caption="Website Global Usage Activities" />
 
               <h3 className="cyril-case-subheading">Ministry Photos</h3>
-              <p>Between the data screens, a photo slideshow brings in the people behind the ministry, rotating over a background seal marking Grace to You&apos;s 50 years, a reminder of the history behind the numbers.</p>
+              <p>Between the data screens, a photo slideshow brings in the people behind the ministry, rotating over a background seal marking Grace to You&apos;s 50 years.</p>
               <CaseFigure src="/img/portfolio/gty-dashboard-5.jpg" alt="GTY Dashboard - Screen 5" caption="Ministry Photo Slideshow" />
             </CaseSection>
 
             {/* 05 — Learning and Reflection */}
-            <CaseSection id="learnings" number={5} title="Learning and Reflection">
+            <CaseSection id="learnings" number={5} title="Learning">
               <CaseLearnings
                 learned={[
                   "Because nobody sits in front of a wall display or clicks it, I learned to design for a glance: large numerals, short labels, and screens that rotate on their own.",
-                  "Giving each metric its own color across screens, and reserving the single filled green card for what is on air today, taught me that color should carry meaning rather than decoration.",
-                  "Making a second version of the Ministry Activities screen that trades some of the schedule for engagement showed me that limited screen space always forces a choice about what matters most.",
+                  "Giving each metric its own color across screens, and reserving the single filled green card for what is on air today, made color something viewers can read at a glance.",
+                  "Making a second version of the Ministry Activities screen that trades some of the schedule for engagement was a reminder that limited screen space forces a choice about what matters most.",
                 ]}
-                reflection={
-                  <p>A dashboard on a wall works when it respects how it is read: from across a room, in a moment, by people who never touch it. Designing for the glance, not for exploration, was the whole job, and the team&apos;s own words were the best test of it: they could &ldquo;just glance at the screen and know what&apos;s going on.&rdquo;</p>
-                }
               />
             </CaseSection>
 

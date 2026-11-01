@@ -11,10 +11,10 @@ import QuizBar from "@/components/viteo/QuizBar";
 import { Arrow, BigWordHead, Button, LogoMark, Pill, ProductBox } from "@/components/viteo/ui";
 
 export const metadata = {
-  title: { absolute: "Viteo — Personalized vitamin subscription | Design & dev pitch by Cyril Florita" },
+  title: { absolute: "Viteo · Personalized vitamin subscription | Design and dev pitch by Cyril Florita" },
   alternates: { canonical: "/pitch/viteo/" },
   openGraph: {
-    title: "Viteo — Personalized vitamin subscription | Design & dev pitch by Cyril Florita",
+    title: "Viteo · Personalized vitamin subscription | Design and dev pitch by Cyril Florita",
     url: "/pitch/viteo/",
     images: [{ url: "/og/viteo.jpg", width: 1200, height: 630, alt: "Viteo, a personalized vitamin subscription" }],
   },
@@ -30,14 +30,14 @@ const STEPS = [
   {
     n: "02",
     pill: "magnesium",
-    title: "Get a pack that explains itself",
+    title: "See why each pill is there",
     text: "Every pill comes with the answer that put it there. Remove or add anything before you order.",
   },
   {
     n: "03",
     pill: "c",
     title: "Stay in control",
-    text: "Skip, pause or change your pack from your account anytime. No calls, no fine print.",
+    text: "Skip, pause or change your pack from your account, anytime.",
   },
 ];
 
@@ -65,7 +65,7 @@ const FAQ = [
   },
   {
     q: "What arrives in the box?",
-    a: "Thirty daily packs, one per day, printed with your name and the day. The box is recyclable and fits through most letterboxes.",
+    a: "A daily pack for every day until your next box, printed with your name and the day. The box is recyclable and fits in most mailboxes.",
   },
 ];
 
@@ -267,7 +267,7 @@ export default function Landing() {
                   <Corner />
                 </a>
               </div>
-              <h2 className="dl-h3">Every ingredient, explained.</h2>
+              <h2 className="dl-h3">Dose, form and price for each.</h2>
             </div>
           </div>
         </div>
@@ -277,7 +277,7 @@ export default function Landing() {
       <section id="how" className="dl-section">
         <div className="dl-wrap">
           <BigWordHead word="How it works">
-            <h2 className="dl-h2">Three steps, no guesswork.</h2>
+            <h2 className="dl-h2">From quiz to pack in three steps.</h2>
           </BigWordHead>
           <ol className="dl-steps">
             {STEPS.map((s) => (
@@ -319,7 +319,7 @@ export default function Landing() {
       <section className="dl-section">
         <div className="dl-wrap">
           <BigWordHead word="Reviews">
-            <h2 className="dl-h2">Built around the things people asked for.</h2>
+            <h2 className="dl-h2">What members say.</h2>
             <p className="dl-bigword-note">
               <span className="dl-code" data-lot="Lot 02">Sample content</span>
             </p>

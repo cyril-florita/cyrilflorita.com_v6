@@ -30,7 +30,7 @@ const SECTIONS = [
   { id: "research", label: "Research & Insights" },
   { id: "design", label: "Design Process" },
   { id: "prototyping", label: "Prototyping & Handoff" },
-  { id: "learnings", label: "Learning and Reflection" },
+  { id: "learnings", label: "Learning & Next Steps" },
 ];
 
 const Page = () => {
@@ -160,7 +160,7 @@ const Page = () => {
                 <CaseFigure src="/img/portfolio/gty9_redesign-overview.jpg" alt="redesign overview" caption="Redesign overview" />
                 <CaseFigure src="/img/portfolio/gty9_project-requirements.jpg" alt="project requirements" caption="Project requirements" />
               </CaseGrid>
-              <p><strong>Key Findings:</strong> I convinced the stakeholders that redesigning a website is more than changing its look and feel: the project should improve the site&apos;s status quo, answer users&apos; needs based on data and research, and accomplish business goals. With the stakeholders and the development team, we grouped sixteen needs into six priorities:</p>
+              <p><strong>Key findings:</strong> With the stakeholders and the development team, I grouped sixteen needs into six priorities:</p>
               <ul className="cyril-case-list">
                 <li>user-centric design, with clearer journeys and better onboarding and direction</li>
                 <li>intuitive navigation, simplified yet robust search, and improved content organization</li>
@@ -200,7 +200,7 @@ const Page = () => {
                 <CaseFigure src="/img/portfolio/gty9_content-audit-meeting.jpg" alt="content audit" caption="Content audit" ratio="3 / 4" />
               </CaseGrid>
               <CaseFigure src="/img/portfolio/gty9_site-and-component-map.jpg" alt="site and component map" caption="Site & component map" />
-              <p><strong>Key Outcome:</strong> A simpler content, site, and navigation structure&mdash;<strong>Listen, Watch, Read, Study, Shop.</strong></p>
+              <p><strong>Key Outcome:</strong> A simpler content, site, and navigation structure: <strong>Listen, Watch, Read, Study, Shop.</strong></p>
 
               <h3 className="cyril-case-subheading">Personas, Journeys, and Stories</h3>
               <p>I created user personas to represent the wants, needs, and behavior patterns of GTY&apos;s audience, and used them from deciding which features to include to evaluating requirements. I then mapped user journeys across GTY&apos;s platforms (apps, social media, and more), from initial awareness to post-purchase and donation engagement, to show the team the user&apos;s needs, pain points, and decision-making.</p>
@@ -251,11 +251,11 @@ const Page = () => {
             </CaseSection>
 
             {/* 06 — Learning and Reflection */}
-            <CaseSection id="learnings" number={6} title="Learning and Reflection">
+            <CaseSection id="learnings" number={6} title="Learning &amp; Next Steps">
 <CaseLearnings
                 learned={[
-                "Stakeholder interviews showed that a redesign is more than a new look and feel, so I start by grounding the project's priorities in the organization's goals and data rather than assumptions.",
-                "Some stakeholders wanted version 8's simplicity carried over, which taught me to weigh modern design against the traditional, clean aesthetic a core audience expects.",
+                "Starting with stakeholder interviews tied the project's priorities to the organization's goals and data rather than assumptions.",
+                "Some stakeholders wanted version 8's simplicity carried over, and I agreed: a core audience used to a traditional, clean look shouldn't be thrown by a new site.",
                 "Research found that asking donors where they hear about GTY added friction to giving, a reminder that a single question can slow an entire flow.",
                 ]}
                 next={[
@@ -264,7 +264,6 @@ const Page = () => {
                 "Keep the design system and the content review process I proposed up to date as the site's content grows.",
                 ]}
               />
-              <p>As the UX designer for GTY v9, I learned that following a structured UX process rigorously is the foundation of design that resonates with users and with the organization&apos;s business goals. Iterative validation caught problems before development, documentation gave stakeholders and developers a shared language, a design system and style guide kept the experience consistent, and analytics tied design changes to measurable outcomes. Every wireframe, prototype, and interaction was built to present biblical content clearly, true to the ministry&apos;s commitment of &ldquo;Unleashing God&apos;s Truth, One Verse at a Time.&rdquo;</p>
             </CaseSection>
 
           </CaseLayout>

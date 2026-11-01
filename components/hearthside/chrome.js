@@ -55,7 +55,7 @@ export function Footer() {
           <div className="hs-owner">
             <div>
               <h2 id="hs-owner">Run a home health agency?</h2>
-              <p>Hearthside is a concept: a website families can actually use, and the referral intake system behind it, from first call to start of care. If you&rsquo;d like your agency&rsquo;s site and intake to work like this, let&rsquo;s talk.</p>
+              <p>Hearthside is a concept: this website and the intake system behind it. If you&rsquo;d like the same for your agency, let&rsquo;s talk.</p>
             </div>
             <div className="hs-owner-ctas">
               <Button href={PITCH_MAILTO} lead="mail">Email Cyril</Button>

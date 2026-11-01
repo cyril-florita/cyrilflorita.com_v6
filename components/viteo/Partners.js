@@ -87,7 +87,7 @@ export default function Partners() {
         {/* How it works */}
         <section className="dl-pro-section">
           <BigWordHead word="How it works">
-            <h2 className="dl-h2">Three steps, then it runs itself.</h2>
+            <h2 className="dl-h2">Apply, share, and your clients take it from there.</h2>
           </BigWordHead>
           <ol className="dl-pro-steps">
             {STEPS.map((s) => (
@@ -103,7 +103,7 @@ export default function Partners() {
         {/* Earnings */}
         <section id="pro-earnings" className="dl-pro-section">
           <BigWordHead word="Earnings">
-            <h2 className="dl-h2">What partnering could look like.</h2>
+            <h2 className="dl-h2">Estimate your earnings.</h2>
           </BigWordHead>
           <div className="dl-pro-calc dl-card dl-panel dl-panel-dark">
             <div className="dl-pro-calc-inputs">
@@ -176,7 +176,7 @@ export default function Partners() {
         {/* Guidelines */}
         <section className="dl-pro-section">
           <BigWordHead word="Guidelines">
-            <h2 className="dl-h2">Trust is the whole point.</h2>
+            <h2 className="dl-h2">Three rules for sharing Viteo.</h2>
           </BigWordHead>
           <ul className="dl-pro-rules">
             <li className="dl-card dl-glass"><h3 className="dl-h3">Always disclose</h3><p>Say you&apos;re a Viteo partner whenever you share it, the way you&apos;d disclose any brand relationship, with or without give-back.</p></li>

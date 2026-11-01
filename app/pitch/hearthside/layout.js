@@ -24,8 +24,8 @@ const serif = Fraunces({ subsets: ["latin"], weight: "400", style: ["normal", "i
 
 export const metadata = {
   title: {
-    default: "Hearthside Home Health — Skilled care at home",
-    template: "%s — Hearthside Home Health",
+    default: "Hearthside Home Health · Skilled care at home",
+    template: "%s · Hearthside Home Health",
   },
   description:
     "Hearthside Home Health, a home health website and intake system concept, designed and built by Cyril Florita.",

@@ -79,7 +79,7 @@ const Page = () => {
 
             {/* 01 — Overview */}
             <CaseSection id="overview" number={1} title="Overview">
-              <p>As a designer at Grace to You, I created visuals that immediately grabbed attention and clearly communicated value, using a clean, modern aesthetic to highlight products being promoted, offered for free, or sold at a discount. The goal was for each graphic to promote its offer effectively: clarity and appeal that turn viewer interest into action by showing the benefits of each product.</p>
+              <p>As a designer at Grace to You, I made graphics for products being promoted, offered for free, or sold at a discount. Each one had to show the product and make the offer clear at a glance.</p>
             </CaseSection>
 
             {/* 02 — Results & Impact */}

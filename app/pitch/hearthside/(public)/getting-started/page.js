@@ -32,7 +32,7 @@ export default function GettingStarted() {
       <PageHead
         photo={{ shot: "A nurse talks a care plan through with a patient and her daughter", src: "/img/hearthside/photos/step-4", alt: "A nurse talks a care plan through with an older woman and her daughter at home", position: "50% 9%", ratio: "16 / 8" }}
         title={<>How <em className="hs-title-em">care begins</em></>}
-        lede="From your first call to your first visit, usually in a few days. We'll tell you what's happening at every step, and we do the paperwork with your doctor's office."
+        lede="From your first call to your first visit, which we schedule as soon as we can. We'll tell you what's happening at every step, and we do the paperwork with your doctor's office."
       >
         <div className="hs-hero-ctas hs-mt-32">
           {/* As on Home: Call first (filled, phone icon), then Request a call. */}
@@ -84,7 +84,7 @@ export default function GettingStarted() {
       <Row id="coverage" label="Insurance & payment" labelledBy="gs-coverage">
         <div className="hs-coverage">
           <div>
-            <h2 id="gs-coverage">Coverage, in plain language</h2>
+            <h2 id="gs-coverage">What insurance covers</h2>
             <h3 className="hs-mt-32">Medicare</h3>
             <p className="hs-mt-8">Medicare covers home health care when certain conditions are met. Generally:</p>
             <ul className="hs-checks">
@@ -99,7 +99,7 @@ export default function GettingStarted() {
             <div className="hs-note">
               <Icon name="info" />
               <p>
-                <strong>This is general guidance, not a coverage decision.</strong> Your doctor and our intake team confirm eligibility, and we review your coverage with you before care begins, so there are no surprises.
+                <strong>This is general guidance, not a coverage decision.</strong> Your doctor and our intake team confirm eligibility, and we review your coverage with you before care begins.
               </p>
             </div>
             <div className="hs-coverage-links">
@@ -110,7 +110,7 @@ export default function GettingStarted() {
         </div>
       </Row>
       {/* The closing "start with a call" band, as on Home: the last section before the footer. */}
-      <CallBand title="Ready when you are. Start with a call." lede={<>Our intake team checks your coverage and sets up the first visit with your doctor&rsquo;s office. No forms about your medical history: we&rsquo;ll ask what we need when we talk.</>} />
+      <CallBand title="Call us and we'll set up the first visit." lede={<>Our intake team checks your coverage and works out the details with your doctor&rsquo;s office.</>} />
     </div>
   );
 }

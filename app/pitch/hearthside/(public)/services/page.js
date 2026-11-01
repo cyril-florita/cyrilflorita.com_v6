@@ -47,9 +47,9 @@ export default function Services() {
       {/* A sand chapter to close the page (hearthside.css, .hs-chapter). */}
       <div className="hs-chapter is-sand">
       <Row label="How visits work" labelledBy="sv-visits">
-        <h2 id="sv-visits">Visits that fit around your life</h2>
+        <h2 id="sv-visits">What to expect from visits</h2>
         <ul className="hs-ruled hs-mt-32">
-          <li><h3>Scheduled, not round-the-clock</h3><p className="hs-muted">Clinicians visit for set appointments, often a few times a week, following the plan your doctor approves.</p></li>
+          <li><h3>Set appointments</h3><p className="hs-muted">Clinicians visit for set appointments, often a few times a week, following the plan your doctor approves.</p></li>
           <li><h3>Your doctor stays in charge</h3><p className="hs-muted">We send updates to your doctor and adjust the plan with them as you progress.</p></li>
           <li><h3>Family in the loop</h3><p className="hs-muted">With your permission, a family member can get visit times and updates.</p></li>
           <li><h3>One number to call</h3><p className="hs-muted">Questions between visits go to the same intake team that set up your care.</p></li>
@@ -57,7 +57,7 @@ export default function Services() {
       </Row>
       </div>
       {/* The closing "start with a call" band, as on Home: the last section before the footer. */}
-      <CallBand title="Not sure which care fits? Start with a call." lede={<>Tell us what&rsquo;s going on. Our intake team will tell you whether home health fits, what your coverage looks like, and what happens next.</>} />
+      <CallBand title="Not sure which care fits? Talk it through with our intake team." lede={<>Tell us what&rsquo;s going on. Our intake team will tell you whether home health fits, what your coverage looks like, and what happens next.</>} />
     </div>
   );
 }

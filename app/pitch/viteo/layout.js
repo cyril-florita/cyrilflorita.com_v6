@@ -31,11 +31,11 @@ const dmSans = DM_Sans({ subsets: ["latin"], variable: "--dl-font-peach-body", d
 
 export const metadata = {
   title: {
-    default: "Viteo — Personalized daily vitamins",
-    template: "%s — Viteo",
+    default: "Viteo · Personalized daily vitamins",
+    template: "%s · Viteo",
   },
   description:
-    "Viteo is a direct-to-consumer personalized vitamin subscription — quiz, personalized plan, checkout and self-serve account — designed and built by Cyril Florita as a design and dev pitch.",
+    "Viteo is a direct-to-consumer personalized vitamin subscription (quiz, plan, checkout and self-serve account), designed and built by Cyril Florita as a design and dev pitch.",
   openGraph: {
     type: "website",
     siteName: "Cyril Florita",
