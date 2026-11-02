@@ -94,7 +94,7 @@ const LAST_YEAR = [12, 16, 13, 19, 15, 20];
 const RoutineChart = () => (
   // Glass: a clear, blurred pane over the landing frame's ambient light.
   <div className="dl-glass-wrap">
-    <div className="dl-panel dl-panel-dark dl-bento-card dl-glass">
+    <div className="dl-panel dl-panel-dark dl-bento-card dl-glass is-link">
       <div className="dl-bento-card-top">
         <span className="dl-pill-label">
           Track your routine <span className="dl-code" data-lot="Lot 01">Sample data</span>

@@ -105,15 +105,15 @@ export default function Partners() {
           <BigWordHead word="Earnings">
             <h2 className="dl-h2">Estimate your earnings.</h2>
           </BigWordHead>
-          <div className="dl-pro-calc dl-card dl-panel dl-panel-dark">
+          <div className="dl-pro-calc dl-card dl-panel dl-panel-2">
             <div className="dl-pro-calc-inputs">
               <label className="dl-pro-range">
                 <span>Clients with an active pack <strong>{clients}</strong></span>
-                <input type="range" min="1" max="100" value={clients} onChange={(e) => setClients(+e.target.value)} />
+                <input type="range" min="1" max="100" value={clients} onChange={(e) => setClients(+e.target.value)} style={{ "--fill": (clients - 1) / 99 }} />
               </label>
               <label className="dl-pro-range">
                 <span>Average pack per month <strong>{money(pack)}</strong></span>
-                <input type="range" min="15" max="45" value={pack} onChange={(e) => setPack(+e.target.value)} />
+                <input type="range" min="15" max="45" value={pack} onChange={(e) => setPack(+e.target.value)} style={{ "--fill": (pack - 15) / 30 }} />
               </label>
               <label className="dl-switch">
                 <input type="checkbox" checked={giveBack} onChange={(e) => setGiveBack(e.target.checked)} />

@@ -7,8 +7,16 @@ import { SAMPLE_REVIEWS } from "./data";
 // buttons and position dots. Three cards show on desktop, two on tablets,
 // one and a peek on phones (viteo.css). With a mouse the track can also be
 // dragged: snapping is off while it follows the pointer, then it glides to
-// the nearest card (a quick flick carries on to the next). No autoplay; the
-// buttons scroll smoothly unless reduced motion is on.
+// the nearest card (a quick flick carries on to the next). Trackpad swipes are
+// axis-locked: one that starts sideways moves only the track (its vertical
+// drift would otherwise scroll the page, so the cards bobbed up and down) and
+// settles on the nearest card when the gesture ends; one that starts vertical
+// moves only the page. While the track moves, its edges soft-fade (80px,
+// easing in and back out, like the portfolio's My Career slider): per-card
+// masks positioned against the track's edges (--l / --r here, the mask in
+// viteo.css), since a mask on the track would cut the glass cards' blur off
+// from the background behind them. No
+// autoplay; the buttons scroll smoothly unless reduced motion is on.
 
 const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -22,28 +30,51 @@ export default function Reviews() {
   const trackRef = useRef(null);
   const stepRef = useRef(1);
   const drag = useRef(null);
+  const lastPress = useRef({ t: -Infinity, x: 0, y: 0 });
   // index: the first fully visible card; stops: how many start positions there are.
   const [state, setState] = useState({ index: 0, stops: SAMPLE_REVIEWS.length });
+
+  // Where the track's edges fall in each card's own coordinates, for its mask.
+  const fade = useCallback(() => {
+    const t = trackRef.current;
+    if (!t) return;
+    const tr = t.getBoundingClientRect();
+    for (const card of t.children) {
+      const c = card.getBoundingClientRect();
+      card.style.setProperty("--l", `${(tr.left - c.left).toFixed(1)}px`);
+      card.style.setProperty("--r", `${(tr.right - c.left).toFixed(1)}px`);
+    }
+  }, []);
 
   const measure = useCallback(() => {
     const t = trackRef.current;
     if (!t || !t.children.length) return;
+    fade();
     const card = t.children[0].getBoundingClientRect().width;
-    const gap = parseFloat(getComputedStyle(t).columnGap) || 0;
+    const cs = getComputedStyle(t);
+    const gap = parseFloat(cs.columnGap) || 0;
     const step = card + gap;
     stepRef.current = step;
-    const perView = Math.max(1, Math.round((t.clientWidth + gap) / step));
+    const inner = t.clientWidth - (parseFloat(cs.paddingLeft) || 0) - (parseFloat(cs.paddingRight) || 0);
+    const perView = Math.max(1, Math.round((inner + gap) / step));
     const stops = Math.max(1, t.children.length - perView + 1);
     const atEnd = t.scrollLeft >= t.scrollWidth - t.clientWidth - 2;
     const index = atEnd ? stops - 1 : Math.min(stops - 1, Math.round(t.scrollLeft / step));
     setState((s) => (s.index === index && s.stops === stops ? s : { index, stops }));
-  }, []);
+  }, [fade]);
 
   useEffect(() => {
     const t = trackRef.current;
     if (!t) return;
     let frame = 0;
-    const onScroll = () => { if (!frame) frame = requestAnimationFrame(() => { frame = 0; measure(); }); };
+    let still = 0;
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(() => { frame = 0; measure(); });
+      // Edges fade while it moves, and ease back once it has settled.
+      t.classList.add("is-moving");
+      clearTimeout(still);
+      still = setTimeout(() => t.classList.remove("is-moving"), 180);
+    };
     measure();
     t.addEventListener("scroll", onScroll, { passive: true });
     // Re-measure when the track or a card changes size (cards can settle
@@ -51,8 +82,54 @@ export default function Reviews() {
     const ro = new ResizeObserver(measure);
     ro.observe(t);
     if (t.children[0]) ro.observe(t.children[0]);
-    return () => { t.removeEventListener("scroll", onScroll); ro.disconnect(); cancelAnimationFrame(frame); };
+    return () => { t.removeEventListener("scroll", onScroll); ro.disconnect(); cancelAnimationFrame(frame); clearTimeout(still); };
   }, [measure]);
+
+  // Trackpad / wheel axis lock. A gesture is a burst of wheel events with no
+  // gap over 140ms (momentum included); its first event decides the axis.
+  useEffect(() => {
+    const t = trackRef.current;
+    if (!t) return;
+    let axis = null;
+    let idle = 0;
+    const settle = () => {
+      axis = null;
+      const step = stepRef.current || 1;
+      const i = Math.max(0, Math.min(t.children.length - 1, Math.round(t.scrollLeft / step)));
+      const card = t.children[i];
+      t.scrollTo({ left: card.offsetLeft - t.children[0].offsetLeft, behavior: reducedMotion() ? "auto" : "smooth" });
+      const done = () => { t.classList.remove("is-dragging"); clearTimeout(timer); t.removeEventListener("scrollend", done); };
+      const timer = setTimeout(done, 700);
+      t.addEventListener("scrollend", done, { once: true });
+    };
+    const onWheel = (e) => {
+      const unit = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? t.clientWidth : 1;
+      const dx = (e.shiftKey && !e.deltaX ? e.deltaY : e.deltaX) * unit;
+      const dy = (e.shiftKey && !e.deltaX ? 0 : e.deltaY) * unit;
+      if (!axis) {
+        if (!dx && !dy) return;
+        axis = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
+        if (axis === "x") t.classList.add("is-dragging"); // snapping off while it follows
+      }
+      clearTimeout(idle);
+      if (axis === "y") {
+        // Scroll the page ourselves when there's sideways drift: left alone,
+        // Chrome latches such a gesture to the track and the page wouldn't
+        // move. A purely vertical wheel keeps the browser's own scrolling.
+        if (dx) {
+          e.preventDefault();
+          window.scrollBy({ top: dy, behavior: "instant" });
+        }
+        idle = setTimeout(() => { axis = null; }, 140);
+        return;
+      }
+      e.preventDefault();
+      t.scrollLeft += dx;
+      idle = setTimeout(settle, 140);
+    };
+    t.addEventListener("wheel", onWheel, { passive: false });
+    return () => { t.removeEventListener("wheel", onWheel); clearTimeout(idle); };
+  }, []);
 
   const go = (i) => {
     const t = trackRef.current;
@@ -64,6 +141,12 @@ export default function Reviews() {
   // Mouse drag (touch and trackpads already scroll the track natively).
   const onPointerDown = (e) => {
     if (e.pointerType !== "mouse" || e.button !== 0) return;
+    // Not on a double press (a trackpad double tap + drag means "select text",
+    // and it slid the whole track with the pointer).
+    // (Pointer events carry no click count, so a double press is timed here.)
+    const prev = lastPress.current;
+    lastPress.current = { t: e.timeStamp, x: e.clientX, y: e.clientY };
+    if (e.timeStamp - prev.t < 450 && Math.hypot(e.clientX - prev.x, e.clientY - prev.y) < 12) return;
     const t = trackRef.current;
     drag.current = { x: e.clientX, left: t.scrollLeft, lastX: e.clientX, lastT: e.timeStamp, v: 0, moved: false };
     t.setPointerCapture(e.pointerId);

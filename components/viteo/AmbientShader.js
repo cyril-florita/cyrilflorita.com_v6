@@ -14,7 +14,7 @@ import { useEffect, useRef } from "react";
 // scene (ProductStory.js), whose canvas only draws when something moves.
 
 const FPS = 30;
-const SPEED = 2.5; // drift speed (1 = the original, slower drift)
+const SPEED = 4; // drift speed (1 = the original, slower drift)
 const RES = 0.35; // drawing-buffer scale against CSS pixels
 
 // Any CSS colour (incl. color-mix / rgba) → [r, g, b] 0–1, composited over
@@ -85,7 +85,8 @@ export default function AmbientShader() {
         const aspect = uAspect;
         const p = vec2(screenUV.x.mul(aspect), screenUV.y); // y runs down
         const u = screenUV.x;
-        const lean = uPointer.x.sub(0.5).mul(0.05).add(uPointer.y.sub(0.5).mul(0.03));
+        // The ribbon leans toward the pointer.
+        const lean = uPointer.x.sub(0.5).mul(0.22).add(uPointer.y.sub(0.5).mul(0.14));
         // The edge: an S-curve, swaying and slowly warped by noise.
         const sway = sin(u.mul(3.4).sub(0.6).add(t.mul(0.16))).mul(0.15)
           .add(sin(u.mul(7.0).add(t.mul(0.23))).mul(0.025));
@@ -109,9 +110,10 @@ export default function AmbientShader() {
         const hue = mix(vec3(uA), vec3(uC), k);
         const rimCol = mix(hue, vec3(1.0, 1.0, 1.0), uRimTint);
         const bodyCol = mix(vec3(uB), hue, smoothstep(0.0, 0.3, d));
-        // The pulse: dim to full strength and back, about every 4.5s (t runs
-        // SPEED× real time). Full strength is what the contrast audit passed.
-        const pulse = sin(t.mul(0.56)).mul(0.5).add(0.5).mul(0.6).add(0.4);
+        // The pulse: from 60% to full strength and back, about every 4.5s
+        // whatever SPEED is (t runs SPEED× real time). Full strength is what the contrast audit
+        // passed (and the ceilings below hold whatever the strengths).
+        const pulse = sin(t.mul(1.4 / SPEED)).mul(0.5).add(0.5).mul(0.4).add(0.6);
         // Its colour: a pale sheen at the core, the theme hue at its edges.
         const sheenCol = mix(hue, vec3(uSheen), smoothstep(0.15, 0.7, spread).max(uSheenAll));
         let col = mix(vec3(uBase), bodyCol, body.mul(uSBody).mul(pulse));
@@ -160,10 +162,10 @@ export default function AmbientShader() {
         // Dark mode: a quieter ribbon with a whitened edge (it reads as light);
         // light mode: stronger colour, no whitening (it would vanish on white).
         uRimTint.value = light ? 0 : 0.15;
-        uSBody.value = light ? 0.5 : 0.2;
-        uSGlow.value = light ? 0.4 : 0.18;
-        uSRim.value = light ? 0.8 : 0.42;
-        uSSpread.value = light ? 0.8 : 0.6;
+        uSBody.value = light ? 0.6 : 0.3;
+        uSGlow.value = light ? 0.5 : 0.26;
+        uSRim.value = light ? 0.9 : 0.55;
+        uSSpread.value = light ? 0.9 : 0.8;
         uSheenAll.value = light ? 1 : 0;
         uCap.value = light ? 1 : 0.05;
         uCeil.value = light ? 1 : 0.085;
@@ -185,8 +187,8 @@ export default function AmbientShader() {
         prev = now; last = now;
         clock += dt * SPEED;
         uTime.value = clock;
-        uPointer.value.x += (tx - uPointer.value.x) * Math.min(1, dt * 1.5);
-        uPointer.value.y += (ty - uPointer.value.y) * Math.min(1, dt * 1.5);
+        uPointer.value.x += (tx - uPointer.value.x) * Math.min(1, dt * 4);
+        uPointer.value.y += (ty - uPointer.value.y) * Math.min(1, dt * 4);
         renderer.render(scene, camera);
       };
 

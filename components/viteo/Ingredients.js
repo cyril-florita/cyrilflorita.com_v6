@@ -15,10 +15,36 @@ import { Arrow, Pill } from "./ui";
 
 const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-// Runs a DOM update inside a view transition when the browser supports it.
+// The morphs (card → close-up, pill glide) are for desktop with a mouse: on
+// phones and tablets a view transition crossfaded snapshots of the whole page
+// (and the card's pill and blur), which showed as blocks of colour before the
+// close-up appeared. There the close-up just opens (phones: the sheet slides
+// up; tablets: a short fade-in, .is-plain in viteo.css).
+// The card's parts that travel to their twins in the close-up during the
+// morph (the dialog's side is named by .dl-ing-dialog.is-morphing in viteo.css).
+const CARD_PARTS = [
+  [".dl-ingredient-open", "dl-ing-title"],
+  [".dl-ing-meta", "dl-ing-meta"],
+  [".dl-ing-blurb", "dl-ing-blurb"],
+  [".dl-ing-plus", "dl-ing-btn"],
+];
+const nameCardParts = (card, on) => {
+  for (const [sel, name] of CARD_PARTS) {
+    const el = card.querySelector(sel);
+    if (el) el.style.viewTransitionName = on ? name : "";
+  }
+};
+
+const canMorph = () => window.matchMedia("(hover: hover) and (pointer: fine) and (min-width: 961px)").matches;
+
+// Runs update inside a view transition where there is one (and the screen
+// gets the morphs); returns a promise that settles when it's done.
 const withTransition = (update) => {
-  if (!document.startViewTransition || reducedMotion()) return update();
-  document.startViewTransition(() => flushSync(update));
+  if (!document.startViewTransition || reducedMotion() || !canMorph()) {
+    update();
+    return Promise.resolve();
+  }
+  return document.startViewTransition(() => flushSync(update)).finished.catch(() => {});
 };
 
 // The close-up's 3D pill: starts in the baked image's pose (so it takes
@@ -135,25 +161,107 @@ export default function Ingredients() {
     if (!openId && d.open) d.close();
   }, [openId]);
 
+  // On desktop the whole card morphs into the close-up and back (one
+  // view-transition name, dl-ing-card, handed between the card and the
+  // dialog), with the pill gliding on top under its own name.
+  const morphCard = canMorph;
   const open = (id, from) => {
     openerRef.current = from;
-    const pill = from.closest(".dl-ingredient")?.querySelector(".dl-ingredient-pill");
+    const card = from.closest(".dl-ingredient");
+    const pill = card?.querySelector(".dl-ingredient-pill");
+    const d = dialogRef.current;
+    const morph = morphCard() && card && d;
+    d?.classList.toggle("is-plain", !morph); // no morph: the dialog animates itself in
     if (pill) pill.style.viewTransitionName = "dl-ing-pill";
+    if (morph) {
+      // The close-up's name and description get the card's widths in em, so
+      // at their larger sizes they wrap in exactly the same places and can
+      // grow from one into the other.
+      const em = (el, width) => width / parseFloat(getComputedStyle(el).fontSize);
+      const title = card.querySelector("h3");
+      const blurb = card.querySelector(".dl-ing-blurb");
+      if (title) {
+        const cs = getComputedStyle(title);
+        d.style.setProperty("--dl-title-em", em(title, title.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight)).toFixed(3));
+      }
+      if (blurb) d.style.setProperty("--dl-blurb-em", em(blurb, blurb.clientWidth).toFixed(3));
+      card.style.viewTransitionName = "dl-ing-card";
+      nameCardParts(card, true);
+      card.classList.add("is-morphing");
+      d.classList.add("is-morphing");
+      document.documentElement.setAttribute("data-dl-morph", "open"); // which way the corners grow
+    }
     withTransition(() => {
       if (pill) pill.style.viewTransitionName = "";
+      if (morph) {
+        card.style.viewTransitionName = "";
+        nameCardParts(card, false);
+        d.style.viewTransitionName = "dl-ing-card";
+        // The pill side's tint fades in once the dialog has mostly grown.
+        d.classList.add("is-entering");
+        setTimeout(() => d.classList.remove("is-entering"), 260);
+      }
       setOpenId(id);
+    }).then(() => {
+      document.documentElement.removeAttribute("data-dl-morph");
+      if (!d) return;
+      d.style.viewTransitionName = "";
+      card?.classList.remove("is-morphing");
+      d.classList.remove("is-morphing");
     });
   };
+  // Closing on desktop is two beats: the close-up's content with no twin on
+  // the card fades out first (.is-leaving), then it morphs back into the card.
+  const leavingRef = useRef(false);
   const close = () => {
     const id = openId;
-    const pill = document.querySelector(`.dl-ingredient-pill[data-story-pill="${id}"]`);
+    const card = document.querySelector(`.dl-ingredient[data-id="${id}"]`);
+    const d = dialogRef.current;
+    const morph = morphCard() && !reducedMotion() && document.startViewTransition && card && d;
+    if (!morph) return morphBack(false);
+    if (leavingRef.current) return;
+    leavingRef.current = true;
+    d.classList.add("is-leaving");
+    setTimeout(() => {
+      leavingRef.current = false;
+      morphBack(true);
+    }, 160);
+  };
+  const morphBack = (morph) => {
+    const id = openId;
+    const card = document.querySelector(`.dl-ingredient[data-id="${id}"]`);
+    const pill = card?.querySelector(".dl-ingredient-pill");
+    const d = dialogRef.current;
+    if (morph) {
+      d.style.viewTransitionName = "dl-ing-card";
+      d.classList.add("is-morphing");
+      card.classList.add("is-morphing");
+      document.documentElement.setAttribute("data-dl-morph", "close");
+    }
+    // The stage swaps its live 3D pill back for the pill image, which is the
+    // one that glides home (otherwise a second pill rides the shrinking dialog).
+    d?.classList.add("is-closing");
     withTransition(() => {
       setOpenId(null);
-      dialogRef.current?.close();
+      d?.close();
+      d?.classList.remove("is-closing", "is-leaving");
+      if (morph) {
+        d.style.viewTransitionName = "";
+        card.style.viewTransitionName = "dl-ing-card";
+        nameCardParts(card, true);
+      }
       if (pill) pill.style.viewTransitionName = "dl-ing-pill";
+    }).then(() => {
+      // Clear the names once the transition is over.
+      document.documentElement.removeAttribute("data-dl-morph");
+      if (card) {
+        card.style.viewTransitionName = "";
+        nameCardParts(card, false);
+        card.classList.remove("is-morphing");
+      }
+      d?.classList.remove("is-morphing");
+      if (pill) pill.style.viewTransitionName = "";
     });
-    // Clear the name once the transition has captured it, and return focus.
-    setTimeout(() => { if (pill) pill.style.viewTransitionName = ""; }, 700);
     openerRef.current?.focus({ preventScroll: true });
   };
   const swap = (id) => withTransition(() => setOpenId(id));
@@ -187,7 +295,8 @@ export default function Ingredients() {
     <>
       <ul className="dl-ingredients">
         {Object.values(PRODUCTS).map((item) => (
-          <li key={item.id} className="dl-card dl-glass dl-ingredient">
+          <li key={item.id} data-id={item.id} className={`dl-card dl-glass dl-ingredient${item.id === openId ? " is-open" : ""}`} style={{ "--glow": item.color }}>
+            <span className="dl-ing-glow" aria-hidden="true" />
             {/* Visible on every screen (touch has no hover): the card opens. */}
             <span className="dl-ing-plus" aria-hidden="true">
               {/* "Expand": opens a larger view (distinct from the ↗ "go to" corners). */}
@@ -200,7 +309,7 @@ export default function Ingredients() {
               <Pill id={item.id} size="lg" tilt={-20} />
             </span>
             <div>
-              <h3>
+              <h3 className="dl-h2">
                 <button type="button" className="dl-ingredient-open" onClick={(e) => open(item.id, e.currentTarget)} aria-haspopup="dialog" aria-label={`${item.name}: details`}>
                   {item.name}
                 </button>
@@ -216,12 +325,14 @@ export default function Ingredients() {
 
       <dialog
         ref={dialogRef}
-        className="dl-ing-dialog dl-panel dl-panel-1"
+        className="dl-ing-dialog dl-glass"
+        style={p ? { "--glow": p.color } : undefined}
         aria-labelledby="dl-ing-title"
         onClose={() => openId && setOpenId(null)}
         onCancel={(e) => { e.preventDefault(); close(); }}
         onClick={(e) => e.target === e.currentTarget && close()}
       >
+        {p && <span className="dl-ing-glow" aria-hidden="true" />}
         {p && (
           <div className="dl-ing-sheet">
             <div className="dl-ing-grab" onPointerDown={onDragStart} onPointerMove={onDragMove} onPointerUp={onDragEnd} onPointerCancel={onDragEnd}>
@@ -229,11 +340,13 @@ export default function Ingredients() {
               <PillStage key={p.id} id={p.id} />
             </div>
             <div className="dl-ing-body">
-              <p className="dl-eyebrow">{p.form}</p>
               {/* Focus lands on the title when the dialog opens (not on the first chip). */}
               <h2 id="dl-ing-title" className="dl-h2" tabIndex={-1} autoFocus>{p.name}</h2>
-              <p className="dl-meta">{p.dose} · {money(p.price)}/mo</p>
+              {/* The same line as the card's, so it travels as one piece. */}
+              <p className="dl-meta">{p.dose} · {p.form} · {money(p.price)}/mo</p>
               <p className="dl-lede">{p.blurb}</p>
+              {/* The rest has no twin on the card: it fades in/out on its own during the morph. */}
+              <div className="dl-ing-more">
               <h3 className="dl-h4">When the quiz adds it</h3>
               <ul className="dl-ing-reasons">
                 {p.reasons.map((r) => <li key={r}>{r}</li>)}
@@ -255,7 +368,7 @@ export default function Ingredients() {
               <p className="dl-meta dl-ing-note">Not medical advice. Check with a healthcare professional before starting any supplement.</p>
               <div className="dl-ing-actions">
                 <Link className="dl-btn dl-btn-primary" href={`${BASE}/quiz/`}>Find your pack <Arrow /></Link>
-                <button type="button" className="dl-btn dl-btn-ghost" onClick={close}>Close</button>
+              </div>
               </div>
             </div>
             <button type="button" className="dl-ing-close" onClick={close} aria-label="Close">
