@@ -75,7 +75,7 @@ export default function HearthsideHome() {
         </div>
         <div className="hs-hero-copy">
           <p className="hs-lede">
-            Nurses and therapists who come to you after a hospital stay, illness, or injury, and an intake team that tells you what happens next.
+            Nurses and therapists who visit you after hospitalization, illness, or injury, with an intake team explaining what happens next.
           </p>
         </div>
       </section>

@@ -475,6 +475,12 @@ page
     // Same side clipping as .cyril-page (big diamonds, the education slider).
     overflow-x: clip;
 
+    // Body paragraphs a touch heavier than the site's 400 (not the caps
+    // labels, nor the contact band, which is shared with other pages).
+    & .cyril-section:not(#contact) p:not(.cyril-upper) {
+        font-weight: 500;
+    }
+
     & .cyril-section {
         position: relative;
         // A title glow (or diamond) must not bleed into the next section.
@@ -3028,11 +3034,11 @@ portfolio
         }
     }
 
-    // My Work grid labels (category line) are lighter and smaller than the
-    // site-wide .cyril-upper.
+    // My Work grid labels (category line) are smaller than the site-wide
+    // .cyril-upper.
     & .cyril-project-descr .cyril-upper {
         font-size: 14px;
-        font-weight: normal;
+        font-weight: 600;
     }
 
     & .cyril-project-descr {
@@ -3677,7 +3683,6 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
         font-size: 13px;
         font-weight: 600;
         letter-spacing: var(--tracking-caps);
-        opacity: 0.6;
     }
 
     & dd {
@@ -3875,10 +3880,8 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
         letter-spacing: var(--tracking-caps);
         text-transform: uppercase;
         text-decoration: none;
-        color: inherit;
-        // 0.6 keeps inactive items clearly dimmer than the orange active one
-        // while still meeting WCAG AA text contrast in both themes.
-        opacity: 0.6;
+        // Paragraph text color; the orange active item stands out by color.
+        color: var(--color-gray);
         transition: opacity 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         line-height: 1.5em;
 
@@ -3997,14 +4000,17 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
         padding-left: 28px;
         margin-bottom: 10px;
 
+        // A small orange diamond on the first line (0.85em is half the 1.7
+        // line height; +1px sits it on the text's optical middle).
         &::before {
             content: "";
             position: absolute;
-            left: 0;
-            top: 0.85em;
-            width: 12px;
-            height: 2px;
+            left: 2px;
+            top: calc(0.85em - 3px);
+            width: 8px;
+            height: 8px;
             background-color: var(--color-accent);
+            transform: rotate(45deg);
         }
     }
 

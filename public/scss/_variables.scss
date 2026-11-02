@@ -10,13 +10,15 @@
     // Accent (brand) color.
     //   --color-accent       fills: buttons, tags, bars, shapes
     //   --color-accent-rgb   the same color as "r, g, b" for rgba() tints/glows
-    //   --color-accent-text  accent as *text* (labels, links, eyebrows) —
-    //                        deeper in light mode for WCAG AA (4.5:1) on white
+    //   --color-accent-text  accent as *text* (labels, links, eyebrows) — in
+    //                        light mode halfway between the button orange and
+    //                        #d63a1f (4.68:1 on white), by choice (2026-11-01):
+    //                        4.05:1, AA for large text only
     //   --color-on-accent    text/icons sitting on an accent fill
     --color-accent: #fa4729;
     --color-accent-rgb: 250, 71, 41;
     --color-accent-light: rgba(var(--color-accent-rgb), 0.18);
-    --color-accent-text: #d63a1f;
+    --color-accent-text: #e84024;
     --color-on-accent: var(--color-light);
     --color-black: #010101;
     --color-bg: var(--color-light);

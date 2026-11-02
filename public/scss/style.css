@@ -10,7 +10,7 @@
   --color-accent: #fa4729;
   --color-accent-rgb: 250, 71, 41;
   --color-accent-light: rgba(var(--color-accent-rgb), 0.18);
-  --color-accent-text: #d63a1f;
+  --color-accent-text: #e84024;
   --color-on-accent: var(--color-light);
   --color-black: #010101;
   --color-bg: var(--color-light);
@@ -1056,174 +1056,174 @@ box to be used for the random glitch effect. Also adds a very subtle
 skew to change the 'thickness' of the glitch.*/
 @keyframes glitch-anim {
   0% {
-    clip: rect(19px, 9999px, 64px, 0);
-    transform: skew(0.94deg);
+    clip: rect(121px, 9999px, 227px, 0);
+    transform: skew(0.06deg);
   }
   5% {
-    clip: rect(76px, 9999px, 66px, 0);
-    transform: skew(0.42deg);
+    clip: rect(8px, 9999px, 117px, 0);
+    transform: skew(0.34deg);
   }
   10% {
-    clip: rect(371px, 9999px, 7px, 0);
-    transform: skew(0.01deg);
+    clip: rect(107px, 9999px, 331px, 0);
+    transform: skew(0.63deg);
   }
   15% {
-    clip: rect(281px, 9999px, 79px, 0);
-    transform: skew(0.26deg);
-  }
-  20% {
-    clip: rect(306px, 9999px, 98px, 0);
-    transform: skew(0.23deg);
-  }
-  25% {
-    clip: rect(350px, 9999px, 104px, 0);
-    transform: skew(1deg);
-  }
-  30% {
-    clip: rect(101px, 9999px, 320px, 0);
-    transform: skew(0.43deg);
-  }
-  35% {
-    clip: rect(286px, 9999px, 333px, 0);
-    transform: skew(0.22deg);
-  }
-  40% {
-    clip: rect(83px, 9999px, 272px, 0);
-    transform: skew(0.47deg);
-  }
-  45% {
-    clip: rect(347px, 9999px, 291px, 0);
-    transform: skew(0.05deg);
-  }
-  50% {
-    clip: rect(250px, 9999px, 352px, 0);
-    transform: skew(0.23deg);
-  }
-  55% {
-    clip: rect(75px, 9999px, 271px, 0);
-    transform: skew(0.81deg);
-  }
-  60% {
-    clip: rect(234px, 9999px, 170px, 0);
-    transform: skew(0.98deg);
-  }
-  65% {
-    clip: rect(336px, 9999px, 4px, 0);
-    transform: skew(0.16deg);
-  }
-  70% {
-    clip: rect(313px, 9999px, 7px, 0);
+    clip: rect(391px, 9999px, 35px, 0);
     transform: skew(0.6deg);
   }
+  20% {
+    clip: rect(17px, 9999px, 183px, 0);
+    transform: skew(0.91deg);
+  }
+  25% {
+    clip: rect(224px, 9999px, 6px, 0);
+    transform: skew(0.81deg);
+  }
+  30% {
+    clip: rect(259px, 9999px, 313px, 0);
+    transform: skew(0.72deg);
+  }
+  35% {
+    clip: rect(370px, 9999px, 101px, 0);
+    transform: skew(0.21deg);
+  }
+  40% {
+    clip: rect(16px, 9999px, 372px, 0);
+    transform: skew(0.08deg);
+  }
+  45% {
+    clip: rect(101px, 9999px, 62px, 0);
+    transform: skew(0.63deg);
+  }
+  50% {
+    clip: rect(18px, 9999px, 165px, 0);
+    transform: skew(0.66deg);
+  }
+  55% {
+    clip: rect(284px, 9999px, 332px, 0);
+    transform: skew(0.73deg);
+  }
+  60% {
+    clip: rect(214px, 9999px, 367px, 0);
+    transform: skew(0.3deg);
+  }
+  65% {
+    clip: rect(138px, 9999px, 265px, 0);
+    transform: skew(0.77deg);
+  }
+  70% {
+    clip: rect(341px, 9999px, 202px, 0);
+    transform: skew(0.03deg);
+  }
   75% {
-    clip: rect(342px, 9999px, 235px, 0);
-    transform: skew(0.79deg);
+    clip: rect(137px, 9999px, 2px, 0);
+    transform: skew(0.48deg);
   }
   80% {
-    clip: rect(359px, 9999px, 356px, 0);
-    transform: skew(0.83deg);
+    clip: rect(21px, 9999px, 98px, 0);
+    transform: skew(0.77deg);
   }
   85% {
-    clip: rect(210px, 9999px, 181px, 0);
-    transform: skew(0.89deg);
+    clip: rect(316px, 9999px, 167px, 0);
+    transform: skew(0.1deg);
   }
   90% {
-    clip: rect(102px, 9999px, 88px, 0);
-    transform: skew(0.26deg);
+    clip: rect(301px, 9999px, 397px, 0);
+    transform: skew(0.15deg);
   }
   95% {
-    clip: rect(355px, 9999px, 166px, 0);
-    transform: skew(0.84deg);
+    clip: rect(270px, 9999px, 150px, 0);
+    transform: skew(0.96deg);
   }
   100% {
-    clip: rect(382px, 9999px, 199px, 0);
-    transform: skew(0.36deg);
+    clip: rect(154px, 9999px, 264px, 0);
+    transform: skew(0.08deg);
   }
 }
 @keyframes glitch-anim2 {
   0% {
-    clip: rect(46px, 9999px, 35px, 0);
-    transform: skew(0.76deg);
+    clip: rect(84px, 9999px, 20px, 0);
+    transform: skew(0.57deg);
   }
   5% {
-    clip: rect(18px, 9999px, 3px, 0);
-    transform: skew(0.55deg);
+    clip: rect(74px, 9999px, 34px, 0);
+    transform: skew(0.36deg);
   }
   10% {
-    clip: rect(40px, 9999px, 63px, 0);
-    transform: skew(0.8deg);
+    clip: rect(40px, 9999px, 7px, 0);
+    transform: skew(0.54deg);
   }
   15% {
-    clip: rect(71px, 9999px, 82px, 0);
+    clip: rect(43px, 9999px, 83px, 0);
     transform: skew(0.17deg);
   }
   20% {
-    clip: rect(38px, 9999px, 13px, 0);
-    transform: skew(0.54deg);
+    clip: rect(75px, 9999px, 45px, 0);
+    transform: skew(0.29deg);
   }
   25% {
-    clip: rect(1px, 9999px, 97px, 0);
-    transform: skew(0.33deg);
+    clip: rect(53px, 9999px, 44px, 0);
+    transform: skew(0.3deg);
   }
   30% {
-    clip: rect(2px, 9999px, 98px, 0);
-    transform: skew(0.2deg);
+    clip: rect(23px, 9999px, 3px, 0);
+    transform: skew(0.01deg);
   }
   35% {
-    clip: rect(13px, 9999px, 22px, 0);
-    transform: skew(0.8deg);
+    clip: rect(61px, 9999px, 42px, 0);
+    transform: skew(0.26deg);
   }
   40% {
-    clip: rect(51px, 9999px, 18px, 0);
-    transform: skew(0.61deg);
+    clip: rect(37px, 9999px, 46px, 0);
+    transform: skew(0.63deg);
   }
   45% {
-    clip: rect(99px, 9999px, 3px, 0);
-    transform: skew(0.16deg);
+    clip: rect(83px, 9999px, 1px, 0);
+    transform: skew(0.64deg);
   }
   50% {
-    clip: rect(13px, 9999px, 23px, 0);
-    transform: skew(0.78deg);
+    clip: rect(25px, 9999px, 78px, 0);
+    transform: skew(0.8deg);
   }
   55% {
-    clip: rect(17px, 9999px, 11px, 0);
-    transform: skew(0.44deg);
+    clip: rect(91px, 9999px, 74px, 0);
+    transform: skew(0.12deg);
   }
   60% {
-    clip: rect(57px, 9999px, 14px, 0);
-    transform: skew(0.97deg);
+    clip: rect(80px, 9999px, 24px, 0);
+    transform: skew(0.19deg);
   }
   65% {
-    clip: rect(96px, 9999px, 87px, 0);
-    transform: skew(0.84deg);
+    clip: rect(10px, 9999px, 78px, 0);
+    transform: skew(0.59deg);
   }
   70% {
-    clip: rect(88px, 9999px, 66px, 0);
-    transform: skew(0.1deg);
+    clip: rect(91px, 9999px, 52px, 0);
+    transform: skew(0.93deg);
   }
   75% {
-    clip: rect(45px, 9999px, 2px, 0);
-    transform: skew(0.79deg);
+    clip: rect(56px, 9999px, 60px, 0);
+    transform: skew(0.58deg);
   }
   80% {
-    clip: rect(40px, 9999px, 76px, 0);
-    transform: skew(0.84deg);
+    clip: rect(39px, 9999px, 2px, 0);
+    transform: skew(0.09deg);
   }
   85% {
-    clip: rect(46px, 9999px, 66px, 0);
-    transform: skew(0.81deg);
+    clip: rect(11px, 9999px, 67px, 0);
+    transform: skew(0.24deg);
   }
   90% {
-    clip: rect(12px, 9999px, 12px, 0);
-    transform: skew(0.17deg);
+    clip: rect(77px, 9999px, 13px, 0);
+    transform: skew(0.66deg);
   }
   95% {
-    clip: rect(89px, 9999px, 10px, 0);
-    transform: skew(0.85deg);
+    clip: rect(53px, 9999px, 93px, 0);
+    transform: skew(0.83deg);
   }
   100% {
-    clip: rect(42px, 9999px, 80px, 0);
-    transform: skew(0.49deg);
+    clip: rect(82px, 9999px, 5px, 0);
+    transform: skew(0.83deg);
   }
 }
 /* -------------------------------------------
@@ -1615,6 +1615,9 @@ page
 .cyril-onepage {
   width: 100%;
   overflow-x: clip;
+}
+.cyril-onepage .cyril-section:not(#contact) p:not(.cyril-upper) {
+  font-weight: 500;
 }
 .cyril-onepage .cyril-section {
   position: relative;
@@ -3727,7 +3730,7 @@ portfolio
 }
 .cyril-portfolio-item .cyril-project-descr .cyril-upper {
   font-size: 14px;
-  font-weight: normal;
+  font-weight: 600;
 }
 .cyril-portfolio-item .cyril-project-descr {
   padding-top: 30px;
@@ -4283,7 +4286,6 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
   font-size: 13px;
   font-weight: 600;
   letter-spacing: var(--tracking-caps);
-  opacity: 0.6;
 }
 .cyril-case-fact dd {
   margin: 0;
@@ -4469,8 +4471,7 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
   letter-spacing: var(--tracking-caps);
   text-transform: uppercase;
   text-decoration: none;
-  color: inherit;
-  opacity: 0.6;
+  color: var(--color-gray);
   transition: opacity 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   line-height: 1.5em;
 }
@@ -4583,11 +4584,12 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
 .cyril-page.cyril-case-page .cyril-case-list li::before {
   content: "";
   position: absolute;
-  left: 0;
-  top: 0.85em;
-  width: 12px;
-  height: 2px;
+  left: 2px;
+  top: calc(0.85em - 3px);
+  width: 8px;
+  height: 8px;
   background-color: var(--color-accent);
+  transform: rotate(45deg);
 }
 .cyril-page.cyril-case-page .cyril-case-list.cyril-case-list-columns {
   max-width: none;
