@@ -318,6 +318,21 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
 /* Desktop: the buttons sit just under the photo on the right, level with the
    headline's lower lines, which run past the photo's bottom edge. */
 .hs-hero-actions { position: absolute; right: 0; top: calc(var(--hs-hero-h) + 36px); z-index: 2; }
+/* The lede must stop short of those buttons (it ran under them on laptops,
+   1100–1440px): it gets the hero's width minus the buttons' (~610px side by
+   side, plus a gap), and on narrower desktops the two buttons stack, which
+   leaves the lede room. Desktop only; tablets and phones put the buttons
+   below the lede. */
+@media (min-width: 961px) {
+  .hs-hero .hs-lede { max-width: min(640px, calc(100cqw - 660px)); }
+  @container (max-width: 1180px) {
+    .hs-hero-ctas { flex-direction: column; align-items: stretch; }
+    .hs-hero .hs-lede { max-width: min(640px, calc(100cqw - 400px)); }
+    /* Stacked, the buttons run taller than the lede; they're absolutely
+       placed, so the lede's block holds the room or they'd overlap the next row. */
+    .hs-hero-copy { min-height: 190px; }
+  }
+}
 
 /* The stage: a wide rectangular photo, the headline in a notch cut into its
    bottom-left corner, after a reference. The notch is the page colour with a
