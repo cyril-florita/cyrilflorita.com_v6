@@ -69,8 +69,8 @@
   --hs-sand: #2A3846;
   --hs-ink: #E3EDF8;              /* white with a blue tint (as Shore's dark ink is warm) */
   --hs-ink-2: #C3CFDA;
-  --hs-line: #34434F;
-  --hs-rule: #455565;
+  --hs-line: rgba(255, 255, 255, 0.1);  /* white-based hairlines in dark mode */
+  --hs-rule: rgba(255, 255, 255, 0.18);
   --hs-control: #8593A1;
   --hs-ember: #7FB6E0;
   --hs-ember-hover: #93C3E8;
@@ -128,8 +128,8 @@
   --hs-sand: #2B3745;
   --hs-ink: #F4EEE5;
   --hs-ink-2: #CFC7BB;
-  --hs-line: #36424F;
-  --hs-rule: #485564;
+  --hs-line: rgba(255, 255, 255, 0.1);  /* white-based hairlines in dark mode */
+  --hs-rule: rgba(255, 255, 255, 0.18);
   --hs-control: #8A929C;
   --hs-ember: #EE9466;
   --hs-ember-hover: #F4A77F;
@@ -222,7 +222,6 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
 .hs-nav a[aria-current="page"] { font-weight: 600; }
 .hs-header-actions { display: flex; align-items: center; gap: 12px; margin-left: 40px; } /* the light/dark toggle, set apart from the nav */
 .hs-mode { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-width: 46px; min-height: 46px; padding: 0 12px; border: 1.5px solid var(--hs-ink); border-radius: var(--hs-radius-sm); background: transparent; color: var(--hs-ink); font: inherit; font-weight: 600; cursor: pointer; }
-.hs-mode:is(:hover, :active) { background: var(--hs-sand); }
 /* Pressed: buttons and the toggle dip slightly while held. */
 .hs :is(.hs-btn, .hs-mode, .hs-dock-phone, .hs-totop):active { scale: 0.97; }
 /* Phones and tablets: the nav becomes a second row under the logo, a strip of
@@ -276,11 +275,10 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
 .hs-btn-primary:hover::before { opacity: 1; }
 .hs-btn-primary[disabled]::before { display: none; }
 .hs-btn-secondary { background: transparent; color: var(--hs-ink); border-color: var(--hs-ink); }
-.hs-btn-secondary:hover { background: var(--hs-sand); color: var(--hs-ember); border-color: var(--hs-ember); } /* on hover, border, label and icon take the primary's hover colour (≥5.2:1 in every look) */
 .hs-btn-quiet { min-height: 44px; padding: 0 2px; background: none; color: var(--hs-ember-text); }
 .hs-btn-quiet:hover { text-decoration: underline; text-underline-offset: 0.3em; }
 .hs-btn-sm { min-height: 44px; padding: 0 16px; font-size: 14px; }
-.hs-btn { transition: background-color var(--hs-dur-fast) var(--hs-ease), color var(--hs-dur-fast) var(--hs-ease), border-color var(--hs-dur-fast) var(--hs-ease); }
+.hs-btn { transition: background-color var(--hs-dur-fast) var(--hs-ease), color var(--hs-dur-fast) var(--hs-ease), border-color var(--hs-dur-fast) var(--hs-ease), scale 120ms cubic-bezier(0.2, 0, 0, 1); }
 .hs-btn .hs-icon { transition: translate var(--hs-dur-fast) var(--hs-ease); }
 .hs-btn:hover .hs-icon:not(.hs-btn-lead) { translate: 3px 0; } /* trailing arrows nudge; leading icons (Request a call, Refer a patient) stay put */
 .hs-btn[disabled] { opacity: 0.45; cursor: not-allowed; }
@@ -624,7 +622,6 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
 .hs-band .hs-btn-primary:hover { background: var(--hb-ink); }
 .hs-band .hs-btn-primary::before { background: var(--hb-hover); }
 .hs-band .hs-btn-secondary { color: var(--hb-ink); border-color: var(--hb-ink); }
-.hs-band .hs-btn-secondary:hover { background: color-mix(in srgb, var(--hb-ink) 9%, transparent); color: var(--hb-hover); border-color: var(--hb-hover); }
 .hs-band .hs-btn-quiet { color: var(--hb-accent); } /* the text link, in the scheme's accent */
 @media (max-width: 680px) { .hs-band-ctas .hs-btn:not(.hs-btn-quiet) { flex: 1 1 100%; } } /* phones: the two buttons full width, the link under them */
 @media (max-width: 680px) { .hs-band { padding: 40px 24px; } }
@@ -839,11 +836,10 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
 .hs[data-hs-mode="dark"] :is(.hs-dock > *, .hs-totop) { box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5); }
 .hs-totop.hs-btn-secondary { background: var(--hs-page); } /* solid, not frosted: a backdrop blur on screen made Chrome repaint neighbouring buttons mid-hover (a flash) */
 .hs-dock .hs-btn-secondary { background: var(--hs-page); } /* the white button: solid, so page text never shows through it */
-:is(.hs-dock .hs-btn-secondary, .hs-totop.hs-btn-secondary):hover { background: var(--hs-sand); color: var(--hs-ember); border-color: var(--hs-ember); }
 .hs-dock-label { margin-right: 4px; }
 .hs-dock.is-hidden { translate: 0 calc(100% + 28px); opacity: 0; }
 .hs-dock.is-hidden, .hs-totop.is-hidden { pointer-events: none; }
-.hs-totop { width: 52px; padding: 0; margin-left: auto; transition: translate var(--hs-dur) var(--hs-ease), opacity var(--hs-dur) var(--hs-ease), background-color var(--hs-dur-fast) var(--hs-ease); }
+.hs-totop { width: 52px; padding: 0; margin-left: auto; transition: translate var(--hs-dur) var(--hs-ease), opacity var(--hs-dur) var(--hs-ease), background-color var(--hs-dur-fast) var(--hs-ease), scale 120ms cubic-bezier(0.2, 0, 0, 1); }
 .hs-totop.is-hidden { translate: 0 calc(100% + 28px); opacity: 0; visibility: hidden; transition-property: translate, opacity, visibility; transition-duration: var(--hs-dur), var(--hs-dur), 0s; transition-delay: 0s, 0s, var(--hs-dur); } /* hidden for real once faded (its frost blur cost every scroll frame) */
 :root:has(.hs) { scroll-padding-bottom: 96px; } /* focused elements never sit under the dock */
 @media (max-width: 1080px) {
@@ -1117,7 +1113,7 @@ main[data-hover] .hs-faq summary:hover { color: var(--hs-ember-text); }
 @media (min-width: 961px) {
   .hs-hero { padding-top: 12px; padding-bottom: 20px; } /* close under the nav */
 }
-.hs-cue { position: fixed; left: 50%; bottom: 22px; z-index: 44; display: none; place-items: center; width: 44px; height: 44px; translate: -50% 0; border: 1.5px solid var(--hs-ink); border-radius: 4px 16px; background: var(--hs-page); color: var(--hs-ink); cursor: pointer; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity var(--hs-dur) var(--hs-ease), visibility 0s var(--hs-dur); } /* hidden for real once faded */
+.hs-cue { position: fixed; left: 50%; bottom: 22px; z-index: 44; display: none; place-items: center; width: 44px; height: 44px; translate: -50% 0; border: 1.5px solid var(--hs-ink); border-radius: 4px 16px; background: var(--hs-page); color: var(--hs-ink); cursor: pointer; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity var(--hs-dur) var(--hs-ease), visibility 0s var(--hs-dur), scale 120ms cubic-bezier(0.2, 0, 0, 1); } /* hidden for real once faded */
 .hs-cue .hs-icon { rotate: 90deg; }
 .hs-cue.is-shown { opacity: 1; pointer-events: auto; visibility: visible; transition-delay: 0s; }
 @media (min-width: 1081px) { .hs-cue { display: grid; } }
@@ -1153,8 +1149,8 @@ main[data-hover] .hs-faq summary:hover { color: var(--hs-ember-text); }
    reduced motion (the global rule stops every transition). */
 @media (prefers-reduced-motion: no-preference) {
   .hs-dock:not(.is-hidden) { transition: translate 0.55s cubic-bezier(0.34, 1.45, 0.5, 1), opacity 0.3s var(--hs-ease); }
-  .hs-dock > * { transition: translate 0.25s var(--hs-ease), opacity 0.2s var(--hs-ease), box-shadow 0.2s var(--hs-ease), background-color var(--hs-dur-fast) var(--hs-ease); }
-  .hs-dock:not(.is-hidden) > * { transition: translate 0.6s cubic-bezier(0.34, 1.56, 0.5, 1), opacity 0.35s var(--hs-ease), box-shadow 0.7s var(--hs-ease-soft), background-color var(--hs-dur-fast) var(--hs-ease); }
+  .hs-dock > * { transition: translate 0.25s var(--hs-ease), opacity 0.2s var(--hs-ease), box-shadow 0.2s var(--hs-ease), background-color var(--hs-dur-fast) var(--hs-ease), scale 120ms cubic-bezier(0.2, 0, 0, 1); }
+  .hs-dock:not(.is-hidden) > * { transition: translate 0.6s cubic-bezier(0.34, 1.56, 0.5, 1), opacity 0.35s var(--hs-ease), box-shadow 0.7s var(--hs-ease-soft), background-color var(--hs-dur-fast) var(--hs-ease), scale 120ms cubic-bezier(0.2, 0, 0, 1); }
   .hs-dock:not(.is-hidden) > :nth-child(2) { transition-delay: 80ms, 80ms, 200ms, 0s; }
   .hs-dock:not(.is-hidden) > :nth-child(3) { transition-delay: 160ms, 160ms, 280ms, 0s; }
   .hs-dock.is-hidden > * { translate: 0 18px; opacity: 0; box-shadow: 0 0 0 rgba(15, 25, 35, 0); }
@@ -1580,10 +1576,10 @@ html[data-hs-vt="look"]::view-transition-new(*) { animation: hs-look-in 0.3s eas
    keyed to the row's heading like the closing band and the FAQ, so they
    reset and replay with it. Nothing hides unless the heading was split. */
 @media (prefers-reduced-motion: no-preference) {
-  .hs-row .hs-row-body .hs-btn { transition: background-color var(--hs-dur-fast) var(--hs-ease), color var(--hs-dur-fast) var(--hs-ease), border-color var(--hs-dur-fast) var(--hs-ease), opacity 0.7s var(--hs-ease-soft) 0.4s, translate 0.8s var(--hs-ease-soft) 0.4s; }
-  .hs-row:has(h2.hs-split:not(.is-in)) .hs-row-body .hs-btn { opacity: 0; translate: 0 12px; transition: none; }
+  .hs-row .hs-row-body .hs-btn { transition: background-color var(--hs-dur-fast) var(--hs-ease), color var(--hs-dur-fast) var(--hs-ease), border-color var(--hs-dur-fast) var(--hs-ease), opacity 0.7s var(--hs-ease-soft) 0.4s, translate 0.8s var(--hs-ease-soft) 0.4s, scale 120ms cubic-bezier(0.2, 0, 0, 1); }
+  .hs-row:has(> .hs-row-body > h2.hs-split:not(.is-in)) .hs-row-body .hs-btn:not(.hs-band .hs-btn) { opacity: 0; translate: 0 12px; transition: none; }
   .hs-roles > li { transition: opacity 0.7s var(--hs-ease-soft), translate 0.8s var(--hs-ease-soft); transition-delay: calc(0.2s + var(--ri, 0) * 60ms); }
-  .hs-row:has(h2.hs-split:not(.is-in)) .hs-roles > li { opacity: 0; translate: 0 14px; transition: none; }
+  .hs-row:has(> .hs-row-body > h2.hs-split:not(.is-in)) .hs-roles > li { opacity: 0; translate: 0 14px; transition: none; }
   .hs-roles > li:nth-child(2) { --ri: 1; } .hs-roles > li:nth-child(3) { --ri: 2; } .hs-roles > li:nth-child(4) { --ri: 3; }
   .hs-roles > li:nth-child(5) { --ri: 4; } .hs-roles > li:nth-child(n+6) { --ri: 5; }
 }
@@ -1631,7 +1627,7 @@ html[data-hs-vt="look"]::view-transition-new(*) { animation: hs-look-in 0.3s eas
    so they reset and replay with it. */
 @media (prefers-reduced-motion: no-preference) {
   .hs-guide legend, .hs-guide-opt { transition: opacity 0.7s var(--hs-ease-soft), translate 0.8s var(--hs-ease-soft), border-color var(--hs-dur-fast) var(--hs-ease), background-color var(--hs-dur-fast) var(--hs-ease); transition-delay: calc(0.25s + var(--gi, 0) * 60ms), calc(0.25s + var(--gi, 0) * 60ms), 0s, 0s; }
-  .hs-row:has(h2.hs-split:not(.is-in)) :is(.hs-guide legend, .hs-guide-opt) { opacity: 0; translate: 0 14px; transition: none; }
+  .hs-row:has(> .hs-row-body > h2.hs-split:not(.is-in)) :is(.hs-guide legend, .hs-guide-opt) { opacity: 0; translate: 0 14px; transition: none; }
   .hs-guide-opt:nth-child(1) { --gi: 1; } .hs-guide-opt:nth-child(2) { --gi: 2; } .hs-guide-opt:nth-child(3) { --gi: 3; } .hs-guide-opt:nth-child(n+4) { --gi: 4; }
 }
 
@@ -1689,3 +1685,238 @@ html[data-hs-vt="look"]::view-transition-new(*) { animation: hs-look-in 0.3s eas
 .hs-mt-56 { margin-top: 56px !important; }
 .hs-mb-16 { margin-bottom: 16px !important; }
 .hs-mb-32 { margin-bottom: 32px !important; }
+
+/* The side mark (SideMark in client.js): the logo's leaf, large, fixed at the
+   bottom left of desktop screens (≥1100px), its whole height and about 85% of its
+   width on screen (the whole H), the rest cropped by the window's edges; the row
+   labels and the left of each section pass over it as the page scrolls. With
+   a mouse it's a 3D gunmetal leaf (GlassMark.js, below); this CSS version,
+   blurred and warm (lamplight through frosted glass), is the fallback. It
+   sits behind everything (the shell is its own stacking context, so z-index
+   -1 keeps it above the page colour) and shows through Home's masked hero
+   (below) and the sheer chapters. That faint, it barely shifts the text
+   it sits under. --mx/--my: the pointer drift. */
+.hs-shell { isolation: isolate; }
+.hs-sidemark { display: none; }
+@media (min-width: 1100px) {
+  .hs-sidemark {
+    --w: min(698px, 74vh);
+    display: block; position: fixed; z-index: -1; pointer-events: none;
+    bottom: calc(var(--w) * -0.1); left: calc(var(--w) * -0.3); /* bottom left: the leaf's whole height and about 85% of its width on screen, the whole H in view */
+    width: var(--w); aspect-ratio: 1;
+    translate: var(--mx, 0px) var(--my, 0px);
+    color: color-mix(in srgb, var(--hs-glow) 20%, transparent);
+    filter: blur(24px);
+    will-change: translate, opacity;
+  }
+  /* Amber over the navy page read as brown: in dark mode it's the warm white
+     of the ink, a lift of light rather than a tint. */
+  .hs[data-hs-mode="dark"] .hs-sidemark { color: color-mix(in srgb, var(--hs-ink) 8%, transparent); }
+  .hs-sidemark svg { display: block; width: 100%; height: 100%; fill: currentColor; }
+}
+/* Lamplight through frosted glass: the blurred, warm mark (the brand's
+   "light left on" glow) breathes slowly, so the content over it reads as
+   sitting on glass. Opacity only, on its own layer; desktop with a mouse,
+   still under reduced motion. */
+@keyframes hs-sidemark-breathe { from { opacity: 0.45; } to { opacity: 1; } }
+@media (min-width: 1100px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .hs-sidemark svg { animation: hs-sidemark-breathe 6s ease-in-out infinite alternate; }
+}
+/* The metal mark and the glow (GlassMark.js, three.js; desktop with a mouse).
+   The glow is one canvas fixed behind the whole page (z-index -1 in the
+   shell's stacking context), a wide oval across its lower half; the leaf is
+   its own transparent canvas in the mark's box (1.3× it, centred, so a tipped
+   corner never clips), out of focus until the pointer comes near
+   (--hs-leaf-blur, set by the script and eased here). Once drawn, the CSS leaf
+   (and its blur) give way. Both held at 60% so text reads over them. */
+@media (min-width: 1100px) {
+  .hs-chapter.is-sand { background: color-mix(in srgb, var(--hs-sand) 70%, transparent); } /* light: a sheer sand, so the glow and the mark show through */
+  .hs[data-hs-mode="dark"] .hs-chapter.is-sand { background: color-mix(in srgb, var(--hs-house) 25%, transparent); } /* dark: a sheer navy (the dark chapter's colour); the dark chapter keeps its full ground, its text is light */
+  .hs-sidemark.is-3d { filter: none; }
+  .hs-sidemark.is-3d svg { display: none; }
+  .hs-sidemark-3d { position: fixed; inset: 0; z-index: -1; width: 100vw; height: 100vh; display: block; pointer-events: none; opacity: 0.6; }
+  .hs-sidemark-leaf {
+    position: absolute; inset: -15%; width: 130%; height: 130%; display: block; opacity: 0.6;
+    filter: blur(var(--hs-leaf-blur, 6px));
+    transition: filter 0.45s var(--hs-ease-soft);
+  }
+  .hs[data-hs-mode="dark"] .hs-sidemark-leaf { opacity: 0.45; } /* metal on navy carries more contrast */
+}
+
+/* The hero's shape, cut by a mask (desktop, ≥961px). HeroMask (client.js)
+   measures the tab and the headline block and draws two SVG paths: the photo's
+   outline with the headline's cut-out (--hs-mask-base, rounded corners and
+   inverse corners in one path) and the tab's cut-out (--hs-mask-tab, sized
+   --hs-tbw × --hs-tbh at the top right), subtracted from it. Then it adds
+   .is-masked. Until then the page-coloured tab and notch above draw the same
+   shape, so the first paint already has it. Masked, they're transparent, and
+   whatever is behind the hero shows through the cut-outs. Whole paths, not
+   abutting gradient pieces, so there are no seams. --hs-tab-k (1 → 0 as the
+   page scrolls, below) shrinks the tab's cut-out into the corner, so the
+   photo still opens to a full rectangle as the scroll story begins. */
+@property --hs-tab-k { syntax: "<number>"; inherits: true; initial-value: 1; }
+@media (min-width: 961px) {
+  .hs-hero-stage.is-masked :is(.hs-hero-tab, .hs-hero-notch) { background: none; }
+  .hs-hero-stage.is-masked :is(.hs-hero-tab, .hs-hero-notch)::before,
+  .hs-hero-stage.is-masked :is(.hs-hero-tab, .hs-hero-notch)::after { display: none; }
+  .hs-hero-stage.is-masked .hs-hero-art {
+    border-radius: 0; /* the outline path rounds the corners */
+    -webkit-mask: var(--hs-mask-base) 0 0 / 100% 100% no-repeat, var(--hs-mask-tab) 100% 0 / calc(var(--hs-tbw) * var(--hs-tab-k)) calc(var(--hs-tbh) * var(--hs-tab-k)) no-repeat;
+    mask: var(--hs-mask-base) 0 0 / 100% 100% no-repeat, var(--hs-mask-tab) 100% 0 / calc(var(--hs-tbw) * var(--hs-tab-k)) calc(var(--hs-tbh) * var(--hs-tab-k)) no-repeat;
+    -webkit-mask-composite: source-out;
+    mask-composite: subtract;
+  }
+}
+@media (min-width: 961px) and (prefers-reduced-motion: no-preference) {
+  .hs-hero-stage.is-masked { animation: hs-tab-close linear both; animation-timeline: scroll(root); animation-range: 0 35vh; }
+}
+@keyframes hs-tab-close { to { --hs-tab-k: 0; } }
+
+/* Buttons (2026-11-02): metal primaries, glass secondaries.
+   The primary is a polished-metal button, after Lakshay Bhushan's shadcn
+   "Metal Buttons" (pure gradients and shadows): a soft rim and a narrow rounded
+   bevel at the edges (below; the original's pale-dark-pale band darkened the middle of the
+   sides, which looked pinched) and a flat face, nearly white
+   at rest and silver on hover (the ::before layer fading in by
+   opacity; a background-colour transition flickered in Chrome). Pressed, it
+   sinks 2px. Unlike the original, the label is navy, not white (≥8:1 on the
+   white and the silver; white on their grey was ~3:1), and the corners stay
+   Hearthside's 6px. The secondary is Viteo's card glass (below). The dock's white button and back-to-top stay
+   solid (their frosted versions made Chrome flash neighbouring buttons
+   mid-hover). */
+/* Flat like the 3D logo: one flat colour on the face (white-silver at rest,
+   silver on hover), shading smoothly darker toward every edge (a soft inset
+   shadow, a touch deeper at the bottom; repeated on the silver hover layer,
+   which would otherwise cover it), inside a soft rim. A vertical gradient
+   across the face made its middle look raised, and crisp highlight and
+   shade lines at the edges read as a ridge. */
+.hs-btn-primary, .hs-btn-primary:hover, .hs-btn[disabled]:hover,
+.hs-band .hs-btn-primary, .hs-band .hs-btn-primary:hover {
+  --metal-edge: inset 0 0 12px 1px rgba(48, 56, 68, 0.16), inset 0 -3px 8px -2px rgba(48, 56, 68, 0.1);
+  color: #1E2A36;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
+  border: 0; /* the rim is the outer ring; a border here left a gap of page colour inside it */
+  background: #F1F3F6;
+  box-shadow: var(--metal-edge), 0 0 0 1px rgba(36, 44, 54, 0.26), 0 1px 2px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 250ms cubic-bezier(0.1, 0.4, 0.2, 1), translate 250ms cubic-bezier(0.1, 0.4, 0.2, 1), scale 250ms cubic-bezier(0.1, 0.4, 0.2, 1);
+}
+.hs-btn-primary::before, .hs-band .hs-btn-primary::before {
+  inset: 0; border-radius: inherit;
+  background: #C8CDD4;
+  box-shadow: inset 0 0 12px 1px rgba(36, 44, 54, 0.22), inset 0 -3px 8px -2px rgba(36, 44, 54, 0.12);
+  transition: opacity 250ms cubic-bezier(0.1, 0.4, 0.2, 1);
+}
+.hs-btn-primary:hover { box-shadow: var(--metal-edge), 0 0 0 1px rgba(36, 44, 54, 0.3), 0 2px 4px rgba(0, 0, 0, 0.1), 0 6px 16px rgba(0, 0, 0, 0.12); }
+.hs-btn-primary:active { translate: 0 2px; box-shadow: var(--metal-edge), 0 0 0 1px rgba(36, 44, 54, 0.3), 0 1px 2px rgba(0, 0, 0, 0.14); }
+/* The secondary is Viteo's card glass: a faint diagonal white sheen over a
+   light dark tint, a 1px white edge and a highlight along the top inner edge
+   (light mode: frosted white, its edge ink-based, since white on cream
+   doesn't show). On hover it turns a darker glass. No backdrop blur and no
+   change to the button's own background on hover: either one made Chrome
+   flash a stale frame mid-hover (as with the primary's fill), so the darker
+   glass is a ::before layer that fades in by opacity, and the label and edge
+   keep their colours. */
+.hs-btn-secondary { position: relative; isolation: isolate; color: var(--hs-ink); }
+.hs-btn-secondary, .hs-btn-secondary:hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.14) 50%, rgba(255, 255, 255, 0.28));
+  border: 1px solid color-mix(in srgb, var(--hs-ink) 24%, transparent);
+  box-shadow: inset 0 1px 0 #FFFFFF;
+  color: var(--hs-ink);
+}
+.hs-btn-secondary::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none;
+  background: linear-gradient(135deg, rgba(30, 42, 54, 0.1), rgba(30, 42, 54, 0.05) 50%, rgba(30, 42, 54, 0.09));
+  opacity: 0; transition: opacity 250ms cubic-bezier(0.1, 0.4, 0.2, 1);
+}
+.hs-btn-secondary:hover::before { opacity: 1; }
+.hs[data-hs-mode="dark"] .hs-btn-secondary, .hs[data-hs-mode="dark"] .hs-btn-secondary:hover {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02) 45%, rgba(255, 255, 255, 0.06)),
+    rgba(37, 51, 64, 0.22);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28), inset 0 -1px 0 rgba(255, 255, 255, 0.06);
+}
+.hs[data-hs-mode="dark"] .hs-btn-secondary::before { background: rgba(6, 10, 15, 0.42); }
+.hs-band .hs-btn-secondary, .hs-band .hs-btn-secondary:hover { color: var(--hb-ink); border-color: color-mix(in srgb, var(--hb-ink) 40%, transparent); background: color-mix(in srgb, var(--hb-ink) 8%, transparent); box-shadow: inset 0 1px 0 color-mix(in srgb, #FFFFFF 30%, transparent); }
+.hs-band .hs-btn-secondary::before { background: rgba(0, 0, 0, 0.18); }
+/* Every other button-like control matches the secondary's glass: the sticky
+   contact bar's buttons and back-to-top (floating over content, so their
+   glass sits on a nearly opaque page-colour base; with no blur, clear glass
+   would let the text behind show through), the light/dark toggle and the
+   desktop scroll cue. Same sheen, edge, top highlight and darker-glass hover
+   layer. */
+.hs :is(.hs-dock .hs-btn-secondary, .hs-totop.hs-btn-secondary), .hs :is(.hs-dock .hs-btn-secondary, .hs-totop.hs-btn-secondary):hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.14) 50%, rgba(255, 255, 255, 0.28)), color-mix(in srgb, var(--hs-page) 97%, transparent);
+  box-shadow: inset 0 1px 0 #FFFFFF, 0 10px 28px rgba(15, 25, 35, 0.14);
+}
+.hs[data-hs-mode="dark"] :is(.hs-dock .hs-btn-secondary, .hs-totop.hs-btn-secondary), .hs[data-hs-mode="dark"] :is(.hs-dock .hs-btn-secondary, .hs-totop.hs-btn-secondary):hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02) 45%, rgba(255, 255, 255, 0.06)), color-mix(in srgb, var(--hs-page) 97%, transparent);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28), inset 0 -1px 0 rgba(255, 255, 255, 0.06), 0 10px 28px rgba(0, 0, 0, 0.5);
+}
+.hs .hs-mode { position: relative; } /* for its hover layer (the cue is already fixed: making it relative dropped it into the page flow, 44px under the hero) */
+.hs :is(.hs-mode, .hs-cue) {
+  isolation: isolate;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.14) 50%, rgba(255, 255, 255, 0.28));
+  border: 1px solid color-mix(in srgb, var(--hs-ink) 24%, transparent);
+  box-shadow: inset 0 1px 0 #FFFFFF;
+}
+.hs .hs-cue { background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.14) 50%, rgba(255, 255, 255, 0.28)), color-mix(in srgb, var(--hs-page) 97%, transparent); } /* floating: a dense pane */
+.hs[data-hs-mode="dark"] :is(.hs-mode, .hs-cue) {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02) 45%, rgba(255, 255, 255, 0.06)), rgba(37, 51, 64, 0.22);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28), inset 0 -1px 0 rgba(255, 255, 255, 0.06);
+}
+.hs[data-hs-mode="dark"] .hs-cue { background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02) 45%, rgba(255, 255, 255, 0.06)), color-mix(in srgb, var(--hs-page) 97%, transparent); }
+.hs :is(.hs-mode, .hs-cue)::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none;
+  background: linear-gradient(135deg, rgba(30, 42, 54, 0.1), rgba(30, 42, 54, 0.05) 50%, rgba(30, 42, 54, 0.09));
+  opacity: 0; transition: opacity 250ms cubic-bezier(0.1, 0.4, 0.2, 1);
+}
+.hs[data-hs-mode="dark"] :is(.hs-mode, .hs-cue)::before { background: rgba(6, 10, 15, 0.42); }
+.hs :is(.hs-mode, .hs-cue):is(:hover, :active)::before { opacity: 1; }
+
+/* Every button grows a little on hover (scale, a quick 120ms; each button's own
+   transition list carries it, so their entrances and springs keep theirs)
+   and dips when pressed. Text links (.hs-btn-quiet) stay put. */
+.hs .hs-mode { transition: scale 120ms cubic-bezier(0.2, 0, 0, 1); }
+@media (hover: hover) {
+  .hs :is(.hs-btn:not(.hs-btn-quiet), .hs-mode, .hs-cue):hover { scale: 1.02; } /* subtle: enough to show it's live */
+}
+.hs :is(.hs-btn:not(.hs-btn-quiet), .hs-mode, .hs-cue, .hs-dock-phone, .hs-totop):active { scale: 0.97; }
+
+/* Dark mode: form fields are clear, so the page (and the glow) shows through,
+   with an eased border: 1px of white at 38% (~3:1 against the page, still
+   enough to find the field) in place of 1.5px of the control colour. Flat,
+   with no sheen or top highlight, so they never read as the glass buttons;
+   read-only sample fields keep a faint fill. */
+.hs[data-hs-mode="dark"] :is(.hs-input, .hs-select, .hs-textarea) { background: transparent; border: 1px solid rgba(255, 255, 255, 0.38); }
+.hs[data-hs-mode="dark"] :is(.hs-input, .hs-select, .hs-textarea):hover { border-color: rgba(255, 255, 255, 0.55); }
+.hs[data-hs-mode="dark"] :is(.hs-input, .hs-select, .hs-textarea):focus-visible { border-color: var(--hs-ink); }
+.hs[data-hs-mode="dark"] :is(.hs-input[readonly], .hs-select[disabled]) { background: rgba(255, 255, 255, 0.04); }
+.hs[data-hs-mode="dark"] .hs-input[aria-invalid="true"] { border-color: var(--hs-danger); }
+.hs[data-hs-mode="dark"] .hs-select option { background: var(--hs-page); color: var(--hs-ink); } /* the open list needs a solid ground */
+
+/* Light mode: the primary is the near-black navy ink (#1E2A36, its colour
+   before the metal buttons) with a white label (~14:1), given depth by a
+   subtle gradient: a touch lighter at the centre, deepening toward every
+   edge, with the soft edge shading and a faint top highlight. On hover it
+   lifts to a slightly lighter navy, the same way. The closing band is navy in
+   light mode, so its primaries keep the light metal. */
+.hs:not([data-hs-mode="dark"]) .hs-btn-primary:not(.hs-band .hs-btn-primary),
+.hs:not([data-hs-mode="dark"]) .hs-btn-primary:not(.hs-band .hs-btn-primary):hover {
+  --metal-edge: inset 0 0 12px 1px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  background: radial-gradient(120% 140% at 50% 35%, #263444 0%, #1E2A36 55%, #161F29 100%);
+  color: #FFFFFF;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+}
+.hs:not([data-hs-mode="dark"]) .hs-btn-primary:not(.hs-band .hs-btn-primary)::before {
+  background: radial-gradient(120% 140% at 50% 35%, #34475A 0%, #2A3A4B 55%, #212E3C 100%);
+  box-shadow: inset 0 0 12px 1px rgba(0, 0, 0, 0.26), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+/* Light mode: form fields with an eased border, 1px of ink at 45% (about
+   2.6:1 against the page) in place of 1.5px of the control colour. */
+.hs:not([data-hs-mode="dark"]) :is(.hs-input, .hs-select, .hs-textarea) { border: 1px solid color-mix(in srgb, var(--hs-ink) 45%, transparent); }
+.hs:not([data-hs-mode="dark"]) :is(.hs-input, .hs-select, .hs-textarea):hover { border-color: color-mix(in srgb, var(--hs-ink) 65%, transparent); }
+.hs:not([data-hs-mode="dark"]) :is(.hs-input, .hs-select, .hs-textarea):focus-visible { border-color: var(--hs-ink); }
+.hs:not([data-hs-mode="dark"]) .hs-input[aria-invalid="true"] { border-color: var(--hs-danger); }

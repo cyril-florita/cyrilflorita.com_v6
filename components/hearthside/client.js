@@ -773,3 +773,88 @@ export function PrintButton() {
     <button type="button" className="hs-btn hs-btn-secondary hs-btn-sm" onClick={() => window.print()}>Save as PDF</button>
   );
 }
+
+// A large, faint logo mark fixed at the left of desktop screens (hearthside.css
+// "The side mark"), cropped by the window's edge; the page's content scrolls
+// past over it. With a mouse it's a 3D piece of frosted glass (GlassMark.js)
+// and drifts a few pixels against the pointer, easing into place; still, and
+// CSS only, under reduced motion. The frame loop runs only
+// while it's catching up.
+export function SideMark() {
+  const ref = useRef(null);
+  useEffect(() => {
+    const el = ref.current;
+    const mq = window.matchMedia("(hover: hover) and (pointer: fine) and (min-width: 1100px) and (prefers-reduced-motion: no-preference)");
+    let x = 0, y = 0, tx = 0, ty = 0, raf = 0;
+    const tick = () => {
+      x += (tx - x) * 0.06; y += (ty - y) * 0.06;
+      el.style.setProperty("--mx", `${x.toFixed(2)}px`);
+      el.style.setProperty("--my", `${y.toFixed(2)}px`);
+      raf = Math.abs(tx - x) + Math.abs(ty - y) > 0.05 ? requestAnimationFrame(tick) : 0;
+    };
+    const move = (e) => {
+      if (!mq.matches) return;
+      tx = -(e.clientX / innerWidth - 0.5) * 28;
+      ty = -(e.clientY / innerHeight - 0.5) * 20;
+      if (!raf) raf = requestAnimationFrame(tick);
+    };
+    window.addEventListener("pointermove", move, { passive: true });
+    // With a mouse, the leaf becomes a piece of frosted glass in three.js
+    // (GlassMark.js, loaded only here); the CSS mark shows until it's drawn.
+    let stop = null, gone = false;
+    if (mq.matches) import("./GlassMark").then((m) => m.startGlassMark(el)).then((s) => (gone ? s() : (stop = s)), (err) => console.error(err));
+    return () => { gone = true; stop?.(); window.removeEventListener("pointermove", move); cancelAnimationFrame(raf); };
+  }, []);
+  return (
+    <div className="hs-sidemark" ref={ref} aria-hidden="true">
+      <svg viewBox="0 0 40 40">
+        <path fillRule="evenodd" d="M3.5 0H25a15 15 0 0 1 15 15v21.5a3.5 3.5 0 0 1-3.5 3.5H15A15 15 0 0 1 0 25V3.5A3.5 3.5 0 0 1 3.5 0Z M12.5 11h4.4v6.9h6.2V11h4.4v18h-4.4v-7.1h-6.2V29h-4.4Z" />
+      </svg>
+    </div>
+  );
+}
+
+// Home's hero on desktop: the photo's shape (the tab cut into its top-right
+// corner, the headline block into its bottom-left) becomes a CSS mask, so
+// what's behind the hero shows through the cut-outs (hearthside.css, "The
+// hero's shape, cut by a mask"). This measures the tab and the headline block
+// and draws the two mask paths, again whenever they change size.
+const svgUrl = (w, h, d) => `url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none"><path d="${d}"/></svg>`)}")`;
+export function HeroMask() {
+  useEffect(() => {
+    const stage = document.querySelector(".hs-hero-stage");
+    const art = stage?.querySelector(".hs-hero-art");
+    const tab = stage?.querySelector(".hs-hero-tab");
+    const notch = stage?.querySelector(".hs-hero-notch");
+    if (!art || !tab || !notch) return;
+    const mq = window.matchMedia("(min-width: 961px)");
+    const measure = () => {
+      if (!mq.matches) return void stage.classList.remove("is-masked");
+      const r = parseFloat(getComputedStyle(stage).getPropertyValue("--hs-notch-r")) || 28;
+      const W = art.offsetWidth, H = art.offsetHeight;
+      const tw = tab.offsetWidth, th = tab.offsetHeight;
+      const nw = notch.offsetWidth, oh = H - notch.offsetTop;
+      // The photo: rounded corners, and the headline's cut-out at the bottom
+      // left (its rounded top-right corner, and the photo's rounded corners
+      // on either side of it). Clockwise from the top-left corner.
+      const base = `M${r} 0H${W - r}A${r} ${r} 0 0 1 ${W} ${r}V${H - r}A${r} ${r} 0 0 1 ${W - r} ${H}`
+        + `H${nw + r}A${r} ${r} 0 0 1 ${nw} ${H - r}V${H - oh + r}A${r} ${r} 0 0 0 ${nw - r} ${H - oh}`
+        + `H${r}A${r} ${r} 0 0 1 0 ${H - oh - r}V${r}A${r} ${r} 0 0 1 ${r} 0Z`;
+      // The tab's cut-out, in a box one radius wider and taller than the tab
+      // (for the photo's rounded corners beside it), anchored top right.
+      const bw = tw + r, bh = th + r;
+      const cut = `M0 0H${bw}V${bh}A${r} ${r} 0 0 0 ${tw} ${th}H${2 * r}A${r} ${r} 0 0 1 ${r} ${th - r}V${r}A${r} ${r} 0 0 0 0 0Z`;
+      stage.style.setProperty("--hs-mask-base", svgUrl(W, H, base));
+      stage.style.setProperty("--hs-mask-tab", svgUrl(bw, bh, cut));
+      stage.style.setProperty("--hs-tbw", `${bw}px`);
+      stage.style.setProperty("--hs-tbh", `${bh}px`);
+      stage.classList.add("is-masked");
+    };
+    const ro = new ResizeObserver(measure);
+    [art, tab, notch].forEach((el) => ro.observe(el));
+    mq.addEventListener("change", measure);
+    document.fonts?.ready.then(measure);
+    return () => { ro.disconnect(); mq.removeEventListener("change", measure); stage.classList.remove("is-masked"); };
+  }, []);
+  return null;
+}

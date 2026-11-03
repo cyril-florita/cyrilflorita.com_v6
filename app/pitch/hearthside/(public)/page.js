@@ -1,6 +1,6 @@
 import { BASE, CREDENTIALS, FAQS, MEDICARE_CONDITIONS, MEDICARE_URL, PHONE, SERVICES, STEPS, AREAS } from "@/components/hearthside/data";
 import { Button, CallBand, CallButton, Icon, PartnerLogos, Photo, Row, Sample } from "@/components/hearthside/ui";
-import { BehindTheScenes, PathSwitch, ScrollCue, StepStory, ZipCheck } from "@/components/hearthside/client";
+import { BehindTheScenes, HeroMask, PathSwitch, ScrollCue, StepStory, ZipCheck } from "@/components/hearthside/client";
 import { PHOTO_LQIP } from "@/components/hearthside/photo-lqip";
 
 export const metadata = {
@@ -62,6 +62,7 @@ export default function HearthsideHome() {
           <div className="hs-hero-notch">
             <h1 id="hs-hero-title"><span><em className="hs-hero-em">Compassionate</em></span> <span><em className="hs-hero-em">care at home.</em></span></h1>
           </div>
+          <HeroMask />
           <div className="hs-hero-actions" data-dock-hide>
             {/* In this order: Call (black), Request a call (white), then Refer a patient as a text link. */}
             <div className="hs-hero-ctas">
