@@ -2021,12 +2021,17 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
   /* The ingredient close-up gets the same glow in its pill's colour (--glow
      on the dialog), running the whole time it's open; slower, since its
      edge is much longer than a card's. */
-  /* (It fades in once the card has morphed into the dialog, so the morph's
-     snapshot doesn't freeze an arc of it.) */
+  /* After a morph it is already running: it travels with the card under its
+     own view-transition name (dl-ing-glow, below), live, so it never freezes.
+     Without the morph it fades in. */
   .dl-ing-dialog .dl-ing-glow {
     z-index: 2; border-radius: 72px; opacity: 1;
-    animation: dl-glow-orbit 5s linear infinite, dl-glow-in 0.45s ease-out 0.5s backwards;
+    animation: dl-glow-orbit 5s linear infinite;
   }
+  .dl-ing-dialog.is-plain .dl-ing-glow { animation: dl-glow-orbit 5s linear infinite, dl-glow-in 0.45s ease-out 0.3s backwards; }
+  /* Closing: it fades out in the first beat (with .dl-ing-more), before the
+     dialog morphs back into the card. */
+  .dl-ing-dialog.is-leaving .dl-ing-glow { opacity: 0; transition: opacity 0.15s ease-out; }
   .dl-ing-dialog .dl-ing-glow::before { border-radius: 32px; }
 }
 
@@ -2203,10 +2208,19 @@ html[data-dl-morph="close"]::view-transition-new(dl-ing-btn) { animation: dl-mor
   .dl-ing-dialog.is-plain[open] { animation: dl-dialog-in 0.35s var(--dl-ease); }
 }
 @keyframes dl-dialog-in { from { opacity: 0; scale: 0.96; } }
-/* No border glow on the card or dialog while they morph: its layer reaches
-   40px outside them, and the snapshot then carried that area as a hard-edged
-   box. (The dialog's glow fades in after landing.) */
-.is-morphing > .dl-ing-glow { display: none !important; }
+/* The border glow morphs on its own (dl-ing-glow: the card's glow, named in
+   CARD_PARTS, and the dialog's), outside the card's snapshot — inside it, its
+   layer reaching 40px out showed as a hard-edged box. The dialog's side is a
+   live image, so its arc keeps orbiting while the card grows; on open the
+   card's (hovered) glow hands over at once, on close the dialog's fades as it
+   shrinks. */
+.dl-ing-dialog.is-morphing > .dl-ing-glow { view-transition-name: dl-ing-glow; }
+::view-transition-group(dl-ing-glow) { animation-duration: 0.5s; animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1); }
+::view-transition-old(dl-ing-glow), ::view-transition-new(dl-ing-glow) { height: 100%; }
+html[data-dl-morph="open"]::view-transition-old(dl-ing-glow) { animation: dl-morph-out 0.12s ease-out both; }
+html[data-dl-morph="open"]::view-transition-new(dl-ing-glow) { animation: none; }
+html[data-dl-morph="close"]::view-transition-old(dl-ing-glow) { animation: dl-morph-out 0.4s ease-in both; }
+html[data-dl-morph="close"]::view-transition-new(dl-ing-glow) { animation: dl-morph-in 0.16s ease-out 0.32s both; }
 @media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
 
 /* ---------- page transitions (View Transitions, layout.js) ---------- */

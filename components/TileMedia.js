@@ -197,40 +197,22 @@ const GridPhone3D = ({ src, poster, label }) => {
 };
 
 export const TILE_MEDIA = {
-  // Viteo (design & dev pitch): the product, flow by flow.
+  // Viteo (design & dev pitch): a 12s loop cut with HyperFrames (new-work/viteo-tile) from
+  // recordings of the prototype: intro, parallax, scroll story, close-up, quiz finale, account.
   "/viteo": {
-    kind: "slideshow", label: "Viteo: the 3D pack, its scroll story, an ingredient close-up, the live quiz, your plan and account",
-    images: [
-      "/img/portfolio/viteo_desktop-landing.jpg",
-      "/img/portfolio/viteo_desktop-story.jpg",
-      "/img/portfolio/viteo_desktop-ingredients.jpg",
-      "/img/portfolio/viteo_desktop-closeup.jpg",
-      "/img/portfolio/viteo_desktop-quiz.jpg",
-      "/img/portfolio/viteo_desktop-plan.jpg",
-      "/img/portfolio/viteo_desktop-account.jpg",
-      "/img/portfolio/viteo_desktop-hero-grove-light.jpg",
-      "/img/portfolio/viteo_desktop-hero-peach-light.jpg",
-    ],
-    interval: 1250, fade: 600,
+    kind: "video", src: "/img/portfolio/viteo_tile.mp4", poster: "/img/thumbs/portfolio/viteo_tile-poster.webp",
+    label: "Viteo: the 3D pack, its scroll story, an ingredient close-up, the quiz finale and the account",
     shape: "wide",
   },
-  // Hearthside (design & dev pitch): the public site, then the intake system.
+
+  // Hearthside (design & dev pitch): a 12s loop cut with HyperFrames (new-work/hearthside-tile): the hero, How can
+  // we help?, the steps story, a referral sent and arriving on the intake board, the ⌘K palette.
   "/hearthside": {
-    kind: "slideshow", label: "Hearthside Home Health: the home page, services, care steps, a referral, and the intake board",
-    images: [
-      "/img/portfolio/hearthside_desktop-home.jpg",
-      "/img/portfolio/hearthside_desktop-services-row.jpg",
-      "/img/portfolio/hearthside_desktop-steps.jpg",
-      "/img/portfolio/hearthside_desktop-team.jpg",
-      "/img/portfolio/hearthside_desktop-referrals.jpg",
-      "/img/portfolio/hearthside_desktop-intake-arrive.jpg",
-      "/img/portfolio/hearthside_desktop-intake-record.jpg",
-      "/img/portfolio/hearthside_desktop-home-shore.jpg",
-      "/img/portfolio/hearthside_desktop-home-dark.jpg",
-    ],
-    interval: 1250, fade: 600,
+    kind: "video", src: "/img/portfolio/hearthside_tile.mp4", poster: "/img/thumbs/portfolio/hearthside_tile-poster.webp",
+    label: "Hearthside Home Health: the home page, care steps, a referral arriving on the intake board, and the command palette",
     shape: "wide",
   },
+
   "/hunger-action-month-dashboard": {
     kind: "video", src: "/img/portfolio/chf-ham-dashboard_preview.mp4", poster: "/img/thumbs/portfolio/chf-ham-dashboard_preview-poster.webp", label: "Hunger Action Month Campaign Dashboard preview",
     shape: "square",

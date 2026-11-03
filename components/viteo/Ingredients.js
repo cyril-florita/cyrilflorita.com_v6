@@ -27,6 +27,7 @@ const CARD_PARTS = [
   [".dl-ing-meta", "dl-ing-meta"],
   [".dl-ing-blurb", "dl-ing-blurb"],
   [".dl-ing-plus", "dl-ing-btn"],
+  [".dl-ing-glow", "dl-ing-glow"],
 ];
 const nameCardParts = (card, on) => {
   for (const [sel, name] of CARD_PARTS) {
