@@ -860,14 +860,14 @@ export function HeroMask() {
 }
 
 // Home's preloader (first load only: the pre-paint script in ../../app/pitch/
-// hearthside/layout.js adds .is-loading to .hs on a fresh load of Home without
-// a hash, ?call or reduced motion, and clears it — and .is-entering — after 7s
+// hearthside/layout.js adds .is-loading to .hs on a fresh load of Home on
+// desktop with a mouse — the screens that load the 3D side mark — without a
+// hash, ?call or reduced motion, and clears it — and .is-entering — after 7s
 // as a safety net). Its markup is always rendered and hidden by CSS unless
 // .is-loading, so it covers the page from the first paint: the logo as metal
 // (a CSS mask over a metal gradient) with a glare sliding across, above a metal
 // progress bar that tracks the fonts, the hero photo and, on desktop, the side
-// mark's first 3D draw (the slow part it covers). Up at least 1.8s on desktop
-// (0.6s elsewhere), at most 5s. Then the hand-off runs in steps (classes on
+// mark's first 3D draw (the slow part it covers). Up at least 1.8s, at most 5s. Then the hand-off runs in steps (classes on
 // .hs, timed here; hearthside.css "Home's preloader"): its logo and bar fade
 // to a blank page; the page underneath starts hidden (.is-entering); the side
 // mark and its glow fade in first (.is-ent-logo, desktop); then the header and
@@ -879,8 +879,7 @@ export function Preloader() {
     const hs = document.querySelector(".hs");
     const el = ref.current;
     if (!hs?.classList.contains("is-loading") || !el) return;
-    const desktop = window.matchMedia("(hover: hover) and (pointer: fine) and (min-width: 1100px) and (prefers-reduced-motion: no-preference)").matches;
-    const MIN = desktop ? 1800 : 600, MAX = 5000;
+    const MIN = 1800, MAX = 5000;
     const t0 = performance.now();
     let done = 0;
     const steps = [
@@ -891,8 +890,8 @@ export function Preloader() {
         img.addEventListener("load", res, { once: true });
         img.addEventListener("error", res, { once: true });
       }),
+      new Promise((res) => window.addEventListener("hs:3d-ready", res, { once: true })),
     ];
-    if (desktop) steps.push(new Promise((res) => window.addEventListener("hs:3d-ready", res, { once: true })));
     steps.forEach((s) => s.then(() => { done++; }));
     // The bar: part time, part real steps, never full until everything's in.
     const tick = setInterval(() => {
@@ -911,10 +910,9 @@ export function Preloader() {
         hs.classList.remove("is-loading"); // ...as the overlay goes, so the screen stays blank
         el.classList.remove("is-leaving");
       });
-      const logo = desktop ? 600 : 0;
       at(880, () => hs.classList.add("is-ent-logo")); // the side mark and its glow
-      at(880 + logo, () => hs.classList.add("is-ent-page")); // the header and Home: the hero's entrance, then the credentials
-      at(880 + logo + 1800, () => hs.classList.remove("is-entering", "is-ent-logo", "is-ent-page"));
+      at(1480, () => hs.classList.add("is-ent-page")); // the header and Home: the hero's entrance, then the credentials
+      at(3280, () => hs.classList.remove("is-entering", "is-ent-logo", "is-ent-page"));
     });
     return () => { clearInterval(tick); timers.forEach(clearTimeout); };
   }, []);
