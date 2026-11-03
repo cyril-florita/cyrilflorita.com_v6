@@ -196,10 +196,16 @@ export default function Account() {
   const daysAway = Math.max(0, Math.round((new Date(order.next) - now) / DAY));
   // Timeline: today → about three months out (further when paused longer).
   const span = Math.max(95, daysAway + 12);
-  const ticks = Array.from({ length: Math.floor(span / 30) + 1 }, (_, i) => ({
-    at: (i * 30) / span,
-    label: i === 0 ? "Today" : new Date(now + i * 30 * DAY).toLocaleDateString("en-US", { month: "short" }),
-  }));
+  // Ticks: today, then the 1st of each month on the track (one per month; a
+  // tick every 30 days named some months twice). A 1st within 12 days of
+  // today is skipped, or its label would sit on "Today".
+  const ticks = [{ key: "today", at: 0, label: "Today" }];
+  for (let m = new Date(now); ; ) {
+    m = new Date(m.getFullYear(), m.getMonth() + 1, 1);
+    const days = (m - now) / DAY;
+    if (days > span) break;
+    if (days >= 12) ticks.push({ key: dayKey(m), at: days / span, label: m.toLocaleDateString("en-US", { month: "short" }) });
+  }
   const upcoming = [0, 1, 2].map((n) => addMonths(order.next, n * plan.months));
 
   // Routine tracker: days the pack was taken in each of the last six months.
@@ -258,7 +264,7 @@ export default function Account() {
             <div className="dl-timeline" aria-hidden="true">
               <span className="dl-timeline-track" />
               {ticks.map((t) => (
-                <span key={t.label} className="dl-timeline-tick" style={{ "--at": t.at }}>{t.label}</span>
+                <span key={t.key} className="dl-timeline-tick" style={{ "--at": t.at }}>{t.label}</span>
               ))}
               <span className="dl-timeline-pin" style={{ "--at": daysAway / span }}>
                 <span className="dl-timeline-flag">
