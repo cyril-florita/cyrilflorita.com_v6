@@ -15,6 +15,28 @@
 // 1 for the glow (a soft background) and up to 1.5 for the leaf.
 
 const H = [[12.5, 11], [16.9, 11], [16.9, 17.9], [23.1, 17.9], [23.1, 11], [27.5, 11], [27.5, 29], [23.1, 29], [23.1, 21.9], [16.9, 21.9], [16.9, 29], [12.5, 29]];
+
+// The leaf (SVG coordinates, y down), the H as a hole, with a deep, round
+// bevel in many steps, so every edge (and the H's) reads as one smooth curve;
+// the bevel stays under half the H's 4.4-unit stems. Centred; rotate it half
+// a turn about x to stand it right way up without mirroring it. Shared with
+// the preloader (PreloaderMark.js).
+export function leafGeometry(THREE) {
+  const shape = new THREE.Shape();
+  shape.moveTo(3.5, 0);
+  shape.lineTo(25, 0);
+  shape.absarc(25, 15, 15, -Math.PI / 2, 0, false);
+  shape.lineTo(40, 36.5);
+  shape.absarc(36.5, 36.5, 3.5, 0, Math.PI / 2, false);
+  shape.lineTo(15, 40);
+  shape.absarc(15, 25, 15, Math.PI / 2, Math.PI, false);
+  shape.lineTo(0, 3.5);
+  shape.absarc(3.5, 3.5, 3.5, Math.PI, Math.PI * 1.5, false);
+  shape.holes.push(new THREE.Path(H.map(([x, y]) => new THREE.Vector2(x, y))));
+  const geo = new THREE.ExtrudeGeometry(shape, { depth: 3, bevelEnabled: true, bevelThickness: 2.4, bevelSize: 1.6, bevelSegments: 24, curveSegments: 48 });
+  geo.center();
+  return geo;
+}
 const FOV = 26;
 const ROOM = 1.3; // the leaf's canvas is 1.3× the host's box, so a tipped corner never clips
 
@@ -57,6 +79,7 @@ export async function startGlassMark(host) {
     lr = new THREE.WebGLRenderer({ canvas: leafCanvas, antialias: true, alpha: true, powerPreference: "low-power" });
   } catch {
     gr?.dispose();
+    window.dispatchEvent(new Event("hs:3d-ready")); // nothing to wait for
     return () => {};
   }
   lr.outputColorSpace = THREE.SRGBColorSpace;
@@ -88,23 +111,7 @@ export async function startGlassMark(host) {
   scene.environmentIntensity = 0.8;
   const camera = new THREE.PerspectiveCamera(FOV, 1, 1, 1000);
 
-  // The leaf (SVG coordinates, y down), the H as a hole. Rotated half a turn
-  // about x below, which turns it right way up without mirroring it.
-  const shape = new THREE.Shape();
-  shape.moveTo(3.5, 0);
-  shape.lineTo(25, 0);
-  shape.absarc(25, 15, 15, -Math.PI / 2, 0, false);
-  shape.lineTo(40, 36.5);
-  shape.absarc(36.5, 36.5, 3.5, 0, Math.PI / 2, false);
-  shape.lineTo(15, 40);
-  shape.absarc(15, 25, 15, Math.PI / 2, Math.PI, false);
-  shape.lineTo(0, 3.5);
-  shape.absarc(3.5, 3.5, 3.5, Math.PI, Math.PI * 1.5, false);
-  shape.holes.push(new THREE.Path(H.map(([x, y]) => new THREE.Vector2(x, y))));
-  // A deep, round bevel in many steps, so every edge (and the H's) reads as
-  // one smooth curve; the bevel stays under half the H's 4.4-unit stems.
-  const geo = new THREE.ExtrudeGeometry(shape, { depth: 3, bevelEnabled: true, bevelThickness: 2.4, bevelSize: 1.6, bevelSegments: 24, curveSegments: 48 });
-  geo.center();
+  const geo = leafGeometry(THREE);
   // Polished metal, its colour and finish set per mode in paint().
   const metal = new THREE.MeshPhysicalMaterial({ metalness: 1, clearcoat: 0.5, clearcoatRoughness: 0.12, envMapIntensity: 1.1 });
   const leaf = new THREE.Mesh(geo, metal);
@@ -264,6 +271,7 @@ export async function startGlassMark(host) {
   gr.render(glowScene, glowCam);
   lr.render(scene, camera);
   host.classList.add("is-3d");
+  window.dispatchEvent(new Event("hs:3d-ready")); // the preloader waits for this first draw
 
   return () => {
     halt();

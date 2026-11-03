@@ -1,5 +1,5 @@
 import { ViewTransition } from "react";
-import { ContactDock, Header, LineReveal, MaskRows, Reveal, ScrollCalm, SideMark, SplitHeads, SwipeRows } from "@/components/hearthside/client";
+import { ContactDock, Header, LineReveal, MaskRows, Preloader, Reveal, ScrollCalm, SideMark, SplitHeads, SwipeRows } from "@/components/hearthside/client";
 import { Footer } from "@/components/hearthside/chrome";
 import CallbackModal from "@/components/hearthside/CallbackModal";
 import "@/app/pitch/hearthside/css/modal.css";
@@ -9,6 +9,7 @@ import "@/app/pitch/hearthside/css/modal.css";
 export default function PublicLayout({ children }) {
   return (
     <div className="hs-shell">
+      <Preloader />
       <SideMark />
       <Header />
       {/* Page changes animate the main column (hearthside.css, "Motion"). */}

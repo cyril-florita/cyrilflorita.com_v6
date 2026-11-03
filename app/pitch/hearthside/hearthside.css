@@ -1920,3 +1920,65 @@ html[data-hs-vt="look"]::view-transition-new(*) { animation: hs-look-in 0.3s eas
 .hs:not([data-hs-mode="dark"]) :is(.hs-input, .hs-select, .hs-textarea):hover { border-color: color-mix(in srgb, var(--hs-ink) 65%, transparent); }
 .hs:not([data-hs-mode="dark"]) :is(.hs-input, .hs-select, .hs-textarea):focus-visible { border-color: var(--hs-ink); }
 .hs:not([data-hs-mode="dark"]) .hs-input[aria-invalid="true"] { border-color: var(--hs-danger); }
+
+/* Home's preloader (Preloader in client.js; shown while .hs.is-loading, set
+   before the first paint). The logo as metal (the leaf as a mask over a metal
+   gradient) with a glare sliding across it, over a metal progress bar (--p,
+   0–1, from the script), on the page colour; silver in light mode, gunmetal
+   in dark, like the side mark. The page can't scroll and Home's entrance
+   animations wait, paused. The hand-off (classes timed by the script): the
+   logo and bar fade to a blank page (.is-leaving); the page underneath starts
+   hidden (.is-entering); the side mark and its glow fade in first
+   (.is-ent-logo); then the header and Home (.is-ent-page), whose paused
+   entrance animations play. */
+.hs-preloader { display: none; }
+.hs.is-loading .hs-preloader {
+  position: fixed; inset: 0; z-index: 1000; display: grid; place-content: center; justify-items: center; gap: 30px;
+  background: var(--hs-page);
+}
+.hs-preloader > * { transition: opacity 0.35s var(--hs-ease-soft); }
+.hs-preloader.is-leaving > * { opacity: 0; }
+html:has(.hs:is(.is-loading, .is-entering)) { overflow: hidden; scrollbar-gutter: stable; } /* the gutter keeps the scrollbar's space, so the page doesn't shift when the lock lifts (as with the call modal) */
+.hs:is(.is-loading, .is-entering:not(.is-ent-page)) :is(main, .hs-header) * { animation-play-state: paused !important; }
+/* Hidden at once (no transition: fading out showed the page for a moment
+   after the overlay left); only the reveals are eased. The page stays
+   painted under the overlay itself, so the hero photo still counts as the
+   largest paint. */
+.hs.is-entering:not(.is-ent-logo) :is(.hs-sidemark, .hs-sidemark-3d) { opacity: 0; }
+.hs.is-entering.is-ent-logo :is(.hs-sidemark, .hs-sidemark-3d) { transition: opacity 0.9s var(--hs-ease-soft); }
+.hs.is-entering:not(.is-ent-page) :is(main, .hs-header) { opacity: 0; }
+.hs.is-entering.is-ent-page :is(main, .hs-header) { transition: opacity 0.45s var(--hs-ease-soft); }
+.hs-pre-mark {
+  display: block; width: 104px; height: 104px;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath fill-rule='evenodd' d='M3.5 0H25a15 15 0 0 1 15 15v21.5a3.5 3.5 0 0 1-3.5 3.5H15A15 15 0 0 1 0 25V3.5A3.5 3.5 0 0 1 3.5 0Z M12.5 11h4.4v6.9h6.2V11h4.4v18h-4.4v-7.1h-6.2V29h-4.4Z'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath fill-rule='evenodd' d='M3.5 0H25a15 15 0 0 1 15 15v21.5a3.5 3.5 0 0 1-3.5 3.5H15A15 15 0 0 1 0 25V3.5A3.5 3.5 0 0 1 3.5 0Z M12.5 11h4.4v6.9h6.2V11h4.4v18h-4.4v-7.1h-6.2V29h-4.4Z'/%3E%3C/svg%3E") center / contain no-repeat;
+  background:
+    linear-gradient(105deg, transparent 38%, rgba(255, 255, 255, 0.9) 50%, transparent 62%) 140% 0 / 260% 100% no-repeat,
+    linear-gradient(160deg, #F8F9FB, #C6CBD2 60%, #E4E7EB);
+  animation: hs-pre-glare 2.4s ease-in-out infinite;
+}
+.hs[data-hs-mode="dark"] .hs-pre-mark {
+  background:
+    linear-gradient(105deg, transparent 38%, rgba(255, 255, 255, 0.55) 50%, transparent 62%) 140% 0 / 260% 100% no-repeat,
+    linear-gradient(160deg, #78818C, #444C55 60%, #5E6670);
+}
+@keyframes hs-pre-glare { 0% { background-position: 140% 0, 0 0; } 70%, 100% { background-position: -40% 0, 0 0; } }
+.hs-pre-bar {
+  position: relative; width: 200px; height: 6px; border-radius: 99px; overflow: hidden;
+  background: color-mix(in srgb, var(--hs-ink) 10%, transparent);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.18);
+}
+.hs-pre-fill {
+  position: absolute; inset: 0; border-radius: inherit; overflow: hidden;
+  clip-path: inset(0 calc((1 - var(--p, 0)) * 100%) 0 0 round 99px);
+  transition: clip-path 0.45s var(--hs-ease-soft);
+  background: linear-gradient(180deg, #E2E5E9, #9AA1AA 60%, #C4C9D0); /* a deeper silver, so it reads on the pale track */
+  box-shadow: inset 0 0 3px rgba(36, 44, 54, 0.35);
+}
+.hs[data-hs-mode="dark"] .hs-pre-fill { background: linear-gradient(180deg, #8C959F, #4E565F 60%, #6E767F); box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.4); }
+.hs-pre-fill::after {
+  content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 40%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.85), transparent);
+  animation: hs-pre-sweep 1.6s ease-in-out infinite;
+}
+@keyframes hs-pre-sweep { from { translate: -100% 0; } to { translate: 260% 0; } }
