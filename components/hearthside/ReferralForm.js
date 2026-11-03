@@ -38,13 +38,21 @@ export default function ReferralForm() {
       patient: { name: patient.name, age: patient.age, zip: patient.zip, town: patient.town, reason: patient.reason },
       source, contact: org.contact.split(",")[0], services, payer: patient.payer, docs,
     });
+    // The section keeps the form's height while the (shorter) confirmation
+    // replaces it, until the scroll up has finished: otherwise the page shrank
+    // under the viewer, the view snapped down to the footer and then slid back.
+    const el = document.getElementById("refer");
+    if (el) el.style.minHeight = `${el.offsetHeight}px`;
     setSent({ id, at: Date.now() });
-    // Bring the confirmation into view once it has replaced the (taller) form.
+    // Bring the confirmation into view once it has replaced the form.
     // offsetTop measured from the wrong parent and left people at the footer.
     requestAnimationFrame(() => {
-      const el = document.getElementById("refer");
+      if (!el) return;
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 100, behavior: reduce ? "auto" : "smooth" });
+      const release = () => { el.style.minHeight = ""; };
+      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 100, behavior: reduce ? "auto" : "smooth" });
+      if (reduce) release();
+      else { window.addEventListener("scrollend", release, { once: true }); setTimeout(release, 1500); }
     });
   };
 
