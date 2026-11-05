@@ -29,7 +29,7 @@ export default function PartnerHero({ headingAs: Heading = "h1", headingId, base
           your clients 15% off their first box, and earn on every box they keep.
         </p>
         <div className="dl-ds-row">
-          <Button href={`${base}#pro-apply`}>Apply to partner <Arrow /></Button>
+          <Button href={`${base}#pro-apply`} size="lg">Apply to partner <Arrow /></Button>
           <Link className="dl-textlink" href={`${base}#pro-earnings`}>Estimate your earnings</Link>
         </div>
       </div>

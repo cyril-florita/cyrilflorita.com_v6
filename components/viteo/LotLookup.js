@@ -1,7 +1,7 @@
 "use client";
 import { useRef, useState } from "react";
 import { LOT_LAB, PRODUCTS, SAMPLE_LOTS } from "./data";
-import { BigWordHead, Pill } from "./ui";
+import { BigWordHead, Pill, Button } from "./ui";
 
 // Batch results: type the lot code from the bottom of the box and see that
 // batch's independent lab results (identity, potency against the label claim,
@@ -45,7 +45,7 @@ export default function LotLookup() {
         <BigWordHead word="Batch results">
           <h1 className="dl-h2">Every batch, tested and published.</h1>
           <p className="dl-bigword-note">
-            <span className="dl-code" data-lot="Lot 04">Sample data</span>
+            <span className="dl-code">Sample data</span>
           </p>
         </BigWordHead>
         <p className="dl-section-lede">
@@ -61,7 +61,7 @@ export default function LotLookup() {
             <span>Lot code</span>
             <input value={code} onChange={(e) => setCode(e.target.value)} placeholder="VT-2410-07" autoComplete="off" spellCheck="false" />
           </label>
-          <button type="submit" className="dl-btn dl-btn-primary">Look up</button>
+          <Button type="submit">Look up</Button>
           <p className="dl-meta dl-lot-try">
             Try a sample lot:{" "}
             {Object.keys(SAMPLE_LOTS).map((k, i) => (
@@ -109,7 +109,7 @@ export default function LotLookup() {
               <Rows rows={d.micro} />
 
               <div className="dl-lot-actions">
-                <button type="button" className="dl-btn dl-btn-ghost" disabled title="Available at launch">Download certificate (PDF)</button>
+                <Button variant="ghost" disabled title="Available at launch">Download certificate (PDF)</Button>
                 <span className="dl-meta">Certificates are available at launch; in preview mode the results above are sample data.</span>
               </div>
             </article>

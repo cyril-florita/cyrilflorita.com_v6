@@ -57,11 +57,11 @@ export default function Plan() {
               {pro
                 ? `Suggested by ${pro.name}. Every item comes with ${pro.first}'s note, and you can change anything.`
                 : sample
-                ? "An example pack for a mostly-indoors vegetarian. Take the quiz to build yours."
+                ? "An example pack for a mostly-indoors vegetarian. Personalize yours in two minutes."
                 : `${cart.items.length} essentials, one ${answers?.time === "evening" ? "evening" : "morning"} pack. Every item says why it's here, and you can change anything.`}
             </p>
           </div>
-          <Link className="dl-textlink" href={`${BASE}/quiz/`}>{sample ? "Take the quiz" : "Retake the quiz"}</Link>
+          <Link className="dl-textlink" href={`${BASE}/quiz/`}>{sample ? "Personalize your pack" : "Update your answers"}</Link>
         </div>
 
         <div className="dl-plan-grid">
@@ -72,7 +72,7 @@ export default function Plan() {
                 <div>
                   <p className="dl-pro-suggested-by">Suggested by <strong>{pro.name}</strong> · {pro.role}</p>
                   <p className="dl-meta">&ldquo;{pro.note}&rdquo;</p>
-                  <p className="dl-meta"><strong>{Math.round(pro.discount * 100)}% off your first box</strong> with {pro.first}&apos;s link, applied at checkout. <span className="dl-code" data-lot="Lot 05">Sample data</span></p>
+                  <p className="dl-meta"><strong>{Math.round(pro.discount * 100)}% off your first box</strong> with {pro.first}&apos;s link, applied at checkout. <span className="dl-code">Sample data</span></p>
                 </div>
               </div>
             )}

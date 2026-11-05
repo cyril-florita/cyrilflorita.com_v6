@@ -90,7 +90,7 @@ export default function HearthsideHome() {
         <p className="hs-creds-note"><Sample /></p>
       </Row>
 
-      <Row label="Who refers to us" tight>
+      <Row label="Partners who trust us" tight>
         <PartnerLogos />
         <p className="hs-logos-note">Hospitals, physicians, and senior communities across the Valley refer patients to us.</p>
         <p className="hs-creds-note"><Sample>Sample partners</Sample></p>
@@ -164,8 +164,8 @@ export default function HearthsideHome() {
             the grid (a swipe row on phones). */}
         <StepStory>
         <div className="hs-story-frame">
-        <h2 id="hs-steps-title">How care begins</h2>
-        <p className="hs-lede">Four steps from your first call to your first visit. We&rsquo;ll tell you what&rsquo;s happening at each one.</p>
+        <h2 id="hs-steps-title">Four steps</h2>
+        <p className="hs-lede">From your first call to your first visit. We&rsquo;ll tell you what&rsquo;s happening at each one.</p>
         <ol className="hs-ruled hs-swipe">
           {STEPS.map((s, i) => (
             <li key={s.title} className="hs-step">
@@ -213,7 +213,7 @@ export default function HearthsideHome() {
 
       {/* What families say, larger, in a sand chapter. */}
       <div className="hs-chapter is-sand">
-      <Row label="In their words" labelledBy="hs-quotes-title">
+      <Row label="Testimonials" labelledBy="hs-quotes-title">
         <h2 id="hs-quotes-title" className="hs-visually-hidden">What families say</h2>
         <ul className="hs-ruled hs-swipe">
           {QUOTES.map((q) => (

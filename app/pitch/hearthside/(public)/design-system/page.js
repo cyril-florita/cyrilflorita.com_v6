@@ -1,6 +1,7 @@
 import { AREAS, BASE, CREDENTIALS, FAQS, SERVICES } from "@/components/hearthside/data";
-import { Button, CallBand, CallButton, Icon, LogoMark, PartnerLogos, Photo, Row, Sample, titleWords } from "@/components/hearthside/ui";
+import { Button, CallBand, CallButton, Icon, Logo, LogoMark, PartnerLogos, Photo, Row, Sample, titleWords } from "@/components/hearthside/ui";
 import { ModeSwitch, ZipCheck } from "@/components/hearthside/client";
+import DsChrome from "@/components/DsChrome";
 import "@/app/pitch/hearthside/css/design-system.css";
 
 export const metadata = {
@@ -93,25 +94,36 @@ function Ratio({ fg, bg }) {
 export default function DesignSystem() {
   return (
     <div className="hs-wrap hs-ds">
+      {/* No site header here: the sidebar (desktop) or top bar and menu
+          (smaller screens) carry the logo, the sections and the way home. */}
+      <div className="hs-ds-cols">
+      <DsChrome
+        prefix="hs"
+        sections={SECTIONS}
+        logo={<Logo />}
+        logoIsLink
+        home={`${BASE}/`}
+        homeLabel="Back to Hearthside home"
+        homeClass="hs-btn hs-btn-secondary hs-btn-sm"
+        burgerClass="hs-mode"
+        linkIcon={<Icon name="arrow" />}
+        toTopClass="hs-btn hs-btn-secondary hs-totop"
+        toTopIcon={<Icon name="up" size={20} className="hs-btn-lead" />}
+      />
+      <div className="hs-ds-main">
       <header className="hs-ds-head">
         <div>
           <h1 className="hs-title-split" aria-label="Design system">{titleWords("Design system")}</h1>
           <p className="hs-lede">
             An editorial grid for a care brand: one calm background, generous space between sections, a label column beside every section, and type that&rsquo;s large and easy to read. Dark by default, with a full light mode; body text meets WCAG AAA (7:1) in both.
           </p>
-          <div className="hs-ds-mode">
-            <ModeSwitch />
-            <span>Switch light and dark to see every token change.</span>
-          </div>
         </div>
         <div className="hs-ds-head-logo" aria-hidden="true">
           <LogoMark size={112} />
           <span>Hearthside</span>
         </div>
       </header>
-      <nav className="hs-ds-toc" aria-label="Sections">
-        <ul>{SECTIONS.map(([id, label]) => <li key={id}><a href={`#${id}`}>{label}</a></li>)}</ul>
-      </nav>
+
 
       <Row id="brand" label="Brand" labelledBy="ds-brand">
         <h2 id="ds-brand">A light left on</h2>
@@ -336,7 +348,7 @@ export default function DesignSystem() {
         </div>
         <h3 className="hs-ds-sub">Page patterns</h3>
         <ul className="hs-ruled">
-          <li><h3>Chapters</h3><p className="hs-ds-muted"><code>.hs-chapter</code>: full-bleed sections that break the run of rows. Sand (How can we help?, In their words, a sub-page&rsquo;s middle row) or dark (Behind the scenes), never side by side, since in dark mode the two are close.</p></li>
+          <li><h3>Chapters</h3><p className="hs-ds-muted"><code>.hs-chapter</code>: full-bleed sections that break the run of rows. Sand (How can we help?, Testimonials, a sub-page&rsquo;s middle row) or dark (Behind the scenes), never side by side, since in dark mode the two are close.</p></li>
           <li><h3>Path cards</h3><p className="hs-ds-muted"><code>.hs-path</code>: a tag with its icon (families, clinician), a 16:9 photo, a title, and the calls to action pinned to the foot. On phones only the chosen card shows, under the switch.</p></li>
           <li><h3>Full-bleed pause</h3><p className="hs-ds-muted"><code>.hs-bleed</code>: one photo edge to edge, its line in the serif italic in a page-colored leaf panel at the foot. Never a gradient over a photo to carry text.</p></li>
           <li><h3>Steps</h3><p className="hs-ds-muted">A 4:3 leaf photo with the number in a page-colored leaf tile in its tight corner. On desktop the list pins and plays as a scroll story with a large serif numeral and a rail that fills as you go.</p></li>
@@ -357,6 +369,8 @@ export default function DesignSystem() {
           <li><h3>Calm layout</h3><p className="hs-ds-muted">One background, space instead of boxes and rules, a chapter or two for rhythm, one closing band. Motion is slow and stops entirely under reduced motion.</p></li>
         </ul>
       </Row>
+      </div>
+      </div>
     </div>
   );
 }

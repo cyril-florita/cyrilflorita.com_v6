@@ -103,7 +103,7 @@ export const PRODUCTS = {
     form: "tablet",
     color: "#E7A9C0",
     price: 5,
-    blurb: "Vitamin B7. The quiz adds it when you pick hair & nails.",
+    blurb: "Vitamin B7. Added when you pick hair & nails.",
     // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
     reasons: ["You picked hair & nails."],
     pairs: [],
@@ -264,7 +264,7 @@ export const money = (n) => `$${n.toLocaleString("en-US", { minimumFractionDigit
 
 // Sample people for the landing page — clearly fictional.
 export const SAMPLE_REVIEWS = [
-  { name: "Maya R.", text: "Quiz took two minutes. For once I actually know why each pill is in there.", plan: "Vegan · 4 items" },
+  { name: "Maya R.", text: "The questions took two minutes. For once I actually know why each pill is in there.", plan: "Vegan · 4 items" },
   { name: "Jordan T.", text: "I travel a lot, so skipping a month in one tap matters.", plan: "Every 2 months" },
   { name: "Priya S.", text: "Liked that it told me to check with my doctor about my meds first.", plan: "Morning pack" },
   { name: "Daniel K.", text: "Swapped one item for another in about ten seconds, from my account.", plan: "Evening pack" },

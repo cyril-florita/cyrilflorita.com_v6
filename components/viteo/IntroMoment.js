@@ -21,7 +21,7 @@ import { CARTON_FALL, backStrength, introState, pillFall } from "./introFall";
 // (.dl.is-intro-pending). On desktop with a mouse, "ready" means the 3D scene
 // has compiled its shaders and uploaded its textures (ProductStory's
 // dl:3d-ready), so none of that work lands in the middle of the intro;
-// elsewhere, the web fonts. At least 2s (0.6s on phones), so the animation plays even on a fast connection; at most 4s.
+// elsewhere, the web fonts. At least 2s on desktop (0.8s on phones and tablets), so the animation plays even on a fast connection; at most 4s.
 
 const VARS = ["--iy", "--ir", "--is", "--io"];
 
@@ -58,7 +58,7 @@ export default function IntroMoment() {
 
     // A fall: one proxy tween per object, eased with its own bounce. It
     // writes the CSS hero's custom properties and the 3D scene's state.
-    const fall = (tl, el, f, state) => {
+    const fall = (tl, el, f, state, t0 = 0) => {
       state.p = 0; state.drop = f.h; state.turn = f.r;
       if (el) gsap.set(el, { "--iy": `${-f.h * 100}cqw`, "--ir": `${f.r}deg`, "--io": 0 });
       const proxy = { e: 0 };
@@ -77,7 +77,7 @@ export default function IntroMoment() {
             el.style.setProperty("--io", Math.min(1, p / 0.3).toFixed(3));
           }
         },
-      }, f.delay);
+      }, t0 + f.delay);
     };
 
     const start = () => {
@@ -90,18 +90,21 @@ export default function IntroMoment() {
     root.classList.remove("is-intro-pending"); // the timeline's start state takes over
     const tl = gsap.timeline({ onComplete: () => end() });
     if (pre) tl.to(pre, { autoAlpha: 0, duration: 0.45, ease: "power2.out", onComplete: () => { pre.style.display = "none"; } }, 0);
+    // The hero waits for the preloader to finish fading, then plays (its
+    // pieces hold their hidden start state underneath until then).
+    const t0 = pre ? 0.45 : 0;
 
     // Logo capsules swing in from either side; the circle opens.
     logo.forEach((el, i) => {
-      tl.fromTo(el, { "--ir": `${i ? 40 : -40}deg`, "--io": 0 }, { "--ir": "0deg", "--io": 1, duration: 0.9, ease: "back.out(1.4)" }, i * 0.08);
+      tl.fromTo(el, { "--ir": `${i ? 40 : -40}deg`, "--io": 0 }, { "--ir": "0deg", "--io": 1, duration: 0.9, ease: "back.out(1.4)" }, t0 + i * 0.08);
     });
-    if (orbit) tl.fromTo(orbit, { "--is": 0.7, "--io": 0 }, { "--is": 1, "--io": 1, duration: 0.8, ease: "power3.out" }, 0.1);
+    if (orbit) tl.fromTo(orbit, { "--is": 0.7, "--io": 0 }, { "--is": 1, "--io": 1, duration: 0.8, ease: "power3.out" }, t0 + 0.1);
     // The product shot, object by object.
-    fall(tl, box, CARTON_FALL, introState.carton);
-    pills.forEach((el, i) => fall(tl, el, pillFall(i), introState.pills[i]));
+    fall(tl, box, CARTON_FALL, introState.carton, t0);
+    pills.forEach((el, i) => fall(tl, el, pillFall(i), introState.pills[i], t0));
     // The badge spins in; the copy rises, staggered.
-    if (badge) tl.fromTo(badge, { "--is": 0.4, "--ir": "-90deg", "--io": 0 }, { "--is": 1, "--ir": "0deg", "--io": 1, duration: 0.8, ease: "power3.out" }, 0.8);
-    if (copy.length) tl.fromTo(copy, { "--iy": "24px" }, { "--iy": "0px", duration: 0.8, ease: "power3.out", stagger: 0.1 }, 0.35);
+    if (badge) tl.fromTo(badge, { "--is": 0.4, "--ir": "-90deg", "--io": 0 }, { "--is": 1, "--ir": "0deg", "--io": 1, duration: 0.8, ease: "power3.out" }, t0 + 0.8);
+    if (copy.length) tl.fromTo(copy, { "--iy": "24px" }, { "--iy": "0px", duration: 0.8, ease: "power3.out", stagger: 0.1 }, t0 + 0.35);
 
     wake(tl.duration() * 1000 + 400);
 
@@ -129,10 +132,10 @@ export default function IntroMoment() {
       ? new Promise((r) => { if (window.__dl3dReady) r(); else window.addEventListener("dl:3d-ready", r, { once: true }); })
       : (document.fonts?.ready ?? Promise.resolve());
     const wait = (ms) => new Promise((r) => setTimeout(r, ms));
-    // Phones get a shorter minimum (0.6s): a long cover hurts their load (Lighthouse's
-    // speed index on slow 4G); elsewhere the animation plays at least 2s.
-    const phone = window.matchMedia("(max-width: 680px)").matches;
-    Promise.all([wait(phone ? 600 : 2000), Promise.race([ready, wait(4000)])]).then(start);
+    // At least 2s on desktop with a mouse (it covers the 3D scene's shader
+    // compile and texture upload); 0.8s on phones and tablets — enough to read
+    // as a preloader without holding the page (it was 0.6s, then 2s, for a day).
+    Promise.all([wait(desktop3d ? 2000 : 800), Promise.race([ready, wait(4000)])]).then(start);
     return () => {
       cancelled = true;
       stop();

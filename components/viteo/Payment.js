@@ -69,7 +69,7 @@ export function PaymentStep({ headingRef, total, zip, onBack, onPaid }) {
     <div className="dl-pay">
       <h1 className="dl-h3" tabIndex={-1} ref={headingRef}>Payment</h1>
       <p className="dl-meta dl-pay-preview">
-        <span className="dl-code" data-lot="Lot 00">Preview</span> Simulated payment: no card can be entered and nothing is charged.
+        <span className="dl-code">Preview</span> Simulated payment: no card can be entered and nothing is charged.
       </p>
 
       {/* Express checkout */}
@@ -132,8 +132,8 @@ export function PaymentStep({ headingRef, total, zip, onBack, onPaid }) {
             </div>
             {sheet === "review" && (
               <div className="dl-modal-actions">
-                <button type="button" className="dl-btn dl-btn-ghost" onClick={() => setSheet(null)}>Cancel</button>
-                <button type="button" className="dl-btn dl-btn-primary" onClick={payWallet} autoFocus>Pay {money(total)}</button>
+                <Button variant="ghost" onClick={() => setSheet(null)}>Cancel</Button>
+                <Button onClick={payWallet} autoFocus>Pay {money(total)}</Button>
               </div>
             )}
           </div>

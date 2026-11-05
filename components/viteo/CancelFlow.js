@@ -1,14 +1,14 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import { BASE, money } from "./data";
+import { Arrow, Button } from "./ui";
 // Page-only styles (split out of viteo.css so the landing skips them).
 import "@/app/pitch/viteo/css/account.css";
 
 // Cancelling, without the trap. A modal in three short steps, each with a
 // way straight to cancelling: (1) an optional reason; (2) one alternative
 // that fits it (save by delivering less often, skip the next box, pause, or
-// retake the quiz), applied in one tap, with "Continue to cancel" right next
+// update your answers), applied in one tap, with "Continue to cancel" right next
 // to it; (3) a plain confirmation where keeping and cancelling carry equal
 // weight. Anything changed here can be undone from the toast.
 
@@ -42,12 +42,12 @@ export default function CancelFlow({ open, onClose, order, nextDate, threePrice,
     cost: {
       title: "Save by getting boxes less often",
       text: `Switch to a delivery every 3 months and save 15%: ${money(threePrice)} per box, with the same daily pack.`,
-      action: <button type="button" className="dl-btn dl-btn-primary" onClick={() => { onThreeMonths(); close(); }}>Switch to every 3 months</button>,
+      action: <Button onClick={() => { onThreeMonths(); close(); }}>Switch to every 3 months</Button>,
     },
     surplus: {
       title: "Skip your next box instead",
       text: `Your next box won't ship on ${nextDate}; the one after it comes as usual. Nothing else changes.`,
-      action: <button type="button" className="dl-btn dl-btn-primary" onClick={() => { onSkip(); close(); }}>Skip my next box</button>,
+      action: <Button onClick={() => { onSkip(); close(); }}>Skip my next box</Button>,
     },
     break: {
       title: "Pause for as long as you need",
@@ -55,17 +55,17 @@ export default function CancelFlow({ open, onClose, order, nextDate, threePrice,
       action: (
         <span className="dl-cancel-pause">
           {[1, 2, 3].map((m) => (
-            <button key={m} type="button" className="dl-btn dl-btn-primary" onClick={() => { onPause(m); close(); }}>
+            <Button key={m} onClick={() => { onPause(m); close(); }}>
               {m} {m === 1 ? "month" : "months"}
-            </button>
+            </Button>
           ))}
         </span>
       ),
     },
     changed: {
       title: "Rebuild your pack in two minutes",
-      text: "Retake the quiz and your next box follows your new answers. Or add and remove items yourself from your pack.",
-      action: <Link className="dl-btn dl-btn-primary" href={`${BASE}/quiz/`} onClick={close}>Retake the quiz</Link>,
+      text: "Personalize your pack again and your next box follows your new answers. Or add and remove items yourself from your pack.",
+      action: <Button href={`${BASE}/quiz/`} onClick={close}>Update your answers</Button>,
     },
   }[reason];
 
@@ -92,8 +92,8 @@ export default function CancelFlow({ open, onClose, order, nextDate, threePrice,
                 ))}
               </div>
               <div className="dl-modal-actions">
-                <button type="button" className="dl-btn dl-btn-ghost" onClick={() => setStep("confirm")}>Skip and cancel</button>
-                <button type="button" className="dl-btn dl-btn-primary" disabled={!reason} onClick={() => setStep(hasOffer(reason) ? "offer" : "confirm")}>Continue</button>
+                <Button variant="ghost" onClick={() => setStep("confirm")}>Skip and cancel</Button>
+                <Button disabled={!reason} onClick={() => setStep(hasOffer(reason) ? "offer" : "confirm")}>Continue <Arrow /></Button>
               </div>
             </>
           )}
@@ -103,7 +103,7 @@ export default function CancelFlow({ open, onClose, order, nextDate, threePrice,
               <h2 id="dl-cancel-title" ref={titleRef} tabIndex={-1} className="dl-h3">{offer.title}</h2>
               <p>{offer.text}</p>
               <div className="dl-modal-actions dl-cancel-offer">
-                <button type="button" className="dl-btn dl-btn-ghost" onClick={() => setStep("confirm")}>Continue to cancel</button>
+                <Button variant="ghost" onClick={() => setStep("confirm")}>Continue to cancel</Button>
                 {offer.action}
               </div>
             </>
@@ -117,8 +117,8 @@ export default function CancelFlow({ open, onClose, order, nextDate, threePrice,
                 <li>Your pack, reasons and routine history are kept, so you can restart in one tap.</li>
               </ul>
               <div className="dl-modal-actions">
-                <button type="button" className="dl-btn dl-btn-secondary" onClick={close}>Keep my subscription</button>
-                <button type="button" className="dl-btn dl-btn-ghost dl-btn-danger" onClick={() => { onCancel(); close(); }}>Cancel subscription</button>
+                <Button onClick={close}>Keep my subscription</Button>
+                <Button variant="ghost" className="dl-btn-danger" onClick={() => { onCancel(); close(); }}>Cancel subscription</Button>
               </div>
             </>
           )}

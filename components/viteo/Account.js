@@ -101,6 +101,7 @@ export default function Account() {
               <Button href={`${BASE}/sign-in/?next=account`} size="lg">Sign in <Arrow /></Button>
               <Button
                 variant="ghost"
+                size="lg"
                 onClick={() => write("session", { email: (stored?.address?.email) || "cyril@example.com", name: stored?.name || "Cyril", method: "sample", since: new Date().toISOString() })}
               >
                 Explore the sample account
@@ -236,7 +237,7 @@ export default function Account() {
             </BigWordHead>
           </div>
           {order.demo
-            ? <p className="dl-meta">Signed in as {session.email}. <Link className="dl-textlink" href={`${BASE}/quiz/`}>Retake the quiz</Link> · <button type="button" className="dl-textlink" onClick={signOut}>Sign out</button></p>
+            ? <p className="dl-meta">Signed in as {session.email}. <Link className="dl-textlink" href={`${BASE}/quiz/`}>Update your answers</Link> · <button type="button" className="dl-textlink" onClick={signOut}>Sign out</button></p>
             : <p className="dl-meta">Order {order.id} · Signed in as {session.email} · <button type="button" className="dl-textlink" onClick={signOut}>Sign out</button></p>}
         </div>
 
@@ -278,7 +279,7 @@ export default function Account() {
                 <Button onClick={resume}>Resume deliveries</Button>
               ) : (
                 <>
-                  <Button variant="secondary" onClick={skip}>Skip this box</Button>
+                  <Button variant="ghost" onClick={skip}>Skip this box</Button>
                   <Button variant="ghost" onClick={() => setPausing((v) => !v)} aria-expanded={pausing}>Pause</Button>
                 </>
               )}
@@ -341,7 +342,7 @@ export default function Account() {
             />
             {order.demo && (
               <p className="dl-meta">
-                <span className="dl-code" data-lot="Lot 03">Sample history</span> Earlier months are examples in preview
+                <span className="dl-code">Sample history</span> Earlier months are examples in preview
                 mode; this month counts your check-ins.
               </p>
             )}
@@ -465,7 +466,7 @@ export default function Account() {
             </div>
             <div className="dl-modal-actions">
               <Button variant="ghost" onClick={() => setEditing(false)}>Cancel</Button>
-              <button type="submit" className="dl-btn dl-btn-primary">Save address</button>
+              <Button type="submit">Save address</Button>
             </div>
             <button type="button" className="dl-ing-close dl-modal-close" onClick={() => setEditing(false)} aria-label="Close">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>

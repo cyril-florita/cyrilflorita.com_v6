@@ -1,10 +1,9 @@
 "use client";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
-import Link from "next/link";
 import { BASE, PRODUCTS, money } from "./data";
 import { buildPill } from "./pillModels";
-import { Arrow, Pill } from "./ui";
+import { Arrow, Logo, Pill, Button } from "./ui";
 
 // The landing page's Ingredients grid and its close-up. Each card opens a
 // dialog: the card's pill morphs (View Transitions API) into a large pill
@@ -140,6 +139,7 @@ function PillStage({ id }) {
 
   return (
     <div className={`dl-ing-stage ${live ? "is-live" : ""}`}>
+      <span className="dl-ing-stage-logo" aria-hidden="true"><Logo /></span>
       <span className="dl-ing-stage-pill" style={{ viewTransitionName: "dl-ing-pill" }}>
         <Pill id={id} size="lg" tilt={-20} />
       </span>
@@ -348,7 +348,7 @@ export default function Ingredients() {
               <p className="dl-lede">{p.blurb}</p>
               {/* The rest has no twin on the card: it fades in/out on its own during the morph. */}
               <div className="dl-ing-more">
-              <h3 className="dl-h4">When the quiz adds it</h3>
+              <h3 className="dl-h4">When your answers add it</h3>
               <ul className="dl-ing-reasons">
                 {p.reasons.map((r) => <li key={r}>{r}</li>)}
               </ul>
@@ -368,7 +368,7 @@ export default function Ingredients() {
               )}
               <p className="dl-meta dl-ing-note">Not medical advice. Check with a healthcare professional before starting any supplement.</p>
               <div className="dl-ing-actions">
-                <Link className="dl-btn dl-btn-primary" href={`${BASE}/quiz/`}>Find your pack <Arrow /></Link>
+                <Button href={`${BASE}/quiz/`}>Personalize your pack <Arrow /></Button>
               </div>
               </div>
             </div>

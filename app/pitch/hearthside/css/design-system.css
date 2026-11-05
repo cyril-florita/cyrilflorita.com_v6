@@ -2,11 +2,6 @@
    Laid out with the site's own editorial rows (.hs-row). */
 .hs-ds-head { display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center; padding-block: 56px 40px; }
 .hs-ds-head-logo { display: grid; justify-items: center; gap: 10px; padding: 32px 44px; border: 1px solid var(--hs-rule); border-radius: var(--hs-radius); font-family: var(--hs-font-display); font-size: 26px; font-weight: 600; letter-spacing: -0.03em; }
-.hs-ds-mode { display: flex; align-items: center; gap: 14px; margin-top: 28px; color: var(--hs-ink-2); }
-.hs-ds-toc { padding-bottom: 40px; }
-.hs-ds-toc ul { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; }
-.hs-ds-toc a { display: inline-block; padding: 8px 14px; border: 1px solid var(--hs-rule); border-radius: var(--hs-radius-sm); color: var(--hs-ink); font-family: var(--hs-font-label); font-size: 14px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; }
-.hs-ds-toc a:hover { background: var(--hs-sand); }
 @media (max-width: 760px) { .hs-ds-head { grid-template-columns: 1fr; padding-top: 32px; } .hs-ds-head-logo { order: -1; justify-self: start; padding: 20px 28px; } }
 
 .hs-ds-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
@@ -89,3 +84,97 @@
 .hs-ds-seg { display: inline-grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; border-radius: 10px 22px; background: var(--hs-sand); }
 .hs-ds-seg span { display: grid; place-items: center; min-height: 48px; padding: 0 18px; border-radius: 6px 18px; color: var(--hs-ink-2); font-weight: 600; }
 .hs-ds-seg .is-on { background: var(--hs-page); color: var(--hs-ink); box-shadow: 0 2px 10px rgba(15, 25, 35, 0.12); }
+
+/* Full width (out of the shell's 1440px), with no site header: DsChrome
+   (components/DsChrome.js) is the page's chrome. ≥1200px a sticky full-height
+   sidebar — the logo, the numbered sections (mono caps, the current one in
+   the accent text colour with an accent line), then "Back to Hearthside home"
+   and light/dark at its foot. Below 1200px a top bar (logo left, the menu
+   button right, in the light/dark toggle's glass) opening a full-screen menu
+   after Viteo's, with the sections as its links. */
+.hs-wrap.hs-ds { width: calc(100vw - 96px); max-width: none; margin-inline: calc(50% - 50vw + 48px); }
+@media (max-width: 1099px) { .hs-wrap.hs-ds { width: calc(100vw - 64px); margin-inline: calc(50% - 50vw + 32px); } }
+@media (max-width: 680px) { .hs-wrap.hs-ds { width: calc(100vw - 32px); margin-inline: calc(50% - 50vw + 16px); } }
+:root:has(.hs-ds) .hs-dock-bar { display: none; } /* a reference page: no contact dock (it covered the rail) */
+.hs-ds .hs-row { scroll-margin-top: 32px; }
+@media (min-width: 1200px) {
+  .hs-ds-cols { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 64px; align-items: start; }
+  .hs-dsc-side { position: sticky; top: 0; display: flex; flex-direction: column; height: 100vh; height: 100dvh; padding: 32px 0; }
+  .hs-dsc-side .hs-ds-rail { min-height: 0; margin-top: 48px; overflow-y: auto; }
+  .hs-dsc-foot { display: flex; align-items: center; gap: 12px; margin-top: auto; padding-top: 24px; }
+  .hs-dsc-bar, .hs-dsc-menu { display: none; }
+}
+@media (max-width: 1199px) {
+  .hs-dsc-side { display: none; }
+  .hs-ds .hs-row { scroll-margin-top: 96px; }
+  .hs-dsc-bar {
+    position: sticky; top: 0; z-index: 40; display: flex; align-items: center; justify-content: space-between; min-height: 76px;
+    margin-inline: calc(50% - 50vw); padding-inline: calc(50vw - 50%); background: color-mix(in srgb, var(--hs-page) 97%, transparent);
+    transition: translate var(--hs-dur) var(--hs-ease);
+  }
+  .hs-dsc-bar.is-hidden { translate: 0 -100%; } /* scrolling down (DsChrome) */
+}
+.hs-dsc-burger { flex: none; width: 44px; height: 44px; padding: 0; cursor: pointer; color: var(--hs-ink); -webkit-tap-highlight-color: transparent; }
+.hs-dsc-burger span { position: absolute; left: 12px; right: 12px; height: 2px; border-radius: 2px; background: currentColor; transition: top 0.4s var(--hs-ease), transform 0.4s var(--hs-ease); }
+.hs-dsc-burger span:nth-child(1) { top: 16px; }
+.hs-dsc-burger span:nth-child(2) { top: 25px; right: 18px; }
+.hs-dsc-burger.is-x span { top: 20.5px; right: 12px; }
+.hs-dsc-menu.is-open .hs-dsc-burger.is-x span:nth-child(1) { transform: rotate(45deg); transition-delay: 0.25s; }
+.hs-dsc-menu.is-open .hs-dsc-burger.is-x span:nth-child(2) { transform: rotate(-45deg); transition-delay: 0.25s; }
+.hs-dsc-menu {
+  position: fixed; inset: 0; z-index: 80; display: flex; flex-direction: column; padding-inline: 32px;
+  overflow-y: auto; overscroll-behavior: contain; background: var(--hs-page); color: var(--hs-ink);
+  visibility: hidden; clip-path: circle(0 at calc(100% - 54px) 38px);
+  transition: clip-path 0.5s var(--hs-ease), visibility 0s 0.5s;
+}
+.hs-dsc-menu.is-open { visibility: visible; clip-path: circle(150% at calc(100% - 54px) 38px); transition: clip-path 0.75s var(--hs-ease), visibility 0s; }
+@media (max-width: 680px) { .hs-dsc-menu { padding-inline: 16px; clip-path: circle(0 at calc(100% - 38px) 38px); } .hs-dsc-menu.is-open { clip-path: circle(150% at calc(100% - 38px) 38px); } }
+.hs-dsc-menu-top { display: flex; flex: none; align-items: center; justify-content: space-between; min-height: 76px; }
+.hs-dsc-menu-nav { display: grid; padding-block: 20px 28px; }
+.hs-dsc-menu-nav a {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--hs-rule); color: inherit; text-decoration: none;
+  font-family: var(--hs-font-head); font-weight: 600; font-size: clamp(28px, 6vw, 44px); line-height: 1.1; letter-spacing: -0.03em;
+}
+.hs-dsc-menu-nav a[aria-current] { color: var(--hs-ember-text); }
+.hs-dsc-menu-nav a .hs-icon { flex: none; width: 0.6em; height: 0.6em; color: var(--hs-ember-text); } /* the trailing arrow, as in Viteo's menu */
+.hs-dsc-menu-foot { display: flex; align-items: center; gap: 12px; margin-top: auto; padding-block: 24px 28px; }
+.hs-dsc-menu-nav a, .hs-dsc-menu-foot { opacity: 0; translate: 0 28px; transition: opacity 0.2s, translate 0.3s var(--hs-ease); }
+.hs-dsc-menu.is-open :is(.hs-dsc-menu-nav a, .hs-dsc-menu-foot) {
+  opacity: 1; translate: 0 0;
+  transition: opacity 0.5s calc(0.2s + var(--i) * 0.05s), translate 0.7s var(--hs-ease) calc(0.2s + var(--i) * 0.05s);
+}
+@media (prefers-reduced-motion: reduce) {
+  .hs-dsc-bar { transition: none; }
+  .hs-dsc-menu, .hs-dsc-menu.is-open { transition: visibility 0s; clip-path: none; }
+  .hs-dsc-menu-nav a, .hs-dsc-menu-foot { opacity: 1; translate: none; transition: none; }
+}
+.hs-ds-rail ol { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--hs-rule); }
+.hs-ds-rail a {
+  display: flex; gap: 12px; margin-left: -2px; padding: 9px 0 9px 20px; border-left: 2px solid transparent;
+  font-family: var(--hs-font-mono); font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.5;
+  text-decoration: none; color: var(--hs-ink-2); transition: color var(--hs-dur-fast) var(--hs-ease), border-color var(--hs-dur-fast) var(--hs-ease);
+}
+.hs-ds-rail a:hover { color: var(--hs-ember-text); }
+.hs-ds-rail a[aria-current] { color: var(--hs-ember-text); border-left-color: var(--hs-ember-text); }
+.hs-ds-rail-num { font-variant-numeric: tabular-nums; }
+
+
+/* The footer goes full width too, like the page (scoped with :has, since this
+   stylesheet stays loaded after a client-side move to another page). */
+:root:has(.hs-ds) .hs-footer .hs-wrap { width: calc(100vw - 96px); max-width: none; margin-inline: calc(50% - 50vw + 48px); }
+@media (max-width: 1099px) { :root:has(.hs-ds) .hs-footer .hs-wrap { width: calc(100vw - 64px); margin-inline: calc(50% - 50vw + 32px); } }
+@media (max-width: 680px) { :root:has(.hs-ds) .hs-footer .hs-wrap { width: calc(100vw - 32px); margin-inline: calc(50% - 50vw + 16px); } }
+:root:has(.hs-ds) .hs-footer { margin-top: 112px; margin-inline: calc(50% - 50vw); padding-inline: calc(50vw - 50%); border-top: 1px solid var(--hs-rule); } /* apart from the page: space and a full-bleed hairline above it, no fill (the wraps inside still land 48px in) */
+
+/* No label column here: the rail names each section and every section has its
+   own heading, so the rows are one column, content flush with the rail's gap. */
+.hs-ds .hs-row { grid-template-columns: minmax(0, 1fr); }
+.hs-ds .hs-row-label { display: none; }
+.hs-ds .hs-row-body { padding-left: 0; }
+@media (max-width: 760px) { .hs-ds .hs-row-body { padding-top: 40px; } }
+
+/* Back to top (DsChrome's toTopClass: the dock's .hs-totop, which is hidden
+   with the dock here): floating at the bottom right, at every size. */
+.hs-dsc-totop.hs-totop { position: fixed; right: 48px; bottom: 32px; z-index: 45; display: inline-flex; margin: 0; }
+@media (max-width: 1099px) { .hs-dsc-totop.hs-totop { right: 32px; bottom: 24px; } }
+@media (max-width: 680px) { .hs-dsc-totop.hs-totop { right: 16px; bottom: 16px; } }

@@ -35,7 +35,7 @@ export const metadata = {
     template: "%s · Viteo",
   },
   description:
-    "Viteo is a direct-to-consumer personalized vitamin subscription (quiz, plan, checkout and self-serve account), designed and built by Cyril Florita as a design and dev pitch.",
+    "Viteo is a direct-to-consumer personalized vitamin subscription (eight-question personalization, plan, checkout and self-serve account), designed and built by Cyril Florita as a design and dev pitch.",
   openGraph: {
     type: "website",
     siteName: "Cyril Florita",

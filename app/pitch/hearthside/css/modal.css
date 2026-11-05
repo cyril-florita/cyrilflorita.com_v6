@@ -12,7 +12,16 @@
   box-shadow: 0 30px 80px rgba(10, 20, 30, 0.3);
 }
 .hs[data-hs-mode="dark"] .hs-modal { box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6); }
-.hs-modal::backdrop { background: rgba(10, 18, 28, 0.5); backdrop-filter: blur(3px); }
+.hs-modal::backdrop { background: transparent; }
+/* While it's open the page steps back, as Viteo's ingredient close-up does:
+   everything in the shell fades out except the background — the 3D side
+   mark and its glow (or their CSS fallback) — so the modal floats over the
+   page colour and the lit logo alone. The transition sits in :where() so it
+   adds to nothing that has its own list; the header's list carries opacity. */
+@media (prefers-reduced-motion: no-preference) {
+  :where(.hs:not(.is-loading, .is-entering) .hs-shell > :not(.hs-sidemark, .hs-sidemark-3d, .hs-modal, .hs-preloader)) { transition: opacity 0.35s var(--hs-ease-soft); } /* not the background, and not during Home's preloader hand-off, which hides the page instantly (a fade there flickered the side mark and glow) */
+}
+.hs:has(.hs-modal[open]) .hs-shell > :not(.hs-sidemark, .hs-sidemark-3d, .hs-modal, .hs-preloader) { opacity: 0; }
 /* The page behind doesn't scroll (the gutter stays, so nothing shifts). */
 :root:has(.hs-modal[open]) { overflow: hidden; scrollbar-gutter: stable; }
 

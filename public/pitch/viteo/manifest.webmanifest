@@ -1,7 +1,7 @@
 {
   "name": "Viteo — Personalized daily vitamins",
   "short_name": "Viteo",
-  "description": "Take the 2-minute quiz, get a daily pack that explains itself, and manage your deliveries.",
+  "description": "Answer eight questions, get a daily pack that explains itself, and manage your deliveries.",
   "id": "/pitch/viteo/",
   "start_url": "/pitch/viteo/",
   "scope": "/pitch/viteo/",

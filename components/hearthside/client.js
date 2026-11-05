@@ -106,6 +106,10 @@ export function Header() {
     return () => { window.removeEventListener("scroll", onScroll); document.removeEventListener("focusin", check); cancelAnimationFrame(raf); set(false); };
   }, []);
 
+  // The design system has no site header: its own sidebar / top bar and menu
+  // (DsChrome) carry the logo, its sections and the way home.
+  if (pathname === `${BASE}/design-system`) return null;
+
   return (
     <header className="hs-header">
       <div className="hs-wrap hs-header-row">
@@ -317,6 +321,7 @@ const REVEAL = ".hs-row-body > :not(.hs-ruled):not(.hs-services):not(.hs-creds):
 export function Reveal() {
   const pathname = usePathname();
   useEffect(() => {
+    if (/design-system/.test(pathname)) return; // a reference page: content is simply there (its rail jumps used to land on half-played reveals)
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
     const fold = window.innerHeight; // anything peeking into the first screen stays visible (it signals more below)
     // Cards in a sideways-scrolling row (the phone swipe rows) reveal as one
@@ -358,6 +363,7 @@ const SPLIT_SKIP = ".hs-hero, .hs-steps-story.is-story .hs-step, .hs-title-split
 export function SplitHeads() {
   const pathname = usePathname();
   useEffect(() => {
+    if (/design-system/.test(pathname)) return; // a reference page: content is simply there (its rail jumps used to land on half-played reveals)
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
     const els = [...document.querySelectorAll(SPLIT)].filter((el) => !el.closest(SPLIT_SKIP));
     // Effects run twice in dev: headings an earlier run split are reused.
@@ -514,6 +520,7 @@ const MASKS = "main .hs-logos";
 export function MaskRows() {
   const pathname = usePathname();
   useEffect(() => {
+    if (/design-system/.test(pathname)) return; // a reference page: content is simply there (its rail jumps used to land on half-played reveals)
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
     const els = [...document.querySelectorAll(MASKS)];
     const timers = [];
@@ -870,16 +877,21 @@ export function HeroMask() {
 // mark's first 3D draw (the slow part it covers). Up at least 1.8s, at most 5s. Then the hand-off runs in steps (classes on
 // .hs, timed here; hearthside.css "Home's preloader"): its logo and bar fade
 // to a blank page; the page underneath starts hidden (.is-entering); the side
-// mark and its glow fade in first (.is-ent-logo, desktop); then the header and
-// Home (.is-ent-page), whose paused entrance animations play — the hero, then
-// the credentials, already timed after it.
+// mark and its glow fade in first (.is-ent-logo); then the header and Home
+// (.is-ent-page), whose paused entrance animations play — the hero, then the
+// credentials, already timed after it.
 export function Preloader() {
   const ref = useRef(null);
   useEffect(() => {
     const hs = document.querySelector(".hs");
     const el = ref.current;
     if (!hs?.classList.contains("is-loading") || !el) return;
-    const MIN = 1800, MAX = 5000;
+    // Desktop with a mouse loads the 3D side mark: wait for its first draw
+    // and fade it in before the page. Phones and tablets have none.
+    const desktop = window.matchMedia("(hover: hover) and (pointer: fine) and (min-width: 1100px)").matches;
+    // At least 1.8s on desktop (it covers the 3D mark's first draw); 0.8s on
+    // phones and tablets, which have no 3D mark — enough to read as a preloader.
+    const MIN = desktop ? 1800 : 800, MAX = 5000;
     const t0 = performance.now();
     let done = 0;
     const steps = [
@@ -890,8 +902,8 @@ export function Preloader() {
         img.addEventListener("load", res, { once: true });
         img.addEventListener("error", res, { once: true });
       }),
-      new Promise((res) => window.addEventListener("hs:3d-ready", res, { once: true })),
     ];
+    if (desktop) steps.push(new Promise((res) => window.addEventListener("hs:3d-ready", res, { once: true })));
     steps.forEach((s) => s.then(() => { done++; }));
     // The bar: part time, part real steps, never full until everything's in.
     const tick = setInterval(() => {
@@ -904,15 +916,18 @@ export function Preloader() {
     ready.then(() => new Promise((res) => setTimeout(res, Math.max(0, MIN - (performance.now() - t0))))).then(() => {
       clearInterval(tick);
       el.style.setProperty("--p", "1");
-      at(380, () => el.classList.add("is-leaving")); // logo and bar fade; the blank page colour stays
-      at(780, () => {
+      // Phones and tablets: a quicker hand-off (no side mark to bring in).
+      const [leave, clear] = desktop ? [380, 780] : [150, 400];
+      at(leave, () => el.classList.add("is-leaving")); // logo and bar fade; the blank page colour stays
+      at(clear, () => {
         hs.classList.add("is-entering"); // the page starts hidden...
         hs.classList.remove("is-loading"); // ...as the overlay goes, so the screen stays blank
         el.classList.remove("is-leaving");
       });
-      at(880, () => hs.classList.add("is-ent-logo")); // the side mark and its glow
-      at(1480, () => hs.classList.add("is-ent-page")); // the header and Home: the hero's entrance, then the credentials
-      at(3280, () => hs.classList.remove("is-entering", "is-ent-logo", "is-ent-page"));
+      const page = desktop ? 1480 : 450;
+      if (desktop) at(880, () => hs.classList.add("is-ent-logo")); // the side mark and its glow
+      at(page, () => hs.classList.add("is-ent-page")); // the header and Home: the hero's entrance, then the credentials
+      at(page + 2000, () => hs.classList.remove("is-entering", "is-ent-logo", "is-ent-page"));
     });
     return () => { clearInterval(tick); timers.forEach(clearTimeout); };
   }, []);

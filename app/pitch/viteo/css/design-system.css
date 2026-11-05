@@ -5,9 +5,6 @@
    layout, since they compete with later shared rules of equal specificity. */
 .dl-ds-head .dl-lede { margin-top: 20px; }
 .dl-ds-current { margin-top: 16px !important; }
-.dl-ds-nav { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
-.dl-ds-nav a { padding: 8px 16px; border-radius: 999px; border: 1.5px solid var(--dl-line); text-decoration: none; font-weight: 600; font-size: 14px; }
-.dl-ds-nav a:hover { border-color: var(--dl-sun); }
 .dl-ds-section { padding: 64px 0 8px; border-top: 1px solid var(--dl-line); margin-top: 56px; }
 .dl-ds-section > .dl-h2 { font-size: 34px; }
 .dl-ds-section > *:not(.dl-h2):not(.dl-section-lede) { margin-top: 28px; }
@@ -104,3 +101,95 @@
 @media (max-width: 680px) {
   .dl-ds-head.dl-panel { padding: 28px 20px; }
 }
+
+/* Full width, with no site header: DsChrome (components/DsChrome.js) is the
+   page's chrome. ≥1200px a sticky full-height sidebar — the logo, the
+   numbered sections (the current one in the accent text colour with an
+   accent line), then "Back to Viteo home" and light/dark at its foot. Below
+   1200px a top bar (logo left, the menu button right) opening the header's
+   full-screen menu, with the sections as its links. */
+.dl .dl-ds-wrap { max-width: none; padding-inline: 48px; }
+.dl .dl-ds { padding-top: 0; }
+.dl:has(.dl-ds) .dl-frame { padding-top: 0; } /* both were room for the site header, which this page doesn't have */
+@media (max-width: 1199px) { .dl-ds-main { padding-top: 8px; } }
+.dl-ds-section { scroll-margin-top: 32px; }
+.dl-dsc-logo { color: var(--dl-ink); text-decoration: none; }
+.dl :is(.dl-dsc-foot, .dl-dsc-menu-foot) > .dl-switcher.is-mode { padding: 0; background: none; }
+@media (min-width: 1200px) {
+  .dl-ds-layout { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 64px; align-items: start; }
+  .dl-ds-main { padding-top: 32px; }
+  .dl-dsc-side { position: sticky; top: 0; display: flex; flex-direction: column; height: 100vh; height: 100dvh; padding: 32px 0; }
+  .dl-dsc-side .dl-ds-rail { min-height: 0; margin-top: 48px; overflow-y: auto; }
+  .dl-dsc-foot { display: flex; align-items: center; gap: 12px; margin-top: auto; padding-top: 24px; }
+  .dl-dsc-bar, .dl-dsc-menu { display: none; }
+}
+@media (max-width: 1199px) {
+  .dl-dsc-side { display: none; }
+  .dl-ds-section { scroll-margin-top: 96px; }
+  .dl-dsc-bar {
+    position: sticky; top: 0; z-index: 60; display: flex; align-items: center; justify-content: space-between;
+    height: 76px; margin-inline: -48px; padding-inline: 48px;
+    background: color-mix(in srgb, var(--dl-cream) 92%, transparent); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+    transition: translate 0.35s var(--dl-ease);
+  }
+  .dl-dsc-bar.is-hidden { translate: 0 -100%; } /* scrolling down (DsChrome) */
+}
+@media (max-width: 680px) { .dl .dl-ds-wrap { padding-inline: 16px; } .dl-dsc-bar { margin-inline: -16px; padding-inline: 16px; } }
+/* The menu button and the menu: the header's (.dl-burger, .dl-menu), shared spec. */
+.dl-dsc-burger {
+  position: relative; flex: none; width: 52px; height: 52px; border-radius: 18px; color: var(--dl-ink); cursor: pointer;
+  border: 1px solid color-mix(in srgb, currentColor 28%, transparent); background: transparent;
+  transition: background-color 0.2s, border-color 0.2s; -webkit-tap-highlight-color: transparent;
+}
+.dl-dsc-burger:is(:hover, :focus-visible) { background: color-mix(in srgb, currentColor 10%, transparent); border-color: color-mix(in srgb, currentColor 60%, transparent); }
+.dl-dsc-burger span { position: absolute; left: 16px; right: 16px; height: 2px; border-radius: 2px; background: currentColor; transition: top 0.4s var(--dl-ease), transform 0.4s var(--dl-ease); }
+.dl-dsc-burger span:nth-child(1) { top: 20px; }
+.dl-dsc-burger span:nth-child(2) { top: 29px; right: 24px; }
+.dl-dsc-burger:hover span:nth-child(2) { right: 16px; }
+.dl-dsc-burger.is-x span { top: 24.5px; right: 16px; }
+.dl-dsc-menu.is-open .dl-dsc-burger.is-x span:nth-child(1) { transform: rotate(45deg); transition-delay: 0.25s; }
+.dl-dsc-menu.is-open .dl-dsc-burger.is-x span:nth-child(2) { transform: rotate(-45deg); transition-delay: 0.25s; }
+.dl-dsc-menu {
+  position: fixed; inset: 0; z-index: 80; display: flex; flex-direction: column; padding-inline: 48px;
+  overflow-y: auto; overscroll-behavior: contain; background: var(--dl-cream); color: var(--dl-ink);
+  visibility: hidden; clip-path: circle(0 at calc(100% - 74px) 38px);
+  transition: clip-path 0.5s var(--dl-ease), visibility 0s 0.5s;
+}
+.dl-dsc-menu.is-open { visibility: visible; clip-path: circle(150% at calc(100% - 74px) 38px); transition: clip-path 0.75s var(--dl-ease), visibility 0s; }
+@media (max-width: 680px) { .dl-dsc-menu { padding-inline: 16px; clip-path: circle(0 at calc(100% - 42px) 38px); } .dl-dsc-menu.is-open { clip-path: circle(150% at calc(100% - 42px) 38px); } }
+.dl-dsc-menu-top { display: flex; flex: none; align-items: center; justify-content: space-between; height: 76px; }
+.dl-dsc-menu-nav { display: grid; padding-block: 20px 28px; }
+.dl-dsc-menu-nav a {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 0;
+  border-bottom: 1px solid var(--dl-line); color: inherit; text-decoration: none;
+  font-family: var(--dl-font-display); font-weight: var(--dl-display-weight); font-size: clamp(28px, 6vw, 44px); line-height: 1.1; letter-spacing: -0.03em;
+}
+.dl-dsc-menu-nav a[aria-current] { color: var(--dl-sun-deep); }
+.dl-dsc-menu-nav a .dl-arrow { width: 0.6em; height: 0.6em; color: var(--dl-sun-deep); --ax: 18px; }
+.dl-dsc-menu-foot { display: flex; align-items: center; gap: 12px; margin-top: auto; padding-block: 24px 28px; }
+.dl-dsc-menu-nav a, .dl-dsc-menu-foot { opacity: 0; translate: 0 28px; transition: opacity 0.2s, translate 0.3s var(--dl-ease); }
+.dl-dsc-menu.is-open :is(.dl-dsc-menu-nav a, .dl-dsc-menu-foot) {
+  opacity: 1; translate: 0 0;
+  transition: opacity 0.5s calc(0.2s + var(--i) * 0.05s), translate 0.7s var(--dl-ease) calc(0.2s + var(--i) * 0.05s);
+}
+@media (prefers-reduced-motion: reduce) {
+  .dl-dsc-bar { transition: none; }
+  .dl-dsc-menu, .dl-dsc-menu.is-open { transition: visibility 0s; clip-path: none; }
+  .dl-dsc-menu-nav a, .dl-dsc-menu-foot { opacity: 1; translate: none; transition: none; }
+}
+.dl-ds-rail ol { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--dl-line); }
+.dl-ds-rail a {
+  display: flex; gap: 12px; margin-left: -2px; padding: 9px 0 9px 20px; border-left: 2px solid transparent;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.5;
+  text-decoration: none; color: var(--dl-ink-2); transition: color 0.3s, border-color 0.3s;
+}
+.dl-ds-rail a:hover { color: var(--dl-sun-deep); }
+.dl-ds-rail a[aria-current] { color: var(--dl-sun-deep); border-left-color: var(--dl-sun); }
+.dl-ds-rail-num { font-variant-numeric: tabular-nums; }
+
+/* The footer goes full width too, like the page (scoped with :has, since this
+   stylesheet stays loaded after a client-side move to another page). */
+.dl:has(.dl-ds) .dl-footer .dl-wrap { max-width: none; padding-inline: 48px; }
+@media (max-width: 680px) { .dl:has(.dl-ds) .dl-footer .dl-wrap { padding-inline: 16px; } }
+/* …and stands apart from the page: space and a full-width hairline above it (no fill). */
+.dl:has(.dl-ds) .dl-footer { margin-top: 96px; padding-top: 56px; border-top: 1px solid var(--dl-line); }

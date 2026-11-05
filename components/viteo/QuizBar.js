@@ -1,10 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { BASE } from "./data";
-import { Arrow } from "./ui";
+import { Arrow, Button } from "./ui";
 
-// Phones and tablets (≤960px): a "Take the quiz" bar fixed to the bottom of
+// Phones and tablets (≤960px): a "Personalize your pack" bar fixed to the bottom of
 // the landing page. It slides up once the hero's own call to action has
 // scrolled away, and steps aside again at the closing call to action (no
 // two quiz buttons on screen at once). Hidden entirely on desktop.
@@ -38,12 +37,12 @@ export default function QuizBar() {
   return (
     <div className={`dl-quizbar ${on ? "is-on" : ""}`} inert={!on}>
       <span className="dl-quizbar-text">
-        <strong>Find your pack</strong>
-        <span>8 questions · 2 minutes</span>
+        <strong>8 questions</strong>
+        <span>About 2 minutes</span>
       </span>
-      <Link className="dl-btn dl-btn-primary" href={`${BASE}/quiz/`}>
-        Take the quiz <Arrow />
-      </Link>
+      <Button href={`${BASE}/quiz/`}>
+        Personalize your pack<span className="dl-quizbar-time"> · 2 min</span> <Arrow />
+      </Button>
     </div>
   );
 }

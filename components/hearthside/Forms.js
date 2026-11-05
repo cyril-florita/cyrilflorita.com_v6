@@ -69,19 +69,22 @@ export function CallbackForm({ onClose }) {
           <input id={`${id}-phone`} className="hs-input" type="tel" autoComplete="tel" inputMode="tel" value={f.phone} onChange={set("phone")} aria-invalid={!!errors.phone} aria-describedby={errors.phone ? `${id}-phone-e` : undefined} />
           {errors.phone && <p id={`${id}-phone-e`} className="hs-error">{errors.phone}</p>}
         </div>
-        <div className="hs-field">
-          <label htmlFor={`${id}-time`}>When should we call?</label>
-          <select id={`${id}-time`} className="hs-select" value={f.time} onChange={set("time")}>
-            <option value="morning">Morning (9 am–12 pm)</option>
-            <option value="afternoon">Afternoon (12–5 pm)</option>
-            <option value="asap">As soon as possible</option>
-          </select>
-        </div>
-        <fieldset className="hs-field">
+        {/* The two choices are full-width rows of chips, one line each on
+            desktop (the "who" chips used to wrap in half the width, beside a
+            select for "when"). */}
+        <fieldset className="hs-field is-wide">
           <legend style={{ fontFamily: "inherit", fontSize: 18, fontWeight: 600, letterSpacing: 0, textTransform: "none" }}>Who is the care for?</legend>
-          <div className="hs-chips">
+          <div className="hs-chips hs-chips-row">
             {[["me", "Me"], ["family", "A family member"], ["pro", "I'm a professional"]].map(([v, l]) => (
               <label key={v} className="hs-chip"><input type="radio" name={`${id}-who`} value={v} checked={f.who === v} onChange={set("who")} />{l}</label>
+            ))}
+          </div>
+        </fieldset>
+        <fieldset className="hs-field is-wide">
+          <legend style={{ fontFamily: "inherit", fontSize: 18, fontWeight: 600, letterSpacing: 0, textTransform: "none" }}>When should we call?</legend>
+          <div className="hs-chips hs-chips-row">
+            {[["morning", "Morning", "9 am–12 pm"], ["afternoon", "Afternoon", "12–5 pm"], ["asap", "As soon as possible"]].map(([v, l, t]) => (
+              <label key={v} className="hs-chip"><input type="radio" name={`${id}-time`} value={v} checked={f.time === v} onChange={set("time")} />{l}{t && <span className="hs-chip-sub">{t}</span>}</label>
             ))}
           </div>
         </fieldset>
@@ -90,7 +93,7 @@ export function CallbackForm({ onClose }) {
       <p className="hs-hint">We only need this to call you back. Please don&rsquo;t include medical details; we&rsquo;ll ask what we need on the phone.</p>
       <div className="hs-hero-ctas hs-mt-0">
         <Button type="submit" lead="callback">Request a call</Button>
-        <span className="hs-hint">Preview mode: nothing is sent.</span>
+        <span className="hs-hint">[ Preview mode: nothing is sent. ]</span>
       </div>
     </form>
     </div>
@@ -168,7 +171,7 @@ export function ApplyForm() {
       </div>
       <div className="hs-hero-ctas hs-mt-0">
         <Button type="submit">Apply for this role</Button>
-        <span className="hs-hint">Preview mode: nothing is sent.</span>
+        <span className="hs-hint">[ Preview mode: nothing is sent. ]</span>
       </div>
     </form>
   );

@@ -75,11 +75,12 @@ export default function Checkout() {
       <section className="dl-checkout">
         <div className="dl-wrap dl-empty">
           <h1 className="dl-h2">Your pack is empty</h1>
-          <p className="dl-section-lede">Take the two-minute quiz to build one, or start from an example pack.</p>
+          <p className="dl-section-lede">Personalize one in two minutes, or start from an example pack.</p>
           <div className="dl-hero-actions">
-            <Button href={`${BASE}/quiz/`}>Take the quiz <Arrow /></Button>
+            <Button href={`${BASE}/quiz/`} size="lg">Personalize your pack <Arrow /></Button>
             <Button
               variant="ghost"
+              size="lg"
               onClick={() => write("cart", { items: recommend({ diet: "vegetarian", sun: "rarely", goals: ["energy"] }), plan: "two" })}
             >
               Start from an example
@@ -193,7 +194,7 @@ export default function Checkout() {
                 </div>
                 {!session && <p className="dl-meta">Have an account? <Link className="dl-textlink" href={`${BASE}/sign-in/?next=checkout`}>Sign in</Link> to fill this in.</p>}
                 <p className="dl-meta">Preview mode: your details stay in this browser and aren&apos;t sent anywhere.</p>
-                <div className="dl-quiz-nav"><span /><button type="submit" className="dl-btn dl-btn-primary">Continue <Arrow /></button></div>
+                <div className="dl-quiz-nav"><span /><Button type="submit">Continue <Arrow /></Button></div>
               </form>
             )}
 
@@ -242,9 +243,9 @@ export default function Checkout() {
                   <div><dt>Payment</dt><dd>{payment?.label || "Not added yet"}<br /><span className="dl-meta">Charged when your first box ships. Preview mode: nothing is charged.</span></dd><button type="button" className="dl-textlink" onClick={() => setStep(2)}>Edit</button></div>
                 </dl>
                 <div className="dl-quiz-nav">
-                  <Button variant="ghost" onClick={() => setStep(2)}>Back</Button>
+                  <Button variant="ghost" size="lg" onClick={() => setStep(2)}>Back</Button>
                   <Button onClick={place} size="lg" disabled={placing || !payment} aria-busy={placing}>
-                    {placing ? <><span className="dl-spin dl-spin-sm" aria-hidden="true" /> Placing order…</> : <>Place order <Arrow /></>}
+                    {placing ? <><span className="dl-spin dl-spin-sm" aria-hidden="true" /> Placing order…</> : <>Place order</>}
                   </Button>
                 </div>
               </div>

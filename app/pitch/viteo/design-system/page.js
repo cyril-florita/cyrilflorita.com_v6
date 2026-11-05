@@ -1,6 +1,7 @@
-import { PRODUCTS } from "@/components/viteo/data";
+import { BASE, PRODUCTS } from "@/components/viteo/data";
 import { Arrow, BigWordHead, Button, Logo, LogoMark, Pill, PillTray, ProductBox, ThemeSwitcher } from "@/components/viteo/ui";
 import { CurrentTheme, Swatches } from "@/components/viteo/DesignTokens";
+import DsChrome from "@/components/DsChrome";
 import RoutineGraph from "@/components/viteo/RoutineGraph";
 import Reviews from "@/components/viteo/Reviews";
 // Page-only styles (split out of viteo.css so the landing skips them).
@@ -84,7 +85,20 @@ const Sub = ({ children }) => <h3 className="dl-h4 dl-ds-sub">{children}</h3>;
 export default function DesignSystem() {
   return (
     <div className="dl-ds">
-      <div className="dl-wrap">
+      <div className="dl-wrap dl-ds-wrap">
+        {/* No site header here: the sidebar (desktop) or top bar and menu
+            (smaller screens) carry the logo, the sections and the way home. */}
+        <div className="dl-ds-layout">
+        <DsChrome
+          prefix="dl"
+          sections={SECTIONS.map(([id, label]) => [`ds-${id}`, label])}
+          logo={<Logo />}
+          home={`${BASE}/`}
+          homeLabel="Back to Viteo home"
+          homeClass="dl-btn dl-btn-ghost dl-btn-sm"
+          linkIcon={<Arrow />}
+        />
+        <div className="dl-ds-main">
         <header className="dl-ds-head dl-panel dl-panel-1">
           {/* The brand, top right (the deeper capsule colours on this light panel). */}
           <span className="dl-ds-head-logo"><Logo /></span>
@@ -97,14 +111,10 @@ export default function DesignSystem() {
             on navy ink, in a soft serif. Each has dark and light modes, and every sample below is the real component.
           </p>
           <CurrentTheme />
-          <nav className="dl-ds-nav" aria-label="On this page">
-            {SECTIONS.map(([id, label]) => (
-              <a key={id} href={`#ds-${id}`}>{label}</a>
-            ))}
-          </nav>
         </header>
 
-        <Section id="brand" title="Brand" lede="Two capsules meeting in a V, in the theme's accent and ink, with a lowercase wordmark. The mark is printed on every box, and the box carries the customer's name once they've taken the quiz.">
+
+        <Section id="brand" title="Brand" lede="Two capsules meeting in a V, in the theme's accent and ink, with a lowercase wordmark. The mark is printed on every box, and the box carries the customer's name once they've personalized it.">
           <div className="dl-ds-brand">
             <div className="dl-card dl-ds-brand-card">
               <span className="dl-pill-label">Logo</span>
@@ -159,7 +169,7 @@ export default function DesignSystem() {
           <Sub>Call-to-action pill</Sub>
           <div className="dl-ds-row">
             <a className="dl-underline-cta" href="#ds-buttons">
-              Take the 2-minute quiz
+              Personalize your pack
               <span className="dl-cta-chip"><Arrow /></span>
             </a>
           </div>
@@ -306,7 +316,7 @@ export default function DesignSystem() {
           <Sub>Accordion</Sub>
           <div className="dl-ds-faq">
             <details className="dl-glass dl-faq-item" open>
-              <summary>How does the quiz decide what goes in my pack?</summary>
+              <summary>How do you decide what goes in my pack?</summary>
               <p>Your answers map to a short list of everyday nutrients, and each pill shows the answer that put it there.</p>
             </details>
             <details className="dl-glass dl-faq-item">
@@ -364,7 +374,7 @@ export default function DesignSystem() {
 
         <Section id="labels" title="Labels & stamps" lede="Labels never look like buttons: no pill shape, border or fill. Sample and preview content is stamped like a batch code, in the accent text color.">
           <div className="dl-ds-grid">
-            <div className="dl-card dl-ds-tile"><span className="dl-code" data-lot="Lot 02">Sample content</span><span className="dl-meta">Stamp · sample or preview content</span></div>
+            <div className="dl-card dl-ds-tile"><span className="dl-code">Sample content</span><span className="dl-meta">Stamp · sample or preview content</span></div>
             <div className="dl-card dl-ds-tile"><span className="dl-pill-label">Your routine tracker</span><span className="dl-meta">Card label</span></div>
             <div className="dl-card dl-ds-tile"><span className="dl-eyebrow">Next delivery</span><span className="dl-meta">Eyebrow · hero and card headers</span></div>
             <div className="dl-card dl-ds-tile"><span><span className="dl-tag dl-tag-sun">Save 15%</span> <span className="dl-tag">Next</span></span><span className="dl-meta">Tags · status and savings</span></div>
@@ -405,10 +415,12 @@ export default function DesignSystem() {
             <div><dt>Pages</dt><dd>0.55s: view transitions, the printed pack glides between pages</dd></div>
             <div><dt>Intro</dt><dd>~1.75s on each landing visit, a GSAP timeline: the carton, then each pill at its own speed, bounce and spin; any click, key or scroll skips it</dd></div>
             <div><dt>Background</dt><dd>A WebGPU shader (WebGL2 fallback) a slow, pulsing ribbon of the theme&apos;s light behind the glass, ~30fps at low resolution; desktop only, off for reduced motion</dd></div>
-            <div><dt>Quiz finale</dt><dd>A GSAP timeline: pills fall into the pack one by one, the pack squashes to catch each, and the plan opens when the last lands</dd></div>
+            <div><dt>Building your pack</dt><dd>A GSAP timeline: pills fall into the pack one by one, the pack squashes to catch each, and the plan opens when the last lands</dd></div>
             <div><dt>Reduced motion</dt><dd>Everything above is off; the content is all there at once</dd></div>
           </dl>
         </Section>
+        </div>
+        </div>
       </div>
     </div>
   );

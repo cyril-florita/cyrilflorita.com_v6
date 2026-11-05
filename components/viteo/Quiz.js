@@ -138,7 +138,7 @@ export default function Quiz() {
       <div className="dl-wrap dl-quiz-layout">
       <div className="dl-quiz-inner dl-panel dl-panel-1">
         {/* Phones: the quiz is full-screen (no site header), so it has its own way out. */}
-        <Link className="dl-quiz-exit" href={`${BASE}/`} aria-label="Leave the quiz">
+        <Link className="dl-quiz-exit" href={`${BASE}/`} aria-label="Leave and go back home">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
         </Link>
         <div className="dl-progress" aria-hidden="true">
@@ -207,9 +207,9 @@ export default function Quiz() {
               <span />
             )}
             {(q.type !== "single" || last) && (
-              <button type="submit" className="dl-btn dl-btn-primary" disabled={!answered}>
+              <Button type="submit"  disabled={!answered}>
                 {last ? "Build my pack" : "Continue"} <Arrow />
-              </button>
+              </Button>
             )}
           </div>
           {q.type === "multi" && (

@@ -28,8 +28,8 @@
   --dl-section: #E8EFE7;
   --dl-well: #EEF5EF;
   --dl-selected: #E6F3EA;
-  --dl-line: #DCE5DD;
-  --dl-line-strong: #C3D1C6;
+  --dl-line: rgba(0, 0, 0, 0.1); /* black-based in light mode, white-based in dark (2026-11-04) */
+  --dl-line-strong: rgba(0, 0, 0, 0.2);
   --dl-hover-line: #9CC7AE;
   --dl-track: #E3EBE4;
   --dl-sage: #E9F1D8;
@@ -75,8 +75,8 @@
   --dl-section: #121B16;
   --dl-well: #2A302C;
   --dl-selected: #1C3226;
-  --dl-line: #353C37;
-  --dl-line-strong: #3A4B40;
+  --dl-line: rgba(255, 255, 255, 0.14);
+  --dl-line-strong: rgba(255, 255, 255, 0.24);
   --dl-hover-line: #5C9E78;
   --dl-track: #2F3530;
   --dl-sage: #263318;
@@ -129,8 +129,8 @@
   --dl-section: #EFF5F6;
   --dl-well: #F1F6F7;
   --dl-selected: #E1F6F5;
-  --dl-line: #E1E7EA;
-  --dl-line-strong: #C6D2D7;
+  --dl-line: rgba(0, 0, 0, 0.1); /* black-based in light mode, white-based in dark (2026-11-04) */
+  --dl-line-strong: rgba(0, 0, 0, 0.2);
   --dl-hover-line: #3ECBDD;
   --dl-track: #E6EEF0;
   --dl-sage: #DDF5F4;
@@ -176,8 +176,8 @@
   --dl-section: #181B29;
   --dl-well: #30333F;
   --dl-selected: #1E3A45;
-  --dl-line: #3A3D4A;
-  --dl-line-strong: #3C4259;
+  --dl-line: rgba(255, 255, 255, 0.14);
+  --dl-line-strong: rgba(255, 255, 255, 0.24);
   --dl-hover-line: #3ECBDD;
   --dl-track: #343744;
   --dl-sage: #183A40;
@@ -223,8 +223,8 @@
   --dl-section: #FDF1EA;
   --dl-well: #FCF3EE;
   --dl-selected: #FFEADF;
-  --dl-line: #EFE3DC;
-  --dl-line-strong: #DECBC1;
+  --dl-line: rgba(0, 0, 0, 0.1); /* black-based in light mode, white-based in dark (2026-11-04) */
+  --dl-line-strong: rgba(0, 0, 0, 0.2);
   --dl-hover-line: #F0956B;
   --dl-track: #F3E8E1;
   --dl-sage: #FFEADC;
@@ -270,8 +270,8 @@
   --dl-section: #161624;
   --dl-well: #313139;
   --dl-selected: #2E2B44;
-  --dl-line: #3C3C46;
-  --dl-line-strong: #3C3C55;
+  --dl-line: rgba(255, 255, 255, 0.14);
+  --dl-line-strong: rgba(255, 255, 255, 0.24);
   --dl-hover-line: #F0956B;
   --dl-track: #35353E;
   --dl-sage: #2E2B44;
@@ -467,26 +467,49 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 .dl-header nav { display: flex; align-items: center; gap: 26px; font-weight: 500; font-size: 15px; }
 .dl-header nav a:not(.dl-btn) { text-decoration: none; white-space: nowrap; }
 /* Narrower desktops: the switcher drops its labels (dots only) to keep the row on one line. */
-@media (max-width: 1180px) { .dl-header-brand .dl-switcher-label { display: none; } .dl-header-brand .dl-switcher button { padding: 0 10px; } .dl-header nav { gap: 20px; } }
+@media (max-width: 1180px) { .dl-header nav { gap: 20px; } }
+/* Light/dark sits at the right end of the desktop nav; the themes live in the footer. */
+.dl-header-inner > nav { margin-left: auto; }
+.dl-header-inner > .dl-switcher.is-mode { margin-left: 8px; padding: 0; background: none; }
+/* The nav's light/dark toggle is one of the square icon buttons (as .dl-corner:
+   52px, 18px corners, 22px icon, a 28% currentColor edge; 10% tint and a 60%
+   edge on hover), not a chip in a track. */
+.dl .dl-switcher.is-mode .dl-switcher-mode {
+  width: 52px; height: 52px; min-height: 0; padding: 0; border-radius: 18px;
+  border: 1px solid color-mix(in srgb, currentColor 28%, transparent); background: transparent;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+.dl .dl-switcher.is-mode .dl-switcher-mode svg { width: 22px; height: 22px; }
+.dl .dl-switcher.is-mode .dl-switcher-mode:is(:hover, :focus-visible) {
+  background: color-mix(in srgb, currentColor 10%, transparent);
+  border-color: color-mix(in srgb, currentColor 60%, transparent);
+}
+.dl-footer-themes { margin-top: 22px; }
 .dl-header nav a:not(.dl-btn):hover { color: var(--dl-sun-deep); }
+/* The current page (Partners, Account): a pill, padded out into the gap so
+   the links don't move — white in light mode, white glass in dark. */
+.dl-nav a { padding: 8px 14px; margin: -8px -14px; border-radius: 999px; }
+.dl-nav a[aria-current="page"] { background: var(--dl-paper); color: var(--dl-ink); }
+.dl[data-dl-mode="dark"] .dl-nav a[aria-current="page"] { background: rgba(255, 255, 255, 0.14); color: #FFFFFF; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.24); } /* dark mode: clear white glass, like the cards, not a dark chip */
+.dl .dl-menu-nav a[aria-current="page"] { color: var(--dl-sun-deep); }
 
 /* Hamburger (≤960px) and its full-screen menu. */
 .dl-burger {
-  display: none; position: relative; flex: none; width: 48px; height: 48px; border-radius: 16px;
+  display: none; position: relative; flex: none; width: 52px; height: 52px; border-radius: 18px; /* the shared icon-button spec */
   border: 1px solid color-mix(in srgb, currentColor 28%, transparent); background: transparent; cursor: pointer;
   transition: background-color 0.2s, border-color 0.2s;
 }
 .dl .dl-burger { color: var(--dl-ink); }
 .dl-burger:is(:hover, :focus-visible) { background: color-mix(in srgb, currentColor 10%, transparent); border-color: color-mix(in srgb, currentColor 60%, transparent); }
 .dl-burger span {
-  position: absolute; left: 14px; right: 14px; height: 2px; border-radius: 2px; background: currentColor;
+  position: absolute; left: 16px; right: 16px; height: 2px; border-radius: 2px; background: currentColor;
   transition: top 0.4s var(--dl-ease), transform 0.4s var(--dl-ease);
 }
-.dl-burger span:nth-child(1) { top: 18px; }
-.dl-burger span:nth-child(2) { top: 27px; right: 20px; }
-.dl-burger:hover span:nth-child(2) { right: 14px; }
+.dl-burger span:nth-child(1) { top: 20px; }
+.dl-burger span:nth-child(2) { top: 29px; right: 24px; }
+.dl-burger:hover span:nth-child(2) { right: 16px; }
 /* The close button draws its X as the menu opens. */
-.dl-burger.is-x span { top: 22.5px; right: 14px; }
+.dl-burger.is-x span { top: 24.5px; right: 16px; }
 .dl-menu:focus { outline: none; }
 /* No grey/accent tap flash on touch devices (the buttons have their own states). */
 .dl :is(.dl-burger, .dl-menu a, .dl-menu button) { -webkit-tap-highlight-color: transparent; }
@@ -848,23 +871,23 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
    keep their white edge. */
 .dl[data-dl-mode="dark"] .dl-card:not(.dl-glass) { border-color: transparent; }
 /* …and the pill tray in a plain card ("Your pack"), whose well is its own step lighter. */
-.dl[data-dl-mode="dark"] .dl-card:not(.dl-glass, .dl-panel) .dl-tray { border-color: transparent; }
+.dl[data-dl-mode="dark"] .dl-card:not(.dl-glass, .dl-panel) .dl-tray { border-color: transparent; background: color-mix(in srgb, #FFFFFF 9%, var(--dl-paper)); } /* a clear step lighter than the card (the well alone was barely visible) */
 .dl-card-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; }
 .dl-tag {
   display: inline-block; padding: 3px 10px; border-radius: 999px;
   background: var(--dl-sage); color: var(--dl-sage-deep);
   font-size: 12px; font-weight: 600; letter-spacing: 0.02em; text-transform: none; vertical-align: middle;
 }
-/* "Sample" / "Preview" notices, labelled like a batch code: a small square,
-   caps in the body font, then "· Lot 02". Readable, and with no pill shape,
-   border or fill, so they never read as buttons. */
+/* "Sample" / "Preview" notices: caps in the body font between square
+   brackets, "[ SAMPLE DATA ]" (like Hearthside's stamps). Readable, and with
+   no pill shape, border or fill, so they never read as buttons. */
 .dl-code {
   display: inline-flex; align-items: center; gap: 0.5em; vertical-align: middle;
   font-family: var(--dl-font-body), system-ui, sans-serif; font-size: 13px; font-weight: 600;
   letter-spacing: 0.08em; text-transform: uppercase; line-height: 1; color: var(--dl-sun-deep);
 }
-.dl-code::before { content: ""; width: 7px; height: 7px; border-radius: 2px; background: currentColor; flex: none; }
-.dl-code::after { content: "· " attr(data-lot); font-weight: 500; }
+.dl-code::before { content: "["; font-weight: 500; }
+.dl-code::after { content: "]"; font-weight: 500; }
 .dl-tag-sun { background: var(--dl-sun-soft); color: var(--dl-sun-deep); margin-left: 8px; }
 .dl-chip {
   display: inline-flex; align-items: center; gap: 10px;
@@ -950,9 +973,8 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 .dl-tray {
   display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 18px 26px;
   padding: 34px 28px; border-radius: 28px;
-  background: radial-gradient(ellipse at 50% 0%, var(--dl-paper) 0, var(--dl-well) 70%);
+  background: var(--dl-well); /* one flat colour (a radial gradient and an inner shadow were dropped, 2026-11-04) */
   border: 1px solid var(--dl-line);
-  box-shadow: inset 0 2px 10px rgba(var(--dl-shade), 0.06);
 }
 .dl-tray-slot { display: inline-flex; animation: dl-drop 0.6s var(--dl-ease) both; animation-delay: calc(var(--i) * 0.12s); }
 .dl-tray-lg .dl-pill { transform: rotate(var(--tilt, 0deg)) scale(1.5); margin: 10px 14px; }
@@ -1447,55 +1469,16 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 /* Tags on pastel panels: solid ink, so they read in every theme and mode. */
 .dl-panel:not(.dl-panel-dark) .dl-tag { background: var(--dl-panel-ink); color: var(--dl-panel-on-ink); }
 
-/* Landing hero panel, with a tab rising into the header (the "notch"). */
+/* Landing hero panel. */
 .dl-bento { padding: 0 0 12px; }
 .dl-bento-hero {
   position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: center;
-  padding: 64px 56px; min-height: 540px; border-top-right-radius: 0;
+  padding: 64px 56px; min-height: 540px;
 }
-/* Sized to its button: the same 14px all round, and corners concentric with
-   the pill button (its 24px radius + the 14px padding = 38px). */
-.dl-bento-tab {
-  --tab-pad: 14px;
-  position: absolute; right: 0; bottom: 100%; padding: var(--tab-pad);
-  display: grid; place-items: center; background: var(--dl-panel-bg);
-  border-radius: calc(24px + var(--tab-pad)) calc(24px + var(--tab-pad)) 0 0;
-  isolation: isolate;
-}
-/* The hero's desk lamp reaches over the tab: the same light, positioned in
-   the hero's coordinates (HeroParallax.js sets --tlx/--tly on the tab). */
-.dl-bento-tab::after {
-  content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none;
-  background: radial-gradient(640px circle at var(--tlx, -400px) var(--tly, 300px), rgba(255, 255, 255, 0.34), transparent 62%);
-}
-.dl[data-dl-mode="dark"] .dl-bento-tab::after { background: radial-gradient(640px circle at var(--tlx, -400px) var(--tly, 300px), rgba(255, 255, 255, 0.42), transparent 62%); }
-/* The inverse corner joining the tab to the header row. It carries the same
-   lamp light as the tab (its centre shifted into this box: 28px right, and
-   up by the tab's height less 28px), and a mask cuts the curve, so it never
-   shows as an unlit patch when the light comes near. */
-.dl-bento-tab::before {
-  --lamp-x: calc(var(--tlx, -400px) + 28px);
-  --lamp-y: calc(var(--tly, 300px) - (48px + 2 * var(--tab-pad) - 28px));
-  content: ""; position: absolute; left: -28px; bottom: 0; width: 28px; height: 28px;
-  background:
-    radial-gradient(640px circle at var(--lamp-x) var(--lamp-y), rgba(255, 255, 255, 0.34), transparent 62%),
-    var(--dl-panel-bg);
-  -webkit-mask: radial-gradient(circle at 0 0, transparent 27.5px, #000 28px);
-  mask: radial-gradient(circle at 0 0, transparent 27.5px, #000 28px);
-}
-.dl[data-dl-mode="dark"] .dl-bento-tab::before {
-  background:
-    radial-gradient(640px circle at var(--lamp-x) var(--lamp-y), rgba(255, 255, 255, 0.42), transparent 62%),
-    var(--dl-panel-bg);
-}
-/* The hero tab rises into the header's row, under the header bar, which
-   spans the full width: let clicks pass through the bar's empty space (its
-   own logo, switcher, links and hamburger stay clickable) so the tab's
-   button gets them. */
+/* The header bar spans the full width: let clicks pass through its empty
+   space (its own logo, switcher, links and hamburger stay clickable). */
 .dl-header, .dl-header-inner { pointer-events: none; }
 .dl-header-inner > *, .dl-menu { pointer-events: auto; }
-.dl:has(.dl-bento-tab) .dl-header nav { margin-right: 232px; } /* clear of the hero tab, with room */
-.dl:has(.dl-bento-tab) .dl-header nav > .dl-btn { display: none; }
 .dl-bento-copy .dl-lede { margin-top: 22px; }
 /* A little cluster of the pack's pills set inline in the hero headline:
    softgel, tablet, capsule, softgel, tablet, overlapping and staggered. */
@@ -1708,8 +1691,6 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
    square under the label's, so neither wraps. */
 .dl-pill-label:has(.dl-code) { flex-wrap: wrap; row-gap: 10px; white-space: nowrap; }
 .dl-pill-label .dl-code { flex-basis: 100%; }
-.dl-pill-label .dl-code::before { margin-right: 3px; }
-.dl-pill-label .dl-code::before { width: 8px; height: 8px; }
 /* Square icon buttons (bento corner arrows, the ingredient "expand", the
    carousel arrows): one spec. 52px, 18px corners, a 22px icon, and a border
    and hover tint taken from the text colour, so they're white-based on dark
@@ -1869,7 +1850,7 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
   .dl-bento-copy { margin-top: 44px; } /* the product comes first on tablet/phone, then the copy */
   .dl-bento-row { grid-template-columns: 1fr 1fr; }
   .dl-bento-row > :first-child { grid-column: 1 / -1; }
-  .dl-header-inner > nav, .dl-header-brand .dl-switcher { display: none; }
+  .dl-header-inner > nav, .dl-header-inner > .dl-switcher { display: none; }
   /* Tablet: the hero tab (landing) and the page's own CTAs carry the quiz,
      so the menu leaves it out. Phones keep it. */
   .dl-menu .dl-menu-cta { display: none; }
@@ -1885,9 +1866,6 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
     -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
   }
   .dl-menu .dl-burger.is-x { margin-right: 14px; }
-  /* Landing: the hero's tab widens to just short of the logo and holds the
-     quiz button, with the hamburger at its far right. */
-  .dl-bento-tab { width: calc(100% - 160px); display: flex; align-items: center; justify-content: flex-end; padding-right: 74px; }
   .dl-header-inner { justify-content: flex-start; }
   .dl-hero-inner, .dl-faq-wrap, .dl-footer-inner { grid-template-columns: 1fr; }
   .dl-hero-art { min-height: 360px; }
@@ -1901,7 +1879,6 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 }
 @media (max-width: 680px) {
   .dl-frame { padding-top: 0; }
-  .dl-bento-tab { display: none; }
   .dl-bento-hero { border-top-right-radius: 28px; padding: 36px 22px 56px; }
   .dl-menu .dl-burger.is-x { margin-right: 0; } /* phones: corner */
   .dl-menu { padding-top: 0; }
@@ -2073,6 +2050,11 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 .dl-ing-stage-pill { display: grid; place-items: center; scale: 3.4; }
 .dl[data-dl-mode="light"] .dl-ing-stage { background: color-mix(in srgb, var(--dl-panel-ink) 6%, transparent); }
 .dl-ing-stage-pill .dl-pill { filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.35)); }
+/* The Viteo logo, at the header's size in the top-left corner (over the 3D canvas). Like the
+   stage's tint it isn't on the card, so it fades in late on open and out in
+   the close's first beat, never caught mid-morph. */
+.dl-ing-stage-logo { position: absolute; left: 32px; top: 30px; z-index: 1; pointer-events: none; transition: opacity 0.2s ease-out; }
+.dl-ing-dialog:is(.is-leaving, .is-entering) .dl-ing-stage-logo { opacity: 0; transition-duration: 0.15s; }
 .dl-ing-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.35s; }
 .dl-ing-stage.is-live canvas { opacity: 1; }
 .dl-ing-stage.is-live .dl-ing-stage-pill { opacity: 0; transition: opacity 0.35s; }
@@ -2105,6 +2087,7 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 .dl-ing-reasons li { position: relative; padding-left: 18px; color: var(--dl-ink-2); }
 .dl-ing-reasons li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 7px; height: 7px; border-radius: 2px; background: var(--dl-sun-deep); }
 .dl-ing-pairs { display: flex; flex-wrap: wrap; gap: 8px; }
+.dl-ing-pairs .dl-chip, .dl-ing-pairs .dl-chip:hover { border-color: transparent; } /* no edge on the close-up's chips (kept transparent so their size doesn't change); hover keeps its tint */
 .dl-ing-note { margin-top: 8px !important; font-size: 13px; }
 .dl-ing-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; }
 /* The close-up's ✕: the same square icon button as the cards' expand button
@@ -2346,6 +2329,13 @@ html[data-dl-morph="close"]::view-transition-new(dl-ing-glow) { animation: dl-mo
   .dl-quizbar-text strong { font-size: 15px; }
   .dl-quizbar-text span { font-size: 12px; opacity: 0.75; }
   .dl .dl-quizbar .dl-btn-primary { background: var(--dl-on-band-accent); color: var(--dl-band); white-space: nowrap; }
+  .dl-quizbar-time { display: none; }
+  /* Narrow phones: the label gives way and the button takes the bar, with the time inside it. */
+  @media (max-width: 480px) {
+    .dl-quizbar-text { display: none; }
+    .dl .dl-quizbar .dl-btn-primary { flex: 1; justify-content: center; }
+    .dl-quizbar-time { display: inline; font-weight: 500; opacity: 0.75; }
+  }
   .dl:has(.dl-quizbar) .dl-footer { padding-bottom: 104px; }
   .dl:has(.dl-quizbar.is-on) .dl-totop { opacity: 0; pointer-events: none; }
 }
@@ -2422,6 +2412,7 @@ html[data-dl-morph="close"]::view-transition-new(dl-ing-glow) { animation: dl-mo
   .dl-ing-dialog::backdrop { background: transparent; }
   .dl-ing-stage { min-height: 200px; }
   .dl-ing-stage-pill { scale: 2.3; }
+  .dl-ing-stage-logo { left: 20px; top: 26px; }
   .dl-ing-body { padding: 24px 22px 0; }
   .dl .dl-ing-close { top: 14px; right: 14px; }
   .dl-ing-actions {

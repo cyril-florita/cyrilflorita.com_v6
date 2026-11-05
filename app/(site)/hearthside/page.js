@@ -146,7 +146,7 @@ const Page = () => {
               <CaseGrid layout="two">
                 <Desktop name="statement" caption="How can we help? opens the conversation" />
                 <Desktop name="services-row" caption="What we do" />
-                <Desktop name="quotes" caption="In their words" />
+                <Desktop name="quotes" caption="Testimonials" />
                 <Desktop name="bts" caption="Behind the scenes" />
               </CaseGrid>
               <p><strong>How care begins, as a story.</strong> On a desktop, the four steps play through in one pinned frame as you scroll: each photo opens through the leaf, the step&apos;s number and text rise in, and a rail fills as you go. Phones and tablets get a swipe row instead.</p>

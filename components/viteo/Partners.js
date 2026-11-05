@@ -61,7 +61,7 @@ export default function Partners() {
                 <li>Clients get {WELCOME * 100}% off their first box</li>
                 <li>You earn {COMMISSION * 100}% of every box they keep, for 12 months</li>
               </ul>
-              <p className="dl-meta">You share Viteo itself; your clients take the quiz and choose their own pack.</p>
+              <p className="dl-meta">You share Viteo itself; your clients personalize and choose their own pack.</p>
             </article>
             <article className="dl-card dl-panel dl-panel-2 dl-pro-track">
               <span className="dl-pill-label">Dietitians and nutritionists</span>
@@ -71,7 +71,7 @@ export default function Partners() {
                 <li>They see &ldquo;Suggested by Cyril Florita&rdquo; and can change anything</li>
                 <li>Practitioner pricing for your own pack, plus commission</li>
               </ul>
-              <p className="dl-meta">Your suggestion arrives with each item&apos;s reason, just like a quiz result.</p>
+              <p className="dl-meta">Your suggestion arrives with each item&apos;s reason, just like a personalized pack.</p>
             </article>
             {/* What a client sees when a professional suggests a pack. */}
             <Link className="dl-panel dl-panel-1 dl-pro-track dl-pro-preview dl-pro-client" href={`${BASE}/plan/?pro=cyril-florita`}>
@@ -144,7 +144,7 @@ export default function Partners() {
         <section className="dl-pro-section">
           <BigWordHead word="Dashboard">
             <h2 className="dl-h2">Your clients, at a glance.</h2>
-            <p className="dl-bigword-note"><span className="dl-code" data-lot="Lot 05">Sample data</span></p>
+            <p className="dl-bigword-note"><span className="dl-code">Sample data</span></p>
           </BigWordHead>
           <div className="dl-pro-dash dl-card">
             <dl className="dl-pro-stats">
@@ -167,7 +167,7 @@ export default function Partners() {
               ))}
             </div>
             <div className="dl-ds-row">
-              <Button variant="secondary" size="sm" href={`${BASE}/plan/?pro=cyril-florita`}>See a suggested pack</Button>
+              <Button variant="ghost" size="sm" href={`${BASE}/plan/?pro=cyril-florita`}>See a suggested pack</Button>
               <Button variant="ghost" size="sm">Copy my link</Button>
             </div>
           </div>
@@ -226,7 +226,7 @@ export default function Partners() {
                 </label>
                 <label className="dl-field"><span>Certification or license number</span><input required /></label>
                 <p className="dl-meta">Preview mode: your details stay in this browser and aren&apos;t sent anywhere.</p>
-                <button type="submit" className="dl-btn dl-btn-primary">Send application <Arrow /></button>
+                <Button type="submit">Send application</Button>
               </>
             )}
           </form>

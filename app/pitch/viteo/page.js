@@ -8,7 +8,7 @@ import ProductStory from "@/components/viteo/ProductStory";
 import Ingredients from "@/components/viteo/Ingredients";
 import PartnerHero from "@/components/viteo/PartnerHero";
 import QuizBar from "@/components/viteo/QuizBar";
-import { Arrow, BigWordHead, Button, LogoMark, Pill, ProductBox } from "@/components/viteo/ui";
+import { Arrow, BigWordHead, LogoMark, Pill, ProductBox } from "@/components/viteo/ui";
 
 export const metadata = {
   title: { absolute: "Viteo · Personalized vitamin subscription | Design and dev pitch by Cyril Florita" },
@@ -24,7 +24,7 @@ const STEPS = [
   {
     n: "01",
     pill: "d3",
-    title: "Take the 2-minute quiz",
+    title: "Answer eight questions",
     text: "Tell us how you eat, sleep and spend your days. You'll see your pack before you sign up for anything.",
   },
   {
@@ -43,7 +43,7 @@ const STEPS = [
 
 const FAQ = [
   {
-    q: "How does the quiz decide what goes in my pack?",
+    q: "How do you decide what goes in my pack?",
     a: "Your answers about diet, time outdoors, sleep, activity and goals map to a short list of everyday nutrients. Each pill in your plan shows the answer that put it there, and you can remove or add anything before you order.",
   },
   {
@@ -97,7 +97,7 @@ const RoutineChart = () => (
     <div className="dl-panel dl-panel-dark dl-bento-card dl-glass is-link">
       <div className="dl-bento-card-top">
         <span className="dl-pill-label">
-          Track your routine <span className="dl-code" data-lot="Lot 01">Sample data</span>
+          Track your routine <span className="dl-code">Sample data</span>
         </span>
         <Link className="dl-corner" href={`${BASE}/account/#acc-tracker`} aria-label="See the routine tracker in your account">
           <Corner />
@@ -149,15 +149,10 @@ export default function Landing() {
         <span className="dl-preloader-mark"><LogoMark /></span>
         <span className="dl-preloader-word">viteo</span>
       </div>
-      {/* Bento: hero panel (with a tab rising into the header) + three cards */}
+      {/* Bento: hero panel + three cards */}
       <section className="dl-bento">
         <div className="dl-wrap">
           <div className="dl-panel dl-panel-1 dl-bento-hero">
-            <div className="dl-bento-tab">
-              <Button href={`${BASE}/quiz/`} variant="secondary">
-                Take the quiz
-              </Button>
-            </div>
             <div className="dl-bento-art">
               <span className="dl-orbit" aria-hidden="true" />
               <div
@@ -198,7 +193,7 @@ export default function Landing() {
                 pill explained.
               </p>
               <Link className="dl-underline-cta" href={`${BASE}/quiz/`}>
-                Take the 2-minute quiz
+                Personalize your pack
                 <span className="dl-cta-chip" aria-hidden="true">
                   <Arrow />
                 </span>
@@ -245,13 +240,13 @@ export default function Landing() {
                 <Link
                   className="dl-corner"
                   href={`${BASE}/quiz/`}
-                  aria-label="Take the quiz"
+                  aria-label="Personalize your pack"
                 >
                   <Corner />
                 </Link>
               </div>
               <div>
-                <p className="dl-meta">From quiz to your pack</p>
+                <p className="dl-meta">From questions to your pack</p>
                 <p className="dl-big">2 min</p>
               </div>
             </div>
@@ -277,7 +272,7 @@ export default function Landing() {
       <section id="how" className="dl-section">
         <div className="dl-wrap">
           <BigWordHead word="How it works">
-            <h2 className="dl-h2">From quiz to pack in three steps.</h2>
+            <h2 className="dl-h2">Your pack in three steps.</h2>
           </BigWordHead>
           <ol className="dl-steps">
             {STEPS.map((s) => (
@@ -321,7 +316,7 @@ export default function Landing() {
           <BigWordHead word="Reviews">
             <h2 className="dl-h2">What members say.</h2>
             <p className="dl-bigword-note">
-              <span className="dl-code" data-lot="Lot 02">Sample content</span>
+              <span className="dl-code">Sample content</span>
             </p>
           </BigWordHead>
           <Reviews />
@@ -330,7 +325,7 @@ export default function Landing() {
             <span className="dl-pro-faces" aria-hidden="true"><span>RD</span><span>PT</span><span>RD</span></span>
             <span>Recommended by trainers and dietitians in our partner program.</span>
             <Link className="dl-textlink" href={`${BASE}/partners/`}>For professionals</Link>
-            <span className="dl-code" data-lot="Lot 05">Sample data</span>
+            <span className="dl-code">Sample data</span>
           </p>
         </div>
       </section>
@@ -368,7 +363,7 @@ export default function Landing() {
             Two minutes to a routine <em>that fits.</em>
           </h2>
           <Link className="dl-underline-cta" href={`${BASE}/quiz/`}>
-            Start the quiz
+            Personalize your pack
             <span className="dl-cta-chip" aria-hidden="true">
               <Arrow />
             </span>

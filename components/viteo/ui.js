@@ -230,10 +230,13 @@ const setDl = (key, value) => {
   } catch {}
 };
 
-export const ThemeSwitcher = () => {
+// `show`: "both" (the menu, the design system), "themes" (the footer) or
+// "mode" (the light/dark toggle alone, at the right of the desktop nav).
+export const ThemeSwitcher = ({ show = "both" }) => {
   const { theme, mode } = useDlTheme();
   return (
-    <div className="dl-switcher">
+    <div className={`dl-switcher${show === "both" ? "" : ` is-${show}`}`}>
+      {show !== "mode" && (
       <div className="dl-switcher-themes" role="radiogroup" aria-label="Theme">
         {THEMES.map((t) => (
           <button
@@ -254,6 +257,8 @@ export const ThemeSwitcher = () => {
           </button>
         ))}
       </div>
+      )}
+      {show !== "themes" && (
       <button
         type="button"
         className="dl-switcher-mode"
@@ -289,6 +294,7 @@ export const ThemeSwitcher = () => {
           </svg>
         )}
       </button>
+      )}
     </div>
   );
 };
@@ -306,8 +312,12 @@ const NAV = [
 // Esc, a link, the close button or widening the window closes it.
 export const Header = () => {
   const [open, setOpen] = useState(false);
-  // No "Take the quiz" while you're taking it (trailingSlash: strip it first).
-  const onQuiz = (usePathname() || "").replace(/\/$/, "") === `${BASE}/quiz`;
+  // trailingSlash: strip it before comparing paths.
+  const path = (usePathname() || "").replace(/\/$/, "");
+  // No "Personalize your pack" while you're taking it.
+  const onQuiz = path === `${BASE}/quiz`;
+  // The current page's link is marked (aria-current, a pill in the nav); signing in counts as Account.
+  const current = (href) => !href.includes("#") && (path === href.replace(/\/$/, "") || (href === `${BASE}/account/` && path === `${BASE}/sign-in`)) ? "page" : undefined;
   const burgerRef = useRef(null);
   const menuRef = useRef(null);
   // Opened by keyboard (Enter/Space give a click with detail 0) or by
@@ -342,6 +352,10 @@ export const Header = () => {
 
   const close = () => setOpen(false);
 
+  // The design system has no site header: its own sidebar / top bar and menu
+  // (DsChrome) carry the logo, its sections and the way home.
+  if (path === `${BASE}/design-system`) return null;
+
   return (
     <header className="dl-header">
       <div className="dl-wrap dl-header-inner">
@@ -349,21 +363,17 @@ export const Header = () => {
           <Link href={`${BASE}/`} aria-label="Viteo home">
             <Logo />
           </Link>
-          {/* Desktop: beside the logo. Tablet/phone: in the menu instead. */}
-          <ThemeSwitcher />
         </div>
-        <nav aria-label="Viteo">
+        <nav className="dl-nav" aria-label="Viteo">
           {NAV.map(([label, href]) => (
-            <Link key={href} href={href}>
+            <Link key={href} href={href} aria-current={current(href)}>
               {label}
             </Link>
           ))}
-          {!onQuiz && (
-            <Button href={`${BASE}/quiz/`} size="sm">
-              Take the quiz
-            </Button>
-          )}
         </nav>
+        {/* Desktop: light/dark at the right of the nav (the themes are in the
+            footer). Tablet/phone: both in the menu instead. */}
+        <ThemeSwitcher show="mode" />
         <button
           ref={burgerRef}
           type="button"
@@ -414,7 +424,7 @@ export const Header = () => {
         </div>
         <nav className="dl-wrap dl-menu-nav" aria-label="Viteo menu">
           {NAV.map(([label, href], i) => (
-            <Link key={href} href={href} onClick={close} style={{ "--i": i }}>
+            <Link key={href} href={href} onClick={close} style={{ "--i": i }} aria-current={current(href)}>
               {label}
               <Arrow />
             </Link>
@@ -423,7 +433,7 @@ export const Header = () => {
         {!onQuiz && (
           <div className="dl-wrap dl-menu-cta" style={{ "--i": NAV.length }}>
             <Button href={`${BASE}/quiz/`} onClick={close}>
-              Take the quiz <Arrow />
+              Personalize your pack <Arrow />
             </Button>
           </div>
         )}
@@ -487,10 +497,13 @@ export const Footer = () => (
           not intended to diagnose, treat, cure, or prevent any disease. Talk
           to your doctor before starting any supplement.
         </p>
+        <div className="dl-footer-themes">
+          <ThemeSwitcher show="themes" />
+        </div>
       </div>
       <nav aria-label="Footer">
         <Link href={`${BASE}/`}>Home</Link>
-        <Link href={`${BASE}/quiz/`}>Quiz</Link>
+        <Link href={`${BASE}/quiz/`}>Personalize your pack</Link>
         <Link href={`${BASE}/plan/`}>Your plan</Link>
         <Link href={`${BASE}/checkout/`}>Checkout</Link>
         <Link href={`${BASE}/account/`}>Account</Link>

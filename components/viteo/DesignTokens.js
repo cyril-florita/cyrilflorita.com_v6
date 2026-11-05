@@ -43,7 +43,7 @@ export const CurrentTheme = () => {
   const t = THEMES.find((x) => x.id === theme) || THEMES[0];
   return (
     <p className="dl-meta dl-ds-current">
-      Showing <strong>{t.label}</strong> in <strong>{mode}</strong> mode · {t.fonts}. Switch themes and modes from the header.
+      Showing <strong>{t.label}</strong> in <strong>{mode}</strong> mode · {t.fonts}. Switch the theme in the footer and light or dark in the header.
     </p>
   );
 };

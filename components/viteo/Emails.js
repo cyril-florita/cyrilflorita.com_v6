@@ -54,7 +54,7 @@ export default function Emails() {
       <div className="dl-wrap">
         <BigWordHead word="Messages">
           <h1 className="dl-h2">The emails and texts between visits.</h1>
-          <p className="dl-bigword-note"><span className="dl-code" data-lot="Lot 06">Sample content</span></p>
+          <p className="dl-bigword-note"><span className="dl-code">Sample content</span></p>
         </BigWordHead>
         <p className="dl-section-lede">
           The messages people get between visits, in the same design. The shipping reminder has the account&apos;s Skip

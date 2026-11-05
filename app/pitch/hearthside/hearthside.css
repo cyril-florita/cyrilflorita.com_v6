@@ -251,7 +251,7 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
 }
 /* The header slides away while scrolling down and back on the way up
    (Header in client.js sets .is-scroll-hidden on .hs). The contact dock stays. */
-.hs-header { transition: translate var(--hs-dur) var(--hs-ease); }
+.hs-header { transition: translate var(--hs-dur) var(--hs-ease), opacity 0.35s var(--hs-ease-soft); } /* opacity: the page steps back behind the call modal (css/modal.css) */
 .hs.is-scroll-hidden .hs-header { translate: 0 -100%; }
 @media (max-width: 560px) {
   .hs-logo-name { font-size: 21px; }
@@ -384,7 +384,7 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
   .hs-hero-notch { order: 2; margin-top: 0; width: auto; }
   .hs-hero-copy { order: 3; }
   .hs-hero-actions { order: 4; position: static; }
-  .hs-hero-art { height: auto; aspect-ratio: 16 / 10; border-radius: var(--hs-radius); }
+  .hs-hero-art { height: auto; aspect-ratio: 16 / 10; border-radius: var(--hs-radius) 96px; } /* tablets: leaf-shaped like every other photo, 96px as --hs-leaf (which is only set on photo frames); phones override below */
   .hs-hero-img { object-position: 50% 30%; } /* the desktop bottom-anchored crop is desktop only */
   .hs-hero-notch { position: static; max-width: none; padding: 0; background: none; border-radius: 0; }
   .hs-hero-notch::before, .hs-hero-notch::after { display: none; }
@@ -443,7 +443,13 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
 }
 @keyframes hs-line-in { from { translate: 0 112%; } }
 @keyframes hs-fade-up { from { opacity: 0; translate: 0 14px; } }
-@keyframes hs-hero-open { from { clip-path: inset(34% 0 0 0); } to { clip-path: inset(0); } }
+/* It starts a third open, so the photo paints at once (it's the largest
+   paint). After Home's preloader the start is fully closed instead: the
+   variable flips while the page is hidden for the hand-off (.is-entering),
+   which doesn't restart the animation, so the photo draws in from nothing
+   rather than popping in a third open. Page-head banners keep the default. */
+@keyframes hs-hero-open { from { clip-path: inset(var(--hs-open-from, 34%) 0 0 0); } to { clip-path: inset(0); } }
+.hs.is-entering .hs-hero-art { --hs-open-from: 100%; }
 @keyframes hs-hero-settle { from { transform: scale(1.18); } to { transform: scale(1); } }
 @keyframes hs-hero-push { from { scale: 1; translate: 0 0; } to { scale: 1.12; translate: 0 -4%; } }
 @keyframes hs-hero-story { from { scale: 1; } to { scale: 1.5; } }
@@ -749,6 +755,11 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
 .hs-chip { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; border: 1.5px solid var(--hs-control); border-radius: var(--hs-radius-sm); cursor: pointer; font-weight: 500 !important; font-size: 16px; }
 .hs-chip:has(input:checked) { border-color: var(--hs-ink); background: var(--hs-ink); color: var(--hs-page); }
 .hs-chip input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+/* A row of chips that shares the width (the call modal's two questions): one line where it fits, wrapping on phones. */
+.hs-chips-row > .hs-chip { flex: 1 1 auto; justify-content: center; }
+.hs-chip:has(.hs-chip-sub) { flex-direction: column; justify-content: center; gap: 0; padding-block: 6px; line-height: 1.25; }
+.hs-chip-sub { color: var(--hs-ink-2); font-weight: 400; font-size: 13px; }
+.hs-chip:has(input:checked) .hs-chip-sub { color: inherit; opacity: 0.8; }
 .hs-chip:has(input:focus-visible) { outline: 3px solid var(--hs-focus); outline-offset: 2px; }
 .hs-preview-note { display: flex; gap: 12px; padding: 16px 18px; border-left: 3px solid var(--hs-ember); background: var(--hs-sand); border-radius: 0 var(--hs-radius-sm) var(--hs-radius-sm) 0; font-size: 16px; color: var(--hs-ink-2); }
 .hs-preview-note .hs-icon { flex: none; color: var(--hs-ember-text); margin-top: 2px; }
@@ -1255,7 +1266,7 @@ main[data-hover] .hs-faq summary:hover { color: var(--hs-ember-text); }
    Home breaks its run of label rows with a centred chapter intro (.hs-help,
    its second sentence in .hs-statement-em), a photo edge to edge
    (.hs-bleed), and full-bleed chapters with their own ground — dark for
-   Behind the scenes, sand for In their words (.hs-chapter). Chapters and the
+   Behind the scenes, sand for Testimonials (.hs-chapter). Chapters and the
    bleed reach the window's edges from inside .hs-wrap (negative margins of
    50% − 50vw); .hs clips the scrollbar's sliver of overflow. */
 /* The full-bleed pieces' sliver of sideways overflow (100vw includes a
@@ -1913,6 +1924,28 @@ html[data-hs-vt="look"]::view-transition-new(*) { animation: hs-look-in 0.3s eas
   background: radial-gradient(120% 140% at 50% 35%, #34475A 0%, #2A3A4B 55%, #212E3C 100%);
   box-shadow: inset 0 0 12px 1px rgba(0, 0, 0, 0.26), inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
+/* Dark mode inverts the closing band to the scheme's light page, so there it
+   takes the light-mode buttons: the navy metal primary and the frosted-white
+   glass secondary, ink-edged. */
+.hs[data-hs-mode="dark"] .hs-band .hs-btn-primary,
+.hs[data-hs-mode="dark"] .hs-band .hs-btn-primary:hover {
+  --metal-edge: inset 0 0 12px 1px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  background: radial-gradient(120% 140% at 50% 35%, #263444 0%, #1E2A36 55%, #161F29 100%);
+  color: #FFFFFF;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+}
+.hs[data-hs-mode="dark"] .hs-band .hs-btn-primary::before {
+  background: radial-gradient(120% 140% at 50% 35%, #34475A 0%, #2A3A4B 55%, #212E3C 100%);
+  box-shadow: inset 0 0 12px 1px rgba(0, 0, 0, 0.26), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+.hs[data-hs-mode="dark"] .hs-band .hs-btn-secondary,
+.hs[data-hs-mode="dark"] .hs-band .hs-btn-secondary:hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.14) 50%, rgba(255, 255, 255, 0.28));
+  border: 1px solid color-mix(in srgb, var(--hb-ink) 24%, transparent);
+  box-shadow: inset 0 1px 0 #FFFFFF;
+  color: var(--hb-ink);
+}
+.hs[data-hs-mode="dark"] .hs-band .hs-btn-secondary::before { background: linear-gradient(135deg, rgba(30, 42, 54, 0.1), rgba(30, 42, 54, 0.05) 50%, rgba(30, 42, 54, 0.09)); }
 
 /* Light mode: form fields with an eased border, 1px of ink at 45% (about
    2.6:1 against the page) in place of 1.5px of the control colour. */
@@ -1944,9 +1977,9 @@ html:has(.hs:is(.is-loading, .is-entering)) { overflow: hidden; scrollbar-gutter
    after the overlay left); only the reveals are eased. The page stays
    painted under the overlay itself, so the hero photo still counts as the
    largest paint. */
-.hs.is-entering:not(.is-ent-logo) :is(.hs-sidemark, .hs-sidemark-3d) { opacity: 0; }
+.hs.is-entering:not(.is-ent-logo) :is(.hs-sidemark, .hs-sidemark-3d) { opacity: 0; transition: none; }
 .hs.is-entering.is-ent-logo :is(.hs-sidemark, .hs-sidemark-3d) { transition: opacity 0.9s var(--hs-ease-soft); }
-.hs.is-entering:not(.is-ent-page) :is(main, .hs-header) { opacity: 0; }
+.hs.is-entering:not(.is-ent-page) :is(main, .hs-header) { opacity: 0; transition: none; } /* none: the header's own list fades opacity (for the call modal) */
 .hs.is-entering.is-ent-page :is(main, .hs-header) { transition: opacity 0.45s var(--hs-ease-soft); }
 .hs-pre-mark {
   display: block; width: 104px; height: 104px;
@@ -1983,3 +2016,23 @@ html:has(.hs:is(.is-loading, .is-entering)) { overflow: hidden; scrollbar-gutter
   animation: hs-pre-sweep 1.6s ease-in-out infinite;
 }
 @keyframes hs-pre-sweep { from { translate: -100% 0; } to { translate: 260% 0; } }
+
+/* Phones and tablets: the hero's entrance after Home's preloader (2026-11-04).
+   Without the preloader these screens show the hero still (its photo is the
+   largest paint, see "Hero entrance"); after it the page is hidden anyway, so
+   the same choreography as desktop plays once the page comes in (.is-ent-page):
+   the photo draws in from nothing (--hs-open-from is 100% under .is-entering),
+   each headline line rises out of its mask, then the area label, the lede, the
+   buttons and the referral link fade up. Backwards fill, so nothing lingers
+   once .is-ent-page is cleared. */
+@media (prefers-reduced-motion: no-preference) and (max-width: 960px) {
+  .hs.is-ent-page .hs-hero-art { animation: hs-hero-open 1.2s cubic-bezier(0.16, 1, 0.3, 1) backwards; }
+  .hs.is-ent-page .hs-hero h1 > span { overflow: clip; padding: 0 0.12em 0.18em 0; margin: 0 -0.12em -0.18em 0; }
+  .hs.is-ent-page .hs-hero h1 > span > em { display: inline-block; animation: hs-line-in 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s backwards; }
+  .hs.is-ent-page .hs-hero h1 > span + span > em { animation-delay: 0.42s; }
+  .hs.is-ent-page :is(.hs-hero-tab, .hs-hero-copy .hs-lede, .hs-hero-ctas > *, .hs-hero-refer) { animation: hs-fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s backwards; }
+  .hs.is-ent-page .hs-hero-copy .hs-lede { animation-delay: 0.6s; }
+  .hs.is-ent-page .hs-hero-ctas > :first-child { animation-delay: 0.7s; }
+  .hs.is-ent-page .hs-hero-ctas > :nth-child(2) { animation-delay: 0.78s; }
+  .hs.is-ent-page .hs-hero-actions .hs-hero-refer { animation-delay: 0.86s; } /* as heavy as the :is() rule above, which it must beat */
+}

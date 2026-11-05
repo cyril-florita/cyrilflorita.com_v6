@@ -24,6 +24,7 @@ const TARGETS = [
 export default function Reveal() {
   const pathname = usePathname();
   useEffect(() => {
+    if ((pathname || "").includes("/design-system")) return; // a reference page: content is simply there
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     // On desktop the 3D story flies pills into these cards; they must already
     // be there when a pill arrives, or the card rising in afterwards replays
