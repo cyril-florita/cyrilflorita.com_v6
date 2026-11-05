@@ -237,7 +237,7 @@ export default function Account() {
             </BigWordHead>
           </div>
           {order.demo
-            ? <p className="dl-meta">Signed in as {session.email}. <Link className="dl-textlink" href={`${BASE}/quiz/`}>Update your answers</Link> · <button type="button" className="dl-textlink" onClick={signOut}>Sign out</button></p>
+            ? <p className="dl-meta">Signed in as {session.email}. <Link className="dl-textlink" href={`${BASE}/personalize/`}>Update your answers</Link> · <button type="button" className="dl-textlink" onClick={signOut}>Sign out</button></p>
             : <p className="dl-meta">Order {order.id} · Signed in as {session.email} · <button type="button" className="dl-textlink" onClick={signOut}>Sign out</button></p>}
         </div>
 

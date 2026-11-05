@@ -16,7 +16,7 @@ export const PRODUCTS = {
     color: "#F6C453",
     price: 5,
     blurb: "Vegan D3 from lichen, in an olive-oil softgel. Your skin makes vitamin D from sunlight, so indoor days mean less of it.",
-    // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
+    // When the answers add it (mirrors recommend() below) and what it's often packed with.
     reasons: ["You spend most of the day indoors.", "Your daily time outside is on the short side.", "It rounds out packs that would otherwise have fewer than three items."],
     pairs: ["omega"],
   },
@@ -29,7 +29,7 @@ export const PRODUCTS = {
     color: "#E58E73",
     price: 4,
     blurb: "Methylcobalamin, a form of vitamin B12. B12 comes almost entirely from animal foods, so plant-based diets contain little of it.",
-    // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
+    // When the answers add it (mirrors recommend() below) and what it's often packed with.
     reasons: ["You eat mostly or fully plant-based.", "You picked steady energy."],
     pairs: ["omega"],
   },
@@ -41,7 +41,7 @@ export const PRODUCTS = {
     color: "#7FB3A6",
     price: 9,
     blurb: "EPA and DHA from algae, the same source fish get theirs from. A plant-based alternative to fish oil, with no fishy aftertaste.",
-    // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
+    // When the answers add it (mirrors recommend() below) and what it's often packed with.
     reasons: ["Fish isn't part of your diet.", "Oily fish rarely makes it onto your plate.", "It rounds out packs that would otherwise have fewer than three items."],
     pairs: ["b12", "d3"],
   },
@@ -54,7 +54,7 @@ export const PRODUCTS = {
     color2: "#F4EFFB",
     price: 6,
     blurb: "Magnesium bound to glycine. Usually taken in the evening.",
-    // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
+    // When the answers add it (mirrors recommend() below) and what it's often packed with.
     reasons: ["You picked winding down.", "You mentioned restless nights.", "You train hard most weeks."],
     pairs: [],
   },
@@ -66,7 +66,7 @@ export const PRODUCTS = {
     color: "#F29E4C",
     price: 4,
     blurb: "Buffered vitamin C at 250 mg, a moderate everyday amount.",
-    // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
+    // When the answers add it (mirrors recommend() below) and what it's often packed with.
     reasons: ["You picked busy-season support.", "It rounds out packs that would otherwise have fewer than three items."],
     pairs: ["zinc"],
   },
@@ -78,7 +78,7 @@ export const PRODUCTS = {
     color: "#9FB7C9",
     price: 4,
     blurb: "Zinc picolinate, 15 mg. Usually paired with vitamin C.",
-    // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
+    // When the answers add it (mirrors recommend() below) and what it's often packed with.
     reasons: ["You picked busy-season support (it joins vitamin C)."],
     pairs: ["c"],
   },
@@ -91,7 +91,7 @@ export const PRODUCTS = {
     color2: "#F1F7EE",
     price: 8,
     blurb: "Five strains, 10 billion CFU at expiry, in a delayed-release capsule.",
-    // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
+    // When the answers add it (mirrors recommend() below) and what it's often packed with.
     reasons: ["You picked digestion."],
     pairs: [],
   },
@@ -104,7 +104,7 @@ export const PRODUCTS = {
     color: "#E7A9C0",
     price: 5,
     blurb: "Vitamin B7. Added when you pick hair & nails.",
-    // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
+    // When the answers add it (mirrors recommend() below) and what it's often packed with.
     reasons: ["You picked hair & nails."],
     pairs: [],
   },
@@ -117,13 +117,13 @@ export const PRODUCTS = {
     color2: "#EEF4FB",
     price: 7,
     blurb: "An amino acid found naturally in green tea.",
-    // When the quiz adds it (mirrors recommend() below) and what it's often packed with.
+    // When the answers add it (mirrors recommend() below) and what it's often packed with.
     reasons: ["You picked calm focus."],
     pairs: [],
   },
 };
 
-// Quiz. `type`: "single" (radio cards), "multi" (checkbox cards, `max`),
+// The questions. `type`: "single" (radio cards), "multi" (checkbox cards, `max`),
 // "text" (first name). Each option's `hint` is optional helper copy.
 export const QUESTIONS = [
   {
@@ -215,8 +215,8 @@ export const QUESTIONS = [
   },
 ];
 
-// The quiz answers -> recommended products, each with a plain reason.
-// `fill: false` skips the "at least three" top-up, so the quiz can show only
+// The answers -> recommended products, each with a plain reason.
+// `fill: false` skips the "at least three" top-up, so the questions page can show only
 // what the answers so far have earned.
 export const recommend = (a, { fill = true } = {}) => {
   const picks = [];

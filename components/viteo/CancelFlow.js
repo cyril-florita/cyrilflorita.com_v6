@@ -65,7 +65,7 @@ export default function CancelFlow({ open, onClose, order, nextDate, threePrice,
     changed: {
       title: "Rebuild your pack in two minutes",
       text: "Personalize your pack again and your next box follows your new answers. Or add and remove items yourself from your pack.",
-      action: <Button href={`${BASE}/quiz/`} onClick={close}>Update your answers</Button>,
+      action: <Button href={`${BASE}/personalize/`} onClick={close}>Update your answers</Button>,
     },
   }[reason];
 

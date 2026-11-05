@@ -14,7 +14,7 @@
     { "src": "/pitch/viteo/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ],
   "shortcuts": [
-    { "name": "Take the quiz", "url": "/pitch/viteo/quiz/" },
+    { "name": "Personalize your pack", "url": "/pitch/viteo/personalize/" },
     { "name": "Your account", "url": "/pitch/viteo/account/" }
   ]
 }

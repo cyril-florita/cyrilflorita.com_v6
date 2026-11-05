@@ -9,8 +9,8 @@ import "./viteo.css";
 // Viteo: a personalized-vitamin subscription, built as a design and dev
 // pitch. It lives outside app/(site), so none of the portfolio's styles,
 // frame or preloader load here. It's searchable (aimed at founders): the
-// landing, quiz and design system are indexed and in the sitemap; plan,
-// checkout and account are noindex (empty without a quiz result). Each page
+// landing, personalize page and design system are indexed and in the sitemap; plan,
+// checkout and account are noindex (empty without answers). Each page
 // sets its own canonical. The footer carries the pitch notice; links back to the portfolio are plain <a> tags, so
 // they do a full page load.
 //

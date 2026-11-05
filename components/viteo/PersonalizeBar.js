@@ -6,8 +6,8 @@ import { Arrow, Button } from "./ui";
 // Phones and tablets (≤960px): a "Personalize your pack" bar fixed to the bottom of
 // the landing page. It slides up once the hero's own call to action has
 // scrolled away, and steps aside again at the closing call to action (no
-// two quiz buttons on screen at once). Hidden entirely on desktop.
-export default function QuizBar() {
+// two "Personalize your pack" buttons on screen at once). Hidden entirely on desktop.
+export default function PersonalizeBar() {
   const [on, setOn] = useState(false);
   useEffect(() => {
     const heroCta = document.querySelector(".dl-bento-hero .dl-underline-cta");
@@ -35,13 +35,13 @@ export default function QuizBar() {
     };
   }, []);
   return (
-    <div className={`dl-quizbar ${on ? "is-on" : ""}`} inert={!on}>
-      <span className="dl-quizbar-text">
+    <div className={`dl-personalize-bar ${on ? "is-on" : ""}`} inert={!on}>
+      <span className="dl-personalize-bar-text">
         <strong>8 questions</strong>
         <span>About 2 minutes</span>
       </span>
-      <Button href={`${BASE}/quiz/`}>
-        Personalize your pack<span className="dl-quizbar-time"> · 2 min</span> <Arrow />
+      <Button href={`${BASE}/personalize/`}>
+        Personalize your pack<span className="dl-personalize-bar-time"> · 2 min</span> <Arrow />
       </Button>
     </div>
   );

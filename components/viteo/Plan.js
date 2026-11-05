@@ -9,7 +9,7 @@ import "@/app/pitch/viteo/css/plan.css";
 
 // "Your plan": the recommended pack with a reason for every item, add /
 // remove, a delivery-frequency picker, and a running price summary. Without
-// quiz answers it shows a sample plan, so the page always has something to
+// answers it shows a sample plan, so the page always has something to
 // show. A partner's link (?pro=<id>, PARTNERS in data.js) loads the pack
 // they suggest, with their reasons, a "Suggested by" banner and their
 // first-box discount (applied at checkout).
@@ -40,7 +40,7 @@ export default function Plan() {
 
   if (!hydrated) return <section className="dl-plan dl-wrap" aria-busy="true" />;
 
-  // The sample plan is nobody in particular, even if an old quiz left a name.
+  // The sample plan is nobody in particular, even if old answers left a name.
   const name = sample ? "" : answers?.name?.trim();
   const pro = PARTNERS[cart.suggestedBy];
   const extras = Object.values(PRODUCTS).filter((p) => !ids.includes(p.id));
@@ -61,7 +61,7 @@ export default function Plan() {
                 : `${cart.items.length} essentials, one ${answers?.time === "evening" ? "evening" : "morning"} pack. Every item says why it's here, and you can change anything.`}
             </p>
           </div>
-          <Link className="dl-textlink" href={`${BASE}/quiz/`}>{sample ? "Personalize your pack" : "Update your answers"}</Link>
+          <Link className="dl-textlink" href={`${BASE}/personalize/`}>{sample ? "Personalize your pack" : "Update your answers"}</Link>
         </div>
 
         <div className="dl-plan-grid">
@@ -92,7 +92,7 @@ export default function Plan() {
                   <li key={item.id} className="dl-card dl-item">
                     <span className="dl-item-pill"><Pill id={item.id} size="lg" tilt={-18} /></span>
                     <div className="dl-item-body">
-                      <h3>{p.name} <span className="dl-meta">{p.dose}</span></h3>
+                      <h2>{p.name} <span className="dl-meta">{p.dose}</span></h2>
                       <p className="dl-why"><span className="dl-why-label">{pro && item.why.startsWith(`${pro.first}'s note`) ? `${pro.first}'s note` : "Why it's here"}</span> {pro ? item.why.replace(`${pro.first}'s note: `, "") : item.why}</p>
                     </div>
                     <div className="dl-item-side">

@@ -84,7 +84,7 @@ export const PillTray = ({ ids, label = "Your daily pack", size = "lg" }) => (
 // The Viteo product box, drawn in CSS (front, side and top faces; styles
 // under "Hero product shot" in viteo.css). Sized by its container: put it in
 // a .dl-product (landing hero), .dl-product-sm (order confirmation) or
-// .dl-product-xs (plan, checkout summary, quiz finale).
+// .dl-product-xs (plan, checkout summary, pack-filling finale).
 // `owner` prints the customer's name on the pack ("Cyril's"). `morph`
 // (default) names it for page transitions, so the same pack moves from page
 // to page; the landing hero turns it off (its 3D version takes over there).
@@ -307,7 +307,7 @@ const NAV = [
 ];
 
 // Header: inline nav on desktop; on tablet and phone (≤960px) the links,
-// theme switcher and quiz button move into a full-screen menu behind a
+// theme switcher and "Personalize your pack" button move into a full-screen menu behind a
 // hamburger. The menu opens with a circular wipe and its items stagger in;
 // Esc, a link, the close button or widening the window closes it.
 export const Header = () => {
@@ -315,7 +315,7 @@ export const Header = () => {
   // trailingSlash: strip it before comparing paths.
   const path = (usePathname() || "").replace(/\/$/, "");
   // No "Personalize your pack" while you're taking it.
-  const onQuiz = path === `${BASE}/quiz`;
+  const onPersonalize = path === `${BASE}/personalize`;
   // The current page's link is marked (aria-current, a pill in the nav); signing in counts as Account.
   const current = (href) => !href.includes("#") && (path === href.replace(/\/$/, "") || (href === `${BASE}/account/` && path === `${BASE}/sign-in`)) ? "page" : undefined;
   const burgerRef = useRef(null);
@@ -331,6 +331,15 @@ export const Header = () => {
     const root = document.documentElement;
     root.style.overflow = "hidden";
     const onKey = (e) => {
+      // Tab and Shift+Tab wrap around inside the open menu (a modal dialog).
+      if (e.key === "Tab") {
+        const f = [...(menuRef.current?.querySelectorAll("a[href], button:not([disabled])") ?? [])].filter((el) => el.offsetParent !== null);
+        if (!f.length) return;
+        const first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && (document.activeElement === first || !menuRef.current.contains(document.activeElement))) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && (document.activeElement === last || !menuRef.current.contains(document.activeElement))) { e.preventDefault(); first.focus(); }
+        return;
+      }
       if (e.key !== "Escape") return;
       setOpen(false);
       burgerRef.current?.focus();
@@ -430,9 +439,9 @@ export const Header = () => {
             </Link>
           ))}
         </nav>
-        {!onQuiz && (
+        {!onPersonalize && (
           <div className="dl-wrap dl-menu-cta" style={{ "--i": NAV.length }}>
-            <Button href={`${BASE}/quiz/`} onClick={close}>
+            <Button href={`${BASE}/personalize/`} onClick={close}>
               Personalize your pack <Arrow />
             </Button>
           </div>
@@ -503,7 +512,7 @@ export const Footer = () => (
       </div>
       <nav aria-label="Footer">
         <Link href={`${BASE}/`}>Home</Link>
-        <Link href={`${BASE}/quiz/`}>Personalize your pack</Link>
+        <Link href={`${BASE}/personalize/`}>Personalize your pack</Link>
         <Link href={`${BASE}/plan/`}>Your plan</Link>
         <Link href={`${BASE}/checkout/`}>Checkout</Link>
         <Link href={`${BASE}/account/`}>Account</Link>

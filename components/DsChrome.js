@@ -72,7 +72,18 @@ export default function DsChrome({ prefix: p, sections, logo, logoIsLink, home, 
     if (!open) return;
     const root = document.documentElement;
     root.style.overflow = "hidden";
-    const onKey = (e) => { if (e.key === "Escape") { setOpen(false); burgerRef.current?.focus(); } };
+    const onKey = (e) => {
+      // Tab and Shift+Tab wrap around inside the open menu (a modal dialog).
+      if (e.key === "Tab") {
+        const f = [...(menuRef.current?.querySelectorAll("a[href], button:not([disabled])") ?? [])].filter((el) => el.offsetParent !== null);
+        if (!f.length) return;
+        const first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && (document.activeElement === first || !menuRef.current.contains(document.activeElement))) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && (document.activeElement === last || !menuRef.current.contains(document.activeElement))) { e.preventDefault(); first.focus(); }
+        return;
+      }
+      if (e.key === "Escape") { setOpen(false); burgerRef.current?.focus(); }
+    };
     const wide = window.matchMedia("(min-width: 1200px)");
     const onWide = (e) => e.matches && setOpen(false);
     window.addEventListener("keydown", onKey);

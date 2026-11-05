@@ -198,10 +198,10 @@ const GridPhone3D = ({ src, poster, label }) => {
 
 export const TILE_MEDIA = {
   // Viteo (design & dev pitch): a 12s loop cut with HyperFrames (new-work/viteo-tile) from
-  // recordings of the prototype: intro, parallax, scroll story, close-up, quiz finale, account.
+  // recordings of the prototype: intro, parallax, scroll story, close-up, pack-building finale, account.
   "/viteo": {
     kind: "video", src: "/img/portfolio/viteo_tile.mp4", poster: "/img/thumbs/portfolio/viteo_tile-poster.webp",
-    label: "Viteo: the 3D pack, its scroll story, an ingredient close-up, the quiz finale and the account",
+    label: "Viteo: the 3D pack, its scroll story, an ingredient close-up, the pack filling and the account",
     shape: "wide",
   },
 

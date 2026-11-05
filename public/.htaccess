@@ -47,6 +47,10 @@ RedirectMatch 301 ^/lab/viteo(/.*)?$ /pitch/viteo$1
 # Home, which opens it (?call).
 RedirectMatch 301 ^/pitch/hearthside/contact/?$ /pitch/hearthside/?call=1
 
+# Viteo's questions moved from /quiz/ to /personalize/ (2026-11-04), so the
+# prototype has no "quiz" wording left; old links and bookmarks land there.
+RedirectMatch 301 ^/pitch/viteo/quiz/?$ /pitch/viteo/personalize/
+
 # deploy.js's record of deployed files: not for the public.
 <IfModule mod_authz_core.c>
   <Files ".deploy-manifest.json">

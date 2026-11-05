@@ -77,7 +77,7 @@ export default function Checkout() {
           <h1 className="dl-h2">Your pack is empty</h1>
           <p className="dl-section-lede">Personalize one in two minutes, or start from an example pack.</p>
           <div className="dl-hero-actions">
-            <Button href={`${BASE}/quiz/`} size="lg">Personalize your pack <Arrow /></Button>
+            <Button href={`${BASE}/personalize/`} size="lg">Personalize your pack <Arrow /></Button>
             <Button
               variant="ghost"
               size="lg"
@@ -194,7 +194,7 @@ export default function Checkout() {
                 </div>
                 {!session && <p className="dl-meta">Have an account? <Link className="dl-textlink" href={`${BASE}/sign-in/?next=checkout`}>Sign in</Link> to fill this in.</p>}
                 <p className="dl-meta">Preview mode: your details stay in this browser and aren&apos;t sent anywhere.</p>
-                <div className="dl-quiz-nav"><span /><Button type="submit">Continue <Arrow /></Button></div>
+                <div className="dl-personalize-nav"><span /><Button type="submit">Continue <Arrow /></Button></div>
               </form>
             )}
 
@@ -217,7 +217,7 @@ export default function Checkout() {
                   After that, a new box every {price.plan.months === 1 ? "month" : `${price.plan.months} months`}.{" "}
                   <Link className="dl-textlink" href={`${BASE}/plan/`}>Change frequency</Link>
                 </p>
-                <div className="dl-quiz-nav">
+                <div className="dl-personalize-nav">
                   <Button variant="ghost" onClick={() => setStep(0)}>Back</Button>
                   <Button onClick={next}>Continue <Arrow /></Button>
                 </div>
@@ -242,7 +242,7 @@ export default function Checkout() {
                   <div><dt>First box</dt><dd>{fmt(startDate)}, then every {price.plan.months === 1 ? "month" : `${price.plan.months} months`}</dd><button type="button" className="dl-textlink" onClick={() => setStep(1)}>Edit</button></div>
                   <div><dt>Payment</dt><dd>{payment?.label || "Not added yet"}<br /><span className="dl-meta">Charged when your first box ships. Preview mode: nothing is charged.</span></dd><button type="button" className="dl-textlink" onClick={() => setStep(2)}>Edit</button></div>
                 </dl>
-                <div className="dl-quiz-nav">
+                <div className="dl-personalize-nav">
                   <Button variant="ghost" size="lg" onClick={() => setStep(2)}>Back</Button>
                   <Button onClick={place} size="lg" disabled={placing || !payment} aria-busy={placing}>
                     {placing ? <><span className="dl-spin dl-spin-sm" aria-hidden="true" /> Placing order…</> : <>Place order</>}

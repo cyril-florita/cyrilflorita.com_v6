@@ -108,7 +108,7 @@ export function PaymentStep({ headingRef, total, zip, onBack, onPaid }) {
         )}
       </div>
 
-      <div className="dl-quiz-nav">
+      <div className="dl-personalize-nav">
         <Button variant="ghost" onClick={onBack}>Back</Button>
         <Button onClick={payCard} disabled={checking} aria-busy={checking}>
           {checking ? <><span className="dl-spin dl-spin-sm" aria-hidden="true" /> Checking card…</> : <>Use this card <Arrow /></>}

@@ -9,7 +9,7 @@ import { Arrow, Logo, Pill, Button } from "./ui";
 // dialog: the card's pill morphs (View Transitions API) into a large pill
 // on a dark stage, which then turns slowly in real 3D (three.js, desktop with
 // a mouse; elsewhere the baked image stays), beside its dose, form, price,
-// the quiz answers that add it, and what it's often packed with. The cards
+// the answers that add it, and what it's often packed with. The cards
 // keep their data-story-pill docks for the scroll story (ProductStory.js).
 
 const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -368,7 +368,7 @@ export default function Ingredients() {
               )}
               <p className="dl-meta dl-ing-note">Not medical advice. Check with a healthcare professional before starting any supplement.</p>
               <div className="dl-ing-actions">
-                <Button href={`${BASE}/quiz/`}>Personalize your pack <Arrow /></Button>
+                <Button href={`${BASE}/personalize/`}>Personalize your pack <Arrow /></Button>
               </div>
               </div>
             </div>

@@ -1,7 +1,7 @@
 "use client";
 import { useSyncExternalStore } from "react";
 
-// Tiny localStorage store for the Viteo prototype (quiz answers, cart,
+// Tiny localStorage store for the Viteo prototype (answers, cart,
 // order). Everything stays in the visitor's browser; nothing is sent
 // anywhere. useStored() re-renders on writes from any component.
 

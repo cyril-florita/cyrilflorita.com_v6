@@ -3,7 +3,7 @@
 // card (useTileThought in components/PortfolioIsotope.js) — edit it here.
 export const CASE_SUMMARIES = {
   "/hearthside": "A design and dev pitch for a home health agency: a calm, phone-first website for families and referral partners, and the intake system behind it, where every referral is routed, tracked, and followed up from the first call to the first visit.",
-  "/viteo": "A design and dev pitch: a personalized vitamin subscription, designed and built end to end, from a 3D product that opens as you scroll and a quiz that builds your pack as you answer, to a plan that explains every pill and an account that keeps subscribers in control.",
+  "/viteo": "A design and dev pitch: a personalized vitamin subscription, designed and built end to end, from a 3D product that opens as you scroll and eight questions that build your pack as you answer, to a plan that explains every pill and an account that keeps subscribers in control.",
   "/35-day-generosity-challenge": "A living landing page for a five-week, multi-channel campaign: one hub that evolved every Monday as supporters worked through a week-by-week journey of generosity.",
   "/giving-tuesday": "A single-purpose donation page for Children's Hunger Fund's biggest giving day of the year: rebuilt for conversion, re-engineered overnight for a corporate match, and run live, hour by hour.",
   "/grace-stream": "Grace Stream, Grace to You's 24/7 online broadcast of John MacArthur's teaching: I designed its brand and built the front end of its player page.",

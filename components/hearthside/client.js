@@ -366,10 +366,16 @@ export function SplitHeads() {
     if (/design-system/.test(pathname)) return; // a reference page: content is simply there (its rail jumps used to land on half-played reveals)
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
     const els = [...document.querySelectorAll(SPLIT)].filter((el) => !el.closest(SPLIT_SKIP));
-    // Effects run twice in dev: headings an earlier run split are reused.
-    // Labels first (innerText needs layout), before any heading is rewritten.
-    const labels = new Map(els.filter((el) => !el.classList.contains("hs-split") && /^H[1-6]$/.test(el.tagName)).map((el) => [el, el.innerText.replace(/\s+/g, " ").trim()])); // innerText keeps the break between a name and its credentials
-    els.filter((el) => !el.classList.contains("hs-split")).forEach((el) => {
+    // Split lazily, like LineReveal: splitting every heading on mount and then
+    // reading every heading's position forced a full-page layout — one ~390ms
+    // task on a throttled phone, behind Home's preloader, which PageSpeed
+    // counted as blocking time. Now headings are split only as they come
+    // within a screen of view, in small batches, and their positions come from
+    // the observer (no forced layout). Labels are read before a batch is
+    // rewritten (innerText needs layout).
+    const splitBatch = (batch) => {
+      const labels = new Map(batch.filter((el) => /^H[1-6]$/.test(el.tagName)).map((el) => [el, el.innerText.replace(/\s+/g, " ").trim()])); // innerText keeps the break between a name and its credentials
+      batch.forEach((el) => {
       const heading = labels.has(el); // a paragraph (the photo line) keeps its words readable instead
       if (heading) el.setAttribute("aria-label", labels.get(el));
       let i = 0;
@@ -392,22 +398,30 @@ export function SplitHeads() {
         n.replaceWith(frag);
       });
       walk(el);
-    });
-    // On screen already: shown in the same frame, so nothing drops in. Read
-    // every heading's position after all the writes, in one layout pass (a
-    // read per heading between writes forced a layout each).
-    const fresh = els.filter((el) => !el.classList.contains("hs-split"));
-    const rects = fresh.map((el) => el.getBoundingClientRect());
-    fresh.forEach((el, i) => {
-      el.classList.add("hs-split");
-      if (rects[i].top < window.innerHeight && rects[i].bottom > 0) el.classList.add("is-in");
-    });
+      });
+    };
     const io = new IntersectionObserver((es) => es.forEach((e) => {
       if (e.isIntersecting) e.target.classList.add("is-in");
       else if (e.boundingClientRect.top > (e.rootBounds?.bottom ?? window.innerHeight)) e.target.classList.remove("is-in"); // left below the screen: replay next time
     }), { rootMargin: "0px 0px -10% 0px" });
-    els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
+    // Within a screen of view: split. One already on screen (from the
+    // observer's own rect, taken before the split) gets is-in in the same
+    // frame, so it shows at once instead of dropping in.
+    const prep = new IntersectionObserver((es) => {
+      const batch = es.filter((e) => e.isIntersecting && !e.target.classList.contains("hs-split"));
+      if (!batch.length) return;
+      batch.forEach((e) => prep.unobserve(e.target));
+      splitBatch(batch.map((e) => e.target));
+      batch.forEach((e) => {
+        const r = e.boundingClientRect, h = e.rootBounds?.height ?? window.innerHeight;
+        e.target.classList.add("hs-split");
+        if (r.top < h && r.bottom > 0) e.target.classList.add("is-in");
+        io.observe(e.target);
+      });
+    }, { rootMargin: "0px 0px 100% 0px" });
+    // Effects run twice in dev: headings an earlier run split are reused.
+    els.forEach((el) => (el.classList.contains("hs-split") ? io.observe(el) : prep.observe(el)));
+    return () => { prep.disconnect(); io.disconnect(); };
   }, [pathname]);
   return null;
 }

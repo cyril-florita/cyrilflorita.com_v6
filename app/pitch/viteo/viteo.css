@@ -159,7 +159,7 @@
   --dl-dark-ink-2: #A7AEC2;
   --dl-dark-accent: #3ECBDD;
   --dl-control: #7A8797; /* form-control boundaries: ≥3:1 on paper */
-  --dl-display-accent: #2E99A5;
+  --dl-display-accent: #267F89; /* 3.2:1 on the main bento (#A6E0E8), the lightest teal that passes AA for large text; #2E99A5 (2.3:1) was tried and failed */
 }
 
 .dl[data-dl-theme="aqua"][data-dl-mode="dark"] {
@@ -1169,31 +1169,31 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 .dl .dl-cta .dl-btn-primary { background: var(--dl-panel-ink); color: var(--dl-panel-on-ink); }
 .dl .dl-cta .dl-btn-primary:hover { background: var(--dl-panel-accent); color: #FFFFFF; }
 
-/* ---------- quiz ---------- */
-.dl-quiz { padding: 48px 0 64px; min-height: 70vh; }
-.dl-quiz-inner { max-width: 760px; }
-/* Quiz + "Your pack so far" side by side (stacked on tablet and phone). */
-.dl-quiz-layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 20px; align-items: start; }
-.dl-quiz-layout .dl-quiz-inner { max-width: none; padding-left: 40px; padding-right: 40px; }
-.dl-quiz-pack { position: sticky; top: 24px; display: grid; gap: 14px; }
-.dl-quiz-pack .dl-tray { margin: 0; }
-.dl-quiz-why { display: grid; gap: 8px; font-size: 14px; color: var(--dl-ink-2); }
-.dl-quiz-why strong { color: var(--dl-ink); font-weight: 600; margin-right: 4px; }
+/* ---------- personalize (the questions) ---------- */
+.dl-personalize { padding: 48px 0 64px; min-height: 70vh; }
+.dl-personalize-inner { max-width: 760px; }
+/* The questions + "Your pack so far" side by side (stacked on tablet and phone). */
+.dl-personalize-layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 20px; align-items: start; }
+.dl-personalize-layout .dl-personalize-inner { max-width: none; padding-left: 40px; padding-right: 40px; }
+.dl-personalize-pack { position: sticky; top: 24px; display: grid; gap: 14px; }
+.dl-personalize-pack .dl-tray { margin: 0; }
+.dl-personalize-why { display: grid; gap: 8px; font-size: 14px; color: var(--dl-ink-2); }
+.dl-personalize-why strong { color: var(--dl-ink); font-weight: 600; margin-right: 4px; }
 @media (max-width: 960px) {
-  .dl-quiz-layout { grid-template-columns: 1fr; }
-  .dl-quiz-pack { position: static; }
-  .dl-quiz-pack .dl-product-xs { display: none; }
+  .dl-personalize-layout { grid-template-columns: 1fr; }
+  .dl-personalize-pack { position: static; }
+  .dl-personalize-pack .dl-product-xs { display: none; }
 }
-@media (max-width: 680px) { .dl-quiz-layout .dl-quiz-inner { padding-left: 20px; padding-right: 20px; } }
-/* Quiz finale: the pills drop into the printed pack one by one (a GSAP
-   timeline in Quiz.js; they start hidden and it moves them with transforms,
+@media (max-width: 680px) { .dl-personalize-layout .dl-personalize-inner { padding-left: 20px; padding-right: 20px; } }
+/* Pack-filling finale: the pills drop into the printed pack one by one (a GSAP
+   timeline in Personalize.js; they start hidden and it moves them with transforms,
    so the CSS translate here only centres them). */
 .dl-pack-fill { position: relative; display: grid; place-items: center; padding-top: 130px; }
 .dl-fill-pill { position: absolute; top: 0; left: 50%; z-index: 0; translate: -50% 0; visibility: hidden; }
 .dl-pack-fill .dl-product { position: relative; z-index: 1; }
 .dl-progress { height: 8px; border-radius: 999px; background: var(--dl-line); overflow: hidden; }
 .dl-progress span { display: block; height: 100%; background: var(--dl-sun); border-radius: 999px; transition: width 0.5s var(--dl-ease); }
-.dl-quiz-count { margin: 12px 0 34px !important; }
+.dl-personalize-count { margin: 12px 0 34px !important; }
 .dl-question { animation: dl-rise 0.45s var(--dl-ease); }
 .dl-question h1:focus { outline: none; }
 @keyframes dl-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
@@ -1224,8 +1224,8 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center / 14px no-repeat;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center / 14px no-repeat;
 }
-.dl-quiz-nav { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 32px; }
-.dl-quiz-hint { margin-top: 12px !important; }
+.dl-personalize-nav { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 32px; }
+.dl-personalize-hint { margin-top: 12px !important; }
 .dl-building { display: grid; place-items: center; text-align: center; }
 .dl-building-inner { max-width: 560px; display: grid; gap: 22px; justify-items: center; }
 
@@ -1251,7 +1251,7 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 .dl-item { display: flex; gap: 18px; align-items: center; padding: 18px 20px; }
 .dl-item-pill { display: grid; place-items: center; width: 64px; height: 64px; flex: none; border-radius: 16px; background: var(--dl-well); }
 .dl-item-body { flex: 1; min-width: 0; }
-.dl-item-body h3 { font-size: 18px; font-weight: 600; }
+.dl-item-body :is(h2, h3) { font-size: 18px; font-weight: 600; } /* h2 on the plan, straight under its h1 (axe heading-order) */
 .dl-why { margin-top: 4px !important; font-size: 15px; color: var(--dl-ink-2); }
 .dl-why-label { display: inline-block; margin-right: 6px; padding: 1px 8px; border-radius: 6px; background: var(--dl-sage); color: var(--dl-sage-deep); font-size: 12px; font-weight: 600; }
 .dl-item-side { display: grid; justify-items: end; gap: 6px; }
@@ -1302,7 +1302,7 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 /* Order confirmation: the product box, small and upright, centred above the
    heading (same CSS box as the landing hero, sized by this container). */
 .dl .dl-product-sm { width: 210px; margin: 0 auto 8px; perspective: 900px; }
-/* A smaller printed pack (plan tray, checkout summary, quiz finale). */
+/* A smaller printed pack (plan tray, checkout summary, pack-filling finale). */
 .dl .dl-product-xs { width: 150px; margin: 0 auto; perspective: 700px; }
 .dl .dl-product-xs::before { inset: 14% 8% 2%; background: var(--dl-panel-ink); }
 .dl-product-xs .dl-box { left: 26%; top: 3%; width: 47%; height: 86%; transform: rotateY(-24deg) rotateX(-6deg) rotateZ(-4deg); }
@@ -1778,8 +1778,6 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
    secondary text steps a touch darker too. */
 .dl.has-ambient[data-dl-mode="light"] { --dl-ink-2: color-mix(in srgb, var(--dl-ink) 25%, var(--dl-ink-2)); }
 .dl.has-ambient[data-dl-mode="light"] { --dl-sun-deep: color-mix(in srgb, var(--dl-ink) 35%, var(--dl-display-accent, #1A6E7B)); }
-/* Aqua's display accent (#2E99A5) is lighter than the deepened teal this was derived from. */
-.dl.has-ambient[data-dl-theme="aqua"][data-dl-mode="light"] { --dl-sun-deep: color-mix(in srgb, var(--dl-ink) 35%, #267F89); }
 .dl.has-ambient[data-dl-mode="dark"] { --dl-sun-deep: color-mix(in srgb, #FFFFFF 30%, var(--dl-dark-accent-text, #7DE2DF)); }
 .dl.has-ambient[data-dl-theme="grove"][data-dl-mode="dark"] { --dl-sun-deep: color-mix(in srgb, #FFFFFF 25%, #A6EBC2); }
 .dl.has-ambient[data-dl-theme="peach"][data-dl-mode="dark"] { --dl-sun-deep: color-mix(in srgb, #FFFFFF 25%, #FFB894); }
@@ -1830,8 +1828,8 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 .dl-chart-legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; background: var(--c); }
 
 /* Panels on the other pages. */
-.dl-quiz-inner.dl-panel { padding-top: 44px; padding-bottom: 44px; }
-/* A panel that is itself the .dl-wrap (quiz card, order confirmation) keeps
+.dl-personalize-inner.dl-panel { padding-top: 44px; padding-bottom: 44px; }
+/* A panel that is itself the .dl-wrap (question card, order confirmation) keeps
    the page gutter outside it, so it never touches the frame edges. */
 .dl-wrap.dl-panel, .dl-wrap.dl-cta-inner { width: calc(100% - 48px); }
 /* The logo sits top right of the page's header bento; the giant "Design system"
@@ -1851,7 +1849,7 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
   .dl-bento-row { grid-template-columns: 1fr 1fr; }
   .dl-bento-row > :first-child { grid-column: 1 / -1; }
   .dl-header-inner > nav, .dl-header-inner > .dl-switcher { display: none; }
-  /* Tablet: the hero tab (landing) and the page's own CTAs carry the quiz,
+  /* Tablet: the hero tab (landing) and the page's own CTAs carry "Personalize your pack",
      so the menu leaves it out. Phones keep it. */
   .dl-menu .dl-menu-cta { display: none; }
   .dl-burger { display: block; }
@@ -1886,7 +1884,7 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
   /* Phones: no top padding, 18px gutter. */
   .dl-header-inner > .dl-burger { top: 14px; right: 18px; }
   .dl-bento-row { grid-template-columns: 1fr; }
-  .dl-quiz-inner.dl-panel { padding: 28px 20px; }
+  .dl-personalize-inner.dl-panel { padding: 28px 20px; }
   .dl-wrap.dl-panel, .dl-wrap.dl-cta-inner { width: calc(100% - 36px); }
   .dl-section-tint > .dl-wrap { border-radius: 24px; padding: 40px 20px; }
   .dl-cta-inner { padding: 48px 24px !important; border-radius: 24px; }
@@ -2308,14 +2306,14 @@ html[data-dl-morph="close"]::view-transition-new(dl-ing-glow) { animation: dl-mo
 @media (hover: none) { .dl-bento-card.is-link:active { scale: 0.98; } }
 
 /* ---------- mobile-first landing & app touches ---------- */
-/* Sticky quiz bar (QuizBar.js): phones and tablets only. */
-.dl-quizbar { display: none; }
-.dl-ing-handle, .dl-quiz-exit { display: none; }
+/* Sticky "Personalize your pack" bar (PersonalizeBar.js): phones and tablets only. */
+.dl-personalize-bar { display: none; }
+.dl-ing-handle, .dl-personalize-exit { display: none; }
 .dl-tabbar { display: none; }
 .dl-ing-grab { position: relative; display: grid; }
 
 @media (max-width: 960px) {
-  .dl-quizbar {
+  .dl-personalize-bar {
     position: fixed; z-index: 60; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom));
     display: flex; align-items: center; justify-content: space-between; gap: 12px;
     padding: 10px 10px 10px 18px; border-radius: 20px;
@@ -2324,24 +2322,24 @@ html[data-dl-morph="close"]::view-transition-new(dl-ing-glow) { animation: dl-mo
     box-shadow: 0 16px 34px -14px rgba(0, 0, 0, 0.55);
     translate: 0 140%; opacity: 0; transition: translate 0.45s var(--dl-ease), opacity 0.3s;
   }
-  .dl-quizbar.is-on { translate: 0 0; opacity: 1; }
-  .dl-quizbar-text { display: grid; line-height: 1.25; }
-  .dl-quizbar-text strong { font-size: 15px; }
-  .dl-quizbar-text span { font-size: 12px; opacity: 0.75; }
-  .dl .dl-quizbar .dl-btn-primary { background: var(--dl-on-band-accent); color: var(--dl-band); white-space: nowrap; }
-  .dl-quizbar-time { display: none; }
+  .dl-personalize-bar.is-on { translate: 0 0; opacity: 1; }
+  .dl-personalize-bar-text { display: grid; line-height: 1.25; }
+  .dl-personalize-bar-text strong { font-size: 15px; }
+  .dl-personalize-bar-text span { font-size: 12px; opacity: 0.75; }
+  .dl .dl-personalize-bar .dl-btn-primary { background: var(--dl-on-band-accent); color: var(--dl-band); white-space: nowrap; }
+  .dl-personalize-bar-time { display: none; }
   /* Narrow phones: the label gives way and the button takes the bar, with the time inside it. */
   @media (max-width: 480px) {
-    .dl-quizbar-text { display: none; }
-    .dl .dl-quizbar .dl-btn-primary { flex: 1; justify-content: center; }
-    .dl-quizbar-time { display: inline; font-weight: 500; opacity: 0.75; }
+    .dl-personalize-bar-text { display: none; }
+    .dl .dl-personalize-bar .dl-btn-primary { flex: 1; justify-content: center; }
+    .dl-personalize-bar-time { display: inline; font-weight: 500; opacity: 0.75; }
   }
-  .dl:has(.dl-quizbar) .dl-footer { padding-bottom: 104px; }
-  .dl:has(.dl-quizbar.is-on) .dl-totop { opacity: 0; pointer-events: none; }
+  .dl:has(.dl-personalize-bar) .dl-footer { padding-bottom: 104px; }
+  .dl:has(.dl-personalize-bar.is-on) .dl-totop { opacity: 0; pointer-events: none; }
 }
 
 @media (max-width: 680px) {
-  /* Trim: the hero's button already says "2-minute quiz", and the routine
+  /* Trim: the hero's button already says "Personalize your pack", and the routine
      chart is a desktop flourish; phones go straight from hero to How it works. */
   .dl-bento-row { display: none; }
 
@@ -2380,16 +2378,16 @@ html[data-dl-morph="close"]::view-transition-new(dl-ing-glow) { animation: dl-mo
   .dl:has(.dl-tabbar) .dl-totop { display: none; } /* the tab bar covers it */
   .dl:has(.dl-tabbar) .dl-toast { bottom: 88px; }
 
-  /* Quiz: full-screen, no site header or footer; its own way out. */
-  .dl:has(.dl-quiz-inner) :is(.dl-header, .dl-footer, .dl-totop) { display: none; }
-  .dl .dl-quiz { padding-top: 12px; }
-  .dl-quiz-inner { position: relative; min-height: calc(100dvh - 24px); }
-  .dl-quiz-exit {
+  /* The questions: full-screen, no site header or footer; its own way out. */
+  .dl:has(.dl-personalize-inner) :is(.dl-header, .dl-footer, .dl-totop) { display: none; }
+  .dl .dl-personalize { padding-top: 12px; }
+  .dl-personalize-inner { position: relative; min-height: calc(100dvh - 24px); }
+  .dl-personalize-exit {
     position: absolute; top: 14px; right: 14px; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px;
     border: 1px solid color-mix(in srgb, var(--dl-panel-ink) 30%, transparent); color: var(--dl-panel-ink);
   }
-  .dl-quiz-exit svg { width: 18px; height: 18px; }
-  .dl-quiz-inner .dl-progress { margin-right: 52px; }
+  .dl-personalize-exit svg { width: 18px; height: 18px; }
+  .dl-personalize-inner .dl-progress { margin-right: 52px; }
 }
 
 /* Ingredient close-up as a bottom sheet (phones); drag its top to close. */
@@ -2424,7 +2422,7 @@ html[data-dl-morph="close"]::view-transition-new(dl-ing-glow) { animation: dl-mo
   .dl-ing-actions .dl-btn { justify-content: center; }
 }
 @keyframes dl-sheet-up { from { translate: 0 100%; } }
-@media (prefers-reduced-motion: reduce) { .dl-quizbar, .dl-ing-dialog { transition: none; } .dl-ing-dialog[open] { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .dl-personalize-bar, .dl-ing-dialog { transition: none; } .dl-ing-dialog[open] { animation: none; } }
 
 /* Phones: a tighter vertical rhythm, so the landing stays short. */
 @media (max-width: 680px) {

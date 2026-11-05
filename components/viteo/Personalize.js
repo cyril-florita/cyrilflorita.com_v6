@@ -7,7 +7,7 @@ import { BASE, PRODUCTS, QUESTIONS, recommend } from "./data";
 import { write } from "./store";
 import { Arrow, BigWordHead, Button, Pill, PillTray, ProductBox } from "./ui";
 
-// The quiz: one question per screen, with a progress bar. Single-choice
+// Personalize your pack: one question per screen, with a progress bar. Single-choice
 // questions advance on their own after a short beat; multi-choice and the
 // name step use Continue. Questions can be skipped by earlier answers (no
 // fish question for plant-based diets). Beside the questions, "Your pack so
@@ -20,9 +20,9 @@ import { Arrow, BigWordHead, Button, Pill, PillTray, ProductBox } from "./ui";
 const reducedMotion = () =>
   typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-export default function Quiz() {
+export default function Personalize() {
   const router = useRouter();
-  // Always a fresh start (retaking the quiz replaces the old answers).
+  // Always a fresh start (updating your answers replaces the old ones).
   const [answers, setAnswers] = useState({});
   const [step, setStep] = useState(0);
   const [building, setBuilding] = useState(null); // recommended ids while "building"
@@ -109,7 +109,7 @@ export default function Quiz() {
 
   if (building) {
     return (
-      <section className="dl-quiz dl-building" aria-live="polite">
+      <section className="dl-personalize dl-building" aria-live="polite">
         <div className="dl-wrap dl-building-inner">
           <BigWordHead word="One moment">
             <h1 className="dl-h2">Building your pack{answers.name ? `, ${answers.name}` : ""}…</h1>
@@ -134,17 +134,17 @@ export default function Quiz() {
   const pct = Math.round(((step + (answered ? 1 : 0)) / steps.length) * 100);
 
   return (
-    <section className="dl-quiz">
-      <div className="dl-wrap dl-quiz-layout">
-      <div className="dl-quiz-inner dl-panel dl-panel-1">
-        {/* Phones: the quiz is full-screen (no site header), so it has its own way out. */}
-        <Link className="dl-quiz-exit" href={`${BASE}/`} aria-label="Leave and go back home">
+    <section className="dl-personalize">
+      <div className="dl-wrap dl-personalize-layout">
+      <div className="dl-personalize-inner dl-panel dl-panel-1">
+        {/* Phones: the questions are full-screen (no site header), so it has its own way out. */}
+        <Link className="dl-personalize-exit" href={`${BASE}/`} aria-label="Leave and go back home">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
         </Link>
         <div className="dl-progress" aria-hidden="true">
           <span style={{ width: `${pct}%` }} />
         </div>
-        <p className="dl-meta dl-quiz-count">
+        <p className="dl-meta dl-personalize-count">
           Question {step + 1} of {steps.length}
         </p>
 
@@ -200,7 +200,7 @@ export default function Quiz() {
             </div>
           )}
 
-          <div className="dl-quiz-nav">
+          <div className="dl-personalize-nav">
             {step > 0 ? (
               <Button variant="ghost" onClick={back}>Back</Button>
             ) : (
@@ -213,7 +213,7 @@ export default function Quiz() {
             )}
           </div>
           {q.type === "multi" && (
-            <p className="dl-meta dl-quiz-hint" aria-live="polite">
+            <p className="dl-meta dl-personalize-hint" aria-live="polite">
               {(value || []).length} of {q.max} selected
             </p>
           )}
@@ -221,7 +221,7 @@ export default function Quiz() {
       </div>
 
       {/* Your pack so far: earned live by the answers. */}
-      <aside className="dl-card dl-quiz-pack" aria-label="Your pack so far" aria-live="polite">
+      <aside className="dl-card dl-personalize-pack" aria-label="Your pack so far" aria-live="polite">
         <div className="dl-product dl-product-xs" aria-hidden="true">
           <ProductBox name={packName} owner={owner} />
         </div>
@@ -229,7 +229,7 @@ export default function Quiz() {
         {live.length ? (
           <>
             <PillTray ids={live.map((p) => p.id)} label="Your pack so far" size="sm" />
-            <ul className="dl-quiz-why">
+            <ul className="dl-personalize-why">
               {live.map((p) => (
                 <li key={p.id}>
                   <strong>{PRODUCTS[p.id].name}</strong> {p.why}

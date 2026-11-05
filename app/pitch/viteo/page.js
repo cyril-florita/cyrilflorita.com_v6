@@ -7,7 +7,7 @@ import IntroMoment from "@/components/viteo/IntroMoment";
 import ProductStory from "@/components/viteo/ProductStory";
 import Ingredients from "@/components/viteo/Ingredients";
 import PartnerHero from "@/components/viteo/PartnerHero";
-import QuizBar from "@/components/viteo/QuizBar";
+import PersonalizeBar from "@/components/viteo/PersonalizeBar";
 import { Arrow, BigWordHead, LogoMark, Pill, ProductBox } from "@/components/viteo/ui";
 
 export const metadata = {
@@ -192,7 +192,7 @@ export default function Landing() {
                 Eight quick questions. One daily pack built around you, with every
                 pill explained.
               </p>
-              <Link className="dl-underline-cta" href={`${BASE}/quiz/`}>
+              <Link className="dl-underline-cta" href={`${BASE}/personalize/`}>
                 Personalize your pack
                 <span className="dl-cta-chip" aria-hidden="true">
                   <Arrow />
@@ -239,7 +239,7 @@ export default function Landing() {
                 </svg>
                 <Link
                   className="dl-corner"
-                  href={`${BASE}/quiz/`}
+                  href={`${BASE}/personalize/`}
                   aria-label="Personalize your pack"
                 >
                   <Corner />
@@ -362,7 +362,7 @@ export default function Landing() {
           <h2 className="dl-display">
             Two minutes to a routine <em>that fits.</em>
           </h2>
-          <Link className="dl-underline-cta" href={`${BASE}/quiz/`}>
+          <Link className="dl-underline-cta" href={`${BASE}/personalize/`}>
             Personalize your pack
             <span className="dl-cta-chip" aria-hidden="true">
               <Arrow />
@@ -373,7 +373,7 @@ export default function Landing() {
       {/* The 3D product story over the page (desktop). */}
       <ProductStory burst={BURST} />
       <IntroMoment />
-      <QuizBar />
+      <PersonalizeBar />
     </>
   );
 }

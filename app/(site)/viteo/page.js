@@ -104,13 +104,13 @@ const Page = () => {
               <h3 className="cyril-case-subheading">What&apos;s Built</h3>
               <ul className="cyril-case-list">
                 <li><strong>Landing page</strong> with a real-time 3D product and a scroll story that carries the pills down the page</li>
-                <li><strong>Two-minute quiz</strong> that builds the pack live as you answer</li>
+                <li><strong>Personalize your pack</strong>: eight questions, two minutes, building the pack live as you answer</li>
                 <li><strong>Personalized plan</strong>, every item with the reason it&apos;s there</li>
                 <li><strong>Checkout</strong> in four steps, with simulated Apple Pay / Google Pay and test-card payments, including a declined card</li>
                 <li><strong>Passwordless sign-in</strong> by email link or passkey, and sign-out</li>
                 <li><strong>Account:</strong> skip, pause, swap and undo; a daily check-in; a routine tracker</li>
                 <li><strong>Honest cancellation</strong> that offers one fitting alternative, with the way out right beside it</li>
-                <li><strong>Ingredient close-ups</strong> in 3D, with dose, form and when the quiz adds each one</li>
+                <li><strong>Ingredient close-ups</strong> in 3D, with dose, form and which answers add each one</li>
                 <li><strong>Batch results:</strong> independent lab results by lot code</li>
                 <li><strong>Partner program</strong> for trainers, dietitians and nutritionists, whose suggested packs open for clients with their notes and a first-box discount</li>
                 <li><strong>Lifecycle messages:</strong> shipping reminder, order confirmation, daily text</li>
@@ -121,7 +121,7 @@ const Page = () => {
               <div className="cyril-case-cta cyril-case-cta-inline">
                 <div>
                   <h3 className="cyril-case-subheading">See it for yourself</h3>
-                  <p>Every flow works: take the quiz, open an ingredient, place an order and skip a delivery. Nothing is charged and nothing leaves your browser.</p>
+                  <p>Every flow works: personalize your pack, open an ingredient, place an order and skip a delivery. Nothing is charged and nothing leaves your browser.</p>
                 </div>
                 <a className="cyril-button" href={LIVE} target="_blank" rel="noopener">Try Viteo live <Arrow /></a>
               </div>
@@ -132,12 +132,12 @@ const Page = () => {
             <CaseSection id="results" number={2} title="Results & Impact">
               <p>Viteo hasn&apos;t launched, so there are no market numbers, and I won&apos;t invent any. What it delivers is a complete, working product rather than mockups, measured on the live site:</p>
               <CaseStats items={[
-                { value: "95", label: "Performance (desktop)" },
+                { value: "98", label: "Performance (mobile)" },
                 { value: "100", label: "Accessibility" },
                 { value: "100", label: "Best practices" },
                 { value: "100", label: "SEO" },
               ]} />
-              <p>Lighthouse scores, 3D scene included. Fixing what the first audit found took desktop performance from 72 to 95 and accessibility from 94 to 100, and it holds at 95 with the moving background and page preloaders added since. A mobile pass (WebP renders, fonts and analytics off the critical path, page-only CSS split out) then took mobile from 62 to 79. Every text color passes WCAG AA in all three themes, light and dark. At launch, the metrics to watch are quiz-to-checkout conversion, edits on the plan page, and skips and pauses against cancellations.</p>
+              <p>PageSpeed Insights scores for the live landing page on a phone, 3D scene included; on desktop it scores 99. Fixing what the first audit found took desktop performance from 72 to 95 and accessibility from 94 to 100. A mobile pass (WebP renders, fonts and analytics off the critical path, page-only CSS split out) then took mobile from 62 to 79, and later tuning brought it to 98, with the largest paint at 1.1 seconds. Every text color passes WCAG AA in all three themes, light and dark. At launch, the metrics to watch are question-to-checkout conversion, edits on the plan page, and skips and pauses against cancellations.</p>
 
               <Desktop name="landing" caption="Landing page" />
               <p><strong>Depth under the pointer.</strong> On desktop, the pack is the pivot of the hero: near pills follow the cursor, far ones drift the other way, and the box turns far enough to show its side, then springs back into place.</p>
@@ -150,15 +150,15 @@ const Page = () => {
               </CaseGrid>
               <Desktop name="story" caption="The scroll story, mid-flight" />
 
-              <p><strong>Every ingredient, up close.</strong> A card opens a 3D close-up with dose, form, the quiz answers that add it, and what it&apos;s often packed with.</p>
+              <p><strong>Every ingredient, up close.</strong> A card opens a 3D close-up with dose, form, the answers that add it, and what it&apos;s often packed with.</p>
               <Desktop name="closeup" caption="Ingredient close-up" />
 
-              <p><strong>A quiz that builds as you answer.</strong> Each answer that earns a pill drops it into &ldquo;Your pack so far&rdquo; with its reason, and the finale fills a pack printed with your name.</p>
+              <p><strong>A pack that builds as you answer.</strong> Each answer that earns a pill drops it into &ldquo;Your pack so far&rdquo; with its reason, and the finale fills a pack printed with your name.</p>
               <CaseGrid layout="two">
-                <Desktop name="quiz" caption="Your pack so far" path="quiz/" />
-                <Desktop name="quiz-building" caption="Building your pack" path="quiz/" />
+                <Desktop name="personalize" caption="Your pack so far" path="personalize/" />
+                <Desktop name="personalize-building" caption="Building your pack" path="personalize/" />
               </CaseGrid>
-              <Clip name="quiz-finale" caption="The finale: each pill drops into your pack" path="quiz/" />
+              <Clip name="personalize-finale" caption="The finale: each pill drops into your pack" path="personalize/" />
 
               <p><strong>Plan, checkout and payment.</strong> Every item says why it&apos;s there and can be removed or swapped. Checkout is four short steps with plain-language errors. Payment is fully prototyped but safe: a wallet sheet, and a card form locked to public test cards, so no real card can ever be entered. A declined test card shows the error path.</p>
               <Desktop name="plan-full" caption="Your plan" path="plan/" ratio="16 / 10" />
@@ -192,12 +192,12 @@ const Page = () => {
             {/* 03 — Design Approach */}
             <CaseSection id="approach" number={3} title="Design Approach">
               <h3 className="cyril-case-subheading">Mobile-First, Enhanced Upward</h3>
-              <p>People take quizzes and check off their pack on their phones, so the phone gets the complete product: one column, a sticky quiz bar, swipe rows, a full-screen quiz, bottom sheets and an app-style tab bar. Tablets add two columns. Desktops with a mouse add hover, a pointer-led light, the moving background and the live 3D. Each layer checks what the device can do before it loads, so phones never download the 3D, and with reduced motion everything is simply there.</p>
+              <p>People answer questions and check off their pack on their phones, so the phone gets the complete product: one column, a sticky &ldquo;Personalize your pack&rdquo; bar, swipe rows, full-screen questions, bottom sheets and an app-style tab bar. Tablets add two columns. Desktops with a mouse add hover, a pointer-led light, the moving background and the live 3D. Each layer checks what the device can do before it loads, so phones never download the 3D, and with reduced motion everything is simply there.</p>
               <CaseGrid layout="three">
                 <Phone name="landing" caption="Landing" />
                 <Phone name="ingredients" caption="Swipe rows" />
                 <Phone name="closeup" caption="Close-up as a bottom sheet" />
-                <Phone name="quiz" caption="Full-screen quiz" />
+                <Phone name="personalize" caption="Full-screen questions" />
                 <Phone name="account" caption="Account with a tab bar" />
                 <Phone name="landing-peach" caption="Peach · Light" />
               </CaseGrid>
@@ -225,7 +225,7 @@ const Page = () => {
               <ul className="cyril-case-list">
                 <li><strong>3D mapped to the layout:</strong> one transparent WebGL canvas where a 3D unit equals a CSS pixel, so the carton and pills are placed straight from the page layout, with nothing extra to keep in sync.</li>
                 <li><strong>Modelled from the catalog:</strong> each product&apos;s color and form generate its pill. The same code bakes the images used everywhere else, so a new product needs no new artwork.</li>
-                <li><strong>One GSAP timeline, two renderers:</strong> each object in the intro has one tween that drives both the 3D scene and the CSS fallback. Any click or scroll skips it, and the quiz finale moves on when its timeline completes, not on a guessed timer.</li>
+                <li><strong>One GSAP timeline, two renderers:</strong> each object in the intro has one tween that drives both the 3D scene and the CSS fallback. Any click or scroll skips it, and the pack-filling finale moves on when its timeline completes, not on a guessed timer.</li>
                 <li><strong>A living background:</strong> a WebGPU shader (falling back to WebGL2) sweeps a slow, pulsing silk ribbon of the theme&apos;s light behind every page. It draws at a third of the screen&apos;s resolution at 30fps, pauses when the tab is hidden, and stays off on phones and for reduced motion. Text can land anywhere on it, so in dark mode the shader caps its own brightness at the level where every text pair still passes AA, checked on every page as the light moves.</li>
                 <li><strong>Performance:</strong> three.js loads only on capable desktops, warms up behind a branded preloader so the intro never stutters, and draws only while something moves.</li>
                 <li><strong>Prototyped, not faked:</strong> sign-in, payment and cancellation are complete flows with loading, success and error states. Nothing is sent or charged, and the card form is locked to public test cards so it can never collect a real card.</li>
@@ -237,13 +237,13 @@ const Page = () => {
             <CaseSection id="learnings" number={5} title="Learning & Next Steps">
               <CaseLearnings
                 learned={[
-                  "Building the product instead of only drawing it surfaced the real decisions early: what happens when a quiz answer makes a question irrelevant, or when someone undoes a skip.",
+                  "Building the product instead of only drawing it surfaced the real decisions early: what happens when one answer makes a question irrelevant, or when someone undoes a skip.",
                   "Driving every color and font from tokens made new themes cheap (Peach, with its own colors and type, needed no component changes), and each one doubled as a test that nothing was hard-coded.",
                   "Writing the copy as part of the design (the “why it’s here” lines, the preview labels, the plain-language errors) did as much for trust as any visual choice.",
                 ]}
                 next={[
                   "Connect the commerce layer: subscriptions and payments (for example Shopify or Stripe Billing), real accounts, and reminder emails and texts.",
-                  "Run moderated usability tests on the quiz and plan pages, and see where people hesitate or edit.",
+                  "Run moderated usability tests on the questions and plan pages, and see where people hesitate or edit.",
                   "Test the copy of the recommendations with people who already take supplements.",
                   "Measure how often each cancellation alternative is taken, and tune the offers by reason.",
                 ]}
@@ -253,7 +253,7 @@ const Page = () => {
             <div className="cyril-case-cta">
               <div>
                 <h3 className="cyril-case-subheading">See it for yourself</h3>
-                <p>Every flow works: take the quiz, open an ingredient, place an order and skip a delivery. Nothing is charged and nothing leaves your browser.</p>
+                <p>Every flow works: personalize your pack, open an ingredient, place an order and skip a delivery. Nothing is charged and nothing leaves your browser.</p>
               </div>
               <a className="cyril-button" href={LIVE} target="_blank" rel="noopener">Try Viteo live <Arrow /></a>
             </div>

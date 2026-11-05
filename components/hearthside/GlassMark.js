@@ -71,8 +71,10 @@ export async function startGlassMark(host) {
   const hs = host.closest(".hs");
   const glowCanvas = document.createElement("canvas");
   glowCanvas.className = "hs-sidemark-3d";
+  glowCanvas.setAttribute("aria-hidden", "true"); // decoration, outside the landmarks (axe region)
   const leafCanvas = document.createElement("canvas");
   leafCanvas.className = "hs-sidemark-leaf";
+  leafCanvas.setAttribute("aria-hidden", "true");
   let gr, lr;
   try {
     gr = new THREE.WebGLRenderer({ canvas: glowCanvas, antialias: false, alpha: false, powerPreference: "low-power" });
