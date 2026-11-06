@@ -1,9 +1,9 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { BASE, money } from "./data";
 import PartnerHero from "./PartnerHero";
-import { Arrow, BigWordHead, Button, Pill, PillTray } from "./ui";
+import { Arrow, BigWordHead, Button, Pill, PillTray, SrStatus } from "./ui";
 
 // Viteo for professionals: personal trainers share Viteo with a link and a
 // code; nutrition professionals suggest a whole pack, which the client sees as
@@ -42,6 +42,20 @@ export default function Partners() {
   const [giveBack, setGiveBack] = useState(false);
   const [sent, setSent] = useState(false);
   const monthly = clients * pack * COMMISSION;
+  const sentRef = useRef(null);
+  // The estimate, for screen readers: announced once the sliders settle
+  // (~600ms after the last change), not at every step of a drag.
+  const estimate = giveBack
+    ? `Your clients save ${COMMISSION * 100}% more, about ${money(monthly)} a month.`
+    : `Estimated earnings ${money(monthly)} a month, ${money(monthly * 12)} a year.`;
+  const [spoken, setSpoken] = useState("");
+  const initial = useRef(estimate);
+  useEffect(() => {
+    if (estimate === initial.current && !spoken) return; // not on load
+    const t = setTimeout(() => setSpoken(estimate), 600);
+    return () => clearTimeout(t);
+  }, [estimate, spoken]);
+  useEffect(() => { if (sent) sentRef.current?.focus(); }, [sent]);
 
   return (
     <div className="dl-pro">
@@ -121,7 +135,7 @@ export default function Partners() {
                 Give back: pass my commission to my clients
               </label>
             </div>
-            <div className="dl-pro-calc-out" aria-live="polite">
+            <div className="dl-pro-calc-out">
               {giveBack ? (
                 <>
                   <span className="dl-pill-label">Your clients save</span>
@@ -137,6 +151,7 @@ export default function Partners() {
               )}
             </div>
           </div>
+          <SrStatus>{spoken}</SrStatus>
           <p className="dl-meta dl-pro-note">An estimate to illustrate the program; real earnings depend on how many clients subscribe and stay.</p>
         </section>
 
@@ -206,8 +221,9 @@ export default function Partners() {
             onSubmit={(e) => { e.preventDefault(); setSent(true); }}
           >
             {sent ? (
-              <div className="dl-pro-sent" role="status">
-                <h2 className="dl-h3">Thanks, we&apos;ve got it.</h2>
+              <div className="dl-pro-sent">
+                {/* Focus moves here once sent, so it's read out. */}
+                <h2 className="dl-h3" tabIndex={-1} ref={sentRef}>Thanks, we&apos;ve got it.</h2>
                 <p>We&apos;ll reply within two business days. Preview mode: nothing was sent.</p>
               </div>
             ) : (

@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useBackdropClose } from "./a11y";
 
 // "Install the app" (footer). Viteo is a Progressive Web App: a manifest
 // scoped to /pitch/viteo/ (public/pitch/viteo/manifest.webmanifest) and a
@@ -27,6 +28,7 @@ export default function InstallApp() {
   const deferred = useRef(null);
   const dialog = useRef(null);
   const button = useRef(null);
+  const backdrop = useBackdropClose(() => setHelp(false));
 
   useEffect(() => {
     if ("serviceWorker" in navigator && process.env.NODE_ENV === "production") {
@@ -78,7 +80,7 @@ export default function InstallApp() {
         className="dl-modal"
         aria-labelledby="dl-install-title"
         onClose={() => { setHelp(false); button.current?.focus({ preventScroll: true }); }}
-        onClick={(e) => e.target === e.currentTarget && setHelp(false)}
+        {...backdrop}
       >
         <div className="dl-modal-body">
           <h2 id="dl-install-title" className="dl-h3">Add Viteo to your home screen</h2>

@@ -63,7 +63,7 @@ export default function IntakeBoard() {
   const tabsRef = useRef(null);
   useEffect(() => {
     const row = tabsRef.current;
-    const tab = row?.querySelector('[aria-selected="true"]');
+    const tab = row?.querySelector('[aria-current="true"]');
     if (tab && row.scrollWidth > row.clientWidth) row.scrollTo({ left: tab.offsetLeft - row.offsetLeft - 16, behavior: "smooth" });
   }, [activeStage]);
   useEffect(() => {
@@ -76,7 +76,7 @@ export default function IntakeBoard() {
 
   useEffect(() => { const t = setInterval(() => setNow(Date.now()), 30000); return () => clearInterval(t); }, []);
 
-  // The arrival sequence, once per referral (PLAYED). Its timers are never
+  // The arrival sequence, once per referral (PLAYED, by id and arrival time). Its timers are never
   // cancelled: arriving client-side from the form, the board mounts with data
   // already loaded, and an effect cleanup (React's dev double-mount, or a
   // store update) used to clear them and leave the card stuck in New. A late
@@ -85,8 +85,11 @@ export default function IntakeBoard() {
     if (!data) return;
     const id = new URLSearchParams(window.location.search).get("arrive");
     const r = id && data.referrals.find((x) => x.id === id);
-    if (!r || PLAYED.has(id)) return;
-    PLAYED.add(id);
+    // Keyed by id and arrival time: ids are reused after "Reset sample data"
+    // (a new referral can get the number an earlier one had).
+    const key = r && `${id}:${r.createdAt}`;
+    if (!r || PLAYED.has(key)) return;
+    PLAYED.add(key);
     const later = (ms, fn) => setTimeout(fn, ms);
     const toast = (icon, text) => setToasts((t) => [...t, { id: Math.random(), icon, text }]);
     setArriving({ id, state: "arriving" }); // eslint-disable-line react-hooks/set-state-in-effect
@@ -141,13 +144,15 @@ export default function IntakeBoard() {
           <button type="button" className="hs-btn hs-btn-secondary hs-btn-sm" onClick={() => { setWho("all"); setOnlyLate(false); }}>Clear filters</button>
         </div>
       )}
-      <div className="hs-stage-tabs" role="tablist" aria-label="Stages" ref={tabsRef}>
+      {/* Jump links to a stage (plain buttons, the shown one marked current),
+          not tabs: the columns are all in the page, side by side. */}
+      <nav className="hs-stage-tabs" aria-label="Stages" ref={tabsRef}>
         {STAGES.filter((s) => OPEN_STAGES.includes(s.id)).map((s) => (
-          <button key={s.id} type="button" role="tab" aria-selected={activeStage === s.id} className="hs-stage-tab" onClick={() => toStage(s.id)}>
+          <button key={s.id} type="button" aria-current={activeStage === s.id ? "true" : undefined} className="hs-stage-tab" onClick={() => toStage(s.id)}>
             {s.name} <span>{shown.filter((r) => r.stage === s.id).length}</span>
           </button>
         ))}
-      </div>
+      </nav>
       <div className="hs-board" ref={boardRef}>
         {STAGES.filter((s) => OPEN_STAGES.includes(s.id)).map((s) => {
           const cards = shown.filter((r) => r.stage === s.id).sort((a, b) => b.createdAt - a.createdAt);

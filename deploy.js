@@ -49,6 +49,21 @@ const pool = async (items, limit, fn) => {
 
 const mb = (bytes) => `${(bytes / 1024 / 1024).toFixed(1)} MB`;
 
+// A missing manifest (first deploy) vs any other failure to read it (lost
+// connection, permissions, ...), which must not be mistaken for a first deploy.
+const isNoSuchFile = (err) =>
+  err?.code === 2 || err?.code === 'ENOENT' || /No such file/i.test(err?.message || '');
+
+// Manifest entries are deleted on the server, so only accept plain relative
+// paths that stay inside remotePath: no absolute paths, no `..` or `.`
+// segments, no backslashes or empty segments.
+const isSafeRelative = (f) =>
+  typeof f === 'string' &&
+  f.length > 0 &&
+  !f.startsWith('/') &&
+  !/[\\\0]/.test(f) &&
+  f.split('/').every((seg) => seg !== '' && seg !== '.' && seg !== '..');
+
 const main = async () => {
   if (!fs.existsSync(localPath)) throw new Error('out/ not found: run `npm run build` first');
 
@@ -68,14 +83,26 @@ const main = async () => {
 
   try {
     let remote = {};
+    let raw = null;
     try {
-      remote = JSON.parse((await sftp.get(`${remotePath}/${MANIFEST}`)).toString());
-    } catch {
+      raw = (await sftp.get(`${remotePath}/${MANIFEST}`)).toString();
+    } catch (err) {
+      if (!isNoSuchFile(err)) {
+        throw new Error(`Could not read the deploy manifest on the server (${err.message}); aborting rather than treating this as a first deploy.`);
+      }
       console.log('No deploy manifest on the server yet: uploading everything this time.');
+    }
+    if (raw !== null) {
+      remote = JSON.parse(raw);
+      if (!remote || typeof remote !== 'object' || Array.isArray(remote)) {
+        throw new Error('The deploy manifest on the server is not a path → hash object; aborting.');
+      }
     }
 
     const changed = Object.keys(local).filter((f) => remote[f] !== local[f]);
-    const stale = Object.keys(remote).filter((f) => !(f in local));
+    const unsafe = Object.keys(remote).filter((f) => !(f in local) && !isSafeRelative(f));
+    for (const f of unsafe) console.warn(`  ! skipping unsafe manifest path: ${JSON.stringify(f)}`);
+    const stale = Object.keys(remote).filter((f) => !(f in local) && isSafeRelative(f));
     const isHtml = (f) => f.endsWith('.html');
     const assets = changed.filter((f) => !isHtml(f));
     const pages = changed.filter(isHtml);

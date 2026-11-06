@@ -14,8 +14,9 @@
 import sharp from "sharp";
 import { readdir, mkdir, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const SRC_DIR = path.join(ROOT, "public/img/portfolio");
 const OUT_DIR = path.join(ROOT, "public/img/thumbs/portfolio");
 const MANIFEST = path.join(ROOT, "components/data/imageSizes.json");

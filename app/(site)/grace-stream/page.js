@@ -3,6 +3,7 @@
 import SiteLayout from "@/layout/SiteLayout";
 import { cyrilUtility } from "@/public/utility/index";
 import { onPreloaderHidden, wipeThen } from "@/components/Preloader";
+import { session } from "@/components/safeStorage";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {
@@ -85,7 +86,7 @@ const Page = () => {
     // Mark which project to scroll back to whenever the user leaves this
     // page — including via the browser's own back button, not just the
     // "Back to Portfolio" button below.
-    sessionStorage.setItem('returnToProject', 'gracestream');
+    session.set('returnToProject', 'gracestream');
     cyrilUtility.tpInner();
     // Wait for the preloader to actually finish hiding before starting this
     // page's own reveal, instead of racing it on a separate fixed timer.
@@ -105,7 +106,7 @@ const Page = () => {
     const projectId = 'gracestream'; // This is the current project
 
     // Save the project ID for the portfolio page to use
-    sessionStorage.setItem('returnToProject', projectId);
+    session.set('returnToProject', projectId);
     wipeThen(() => router.push('/'));
   };
 
@@ -120,9 +121,9 @@ const Page = () => {
             title="Grace Stream"
             summary={CASE_SUMMARIES["/grace-stream"]}
             facts={[
-              { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Media Organization</> },
+              { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank" rel="noopener noreferrer">Grace to You</a>&mdash;A Christian Media Organization</> },
               { label: "Role", value: "Product Designer & Web Developer" },
-              { label: "Website", value: <a className="cyril-dark" href="https://www.gty.org/listen/gracestream" target="_blank">gty.org/listen/gracestream</a> },
+              { label: "Website", value: <a className="cyril-dark" href="https://www.gty.org/listen/gracestream" target="_blank" rel="noopener noreferrer">gty.org/listen/gracestream</a> },
               { label: "Platform & Tools", value: "Radio.co" },
             ]}
             image="/img/portfolio/main_grace-stream.jpg"
@@ -139,7 +140,7 @@ const Page = () => {
 
             {/* 02 — Results & Impact */}
             <CaseSection id="results" number={2} title="Results &amp; Impact">
-              <p>Grace Stream is live as a 24/7 broadcast of John MacArthur's teaching: a looping playlist on Radio.co, a player customized to the GTY design language, and &ldquo;Now Playing&rdquo; info that updates dynamically. The ministry chose the Wave logo, which I used for all digital and print assets. Check out how <a className="cyril-accent" href="https://www.gty.org/listen/gracestream" target="_blank"><strong>Grace Stream</strong></a> offers continuous, scripture-rich content that's always available.</p>
+              <p>Grace Stream is live as a 24/7 broadcast of John MacArthur's teaching: a looping playlist on Radio.co, a player customized to the GTY design language, and &ldquo;Now Playing&rdquo; info that updates dynamically. The ministry chose the Wave logo, which I used for all digital and print assets. Check out how <a className="cyril-accent" href="https://www.gty.org/listen/gracestream" target="_blank" rel="noopener noreferrer"><strong>Grace Stream</strong></a> offers continuous, scripture-rich content that's always available.</p>
             </CaseSection>
 
             {/* 03 — Brand Identity */}
@@ -195,7 +196,7 @@ const Page = () => {
 
               <h3 className="cyril-case-subheading">Development &amp; Integration of the 24/7 Stream</h3>
               <p>Working with a Back-End Developer, I handled the front-end development, focusing on performance, responsiveness, and real-time functionality, keeping the stream information current and the media player consistent across devices and browsers. Accessibility was a priority, so every listener can use the player, however they interact with the page.</p>
-              <p>The key challenge was delivering 24/7 live audio that plays whenever a listener tunes in. <a className="cyril-accent" target="_blank" href="https://radio.co"><strong>Radio.co</strong></a> provided the backend infrastructure: its reliability, scheduling features, and embeddable player gave us a &#8220;set-it-and-forget-it&#8221; stream that still offers control over what goes out and when. The Internet Ministry Coordinator, Digital Platforms Director, and I curated a looping playlist of John MacArthur's sermons across a wide range of books and topics, and used Radio.co's scheduling tools so the stream feels like a real-time broadcast rather than a simple playlist.</p>
+              <p>The key challenge was delivering 24/7 live audio that plays whenever a listener tunes in. <a className="cyril-accent" target="_blank" rel="noopener noreferrer" href="https://radio.co"><strong>Radio.co</strong></a> provided the backend infrastructure: its reliability, scheduling features, and embeddable player gave us a &#8220;set-it-and-forget-it&#8221; stream that still offers control over what goes out and when. The Internet Ministry Coordinator, Digital Platforms Director, and I curated a looping playlist of John MacArthur's sermons across a wide range of books and topics, and used Radio.co's scheduling tools so the stream feels like a real-time broadcast rather than a simple playlist.</p>
               <p>I then customized the embedded player to match the Grace Stream design system, stripping away anything off-brand or generic, and wrapped it in a custom UI that fetches current track metadata from the Radio.co API to update the &#8220;Now Playing&#8221; info, so users can see which sermon is airing even if they jump in mid-message.</p>
               <p>Because Grace Stream is &#8220;always on,&#8221; uptime mattered as much as the design. The Back-end Engineer and I implemented fallback behaviors for the player and made playback work across browsers, including on mobile and lower-powered devices.</p>
               <CaseFigure src="/img/portfolio/grace-stream_website.jpg" alt="Grace Stream Website" caption="Website" />

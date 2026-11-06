@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
-import { ViewTransition } from "react";
+import { ViewTransition, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { BASE } from "./data";
 import { ModeSwitch } from "./client";
-import { resetSample, useIntake } from "./store";
+import { resetSample, routePending, useIntake } from "./store";
 import { isOverdue } from "./intake-data";
 import { Icon, LogoMark } from "./ui";
 import CommandPalette, { openPalette } from "./CommandPalette";
@@ -24,7 +24,18 @@ const norm = (p) => (p || "/").replace(/\/+$/, "");
 export default function IntakeShell({ children }) {
   const path = norm(usePathname());
   const data = useIntake();
-  const overdue = data ? data.referrals.filter((r) => isOverdue(r)).length : 0;
+  // The overdue count ticks like the board's (30s), so the two agree.
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => { const t = setInterval(() => setNow(Date.now()), 30000); return () => clearInterval(t); }, []);
+  // Route any referral from the form that nobody watched arrive (the
+  // confirmation promises it's routed right away). The board's ?arrive=
+  // referral is left for the board, which shows it landing in New first.
+  useEffect(() => {
+    if (!data) return;
+    const arrive = path === norm(`${BASE}/intake/`) ? new URLSearchParams(window.location.search).get("arrive") : null;
+    routePending(arrive);
+  }, [data, path]);
+  const overdue = data ? data.referrals.filter((r) => isOverdue(r, now)).length : 0;
   return (
     <div className="hs-app">
       <aside className="hs-app-side" aria-label="Intake sidebar">

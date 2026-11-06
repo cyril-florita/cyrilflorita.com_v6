@@ -30,6 +30,7 @@ export const openPalette = () => window.dispatchEvent(new Event("hs:palette"));
 export default function CommandPalette() {
   const ref = useRef(null);
   const inputRef = useRef(null);
+  const downOnBackdrop = useRef(false); // a drag out of the field onto the backdrop isn't a backdrop click
   const [q, setQ] = useState("");
   const [active, setActive] = useState(0);
   const router = useRouter();
@@ -77,12 +78,14 @@ export default function CommandPalette() {
 
   let i = -1;
   return (
-    <dialog ref={ref} className="hs-cmd" aria-label="Search the intake system" onClick={(e) => { if (e.target === ref.current) ref.current.close(); }}>
+    <dialog ref={ref} className="hs-cmd" aria-label="Search the intake system"
+      onPointerDown={(e) => { downOnBackdrop.current = e.target === ref.current; }}
+      onClick={(e) => { if (e.target === ref.current && downOnBackdrop.current) ref.current.close(); }}>
       <div className="hs-cmd-box">
         <div className="hs-cmd-field">
           <Icon name="search" size={22} />
           <input ref={inputRef} value={q} onChange={(e) => { setQ(e.target.value); setActive(0); }} onKeyDown={onKeyDown}
-            role="combobox" aria-expanded="true" aria-controls="hs-cmd-list" aria-activedescendant={flat.length ? `hs-cmd-${cur}` : undefined} aria-autocomplete="list"
+            role="combobox" aria-expanded={flat.length > 0} aria-controls="hs-cmd-list" aria-activedescendant={flat.length ? `hs-cmd-${cur}` : undefined} aria-autocomplete="list"
             placeholder="Search referrals, screens, or actions" spellCheck={false} autoComplete="off" />
           <kbd>Esc</kbd>
         </div>
@@ -104,8 +107,9 @@ export default function CommandPalette() {
               })}
             </div>
           ))}
-          {!flat.length && <p className="hs-cmd-none">No matches for &ldquo;{q}&rdquo;. Try a referral ID, a patient name, or a town.</p>}
         </div>
+        {/* Outside the listbox (only options and groups belong in it), in the same place. */}
+        <p className="hs-cmd-none" role="status">{!flat.length && <>No matches for &ldquo;{q}&rdquo;. Try a referral ID, a patient name, or a town.</>}</p>
         <p className="hs-cmd-foot" aria-hidden="true"><kbd>↑</kbd><kbd>↓</kbd> to move · <kbd>↵</kbd> to open · <kbd>⌘K</kbd> anywhere</p>
       </div>
     </dialog>

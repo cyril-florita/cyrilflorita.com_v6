@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { money } from "./data";
-import { Arrow, Button } from "./ui";
+import { Arrow, Button, SrStatus, onRadioKeyDown, radioTabIndex, useBackdropClose, useMounted } from "./ui";
 
 // Checkout's payment step, simulated and safe by construction: nobody can
 // type a card number. Two experiences:
@@ -34,6 +34,12 @@ export function PaymentStep({ headingRef, total, zip, onBack, onPaid }) {
   const [declined, setDeclined] = useState(false);
   const dialog = useRef(null);
   const errorRef = useRef(null);
+  const mounted = useMounted();
+  // Bumped whenever the sheet closes, so a payment the browser cut short
+  // (a forced close) doesn't carry on and reopen it.
+  const flow = useRef(0);
+  // The sheet closes from its backdrop only while it's asking (not mid-payment).
+  const backdrop = useBackdropClose(() => sheet === "review" && setSheet(null));
 
   useEffect(() => {
     const d = dialog.current;
@@ -42,19 +48,27 @@ export function PaymentStep({ headingRef, total, zip, onBack, onPaid }) {
     if (!sheet && d.open) d.close();
   }, [sheet]);
 
+  // Each wait may outlast the page (the visitor goes Back or leaves): stop
+  // there rather than set state or report a payment.
   const payWallet = async () => {
+    const id = ++flow.current;
+    const live = () => mounted.current && flow.current === id;
     setSheet("paying");
     await wait(1100);
+    if (!live()) return;
     setSheet("done");
     await wait(700);
+    if (!live()) return;
     setSheet(null);
     onPaid({ method: "wallet", label: `${wallet} · Visa ···· 4242` });
   };
 
   const payCard = async () => {
+    if (checking) return;
     setDeclined(false);
     setChecking(true);
     await wait(1200);
+    if (!mounted.current) return;
     setChecking(false);
     if (card === "declined") {
       setDeclined(true);
@@ -81,9 +95,9 @@ export function PaymentStep({ headingRef, total, zip, onBack, onPaid }) {
 
       {/* Card form: read-only test cards */}
       <div className="dl-card-form" aria-describedby="dl-card-lock">
-        <div className="dl-card-choice" role="radiogroup" aria-label="Test card">
-          {Object.entries(CARDS).map(([k, v]) => (
-            <button key={k} type="button" role="radio" aria-checked={card === k} className={`dl-chip ${card === k ? "is-on" : ""}`} onClick={() => { setCard(k); setDeclined(false); }}>
+        <div className="dl-card-choice" role="radiogroup" aria-label="Test card" onKeyDown={onRadioKeyDown}>
+          {Object.entries(CARDS).map(([k, v], i) => (
+            <button key={k} type="button" role="radio" aria-checked={card === k} tabIndex={radioTabIndex(card === k, i, true)} className={`dl-chip ${card === k ? "is-on" : ""}`} onClick={() => { setCard(k); setDeclined(false); }}>
               {v.note}
             </button>
           ))}
@@ -110,13 +124,23 @@ export function PaymentStep({ headingRef, total, zip, onBack, onPaid }) {
 
       <div className="dl-personalize-nav">
         <Button variant="ghost" onClick={onBack}>Back</Button>
-        <Button onClick={payCard} disabled={checking} aria-busy={checking}>
+        {/* aria-disabled while checking (not disabled), so focus stays on the button. */}
+        <Button onClick={payCard} aria-disabled={checking || undefined} aria-busy={checking}>
           {checking ? <><span className="dl-spin dl-spin-sm" aria-hidden="true" /> Checking card…</> : <>Use this card <Arrow /></>}
         </Button>
       </div>
+      <SrStatus>{checking ? "Checking card…" : ""}</SrStatus>
 
-      {/* The simulated wallet sheet */}
-      <dialog ref={dialog} className="dl-modal dl-syssheet dl-wallet-sheet" aria-labelledby="dl-wallet-title" onClose={() => setSheet(null)} onClick={(e) => e.target === e.currentTarget && sheet === "review" && setSheet(null)}>
+      {/* The simulated wallet sheet. Esc closes it only while it's asking:
+          mid-payment the flow finishes on its own. */}
+      <dialog
+        ref={dialog}
+        className="dl-modal dl-syssheet dl-wallet-sheet"
+        aria-labelledby="dl-wallet-title"
+        onClose={() => { flow.current++; setSheet(null); }}
+        onCancel={(e) => { if (sheet !== "review") e.preventDefault(); }}
+        {...backdrop}
+      >
         {sheet && (
           <div className="dl-modal-body">
             <p className="dl-wallet-head"><strong id="dl-wallet-title">{wallet}</strong><span className="dl-meta">Simulated</span></p>

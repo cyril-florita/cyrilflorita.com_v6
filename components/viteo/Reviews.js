@@ -220,10 +220,11 @@ export default function Reviews() {
             ))}
           </div>
           <div className="dl-carousel-nav">
-            <button type="button" className="dl-corner" onClick={() => go(index - 1)} disabled={index === 0} aria-label="Previous review" aria-controls="dl-reviews-track">
+            {/* aria-disabled at the ends (not disabled), so a focused button keeps focus. */}
+            <button type="button" className="dl-corner" onClick={() => index > 0 && go(index - 1)} aria-disabled={index === 0 || undefined} aria-label="Previous review" aria-controls="dl-reviews-track">
               <Chevron back />
             </button>
-            <button type="button" className="dl-corner" onClick={() => go(index + 1)} disabled={index >= stops - 1} aria-label="Next review" aria-controls="dl-reviews-track">
+            <button type="button" className="dl-corner" onClick={() => index < stops - 1 && go(index + 1)} aria-disabled={index >= stops - 1 || undefined} aria-label="Next review" aria-controls="dl-reviews-track">
               <Chevron />
             </button>
           </div>

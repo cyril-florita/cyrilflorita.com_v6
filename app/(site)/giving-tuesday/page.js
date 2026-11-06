@@ -3,6 +3,7 @@
 import SiteLayout from "@/layout/SiteLayout";
 import { cyrilUtility } from "@/public/utility/index";
 import { onPreloaderHidden, wipeThen } from "@/components/Preloader";
+import { session } from "@/components/safeStorage";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {
@@ -33,7 +34,7 @@ const Page = () => {
     // Mark which project to scroll back to whenever the user leaves this
     // page — including via the browser's own back button, not just the
     // "Back to My Work" buttons.
-    sessionStorage.setItem('returnToProject', 'givingtuesday');
+    session.set('returnToProject', 'givingtuesday');
     cyrilUtility.tpInner();
     // Wait for the preloader to actually finish hiding before starting this
     // page's own reveal, instead of racing it on a separate fixed timer.
@@ -48,7 +49,7 @@ const Page = () => {
   }, []);
 
   const handleBackToPortfolio = () => {
-    sessionStorage.setItem('returnToProject', 'givingtuesday');
+    session.set('returnToProject', 'givingtuesday');
     wipeThen(() => router.push('/'));
   };
 
@@ -63,7 +64,7 @@ const Page = () => {
             title="Giving Tuesday Campaign"
             summary={CASE_SUMMARIES["/giving-tuesday"]}
             facts={[
-              { label: "Client", value: <><a className="cyril-dark" href="https://childrenshungerfund.org" target="_blank">Children&apos;s Hunger Fund</a>&mdash;A Christian Non-Profit Ministry</> },
+              { label: "Client", value: <><a className="cyril-dark" href="https://childrenshungerfund.org" target="_blank" rel="noopener noreferrer">Children&apos;s Hunger Fund</a>&mdash;A Christian Non-Profit Ministry</> },
               { label: "Role", value: "Designer & Developer (sole developer)" },
               { label: "Platform & Tools", value: <>{"WordPress"}<br />{"PHP, SASS, JavaScript/jQuery, embedded giving forms"}</> },
               { label: "Deliverables", value: "Landing page, live donation tracker, post-campaign page" },

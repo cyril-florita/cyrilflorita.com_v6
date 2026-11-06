@@ -213,6 +213,10 @@ export default function AmbientShader() {
         delete root.dataset.ambient;
         geometry.dispose();
         material.dispose();
+        // WebGPURenderer has no forceContextLoss today (its dispose() already
+        // destroys the device / loses the WebGL2 fallback's context); call it
+        // if a future three adds one.
+        renderer.forceContextLoss?.();
         renderer.dispose();
       };
     })();

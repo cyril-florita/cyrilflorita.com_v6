@@ -25,9 +25,9 @@
 .dl-week li.is-today { border-color: var(--dl-ink); }
 .dl-week li.is-today .dl-week-lid { background: var(--dl-ink); color: var(--dl-panel-on-ink); border-bottom-color: var(--dl-ink); }
 .dl-week-pill { display: grid; place-items: center; animation: dl-pill-drop 0.55s cubic-bezier(0.3, 1.5, 0.5, 1) both; }
-.dl-account-pack .dl-summary-items { margin-bottom: 16px !important; }
+.dl-account-pack .dl-summary-items { margin-bottom: 16px; }
 .dl-account .dl-form-grid { grid-template-columns: 1fr 1fr; }
-.dl-account .dl-fine { margin-top: 28px !important; }
+.dl-account .dl-fine { margin-top: 28px; }
 @media (max-width: 960px) {
   .dl-account-grid { grid-template-columns: 1fr 1fr; grid-auto-flow: dense; }
 }

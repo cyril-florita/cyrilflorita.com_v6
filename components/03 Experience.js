@@ -93,7 +93,7 @@ const Experience = () => {
                           Apr 2025 &mdash; <span>Today</span> &#40;<CountUp value={`${getYearsSince(CHF_START_DATE)} Years`} />&#41;
                         </p>
                         <p>
-                          <a className="cyril-upper cyril-text-normal cyril-text-underline" href="https://childrenshungerfund.org" target="_blank">Children's Hunger Fund</a>, a Christian non-profit ministry based in Sylmar, CA.
+                          <a className="cyril-upper cyril-text-normal cyril-text-underline" href="https://childrenshungerfund.org" target="_blank" rel="noopener noreferrer">Children's Hunger Fund</a>, a Christian non-profit ministry based in Sylmar, CA.
                         </p>
                       </div>
                     </div>
@@ -111,7 +111,7 @@ const Experience = () => {
                           Dec 2014 &mdash; Feb 2024 &#40;<span>10 years</span>&#41;
                         </p>
                         <p>
-                          <a className="cyril-upper cyril-text-normal cyril-text-underline" href="https://www.gty.org" target="_blank">Grace to You</a>, a Christian multimedia ministry in Santa Clarita, CA.
+                          <a className="cyril-upper cyril-text-normal cyril-text-underline" href="https://www.gty.org" target="_blank" rel="noopener noreferrer">Grace to You</a>, a Christian multimedia ministry in Santa Clarita, CA.
                         </p>
                       </div>
                     </div>
@@ -127,7 +127,7 @@ const Experience = () => {
                           Oct 2014 &mdash; Nov 2014 &#40;<span>2 months</span>&#41;
                         </p>
                         <p>
-                          <a className="cyril-upper cyril-text-normal cyril-text-underline" href="https://www.scorpion.co" target="_blank">Scorpion Design</a>, a design and marketing agency in Santa Clarita, CA.
+                          <a className="cyril-upper cyril-text-normal cyril-text-underline" href="https://www.scorpion.co" target="_blank" rel="noopener noreferrer">Scorpion Design</a>, a design and marketing agency in Santa Clarita, CA.
                         </p>
                       </div>
                     </div>
@@ -145,7 +145,7 @@ const Experience = () => {
                           Aug 2011 &mdash; Oct 2014 &#40;<span>3 years</span>&#41;
                         </p>
                         <p>
-                          <a className="cyril-upper cyril-text-normal cyril-text-underline" href="https://www.digitalroominc.com" target="_blank">PrintRunner / Digital Room, Inc.</a>, a printing solutions company in Van Nuys, CA.
+                          <a className="cyril-upper cyril-text-normal cyril-text-underline" href="https://www.digitalroominc.com" target="_blank" rel="noopener noreferrer">PrintRunner / Digital Room, Inc.</a>, a printing solutions company in Van Nuys, CA.
                         </p>
                       </div>
                     </div>
@@ -163,7 +163,7 @@ const Experience = () => {
                           Apr 2009 &mdash; June 2011 &#40;<span>2 years</span>&#41;
                         </p>
                         <p>
-                          <a className="cyril-upper cyril-text-normal cyril-text-underline" href="https://www.latimes.com/archives/la-xpm-2010-sep-22-la-fi-mighty-net-20100922-story.html" target="_blank">Mighty Net, Inc.</a> &#40;now <a className="cyril-text-underline" href="https://www.experian.com/" target="_blank"><strong>Experian</strong></a>&#41;, a financial institution in Calabasas, CA.
+                          <a className="cyril-upper cyril-text-normal cyril-text-underline" href="https://www.latimes.com/archives/la-xpm-2010-sep-22-la-fi-mighty-net-20100922-story.html" target="_blank" rel="noopener noreferrer">Mighty Net, Inc.</a> &#40;now <a className="cyril-text-underline" href="https://www.experian.com/" target="_blank" rel="noopener noreferrer"><strong>Experian</strong></a>&#41;, a financial institution in Calabasas, CA.
                         </p>
                       </div>
                     </div>
@@ -181,7 +181,7 @@ const Experience = () => {
                           June 2008 &mdash; Dec 2008  &#40;<span>6 months</span>&#41;
                         </p>
                         <p>
-                          <a className="cyril-upper cyril-text-normal cyril-text-underline" href="https://en.wikipedia.org/wiki/EQAL" target="_blank">EQAL, Inc.</a>, an entertainment company in Sherman Oaks, CA.
+                          <a className="cyril-upper cyril-text-normal cyril-text-underline" href="https://en.wikipedia.org/wiki/EQAL" target="_blank" rel="noopener noreferrer">EQAL, Inc.</a>, an entertainment company in Sherman Oaks, CA.
                         </p>
                       </div>
                     </div>
@@ -199,7 +199,7 @@ const Experience = () => {
                           June 2007 &mdash; June 2008  &#40;<span>1 year</span>&#41;
                         </p>
                         <p>
-                          <a className="cyril-upper cyril-text-normal cyril-text-underline" href="https://en.wikipedia.org/wiki/Whittman-Hart" target="_blank">Whittman-Hart Interactive</a>, a design agency in Century City, CA.
+                          <a className="cyril-upper cyril-text-normal cyril-text-underline" href="https://en.wikipedia.org/wiki/Whittman-Hart" target="_blank" rel="noopener noreferrer">Whittman-Hart Interactive</a>, a design agency in Century City, CA.
                         </p>
                       </div>
                     </div>
@@ -217,7 +217,7 @@ const Experience = () => {
                           Oct 2006 &mdash; May 2007  &#40;<span>7 months</span>&#41;
                         </p>
                         <p>
-                          <a className="cyril-upper cyril-text-normal cyril-text-underline" href="https://studiosystem.com" target="_blank">Baseline Studio System</a>, an entertainment industry database company in Santa Monica, CA.
+                          <a className="cyril-upper cyril-text-normal cyril-text-underline" href="https://studiosystem.com" target="_blank" rel="noopener noreferrer">Baseline Studio System</a>, an entertainment industry database company in Santa Monica, CA.
                         </p>
                       </div>
                     </div>
@@ -235,7 +235,7 @@ const Experience = () => {
                           Mar 2006 &mdash; Oct 2006  &#40;<span>7 months</span>&#41;
                         </p>
                         <p>
-                          <a className="cyril-upper cyril-text-normal cyril-text-underline" href="https://www.linkedin.com/company/infospace" target="_blank">Infospace, Inc.</a>, a multimedia company in Santa Monica, CA.
+                          <a className="cyril-upper cyril-text-normal cyril-text-underline" href="https://www.linkedin.com/company/infospace" target="_blank" rel="noopener noreferrer">Infospace, Inc.</a>, a multimedia company in Santa Monica, CA.
                         </p>
                       </div>
                     </div>

@@ -1,9 +1,10 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { BASE, PLANS, PRODUCTS, money, priceFor } from "./data";
-import { useHydrated, useStored, write } from "./store";
-import { Arrow, BigWordHead, Button, Pill, PillTray, PreviewNotice } from "./ui";
+import { BASE, PLANS, PRODUCTS, getOwn, money, priceFor } from "./data";
+import { addDays, addMonths, dayKey, monthKey, monthStart } from "./dates";
+import { read, useHydrated, useStored, write } from "./store";
+import { Arrow, BigWordHead, Button, Pill, PillTray, PreviewNotice, onRadioKeyDown, radioTabIndex, useBackdropClose } from "./ui";
 import AccountTabs from "./AccountTabs";
 import RoutineGraph from "./RoutineGraph";
 import CancelFlow from "./CancelFlow";
@@ -24,12 +25,8 @@ const DAY = 86400000;
 // captured once on mount, so a render never depends on the time).
 const clock = () => Date.now();
 const fmt = (d) => new Date(d).toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
-const addMonths = (iso, n) => {
-  const d = new Date(iso);
-  d.setMonth(d.getMonth() + n);
-  return d.toISOString();
-};
-const dayKey = (d) => new Date(d).toISOString().slice(0, 10);
+// Dates: addMonths (clamped to the month's last day), and local-day / month
+// keys for the check-ins (components/viteo/dates.js).
 
 const demoOrder = () => {
   const next = new Date(Date.now() + 9 * DAY);
@@ -53,7 +50,7 @@ const demoOrder = () => {
     plan: "two",
     time: "morning",
     reminders: true,
-    checkins: [1, 2, 3].map((n) => dayKey(Date.now() - n * DAY)),
+    checkins: [1, 2, 3].map((n) => dayKey(addDays(Date.now(), -n))),
   };
 };
 
@@ -72,6 +69,7 @@ export default function Account() {
   const editButton = useRef(null);
   const [demo] = useState(() => (typeof window === "undefined" ? null : demoOrder()));
   const [now] = useState(() => Date.now());
+  const addressBackdrop = useBackdropClose(() => setEditing(false));
 
   useEffect(() => () => clearTimeout(toastTimer.current), []);
 
@@ -125,6 +123,19 @@ export default function Account() {
   const save = (patch) => write("order", { ...order, ...patch });
   const signOut = () => write("session", null);
 
+  // Undo restores only what that action changed, merged onto the order as it
+  // is now (so an edit made meanwhile, elsewhere on the page, isn't reverted).
+  // `fields`: the order's keys to put back; `fix(cur)`: a patch for nested
+  // changes (the cart).
+  const undoFor = (fields, fix) => {
+    const prev = Object.fromEntries(fields.map((k) => [k, order[k]]));
+    return () => {
+      const cur = read("order");
+      if (!cur) return;
+      write("order", { ...cur, ...prev, ...(fix ? fix(cur) : {}) });
+    };
+  };
+
   const notify = (text, undo) => {
     clearTimeout(toastTimer.current);
     setToast({ text, undo });
@@ -132,18 +143,18 @@ export default function Account() {
   };
 
   const skip = () => {
-    const before = order;
+    const undo = undoFor(["next"]);
     const next = addMonths(order.next, plan.months);
     save({ next });
-    notify(`Skipped. Your next box is now ${fmt(next)}.`, () => write("order", before));
+    notify(`Skipped. Your next box is now ${fmt(next)}.`, undo);
   };
 
   const pause = (months) => {
-    const before = order;
+    const undo = undoFor(["paused", "next"]);
     const until = addMonths(new Date(clock()).toISOString(), months);
     save({ paused: until, next: until });
     setPausing(false);
-    notify(`Paused until ${fmt(until)}.`, () => write("order", before));
+    notify(`Paused until ${fmt(until)}.`, undo);
   };
 
   const resume = () => {
@@ -154,9 +165,9 @@ export default function Account() {
 
   // Cancelling (CancelFlow.js) and coming back.
   const cancelSubscription = () => {
-    const before = order;
+    const undo = undoFor(["cancelled", "paused"]);
     save({ cancelled: new Date(clock()).toISOString(), paused: null });
-    notify("Subscription cancelled. No more boxes will ship.", () => write("order", before));
+    notify("Subscription cancelled. No more boxes will ship.", undo);
   };
   const restart = () => {
     const next = new Date(clock() + 3 * DAY).toISOString();
@@ -164,21 +175,33 @@ export default function Account() {
     notify(`Welcome back. Your first box ships ${fmt(next)}.`);
   };
   const switchToThreeMonths = () => {
-    const before = order;
+    const cartPlan = order.cart.plan;
+    const undo = undoFor(["plan"], (cur) => ({ cart: { ...cur.cart, plan: cartPlan } }));
     save({ plan: "three", cart: { ...order.cart, plan: "three" } });
-    notify("Switched to a delivery every 3 months.", () => write("order", before));
+    notify("Switched to a delivery every 3 months.", undo);
   };
 
   const removeItem = (id) => {
-    if (items.length <= 1) return;
-    const before = order;
+    const p = getOwn(PRODUCTS, id);
+    if (items.length <= 1 || !p) return;
+    // Undo puts the item back where it was (unless it's been added again).
+    const at = items.findIndex((i) => i.id === id);
+    const item = items[at];
+    const undo = undoFor([], (cur) => {
+      if (cur.cart.items.some((i) => i.id === id)) return {};
+      const list = [...cur.cart.items];
+      list.splice(Math.min(at, list.length), 0, item);
+      return { cart: { ...cur.cart, items: list } };
+    });
     save({ cart: { ...order.cart, items: items.filter((i) => i.id !== id) } });
-    notify(`${PRODUCTS[id].name} removed from your next box.`, () => write("order", before));
+    notify(`${p.name} removed from your next box.`, undo);
   };
 
   const addItem = (id) => {
+    const p = getOwn(PRODUCTS, id);
+    if (!p) return;
     save({ cart: { ...order.cart, items: [...items, { id, why: "You added this yourself." }] } });
-    notify(`${PRODUCTS[id].name} added to your next box.`);
+    notify(`${p.name} added to your next box.`);
   };
 
   const checkIn = () => {
@@ -188,9 +211,9 @@ export default function Account() {
 
   // Streak: consecutive days up to today (or yesterday, if today isn't in yet).
   let streak = 0;
-  for (let i = tookToday ? 0 : 1; checkins.includes(dayKey(now - i * DAY)); i++) streak++;
+  for (let i = tookToday ? 0 : 1; checkins.includes(dayKey(addDays(now, -i))); i++) streak++;
   const week = Array.from({ length: 7 }, (_, i) => {
-    const d = new Date(now - (6 - i) * DAY);
+    const d = addDays(now, i - 6);
     return { key: dayKey(d), label: d.toLocaleDateString("en-US", { weekday: "narrow" }), today: i === 6 };
   });
 
@@ -214,10 +237,8 @@ export default function Account() {
   // are sample history (a real account would have its own).
   const SAMPLE_HISTORY = [19, 22, 21, 25, 26];
   const months = Array.from({ length: 6 }, (_, i) => {
-    const d = new Date(now);
-    d.setDate(1);
-    d.setMonth(d.getMonth() - (5 - i));
-    return { key: dayKey(d).slice(0, 7), label: d.toLocaleDateString("en-US", { month: "short" }) };
+    const d = monthStart(now, i - 5); // the 1st, at noon: no rollover
+    return { key: monthKey(d), label: d.toLocaleDateString("en-US", { month: "short" }) };
   });
   const taken = months.map((m, i) =>
     order.demo && i < 5 ? SAMPLE_HISTORY[i] : checkins.filter((k) => k.startsWith(m.key)).length,
@@ -351,9 +372,9 @@ export default function Account() {
           {/* Frequency + schedule */}
           <div id="acc-settings" className="dl-card dl-panel dl-panel-2">
             <h2 className="dl-h3">Delivery frequency</h2>
-            <div className="dl-segment" role="radiogroup" aria-label="Delivery frequency">
-              {PLANS.map((pl) => (
-                <button key={pl.id} type="button" role="radio" aria-checked={order.plan === pl.id} className={order.plan === pl.id ? "is-on" : ""} onClick={() => save({ plan: pl.id, cart: { ...order.cart, plan: pl.id } })}>
+            <div className="dl-segment" role="radiogroup" aria-label="Delivery frequency" onKeyDown={onRadioKeyDown}>
+              {PLANS.map((pl, i) => (
+                <button key={pl.id} type="button" role="radio" aria-checked={order.plan === pl.id} tabIndex={radioTabIndex(order.plan === pl.id, i, PLANS.some((x) => x.id === order.plan))} className={order.plan === pl.id ? "is-on" : ""} onClick={() => save({ plan: pl.id, cart: { ...order.cart, plan: pl.id } })}>
                   {pl.months === 1 ? "Monthly" : `${pl.months} months`}
                 </button>
               ))}
@@ -384,12 +405,15 @@ export default function Account() {
             </div>
             <PillTray ids={ids} label="Your pack" size="sm" />
             <ul className="dl-summary-items">
-              {items.map((i) => (
-                <li key={i.id}>
-                  <span><Pill id={i.id} size="sm" tilt={-20} /> {PRODUCTS[i.id].name}</span>
-                  <button type="button" className="dl-textlink" onClick={() => removeItem(i.id)} disabled={items.length <= 1} aria-label={`Remove ${PRODUCTS[i.id].name}`}>Remove</button>
-                </li>
-              ))}
+              {items.map((i) => {
+                const p = getOwn(PRODUCTS, i.id);
+                return p && (
+                  <li key={i.id}>
+                    <span><Pill id={i.id} size="sm" tilt={-20} /> {p.name}</span>
+                    <button type="button" className="dl-textlink" onClick={() => removeItem(i.id)} disabled={items.length <= 1} aria-label={`Remove ${p.name}`}>Remove</button>
+                  </li>
+                );
+              })}
             </ul>
             {extras.length > 0 && (
               <>
@@ -442,7 +466,7 @@ export default function Account() {
         className="dl-modal"
         aria-labelledby="dl-address-title"
         onClose={() => { setEditing(false); editButton.current?.focus({ preventScroll: true }); }}
-        onClick={(e) => e.target === e.currentTarget && setEditing(false)}
+        {...addressBackdrop}
       >
         {editing && draft && (
           <form

@@ -11,6 +11,7 @@ import { gsap } from "gsap";
 import { wipeThen } from './Preloader';
 import { useRouter } from "next/navigation";
 import { cyrilUtility } from "@/public/utility/index";
+import { safeDecode } from "@/components/safeStorage";
 
 // A single graphic as its own grid item (Marketing filter by default; web
 // pieces pass filter="fil-uix" so they show under Web & App). It links to the
@@ -314,7 +315,7 @@ const PortfolioIsotope = () => {
     let target = returnId && document.getElementById(returnId);
     if (!target) {
       const zoom = window.location.hash.match(/^#zoom-(.+)$/);
-      const link = zoom && document.querySelector(`[data-zoom-id="${CSS.escape(decodeURIComponent(zoom[1]))}"]`);
+      const link = zoom && document.querySelector(`[data-zoom-id="${CSS.escape(safeDecode(zoom[1]))}"]`);
       target = link?.closest(".cyril-grid-item") || null;
     }
     if (target && !target.matches(filterSelector(filterKey))) {

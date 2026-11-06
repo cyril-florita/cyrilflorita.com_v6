@@ -222,6 +222,9 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
 .hs-nav a[aria-current="page"] { font-weight: 600; }
 .hs-header-actions { display: flex; align-items: center; gap: 12px; margin-left: 40px; } /* the light/dark toggle, set apart from the nav */
 .hs-mode { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-width: 46px; min-height: 46px; padding: 0 12px; border: 1.5px solid var(--hs-ink); border-radius: var(--hs-radius-sm); background: transparent; color: var(--hs-ink); font: inherit; font-weight: 600; cursor: pointer; }
+/* ModeSwitch renders both icons; the mode on .hs picks one (the sun in dark,
+   the moon in light), so the first paint is already right. */
+.hs[data-hs-mode="dark"] .hs-mode .hs-mode-moon, .hs:not([data-hs-mode="dark"]) .hs-mode .hs-mode-sun { display: none; }
 /* Pressed: buttons and the toggle dip slightly while held. */
 .hs :is(.hs-btn, .hs-mode, .hs-dock-phone, .hs-totop):active { scale: 0.97; }
 /* Phones and tablets: the nav becomes a second row under the logo, a strip of

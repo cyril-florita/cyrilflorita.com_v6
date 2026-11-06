@@ -1,6 +1,7 @@
 Options -Indexes
 
-ErrorDocument 403 /index.html
+# Forbidden (e.g. a directory without an index) shows the same page as a 404.
+ErrorDocument 403 /404.html
 ErrorDocument 404 /404.html
 
 # Web app manifests (the portfolio's and Viteo's).
@@ -16,7 +17,9 @@ AddType application/manifest+json .webmanifest
 
 # Caching: Next's build files are content-hashed (new name on every build),
 # so they can be cached for a year; images for a day (screenshots get
-# replaced under the same name); pages are always revalidated.
+# replaced under the same name); pages, and the .txt RSC payloads Next
+# fetches for client-side navigation, are always revalidated (a stale .txt
+# from an earlier build would point at chunks that are no longer there).
 <IfModule mod_headers.c>
   <If "%{REQUEST_URI} =~ m#^/_next/static/#">
     Header set Cache-Control "public, max-age=31536000, immutable"
@@ -24,7 +27,7 @@ AddType application/manifest+json .webmanifest
   <ElseIf "%{REQUEST_URI} =~ m#\.(jpe?g|png|webp|gif|svg|mp4|woff2?)$#">
     Header set Cache-Control "public, max-age=86400"
   </ElseIf>
-  <ElseIf "%{REQUEST_URI} =~ m#(/|\.html)$#">
+  <ElseIf "%{REQUEST_URI} =~ m#(/|\.html|\.txt)$#">
     Header set Cache-Control "no-cache"
   </ElseIf>
 </IfModule>

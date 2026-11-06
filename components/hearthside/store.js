@@ -11,12 +11,31 @@ const KEY = "hs-intake";
 const listeners = new Set();
 let state = null;
 
+// A saved referral the screens can render: a string id plus the fields they
+// read without checks.
+export const isReferral = (r) => !!r && typeof r === "object" && typeof r.id === "string" && typeof r.stage === "string"
+  && !!r.patient && typeof r.patient === "object" && Array.isArray(r.history) && Array.isArray(r.docs) && Array.isArray(r.services);
+// Saved state from localStorage, checked: anything not shaped like version 1
+// (an edited or corrupt entry) gives null, and the caller starts from the
+// seeds; malformed referrals are dropped.
+export function parseSaved(saved) {
+  if (saved?.v !== 1 || !Array.isArray(saved.referrals) || !Array.isArray(saved.done)) return null;
+  return { ...saved, referrals: saved.referrals.filter(isReferral), done: saved.done.filter((k) => typeof k === "string") };
+}
+// The next reference number: one past the highest HS-<n> (the seeds' range
+// when there are none).
+export const SEED_BASE = 24816;
+export function nextId(referrals) {
+  const ns = referrals.map((r) => +String(r.id).slice(3)).filter(Number.isFinite);
+  return `HS-${Math.max(SEED_BASE, ...ns) + 1}`;
+}
+
 const load = () => {
   if (state) return state;
   if (typeof window === "undefined") return null;
   try {
-    const saved = JSON.parse(localStorage.getItem(KEY));
-    if (saved?.v === 1) return (state = saved);
+    const saved = parseSaved(JSON.parse(localStorage.getItem(KEY)));
+    if (saved) return (state = saved);
   } catch {}
   return (state = { v: 1, referrals: seedReferrals(), done: [] });
 };
@@ -43,14 +62,15 @@ const update = (id, fn) => {
 const log = (r, text, who = "System", at = Date.now()) => { r.history.push({ at, text, who }); return r; };
 const actor = (r) => coordinator(r.coordinator)?.name ?? "Intake team";
 
-// A new referral from the public form. It lands in "New"; assign() routes it
-// (the board does that a beat later, so you can watch it happen).
+// A new referral from the public form. It lands in "New" marked `arriving`;
+// assign() routes it — the board a beat later, so you can watch it happen
+// (?arrive=), or routePending() as soon as any other intake screen or the
+// status page opens, so it's routed even if nobody watches.
 export function submitReferral({ patient, source, contact, services, payer, docs }) {
   const s = load();
-  const n = Math.max(...s.referrals.map((r) => +r.id.slice(3))) + 1;
   const now = Date.now();
   const r = {
-    id: `HS-${n}`, patient, source, contact, services, payer, docs,
+    id: nextId(s.referrals), patient, source, contact, services, payer, docs,
     stage: "new", coordinator: null, createdAt: now, stageAt: now,
     nextAction: "Assign and make first call", due: now + 2 * 3600e3, arriving: true,
     history: [{ at: now, text: `Referral received from ${sourceName(source)} through the secure form`, who: "System" }],
@@ -61,13 +81,14 @@ export function submitReferral({ patient, source, contact, services, payer, docs
 
 export function assign(id) {
   update(id, (r) => {
+    if (r.stage !== "new" || r.arriving === false) return r; // already routed or tried (the board's timer can land after routePending)
+    r.arriving = false;
     const rt = route(r.patient.zip);
     if (!rt) return log(r, "No routing rule matched: left for the intake lead");
     const now = Date.now();
     r.coordinator = rt.coordinator;
     r.stage = "assigned";
     r.stageAt = now;
-    r.arriving = false;
     r.nextAction = "First call to patient or family";
     r.due = now + 2 * 3600e3;
     log(r, `Assigned to ${coordinator(rt.coordinator).name} (${rt.rule})`);
@@ -76,6 +97,15 @@ export function assign(id) {
     if (miss.length) log(r, `Flagged missing: ${miss.map((d) => d.name).join(", ")}`);
     return r;
   });
+}
+
+// Form referrals still waiting to be routed (`arriving`, still in New),
+// except one the board is about to play (its ?arrive= id).
+export const pendingRoutes = (referrals, except = null) =>
+  referrals.filter((r) => r.arriving && r.stage === "new" && r.id !== except).map((r) => r.id);
+export function routePending(except = null) {
+  const s = load();
+  if (s) pendingRoutes(s.referrals, except).forEach(assign);
 }
 
 export function logCall(id, reached) {

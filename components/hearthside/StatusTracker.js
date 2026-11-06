@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { BASE, PHONE } from "./data";
 import { coordinator, sourceName } from "./intake-data";
-import { STATUS_STEPS, statusStep, useIntake } from "./store";
+import { STATUS_STEPS, routePending, statusStep, useIntake } from "./store";
 import { Button, CallButton, Icon } from "./ui";
 
 // The referrer's status page: where a referral stands, like package
@@ -16,13 +16,16 @@ export default function StatusTracker() {
   useEffect(() => {
     setRef(new URLSearchParams(window.location.search).get("ref")?.toUpperCase() || ""); // eslint-disable-line react-hooks/set-state-in-effect
   }, []);
+  // A referral sent from the form and not watched on the board is routed
+  // now, as the confirmation promises.
+  useEffect(() => { if (data) routePending(); }, [data]);
   if (ref === null || !data) return <p aria-busy="true">Loading status…</p>;
   const r = data.referrals.find((x) => x.id === ref);
 
   const lookup = (e) => {
     e.preventDefault();
     const id = input.trim().toUpperCase();
-    window.history.replaceState(null, "", `?ref=${id}`);
+    window.history.replaceState(null, "", `?ref=${encodeURIComponent(id)}`);
     setRef(id);
   };
 

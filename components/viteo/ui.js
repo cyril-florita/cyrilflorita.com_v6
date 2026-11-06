@@ -2,8 +2,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ViewTransition, useEffect, useId, useRef, useState, useSyncExternalStore } from "react";
-import { BASE, PRODUCTS } from "./data";
+import { BASE, PRODUCTS, getOwn } from "./data";
 import InstallApp from "./InstallApp";
+export { focusAfterMenuLink, onRadioKeyDown, radioTabIndex, useBackdropClose, useMounted, SrStatus } from "./a11y";
+import { focusAfterMenuLink, onRadioKeyDown, radioTabIndex } from "./a11y";
 
 // Shared Viteo UI: logo, pill illustrations, buttons, and the page shell
 // (header, footer with the concept notice). Styles: app/pitch/viteo/viteo.css.
@@ -45,7 +47,7 @@ export const Logo = ({ small = false }) => (
 // from components/viteo/pillModels.js by scripts/render-pills.mjs), sized by
 // its form's CSS box (capsule / softgel / tablet) and tilted per use.
 export const Pill = ({ id, size = "md", tilt = 0 }) => {
-  const p = PRODUCTS[id];
+  const p = getOwn(PRODUCTS, id);
   if (!p) return null;
   return (
     <span
@@ -67,7 +69,7 @@ export const PillTray = ({ ids, label = "Your daily pack", size = "lg" }) => (
   <div
     className={`dl-tray dl-tray-${size}`}
     role="img"
-    aria-label={`${label}: ${ids.map((i) => PRODUCTS[i]?.name).join(", ")}`}
+    aria-label={`${label}: ${ids.map((i) => getOwn(PRODUCTS, i)?.name).filter(Boolean).join(", ")}`}
   >
     {ids.map((id, i) => (
       <span key={id} className="dl-tray-slot" style={{ "--i": i }}>
@@ -237,13 +239,14 @@ export const ThemeSwitcher = ({ show = "both" }) => {
   return (
     <div className={`dl-switcher${show === "both" ? "" : ` is-${show}`}`}>
       {show !== "mode" && (
-      <div className="dl-switcher-themes" role="radiogroup" aria-label="Theme">
-        {THEMES.map((t) => (
+      <div className="dl-switcher-themes" role="radiogroup" aria-label="Theme" onKeyDown={onRadioKeyDown}>
+        {THEMES.map((t, i) => (
           <button
             key={t.id}
             type="button"
             role="radio"
             aria-checked={theme === t.id}
+            tabIndex={radioTabIndex(theme === t.id, i, THEMES.some((x) => x.id === theme))}
             className={theme === t.id ? "is-on" : ""}
             onClick={() => setDl("theme", t.id)}
             title={`${t.label} theme`}
@@ -360,6 +363,8 @@ export const Header = () => {
   }, [open]);
 
   const close = () => setOpen(false);
+  // A menu link: close, and if it stays on this page, move focus to its target.
+  const closeTo = (href) => () => { close(); focusAfterMenuLink(href, path); };
 
   // The design system has no site header: its own sidebar / top bar and menu
   // (DsChrome) carry the logo, its sections and the way home.
@@ -411,7 +416,7 @@ export const Header = () => {
         inert={!open}
       >
         <div className="dl-wrap dl-menu-top">
-          <Link href={`${BASE}/`} aria-label="Viteo home" onClick={close}>
+          <Link href={`${BASE}/`} aria-label="Viteo home" onClick={closeTo(`${BASE}/`)}>
             <Logo />
           </Link>
           <button
@@ -433,7 +438,7 @@ export const Header = () => {
         </div>
         <nav className="dl-wrap dl-menu-nav" aria-label="Viteo menu">
           {NAV.map(([label, href], i) => (
-            <Link key={href} href={href} onClick={close} style={{ "--i": i }} aria-current={current(href)}>
+            <Link key={href} href={href} onClick={closeTo(href)} style={{ "--i": i }} aria-current={current(href)}>
               {label}
               <Arrow />
             </Link>
@@ -546,3 +551,31 @@ export const PreviewNotice = ({ children }) => (
   </div>
 );
 
+
+// The design system's radio demos (option cards and the segmented control):
+// the same markup as the real ones, with working selection and arrow keys.
+export const DemoRadios = ({ as: Tag = "div", className, label, kind = "option", options }) => {
+  const [on, setOn] = useState(0);
+  return (
+    <Tag className={className} role="radiogroup" aria-label={label} onKeyDown={onRadioKeyDown}>
+      {options.map((o, i) => (
+        <button
+          key={o.label}
+          type="button"
+          role="radio"
+          aria-checked={on === i}
+          tabIndex={radioTabIndex(on === i, i, true)}
+          className={kind === "option" ? `dl-option${on === i ? " is-on" : ""}` : on === i ? "is-on" : undefined}
+          onClick={() => setOn(i)}
+        >
+          {kind === "option" ? (
+            <>
+              <span className="dl-option-text"><span>{o.label}</span>{o.hint && <span className="dl-meta">{o.hint}</span>}</span>
+              <span className="dl-option-check" />
+            </>
+          ) : o.label}
+        </button>
+      ))}
+    </Tag>
+  );
+};

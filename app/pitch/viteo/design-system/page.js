@@ -1,5 +1,5 @@
 import { BASE, PRODUCTS } from "@/components/viteo/data";
-import { Arrow, BigWordHead, Button, Logo, LogoMark, Pill, PillTray, ProductBox, ThemeSwitcher } from "@/components/viteo/ui";
+import { Arrow, BigWordHead, Button, DemoRadios, Logo, LogoMark, Pill, PillTray, ProductBox, ThemeSwitcher } from "@/components/viteo/ui";
 import { CurrentTheme, Swatches } from "@/components/viteo/DesignTokens";
 import DsChrome from "@/components/DsChrome";
 import RoutineGraph from "@/components/viteo/RoutineGraph";
@@ -207,16 +207,9 @@ export default function DesignSystem() {
               <label className="dl-field dl-field-wide"><span>Email</span><input defaultValue="cyril@example.com" /></label>
               <label className="dl-field dl-field-wide has-error"><span>ZIP code</span><input defaultValue="913" /><span className="dl-error">Use a 5-digit ZIP code.</span></label>
             </div>
-            <div className="dl-options">
-              <button type="button" className="dl-option is-on" role="radio" aria-checked="true"><span className="dl-option-text"><span>Selected option</span><span className="dl-meta">With a hint</span></span><span className="dl-option-check" /></button>
-              <button type="button" className="dl-option" role="radio" aria-checked="false"><span className="dl-option-text"><span>Unselected option</span></span><span className="dl-option-check" /></button>
-            </div>
+            <DemoRadios className="dl-options" label="Example options" options={[{ label: "Selected option", hint: "With a hint" }, { label: "Unselected option" }]} />
             <div className="dl-ds-row">
-              <span className="dl-segment" role="radiogroup" aria-label="Example segmented control">
-                <button type="button" className="is-on" role="radio" aria-checked="true">Monthly</button>
-                <button type="button" role="radio" aria-checked="false">2 months</button>
-                <button type="button" role="radio" aria-checked="false">3 months</button>
-              </span>
+              <DemoRadios as="span" className="dl-segment" kind="segment" label="Example segmented control" options={[{ label: "Monthly" }, { label: "2 months" }, { label: "3 months" }]} />
               <label className="dl-switch"><input type="checkbox" defaultChecked /><span className="dl-switch-ui" aria-hidden="true" />Reminders</label>
               <button type="button" className="dl-chip"><Pill id="c" size="sm" tilt={-20} /> Vitamin C <span className="dl-meta">+$4</span></button>
             </div>

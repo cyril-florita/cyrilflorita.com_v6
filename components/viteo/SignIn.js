@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { BASE } from "./data";
 import { read, write } from "./store";
-import { Arrow, BigWordHead, PreviewNotice, Button } from "./ui";
+import { BigWordHead, PreviewNotice, Button, SrStatus, useBackdropClose, useMounted } from "./ui";
 // Page-only styles (split out of viteo.css so the landing skips them).
 import "@/app/pitch/viteo/css/signin.css";
 
@@ -34,6 +34,11 @@ export default function SignIn() {
   const [passkey, setPasskey] = useState(null); // null | "ask" | "verifying" | "done"
   const sheet = useRef(null);
   const heading = useRef(null);
+  const mounted = useMounted();
+  // Bumped whenever the passkey sheet closes, so a check the browser cut
+  // short (a forced close) doesn't carry on and sign in anyway.
+  const flow = useRef(0);
+  const backdrop = useBackdropClose(() => passkey === "ask" && setPasskey(null));
 
   const next = () => {
     const n = new URLSearchParams(window.location.search).get("next");
@@ -43,6 +48,8 @@ export default function SignIn() {
   const finish = async (addr, method) => {
     setStage("signing");
     await wait(700);
+    // Left the page meanwhile: don't sign in or navigate.
+    if (!mounted.current) return;
     write("session", { email: addr, name: nameFrom(addr), method, since: new Date().toISOString() });
     router.push(next());
   };
@@ -72,10 +79,14 @@ export default function SignIn() {
   };
 
   const usePasskey = async () => {
+    const id = ++flow.current;
+    const live = () => mounted.current && flow.current === id;
     setPasskey("verifying");
     await wait(1100);
+    if (!live()) return;
     setPasskey("done");
     await wait(500);
+    if (!live()) return;
     setPasskey(null);
     finish(email.trim() || "cyril@example.com", "passkey");
   };
@@ -123,7 +134,7 @@ export default function SignIn() {
           )}
 
           {stage === "signing" && (
-            <div className="dl-signin-busy" role="status">
+            <div className="dl-signin-busy">
               <span className="dl-spin" aria-hidden="true" />
               <h1 className="dl-h3" tabIndex={-1} ref={heading}>Signing you in…</h1>
             </div>
@@ -145,8 +156,21 @@ export default function SignIn() {
         </button>
       )}
 
-      {/* The simulated passkey system sheet. */}
-      <dialog ref={sheet} className="dl-modal dl-syssheet" aria-labelledby="dl-passkey-title" onClose={() => setPasskey(null)} onClick={(e) => e.target === e.currentTarget && passkey === "ask" && setPasskey(null)}>
+      {/* Always mounted, so its changes are announced. */}
+      <SrStatus>
+        {stage === "signing" ? "Signing you in…" : stage === "sent" && mail ? "New email: Viteo, your sign-in link." : passkey === "done" ? "Signed in." : ""}
+      </SrStatus>
+
+      {/* The simulated passkey system sheet. Esc closes it only while it's
+          asking: once confirming, the flow finishes on its own. */}
+      <dialog
+        ref={sheet}
+        className="dl-modal dl-syssheet"
+        aria-labelledby="dl-passkey-title"
+        onClose={() => { flow.current++; setPasskey(null); }}
+        onCancel={(e) => { if (passkey !== "ask") e.preventDefault(); }}
+        {...backdrop}
+      >
         {passkey && (
           <div className="dl-modal-body dl-syssheet-body">
             <span className={`dl-syssheet-icon ${passkey === "done" ? "is-done" : ""}`} aria-hidden="true">

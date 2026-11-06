@@ -1,12 +1,4 @@
-import { useEffect } from "react";
-
 const Footer = () => {
-
-  // Initialize theme from localStorage
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
-  }, []);
-
   return (
     <div className="cyril-bottom-panel">
       <div className="cyril-bp-frame">
@@ -23,6 +15,7 @@ const Footer = () => {
               <a
                 href="https://www.behance.net/cyrilflorita"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="social-icon"
                 aria-label="Behance"
               >
@@ -33,6 +26,7 @@ const Footer = () => {
               <a
                 href="https://github.com/cyril-florita"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="social-icon"
                 aria-label="GitHub"
               >
@@ -43,6 +37,7 @@ const Footer = () => {
               <a
                 href="https://www.linkedin.com/in/cyrilflorita"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="social-icon"
                 aria-label="LinkedIn"
               >
@@ -53,6 +48,7 @@ const Footer = () => {
               <a
                 href="https://x.com/CyrilFlorita"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="social-icon"
                 aria-label="Twitter/X"
               >

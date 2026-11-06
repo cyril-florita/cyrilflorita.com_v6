@@ -334,7 +334,9 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 .dl *, .dl *::before, .dl *::after { box-sizing: border-box; }
 .dl img { max-width: 100%; }
 .dl a { color: inherit; }
-.dl h1, .dl h2, .dl h3, .dl h4, .dl p, .dl ul, .dl ol, .dl dl, .dl dd, .dl figure { margin: 0; }
+/* Zero specificity (:where), so any single-class rule sets these margins
+   without !important. */
+:where(.dl) :where(h1, h2, h3, h4, p, ul, ol, dl, dd, figure) { margin: 0; }
 .dl ul, .dl ol { padding: 0; list-style: none; }
 .dl button { font: inherit; color: inherit; }
 /* Button variants below are prefixed with .dl so they beat the two resets above. */
@@ -384,12 +386,12 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 .dl-h3 { font-size: 20px; font-weight: 600; line-height: 1.3; }
 .dl-h4 { font-size: 15px; font-weight: 600; margin-top: 22px !important; }
 .dl-lede { font-size: 18px; line-height: 1.6; color: var(--dl-ink-2); max-width: 34em; }
-.dl-section-lede { color: var(--dl-ink-2); margin-top: 12px !important; max-width: 40em; }
+.dl-section-lede { color: var(--dl-ink-2); margin-top: 12px; max-width: 40em; }
 .dl-meta { font-size: 14px; color: var(--dl-ink-2); font-weight: 400; }
 .dl-eyebrow {
   display: inline-flex; align-items: center; gap: 10px;
   font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--dl-sun-deep); margin-bottom: 14px !important;
+  color: var(--dl-sun-deep); margin-bottom: 14px;
 }
 .dl .dl-textlink {
   background: none; border: 0; padding: 0; cursor: pointer;
@@ -442,7 +444,7 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 .dl .dl-btn-secondary:hover { background: var(--dl-ink-hover); }
 .dl .dl-btn-ghost { background: transparent; border-color: var(--dl-ink); color: var(--dl-ink); }
 .dl .dl-btn-ghost:hover { background: rgba(var(--dl-shade), 0.06); }
-.dl-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
+.dl-btn:is(:disabled, [aria-disabled="true"]) { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
 .dl-btn-sm { min-height: 44px; padding: 0 18px; font-size: 15px; }
 .dl-btn-lg { min-height: 56px; padding: 0 30px; font-size: 17px; }
 .dl-btn-block { width: 100%; }
@@ -456,7 +458,7 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
   46% { translate: calc(var(--ax, 14px) * -1) calc(var(--ay, 0px) * -1); opacity: 0; }
   100% { translate: 0 0; opacity: 1; }
 }
-:is(.dl-btn:not(:disabled), .dl-menu-nav a, .dl-underline-cta, .dl-corner, .dl-totop):hover svg { animation: dl-arrow-loop 0.5s var(--dl-ease); }
+:is(.dl-btn:not(:disabled, [aria-disabled="true"]), .dl-menu-nav a, .dl-underline-cta, .dl-corner, .dl-totop):hover svg { animation: dl-arrow-loop 0.5s var(--dl-ease); }
 
 /* ---------- shell ---------- */
 .dl-header { position: relative; z-index: 3; }
@@ -546,7 +548,7 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 @media (min-width: 961px) { .dl-menu { display: none; } }
 .dl-footer { padding: 48px 0 56px; margin-top: 24px; }
 .dl-footer-inner { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; }
-.dl-footer p { margin-top: 14px !important; color: var(--dl-ink-2); font-size: 14px; max-width: 44em; }
+.dl-footer p { margin-top: 14px; color: var(--dl-ink-2); font-size: 14px; max-width: 44em; }
 .dl-footer nav { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; align-content: start; font-size: 15px; }
 .dl-footer nav a { text-decoration: none; }
 .dl-footer nav a:hover { color: var(--dl-sun-deep); }
@@ -556,7 +558,7 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
   margin-top: 40px; padding-top: 22px; border-top: 1px solid rgba(255, 255, 255, 0.14); font-size: 13px;
 }
 .dl[data-dl-mode="light"] .dl-footer-legal { border-top-color: #FFFFFF; }
-.dl .dl-footer-legal p { margin-top: 0 !important; max-width: none; font-size: 13px; }
+.dl .dl-footer-legal p { margin-top: 0; max-width: none; font-size: 13px; }
 .dl-footer-legal strong { color: var(--dl-ink); font-weight: 600; }
 /* Messages (Emails.js): emails shown as they'd arrive, light and 600px
    wide in an inbox frame, in fixed brand colours (not the site theme). */
@@ -564,7 +566,7 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 /* The partner program on the landing page (page.js): a proof line under the
    reviews, and a band with what a client sees; plus the "Suggested by"
    banner on the plan page (Plan.js, ?pro=). */
-.dl-pro-proof { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-top: 28px !important; color: var(--dl-ink-2); }
+.dl-pro-proof { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-top: 28px; color: var(--dl-ink-2); }
 /* Bare text that can sit over the moving background's bright spread: full ink. */
 .dl.has-ambient .dl-pro-proof { color: var(--dl-ink); }
 .dl-pro-faces { display: inline-flex; }
@@ -701,7 +703,7 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 }
 .dl-pro-calc-out { display: grid; gap: 8px; padding: 24px; border-radius: 20px; background: var(--dl-panel-2); }
 .dl-pro-calc-out .dl-big small { font-size: 0.4em; font-weight: 600; margin-left: 4px; }
-.dl-pro-note { margin-top: 12px !important; }
+.dl-pro-note { margin-top: 12px; }
 .dl-pro-dash { display: grid; gap: 22px; padding: 28px; }
 .dl-pro-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 .dl-pro-stats > div { padding: 16px; border-radius: 16px; background: var(--dl-well); }
@@ -809,7 +811,7 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 .dl-lot-missing { max-width: 640px; display: grid; gap: 8px; padding: 24px; }
 .dl-lot-card { display: grid; gap: 14px; padding: 32px; }
 .dl-lot-head { display: grid; grid-template-columns: 96px minmax(0, 1fr) auto; align-items: center; gap: 20px; }
-.dl-lot-head .dl-eyebrow { margin-bottom: 4px !important; }
+.dl-lot-head .dl-eyebrow { margin-bottom: 4px; }
 .dl-lot-pill { display: grid; place-items: center; height: 72px; }
 .dl-lot-pill .dl-pill { transform: rotate(var(--tilt, 0deg)) scale(1.8); }
 .dl-lot-badge { padding: 6px 14px; border-radius: 999px; font-size: 13px; font-weight: 700; background: var(--dl-sage); color: var(--dl-sage-deep); }
@@ -843,7 +845,7 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 .dl-footer-install svg { width: 18px; height: 18px; }
 .dl-footer-install:hover { text-decoration: underline; text-underline-offset: 3px; }
 .dl .dl-footer-install:focus-visible { outline: 3px solid var(--dl-sun-deep); outline-offset: 3px; border-radius: 6px; }
-.dl-install-steps { display: grid; gap: 0; margin-top: 4px; }
+.dl-install-steps { display: grid; gap: 0; }
 .dl-install-steps > div { display: grid; grid-template-columns: 140px 1fr; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--dl-line); }
 .dl-install-steps dt { font-weight: 600; }
 .dl-install-steps dd { color: var(--dl-ink-2); }
@@ -989,7 +991,7 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 .dl-hero-inner { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: center; }
 .dl-hero-copy .dl-lede { margin-top: 22px; }
 .dl-hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
-.dl-hero-trust { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 30px !important; color: var(--dl-ink-2); font-size: 14px; }
+.dl-hero-trust { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 30px; color: var(--dl-ink-2); font-size: 14px; }
 .dl-hero-trust li::before { content: "✓"; color: var(--dl-sage-deep); font-weight: 700; margin-right: 8px; }
 .dl-hero-art { position: relative; display: grid; place-items: center; min-height: 440px; }
 .dl-sun {
@@ -1025,13 +1027,13 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
   /* The fill only paints inside the box, and the tight tracking pushes the
      last letter's ink past it ("Questions" lost its s): pad the right, and
      cancel the padding with the margin so nothing shifts. */
-  margin: 0 -0.12em -0.27em -.04em !important; padding-right: 0.12em;
+  margin: 0 -0.12em -0.27em -.04em; padding-right: 0.12em;
   background: linear-gradient(180deg, color-mix(in srgb, var(--dl-sun-deep) 26%, transparent), color-mix(in srgb, var(--dl-sun-deep) 3%, transparent) 92%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
   pointer-events: none; user-select: none;
 }
 .dl-bigword-head > :not(.dl-bigword-fit) { position: relative; }
-.dl-bigword-note { margin-top: 12px !important; }
+.dl-bigword-note { margin-top: 12px; }
 .dl-bigword > span { display: block; }
 /* The hero keeps a small label instead (unique to the hero): the eyebrow
    style, a step bigger. */
@@ -1050,13 +1052,13 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 
 /* Steps: the cards step down left to right (progression), each with a huge
    numeral set behind the copy, whole, in the top-left corner. */
-.dl-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px !important; align-items: start; }
+.dl-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; align-items: start; }
 /* Content (pill, title, text) sits at the bottom of the card, under the numeral. */
 .dl-step { position: relative; overflow: hidden; isolation: isolate; min-height: 300px; display: flex; flex-direction: column; justify-content: flex-end; }
 .dl-steps .dl-step:nth-child(2) { margin-top: 40px; }
 .dl-steps .dl-step:nth-child(3) { margin-top: 80px; }
 .dl-step h3 { position: relative; z-index: 1; font-size: 24px; line-height: 1.2; font-weight: 600; letter-spacing: -0.01em; max-width: 13em; }
-.dl-step p { position: relative; z-index: 1; color: var(--dl-ink-2); margin-top: 10px !important; max-width: 24em; }
+.dl-step p { position: relative; z-index: 1; color: var(--dl-ink-2); margin-top: 10px; max-width: 24em; }
 .dl-step-n {
   position: absolute; z-index: 0; left: 0.08em; top: 0;
   font-family: var(--dl-font-display), serif; font-weight: 800; font-size: 210px; line-height: 1; letter-spacing: -0.07em;
@@ -1071,7 +1073,7 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .dl-step:hover .dl-step-n { translate: 6px 6px; }
 }
-.dl-ingredients { display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px 16px; margin-top: 72px !important; } /* row gap: room for the pills breaking out above each card */
+.dl-ingredients { display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px 16px; margin-top: 72px; } /* row gap: room for the pills breaking out above each card */
 /* Ingredient card: the pill centred at the top, breaking out above the
    card's edge; the expand button top right; and the name, dose line and
    description under the pill at the card's full width (only the name keeps
@@ -1080,7 +1082,7 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 /* The card's name is set like the close-up's heading (.dl-h2's font, weight
    and tracking), at card size, and the name and dose line hug their text:
    so each can grow or glide into its twin in the close-up during the morph. */
-.dl-ingredient h3 { font-size: 19px; line-height: 1.1; margin-top: 10px !important; padding: 0 64px; text-align: center; }
+.dl-ingredient h3 { font-size: 19px; line-height: 1.1; margin-top: 10px; padding: 0 64px; text-align: center; }
 .dl-ingredient .dl-ing-meta { width: fit-content; margin: 4px auto 0; text-align: center; }
 .dl-ingredient .dl-ing-blurb { font-size: 15px; margin-top: 12px; }
 /* The pill, twice the usual size, breaking out above the card's top edge
@@ -1095,7 +1097,7 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 .dl-reviews {
   display: flex; gap: 20px; overflow-x: auto; overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory; scrollbar-width: none;
-  margin-top: 36px !important; padding: 2px 0 6px;
+  margin-top: 36px; padding: 2px 0 6px;
 }
 .dl-reviews::-webkit-scrollbar { display: none; }
 .dl-reviews > li { flex: 0 0 calc((100% - 40px) / 3); scroll-snap-align: start; }
@@ -1132,11 +1134,11 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 .dl-carousel-dots button.is-on::before { width: 24px; background: currentColor; }
 .dl-carousel-nav { display: flex; gap: 10px; }
 .dl .dl-carousel-nav .dl-corner { cursor: pointer; }
-.dl .dl-carousel-nav .dl-corner:disabled { opacity: 0.35; cursor: default; }
+.dl .dl-carousel-nav .dl-corner:is(:disabled, [aria-disabled="true"]) { opacity: 0.35; cursor: default; }
 .dl-carousel-nav .dl-corner svg { --ax: 8px; --ay: 0px; }
 .dl-carousel-nav .dl-corner:first-child svg { --ax: -8px; }
-.dl-carousel-nav .dl-corner:disabled svg { animation: none !important; }
-.dl-review p { font-family: var(--dl-font-display), serif; font-size: 21px; line-height: 1.4; margin-bottom: 18px !important; }
+.dl-carousel-nav .dl-corner:is(:disabled, [aria-disabled="true"]) svg { animation: none !important; }
+.dl-review p { font-family: var(--dl-font-display), serif; font-size: 21px; line-height: 1.4; margin-bottom: 18px; }
 .dl-faq-wrap { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 48px; }
 .dl-faq { display: grid; gap: 12px; align-content: start; }
 .dl-faq-item { padding: 20px 24px; border-radius: 20px; }
@@ -1155,7 +1157,7 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 @media (prefers-reduced-motion: reduce) { .dl-faq-item::details-content { transition: none; } }
 /* The gap above the answer is padding, not margin: a margin collapsed out of
    the closing box, so the last 10px snapped shut at the end. */
-.dl-faq-item p { margin-top: 0 !important; padding-top: 10px; color: var(--dl-ink-2); }
+.dl-faq-item p { margin-top: 0; padding-top: 10px; color: var(--dl-ink-2); }
 .dl-cta { padding: 24px 0 8px; }
 .dl-cta-inner { background: var(--dl-panel-2); color: var(--dl-panel-ink); border-radius: 32px; padding: 72px 56px !important; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 32px; }
 .dl-cta .dl-display { font-size: clamp(36px, 5vw, 64px); max-width: 12em; }
@@ -1193,7 +1195,7 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 .dl-pack-fill .dl-product { position: relative; z-index: 1; }
 .dl-progress { height: 8px; border-radius: 999px; background: var(--dl-line); overflow: hidden; }
 .dl-progress span { display: block; height: 100%; background: var(--dl-sun); border-radius: 999px; transition: width 0.5s var(--dl-ease); }
-.dl-personalize-count { margin: 12px 0 34px !important; }
+.dl-personalize-count { margin: 12px 0 34px; }
 .dl-question { animation: dl-rise 0.45s var(--dl-ease); }
 .dl-question h1:focus { outline: none; }
 @keyframes dl-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
@@ -1225,7 +1227,7 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center / 14px no-repeat;
 }
 .dl-personalize-nav { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 32px; }
-.dl-personalize-hint { margin-top: 12px !important; }
+.dl-personalize-hint { margin-top: 12px; }
 .dl-building { display: grid; place-items: center; text-align: center; }
 .dl-building-inner { max-width: 560px; display: grid; gap: 22px; justify-items: center; }
 
@@ -1252,12 +1254,12 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 .dl-item-pill { display: grid; place-items: center; width: 64px; height: 64px; flex: none; border-radius: 16px; background: var(--dl-well); }
 .dl-item-body { flex: 1; min-width: 0; }
 .dl-item-body :is(h2, h3) { font-size: 18px; font-weight: 600; } /* h2 on the plan, straight under its h1 (axe heading-order) */
-.dl-why { margin-top: 4px !important; font-size: 15px; color: var(--dl-ink-2); }
+.dl-why { margin-top: 4px; font-size: 15px; color: var(--dl-ink-2); }
 .dl-why-label { display: inline-block; margin-right: 6px; padding: 1px 8px; border-radius: 6px; background: var(--dl-sage); color: var(--dl-sage-deep); font-size: 12px; font-weight: 600; }
 .dl-item-side { display: grid; justify-items: end; gap: 6px; }
 .dl-price { font-weight: 600; font-size: 17px; }
 .dl-extras { margin-top: 28px; }
-.dl-extras ul, .dl-extras-inline { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px !important; }
+.dl-extras ul, .dl-extras-inline { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
 .dl-summary { position: sticky; top: 96px; display: grid; gap: 16px; }
 .dl-totals { display: grid; gap: 8px; padding-top: 14px; border-top: 1px solid var(--dl-line); }
 .dl-totals > div { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; }
@@ -1268,10 +1270,10 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 .dl-total dt { color: var(--dl-ink) !important; font-weight: 600; }
 .dl-total dd { font-weight: 700; }
 .dl-perday { text-align: center; }
-.dl-fine { text-align: center; margin-top: 4px !important; }
+.dl-fine { text-align: center; margin-top: 4px; }
 
 /* ---------- checkout ---------- */
-.dl-stepper { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-bottom: 28px !important; color: var(--dl-ink-2); font-weight: 600; font-size: 15px; }
+.dl-stepper { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-bottom: 28px; color: var(--dl-ink-2); font-weight: 600; font-size: 15px; }
 .dl-stepper li { display: inline-flex; align-items: center; gap: 10px; }
 .dl-stepper-n { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--dl-line); font-size: 13px; }
 .dl-stepper .is-current { color: var(--dl-ink); }
@@ -1286,7 +1288,7 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 .dl-date.is-on { border-color: var(--dl-sun); background: var(--dl-selected); }
 .dl-demo-pay { margin-top: 22px; padding: 24px; border-radius: 16px; border: 2px dashed var(--dl-line-strong); background: var(--dl-well); display: grid; gap: 10px; justify-items: start; }
 .dl-demo-pay p { color: var(--dl-ink-2); }
-.dl-review-list { display: grid; gap: 0; margin-top: 18px; }
+.dl-review-list { display: grid; gap: 0; }
 .dl-review-list > div { display: grid; grid-template-columns: 120px 1fr auto; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--dl-line); align-items: start; }
 .dl-review-list dt { font-weight: 600; }
 .dl-summary-items { display: grid; gap: 10px; }
@@ -1345,7 +1347,7 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
    panel's dark text.) */
 .dl-next.is-paused { background: color-mix(in srgb, var(--dl-panel-1) 72%, #9AA1AC); }
 .dl-next.is-paused .dl-eyebrow { color: var(--dl-panel-ink); } /* the small label stays AA on the muted card */
-.dl-next-date { font-size: clamp(40px, 5vw, 64px); margin: 4px 0 8px !important; }
+.dl-next-date { font-size: clamp(40px, 5vw, 64px); margin: 4px 0 8px; }
 .dl-next-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
 .dl-pause { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 16px; animation: dl-rise 0.3s var(--dl-ease); }
 .dl-checkin { display: flex; flex-direction: column; gap: 16px; }
@@ -1364,7 +1366,7 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 .dl-segment { display: inline-flex; padding: 4px; border-radius: 999px; background: var(--dl-track); margin: 14px 0 10px; }
 .dl-segment button { border: 0; background: transparent; min-height: 40px; padding: 0 16px; border-radius: 999px; font-weight: 600; font-size: 14px; cursor: pointer; }
 .dl-segment button.is-on { background: var(--dl-paper); box-shadow: 0 2px 6px rgba(var(--dl-shade), 0.15); }
-.dl-schedule { display: grid; gap: 10px; margin-top: 10px !important; }
+.dl-schedule { display: grid; gap: 10px; margin-top: 10px; }
 .dl-schedule li { display: flex; align-items: center; gap: 12px; font-size: 15px; }
 .dl-schedule-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--dl-sun); }
 .dl-schedule li + li .dl-schedule-dot { background: var(--dl-line); }
@@ -1514,7 +1516,7 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 /* Closing band: headline left, button right, on one row (stacks on phones). */
 .dl .dl-cta-inner { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 40px; }
 @media (max-width: 760px) { .dl .dl-cta-inner { grid-template-columns: 1fr; gap: 28px; } .dl .dl-cta .dl-underline-cta { justify-self: start; } }
-.dl-bento-sub { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 22px !important; font-size: 14px; color: var(--dl-ink-2); }
+.dl-bento-sub { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 22px; font-size: 14px; color: var(--dl-ink-2); }
 .dl-bento-sub a { font-weight: 600; }
 .dl-bento-art { position: relative; display: grid; place-items: center; min-height: 540px; }
 /* The box rises above the circle, so the art's visual centre sits high:
@@ -1703,7 +1705,7 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
   transition: background-color 0.2s, border-color 0.2s, transform 0.3s var(--dl-ease);
 }
 .dl-corner svg, .dl-ing-plus svg { width: 22px; height: 22px; }
-.dl-corner:is(:hover, :focus-visible):not(:disabled),
+.dl-corner:is(:hover, :focus-visible):not(:disabled, [aria-disabled="true"]),
 .dl-bento-card.is-link:hover .dl-corner,
 .dl-ingredient:is(:hover, :active) .dl-ing-plus {
   background: color-mix(in srgb, currentColor 10%, transparent);
@@ -2061,7 +2063,7 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 .dl-ing-body { padding: 44px 40px 36px; display: grid; gap: 10px; align-content: start; }
 .dl-ing-more { display: grid; gap: 10px; align-content: start; } /* the body's lower half (Ingredients.js) */
 .dl-ing-body .dl-lede {
-  font-size: 17px; margin-top: 6px !important; color: var(--dl-ink);
+  font-size: 17px; margin-top: 6px; color: var(--dl-ink);
   /* The card's description width in em (--dl-blurb-em, set by Ingredients.js
      on open), so it breaks lines in the same places, only larger. */
   width: min(calc(var(--dl-blurb-em, 1000) * 1em), 100%);
@@ -2086,7 +2088,7 @@ body:has(.dl[data-dl-theme="peach"][data-dl-mode="dark"]) { background: #12121D;
 .dl-ing-reasons li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 7px; height: 7px; border-radius: 2px; background: var(--dl-sun-deep); }
 .dl-ing-pairs { display: flex; flex-wrap: wrap; gap: 8px; }
 .dl-ing-pairs .dl-chip, .dl-ing-pairs .dl-chip:hover { border-color: transparent; } /* no edge on the close-up's chips (kept transparent so their size doesn't change); hover keeps its tint */
-.dl-ing-note { margin-top: 8px !important; font-size: 13px; }
+.dl-ing-note { margin-top: 8px; font-size: 13px; }
 .dl-ing-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; }
 /* The close-up's ✕: the same square icon button as the cards' expand button
    (.dl-corner / .dl-ing-plus: 52px, 18px corners, a 28% currentColor border,
@@ -2354,10 +2356,10 @@ html[data-dl-morph="close"]::view-transition-new(dl-ing-glow) { animation: dl-mo
   .dl .dl-ingredients, .dl .dl-reviews {
     display: flex; gap: 14px; overflow-x: auto; overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory; scroll-padding: 0 18px; scrollbar-width: none;
-    margin-left: -18px !important; margin-right: -18px !important; padding: 0 18px 8px;
+    margin-left: -18px; margin-right: -18px; padding: 0 18px 8px;
   }
   .dl .dl-ingredients::-webkit-scrollbar, .dl .dl-reviews::-webkit-scrollbar { display: none; }
-  .dl .dl-ingredients { padding-top: 64px; margin-top: 8px !important; } /* room for the pills breaking out */
+  .dl .dl-ingredients { padding-top: 64px; margin-top: 8px; } /* room for the pills breaking out */
   .dl-ingredients > li { flex: 0 0 78%; scroll-snap-align: start; }
   .dl-reviews > li { flex: 0 0 85%; scroll-snap-align: start; }
 
@@ -2434,11 +2436,11 @@ html[data-dl-morph="close"]::view-transition-new(dl-ing-glow) { animation: dl-mo
   .dl .dl-bento-copy { margin-top: 20px; }
   .dl .dl-bento-copy .dl-lede { margin-top: 12px; font-size: 16px; }
   .dl .dl-bento-hero .dl-underline-cta { margin-top: 22px; min-height: 60px; width: 100%; padding-left: 22px; gap: 12px; font-size: 14px; letter-spacing: 0.04em; white-space: nowrap; }
-  .dl .dl-bento-sub { margin-top: 14px !important; }
-  .dl .dl-section-lede { margin-top: 8px !important; }
-  .dl .dl-steps { margin-top: 20px !important; gap: 12px; }
-  .dl .dl-ingredients { padding-top: 56px; margin-top: 0 !important; }
-  .dl .dl-reviews { margin-top: 20px !important; }
+  .dl .dl-bento-sub { margin-top: 14px; }
+  .dl .dl-section-lede { margin-top: 8px; }
+  .dl .dl-steps { margin-top: 20px; gap: 12px; }
+  .dl .dl-ingredients { padding-top: 56px; margin-top: 0; }
+  .dl .dl-reviews { margin-top: 20px; }
   .dl .dl-faq { gap: 8px; }
   .dl .dl-faq-item { padding: 16px 18px; }
   .dl .dl-cta { padding: 4px 0 0; }

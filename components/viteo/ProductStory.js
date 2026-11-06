@@ -466,6 +466,8 @@ export default function ProductStory({ burst }) {
         disposables.forEach((d) => d.dispose?.());
         envTex.dispose();
         pmrem.dispose();
+        // Free the GL context now (browsers cap live contexts), not at GC.
+        renderer.forceContextLoss?.();
         renderer.dispose();
         window.__dl3dReady = false;
       };

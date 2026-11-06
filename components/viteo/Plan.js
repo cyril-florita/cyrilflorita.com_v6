@@ -1,9 +1,9 @@
 "use client";
 import { useEffect } from "react";
 import Link from "next/link";
-import { BASE, PARTNERS, PLANS, PRODUCTS, money, priceFor, recommend } from "./data";
+import { BASE, PARTNERS, PLANS, PRODUCTS, getOwn, money, priceFor, recommend } from "./data";
 import { useHydrated, useStored, write } from "./store";
-import { Arrow, BigWordHead, Button, Pill, PillTray, ProductBox } from "./ui";
+import { Arrow, BigWordHead, Button, Pill, PillTray, ProductBox, onRadioKeyDown, radioTabIndex } from "./ui";
 // Page-only styles (split out of viteo.css so the landing skips them).
 import "@/app/pitch/viteo/css/plan.css";
 
@@ -22,7 +22,7 @@ export default function Plan() {
   const answers = useStored("answers");
   // A partner's link: load their suggested pack (once per visit to the link).
   useEffect(() => {
-    const pro = PARTNERS[new URLSearchParams(window.location.search).get("pro")];
+    const pro = getOwn(PARTNERS, new URLSearchParams(window.location.search).get("pro"));
     if (!pro) return;
     write("referral", { id: pro.id });
     write("cart", { items: pro.items, plan: "two", suggestedBy: pro.id });
@@ -42,7 +42,7 @@ export default function Plan() {
 
   // The sample plan is nobody in particular, even if old answers left a name.
   const name = sample ? "" : answers?.name?.trim();
-  const pro = PARTNERS[cart.suggestedBy];
+  const pro = getOwn(PARTNERS, cart.suggestedBy);
   const extras = Object.values(PRODUCTS).filter((p) => !ids.includes(p.id));
 
   return (
@@ -87,7 +87,8 @@ export default function Plan() {
 
             <ul className="dl-items" aria-label="In your pack">
               {cart.items.map((item) => {
-                const p = PRODUCTS[item.id];
+                const p = getOwn(PRODUCTS, item.id);
+                if (!p) return null;
                 return (
                   <li key={item.id} className="dl-card dl-item">
                     <span className="dl-item-pill"><Pill id={item.id} size="lg" tilt={-18} /></span>
@@ -135,8 +136,8 @@ export default function Plan() {
 
           <aside className="dl-card dl-panel dl-panel-3 dl-summary" aria-label="Plan summary">
             <h2 className="dl-h3">Delivery</h2>
-            <div className="dl-plans" role="radiogroup" aria-label="Delivery frequency">
-              {PLANS.map((pl) => {
+            <div className="dl-plans" role="radiogroup" aria-label="Delivery frequency" onKeyDown={onRadioKeyDown}>
+              {PLANS.map((pl, i) => {
                 const p = priceFor(cart.items, pl.id);
                 const on = cart.plan === pl.id;
                 return (
@@ -145,6 +146,7 @@ export default function Plan() {
                     type="button"
                     role="radio"
                     aria-checked={on}
+                    tabIndex={radioTabIndex(on, i, PLANS.some((x) => x.id === cart.plan))}
                     className={`dl-plan-option ${on ? "is-on" : ""}`}
                     onClick={() => save({ plan: pl.id })}
                   >

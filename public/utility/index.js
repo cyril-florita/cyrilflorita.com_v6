@@ -201,6 +201,10 @@ export const applyHiddenState = (els, className) => {
 
 let revealObserver;
 
+// Smooth programmatic scrolls, except under reduced motion.
+const scrollBehavior = () =>
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+
 const getRevealObserver = () => {
   if (revealObserver) return revealObserver;
 
@@ -238,9 +242,12 @@ export const cyrilUtility = {
   // them, so nothing visibly blinks out), then starts watching them only once
   // the preloader is gone, so anything already in view animates in visibly.
   // Idempotent — safe to call again when late content mounts (e.g. the
-  // dynamically-imported portfolio grid).
+  // dynamically-imported portfolio grid). Returns a cleanup that stops
+  // watching the elements this call tagged (so the shared observer doesn't
+  // hold on to a page's detached elements) and untags any that haven't
+  // revealed yet, so a later call (e.g. an effect re-run) picks them up again.
   revealOnScroll() {
-    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) return;
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) return () => {};
 
     const candidates = Array.from(document.querySelectorAll(REVEAL_SELECTORS.join(',')));
 
@@ -258,18 +265,28 @@ export const cyrilUtility = {
     els.forEach((el) => { el.dataset.reveal = 'pending'; });
     applyHiddenState(els, 'cyril-reveal');
 
-    onPreloaderHidden(() => {
+    const unsubscribe = onPreloaderHidden(() => {
       const observer = getRevealObserver();
       els.forEach((el) => {
         if (el.isConnected) observer.observe(el);
       });
     });
+
+    return () => {
+      unsubscribe();
+      els.forEach((el) => {
+        revealObserver?.unobserve(el);
+        if (el.classList.contains('cyril-reveal') && !el.classList.contains('cyril-revealed')) {
+          delete el.dataset.reveal;
+        }
+      });
+    };
   },
 
   tpInner() {
     var topPanel = document.querySelector(".cyril-top-panel");
     var bottomPanel = document.querySelector(".cyril-bottom-panel");
-    if (topPanel, bottomPanel) {
+    if (topPanel && bottomPanel) {
       topPanel.classList.add("cyril-tp-inner");
       bottomPanel.classList.add("cyril-bp-inner");
     }
@@ -312,26 +329,29 @@ export const cyrilUtility = {
     maxTimer = window.setTimeout(release, maxDuration);
   },
 
+  // Each of these window-listener utilities returns a cleanup that removes
+  // what it added (SiteLayout calls them on mount and cleans up on unmount).
   topBarActive() {
     var cyrilFrame = document.querySelector(".cyril-frame");
     let lastScrollTop = 0;
-    if (cyrilFrame) {
-      window.addEventListener("scroll", function () {
-        var scrolling = window.scrollY || document.documentElement.scrollTop;
-        // if scrolling down
-        if (scrolling > lastScrollTop) {
-          cyrilFrame.classList.add("hide");
-          cyrilFrame.classList.remove("cyril-scrolled-up");
-        } else {
-          cyrilFrame.classList.remove("hide");
-          // Scrolling back up (not at the very top): the home page's desktop
-          // header, otherwise transparent, gets its background back.
-          cyrilFrame.classList.toggle("cyril-scrolled-up", scrolling > 0);
-        }
-        // update last scroll position
-        lastScrollTop = scrolling <= 0 ? 0 : scrolling;
-      });
-    }
+    if (!cyrilFrame) return () => {};
+    const handleScroll = () => {
+      var scrolling = window.scrollY || document.documentElement.scrollTop;
+      // if scrolling down
+      if (scrolling > lastScrollTop) {
+        cyrilFrame.classList.add("hide");
+        cyrilFrame.classList.remove("cyril-scrolled-up");
+      } else {
+        cyrilFrame.classList.remove("hide");
+        // Scrolling back up (not at the very top): the home page's desktop
+        // header, otherwise transparent, gets its background back.
+        cyrilFrame.classList.toggle("cyril-scrolled-up", scrolling > 0);
+      }
+      // update last scroll position
+      lastScrollTop = scrolling <= 0 ? 0 : scrolling;
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   },
 
   backToTop() {
@@ -358,7 +378,7 @@ export const cyrilUtility = {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   },
 
@@ -372,7 +392,7 @@ export const cyrilUtility = {
       if (topIndex !== -1) {
         window.scrollTo({
           top: topIndex * window.innerHeight,
-          behavior: 'smooth'
+          behavior: scrollBehavior()
         });
 
         sections.forEach((section, sectionIndex) => {
@@ -381,18 +401,20 @@ export const cyrilUtility = {
 
         dots.forEach((dot, dotIndex) => {
           dot.classList.toggle("cyril-active", dotIndex === topIndex);
+          if (dotIndex === topIndex) dot.setAttribute("aria-current", "true");
+          else dot.removeAttribute("aria-current");
         });
       }
     } else if (pathname === '/') {
       document.getElementById('intro')?.classList.remove('cyril-hero-exit');
       window.scrollTo({
         top: 0,
-        behavior: 'smooth'
+        behavior: scrollBehavior()
       });
     } else {
       window.scrollTo({
         top: 0,
-        behavior: 'smooth'
+        behavior: scrollBehavior()
       });
     }
   },
@@ -434,7 +456,9 @@ export const cyrilUtility = {
     const builtText = document.querySelector('.cyril-built');
     const isOnePage = document.querySelector('.cyril-onepage');
 
-    window.addEventListener('scroll', () => {
+    if (!builtText) return () => {};
+
+    const handleScroll = () => {
       const isMobileView = window.innerWidth <= 1200;
 
       if (isOnePage && !isMobileView) {
@@ -463,7 +487,9 @@ export const cyrilUtility = {
           builtText.classList.remove('show');
         }
       }
-    });
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   },
   
   swiperSliderSameHeight() {
@@ -495,5 +521,9 @@ export const cyrilUtility = {
     window.addEventListener('load', setEqualHeight);
     window.addEventListener('resize', setEqualHeight);
     setEqualHeight(); // Initial call
+    return () => {
+      window.removeEventListener('load', setEqualHeight);
+      window.removeEventListener('resize', setEqualHeight);
+    };
   }
 };

@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cyrilUtility } from "@/public/utility/index";
+import { session } from "@/components/safeStorage";
 import { Fragment } from "react";
 
 const HEADLINE = "Cyril Florita";
@@ -62,11 +63,13 @@ const Banner = ( { bgImage = "/img/cyril-florita-profile.webp" } ) => {
 
                         if (pathname === '/') {
                           document.getElementById('intro')?.classList.add('cyril-hero-exit');
-                          document.getElementById('portfolio-start')?.scrollIntoView({ behavior: 'smooth' });
+                          document.getElementById('portfolio-start')?.scrollIntoView({
+                            behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+                          });
                           return;
                         }
 
-                        sessionStorage.setItem('scrollToPortfolio', 'true');
+                        session.set('scrollToPortfolio', 'true');
                         cyrilUtility.handlePageTransition().then(() => {
                           window.location.href = '/';
                         });

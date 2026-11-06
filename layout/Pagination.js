@@ -1,3 +1,7 @@
+// About Me's section dots. public/utility/onepage.js binds their clicks and
+// moves cyril-active / aria-current between them as the sections change.
+const SECTIONS = ["Background", "Experience", "Skills", "Tools", "Education", "Contact"];
+
 const Pagination = ({ direction }) => {
   return (
     <div
@@ -5,12 +9,17 @@ const Pagination = ({ direction }) => {
         direction ? direction : "right"
       }`}
     >
-      <div className="cyril-dot cyril-active" data-index={0} data-name="Background" />
-      <div className="cyril-dot" data-index={1} data-name="Experience" />
-      <div className="cyril-dot" data-index={2} data-name="Skills" />
-      <div className="cyril-dot" data-index={3} data-name="Tools" />
-      <div className="cyril-dot" data-index={4} data-name="Education" />
-      <div className="cyril-dot" data-index={5} data-name="Contact" />
+      {SECTIONS.map((name, i) => (
+        <button
+          key={name}
+          type="button"
+          className={`cyril-dot${i === 0 ? " cyril-active" : ""}`}
+          data-index={i}
+          data-name={name}
+          aria-label={`Go to ${name}`}
+          aria-current={i === 0 ? "true" : undefined}
+        />
+      ))}
     </div>
   );
 };

@@ -3,6 +3,7 @@
 import SiteLayout from "@/layout/SiteLayout";
 import { cyrilUtility } from "@/public/utility/index";
 import { onPreloaderHidden, wipeThen } from "@/components/Preloader";
+import { session } from "@/components/safeStorage";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {
@@ -53,7 +54,7 @@ const Page = () => {
   const router = useRouter();
 
   useEffect(() => {
-    sessionStorage.setItem("returnToProject", "viteo");
+    session.set("returnToProject", "viteo");
     cyrilUtility.tpInner();
     const unsubscribePreloader = onPreloaderHidden(() => {
       document.querySelector(".cyril-page")?.classList.add("cyril-active");
@@ -62,7 +63,7 @@ const Page = () => {
   }, []);
 
   const handleBackToPortfolio = () => {
-    sessionStorage.setItem("returnToProject", "viteo");
+    session.set("returnToProject", "viteo");
     wipeThen(() => router.push("/"));
   };
 

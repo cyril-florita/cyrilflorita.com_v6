@@ -3,6 +3,7 @@
 import SiteLayout from "@/layout/SiteLayout";
 import { cyrilUtility } from "@/public/utility/index";
 import { onPreloaderHidden, wipeThen } from "@/components/Preloader";
+import { session } from "@/components/safeStorage";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {
@@ -33,7 +34,7 @@ const Page = () => {
     // Mark which project to scroll back to whenever the user leaves this
     // page — including via the browser's own back button, not just the
     // "Back to My Work" buttons.
-    sessionStorage.setItem('returnToProject', 'hamdashboard');
+    session.set('returnToProject', 'hamdashboard');
     cyrilUtility.tpInner();
     // Wait for the preloader to actually finish hiding before starting this
     // page's own reveal, instead of racing it on a separate fixed timer.
@@ -48,7 +49,7 @@ const Page = () => {
   }, []);
 
   const handleBackToPortfolio = () => {
-    sessionStorage.setItem('returnToProject', 'hamdashboard');
+    session.set('returnToProject', 'hamdashboard');
     wipeThen(() => router.push('/'));
   };
 

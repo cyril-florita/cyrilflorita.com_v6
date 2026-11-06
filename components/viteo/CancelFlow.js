@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { BASE, money } from "./data";
-import { Arrow, Button } from "./ui";
+import { Arrow, Button, onRadioKeyDown, radioTabIndex, useBackdropClose } from "./ui";
 // Page-only styles (split out of viteo.css so the landing skips them).
 import "@/app/pitch/viteo/css/account.css";
 
@@ -36,6 +36,7 @@ export default function CancelFlow({ open, onClose, order, nextDate, threePrice,
   useEffect(() => { if (open) titleRef.current?.focus(); }, [open, step]);
 
   const close = () => { onClose(); setStep("reason"); setReason(null); };
+  const backdrop = useBackdropClose(() => close());
   const hasOffer = (r) => r && r !== "other" && !(r === "cost" && order.plan === "three");
 
   const offer = {
@@ -75,7 +76,7 @@ export default function CancelFlow({ open, onClose, order, nextDate, threePrice,
       className="dl-modal dl-cancel"
       aria-labelledby="dl-cancel-title"
       onClose={close}
-      onClick={(e) => e.target === e.currentTarget && close()}
+      {...backdrop}
     >
       {open && (
         <div className="dl-modal-body">
@@ -83,9 +84,9 @@ export default function CancelFlow({ open, onClose, order, nextDate, threePrice,
             <>
               <h2 id="dl-cancel-title" ref={titleRef} tabIndex={-1} className="dl-h3">Before you go, what&apos;s the main reason?</h2>
               <p className="dl-meta">Optional. It helps us improve, and we may have something that fits better.</p>
-              <div className="dl-options" role="radiogroup" aria-label="Reason for cancelling">
-                {REASONS.map((r) => (
-                  <button key={r.id} type="button" role="radio" aria-checked={reason === r.id} className={`dl-option ${reason === r.id ? "is-on" : ""}`} onClick={() => setReason(r.id)}>
+              <div className="dl-options" role="radiogroup" aria-label="Reason for cancelling" onKeyDown={onRadioKeyDown}>
+                {REASONS.map((r, i) => (
+                  <button key={r.id} type="button" role="radio" aria-checked={reason === r.id} tabIndex={radioTabIndex(reason === r.id, i, !!reason)} className={`dl-option ${reason === r.id ? "is-on" : ""}`} onClick={() => setReason(r.id)}>
                     <span className="dl-option-text"><span>{r.label}</span></span>
                     <span className="dl-option-check" />
                   </button>

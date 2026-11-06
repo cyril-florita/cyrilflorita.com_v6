@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { BASE } from "./data";
 import { DECLINE_REASONS, DOCS, REGIONS, SERVICE_OPTIONS, coordinator, fmtDue, isOverdue, regionFor, sourceName, stageName } from "./intake-data";
 import { accept, decline, logCall, receiveDoc, startOfCare, useIntake } from "./store";
@@ -15,15 +16,17 @@ const fmt = (t) => new Date(t).toLocaleString("en-US", { month: "short", day: "n
 
 export default function ReferralRecord() {
   const data = useIntake();
-  const [id, setId] = useState(null);
+  // Read from the router, so moving from one record to another (the ⌘K
+  // palette, a link) shows the new one; the page wraps this in <Suspense>,
+  // since the static export can't know ?id= ahead of time.
+  const id = useSearchParams().get("id") || "";
   const [reason, setReason] = useState(DECLINE_REASONS[0]);
   const [now, setNow] = useState(() => Date.now());
   useEffect(() => {
-    setId(new URLSearchParams(window.location.search).get("id") || ""); // eslint-disable-line react-hooks/set-state-in-effect
     const t = setInterval(() => setNow(Date.now()), 30000);
     return () => clearInterval(t);
   }, []);
-  if (!data || id === null) return <Skeleton blocks={2} />;
+  if (!data) return <Skeleton blocks={2} />;
   const r = data.referrals.find((x) => x.id === id);
   if (!r) return <p>Referral not found. <Link href={`${BASE}/intake/`}>Back to the board</Link></p>;
 

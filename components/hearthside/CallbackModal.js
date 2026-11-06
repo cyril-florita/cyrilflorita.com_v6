@@ -18,6 +18,7 @@ export default function CallbackModal() {
   const ref = useRef(null);
   const opener = useRef(null);
   const [open, setOpen] = useState(false);
+  const downOnBackdrop = useRef(false); // where the press began: a drag out of a field onto the backdrop isn't a backdrop click
 
   const show = useCallback(() => {
     if (ref.current?.open) return;
@@ -45,8 +46,13 @@ export default function CallbackModal() {
     };
     const fromUrl = () => {
       const { hash, search, pathname } = window.location;
-      if (hash === HASH || new URLSearchParams(search).has("call")) {
-        window.history.replaceState(null, "", pathname); // the link opened it; keep the address clean
+      const params = new URLSearchParams(search);
+      if (hash === HASH || params.has("call")) {
+        // The link opened it; keep the address clean: drop ?call and the hash,
+        // keep any other parameters.
+        params.delete("call");
+        const rest = params.toString();
+        window.history.replaceState(null, "", `${pathname}${rest ? `?${rest}` : ""}`);
         show();
       }
     };
@@ -70,9 +76,10 @@ export default function CallbackModal() {
       className="hs-modal"
       aria-labelledby="hs-cb-title"
       onClose={onClosed}
+      onPointerDown={(e) => { downOnBackdrop.current = e.target === ref.current; }}
       onClick={(e) => {
-        // The backdrop (a click on the dialog itself), or any link that leaves the modal.
-        if (e.target === ref.current) return close();
+        // The backdrop (pressed and released on the dialog itself), or any link that leaves the modal.
+        if (e.target === ref.current && downOnBackdrop.current) return close();
         const a = e.target instanceof Element ? e.target.closest("a[href]") : null;
         if (a && !a.getAttribute("href").startsWith("tel:") && a.getAttribute("href") !== HASH) close();
       }}

@@ -49,7 +49,10 @@ export function ModeSwitch() {
   });
   return (
     <button className="hs-mode" type="button" onClick={toggle} aria-label={mode ? `Switch to ${next} mode` : "Switch color mode"}>
-      <Icon name={mode === "dark" ? "sun" : "moon"} size={22} />
+      {/* Both icons render; CSS shows the one for the mode on .hs (the sun in
+          dark), so the first paint is right before this effect has run. */}
+      <Icon name="sun" size={22} className="hs-mode-sun" />
+      <Icon name="moon" size={22} className="hs-mode-moon" />
     </button>
   );
 }
@@ -359,7 +362,10 @@ export function Reveal() {
 // motion. A heading's text becomes its accessible name and the word spans are
 // hidden from assistive tech.
 const SPLIT = "main :is(h1, h2, h3):not(.hs-visually-hidden), main .hs-bleed-line, .hs-footer h2"; // plus the line over the full-bleed photo, set like a headline, and the footer's headings
-const SPLIT_SKIP = ".hs-hero, .hs-steps-story.is-story .hs-step, .hs-title-split"; // page titles are split on the server
+// Live regions and React-updated text (role="status", aria-live, data-live)
+// are never split: rewriting their text nodes would break React's updates.
+const LIVE_SKIP = "[aria-live], [role=\"status\"], [role=\"alert\"], [data-live]";
+const SPLIT_SKIP = `.hs-hero, .hs-steps-story.is-story .hs-step, .hs-title-split, ${LIVE_SKIP}`; // page titles are split on the server
 export function SplitHeads() {
   const pathname = usePathname();
   useEffect(() => {
@@ -436,7 +442,7 @@ export function SplitHeads() {
 // hero, forms, the pinned steps, the hover notes or the design-system page;
 // never under reduced motion.
 const LINES = "main :is(p, .hs-list li, .hs-checks li, .hs-path-list li), .hs-footer p";
-const LINES_SKIP = ".hs-hero, .hs-bleed-line, form, .hs-steps-story.is-story .hs-step, .hs-clinician-note, .hs-bts, .hs-zip, .hs-faq, .hs-dock, .hs-sample, .hs-help-label, .hs-path-tag";
+const LINES_SKIP = `.hs-hero, .hs-bleed-line, form, .hs-steps-story.is-story .hs-step, .hs-clinician-note, .hs-bts, .hs-zip, .hs-faq, .hs-dock, .hs-sample, .hs-help-label, .hs-path-tag, ${LIVE_SKIP}`;
 export function LineReveal() {
   const pathname = usePathname();
   useEffect(() => {
@@ -823,7 +829,10 @@ export function SideMark() {
     // With a mouse, the leaf becomes a piece of frosted glass in three.js
     // (GlassMark.js, loaded only here); the CSS mark shows until it's drawn.
     let stop = null, gone = false;
-    if (mq.matches) import("./GlassMark").then((m) => m.startGlassMark(el)).then((s) => (gone ? s() : (stop = s)), (err) => console.error(err));
+    if (mq.matches) import("./GlassMark").then((m) => m.startGlassMark(el)).then((s) => (gone ? s() : (stop = s)), (err) => {
+      console.error(err);
+      window.dispatchEvent(new Event("hs:3d-ready")); // no 3D mark: don't keep the preloader waiting for it
+    });
     return () => { gone = true; stop?.(); window.removeEventListener("pointermove", move); cancelAnimationFrame(raf); };
   }, []);
   return (
@@ -900,6 +909,11 @@ export function Preloader() {
     const hs = document.querySelector(".hs");
     const el = ref.current;
     if (!hs?.classList.contains("is-loading") || !el) return;
+    // Take over from the pre-paint script's 7s safety timer: from here this
+    // effect finishes the hand-off (within MAX), so that timer can't cut it
+    // short. Re-armed in the cleanup if the hand-off hasn't finished.
+    clearTimeout(window.__hsPreT);
+    let dead = false, finished = false;
     // Desktop with a mouse loads the 3D side mark: wait for its first draw
     // and fade it in before the page. Phones and tablets have none.
     const desktop = window.matchMedia("(hover: hover) and (pointer: fine) and (min-width: 1100px)").matches;
@@ -927,7 +941,8 @@ export function Preloader() {
     const timers = [];
     const at = (ms, fn) => timers.push(setTimeout(fn, ms));
     const ready = Promise.race([Promise.all(steps), new Promise((res) => setTimeout(res, MAX))]);
-    ready.then(() => new Promise((res) => setTimeout(res, Math.max(0, MIN - (performance.now() - t0))))).then(() => {
+    ready.then(() => new Promise((res) => { if (!dead) at(Math.max(0, MIN - (performance.now() - t0)), res); })).then(() => {
+      if (dead || !hs.classList.contains("is-loading")) return;
       clearInterval(tick);
       el.style.setProperty("--p", "1");
       // Phones and tablets: a quicker hand-off (no side mark to bring in).
@@ -941,9 +956,21 @@ export function Preloader() {
       const page = desktop ? 1480 : 450;
       if (desktop) at(880, () => hs.classList.add("is-ent-logo")); // the side mark and its glow
       at(page, () => hs.classList.add("is-ent-page")); // the header and Home: the hero's entrance, then the credentials
-      at(page + 2000, () => hs.classList.remove("is-entering", "is-ent-logo", "is-ent-page"));
+      at(page + 2000, () => { finished = true; hs.classList.remove("is-entering", "is-ent-logo", "is-ent-page"); });
     });
-    return () => { clearInterval(tick); timers.forEach(clearTimeout); };
+    return () => {
+      dead = true;
+      clearInterval(tick);
+      timers.forEach(clearTimeout);
+      // Unmounted mid-way: during the hand-off, end it now; before it (or in
+      // React's dev double-mount, which re-runs at once and clears this
+      // again), restore the safety net so the page can't stay hidden.
+      const end = () => hs.classList.remove("is-loading", "is-entering", "is-ent-logo", "is-ent-page");
+      if (!finished) {
+        if (hs.classList.contains("is-loading")) window.__hsPreT = setTimeout(end, 7000);
+        else end();
+      }
+    };
   }, []);
   return (
     <div className="hs-preloader" ref={ref} aria-hidden="true">

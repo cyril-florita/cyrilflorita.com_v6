@@ -715,6 +715,13 @@ pagination
     }
 
     & .cyril-dot {
+        // The dots are <button>s: drop the browser's button styling.
+        appearance: none;
+        border: 0;
+        padding: 0;
+        background: none;
+        color: inherit;
+        font: inherit;
         display: flex;
         align-items: center;
         position: relative;
@@ -813,6 +820,8 @@ pagination
     @media screen and (max-width: 1200px) {
         opacity: 0;
         pointer-events: none;
+        // Hidden dots stay out of the Tab order too (no snapping here).
+        visibility: hidden;
     }
 }
 

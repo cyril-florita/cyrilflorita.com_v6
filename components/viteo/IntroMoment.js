@@ -127,9 +127,10 @@ export default function IntroMoment() {
     };
 
     // Wait for the page to be ready (see above), then start.
+    let onReady = null; // the dl:3d-ready listener, removed on cleanup
     const desktop3d = window.matchMedia("(hover: hover) and (pointer: fine) and (min-width: 961px)").matches;
     const ready = desktop3d
-      ? new Promise((r) => { if (window.__dl3dReady) r(); else window.addEventListener("dl:3d-ready", r, { once: true }); })
+      ? new Promise((r) => { if (window.__dl3dReady) r(); else { onReady = r; window.addEventListener("dl:3d-ready", r, { once: true }); } })
       : (document.fonts?.ready ?? Promise.resolve());
     const wait = (ms) => new Promise((r) => setTimeout(r, ms));
     // At least 2s on desktop with a mouse (it covers the 3D scene's shader
@@ -139,6 +140,7 @@ export default function IntroMoment() {
     return () => {
       cancelled = true;
       stop();
+      if (onReady) window.removeEventListener("dl:3d-ready", onReady);
       root.classList.remove("is-intro-pending");
     };
   }, []);

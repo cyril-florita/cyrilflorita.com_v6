@@ -4,6 +4,7 @@ import SiteLayout from "@/layout/SiteLayout";
 import { SOCIAL_GRAPHICS } from "@/components/data/socialGraphics";
 import { cyrilUtility } from "@/public/utility/index";
 import { onPreloaderHidden, wipeThen } from "@/components/Preloader";
+import { session } from "@/components/safeStorage";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {
@@ -49,7 +50,7 @@ const Page = () => {
     // Mark which project to scroll back to whenever the user leaves this
     // page — including via the browser's own back button, not just the
     // "Back to Portfolio" button below.
-    sessionStorage.setItem('returnToProject', 'gtysocialmedia');
+    session.set('returnToProject', 'gtysocialmedia');
     cyrilUtility.tpInner();
     // Wait for the preloader to actually finish hiding before starting this
     // page's own reveal, instead of racing it on a separate fixed timer.
@@ -69,7 +70,7 @@ const Page = () => {
     const projectId = 'gtysocialmedia'; // This is the current project
 
     // Save the project ID for the portfolio page to use
-    sessionStorage.setItem('returnToProject', projectId);
+    session.set('returnToProject', projectId);
     wipeThen(() => router.push('/'));
   };
 
@@ -84,7 +85,7 @@ const Page = () => {
             title="GTY Social Media Graphics"
             summary={CASE_SUMMARIES["/gty-social-media-graphics"]}
             facts={[
-              { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank">Grace to You</a>&mdash;A Christian Media Organization</> },
+              { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank" rel="noopener noreferrer">Grace to You</a>&mdash;A Christian Media Organization</> },
               { label: "Role", value: "Web Designer & Developer" },
               { label: "Platform & Tools", value: "Social Media" },
             ]}

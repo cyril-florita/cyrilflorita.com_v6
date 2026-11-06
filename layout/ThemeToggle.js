@@ -1,4 +1,5 @@
 import { useIsDark } from './domState';
+import { local } from '@/components/safeStorage';
 
 const Social = () => {
   const isDarkMode = useIsDark(); // follows data-theme on <html>, which the click below sets
@@ -14,7 +15,7 @@ const Social = () => {
         clearTimeout(window.__cyrilThemeFade);
         window.__cyrilThemeFade = setTimeout(() => root.classList.remove('cyril-theme-switching'), 500);
         root.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
+        local.set('theme', newTheme);
       }}
       aria-label="Toggle dark mode"
     >

@@ -3,9 +3,9 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { BASE, PRODUCTS, QUESTIONS, recommend } from "./data";
+import { BASE, PRODUCTS, QUESTIONS, activeAnswers, recommend } from "./data";
 import { write } from "./store";
-import { Arrow, BigWordHead, Button, Pill, PillTray, ProductBox } from "./ui";
+import { Arrow, BigWordHead, Button, Pill, PillTray, ProductBox, onRadioKeyDown, radioTabIndex } from "./ui";
 
 // Personalize your pack: one question per screen, with a progress bar. Single-choice
 // questions advance on their own after a short beat; multi-choice and the
@@ -47,8 +47,11 @@ export default function Personalize() {
   useEffect(() => () => clearTimeout(advanceTimer.current), []);
 
   const finish = (all) => {
-    const picks = recommend(all);
-    write("answers", all);
+    // Only the answers to questions that were asked (an earlier fish answer
+    // doesn't count after choosing vegan).
+    const active = activeAnswers(all);
+    const picks = recommend(active);
+    write("answers", active);
     write("cart", { items: picks, plan: "two" });
     setBuilding(picks.map((p) => p.id));
   };
@@ -92,12 +95,14 @@ export default function Personalize() {
     setStep((s) => Math.max(0, s - 1));
   };
 
-  const set = (v) => {
+  // `advance: false` when the arrow keys pick an option (radio pattern): the
+  // choice is made, but the question waits for Enter / Space or a click.
+  const set = (v, advance = true) => {
     const all = { ...answers, [q.id]: v };
     setAnswers(all);
     if (q.type === "single") {
-      clearTimeout(advanceTimer.current);
-      advanceTimer.current = setTimeout(() => next(all), reducedMotion() ? 0 : 320);
+      clearTimeout(advanceTimer.current); // an arrow key also cancels a pending advance
+      if (advance) advanceTimer.current = setTimeout(() => next(all), reducedMotion() ? 0 : 320);
     }
   };
 
@@ -174,8 +179,10 @@ export default function Personalize() {
           )}
 
           {q.type !== "text" && (
-            <div className={`dl-options ${q.type === "multi" ? "dl-options-grid" : ""}`} role={q.type === "multi" ? "group" : "radiogroup"} aria-label={q.title}>
-              {q.options.map((o) => {
+            <div className={`dl-options ${q.type === "multi" ? "dl-options-grid" : ""}`} role={q.type === "multi" ? "group" : "radiogroup"} aria-label={q.title}
+              onKeyDown={q.type === "multi" ? undefined : (e) => onRadioKeyDown(e, (el) => set(el.dataset.value, false))}
+            >
+              {q.options.map((o, i) => {
                 const on = q.type === "multi" ? (value || []).includes(o.value) : value === o.value;
                 const full = q.type === "multi" && !on && (value || []).length >= q.max;
                 return (
@@ -184,6 +191,8 @@ export default function Personalize() {
                     type="button"
                     role={q.type === "multi" ? "checkbox" : "radio"}
                     aria-checked={on}
+                    data-value={o.value}
+                    tabIndex={q.type === "multi" ? undefined : radioTabIndex(on, i, q.options.some((x) => x.value === value))}
                     disabled={full}
                     className={`dl-option ${on ? "is-on" : ""}`}
                     onClick={() => (q.type === "multi" ? toggle(o.value) : set(o.value))}

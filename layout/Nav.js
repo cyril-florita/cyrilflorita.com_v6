@@ -3,6 +3,10 @@ import { usePathname } from "next/navigation";
 import { Fragment } from "react";
 import { useHeroState, useIsCasePage, useTopSectionActive } from "./domState";
 import { cyrilUtility } from "@/public/utility/index";
+import { session } from "@/components/safeStorage";
+
+const scrollBehavior = () =>
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
 
 const Nav = () => {
   // next.config.js sets trailingSlash: true, so on the exported site
@@ -27,6 +31,9 @@ const Nav = () => {
     e.preventDefault();
 
     if (pathname !== '/about-me') {
+      // Leaving through the nav, not a case study's back button: don't let
+      // a project page's returnToProject send a later visit to "/" into the grid.
+      session.remove('returnToProject');
       await cyrilUtility.handlePageTransition();
       window.location.href = '/about-me';
       return;
@@ -45,13 +52,15 @@ const Nav = () => {
     if (topIndex !== -1) {
       window.scrollTo({
         top: topIndex * window.innerHeight,
-        behavior: "smooth",
+        behavior: scrollBehavior(),
       });
       sections.forEach((section, sectionIndex) => {
         section.classList.toggle("cyril-active", sectionIndex === topIndex);
       });
       dots.forEach((dot, dotIndex) => {
         dot.classList.toggle("cyril-active", dotIndex === topIndex);
+        if (dotIndex === topIndex) dot.setAttribute("aria-current", "true");
+        else dot.removeAttribute("aria-current");
       });
     }
   };
@@ -70,11 +79,12 @@ const Nav = () => {
                 if (pathname === '/') {
                   cyrilUtility.keepFrameVisible();
                   document.getElementById('intro')?.classList.add('cyril-hero-exit');
-                  document.getElementById('portfolio-start')?.scrollIntoView({ behavior: 'smooth' });
+                  document.getElementById('portfolio-start')?.scrollIntoView({ behavior: scrollBehavior() });
                   return;
                 }
 
-                sessionStorage.setItem('scrollToPortfolio', 'true');
+                session.remove('returnToProject');
+                session.set('scrollToPortfolio', 'true');
                 await cyrilUtility.handlePageTransition();
                 window.location.href = '/';
               }}

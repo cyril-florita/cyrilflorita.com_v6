@@ -102,14 +102,20 @@ export async function startGlassMark(host) {
       uAmt: { value: 1 }, uAdd: { value: 0 },
     },
   });
-  const quad = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), glow);
+  const quadGeo = new THREE.PlaneGeometry(2, 2);
+  const quad = new THREE.Mesh(quadGeo, glow);
   quad.frustumCulled = false;
   glowScene.add(quad);
 
   // The leaf: its own scene, lit by a room environment.
   const scene = new THREE.Scene();
   const pmrem = new THREE.PMREMGenerator(lr);
-  scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+  // Kept to dispose: the environment's render target; the room itself is
+  // only needed for this one bake.
+  const room = new RoomEnvironment();
+  const envRT = pmrem.fromScene(room, 0.04);
+  room.dispose();
+  scene.environment = envRT.texture;
   scene.environmentIntensity = 0.8;
   const camera = new THREE.PerspectiveCamera(FOV, 1, 1, 1000);
 
@@ -185,7 +191,9 @@ export async function startGlassMark(host) {
   host.append(leafCanvas);
   size();
   paint();
-  await lr.compileAsync(scene, camera);
+  // Precompiling only saves a stall on the first draw; if it fails, the draw
+  // compiles them itself and hs:3d-ready still fires below.
+  try { await lr.compileAsync(scene, camera); } catch (err) { console.error(err); }
 
   let rx = 0, ry = 0, trx = 0, try_ = 0, lx = 20, ly = 20, tlx = 20, tly = 20;
   // The push from the pointer (a spring, so it leans away and settles back)
@@ -284,7 +292,9 @@ export async function startGlassMark(host) {
     host.classList.remove("is-3d");
     host.style.removeProperty("--hs-leaf-blur");
     glowCanvas.remove(); leafCanvas.remove();
-    geo.dispose(); glow.dispose(); metal.dispose(); pmrem.dispose();
+    geo.dispose(); quadGeo.dispose(); glow.dispose(); metal.dispose(); envRT.dispose(); pmrem.dispose();
+    // Free the two WebGL contexts now rather than whenever the browser collects them.
+    gr.forceContextLoss(); lr.forceContextLoss();
     gr.dispose(); lr.dispose();
   };
 }

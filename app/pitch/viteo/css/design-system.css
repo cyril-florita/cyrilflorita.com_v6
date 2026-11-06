@@ -10,7 +10,7 @@
 .dl-ds-section > *:not(.dl-h2):not(.dl-section-lede) { margin-top: 28px; }
 .dl-ds-forms { display: grid; gap: 24px; max-width: 720px; }
 .dl-ds-forms .dl-form-grid { margin: 0; }
-.dl-ds-pills { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 18px; margin-bottom: 26px; }
+.dl-ds-pills { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 18px; }
 .dl-ds-pills li { display: grid; justify-items: center; gap: 14px; text-align: center; padding: 22px 8px; border-radius: 16px; background: var(--dl-paper); border: 1px solid var(--dl-line); }
 .dl-ds-card { max-width: 420px; display: grid; gap: 12px; }
 .dl-ds-card.dl-item { display: flex; }

@@ -4,6 +4,11 @@
 
 export const BASE = "/pitch/viteo";
 
+// An own-property lookup for keys that come from the URL, storage or a form
+// (so "__proto__", "constructor" and the like never resolve to anything).
+export const getOwn = (obj, key) =>
+  obj && typeof key === "string" && Object.hasOwn(obj, key) ? obj[key] : null;
+
 // The catalog. `color`/`color2` paint the pill illustration; `form` picks
 // its shape (capsule = two-tone, softgel = oval, tablet = round, or an oblong
 // caplet with `shape: "oblong"`).
@@ -215,15 +220,31 @@ export const QUESTIONS = [
   },
 ];
 
+// The answers that count: answers to questions skipped by other answers (an
+// old fish answer after switching to vegan) are dropped, so they can't add
+// pills or reasons. Questions are checked in order, as the questions page
+// shows them.
+export const activeAnswers = (answers) => {
+  const a = answers && typeof answers === "object" && !Array.isArray(answers) ? answers : {};
+  const out = {};
+  QUESTIONS.forEach((q) => {
+    if (!Object.hasOwn(a, q.id) || a[q.id] === undefined) return;
+    if (q.skip && q.skip(a)) return;
+    out[q.id] = a[q.id];
+  });
+  return out;
+};
+
 // The answers -> recommended products, each with a plain reason.
 // `fill: false` skips the "at least three" top-up, so the questions page can show only
 // what the answers so far have earned.
-export const recommend = (a, { fill = true } = {}) => {
+export const recommend = (answers, { fill = true } = {}) => {
+  const a = activeAnswers(answers);
   const picks = [];
   const add = (id, why) => {
     if (!picks.find((p) => p.id === id)) picks.push({ id, why });
   };
-  const goals = a.goals || [];
+  const goals = Array.isArray(a.goals) ? a.goals : [];
   if (a.sun === "rarely" || a.sun === "some") add("d3", a.sun === "rarely" ? "You spend most of the day indoors." : "Your daily time outside is on the short side.");
   if (a.diet === "vegan" || a.diet === "vegetarian") add("b12", "You eat mostly or fully plant-based.");
   if (a.diet === "vegan" || a.diet === "vegetarian" || a.fish === "rarely") add("omega", a.fish === "rarely" ? "Oily fish rarely makes it onto your plate." : "Fish isn't part of your diet.");
@@ -254,7 +275,7 @@ export const SHIPPING = 0; // free, always — one less line to worry about
 
 export const priceFor = (items, planId) => {
   const plan = PLANS.find((p) => p.id === planId) || PLANS[0];
-  const monthly = items.reduce((n, i) => n + (PRODUCTS[i.id]?.price || 0), 0);
+  const monthly = (Array.isArray(items) ? items : []).reduce((n, i) => n + (getOwn(PRODUCTS, i?.id)?.price || 0), 0);
   const subtotal = monthly * plan.months;
   const savings = Math.round(subtotal * plan.discount * 100) / 100;
   return { plan, monthly, subtotal, savings, total: Math.round((subtotal - savings) * 100) / 100 };
@@ -317,3 +338,105 @@ export const PARTNERS = {
   },
 };
 
+
+// ---------- Stored data, normalized ----------
+// What the store (store.js) hands to pages: data saved by an older version of
+// the prototype, or edited by hand, is reshaped or dropped here, so a page
+// never sees an item that isn't in the catalog or a field of the wrong type.
+// Pure functions of their input (the lead's unit tests call them directly).
+const isObj = (v) => !!v && typeof v === "object" && !Array.isArray(v);
+const str = (v, fallback = "") => (typeof v === "string" ? v : fallback);
+const isDate = (v) => typeof v === "string" && !Number.isNaN(new Date(v).getTime());
+const dateOr = (v, fallback = null) => (isDate(v) ? v : fallback);
+const DAY_KEY = /^\d{4}-\d{2}-\d{2}$/;
+
+// A cart: { items: [{ id, why }], plan, suggestedBy? }, or null when it has no
+// valid items. Unknown and repeated ids are dropped.
+export const normalizeCart = (cart) => {
+  if (!isObj(cart) || !Array.isArray(cart.items)) return null;
+  const seen = new Set();
+  const items = [];
+  cart.items.forEach((i) => {
+    const id = isObj(i) ? i.id : i;
+    if (!getOwn(PRODUCTS, id) || seen.has(id)) return;
+    seen.add(id);
+    items.push({ ...(isObj(i) ? i : {}), id, why: str(isObj(i) ? i.why : "") });
+  });
+  if (!items.length) return null;
+  const out = { ...cart, items, plan: PLANS.some((p) => p.id === cart.plan) ? cart.plan : "two" };
+  if (!getOwn(PARTNERS, cart.suggestedBy)) delete out.suggestedBy;
+  return out;
+};
+
+// The questions' answers, keeping only values each question allows.
+export const normalizeAnswers = (answers) => {
+  if (!isObj(answers)) return null;
+  const out = {};
+  QUESTIONS.forEach((q) => {
+    const v = answers[q.id];
+    if (q.type === "text") {
+      if (typeof v === "string") out[q.id] = v.slice(0, 30);
+    } else if (q.type === "multi") {
+      if (Array.isArray(v)) out[q.id] = [...new Set(v.filter((x) => q.options.some((o) => o.value === x)))].slice(0, q.max || 99);
+    } else if (q.options.some((o) => o.value === v)) {
+      out[q.id] = v;
+    }
+  });
+  return out;
+};
+
+const ADDRESS_KEYS = ["name", "email", "line1", "line2", "city", "state", "zip"];
+const normalizeAddress = (a) => {
+  const src = isObj(a) ? a : {};
+  const out = {};
+  ADDRESS_KEYS.forEach((k) => {
+    if (k === "email" && typeof src.email !== "string") return;
+    out[k] = str(src[k]);
+  });
+  return out;
+};
+
+// A placed (or demo) order, or null without a valid cart and next date.
+export const normalizeOrder = (order) => {
+  if (!isObj(order)) return null;
+  const cart = normalizeCart(order.cart);
+  if (!cart || !isDate(order.next)) return null;
+  const plan = PLANS.some((p) => p.id === order.plan) ? order.plan : cart.plan;
+  return {
+    ...order,
+    id: str(order.id, "VT-000000"),
+    cart,
+    plan,
+    name: str(order.name),
+    address: normalizeAddress(order.address),
+    next: order.next,
+    start: dateOr(order.start, order.next),
+    paused: dateOr(order.paused),
+    cancelled: dateOr(order.cancelled),
+    time: order.time === "evening" ? "evening" : "morning",
+    reminders: order.reminders !== false,
+    checkins: Array.isArray(order.checkins) ? [...new Set(order.checkins.filter((k) => typeof k === "string" && DAY_KEY.test(k)))] : [],
+    payment: isObj(order.payment) ? { method: str(order.payment.method), label: str(order.payment.label) } : null,
+  };
+};
+
+export const normalizeSession = (s) =>
+  isObj(s) && typeof s.email === "string"
+    ? { ...s, email: s.email, name: str(s.name), method: str(s.method), since: str(s.since) }
+    : null;
+
+export const normalizeReferral = (r) => (isObj(r) && getOwn(PARTNERS, r.id) ? { id: r.id } : null);
+
+// Store key -> its normalizer (unknown keys pass through as they are).
+export const NORMALIZERS = {
+  cart: normalizeCart,
+  order: normalizeOrder,
+  answers: normalizeAnswers,
+  session: normalizeSession,
+  referral: normalizeReferral,
+};
+export const normalizeStored = (key, value) => {
+  if (value === null || value === undefined) return null;
+  const fn = getOwn(NORMALIZERS, key);
+  return fn ? fn(value) : value;
+};

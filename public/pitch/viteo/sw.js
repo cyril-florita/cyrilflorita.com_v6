@@ -11,7 +11,9 @@ self.addEventListener("install", (e) => {
 
 self.addEventListener("activate", (e) => {
   e.waitUntil(
-    caches.keys()
+    // Navigation preload: the page request starts while the worker boots.
+    Promise.resolve(self.registration.navigationPreload?.enable()).catch(() => {})
+      .then(() => caches.keys())
       .then((keys) => Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k))))
       .then(() => self.clients.claim()),
   );
@@ -19,5 +21,15 @@ self.addEventListener("activate", (e) => {
 
 self.addEventListener("fetch", (e) => {
   if (e.request.mode !== "navigate") return; // everything else: the browser as usual
-  e.respondWith(fetch(e.request).catch(() => caches.match(OFFLINE)));
+  e.respondWith((async () => {
+    try {
+      const pre = await e.preloadResponse;
+      if (pre) return pre;
+      return await fetch(e.request);
+    } catch {
+      // Offline: the branded page, or a plain network error if it isn't
+      // cached (respondWith(undefined) would throw).
+      return (await caches.match(OFFLINE)) || Response.error();
+    }
+  })());
 });

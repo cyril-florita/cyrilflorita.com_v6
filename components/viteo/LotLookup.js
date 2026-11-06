@@ -1,6 +1,6 @@
 "use client";
 import { useRef, useState } from "react";
-import { LOT_LAB, PRODUCTS, SAMPLE_LOTS } from "./data";
+import { LOT_LAB, PRODUCTS, SAMPLE_LOTS, getOwn } from "./data";
 import { BigWordHead, Pill, Button } from "./ui";
 
 // Batch results: type the lot code from the bottom of the box and see that
@@ -31,13 +31,13 @@ export default function LotLookup() {
   const resultRef = useRef(null);
 
   const look = (value) => {
-    const key = LOOKUP[norm(value)];
-    setLot(key ? { code: key, data: SAMPLE_LOTS[key] } : { code: value.trim(), missing: true });
+    const key = getOwn(LOOKUP, norm(value));
+    setLot(key ? { code: key, data: getOwn(SAMPLE_LOTS, key) } : { code: value.trim(), missing: true });
     requestAnimationFrame(() => resultRef.current?.focus({ preventScroll: false }));
   };
 
   const d = lot?.data;
-  const p = d && PRODUCTS[d.product];
+  const p = d && getOwn(PRODUCTS, d.product);
 
   return (
     <section className="dl-lot">

@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect } from 'react';
+import { local } from '@/components/safeStorage';
 
 export function ClientThemeProvider({ children }) {
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const savedTheme = local.get('theme');
     const initialTheme = savedTheme || 'dark';
     
     document.documentElement.setAttribute('data-theme', initialTheme);
@@ -21,9 +21,10 @@ export function ClientThemeProvider({ children }) {
     updateThemeAwareImages(initialTheme);
 
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    // Follow the OS while the visitor hasn't picked a theme with the toggle.
     const handleChange = (e) => {
-      if (!localStorage.getItem('theme')) {
-        const newTheme = 'dark';
+      if (!local.get('theme')) {
+        const newTheme = e.matches ? 'dark' : 'light';
         document.documentElement.setAttribute('data-theme', newTheme);
         updateThemeAwareImages(newTheme);
       }

@@ -3,6 +3,7 @@ import { usePathname } from "next/navigation";
 import Nav from "./Nav";
 import { useHeroState } from "./domState";
 import { cyrilUtility } from "@/public/utility/index";
+import { session } from "@/components/safeStorage";
 
 const Header = () => {
   const pathname = usePathname();
@@ -15,6 +16,8 @@ const Header = () => {
     e.preventDefault();
 
     if (pathname !== '/') {
+      // The logo goes to the hero, not back to a project in the grid.
+      session.remove('returnToProject');
       await cyrilUtility.handlePageTransition();
       window.location.href = '/';
       return;
@@ -33,7 +36,10 @@ const Header = () => {
     introSection?.classList.remove('cyril-hero-collapsed');
     void introSection?.offsetHeight;
     introSection?.classList.remove('cyril-hero-exit');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({
+      top: 0,
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+    });
   };
 
   return (

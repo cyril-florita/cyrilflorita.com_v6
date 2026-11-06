@@ -1,10 +1,10 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { BASE, PARTNERS, PRODUCTS, money, priceFor, recommend } from "./data";
+import { BASE, PARTNERS, PRODUCTS, getOwn, money, priceFor, recommend } from "./data";
 import { useHydrated, useStored, write } from "./store";
 import { PaymentStep } from "./Payment";
-import { Arrow, BigWordHead, Button, PillTray, ProductBox } from "./ui";
+import { Arrow, BigWordHead, Button, PillTray, ProductBox, SrStatus, onRadioKeyDown, radioTabIndex, useMounted } from "./ui";
 // Page-only styles (split out of viteo.css so the landing skips them).
 import "@/app/pitch/viteo/css/plan.css";
 import "@/app/pitch/viteo/css/checkout.css";
@@ -62,6 +62,7 @@ export default function Checkout() {
   const [payment, setPayment] = useState(null); // { method, label } once authorized
   const [placing, setPlacing] = useState(false);
   const headingRef = useRef(null);
+  const mounted = useMounted();
 
   useEffect(() => {
     headingRef.current?.focus({ preventScroll: true });
@@ -120,9 +121,12 @@ export default function Checkout() {
   };
 
   const place = async () => {
+    if (placing || !payment) return;
     setPlacing(true);
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     await new Promise((r) => setTimeout(r, reduce ? 150 : 1200));
+    // Left the page while it was "placing": don't write or sign in.
+    if (!mounted.current) return;
     const order = {
       id: orderId(),
       cart,
@@ -201,11 +205,11 @@ export default function Checkout() {
             {step === 1 && (
               <div>
                 <h1 className="dl-h3" tabIndex={-1} ref={headingRef}>When should your first box arrive?</h1>
-                <div className="dl-dates" role="radiogroup" aria-label="First delivery date">
-                  {dates.map((d) => {
+                <div className="dl-dates" role="radiogroup" aria-label="First delivery date" onKeyDown={onRadioKeyDown}>
+                  {dates.map((d, i) => {
                     const on = startDate.toDateString() === d.toDateString();
                     return (
-                      <button key={d.toISOString()} type="button" role="radio" aria-checked={on} className={`dl-date ${on ? "is-on" : ""}`} onClick={() => setStart(d.toISOString())}>
+                      <button key={d.toISOString()} type="button" role="radio" aria-checked={on} tabIndex={radioTabIndex(on, i, dates.some((x) => x.toDateString() === startDate.toDateString()))} className={`dl-date ${on ? "is-on" : ""}`} onClick={() => setStart(d.toISOString())}>
                         <span className="dl-meta">{d.toLocaleDateString("en-US", { weekday: "short" })}</span>
                         <strong>{d.getDate()}</strong>
                         <span className="dl-meta">{d.toLocaleDateString("en-US", { month: "short" })}</span>
@@ -244,10 +248,12 @@ export default function Checkout() {
                 </dl>
                 <div className="dl-personalize-nav">
                   <Button variant="ghost" size="lg" onClick={() => setStep(2)}>Back</Button>
-                  <Button onClick={place} size="lg" disabled={placing || !payment} aria-busy={placing}>
+                  {/* aria-disabled while placing (not disabled), so focus stays on the button. */}
+                  <Button onClick={place} size="lg" disabled={!payment} aria-disabled={placing || undefined} aria-busy={placing}>
                     {placing ? <><span className="dl-spin dl-spin-sm" aria-hidden="true" /> Placing order…</> : <>Place order</>}
                   </Button>
                 </div>
+                <SrStatus>{placing ? "Placing order…" : ""}</SrStatus>
               </div>
             )}
           </div>
@@ -259,17 +265,18 @@ export default function Checkout() {
             </div>
             <PillTray ids={cart.items.map((i) => i.id)} label="Your pack" size="sm" />
             <ul className="dl-summary-items">
-              {cart.items.map((i) => (
-                <li key={i.id}><span>{PRODUCTS[i.id].name}</span><span className="dl-meta">{money(PRODUCTS[i.id].price)}/mo</span></li>
-              ))}
+              {cart.items.map((i) => {
+                const p = getOwn(PRODUCTS, i.id);
+                return p && <li key={i.id}><span>{p.name}</span><span className="dl-meta">{money(p.price)}/mo</span></li>;
+              })}
             </ul>
             <dl className="dl-totals">
               <div><dt>{price.plan.label}</dt><dd>{money(price.subtotal)}</dd></div>
               {price.savings > 0 && <div className="dl-save"><dt>Saving</dt><dd>−{money(price.savings)}</dd></div>}
               <div><dt>Delivery</dt><dd>Free</dd></div>
               <div className="dl-total"><dt>Per box</dt><dd>{money(price.total)}</dd></div>
-              {PARTNERS[referral?.id] && (() => {
-                const pr = PARTNERS[referral.id];
+              {getOwn(PARTNERS, referral?.id) && (() => {
+                const pr = getOwn(PARTNERS, referral.id);
                 const off = Math.round(price.total * pr.discount * 100) / 100;
                 return (
                   <>

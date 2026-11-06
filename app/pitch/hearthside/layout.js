@@ -48,9 +48,10 @@ export const viewport = { themeColor: "#1E2A36", maximumScale: 5, userScalable: 
 // no ?call, no reduced motion; every screen size again since 2026-11-04 —
 // phones and tablets skipped it for a day, for PageSpeed) it also adds .is-loading, which shows the
 // preloader from the first paint (Preloader in components/hearthside/
-// client.js), and clears it (and the hand-off's classes) after 7s whatever
-// happens.
-const MODE_SCRIPT = `(function(){var e=document.currentScript.parentElement;try{var t=localStorage.getItem('hs-theme');e.setAttribute('data-hs-theme',t==='tide'?t:'shore');var m=localStorage.getItem('hs-mode');if(m!=='light')m='dark';e.setAttribute('data-hs-mode',m);}catch(x){}var p=location.pathname;if((p==='/pitch/hearthside/'||p==='/pitch/hearthside')&&!location.hash&&!/[?&]call/.test(location.search)&&!matchMedia('(prefers-reduced-motion: reduce)').matches){e.classList.add('is-loading');setTimeout(function(){e.classList.remove('is-loading','is-entering','is-ent-logo','is-ent-page')},7000);}})();`;
+// client.js), and clears it (and the hand-off's classes) after 7s if the
+// Preloader never takes over (it clears that timer, window.__hsPreT, when it
+// does, and finishes the hand-off itself, within MAX).
+const MODE_SCRIPT = `(function(){var e=document.currentScript.parentElement;try{var t=localStorage.getItem('hs-theme');e.setAttribute('data-hs-theme',t==='tide'?t:'shore');var m=localStorage.getItem('hs-mode');if(m!=='light')m='dark';e.setAttribute('data-hs-mode',m);}catch(x){}var p=location.pathname;if((p==='/pitch/hearthside/'||p==='/pitch/hearthside')&&!location.hash&&!/[?&]call/.test(location.search)&&!matchMedia('(prefers-reduced-motion: reduce)').matches){e.classList.add('is-loading');window.__hsPreT=setTimeout(function(){e.classList.remove('is-loading','is-entering','is-ent-logo','is-ent-page')},7000);}})();`;
 
 export default function HearthsideLayout({ children }) {
   return (

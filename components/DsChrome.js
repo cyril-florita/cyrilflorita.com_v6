@@ -104,7 +104,15 @@ export default function DsChrome({ prefix: p, sections, logo, logoIsLink, home, 
   const jumpFromMenu = (id) => (e) => {
     e.preventDefault();
     setOpen(false);
-    requestAnimationFrame(() => go(id)); // after the scroll lock lifts
+    requestAnimationFrame(() => {
+      go(id); // after the scroll lock lifts
+      // The menu is now inert: move focus to the section it jumped to (no
+      // scroll of its own; the jump does that), not back to the page's top.
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (!el.hasAttribute("tabindex")) el.setAttribute("tabindex", "-1");
+      el.focus({ preventScroll: true, focusVisible: false });
+    });
   };
 
   // `logoIsLink`: the logo already links home (Hearthside's Logo), so it isn't wrapped in another link.

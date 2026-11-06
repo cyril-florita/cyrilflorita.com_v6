@@ -3,6 +3,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { onPreloaderHidden, wipeThen } from "@/components/Preloader";
 import { imageSize, thumbFor } from "@/components/imageProps";
 import VIDEO_SIZES from "@/components/data/videoSizes.json";
+import { safeDecode } from "@/components/safeStorage";
 
 // Site-wide image viewer (replaces the old magnific-style lightbox). Any link
 // to an image under /img/ opens here instead of navigating:
@@ -216,7 +217,7 @@ const ZoomViewer = () => {
       timer = setTimeout(() => {
         const link = [...document.querySelectorAll(IMAGE_LINK)]
           .filter(isMediaLink)
-          .find((l) => describe(l).id === decodeURIComponent(match[1]));
+          .find((l) => describe(l).id === safeDecode(match[1]));
         if (!link) return;
         const items = groupFor(link);
         returnFocus.current = link;
@@ -341,7 +342,7 @@ const ZoomViewer = () => {
         close();
       } else if (e.key === "Tab") {
         // Keep focus inside the viewer.
-        const focusable = [...overlayRef.current.querySelectorAll("button")];
+        const focusable = [...overlayRef.current.querySelectorAll("button, a[href]")];
         const i = focusable.indexOf(document.activeElement);
         const nextI = e.shiftKey ? (i <= 0 ? focusable.length - 1 : i - 1) : (i + 1) % focusable.length;
         e.preventDefault();

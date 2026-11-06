@@ -5,6 +5,7 @@ import ContactBand from "@/components/ContactBand";
 import dynamic from "next/dynamic";
 import { applyHiddenState, cyrilUtility, hideSplitTitle, scrambleInTitle } from "@/public/utility/index";
 import { onPreloaderHidden } from "@/components/Preloader";
+import { session } from "@/components/safeStorage";
 import { useEffect, useRef } from "react";
 
 const PortfolioIsotope = dynamic(
@@ -15,6 +16,10 @@ const PortfolioIsotope = dynamic(
 );
 
 const TRANSITION_MS = 500;
+
+// Smooth programmatic scrolls, except under reduced motion.
+const scrollBehavior = () =>
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
 
 // First-load hero entrance: each piece rises in, top to bottom, once the
 // preloader is gone — see .cyril-hero-piece in _components.scss. Ordered by
@@ -78,7 +83,7 @@ const Index = () => {
     transitioningRef.current = true;
     cyrilUtility.keepFrameVisible();
     document.getElementById('intro')?.classList.add('cyril-hero-exit');
-    document.getElementById('portfolio-start')?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('portfolio-start')?.scrollIntoView({ behavior: scrollBehavior() });
     setTimeout(() => { transitioningRef.current = false; }, TRANSITION_MS);
   };
 
@@ -93,7 +98,7 @@ const Index = () => {
     hero?.classList.remove('cyril-hero-collapsed');
     void hero?.offsetHeight;
     hero?.classList.remove('cyril-hero-exit');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: scrollBehavior() });
     setTimeout(() => { transitioningRef.current = false; }, TRANSITION_MS);
   };
 
@@ -105,13 +110,13 @@ const Index = () => {
     }
 
     // Check if we're returning to a specific project
-    const returnToProject = sessionStorage.getItem('returnToProject');
+    const returnToProject = session.get('returnToProject');
     // Check if the nav sent us here to land directly on the My Work section
-    const scrollToPortfolio = sessionStorage.getItem('scrollToPortfolio');
+    const scrollToPortfolio = session.get('scrollToPortfolio');
 
     if (returnToProject) {
       // Clear the storage
-      sessionStorage.removeItem('returnToProject');
+      session.remove('returnToProject');
       // Let the grid (mounts a moment later) switch to "All" if its restored
       // filter would hide this project — see PortfolioIsotope.js.
       window.cyrilReturnToProject = returnToProject;
@@ -132,11 +137,11 @@ const Index = () => {
 
         if (projectElement) {
           // Scroll to the element
-          projectElement.scrollIntoView({ behavior: 'smooth' });
+          projectElement.scrollIntoView({ behavior: scrollBehavior() });
         }
       }, 800); // Give more time for isotope to render
     } else if (scrollToPortfolio) {
-      sessionStorage.removeItem('scrollToPortfolio');
+      session.remove('scrollToPortfolio');
 
       // Let the page load normally with the hero showing, then play the
       // exact same animated hand-off as scrolling down manually would.
@@ -151,8 +156,9 @@ const Index = () => {
 
     cyrilUtility.tpInner();
 
-    // Enable smooth scroll behavior
-    document.documentElement.style.scrollBehavior = 'smooth';
+    // Enable smooth scroll behavior (not under reduced motion, where the
+    // stylesheet already turns it off).
+    if (scrollBehavior() === "smooth") document.documentElement.style.scrollBehavior = "smooth";
 
     setTimeout(() => {
       const pageElement = document.querySelector('.cyril-page');

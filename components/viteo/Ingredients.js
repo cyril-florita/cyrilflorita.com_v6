@@ -3,7 +3,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import { BASE, PRODUCTS, money } from "./data";
 import { buildPill } from "./pillModels";
-import { Arrow, Logo, Pill, Button } from "./ui";
+import { Arrow, Logo, Pill, Button, useBackdropClose } from "./ui";
 
 // The landing page's Ingredients grid and its close-up. Each card opens a
 // dialog: the card's pill morphs (View Transitions API) into a large pill
@@ -131,6 +131,8 @@ function PillStage({ id }) {
         owned.forEach((o) => o.dispose?.());
         env.dispose();
         pmrem.dispose();
+        // Free the GL context now (browsers cap live contexts), not at GC.
+        renderer.forceContextLoss?.();
         renderer.dispose();
       };
     })();
@@ -266,6 +268,7 @@ export default function Ingredients() {
     openerRef.current?.focus({ preventScroll: true });
   };
   const swap = (id) => withTransition(() => setOpenId(id));
+  const backdrop = useBackdropClose(() => close());
 
   // Phones: the close-up is a bottom sheet; dragging its top (the handle and
   // pill stage) down past a threshold closes it, otherwise it springs back.
@@ -331,7 +334,7 @@ export default function Ingredients() {
         aria-labelledby="dl-ing-title"
         onClose={() => openId && setOpenId(null)}
         onCancel={(e) => { e.preventDefault(); close(); }}
-        onClick={(e) => e.target === e.currentTarget && close()}
+        {...backdrop}
       >
         {p && <span className="dl-ing-glow" aria-hidden="true" />}
         {p && (

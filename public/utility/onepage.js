@@ -66,7 +66,7 @@ export const onepage = () => {
     scrolling = true;
     window.scrollTo({
       top: index * window.innerHeight,
-      behavior: "smooth",
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
     });
 
     updateActiveDot(index);
@@ -74,8 +74,11 @@ export const onepage = () => {
   }
 
   function updateActiveDot(index) {
-    dots.forEach((dot) => dot.classList.remove("cyril-active"));
-    dots[index]?.classList.add("cyril-active");
+    dots.forEach((dot, dotIndex) => {
+      dot.classList.toggle("cyril-active", dotIndex === index);
+      if (dotIndex === index) dot.setAttribute("aria-current", "true");
+      else dot.removeAttribute("aria-current");
+    });
   }
 
   function updateActiveSection(index) {

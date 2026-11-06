@@ -25,11 +25,14 @@ const SiteLayout = ({ children, header, footer, noFooter }) => {
       document.querySelector("body").classList.remove("cyril-custom-scroll");
     }
 
-    cyrilUtility.topBarActive();
-    cyrilUtility.backToTop();
-    cyrilUtility.builtTextVisibility();
-    cyrilUtility.swiperSliderSameHeight();
-    cyrilUtility.revealOnScroll();
+    const cleanups = [
+      cyrilUtility.topBarActive(),
+      cyrilUtility.backToTop(),
+      cyrilUtility.builtTextVisibility(),
+      cyrilUtility.swiperSliderSameHeight(),
+      cyrilUtility.revealOnScroll(),
+    ];
+    return () => cleanups.forEach((cleanup) => cleanup?.());
   }, []);
 
   return (
