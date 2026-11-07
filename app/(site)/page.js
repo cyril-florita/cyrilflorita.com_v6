@@ -29,8 +29,9 @@ const showYouWereHere = (tile) => {
   const toast = document.createElement('span');
   toast.className = 'cyril-you-were-here';
   toast.setAttribute('aria-hidden', 'true');
-  // Four outline rings (.cyril-you-were-here-ring) ripple out from the diamond.
-  toast.innerHTML = 'You were<br>just here' + '<i class="cyril-you-were-here-ring"></i>'.repeat(4);
+  // Two outline rings (.cyril-you-were-here-ring) ripple out from the diamond
+  // in a heartbeat: two fast ripples, a pause, repeat.
+  toast.innerHTML = 'You were<br>just here' + '<i class="cyril-you-were-here-ring"></i>'.repeat(2);
   cover.appendChild(toast);
   requestAnimationFrame(() => requestAnimationFrame(() => toast.classList.add('is-in')));
   // A spotlight: the other cards dim while the toast shows (.is-spotlight
