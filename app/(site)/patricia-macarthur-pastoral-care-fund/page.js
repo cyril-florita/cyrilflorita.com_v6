@@ -182,9 +182,9 @@ const Page = () => {
           </CaseLayout>
 
           <CaseNext
-            href="/truth-matters-conference"
-            title="Truth Matters Conference"
-            category="Branding"
+            href="/sekihmentis"
+            title="SekihMentis"
+            category="Illustration"
             onBack={handleBackToPortfolio}
           />
 

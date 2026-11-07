@@ -14,6 +14,7 @@ const PROJECTS = [
   'giving-tuesday',
   'gty_v8',
   '35-day-generosity-challenge',
+  'truth-matters-conference',
   'grace-stream',
   'gty-dashboard',
   'volunteer-leadership-team',
@@ -24,7 +25,6 @@ const PROJECTS = [
   'gty-resources',
   'the-study-bible-app-logo',
   'patricia-macarthur-pastoral-care-fund',
-  'truth-matters-conference',
   'sekihmentis',
   'he-took-my-place',
 ];

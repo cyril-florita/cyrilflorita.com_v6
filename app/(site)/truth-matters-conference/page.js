@@ -57,13 +57,13 @@ const Page = () => {
         <div className="cyril-page cyril-project-page cyril-case-page">
 
           <CaseHero
-            category="Branding"
-            detail="Conference Brand"
+            category="Branding, Design, & Development"
+            detail="Conference Brand & Web"
             title="Truth Matters Conference"
             summary={CASE_SUMMARIES["/truth-matters-conference"]}
             facts={[
               { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank" rel="noopener noreferrer">Grace to You</a>&mdash;A Christian Media Organization</> },
-              { label: "Role", value: "Brand, Motion & Web Designer" },
+              { label: "Role", value: "Brand, Motion, and Web Designer & Developer" },
               { label: "Platform & Tools", value: "Illustrator, Photoshop, After Effects" },
             ]}
             tile="/truth-matters-conference"
@@ -73,8 +73,8 @@ const Page = () => {
 
             {/* 01 — Overview */}
             <CaseSection id="overview" number={1} title="Overview">
-              <p>Truth Matters is Grace to You&apos;s Bible conference. This one, <em>Truth Matters: Recovering a Biblical Worldview</em>, was the first held outside California, at the Answers Center at the Ark Encounter, with John MacArthur and guest speakers over three days of preaching and panel Q&amp;As.</p>
-              <p>I designed the brand and everything that carried it: the graphic on the LED wall behind the stage, an animated logo, the livestream thumbnails, the website banners and conference pages, and the shirts, sweatshirts, bags, and stickers.</p>
+              <p>Truth Matters is Grace to You&apos;s Bible conference. This one, <em>Truth Matters: Recovering a Biblical Worldview</em>, was the first held outside California, at the Answers Center at the Ark Encounter in Williamstown, Kentucky, with John MacArthur and guest speakers over three days of preaching and panel Q&amp;As.</p>
+              <p>I designed the brand and everything that carried it: the graphic on the LED wall behind the stage, an animated logo, the livestream thumbnails, the website banners, and the shirts, sweatshirts, bags, and stickers. I also designed and built the conference pages on GTY.org.</p>
             </CaseSection>
 
             {/* 02 — Results & Impact */}
@@ -111,7 +111,7 @@ const Page = () => {
               </CaseGrid>
 
               <h3 className="cyril-case-subheading">Conference Pages</h3>
-              <p>The conference page on GTY.org has three tabs: the session videos by day, the conference details and venue, and the speakers.</p>
+              <p>I designed and built the conference page on GTY.org, with three tabs: the session videos by day, the conference details and venue, and the speakers.</p>
               <CaseGrid layout="three">
                 <CaseFigure src={`${P}conference-page_media.jpg`} alt="Conference page, Media tab with the sessions by day" caption="Media tab" ratio="3 / 4" />
                 <CaseFigure src={`${P}conference-page_venue.jpg`} alt="Conference page, Conference Info tab with the venue" caption="Conference info tab" ratio="3 / 4" />
@@ -179,9 +179,9 @@ const Page = () => {
           </CaseLayout>
 
           <CaseNext
-            href="/sekihmentis"
-            title="SekihMentis"
-            category="Illustration"
+            href="/grace-stream"
+            title="Grace Stream"
+            category="Branding, Design, & Development"
             onBack={handleBackToPortfolio}
           />
 

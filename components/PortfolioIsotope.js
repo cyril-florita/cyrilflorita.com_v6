@@ -599,7 +599,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* wide . giving tuesday (looping video thumbnail) */}
-          <div id="givingtuesday" data-project="givingtuesday" data-order-web="11" data-order-brand="3" className="cyril-grid-item fil-uix fil-marketing">
+          <div id="givingtuesday" data-project="givingtuesday" data-order-web="12" data-order-brand="3" className="cyril-grid-item fil-uix fil-marketing">
             <Link href="/giving-tuesday" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -631,7 +631,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* wide . 35-day generosity challenge (looping video thumbnail) */}
-          <div id="generositychallenge" data-project="generositychallenge" data-order-web="14" data-order-brand="7" className="cyril-grid-item fil-uix fil-marketing">
+          <div id="generositychallenge" data-project="generositychallenge" data-order-web="15" data-order-brand="7" className="cyril-grid-item fil-uix fil-marketing">
             <Link href="/35-day-generosity-challenge" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -646,8 +646,24 @@ const PortfolioIsotope = () => {
             </Link>
           </div>
 
+          {/* wide (16:9) . truth matters conference (branding + web: Case Studies after 35-Day, Web & App after GTY Dashboard) */}
+          <div id="tmconference" data-project="tmconference" data-order-web="9" data-order-brand="6" className="cyril-grid-item fil-branding fil-uix">
+            <Link href="/truth-matters-conference" onClick={saveFilterOnNavigate}>
+              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
+                <div className="cyril-cover" style={{ paddingBottom: "56.25%" }}>
+                  <TileMedia slug="/truth-matters-conference" />
+                  <h3>Case Study</h3>
+                </div>
+                <div className="cyril-project-descr">
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Branding, Design, &amp; Development</p>
+                  <h4 className="cyril-up">Truth Matters Conference</h4>
+                </div>
+              </div>
+            </Link>
+          </div>
+
           {/* square . gracestream */}
-          <div id="gracestream" data-project="gracestream" data-order-web="10" data-order-brand="4" className="cyril-grid-item fil-branding fil-uix">
+          <div id="gracestream" data-project="gracestream" data-order-web="11" data-order-brand="4" className="cyril-grid-item fil-branding fil-uix">
             <Link href="/grace-stream" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -679,7 +695,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* wide . volunteer leadership team (looping video thumbnail) */}
-          <div id="volunteerleadership" data-project="volunteerleadership" data-order-web="13" data-order-brand="8" className="cyril-grid-item fil-uix fil-marketing">
+          <div id="volunteerleadership" data-project="volunteerleadership" data-order-web="14" data-order-brand="8" className="cyril-grid-item fil-uix fil-marketing">
             <Link href="/volunteer-leadership-team" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -695,7 +711,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* square . truth matters podcast */}
-          <div id="truthmatters" data-project="truthmatters" data-order-web="12" data-order-brand="5" className="cyril-grid-item fil-branding fil-uix">
+          <div id="truthmatters" data-project="truthmatters" data-order-web="13" data-order-brand="5" className="cyril-grid-item fil-branding fil-uix">
             <Link href="/truth-matters" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover truth-matters">
@@ -711,7 +727,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* wide . gty app (looping video thumbnail — Fig. 01 on its page) */}
-          <div id="gtyapplanding" data-project="gtyapplanding" data-order-web="9" className="cyril-grid-item fil-uix">
+          <div id="gtyapplanding" data-project="gtyapplanding" data-order-web="10" className="cyril-grid-item fil-uix">
             <Link href="/gty-app-landing" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 {/* Cover sized to the video (640×488), so none of it is cropped. */}
@@ -802,22 +818,6 @@ const PortfolioIsotope = () => {
                 <div className="cyril-project-descr">
                   <p className="cyril-upper cyril-accent cyril-mb-10">Branding</p>
                   <h4 className="cyril-up">The Patricia MacArthur Pastoral Care Fund</h4>
-                </div>
-              </div>
-            </Link>
-          </div>
-
-          {/* wide (16:9) . truth matters conference (branding; not featured — Marketing & Branding only) */}
-          <div id="tmconference" data-project="tmconference" data-order-brand="6" className="cyril-grid-item cyril-not-featured fil-branding">
-            <Link href="/truth-matters-conference" onClick={saveFilterOnNavigate}>
-              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
-                <div className="cyril-cover" style={{ paddingBottom: "56.25%" }}>
-                  <TileMedia slug="/truth-matters-conference" />
-                  <h3>Case Study</h3>
-                </div>
-                <div className="cyril-project-descr">
-                  <p className="cyril-upper cyril-accent cyril-mb-10">Branding</p>
-                  <h4 className="cyril-up">Truth Matters Conference</h4>
                 </div>
               </div>
             </Link>
