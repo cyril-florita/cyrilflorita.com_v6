@@ -33,19 +33,30 @@ const showYouWereHere = (tile) => {
   cover.appendChild(toast);
   requestAnimationFrame(() => requestAnimationFrame(() => toast.classList.add('is-in')));
   // A spotlight: the other cards dim while the toast shows (.is-spotlight
-  // on the grid), and come back with it, or at once on any scroll, tap,
-  // key or pointer movement over the grid.
+  // on the grid), and come back with it, or early on deliberate input only:
+  // a wheel or touch scroll, a tap or click, a key, or the mouse travelling
+  // 48px over the grid. Not on 'scroll' (layout and programmatic scrolls fire
+  // it) nor on any pointermove: Chrome sends one when content moves under a
+  // resting cursor, and a hand on the trackpad nudges it a pixel, which used
+  // to end the dim at once, so it only sometimes showed.
   const grid = tile.closest('.cyril-portfolio-grid');
-  const events = [[window, 'scroll'], [window, 'pointerdown'], [window, 'keydown'], [grid, 'pointermove']];
-  const undim = () => {
+  const started = performance.now();
+  let travel = 0;
+  const onMove = (e) => {
+    if (!e.isTrusted || e.pointerType !== 'mouse' || performance.now() - started < 400) return;
+    travel += Math.abs(e.movementX || 0) + Math.abs(e.movementY || 0);
+    if (travel >= 48) undim();
+  };
+  const events = [[window, 'wheel', undim], [window, 'touchmove', undim], [window, 'pointerdown', undim], [window, 'keydown', undim], [grid, 'pointermove', onMove]];
+  function undim() {
     grid?.classList.remove('is-spotlight');
     tile.classList.remove('is-spotlit');
-    events.forEach(([el, type]) => el?.removeEventListener(type, undim));
-  };
+    events.forEach(([el, type, fn]) => el?.removeEventListener(type, fn));
+  }
   if (grid) {
     tile.classList.add('is-spotlit');
     grid.classList.add('is-spotlight');
-    events.forEach(([el, type]) => el.addEventListener(type, undim, { passive: true }));
+    events.forEach(([el, type, fn]) => el.addEventListener(type, fn, { passive: true }));
   }
   // …and the tile's fiery frame burns once round (.is-burning; the same
   // flame as the desktop hover, on any screen size, not under reduced motion).
@@ -59,6 +70,24 @@ const showYouWereHere = (tile) => {
     toast.classList.remove('is-in');
     setTimeout(() => toast.remove(), 600);
   }, YOU_WERE_HERE_MS);
+};
+
+// Coming back to a project: glide its tile to the centre of the screen,
+// then the toast and spotlight once it lands (scrollend, or a fallback where
+// it isn't supported). Used on a normal arrival and on a back/forward-cache
+// restore of this page.
+const glideToProject = (id) => {
+  const tile = document.getElementById(id) || document.querySelector(`[data-project="${id}"]`);
+  if (!tile) return;
+  tile.scrollIntoView({ behavior: scrollBehavior(), block: 'center' });
+  let shown = false;
+  const show = () => {
+    if (shown) return;
+    shown = true;
+    showYouWereHere(tile);
+  };
+  window.addEventListener('scrollend', show, { once: true });
+  setTimeout(show, scrollBehavior() === 'smooth' ? 1400 : 100);
 };
 
 // Smooth programmatic scrolls, except under reduced motion.
@@ -177,22 +206,7 @@ const Index = () => {
       // has laid the grid out), scroll smoothly to the project's tile and
       // centre it on the screen.
       onPreloaderHidden(() => {
-        setTimeout(() => {
-          const projectElement = document.getElementById(returnToProject) ||
-                                document.querySelector(`[data-project="${returnToProject}"]`);
-          if (!projectElement) return;
-          projectElement.scrollIntoView({ behavior: scrollBehavior(), block: 'center' });
-          // Once the glide lands, a "You were just here" toast on the tile's
-          // cover (scrollend, or a fallback where it isn't supported).
-          let shown = false;
-          const show = () => {
-            if (shown) return;
-            shown = true;
-            showYouWereHere(projectElement);
-          };
-          window.addEventListener('scrollend', show, { once: true });
-          setTimeout(show, scrollBehavior() === 'smooth' ? 1400 : 100);
-        }, 300);
+        setTimeout(() => glideToProject(returnToProject), 300);
       });
     } else if (scrollToPortfolio) {
       session.remove('scrollToPortfolio');
@@ -220,6 +234,25 @@ const Index = () => {
         pageElement.classList.add('cyril-active');
       }
     }, 100);
+  }, []);
+
+  // The browser's Back from a case study that was a full page load (opened
+  // in its own tab, from a search, or reloaded) restores this page from the
+  // back/forward cache, so the mount effect above doesn't run again: pick up
+  // the project the case study left in returnToProject and give it the same
+  // glide, toast and spotlight. (Back after the client router's own
+  // navigation remounts the page, which the mount effect already handles.)
+  useEffect(() => {
+    const onPageShow = (e) => {
+      if (!e.persisted) return;
+      const id = session.get('returnToProject');
+      if (!id) return;
+      session.remove('returnToProject');
+      document.getElementById('intro')?.classList.add('cyril-hero-exit', 'cyril-hero-collapsed');
+      onPreloaderHidden(() => setTimeout(() => glideToProject(id), 300));
+    };
+    window.addEventListener('pageshow', onPageShow);
+    return () => window.removeEventListener('pageshow', onPageShow);
   }, []);
 
   // Which section is "current" is read straight off the DOM (the hero's own
