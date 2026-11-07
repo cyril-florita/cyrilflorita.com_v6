@@ -3822,10 +3822,33 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
     }
 }
 
-// full-bleed hero image (settles from a slight zoom — see CaseHero)
+// Hero visual: a framed card in the content width (the hero's .container),
+// with the My Work tiles' offset frame (.cyril-cover::after), so the page
+// reads as the tile you clicked, opened up. The card clips the media (which
+// settles from a slight zoom — see CaseHero); the frame sits on the wrapper
+// so it isn't clipped.
+.cyril-case-hero-media {
+    position: relative;
+    margin-top: 90px;
+
+    &::after {
+        content: "";
+        position: absolute;
+        left: 12px;
+        top: 12px;
+        right: -12px;
+        bottom: -12px;
+        z-index: 1;
+        border: 2px solid var(--color-frame);
+        pointer-events: none;
+    }
+
+    @media screen and (max-width: 768px) {
+        margin-top: 60px;
+    }
+}
+
 .cyril-case-bleed {
-    max-width: 1760px;
-    margin: 90px auto 0;
     overflow: hidden;
 }
 
@@ -3875,10 +3898,9 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
     // Room between the sticky rail's "Back to My Work" (which rides down to
     // the end of this block) and the "Next project" band's top line.
     padding-bottom: 120px;
-
-    @media screen and (min-width: 1400px) {
-        max-width: 1400px;
-    }
+    // Same width as the hero (a plain .container), so the rail starts at the
+    // title's and the hero card's left edge and the content column ends at
+    // the card's right edge. (It was 100px wider, max-width 1400px.)
 
     @media screen and (max-width: 1200px) {
         grid-template-columns: minmax(0, 1fr);

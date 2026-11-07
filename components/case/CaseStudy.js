@@ -27,7 +27,7 @@ const prefersReducedMotion = () =>
 // Hero: eyebrow (category + a short descriptor — deliberately no dates, so
 // older work doesn't read as dated), oversized left-aligned title, summary,
 // the facts row, then (optionally)
-// a full-bleed image — or a looping, muted video (`video`, with its poster
+// a framed image in the content width — or a looping, muted video (`video`, with its poster
 // from videoSizes.json) — that settles from a slight zoom as it scrolls up.
 export const CaseHero = ({ category, detail, title, summary, result, facts, image, imageAlt, video, tile }) => {
   const imgRef = useRef(null);
@@ -105,9 +105,15 @@ export const CaseHero = ({ category, detail, title, summary, result, facts, imag
           </dl>
         )}
       </header>
+      {/* The visual: a framed card in the content width, with the My Work
+          tiles' offset frame (.cyril-case-hero-media::after), so the page
+          reads as the tile you clicked, opened up. */}
+      {(tile || video || image) && (
+      <div className="container">
+      <div className="cyril-case-hero-media">
       {tile ? (
         // A project's My Work thumbnail as the hero (e.g. the 3D phone),
-        // from TILE_MEDIA — same media, full width.
+        // from TILE_MEDIA — same media, larger.
         <div className="cyril-case-bleed cyril-case-bleed-tile">
           <TileMedia slug={tile} sizes="100vw" />
         </div>
@@ -129,8 +135,11 @@ export const CaseHero = ({ category, detail, title, summary, result, facts, imag
       ) : image && (
         <div className="cyril-case-bleed">
           {/* On screen at arrival — load it right away, first. */}
-          <img ref={imgRef} {...imageProps(image, "100vw")} alt={imageAlt} fetchPriority="high" />
+          <img ref={imgRef} {...imageProps(image, "(max-width: 1440px) 100vw, 1300px")} alt={imageAlt} fetchPriority="high" />
         </div>
+      )}
+      </div>
+      </div>
       )}
     </>
   );
