@@ -2509,6 +2509,28 @@ portfolio
     }
 }
 
+// Spotlight: coming back from a case study, the other cards dim while the
+// "You were just here" toast shows on yours (app/page.js toggles
+// .is-spotlight on the grid and .is-spotlit on the tile). Opacity only, on
+// the card inside each grid item, so it never fights Isotope's or the
+// filter dip's transitions on .cyril-grid-item.
+.cyril-portfolio-grid .cyril-portfolio-item {
+    transition: opacity 0.6s ease, filter 0.6s ease;
+}
+
+// Darkened, not faded to the page colour, so it reads as dimmed lights in
+// both modes.
+.cyril-portfolio-grid.is-spotlight .cyril-grid-item:not(.is-spotlit) .cyril-portfolio-item {
+    opacity: 0.35;
+    filter: brightness(0.15);
+}
+
+// The pointer's glow behind the hovered tile (.cyril-grid-glow, dark mode)
+// stays off during the spotlight, so only the returned card is lit.
+.cyril-grid-glow-host:has(.is-spotlight) .cyril-grid-glow {
+    opacity: 0 !important;
+}
+
 // Crossfading slideshow tile (GridSlideshow in PortfolioIsotope.js): the
 // images stack inside the cover and fade between each other; each keeps the
 // tile image styles (grayscale → color on hover, hover shrink).

@@ -32,6 +32,21 @@ const showYouWereHere = (tile) => {
   toast.innerHTML = 'You were<br>just here';
   cover.appendChild(toast);
   requestAnimationFrame(() => requestAnimationFrame(() => toast.classList.add('is-in')));
+  // A spotlight: the other cards dim while the toast shows (.is-spotlight
+  // on the grid), and come back with it, or at once on any scroll, tap,
+  // key or pointer movement over the grid.
+  const grid = tile.closest('.cyril-portfolio-grid');
+  const events = [[window, 'scroll'], [window, 'pointerdown'], [window, 'keydown'], [grid, 'pointermove']];
+  const undim = () => {
+    grid?.classList.remove('is-spotlight');
+    tile.classList.remove('is-spotlit');
+    events.forEach(([el, type]) => el?.removeEventListener(type, undim));
+  };
+  if (grid) {
+    tile.classList.add('is-spotlit');
+    grid.classList.add('is-spotlight');
+    events.forEach(([el, type]) => el.addEventListener(type, undim, { passive: true }));
+  }
   // …and the tile's fiery frame burns once round (.is-burning; the same
   // flame as the desktop hover, on any screen size, not under reduced motion).
   if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
@@ -40,6 +55,7 @@ const showYouWereHere = (tile) => {
     lap.finished.catch(() => {}).finally(() => cover.classList.remove('is-burning'));
   }
   setTimeout(() => {
+    undim();
     toast.classList.remove('is-in');
     setTimeout(() => toast.remove(), 600);
   }, YOU_WERE_HERE_MS);
