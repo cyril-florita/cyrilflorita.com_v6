@@ -85,8 +85,7 @@ const Page = () => {
               { label: "Role", value: "Web Designer & Developer" },
               { label: "Platform & Tools", value: "Web — Desktop, Tablet, Mobile" },
             ]}
-            image="/img/portfolio/main_gty-app-landing.jpg"
-            imageAlt="GTY App Landing Page, first screen"
+            tile="/gty-app-landing"
           />
 
           <CaseLayout sections={SECTIONS}>

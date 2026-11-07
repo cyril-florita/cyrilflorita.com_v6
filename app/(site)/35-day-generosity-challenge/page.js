@@ -68,8 +68,7 @@ const Page = () => {
               { label: "Platform & Tools", value: <>{"WordPress"}<br />{"PHP, SASS, JavaScript/jQuery"}</> },
               { label: "Deliverables", value: "Landing page, 5 weekly updates, 5 blog posts, downloadable resource" },
             ]}
-            image="/img/portfolio/chf-35-day-generosity_main.jpg"
-            imageAlt="35-Day Generosity Challenge landing page"
+            tile="/35-day-generosity-challenge"
           />
 
           <CaseLayout sections={SECTIONS}>

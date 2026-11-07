@@ -70,8 +70,7 @@ const Page = () => {
               { label: "Deliverables", value: "Landing page, lead-capture form, event registration hand-off" },
               { label: "Website", value: <a className="cyril-dark" href="https://childrenshungerfund.org/dallas-volunteer-leader" target="_blank" rel="noopener noreferrer">childrenshungerfund.org/dallas-volunteer-leader</a> },
             ]}
-            image="/img/portfolio/chf-volunteer-leadership_main.jpg"
-            imageAlt="Volunteer Leadership Team landing page"
+            tile="/volunteer-leadership-team"
           />
 
           <CaseLayout sections={SECTIONS}>

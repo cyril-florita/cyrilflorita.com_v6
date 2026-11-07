@@ -79,7 +79,7 @@ const Page = () => {
             title="Hearthside"
             summary={CASE_SUMMARIES["/hearthside"]}
             facts={[
-              { label: "Project", value: "A website and intake system for a skilled home health agency, designed and built end to end as a design and dev pitch to agency owners" },
+              { label: "Target Clients", value: "Owners of home health agencies" },
               { label: "Role", value: "Product Designer & Front-End Developer" },
               { label: "Platform & Tools", value: "Web — Desktop, Tablet, Mobile · Next.js, React, CSS" },
               { label: "Try It Live", value: <a className="cyril-dark" href={LIVE} target="_blank" rel="noopener">cyrilflorita.com/pitch/hearthside</a> },

@@ -70,8 +70,7 @@ const Page = () => {
               { label: "Deliverables", value: "Landing page, live donation tracker, post-campaign page" },
             ]}
             result={{ value: "$150K+", label: "Raised on Giving Tuesday" }}
-            image="/img/portfolio/chf-giving-tuesday_main.jpg"
-            imageAlt="Giving Tuesday landing page"
+            tile="/giving-tuesday"
           />
 
           <CaseLayout sections={SECTIONS}>

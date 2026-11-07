@@ -78,7 +78,7 @@ const Page = () => {
             title="Viteo"
             summary={CASE_SUMMARIES["/viteo"]}
             facts={[
-              { label: "Project", value: "A personalized vitamin subscription, designed and built end to end as a design and dev pitch to an entrepreneur" },
+              { label: "Target Clients", value: "Founders launching a subscription or wellness brand" },
               { label: "Role", value: "Product Designer & Front-End Developer" },
               { label: "Platform & Tools", value: "Web — Desktop, Tablet, Mobile · Next.js, React, three.js, CSS" },
               { label: "Try It Live", value: <a className="cyril-dark" href={LIVE} target="_blank" rel="noopener">cyrilflorita.com/pitch/viteo</a> },

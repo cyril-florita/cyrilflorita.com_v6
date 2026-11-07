@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {
   CaseHero,
+  CaseLead,
   CaseLayout,
   CaseSection,
   CaseFigure,
@@ -89,8 +90,6 @@ const Page = () => {
               { label: "Role", value: "Web Designer & Developer" },
               { label: "Platform & Tools", value: "Social Media" },
             ]}
-            image="/img/portfolio/gty-social_train-tracks---Light-of-God's-Truth.jpg"
-            imageAlt="Light of God's Truth"
           />
 
           <CaseLayout sections={SECTIONS}>
@@ -98,6 +97,8 @@ const Page = () => {
             {/* 01 — Overview */}
             <CaseSection id="overview" number={1} title="Overview">
               <p>These are quote graphics for Grace to You&apos;s social media: short quotes from John MacArthur, set to stop a fast-scrolling feed, with the Grace to You logo and the GTY.org address placed so viewers know where to go for more. Each one credits John MacArthur and names the source, so readers can find the original context.</p>
+              {/* The tile's slideshow, after the overview */}
+              <CaseLead tile="/gty-social-media-graphics" />
             </CaseSection>
 
             {/* 02 — Results & Impact */}

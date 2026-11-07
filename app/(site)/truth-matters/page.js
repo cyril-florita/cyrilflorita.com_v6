@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {
   CaseHero,
+  CaseLead,
   CaseLayout,
   CaseSection,
   CaseFigure,
@@ -132,8 +133,6 @@ const Page = () => {
               { label: "Website", value: <a className="cyril-dark" href="https://truthmatterspodcast.gty.org" target="_blank" rel="noopener noreferrer">truthmatterspodcast.gty.org</a> },
               { label: "Platform & Tools", value: "WordPress" },
             ]}
-            image="/img/portfolio/main_truth-matters-podcast.jpg"
-            imageAlt="Truth Matters Podcast Wide"
           />
 
           <CaseLayout sections={SECTIONS}>
@@ -142,6 +141,8 @@ const Page = () => {
             <CaseSection id="overview" number={1} title="Overview">
               <p>The Truth Matters Podcast is a media production by Grace to You. In each episode, host Darrell Harrison welcomes a guest to explore a featured resource from the Grace to You collection (a book, sermon, or blog series by John MacArthur) and why it still matters for the church today.</p>
               <p>The show needed a brand and website in its own tone, with the logo, artwork, and episode pages telling one consistent story. As the Product Designer and Developer, I brought together three roles I love: branding, UX/UI design, and front-end development.</p>
+              {/* The tile's slideshow, after the overview */}
+              <CaseLead tile="/truth-matters" />
             </CaseSection>
 
             {/* 02 — Results & Impact */}

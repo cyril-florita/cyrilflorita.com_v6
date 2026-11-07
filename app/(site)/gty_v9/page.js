@@ -83,8 +83,7 @@ const Page = () => {
               { label: "Platform & Tools", value: <>{"Web — Mobile, Tablet, Desktop"}<br />{"Axure RP, Google Analytics"}</> },
               { label: "Deliverables", value: "Research, IA, Personas & Journeys, Wireframes, Prototypes" },
             ]}
-            image="/img/portfolio/gty9_final-design_homepage_4x3.jpg"
-            imageAlt="Grace to You final homepage design"
+            tile="/gty_v9"
           />
 
           <CaseLayout sections={SECTIONS}>

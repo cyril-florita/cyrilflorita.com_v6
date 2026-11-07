@@ -89,8 +89,7 @@ const Page = () => {
               { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank" rel="noopener noreferrer">Grace to You</a>&mdash;A Christian Media Organization</> },
               { label: "Role", value: "Web Designer & Developer" },
             ]}
-            image="/img/portfolio/gty-blog_Christ-gives-the-gospel.jpg"
-            imageAlt="Christ Gives the Gospel"
+            tile="/gty-blog-graphics"
           />
 
           <CaseLayout sections={SECTIONS}>

@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {
   CaseHero,
+  CaseLead,
   CaseLayout,
   CaseSection,
   CaseFigure,
@@ -115,8 +116,6 @@ const Page = () => {
               { label: "Role", value: "Logo Designer" },
               { label: "Deliverables", value: "Full-Color, Gold on Black & Portrait Logo Versions" },
             ]}
-            image="/img/portfolio/main_patricia-macarthur-pastoral-care-fund.jpg"
-            imageAlt="The Patricia MacArthur Pastoral Care Fund logo, gold on black"
           />
 
           <CaseLayout sections={SECTIONS}>
@@ -124,6 +123,8 @@ const Page = () => {
             {/* 01 — Overview */}
             <CaseSection id="overview" number={1} title="Overview">
               <p>As a designer at Grace to You, I created the logo for the Patricia MacArthur Pastoral Care Fund. It needed to feel personal and caring, like the fund itself.</p>
+              {/* The tile's slideshow, after the overview */}
+              <CaseLead tile="/patricia-macarthur-pastoral-care-fund" />
             </CaseSection>
 
             {/* 02 — Results & Impact */}

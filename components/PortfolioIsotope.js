@@ -500,7 +500,7 @@ const PortfolioIsotope = () => {
           <div className="grid-sizer" />
 
           {/* wide . viteo (design & dev pitch; first in Case Studies, second in Web & App) */}
-          <div id="viteo" data-project="viteo" data-order-web="2" className="cyril-grid-item fil-uix">
+          <div id="viteo" data-project="viteo" data-order-web="3" className="cyril-grid-item fil-uix">
             <Link href="/viteo" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -516,7 +516,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* wide . hearthside (design & dev pitch; beside Viteo in Case Studies, sixth in Web & App) */}
-          <div id="hearthside" data-project="hearthside" data-order-web="6" className="cyril-grid-item fil-uix">
+          <div id="hearthside" data-project="hearthside" data-order-web="1" className="cyril-grid-item fil-uix">
             <Link href="/hearthside" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -532,7 +532,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* square . hunger action month campaign dashboard (looping video thumbnail) */}
-          <div id="hamdashboard" data-project="hamdashboard" data-order-web="7" data-order-brand="1" className="cyril-grid-item fil-uix fil-marketing">
+          <div id="hamdashboard" data-project="hamdashboard" data-order-web="6" data-order-brand="1" className="cyril-grid-item fil-uix fil-marketing">
             <Link href="/hunger-action-month-dashboard" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -548,7 +548,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* wide . the study bible app */}
-          <div id="thestudybibleapp" data-project="thestudybibleapp" data-order-web="1" className="cyril-grid-item fil-uix">
+          <div id="thestudybibleapp" data-project="thestudybibleapp" data-order-web="2" className="cyril-grid-item fil-uix">
             <Link href="/the-study-bible-app" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -564,7 +564,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* wide . gty v9 (looping video thumbnail) */}
-          <div id="gty9" data-project="gty9" data-order-web="3" className="cyril-grid-item fil-uix">
+          <div id="gty9" data-project="gty9" data-order-web="4" className="cyril-grid-item fil-uix">
             <Link href="/gty_v9" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -615,7 +615,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* long . gty v8 */}
-          <div id="gty8" data-project="gty8" data-order-web="4" className="cyril-grid-item fil-uix">
+          <div id="gty8" data-project="gty8" data-order-web="7" className="cyril-grid-item fil-uix">
             <Link href="/gty_v8" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">

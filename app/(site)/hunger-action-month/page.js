@@ -75,8 +75,7 @@ const Page = () => {
               { label: "Related", value: <CaseLink href="/hunger-action-month-dashboard" className="cyril-dark">Campaign dashboard case study</CaseLink> },
               { label: "Website", value: <a className="cyril-dark" href="https://childrenshungerfund.org/hungeractionmonth/" target="_blank" rel="noopener noreferrer">childrenshungerfund.org/hungeractionmonth</a> },
             ]}
-            image="/img/portfolio/chf-hunger-action-month_main.jpg"
-            imageAlt="Hunger Action Month landing page"
+            tile="/hunger-action-month"
           />
 
           <CaseLayout sections={SECTIONS}>

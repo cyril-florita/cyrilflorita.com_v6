@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {
   CaseHero,
+  CaseLead,
   CaseLayout,
   CaseSection,
   CaseFigure,
@@ -119,8 +120,6 @@ const Page = () => {
               { label: "Role", value: "Logo/Brand Designer" },
               { label: "Deliverables", value: "Logo & Wordmark" },
             ]}
-            image="/img/portfolio/main_the-study-bible-app-logo.jpg"
-            imageAlt="The Study Bible App Logo - Main"
           />
 
           <CaseLayout sections={SECTIONS}>
@@ -128,6 +127,8 @@ const Page = () => {
             {/* 01 — Overview */}
             <CaseSection id="overview" number={1} title="Overview">
               <p>As a designer at Grace to You, I was tasked with creating a visual identity for The Study Bible app. The goal was to design a logo that communicates usability, clarity, and a sense of illumination, while remaining simple and versatile for digital use.</p>
+              {/* The tile's slideshow, after the overview */}
+              <CaseLead tile="/the-study-bible-app-logo" />
             </CaseSection>
 
             {/* 02 — Results & Impact */}

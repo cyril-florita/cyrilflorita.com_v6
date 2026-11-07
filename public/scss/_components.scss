@@ -3852,6 +3852,40 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
     overflow: hidden;
 }
 
+// A square tile as the hero (e.g. /gty-social-media-graphics' slideshow):
+// on desktop, the summary's width — half the content width less half the
+// 30px gap, capped like the summary at 42ch of its 22px type — centred in
+// the content width; full width on tablets and phones.
+.cyril-case-hero-media.is-square {
+    @media screen and (min-width: 993px) {
+        width: calc(50% - 15px);
+        max-width: 42ch;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 22px;
+    }
+
+    // In the content column (CaseLead, after the Overview's text): the
+    // summary's width, against the column's left edge. It's a section's
+    // last child, so the section's own spacing follows it.
+    &.cyril-case-lead {
+        margin: 50px 0 12px;
+
+        @media screen and (min-width: 993px) {
+            width: 42ch;
+            max-width: 100%;
+        }
+
+        @media screen and (max-width: 768px) {
+            margin-top: 36px;
+        }
+    }
+
+    & .cyril-case-bleed.cyril-case-bleed-tile {
+        aspect-ratio: 1 / 1;
+    }
+}
+
 // Hero showing a project's tile media (CaseHero `tile`), e.g. the 3D phone.
 .cyril-case-bleed.cyril-case-bleed-tile {
     position: relative;

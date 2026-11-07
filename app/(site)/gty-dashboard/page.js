@@ -84,8 +84,7 @@ const Page = () => {
               { label: "Role", value: "Web Designer & Developer" },
               { label: "Platform & Tools", value: "TV — Office Displays" },
             ]}
-            image="/img/portfolio/gty-dashboard-2b.jpg"
-            imageAlt="GTY Dashboard - Ministry Activities screen"
+            tile="/gty-dashboard"
           />
 
           <CaseLayout sections={SECTIONS}>

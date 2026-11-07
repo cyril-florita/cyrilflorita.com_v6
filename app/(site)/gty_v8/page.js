@@ -77,8 +77,7 @@ const Page = () => {
               { label: "Platform & Tools", value: <>{"Responsive Web — Mobile & Desktop"}<br />{"Visual Studio Code, Google's Material Design System, HandlebarsJS"}</> },
               { label: "Team", value: "Digital Platforms Coordinator, Software Engineer, Software Developer" },
             ]}
-            image="/img/portfolio/gty8_screenshot_4x3.jpg"
-            imageAlt="Grace to You (v.8)"
+            tile="/gty_v8"
           />
 
           <CaseLayout sections={SECTIONS}>

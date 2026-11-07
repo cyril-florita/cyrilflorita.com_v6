@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {
   CaseHero,
+  CaseLead,
   CaseLayout,
   CaseSection,
   CaseFigure,
@@ -126,8 +127,6 @@ const Page = () => {
               { label: "Website", value: <a className="cyril-dark" href="https://www.gty.org/listen/gracestream" target="_blank" rel="noopener noreferrer">gty.org/listen/gracestream</a> },
               { label: "Platform & Tools", value: "Radio.co" },
             ]}
-            image="/img/portfolio/main_grace-stream.jpg"
-            imageAlt="Main Image for Grace Stream"
           />
 
           <CaseLayout sections={SECTIONS}>
@@ -136,6 +135,8 @@ const Page = () => {
             <CaseSection id="overview" number={1} title="Overview">
               <p>Listeners needed uninterrupted access to biblically sound preaching, whether during a morning commute, a workday, or a quiet evening. Grace to You created Grace Stream, a 24/7 online broadcasting platform featuring continuous teaching from John MacArthur's extensive library of sermons, to meet that need.</p>
               <p>As both the Product Designer and Web Developer, my job was to give the stream a brand and a clean, simple page that stays out of the listener&apos;s way.</p>
+              {/* The tile's slideshow, after the overview */}
+              <CaseLead tile="/grace-stream" />
             </CaseSection>
 
             {/* 02 — Results & Impact */}

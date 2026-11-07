@@ -110,7 +110,7 @@ export const CaseHero = ({ category, detail, title, summary, result, facts, imag
           reads as the tile you clicked, opened up. */}
       {(tile || video || image) && (
       <div className="container">
-      <div className="cyril-case-hero-media">
+      <div className={`cyril-case-hero-media${tile && TILE_MEDIA[tile]?.shape === "square" ? " is-square" : ""}`}>
       {tile ? (
         // A project's My Work thumbnail as the hero (e.g. the 3D phone),
         // from TILE_MEDIA — same media, larger.
@@ -144,6 +144,17 @@ export const CaseHero = ({ category, detail, title, summary, result, facts, imag
     </>
   );
 };
+
+// A project's tile media inside the content column (instead of CaseHero's
+// card) — used for the square GTY Social slideshow, after the Overview's
+// text. Same framed card, at the summary's width.
+export const CaseLead = ({ tile }) => (
+  <div className={`cyril-case-hero-media cyril-case-lead${TILE_MEDIA[tile]?.shape === "square" ? " is-square" : ""}`}>
+    <div className="cyril-case-bleed cyril-case-bleed-tile">
+      <TileMedia slug={tile} sizes="(max-width: 992px) 100vw, 600px" />
+    </div>
+  </div>
+);
 
 // Two-column body: a sticky section index on the left (highlighting the
 // section being read, click to jump) and the sections on the right. Pages
