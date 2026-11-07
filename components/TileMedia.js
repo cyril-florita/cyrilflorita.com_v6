@@ -261,6 +261,19 @@ export const TILE_MEDIA = {
     shape: "wide",
   },
   // The brand's story (logo → YouTube → merchandise → Apple Podcasts → the website), crossfading like Grace Stream.
+  // The conference's handwritten mark: the logo, the LED wall it lit, a livestream screen, a tee, the round sticker; crossfading. 16:9.
+  "/truth-matters-conference": {
+    kind: "slideshow", label: "Truth Matters Conference brand, from the handwritten logo to the stage, livestream, merch and stickers",
+    images: [
+      "/img/portfolio/thumb_tmc-logo.jpg",
+      "/img/portfolio/thumb_tmc-led-wall.jpg",
+      "/img/portfolio/thumb_tmc-livestream.jpg",
+      "/img/portfolio/thumb_tmc-tee.jpg",
+      "/img/portfolio/thumb_tmc-sticker.jpg",
+    ],
+    interval: 1250, fade: 600,
+    shape: "wide", ratio: "16 / 9",
+  },
   "/truth-matters": {
     kind: "slideshow", label: "Truth Matters Podcast brand, from logo to merchandise and the website",
     images: [

@@ -21,6 +21,7 @@ export const CASE_SUMMARIES = {
   "/sekihmentis": "A grungy “Transformers: Autobots Big Gun” themed background graphic designed for my MySpace profile.",
   "/the-study-bible-app-logo": "A visual identity for The Study Bible app: a simple, versatile logo of a book, a pen, and a rising sun, tested for clarity at small sizes.",
   "/the-study-bible-app": "A redesign of The Study Bible app that I led at Grace to You, fixing the legacy app's critical usability issues with a simpler, cleaner experience.",
+  "/truth-matters-conference": "The brand for Grace to You’s Truth Matters conference, built from John MacArthur’s own handwriting and carried from the LED wall and livestream to the conference pages, merch, and stickers.",
   "/truth-matters": "The brand, UX/UI design, and WordPress website for Grace to You's Truth Matters Podcast, with a global player that keeps playing while you browse.",
   "/volunteer-leadership-team": "A new landing page recruiting Volunteer Leaders for Children's Hunger Fund's new North Texas facility: the one destination behind every printed flyer, event QR code, and staff conversation, launched ahead of an in-person Open House.",
 };

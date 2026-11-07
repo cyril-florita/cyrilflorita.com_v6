@@ -5,6 +5,7 @@ import Reveal from "@/components/viteo/Reveal";
 import ScrollMotion from "@/components/viteo/ScrollMotion";
 import AmbientShader from "@/components/viteo/AmbientShader";
 import "./viteo.css";
+import InlineScript from "@/components/InlineScript";
 
 // Viteo: a personalized-vitamin subscription, built as a design and dev
 // pitch. It lives outside app/(site), so none of the portfolio's styles,
@@ -69,7 +70,7 @@ export default function ViteoLayout({ children }) {
       data-dl-mode="dark"
       suppressHydrationWarning
     >
-      <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+      <InlineScript html={THEME_SCRIPT} />
       {/* The moving background, on every page (desktop); it persists across
           client-side page changes. */}
       <AmbientShader />

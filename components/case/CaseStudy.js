@@ -114,7 +114,7 @@ export const CaseHero = ({ category, detail, title, summary, result, facts, imag
       {tile ? (
         // A project's My Work thumbnail as the hero (e.g. the 3D phone),
         // from TILE_MEDIA — same media, larger.
-        <div className="cyril-case-bleed cyril-case-bleed-tile">
+        <div className="cyril-case-bleed cyril-case-bleed-tile" style={TILE_MEDIA[tile]?.ratio ? { aspectRatio: TILE_MEDIA[tile].ratio } : undefined}>
           <TileMedia slug={tile} sizes="100vw" />
         </div>
       ) : video ? (
@@ -301,10 +301,11 @@ export const CaseFigure = ({ src, alt, caption, ratio, size = "full", frame, url
 };
 
 // Desktop recordings sit in a browser-window frame (see BrowserFrame);
-// size="phone" uses the phone frame instead.
-export const CaseVideo = ({ src, caption, size = "full", url }) => (
+// size="phone" uses the phone frame instead, and frame={false} none (e.g. an
+// animated logo).
+export const CaseVideo = ({ src, caption, size = "full", url, frame = true }) => (
   <figure className={`cyril-case-figure cyril-case-figure-${size}`}>
-    {size === "phone" ? (
+    {size === "phone" || !frame ? (
       <VideoFigure url={src} marginTop="" marginBottom="" />
     ) : (
       <BrowserFrame url={url}>

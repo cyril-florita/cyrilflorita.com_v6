@@ -70,6 +70,7 @@ export const metadata = {
 };
 
 import { ClientThemeProvider } from '../components/ClientThemeProvider';
+import InlineScript from "@/components/InlineScript";
 
 // Social profiles match the links in layout/Footer.js.
 const PERSON_JSON_LD = {
@@ -92,17 +93,15 @@ export default function RootLayout({ children }) {
     <html lang="en" data-theme="dark" className={`${space_grotest.variable} ${atkinson.variable}`} suppressHydrationWarning={true}>
       <head>
         {/* Set theme before first paint (default dark) to avoid a flash on navigation */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
+        <InlineScript
+          html={`
               (function () {
                 try {
                   var theme = localStorage.getItem('theme') || 'dark';
                   document.documentElement.setAttribute('data-theme', theme);
                 } catch (e) {}
               })();
-            `,
-          }}
+            `}
         />
         {/* Structured data: who this site is about */}
         <script

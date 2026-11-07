@@ -631,7 +631,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* wide . 35-day generosity challenge (looping video thumbnail) */}
-          <div id="generositychallenge" data-project="generositychallenge" data-order-web="14" data-order-brand="6" className="cyril-grid-item fil-uix fil-marketing">
+          <div id="generositychallenge" data-project="generositychallenge" data-order-web="14" data-order-brand="7" className="cyril-grid-item fil-uix fil-marketing">
             <Link href="/35-day-generosity-challenge" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -679,7 +679,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* wide . volunteer leadership team (looping video thumbnail) */}
-          <div id="volunteerleadership" data-project="volunteerleadership" data-order-web="13" data-order-brand="7" className="cyril-grid-item fil-uix fil-marketing">
+          <div id="volunteerleadership" data-project="volunteerleadership" data-order-web="13" data-order-brand="8" className="cyril-grid-item fil-uix fil-marketing">
             <Link href="/volunteer-leadership-team" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -728,7 +728,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* wide . marketing . blog graphics */}
-          <div id="gtyblog" data-project="gtyblog" data-order-brand="9" className="cyril-grid-item cyril-not-featured fil-marketing">
+          <div id="gtyblog" data-project="gtyblog" data-order-brand="10" className="cyril-grid-item cyril-not-featured fil-marketing">
             <Link href="/gty-blog-graphics" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -744,7 +744,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* square . social media graphics */}
-          <div id="gtysocialmedia" data-project="gtysocialmedia" data-order-brand="8" className="cyril-grid-item fil-marketing">
+          <div id="gtysocialmedia" data-project="gtysocialmedia" data-order-brand="9" className="cyril-grid-item fil-marketing">
             <Link href="/gty-social-media-graphics" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -760,7 +760,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* wide . gty resources */}
-          <div id="gtyresources" data-project="gtyresources" data-order-brand="10" className="cyril-grid-item cyril-not-featured fil-marketing">
+          <div id="gtyresources" data-project="gtyresources" data-order-brand="11" className="cyril-grid-item cyril-not-featured fil-marketing">
             <Link href="/gty-resources" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -776,7 +776,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* square . (branding) study bible app */}
-          <div id="thestudybibleapplogo" data-project="thestudybibleapplogo" data-order-brand="11" className="cyril-grid-item cyril-not-featured fil-branding">
+          <div id="thestudybibleapplogo" data-project="thestudybibleapplogo" data-order-brand="12" className="cyril-grid-item cyril-not-featured fil-branding">
             <Link href="/the-study-bible-app-logo" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -792,7 +792,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* square . patricia macarthur */}
-          <div id="patriciamacarthur" data-project="patriciamacarthur" data-order-brand="12" className="cyril-grid-item cyril-not-featured fil-branding fil-illustration">
+          <div id="patriciamacarthur" data-project="patriciamacarthur" data-order-brand="13" className="cyril-grid-item cyril-not-featured fil-branding fil-illustration">
             <Link href="/patricia-macarthur-pastoral-care-fund" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -807,8 +807,24 @@ const PortfolioIsotope = () => {
             </Link>
           </div>
 
+          {/* wide (16:9) . truth matters conference (branding; not featured — Marketing & Branding only) */}
+          <div id="tmconference" data-project="tmconference" data-order-brand="6" className="cyril-grid-item cyril-not-featured fil-branding">
+            <Link href="/truth-matters-conference" onClick={saveFilterOnNavigate}>
+              <div className="cyril-portfolio-item cyril-wide-item cyril-mb-80">
+                <div className="cyril-cover" style={{ paddingBottom: "56.25%" }}>
+                  <TileMedia slug="/truth-matters-conference" />
+                  <h3>Case Study</h3>
+                </div>
+                <div className="cyril-project-descr">
+                  <p className="cyril-upper cyril-accent cyril-mb-10">Branding</p>
+                  <h4 className="cyril-up">Truth Matters Conference</h4>
+                </div>
+              </div>
+            </Link>
+          </div>
+
           {/* long . sekihmentis */}
-          <div id="sekihmentis" data-project="sekihmentis" data-order-brand="13" className="cyril-grid-item fil-illustration">
+          <div id="sekihmentis" data-project="sekihmentis" data-order-brand="14" className="cyril-grid-item fil-illustration">
             <Link href="/sekihmentis" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-long-item cyril-mb-80">
                 <div className="cyril-cover">
@@ -826,7 +842,7 @@ const PortfolioIsotope = () => {
           </div>
 
           {/* square . illustration . he took my place */}
-          <div id="hetookmyplace" data-project="hetookmyplace" data-order-brand="14" className="cyril-grid-item fil-illustration">
+          <div id="hetookmyplace" data-project="hetookmyplace" data-order-brand="15" className="cyril-grid-item fil-illustration">
             <Link href="/he-took-my-place" onClick={saveFilterOnNavigate}>
               <div className="cyril-portfolio-item cyril-square-item cyril-mb-80">
                 <div className="cyril-cover">

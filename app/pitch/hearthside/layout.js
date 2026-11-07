@@ -1,5 +1,6 @@
 import { DM_Mono, Fraunces, Hanken_Grotesk, Host_Grotesk } from "next/font/google";
 import "./hearthside.css";
+import InlineScript from "@/components/InlineScript";
 
 // Hearthside Home Health: a fictional skilled home health agency and the
 // intake system behind its website, built as a design and dev pitch. Like
@@ -56,7 +57,7 @@ const MODE_SCRIPT = `(function(){var e=document.currentScript.parentElement;try{
 export default function HearthsideLayout({ children }) {
   return (
     <div className={`hs ${host.variable} ${hanken.variable} ${mono.variable} ${serif.variable}`} data-hs-theme="shore" data-hs-mode="dark" suppressHydrationWarning>
-      <script dangerouslySetInnerHTML={{ __html: MODE_SCRIPT }} />
+      <InlineScript html={MODE_SCRIPT} />
       <a className="hs-skip" href="#main">Skip to content</a>
       {/* (public)/layout.js adds the site's header, frame and footer; intake/
           has its own app shell. */}

@@ -24,6 +24,7 @@ const PROJECTS = [
   'gty-resources',
   'the-study-bible-app-logo',
   'patricia-macarthur-pastoral-care-fund',
+  'truth-matters-conference',
   'sekihmentis',
   'he-took-my-place',
 ];

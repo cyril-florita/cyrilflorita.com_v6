@@ -41,6 +41,7 @@ const IMAGES = {
   "gty-dashboard": ["/img/portfolio/gty-dashboard-1b.jpg", "contain"],
   "grace-stream": ["/img/portfolio/main_grace-stream.jpg", "cover"],
   "truth-matters": ["/img/portfolio/main_truth-matters-podcast.jpg", "cover"],
+  "truth-matters-conference": ["/img/portfolio/tmc_led-wall.jpg", "cover", "top"],
   "the-study-bible-app-logo": ["/img/portfolio/main_the-study-bible-app-logo.jpg", "cover"],
   "patricia-macarthur-pastoral-care-fund": ["/img/portfolio/patricia-macarthur-pastoral-care-fund-logo-light.jpg", "contain"],
   "gty-blog-graphics": ["/img/portfolio/gty-blog_the-Bible-is-timeless-truth.jpg", "contain"],
