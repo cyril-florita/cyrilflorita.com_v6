@@ -2578,8 +2578,9 @@ portfolio
 // red tail) runs round the crisp 2px line over a dim ember base, and a
 // slightly blurred copy (::before) is the glow. Both read the registered
 // --fire-angle, which useFireFrame (PortfolioIsotope.js) animates on the
-// hovered tile only, at a constant speed along the frame. Under reduced
-// motion the frame just turns orange (the rule above).
+// hovered tile only, at a constant speed along the frame (and once round
+// the tile you came back to, .is-burning). Under reduced motion the frame
+// just turns orange on hover (the rule above).
 @property --fire-angle {
     syntax: "<angle>";
     inherits: true;
@@ -2592,7 +2593,22 @@ portfolio
     }
 }
 
-@media (hover: hover) and (pointer: fine) and (min-width: 1201px) and (prefers-reduced-motion: no-preference) {
+// The burning look: hovered tiles (desktop mouse) and .is-burning.
+@mixin burning {
+    &::after {
+        border-image: var(--fire) 1;
+        filter: drop-shadow(0 0 2px rgba(255, 150, 60, 0.9));
+    }
+
+    &::before {
+        border-image: var(--fire) 1;
+        filter: blur(1px) brightness(1.3);
+        opacity: 1;
+        animation: cyril-fire-in 0.4s ease-out;
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
     .cyril-portfolio-item .cyril-cover {
         --fire-ember: rgba(var(--color-accent-rgb), 0.45);
         --fire-core: #fff3c4;
@@ -2623,18 +2639,15 @@ portfolio
         }
     }
 
-    .cyril-portfolio-item:hover .cyril-cover {
-        &::after {
-            border-image: var(--fire) 1;
-            filter: drop-shadow(0 0 2px rgba(255, 150, 60, 0.9));
-        }
+    // .is-burning: the one lap app/page.js runs on the tile you came back
+    // to (any screen size).
+    .cyril-portfolio-item .cyril-cover.is-burning {
+        @include burning;
+    }
 
-        &::before {
-            border-image: var(--fire) 1;
-            filter: blur(1px) brightness(1.3);
-            opacity: 1;
-            animation: cyril-fire-in 0.4s ease-out;
-        }
+    // Not hovered, the frame isn't drawn in (scale 0.96), so neither is its glow.
+    .cyril-portfolio-item:not(:hover) .cyril-cover.is-burning::before {
+        transform: none;
     }
 
     // Light mode: a white-hot core vanishes on the pale page, so the flame
@@ -2642,6 +2655,12 @@ portfolio
     :root:not([data-theme="dark"]) .cyril-portfolio-item .cyril-cover {
         --fire-core: #ffb020;
         --fire-hot: #ff8a1f;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) and (min-width: 1201px) and (prefers-reduced-motion: no-preference) {
+    .cyril-portfolio-item:hover .cyril-cover {
+        @include burning;
     }
 }
 
@@ -2878,6 +2897,78 @@ portfolio
             z-index: 1;
             // transform: scale(1), translate(0,0);
             transition: variables.$tr;
+        }
+
+        // "You were just here": a toast on the tile you came back from (app/page.js
+        // adds it after the glide lands, then removes it). A diamond, like
+        // the site's background diamonds, in the hero button's orange with
+        // its offset shadow, centred on the cover; it rises in and fades.
+        // The diamond and its shadow are rotated squares (::before, ::after)
+        // behind the label, so the text stays level.
+        & .cyril-you-were-here {
+            --side: 132px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 2;
+            display: grid;
+            place-items: center;
+            width: calc(var(--side) * 1.4142);
+            height: calc(var(--side) * 1.4142);
+            color: var(--color-on-accent);
+            font-family: var(--font-atkinson);
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 1.15;
+            text-align: center;
+            text-transform: uppercase;
+            pointer-events: none;
+            opacity: 0;
+            translate: -50% calc(-50% + 14px);
+            scale: 0.9;
+            transition: opacity 0.45s ease, translate 0.6s cubic-bezier(0.34, 1.4, 0.5, 1), scale 0.6s cubic-bezier(0.34, 1.4, 0.5, 1);
+
+            &::before,
+            &::after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                z-index: -1;
+                width: var(--side);
+                height: var(--side);
+                translate: -50% -50%;
+                rotate: 45deg;
+            }
+
+            // The diamond.
+            &::before {
+                background-color: var(--color-accent);
+            }
+
+            // Its offset shadow, as on .cyril-button.
+            &::after {
+                z-index: -2;
+                margin: 7px 0 0 7px;
+                background-color: var(--color-accent-light);
+            }
+
+            &.is-in {
+                opacity: 1;
+                translate: -50% -50%;
+                scale: 1;
+            }
+
+            @media screen and (max-width: 768px) {
+                --side: 88px;
+                font-size: 12px;
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                translate: -50% -50%;
+                scale: 1;
+                transition: opacity 0.3s ease;
+            }
         }
 
         &.case-study-coming-soon {

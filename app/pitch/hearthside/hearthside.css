@@ -1044,10 +1044,10 @@ body:has(.hs[data-hs-theme="shore"][data-hs-mode="dark"]) { background: #1E2A36;
   .hs-seg { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 24px; padding: 4px; border-radius: 10px 22px; background: var(--hs-sand); }
   /* The raised thumb is one element that glides between the options, with a
      touch of overshoot, rather than two backgrounds swapping. */
-  .hs-seg::before { content: ""; position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc(50% - 6px); border-radius: 6px 18px; background: var(--hs-page); box-shadow: 0 2px 10px rgba(15, 25, 35, 0.12); transition: translate 0.55s cubic-bezier(0.34, 1.4, 0.5, 1); }
+  .hs-seg::before { content: ""; position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc(50% - 6px); border-radius: 6px 18px; background: var(--hs-ember); box-shadow: 0 2px 10px rgba(15, 25, 35, 0.12); transition: translate 0.55s cubic-bezier(0.34, 1.4, 0.5, 1); }
   .hs-seg[data-active="1"]::before { translate: calc(100% + 4px) 0; }
-  .hs-seg-btn { position: relative; z-index: 1; min-height: 48px; padding: 0 8px; border: 0; border-radius: 6px 18px; background: none; color: var(--hs-ink-2); font: inherit; font-size: 16px; font-weight: 600; cursor: pointer; transition: color 0.3s var(--hs-ease); -webkit-tap-highlight-color: transparent; }
-  .hs-seg-btn[aria-pressed="true"] { color: var(--hs-ink); }
+  .hs-seg-btn { position: relative; z-index: 1; min-height: 48px; padding: 0 8px; border: 0; border-radius: 6px 18px; background: none; color: var(--hs-ink); font: inherit; font-size: 16px; font-weight: 600; cursor: pointer; transition: color 0.3s var(--hs-ease); -webkit-tap-highlight-color: transparent; }
+  .hs-seg-btn[aria-pressed="true"] { color: var(--hs-on-ember); }
   .hs-seg-btn:active { scale: 1; }
   .hs-paths { view-transition-name: hs-paths; margin-top: 20px; }
   .hs-paths[data-active="0"] > .hs-path:nth-child(2),
@@ -1495,7 +1495,7 @@ html[data-hs-vt="look"]::view-transition-new(*) { animation: hs-look-in 0.3s eas
   .hs-help .hs-path :is(.hs-photo, .hs-photo-frame) { --hs-leaf: 44px; }
   .hs-help .hs-path-tag { display: none; } /* the switch above already says who it's for */
   .hs-help .hs-paths { margin-top: 24px; } /* space between the switch and the chosen card's photo */
-  .hs-help .hs-seg { background: color-mix(in srgb, var(--hs-ink) 9%, var(--hs-sand)); } /* the switch's track, a shade deeper than the sand; its thumb stays the page colour */
+  .hs-help .hs-seg { background: var(--hs-page); } /* the switch's track takes the page colour (the thumb's old look), and the thumb is the accent (peach in Shore dark) */
 }
 
 /* Home's How care begins: the heading and lede inside the story's frame keep

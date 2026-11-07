@@ -83,8 +83,16 @@ const Nav = () => {
                   return;
                 }
 
-                session.remove('returnToProject');
-                session.set('scrollToPortfolio', 'true');
+                if (document.querySelector('.cyril-case-page')) {
+                  // From a case study, My Work returns to that project's tile:
+                  // the page set returnToProject on mount, and "/" restores it.
+                  session.remove('scrollToPortfolio');
+                } else {
+                  // From anywhere else (About Me, the 404 page), land at the
+                  // top of My Work, never on a project seen earlier.
+                  session.remove('returnToProject');
+                  session.set('scrollToPortfolio', 'true');
+                }
                 await cyrilUtility.handlePageTransition();
                 window.location.href = '/';
               }}

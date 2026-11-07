@@ -5,6 +5,7 @@ import ContactBand from "@/components/ContactBand";
 import dynamic from "next/dynamic";
 import { applyHiddenState, cyrilUtility, hideSplitTitle, scrambleInTitle } from "@/public/utility/index";
 import { onPreloaderHidden } from "@/components/Preloader";
+import { FIRE_LAP, fireFrames } from "@/components/fireFrame";
 import { session } from "@/components/safeStorage";
 import { useEffect, useRef } from "react";
 
@@ -16,6 +17,33 @@ const PortfolioIsotope = dynamic(
 );
 
 const TRANSITION_MS = 500;
+
+// Coming back from a case study: a "You were just here" toast on its tile's cover
+// that rises in, holds, and fades away (.cyril-you-were-here in
+// _components.scss; no movement under reduced motion). Decorative — the tile
+// itself is the content — so it's hidden from screen readers.
+const YOU_WERE_HERE_MS = 3200;
+const showYouWereHere = (tile) => {
+  const cover = tile.querySelector('.cyril-cover');
+  if (!cover || cover.querySelector('.cyril-you-were-here')) return;
+  const toast = document.createElement('span');
+  toast.className = 'cyril-you-were-here';
+  toast.setAttribute('aria-hidden', 'true');
+  toast.innerHTML = 'You were<br>just here';
+  cover.appendChild(toast);
+  requestAnimationFrame(() => requestAnimationFrame(() => toast.classList.add('is-in')));
+  // …and the tile's fiery frame burns once round (.is-burning; the same
+  // flame as the desktop hover, on any screen size, not under reduced motion).
+  if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+    cover.classList.add('is-burning');
+    const lap = cover.animate(fireFrames(cover.offsetWidth, cover.offsetHeight), { duration: FIRE_LAP });
+    lap.finished.catch(() => {}).finally(() => cover.classList.remove('is-burning'));
+  }
+  setTimeout(() => {
+    toast.classList.remove('is-in');
+    setTimeout(() => toast.remove(), 600);
+  }, YOU_WERE_HERE_MS);
+};
 
 // Smooth programmatic scrolls, except under reduced motion.
 const scrollBehavior = () =>
@@ -129,17 +157,27 @@ const Index = () => {
       document.querySelector('.cyril-page')?.classList.add('cyril-fade-only');
       window.scrollTo(0, 0);
 
-      // Wait for the DOM to be fully loaded and isotope to initialize
-      setTimeout(() => {
-        // Find the element for the project
-        const projectElement = document.getElementById(returnToProject) ||
-                              document.querySelector(`[data-project="${returnToProject}"]`);
-
-        if (projectElement) {
-          // Scroll to the element
-          projectElement.scrollIntoView({ behavior: scrollBehavior() });
-        }
-      }, 800); // Give more time for isotope to render
+      // Once the preloader has slid away (so the glide is seen, and Isotope
+      // has laid the grid out), scroll smoothly to the project's tile and
+      // centre it on the screen.
+      onPreloaderHidden(() => {
+        setTimeout(() => {
+          const projectElement = document.getElementById(returnToProject) ||
+                                document.querySelector(`[data-project="${returnToProject}"]`);
+          if (!projectElement) return;
+          projectElement.scrollIntoView({ behavior: scrollBehavior(), block: 'center' });
+          // Once the glide lands, a "You were just here" toast on the tile's
+          // cover (scrollend, or a fallback where it isn't supported).
+          let shown = false;
+          const show = () => {
+            if (shown) return;
+            shown = true;
+            showYouWereHere(projectElement);
+          };
+          window.addEventListener('scrollend', show, { once: true });
+          setTimeout(show, scrollBehavior() === 'smooth' ? 1400 : 100);
+        }, 300);
+      });
     } else if (scrollToPortfolio) {
       session.remove('scrollToPortfolio');
 
