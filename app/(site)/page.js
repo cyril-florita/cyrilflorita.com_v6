@@ -29,25 +29,19 @@ const showYouWereHere = (tile) => {
   const toast = document.createElement('span');
   toast.className = 'cyril-you-were-here';
   toast.setAttribute('aria-hidden', 'true');
-  toast.innerHTML = 'You were<br>just here';
+  // Four outline rings (.cyril-you-were-here-ring) ripple out from the diamond.
+  toast.innerHTML = 'You were<br>just here' + '<i class="cyril-you-were-here-ring"></i>'.repeat(4);
   cover.appendChild(toast);
   requestAnimationFrame(() => requestAnimationFrame(() => toast.classList.add('is-in')));
   // A spotlight: the other cards dim while the toast shows (.is-spotlight
-  // on the grid), and come back with it, or early on deliberate input only:
-  // a wheel or touch scroll, a tap or click, a key, or the mouse travelling
-  // 48px over the grid. Not on 'scroll' (layout and programmatic scrolls fire
-  // it) nor on any pointermove: Chrome sends one when content moves under a
-  // resting cursor, and a hand on the trackpad nudges it a pixel, which used
-  // to end the dim at once, so it only sometimes showed.
+  // on the grid) and come back with it, after the full ~3s. Moving the mouse
+  // doesn't end it. While it's on, the grid glow sits behind the returned
+  // card (useGridGlow), and hovering a dimmed card neither lights nor colours
+  // it nor burns its border (.is-spotlight in _components.scss, useFireFrame).
+  // Only a wheel or touch scroll, a click or tap, or a key ends it early.
+  // Not 'scroll', which layout and programmatic scrolls also fire.
   const grid = tile.closest('.cyril-portfolio-grid');
-  const started = performance.now();
-  let travel = 0;
-  const onMove = (e) => {
-    if (!e.isTrusted || e.pointerType !== 'mouse' || performance.now() - started < 400) return;
-    travel += Math.abs(e.movementX || 0) + Math.abs(e.movementY || 0);
-    if (travel >= 48) undim();
-  };
-  const events = [[window, 'wheel', undim], [window, 'touchmove', undim], [window, 'pointerdown', undim], [window, 'keydown', undim], [grid, 'pointermove', onMove]];
+  const events = [[window, 'wheel', undim], [window, 'touchmove', undim], [window, 'pointerdown', undim], [window, 'keydown', undim]];
   function undim() {
     grid?.classList.remove('is-spotlight');
     tile.classList.remove('is-spotlit');

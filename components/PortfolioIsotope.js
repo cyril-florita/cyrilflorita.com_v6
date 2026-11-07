@@ -179,10 +179,14 @@ const useGridGlow = (glowRef) => {
     const host = glow.offsetParent || glow.parentElement;
     let current = null;
 
-    const onOver = (e) => {
-      const cover = e.target.closest(".cyril-grid-item")?.querySelector(".cyril-cover");
-      if (!cover || cover === current) return;
+    // Glide the glow behind a cover (or fade it out with null).
+    const glowAt = (cover) => {
+      if (cover === current) return;
       current = cover;
+      if (!cover) {
+        gsap.to(glow, { opacity: 0, duration: reduce ? 0 : 0.5, ease: "power2.out", overwrite: "auto" });
+        return;
+      }
       const c = cover.getBoundingClientRect(), h = host.getBoundingClientRect();
       const x = c.left - h.left + c.width / 2, y = c.top - h.top + c.height / 2;
       const size = Math.max(c.width, c.height) * 1.9;
@@ -191,13 +195,25 @@ const useGridGlow = (glowRef) => {
         duration: reduce ? 0 : 0.7, ease: "power3.out", overwrite: "auto",
       });
     };
-    const onLeave = () => {
-      current = null;
-      gsap.to(glow, { opacity: 0, duration: reduce ? 0 : 0.5, ease: "power2.out", overwrite: "auto" });
+    // While the return spotlight is on (app/page.js: .is-spotlight on the
+    // grid, .is-spotlit on the returned tile), the glow stays behind the
+    // returned card whatever the pointer does; dimmed cards never get it.
+    const spotlit = () => (grid.classList.contains("is-spotlight") ? grid.querySelector(".is-spotlit .cyril-cover") : null);
+
+    const onOver = (e) => {
+      const keep = spotlit();
+      if (keep) return glowAt(keep);
+      glowAt(e.target.closest(".cyril-grid-item")?.querySelector(".cyril-cover") || null);
     };
+    const onLeave = () => glowAt(spotlit());
+    // The spotlight starting or ending: glide to the returned card, or, once
+    // it ends, to the card under the pointer (if any).
+    const watch = new MutationObserver(() => glowAt(spotlit() || grid.querySelector(".cyril-grid-item:hover .cyril-cover")));
+    watch.observe(grid, { attributes: true, attributeFilter: ["class"] });
     grid.addEventListener("pointerover", onOver);
     grid.addEventListener("pointerleave", onLeave);
     return () => {
+      watch.disconnect();
       grid.removeEventListener("pointerover", onOver);
       grid.removeEventListener("pointerleave", onLeave);
       gsap.killTweensOf(glow);
@@ -219,7 +235,10 @@ const useFireFrame = () => {
       anim = current = null;
     };
     const onOver = (e) => {
-      const cover = e.target.closest(".cyril-portfolio-item")?.querySelector(".cyril-cover") || null;
+      // A card dimmed by the return spotlight (app/page.js) doesn't burn.
+      const item = e.target.closest(".cyril-grid-item");
+      const dimmed = item && grid.classList.contains("is-spotlight") && !item.classList.contains("is-spotlit");
+      const cover = dimmed ? null : e.target.closest(".cyril-portfolio-item")?.querySelector(".cyril-cover") || null;
       if (cover === current) return;
       stop();
       if (!cover || !motion.matches) return;
@@ -228,7 +247,16 @@ const useFireFrame = () => {
     };
     grid.addEventListener("pointerover", onOver);
     grid.addEventListener("pointerleave", stop);
+    // When the return spotlight ends with the pointer resting on a card,
+    // burn it right away (pointerover won't fire again until it moves on).
+    const watch = new MutationObserver(() => {
+      if (grid.classList.contains("is-spotlight")) return;
+      const hovered = grid.querySelector(".cyril-grid-item:hover .cyril-portfolio-item");
+      if (hovered) onOver({ target: hovered });
+    });
+    watch.observe(grid, { attributes: true, attributeFilter: ["class"] });
     return () => {
+      watch.disconnect();
       grid.removeEventListener("pointerover", onOver);
       grid.removeEventListener("pointerleave", stop);
       stop();
