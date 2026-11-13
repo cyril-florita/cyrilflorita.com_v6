@@ -82,11 +82,12 @@ const Page = () => {
               { label: "Role", value: "User Experience Designer" },
               { label: "Platform & Tools", value: <>{"Web — Mobile, Tablet, Desktop"}<br />{"Axure RP, Google Analytics"}</> },
               { label: "Deliverables", value: "Research, IA, Personas & Journeys, Wireframes, Prototypes" },
+              { label: "Website", value: <a className="cyril-dark" href="https://www.gty.org" target="_blank" rel="noopener noreferrer">gty.org</a> },
             ]}
             tile="/gty_v9"
           />
 
-          <CaseLayout sections={SECTIONS}>
+          <CaseLayout sections={SECTIONS} railAction={{ href: "https://www.gty.org", label: "Visit GTY.org" }}>
 
             {/* 01 — Overview */}
             <CaseSection id="overview" number={1} title="Overview">
