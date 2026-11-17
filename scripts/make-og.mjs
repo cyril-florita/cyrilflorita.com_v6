@@ -55,13 +55,18 @@ const IMAGES = {
   "giving-tuesday": ["/img/thumbs/portfolio/chf-giving-tuesday_preview-poster.webp", "cover"],
   viteo: ["/img/portfolio/viteo_desktop-landing.jpg", "cover"],
   hearthside: ["/img/portfolio/hearthside_desktop-home.jpg", "cover", "top"],
+  // the stage only: from just above the label to just above the spec strip (2x capture, 1.905:1)
+  mustang: ["/img/portfolio/mustang_desktop-landing.jpg", "cover", "centre", { left: 0, top: 43, width: 2880, height: 1512 }],
   "volunteer-leadership-team": ["/img/thumbs/portfolio/chf-volunteer-leadership_preview-poster.webp", "cover"],
 };
 
 await mkdir(OUT_DIR, { recursive: true });
 
-for (const [slug, [src, fit, position = "centre"]] of Object.entries(IMAGES)) {
-  await sharp(path.join(PUB, src))
+// [source, fit, position, optional crop box applied before the resize]
+for (const [slug, [src, fit, position = "centre", crop]] of Object.entries(IMAGES)) {
+  const img = sharp(path.join(PUB, src));
+  if (crop) img.extract(crop);
+  await img
     .resize(W, H, { fit, position, background: BLACK })
     .flatten({ background: BLACK })
     .jpeg({ quality: 82, mozjpeg: true })

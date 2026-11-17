@@ -51,6 +51,10 @@ On phones and tablets, opening a view adds the Full view window under the three 
 
 `.ms-btn`'s fill is a `::before` layer that fades by opacity (the ghost button's tint too), with only the label colour transitioning: animating `background` itself made Chrome on macOS flash a stale frame mid-hover, as on Hearthside. Pointer cursor.
 
+## Share image
+
+`/og/mustang.jpg` (1200×630), set in `layout.js` (`openGraph` + `twitter`), so shared links show the ad, not the portfolio's default. It's made by `npm run og` (`scripts/make-og.mjs`, entry `mustang`) from `public/img/portfolio/mustang_desktop-landing.jpg`, a 1440×900 @2x capture of the built page taken after the preloader and window sweep, cropped to the stage (`top: 43, height: 1512`: from just above the label to just above the spec strip; the script now takes an optional crop box). Re-capture it if the landing changes visibly; the page is noindex, but shared links still read these tags.
+
 ## Scrollbar
 
 `:root:has(.ms)` sets the page's scrollbar to the accent blue of the `[ Sample offer ]` stamp (`--ms-accent`, #7fb9ff; written out, since the root sits outside `.ms` where the token lives) over the page's near-black, with `::-webkit-scrollbar` rules for Safari before 26. (It followed the chosen paint for a round; the user preferred one colour.)
