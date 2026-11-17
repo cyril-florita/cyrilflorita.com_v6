@@ -90,8 +90,8 @@ const Page = () => {
           </CaseLayout>
 
           <CaseNext
-            href="/viteo"
-            title="Viteo"
+            href="/hearthside"
+            title="Hearthside"
             category="Product Design & Development"
             onBack={handleBackToPortfolio}
           />

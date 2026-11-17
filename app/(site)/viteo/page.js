@@ -262,9 +262,9 @@ const Page = () => {
           </CaseLayout>
 
           <CaseNext
-            href="/hearthside"
-            title="Hearthside"
-            category="Product Design & Development"
+            href="/hunger-action-month-dashboard"
+            title="Hunger Action Month Campaign Dashboard"
+            category="Design, Development, & Campaign Performance Tracking"
             onBack={handleBackToPortfolio}
           />
 

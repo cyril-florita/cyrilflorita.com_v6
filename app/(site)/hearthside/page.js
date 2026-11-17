@@ -254,9 +254,9 @@ const Page = () => {
           </CaseLayout>
 
           <CaseNext
-            href="/hunger-action-month-dashboard"
-            title="Hunger Action Month Campaign Dashboard"
-            category="Design, Development, & Campaign Performance Tracking"
+            href="/mustang"
+            title="Mustang"
+            category="Interactive Ad Design & Development"
             onBack={handleBackToPortfolio}
           />
 

@@ -5,8 +5,9 @@ const SITE = 'https://cyrilflorita.com';
 
 // Project case-study routes (app/<slug>/page.js), in My Work grid order.
 const PROJECTS = [
-  'viteo',
   'hearthside',
+  'mustang',
+  'viteo',
   'hunger-action-month-dashboard',
   'the-study-bible-app',
   'gty_v9',

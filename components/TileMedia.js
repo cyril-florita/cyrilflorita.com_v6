@@ -213,6 +213,14 @@ export const TILE_MEDIA = {
     shape: "wide",
   },
 
+  // Mustang (design & dev pitch): a 12s loop recorded from the built ad (CDP screencast, 1600×900 @1.2, sped up
+  // 1.5×, its last 0.5s crossfading into its first): a drag, two paints, the cockpit window and back.
+  "/mustang": {
+    kind: "video", src: "/img/portfolio/mustang_tile.mp4", poster: "/img/thumbs/portfolio/mustang_tile-poster.webp",
+    label: "Mustang ad: the 3D car turned, repainted red and yellow, and the cockpit opened",
+    shape: "wide",
+  },
+
   "/hunger-action-month-dashboard": {
     kind: "video", src: "/img/portfolio/chf-ham-dashboard_preview.mp4", poster: "/img/thumbs/portfolio/chf-ham-dashboard_preview-poster.webp", label: "Hunger Action Month Campaign Dashboard preview",
     shape: "square",
