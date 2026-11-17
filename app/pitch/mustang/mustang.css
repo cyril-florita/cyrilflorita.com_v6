@@ -405,7 +405,7 @@
   .ms-word { top: calc(var(--view-top, 70px) + 22vw + 20px - 0.85em); font-size: 26vw; }   /* the caps' foot (0.85em down the line box) just below the roofline (~18.5vw into the 16:10 view), so most of the word stays legible */
   .ms-tiles { order: 4; }
   .ms-offer { order: 5; }
-  .ms-hint-view { display: block; position: absolute; left: 50%; top: calc(var(--view-top, 70px) + 56vw); translate: -50% 0; margin: 0; z-index: 4; pointer-events: none; transition: opacity 0.35s ease; }
+  .ms-hint-view { display: block; position: absolute; left: 50%; top: calc(var(--view-top, 70px) + 49vw); translate: -50% 0; margin: 0; z-index: 4; pointer-events: none; transition: opacity 0.35s ease; }
   .ms-stage:not([data-view="full"]) .ms-hint-view { opacity: 0; }
 
   .ms-paint-menu { display: block; position: absolute; z-index: 8; top: 16px; right: 20px; }
