@@ -511,22 +511,23 @@
   :root:has(.ms)::-webkit-scrollbar-thumb { background: #7fb9ff; border: 3px solid #05080e; border-radius: 6px; }
 }
 
-/* ------------------------------------------------- phones: windows read as tappable */
-/* an "opens larger" mark in each window's top-right corner, and, once per visit, a
-   light that runs one lap round each window in turn (CarStage.js adds .is-sweep) */
-.ms-tile-open { display: none; }
+/* ------------------------------------------------- the windows read as tappable */
+/* on touch screens an "opens larger" mark in each window's top-right corner, and, at every size, once per visit, a
+   light that runs one lap round each window in turn (CarStage.js adds .is-sweep and
+   takes it off again, so the desktop hover glow keeps working) */
+.ms-tile-open {
+  position: absolute; top: 6px; right: 6px; z-index: 1; display: none; place-items: center; width: 26px; height: 26px;
+  border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 7px; background: rgba(5, 8, 14, 0.55); color: var(--ms-ink); pointer-events: none;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+.ms-tile-open svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.ms-tile:hover .ms-tile-open { border-color: rgba(255, 255, 255, 0.8); }
+.ms-tile[aria-pressed="true"] .ms-tile-open { border-color: var(--ms-accent); color: var(--ms-accent); }
+@media (max-width: 999px), (hover: none) { .ms-tile-open { display: grid; } }   /* the mark is for touch screens; desktop has the hover glow */
 @keyframes ms-sweep-26 { 0% { stroke-dashoffset: 26; opacity: 0; } 12%, 80% { opacity: 1; } 100% { stroke-dashoffset: -74; opacity: 0; } }
 @keyframes ms-sweep-34 { 0% { stroke-dashoffset: 34; opacity: 0; } 12%, 80% { opacity: 1; } 100% { stroke-dashoffset: -66; opacity: 0; } }
 @keyframes ms-sweep-12 { 0% { stroke-dashoffset: 12; opacity: 0; } 12%, 80% { opacity: 1; } 100% { stroke-dashoffset: -88; opacity: 0; } }
-@media (max-width: 999px), (hover: none) {
-  .ms-tile-open {
-    position: absolute; top: 6px; right: 6px; z-index: 1; display: grid; place-items: center; width: 26px; height: 26px;
-    border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 7px; background: rgba(5, 8, 14, 0.55); color: var(--ms-ink); pointer-events: none;
-  }
-  .ms-tile-open svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-  .ms-tile[aria-pressed="true"] .ms-tile-open { border-color: var(--ms-accent); color: var(--ms-accent); }
-}
-@media (prefers-reduced-motion: no-preference) and ((max-width: 999px) or (hover: none)) {
+@media (prefers-reduced-motion: no-preference) {
   .ms-tiles.is-sweep > li:not(.ms-tile-full-li) .ms-glow-wide { animation: ms-sweep-26 1.5s ease-in-out var(--sd) 1 both; }
   .ms-tiles.is-sweep > li:not(.ms-tile-full-li) .ms-glow-tail { animation: ms-sweep-34 1.5s ease-in-out var(--sd) 1 both; }
   .ms-tiles.is-sweep > li:not(.ms-tile-full-li) .ms-glow-core { animation: ms-sweep-12 1.5s ease-in-out var(--sd) 1 both; }
@@ -534,4 +535,3 @@
   .ms-tiles > li:nth-child(2) { --sd: 0.45s; }
   .ms-tiles > li:nth-child(3) { --sd: 0.9s; }
 }
-

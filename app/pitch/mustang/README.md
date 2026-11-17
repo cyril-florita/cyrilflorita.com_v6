@@ -41,9 +41,11 @@ An interactive Ford Mustang (S650) ad: a spec ad that uses the real name. Unoffi
 
 A fixed cover (z-index 60) with the S650 / MUSTANG lockup large and centred: the hairline draws across, the words rise out of their masks, the short rule under the slashes draws, and the four slashes light one after another while the car loads. Once the stage's `data-state` leaves `loading` (ready or fallback) and the fonts are in, all four light, the lockup lifts and the cover fades (at least 1.4s, at most 8s; a CSS timer lifts it after 9s without JS). While it's up the page can't scroll and every entrance animation in the stage and spec strip is paused (`:has(.ms-pre:not(.is-done))`), so they play when it lifts.
 
-## Windows on phones and tablets
+## Windows read as clickable
 
-To read as tappable (≤999px or no hover): each feature window carries an "opens larger" mark in its top-right corner (`.ms-tile-open`: two arrows to opposite corners on a small dark glass square; accent-coloured on the open window; not on Full view), and once per visit the desktop hover glow runs one lap round each window in turn (`.ms-tiles.is-sweep`, 1.5s a lap, 0.45s apart, fading in and out; `ms-sweep-*` keyframes). CarStage adds `.is-sweep` only once the car is ready, the preloader has lifted, the windows' entrance has finished (1.9s after) and the row is 60% in view; never under reduced motion. A constant throb was considered and rejected (it reads as a notification and runs forever).
+On phones, tablets and touch screens each feature window carries an "opens larger" mark in its top-right corner (`.ms-tile-open`: two arrows to opposite corners on a small dark glass square; accent-coloured on the open window; not on Full view), and at every size (desktop too since 2026-11-17; the mark stays touch-only, desktop has its hover glow) once per visit the hover glow runs one lap round each window in turn (`.ms-tiles.is-sweep`, 1.5s a lap, 0.45s apart, fading in and out; `ms-sweep-*` keyframes). CarStage adds `.is-sweep` (and removes it 2.7s later, or the sweep's filled keyframes would block the desktop hover glow) only once the car is ready, the preloader has lifted, the windows' entrance has finished (1.9s after) and the row is 60% in view; never under reduced motion. A constant throb was considered and rejected (it reads as a notification and runs forever).
+
+On phones and tablets, opening a view adds the Full view window under the three (and closing it removes it), which moves the offer: CarStage measures the offer's top before the change and animates it from there (a FLIP in a `useLayoutEffect` on `view`, 0.55s, `translate` via the Web Animations API; skipped under reduced motion), so it glides down and back up instead of jumping.
 
 ## Buttons
 

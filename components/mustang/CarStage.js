@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 // The pitch's interactive stage: one WebGL canvas (three.js, loaded on demand)
 // behind the page's text. The car (public/pitch/mustang/car.glb, built by
@@ -118,19 +118,23 @@ export default function CarStage({ children }) {
   const [state, setState] = useState("loading"); // loading | ready | fallback
   const [said, setSaid] = useState("");
   const tilesRef = useRef(null);
-  // Phones and tablets: once the car is in and the windows are well in view, a light runs one lap
-  // round each window in turn (the desktop hover glow, mustang.css .is-sweep), once per visit.
+  // Once the car is in and the windows are well in view, a light runs one lap round each window
+  // in turn (the hover glow, mustang.css .is-sweep), once per visit; the class comes off after,
+  // so the desktop hover glow works again.
   useEffect(() => {
     const ul = tilesRef.current;
     if (state !== "ready" || !ul) return;
-    if (!matchMedia("(max-width: 999px), (hover: none)").matches || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     // wait for the preloader to lift and the windows' entrance (≤1.9s after it) to finish
     let t = 0, liftedAt = 0, seen = false, mo = null;
     const pre = document.querySelector(".ms-pre");
     const go = () => {
       if (!seen || (pre && !liftedAt)) return;
       clearTimeout(t);
-      t = setTimeout(() => ul.classList.add("is-sweep"), Math.max(400, liftedAt + 1900 - performance.now()));
+      t = setTimeout(() => {
+        ul.classList.add("is-sweep");
+        t = setTimeout(() => ul.classList.remove("is-sweep"), 2700);      // three 1.5s laps, 0.45s apart
+      }, Math.max(400, liftedAt + 1900 - performance.now()));
     };
     const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { seen = true; io.disconnect(); go(); } }, { threshold: 0.6 });
     io.observe(ul);
@@ -648,12 +652,24 @@ export default function CarStage({ children }) {
     return () => { disposed = true; cleanup(); };
   }, []);
 
+  const offerFrom = useRef(null);
   const choose = (id) => {
     const next = view === id ? "full" : id;
+    offerFrom.current = stageRef.current?.querySelector(".ms-offer")?.getBoundingClientRect().top ?? null;
     setView(next);
     api.current?.view(next);
     setSaid(next === "full" ? "Full view of the car." : FEATURES.find((f) => f.id === next).say);
   };
+  // Phones: the Full view window appears under the three (or goes) and moves the offer; the
+  // offer glides from where it was instead of jumping (a FLIP: measured before and after).
+  useLayoutEffect(() => {
+    const from = offerFrom.current; offerFrom.current = null;
+    const offer = stageRef.current?.querySelector(".ms-offer");
+    if (from === null || !offer || !matchMedia("(max-width: 999px)").matches || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const dy = from - offer.getBoundingClientRect().top;
+    if (Math.abs(dy) < 1) return;
+    offer.animate([{ translate: `0 ${dy}px` }, { translate: "0 0" }], { duration: 550, easing: "cubic-bezier(0.22, 1, 0.36, 1)" });
+  }, [view]);
   const paintKey = (e, p) => {
     const i = PAINTS.indexOf(p), n = PAINTS.length;
     const j = { ArrowRight: (i + 1) % n, ArrowDown: (i + 1) % n, ArrowLeft: (i + n - 1) % n, ArrowUp: (i + n - 1) % n, Home: 0, End: n - 1 }[e.key];
