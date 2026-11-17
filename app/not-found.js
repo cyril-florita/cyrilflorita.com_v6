@@ -1,56 +1,23 @@
 "use client";
 
-// The 404 renders under the root layout only (outside app/(site)), so it
-// brings the portfolio's styles and preloader itself.
-import "@css/plugins/bootstrap-grid.css";
-import "@css/plugins/swiper.min.css";
-import "@fonts/font-awesome/css/fa-subset.css";
-import "@scss/style.css";
-import Preloader from "@/components/Preloader";
-import SiteLayout from "@/layout/SiteLayout";
-import { cyrilUtility } from "@/public/utility/index";
-import { onPreloaderHidden } from "@/components/Preloader";
-import { useEffect } from "react";
+import dynamic from "next/dynamic";
 
-// Exported as out/404.html; Apache serves it for missing URLs
-// (ErrorDocument 404 /404.html in public/.htaccess).
-const goTo = (href) => (e) => {
-  e.preventDefault();
-  cyrilUtility.handlePageTransition().then(() => {
-    window.location.href = href;
-  });
-};
+// The root not-found boundary is sent with every route of the app, along with
+// the client components it imports and their CSS, so importing the 404 page here
+// directly made every page (the pitches too) preload the portfolio's ~170KB of
+// styles. Loaded in the browser only (next/dynamic, ssr: false), the page and its
+// styles form their own chunk that only a 404 fetches. Until it arrives, a cover
+// in the preloader's colour (white, black in dark mode; the theme is set before
+// first paint by app/layout.js) stands in, so there's no blank white flash.
+const Cover = () => (
+  <>
+    <style>{`.nf-cover{position:fixed;inset:0;z-index:100000;background:#fff}html[data-theme="dark"] .nf-cover{background:#000}`}</style>
+    <div className="nf-cover" aria-hidden="true" />
+  </>
+);
 
-const NotFound = () => {
-  useEffect(() => {
-    cyrilUtility.tpInner();
-    return onPreloaderHidden(() => {
-      document.querySelector(".cyril-page")?.classList.add("cyril-active");
-    });
-  }, []);
+const NotFoundPage = dynamic(() => import("@/components/NotFoundPage"), { ssr: false, loading: Cover });
 
-  return (
-    <>
-    <Preloader />
-    <SiteLayout>
-      <div className="cyril-page cyril-not-found">
-        <div className="container">
-          <p className="cyril-upper subheader">
-            &#91; Page <span className="cyril-accent">not found</span> &#93;
-          </p>
-          <h1 className="cyril-up glitch cyril-not-found-title" data-text="404">404</h1>
-          <p className="cyril-not-found-lede">
-            This page doesn&apos;t exist, or it moved. Here&apos;s a way back.
-          </p>
-          <div className="cyril-contact-actions">
-            <a className="cyril-button" href="/" onClick={goTo("/")}>See My Work</a>
-            <a className="cyril-button cyril-type-3" href="/about-me/" onClick={goTo("/about-me/")}>About Me</a>
-          </div>
-        </div>
-      </div>
-    </SiteLayout>
-    </>
-  );
-};
-
-export default NotFound;
+export default function NotFound() {
+  return <NotFoundPage />;
+}

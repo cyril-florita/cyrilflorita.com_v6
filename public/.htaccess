@@ -1,5 +1,16 @@
 Options -Indexes
 
+# Always https: a plain-http visit gets a permanent redirect to the same host and
+# path over https (mobile Firefox showed "not secure" on http links). mod_alias in
+# an <If>, no RewriteEngine. It also holds back when a proxy in front reports the
+# request as https (X-Forwarded-Proto), so it can't loop if TLS ends before Apache.
+<If "%{HTTPS} != 'on' && %{HTTP:X-Forwarded-Proto} != 'https' && %{QUERY_STRING} == ''">
+  Redirect permanent "https://%{HTTP_HOST}%{REQUEST_URI}"
+</If>
+<ElseIf "%{HTTPS} != 'on' && %{HTTP:X-Forwarded-Proto} != 'https'">
+  Redirect permanent "https://%{HTTP_HOST}%{REQUEST_URI}?%{QUERY_STRING}"
+</ElseIf>
+
 # Forbidden (e.g. a directory without an index) shows the same page as a 404.
 ErrorDocument 403 /404.html
 ErrorDocument 404 /404.html
