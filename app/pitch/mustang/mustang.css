@@ -54,14 +54,14 @@
   background: radial-gradient(120% 95% at 50% 45%, transparent 45%, rgba(0, 0, 0, 0.55) 100%);
 }
 .ms-word {
-  /* desktop: the word fills the space between the page's left gutter and the windows (centred there,
-     not on the page, so it can be big without the G running under the windows), its caps' foot (0.85em
-     down the line box) at the car's mid-height, ~47.5% down the stage; capped so the caps start at least
-     40px under the top (0.475 × (100svh − 120px) − 40px = 0.81em) */
-  position: absolute; z-index: 1; left: 40px; right: calc(52px + min(250px, 19vw)); top: calc(47.5% - 0.85em); text-align: center;
+  /* desktop: centred on the car (the page's centre), as wide as it can be while the G stays 12px
+     short of the windows (right: 40px), its caps' foot (0.85em down the line box) at the car's
+     mid-height, ~47.5% down the stage; capped so the caps start at least 40px under the top
+     (0.475 × (100svh − 120px) − 40px = 0.81em) */
+  position: absolute; z-index: 1; left: -60px; right: 0; top: calc(47.5% - 0.85em - 30px); text-align: center;   /* foot 30px above mid-height; the -60px left edge centres it 30px left of the page's centre */
   font-family: var(--ms-font-word), Impact, sans-serif;
   font-weight: 800;
-  font-size: min(calc(58.6svh - 119px), calc((100vw - 92px - min(250px, 19vw)) / 3.3));   /* the word is 3.3em wide */
+  font-size: min(calc(58.6svh - 119px), calc((100vw - 2 * (52px + min(250px, 19vw))) / 3.3));   /* the word is 3.3em wide */
   line-height: 0.92; padding-bottom: 0.08em;   /* room under the caps' foot (0.85em) for overshoot: the clipped fill only paints inside the box */
   letter-spacing: -0.02em; text-indent: -0.02em;   /* the letters almost touching (the indent re-centres the trailing space) */
   color: transparent;
