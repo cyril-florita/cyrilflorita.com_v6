@@ -27,6 +27,8 @@ const eslintConfig = defineConfig([
     'next-env.d.ts',
     // Staging folder for new project materials (git-ignored).
     'new-work/**',
+    // Vendored Draco decoder (three.js), served as-is for the Mustang pitch.
+    'public/pitch/mustang/draco/**',
   ]),
 ])
 

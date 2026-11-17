@@ -1,0 +1,537 @@
+/* Mustang: an interactive car ad (design and dev pitch). Everything is scoped
+   under .ms. The stage is a dark showroom laid out after a poster: the car
+   centered under a giant word, the windows down the right, the hero text at
+   the left, and under the car's tires the paint choice, then the offer. One
+   WebGL canvas covers the stage, under the text; the car and the windows'
+   views are drawn into it (components/mustang/CarStage.js). */
+.ms {
+  overflow-x: clip;   /* nothing may widen the page on phones */
+  --ms-bg: #05080e;
+  --ms-ink: #eef3f9;
+  --ms-ink-2: #a9b8cb;
+  --ms-line: rgba(255, 255, 255, 0.28);
+  --ms-accent: #7fb9ff;
+  --ms-ease: cubic-bezier(0.22, 0.8, 0.26, 1);
+  background: var(--ms-bg);
+  color: var(--ms-ink);
+  font-family: var(--ms-font-body), system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  min-height: 100vh;
+}
+:root:has(.ms) { background: #05080e; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { :root:has(.ms) { scroll-behavior: auto; } }
+:root:has(.ms) body { margin: 0; background: #05080e; }
+:where(.ms) :where(h1, h2, p, ul, dl, dd) { margin: 0; padding: 0; }
+:where(.ms) ul { list-style: none; }
+.ms a { color: inherit; }
+.ms :focus-visible { outline: 2px solid var(--ms-accent); outline-offset: 3px; }
+.ms :is(a, button, summary, [role="option"], [tabindex]) { -webkit-tap-highlight-color: transparent; }   /* no blue tap box on phones */
+.ms-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.ms-skip { position: absolute; left: 12px; top: -60px; z-index: 20; padding: 10px 14px; background: var(--ms-ink); color: #05080e; }
+.ms-skip:focus { top: 12px; }
+
+/* ------------------------------------------------------------- the stage */
+.ms-stage {
+  position: relative;
+  height: max(calc(100svh - 120px), 640px);
+  overflow: hidden;
+  isolation: isolate;
+}
+.ms-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(60% 45% at 38% 78%, rgba(60, 100, 160, 0.30), transparent 70%),
+    radial-gradient(70% 60% at 30% 20%, rgba(40, 70, 120, 0.42), transparent 72%),
+    linear-gradient(180deg, #0a1322 0%, #070c16 55%, #04060b 100%);
+}
+/* grunge, after the poster: the grit texture (Grit.js, made once at load, grain
+   baked in) in an overlay blend, then a vignette darkening the corners */
+.ms-grit { position: absolute; inset: 0; background-size: 512px; mix-blend-mode: overlay; opacity: 0; transition: opacity 1.2s ease; }
+.ms-grit.is-on { opacity: 0.9; }
+.ms-bg::after {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(120% 95% at 50% 45%, transparent 45%, rgba(0, 0, 0, 0.55) 100%);
+}
+.ms-word {
+  /* desktop: the word fills the space between the page's left gutter and the windows (centred there,
+     not on the page, so it can be big without the G running under the windows), its caps' foot (0.85em
+     down the line box) at the car's mid-height, ~47.5% down the stage; capped so the caps start at least
+     40px under the top (0.475 × (100svh − 120px) − 40px = 0.81em) */
+  position: absolute; z-index: 1; left: 40px; right: calc(52px + min(250px, 19vw)); top: calc(47.5% - 0.85em); text-align: center;
+  font-family: var(--ms-font-word), Impact, sans-serif;
+  font-weight: 800;
+  font-size: min(calc(58.6svh - 119px), calc((100vw - 92px - min(250px, 19vw)) / 3.3));   /* the word is 3.3em wide */
+  line-height: 0.92; padding-bottom: 0.08em;   /* room under the caps' foot (0.85em) for overshoot: the clipped fill only paints inside the box */
+  letter-spacing: -0.02em; text-indent: -0.02em;   /* the letters almost touching (the indent re-centres the trailing space) */
+  color: transparent;
+  background: linear-gradient(180deg, rgba(150, 180, 220, 0.34) 0%, rgba(125, 155, 200, 0.27) 100%);   /* lit from above, no fade at the foot */
+  -webkit-background-clip: text; background-clip: text;
+  user-select: none; pointer-events: none;
+}
+.ms-canvas { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; display: block; opacity: 0; transition: opacity 0.8s ease; }
+.ms-stage[data-state="ready"] .ms-canvas { opacity: 1; }
+.ms-view {
+  position: absolute; inset: 0; z-index: 3;
+  cursor: grab; touch-action: pan-y; -webkit-user-select: none; user-select: none;
+}
+.ms-view.is-dragging { cursor: grabbing; }
+.ms-view:focus-visible { outline-offset: -6px; }
+.ms-stage[data-state="fallback"] .ms-view { background: url(/pitch/mustang/car-fallback.webp) 50% 55% / min(60%, 900px) auto no-repeat; cursor: default; }
+
+.ms-top, .ms-copy, .ms-offer { position: absolute; z-index: 4; pointer-events: none; }
+.ms-top a, .ms-copy a, .ms-copy button { pointer-events: auto; }
+.ms-top { left: 40px; top: 30px; display: grid; gap: 6px; font-family: var(--ms-font-head), sans-serif; font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; }
+.ms-top span:first-child { padding-bottom: 6px; border-bottom: 1px solid var(--ms-line); }
+.ms-slashes { display: inline-flex; gap: 3px; margin-left: 10px; vertical-align: middle; }
+.ms-slashes i { width: 4px; height: 11px; background: var(--ms-ink-2); transform: skewX(-24deg); }
+
+.ms-copy { left: 104px; top: 50%; translate: 0 -42%; width: min(310px, 23vw); color: var(--ms-ink-2); font-size: 14.5px; }
+.ms-title { font-family: var(--ms-font-head), sans-serif; font-weight: 400; font-size: clamp(22px, 2.3vw, 34px); line-height: 1.1; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ms-ink); }
+.ms-sub { margin: 8px 0 14px; padding-bottom: 12px; border-bottom: 1px solid var(--ms-line); font-family: var(--ms-font-head), sans-serif; font-size: 10.5px; letter-spacing: 0.2em; white-space: nowrap; text-transform: uppercase; color: var(--ms-accent); }
+.ms .ms-btn {
+  position: relative; isolation: isolate;
+  display: inline-flex; align-items: center; min-height: 46px; padding: 0 22px;
+  border: 1px solid var(--ms-ink); background: transparent; color: #05080e; font-weight: 400;
+  font-family: var(--ms-font-head), sans-serif; font-size: 11.5px; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; cursor: pointer;
+  transition: color 0.2s ease;
+}
+/* the fill is its own layer that fades by opacity: transitioning background
+   itself made Chrome on macOS flash a stale frame mid-hover (as on Hearthside) */
+.ms .ms-btn::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--ms-ink); transition: opacity 0.2s ease; }
+.ms .ms-btn:hover { color: var(--ms-ink); }
+.ms .ms-btn:hover::before { opacity: 0; }
+
+/* the windows: three slanted frames after the poster, all one shape (a left
+   edge leaning 7% of the width), plus a wider "Full view" one under them while
+   a feature is open. The 3D view inside is cut to the same shape in WebGL
+   (CarStage.js); the outline is an SVG polygon drawn at the window's real size. */
+.ms-tiles { position: absolute; z-index: 5; right: 40px; top: 96px; width: min(250px, 19vw, calc((max(100svh - 120px, 640px) - 141px) / 2.73)); display: grid; gap: 5px; }
+.ms-tile-full-li { margin-top: 6px; }
+.ms-tile { position: relative; display: block; width: 100%; padding: 0; border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.ms-tile-window {
+  display: block; aspect-ratio: var(--ar, 1.3);
+  clip-path: polygon(var(--slant, 6%) 0, 100% 0, 100% 100%, 0 100%);
+  background: linear-gradient(160deg, rgba(60, 90, 140, 0.25), rgba(5, 8, 14, 0.9));
+}
+.ms-stage[data-state="ready"] .ms-tile-window { background: none; }
+.ms-tile-frame { position: absolute; left: 0; top: 0; width: 100%; height: auto; aspect-ratio: var(--ar); overflow: visible; pointer-events: none; }
+.ms-frame-line { fill: none; stroke: rgba(255, 255, 255, 0.55); stroke-width: 1.2; transition: stroke 0.35s ease; }
+.ms-tile:hover .ms-frame-line { stroke: rgba(255, 255, 255, 0.9); }
+.ms-tile[aria-pressed="true"] .ms-frame-line { stroke: var(--ms-accent); stroke-width: 2; }
+.ms-tile-label {
+  position: absolute; left: calc(var(--slant, 6%) + 8px); bottom: 8px; display: flex; gap: 8px; align-items: baseline;
+  font-family: var(--ms-font-head), sans-serif; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap;
+  color: rgba(238, 243, 249, 0.92); text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9), 0 0 2px rgba(0, 0, 0, 0.8);
+}
+.ms-tile[aria-pressed="true"] .ms-tile-label { color: #fff; }
+.ms-tile-kicker { color: var(--ms-accent); }
+
+/* hover glow, after Viteo's ingredient cards: a lit stretch of border, a bright
+   head with a fading tail and a soft blurred bloom, travels clockwise round the
+   window, a lap every 3s; it pauses (and fades) when the pointer leaves, so it
+   picks up where it stopped. Each layer's dash is head-aligned (offset = its length). */
+.ms-glow { fill: none; stroke-linecap: round; opacity: 0; transition: opacity 0.45s ease; }
+.ms-glow-wide { stroke-dasharray: 26 74; stroke-dashoffset: 26; stroke: rgba(110, 170, 255, 0.95); stroke-width: 9; filter: blur(6px); }
+.ms-glow-tail { stroke-dasharray: 34 66; stroke-dashoffset: 34; stroke: rgba(160, 205, 255, 0.5); stroke-width: 2; }
+.ms-glow-core { stroke-dasharray: 12 88; stroke-dashoffset: 12; stroke: #eef6ff; stroke-width: 2.4; filter: drop-shadow(0 0 3px rgba(150, 200, 255, 0.9)); }
+/* one keyframe set per layer: Chrome won't tween a dash offset written with var() */
+@keyframes ms-orbit-26 { from { stroke-dashoffset: 26; } to { stroke-dashoffset: -74; } }
+@keyframes ms-orbit-34 { from { stroke-dashoffset: 34; } to { stroke-dashoffset: -66; } }
+@keyframes ms-orbit-12 { from { stroke-dashoffset: 12; } to { stroke-dashoffset: -88; } }
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+  .ms-glow-wide { animation: ms-orbit-26 3s linear infinite paused; }
+  .ms-glow-tail { animation: ms-orbit-34 3s linear infinite paused; }
+  .ms-glow-core { animation: ms-orbit-12 3s linear infinite paused; }
+  .ms-tile:hover .ms-glow, .ms-tile:focus-visible .ms-glow { opacity: 1; animation-play-state: running; }
+}
+
+/* under the car, just past the tires: the paint choice and the drag hint, then
+   the offer (its details open in a small panel above the button) */
+.ms-controls { position: absolute; z-index: 5; left: 50%; top: 66%; translate: -50% 0; display: grid; justify-items: center; gap: 9px; }
+/* desktop paint rail: far-left edge, mid-height; a vertical label, the swatches in
+   a column on a hairline, each name in a glass pill on hover or keyboard focus */
+.ms-paint-rail { position: absolute; z-index: 5; left: 34px; top: 50%; translate: 0 -50%; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.ms-paint-rail-label { writing-mode: vertical-rl; rotate: 180deg; font-family: var(--ms-font-head), sans-serif; font-size: 9.5px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--ms-ink-2); }
+.ms-paint-rail .ms-paints { position: relative; flex-direction: column; gap: 14px; }
+.ms-paint-rail .ms-paints::before { content: ""; position: absolute; left: 50%; top: 6px; bottom: 6px; width: 1px; translate: -0.5px 0; background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.22) 20%, rgba(255, 255, 255, 0.22) 80%, transparent); }
+.ms-paint { position: relative; }
+.ms-paint::after {
+  content: attr(data-name); position: absolute; left: calc(100% + 14px); top: 50%; translate: -6px -50%; padding: 6px 12px; border-radius: 999px; white-space: nowrap; pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.22); background: linear-gradient(135deg, rgba(30, 44, 66, 0.92), rgba(10, 15, 24, 0.92));
+  font-family: var(--ms-font-head), sans-serif; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ms-ink);
+  opacity: 0; transition: opacity 0.25s ease, translate 0.35s var(--ms-ease);
+}
+.ms-paint:is(:hover, :focus-visible)::after { opacity: 1; translate: 0 -50%; }
+.ms-paint-row { display: flex; align-items: center; gap: 14px; }
+.ms-paints { display: flex; align-items: center; gap: 9px; }
+.ms-paint { width: 26px; height: 26px; padding: 0; border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.35); background: var(--swatch); cursor: pointer; transition: scale 0.2s var(--ms-ease), border-color 0.2s ease; }
+.ms-paint:hover { scale: 1.12; }
+.ms-paint[aria-checked="true"] { border-color: var(--ms-ink); box-shadow: 0 0 0 2px #05080e, 0 0 0 4px var(--ms-ink); }
+.ms-paint-name { min-width: 9em; font-family: var(--ms-font-head), sans-serif; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ms-ink-2); }
+.ms-hint { white-space: nowrap; pointer-events: none; font-family: var(--ms-font-head), sans-serif; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ms-ink-2); }
+.ms-offer { left: 50%; top: calc(66% + 52px); translate: -50% 0; width: max-content; text-align: center; color: var(--ms-ink-2); }
+.ms-offer .ms-stamp { font-size: 10.5px; letter-spacing: 0.18em; }
+.ms-offer-stamp { margin-top: 12px; }
+.ms-offer-title { margin: 0 0 4px; font-family: var(--ms-font-head), sans-serif; font-weight: 400; font-size: clamp(18px, 1.9vw, 28px); line-height: 1.15; letter-spacing: 0.03em; text-transform: uppercase; white-space: nowrap; color: var(--ms-ink); }
+.ms-offer-terms { font-size: 13px; letter-spacing: 0.05em; }
+.ms-offer .ms-btn { margin-top: 14px; pointer-events: auto; }
+@media (min-width: 1000px) {                                   /* desktop: a bigger offer under the car */
+  .ms-offer .ms-stamp { font-size: 12px; }
+  .ms-offer-stamp { margin-top: 14px; }
+  .ms-offer-title { margin: 0 0 6px; font-size: clamp(24px, 2.4vw, 34px); }
+  .ms-offer-terms { font-size: 15.5px; }
+  .ms-offer .ms-btn { margin-top: 18px; min-height: 54px; padding: 0 30px; font-size: 13px; }
+}
+@media (min-width: 1000px) and (max-height: 860px) {          /* shorter laptops: a step smaller, closer under the swatch row */
+  .ms-offer { top: calc(66% + 40px); }
+  .ms-offer-title { font-size: clamp(22px, 2.2vw, 30px); }
+  .ms-offer .ms-btn { margin-top: 12px; min-height: 50px; }
+}
+
+/* Offer details: a centered modal (after Viteo's ingredient close-up). The
+   dialog is in the top layer, so it stays while the page fades to its background. */
+.ms-offer-dialog {
+  width: min(520px, calc(100vw - 32px)); max-width: none; max-height: calc(100dvh - 48px); padding: 0; overflow: auto; color: var(--ms-ink);
+  /* clear glass, on the dialog itself: a backdrop blur inside it would only see the
+     dialog, so the panel within stays transparent */
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.025) 55%, rgba(255, 255, 255, 0.06));
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  -webkit-backdrop-filter: blur(22px) saturate(1.45); backdrop-filter: blur(22px) saturate(1.45);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.28), inset 0 -1px 0 rgba(255, 255, 255, 0.06);
+}
+.ms-offer-dialog::backdrop { background: transparent; }
+.ms-offer-panel { position: relative; padding: 32px 30px 26px; text-align: left; font-size: 14px; line-height: 1.55; color: var(--ms-ink); text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35); }
+.ms-offer-dialog[open] { animation: ms-modal-in 0.5s var(--ms-ease); }
+@media (min-width: 1000px) {                                   /* desktop: the modal sits on the right, so the car stays whole on the left */
+  .ms-offer-dialog { margin: auto max(48px, 6vw) auto auto; }
+  .ms-offer-dialog[open] { animation-name: ms-modal-in-right; }
+}
+@keyframes ms-modal-in-right { from { opacity: 0; translate: 32px 0; } }
+@keyframes ms-modal-in { from { opacity: 0; scale: 0.96; translate: 0 14px; } }
+@keyframes ms-sheet-in { from { opacity: 0; translate: 0 60px; } }
+:where(.ms-stage > *, .ms-specs, .ms-footer) { transition: opacity 0.4s ease; }
+.ms:has(.ms-offer-dialog[open]) :is(.ms-stage > :not(.ms-bg, .ms-smoke, .ms-floor, .ms-canvas), .ms-specs, .ms-footer) { opacity: 0; pointer-events: none; }
+.ms-offer-dialog { pointer-events: auto; }   /* it sits inside the faded offer block, which turns pointer events off */
+:root:has(.ms-offer-dialog[open]) { overflow: hidden; }   /* phones also block touch scrolls outside the sheet (OfferDetails.js) */
+.ms-offer-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.ms-offer-actions .ms-btn { flex: 1 1 auto; justify-content: center; padding: 0 18px; white-space: nowrap; pointer-events: auto; }
+.ms .ms-btn-ghost { color: var(--ms-ink); border-color: rgba(255, 255, 255, 0.45); }
+.ms .ms-btn-ghost::before { background: rgba(255, 255, 255, 0.1); opacity: 0; }
+.ms .ms-btn-ghost:hover { border-color: var(--ms-ink); }
+.ms .ms-btn-ghost:hover::before { opacity: 1; }
+.ms-offer-note { min-height: 1.5em; margin-top: 10px; font-size: 12.5px; color: var(--ms-accent); }
+.ms-offer-note:empty { min-height: 0; margin-top: 0; }
+.ms-offer-panel-title { margin: 8px 0 14px; font-family: var(--ms-font-head), sans-serif; font-weight: 400; font-size: 18px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ms-ink); }
+.ms-offer-terms-list { display: grid; gap: 0; margin: 0; }
+.ms-offer-terms-list > div { display: grid; grid-template-columns: 108px 1fr; gap: 12px; padding: 9px 0; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+.ms-offer-terms-list dt { font-family: var(--ms-font-head), sans-serif; font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ms-accent); padding-top: 3px; }
+.ms-offer-terms-list dd { margin: 0; color: var(--ms-ink); }
+.ms-offer-fine { margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 11.5px; color: var(--ms-ink-2); }
+.ms-offer-close { position: absolute; top: 10px; right: 10px; width: 44px; height: 44px; border: 0; background: none; color: var(--ms-ink-2); font-size: 22px; line-height: 1; cursor: pointer; }
+.ms-offer-close:hover { color: var(--ms-ink); }
+.ms-offer-more[open] .ms-offer-panel { animation: ms-in-up 0.35s var(--ms-ease); }
+.ms-loading { position: absolute; z-index: 4; left: 50%; top: 52%; translate: -50% -50%; font-family: var(--ms-font-head), sans-serif; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ms-ink-2); transition: opacity 0.4s ease; }
+.ms-stage:not([data-state="loading"]) .ms-loading { opacity: 0; visibility: hidden; }
+
+/* smoke: three drifting layers of the generated texture (Smoke.js) */
+.ms-smoke {
+  position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; opacity: 0; transition: opacity 1.6s ease, filter 1.2s ease;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 46% 30%, #000 25%, rgba(0, 0, 0, 0.3) 68%, transparent 100%), linear-gradient(to bottom, #000 38%, transparent 56%);
+  -webkit-mask-composite: source-in;
+  mask-image: radial-gradient(ellipse 80% 60% at 46% 30%, #000 25%, rgba(0, 0, 0, 0.3) 68%, transparent 100%), linear-gradient(to bottom, #000 38%, transparent 56%);
+  mask-composite: intersect;
+}
+.ms-smoke[data-ready="true"] { opacity: 1; }
+.ms-smoke-gl { position: absolute; inset: 0; width: 100%; height: 100%; display: none; }
+.ms-smoke[data-gl] { -webkit-mask-image: none; mask-image: none; }
+.ms-smoke[data-gl] .ms-smoke-gl { display: block; }
+.ms-smoke[data-gl] i { display: none; }
+.ms-stage[data-car-hover] .ms-smoke { filter: brightness(1.45); }
+.ms-smoke i { position: absolute; inset: -30%; background: var(--smoke) 0 0 / 760px repeat; mix-blend-mode: screen; filter: blur(3px); will-change: transform; }
+.ms-smoke i:nth-of-type(1) { opacity: 0.34; animation: ms-drift-a 46s linear infinite alternate; }
+.ms-smoke i:nth-of-type(2) { opacity: 0.24; background-size: 900px; animation: ms-drift-b 64s linear infinite alternate; }
+.ms-smoke i:nth-of-type(3) { opacity: 0.14; background-size: 420px; animation: ms-drift-c 38s linear infinite alternate; }
+@keyframes ms-drift-a { from { transform: translate3d(-4%, 2%, 0); } to { transform: translate3d(7%, -3%, 0); } }
+@keyframes ms-drift-b { from { transform: translate3d(6%, -2%, 0) scale(1.05); } to { transform: translate3d(-6%, 3%, 0) scale(1.05); } }
+@keyframes ms-drift-c { from { transform: translate3d(0, 4%, 0); } to { transform: translate3d(-8%, -2%, 0); } }
+
+/* the floor: a dark band from the car's wheels down, with a faint sheen at its
+   horizon, under the canvas's glossy floor and the car's reflection */
+.ms-floor {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 46%; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(55% 22% at 40% 6%, rgba(80, 120, 180, 0.16), transparent 70%),
+    linear-gradient(to bottom, rgba(5, 8, 14, 0) 0%, rgba(4, 7, 12, 0.82) 22%, #03050a 100%);
+}
+.ms-floor::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 7%; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(150, 185, 230, 0.16) 30%, rgba(150, 185, 230, 0.16) 60%, transparent);
+}
+
+.ms-paint-menu, .ms-hint-view { display: none; }
+
+/* the page loads in: the word rises out of its own mask, the copy and the
+   controls follow, the windows slide in from the right, then the specs */
+@keyframes ms-in-up { from { opacity: 0; translate: 0 18px; } }
+@keyframes ms-in-right { from { opacity: 0; translate: 48px 0; } }
+@keyframes ms-in-left { from { opacity: 0; translate: -24px 0; } }
+@keyframes ms-in-fade { from { opacity: 0; } }
+@keyframes ms-word-in { from { opacity: 0; translate: 0 9%; clip-path: inset(0 0 100% 0); } to { opacity: 1; clip-path: inset(0 0 -10% 0); } }
+@media (prefers-reduced-motion: no-preference) {
+  .ms-word { animation: ms-word-in 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.1s backwards; }
+  .ms-top > * { animation: ms-in-up 0.8s var(--ms-ease) backwards; }
+  .ms-top > :nth-child(1) { animation-delay: 0.05s; }
+  .ms-top > :nth-child(2) { animation-delay: 0.15s; }
+  .ms-copy > * { animation: ms-in-up 0.9s var(--ms-ease) backwards; }
+  .ms-copy > :nth-child(1) { animation-delay: 0.45s; }
+  .ms-copy > :nth-child(2) { animation-delay: 0.55s; }
+  .ms-copy > :nth-child(3) { animation-delay: 0.65s; }
+  .ms-tiles > li { animation: ms-in-right 1s var(--ms-ease) backwards; }
+  .ms-tiles > li:nth-child(1) { animation-delay: 0.55s; }
+  .ms-tiles > li:nth-child(2) { animation-delay: 0.68s; }
+  .ms-tiles > li:nth-child(3) { animation-delay: 0.81s; }
+  .ms-controls > * { animation: ms-in-up 0.9s var(--ms-ease) 0.95s backwards; }
+  .ms-paint-rail > * { animation: ms-in-left 0.9s var(--ms-ease) backwards; }
+  .ms-paint-rail > :nth-child(1) { animation-delay: 0.5s; }
+  .ms-paint-rail > :nth-child(2) { animation-delay: 0.6s; }
+  .ms-offer > :not(.ms-offer-dialog) { animation: ms-in-up 0.9s var(--ms-ease) backwards; }   /* not the modal: it inherited the stagger's 1.2s delay, so it opened in place, then jumped right and slid in again */
+  .ms-offer > :nth-child(1) { animation-delay: 0.9s; }
+  .ms-offer > :nth-child(2) { animation-delay: 1s; }
+  .ms-offer > :nth-child(3) { animation-delay: 1.1s; }
+  .ms-offer > :nth-child(4) { animation-delay: 1.2s; }
+  .ms-offer > :nth-child(5) { animation-delay: 1.3s; }
+  .ms .ms-offer-dialog[open] { animation-delay: 0s; }   /* the modal is the offer block's 4th child; it must not wait for the stagger */
+  .ms-tile-full-li { animation: ms-in-right 0.7s var(--ms-ease) backwards; }
+  .ms-floor { animation: ms-in-fade 1.6s ease 0.2s backwards; }
+  .ms-specs dl > div { animation: ms-in-up 0.9s var(--ms-ease) backwards; }
+  .ms-specs dl > div:nth-child(1) { animation-delay: 1.1s; }
+  .ms-specs dl > div:nth-child(2) { animation-delay: 1.18s; }
+  .ms-specs dl > div:nth-child(3) { animation-delay: 1.26s; }
+  .ms-specs dl > div:nth-child(4) { animation-delay: 1.34s; }
+  .ms-specs dl > div:nth-child(5) { animation-delay: 1.42s; }
+
+  /* window hover: its outline lights, the glow orbits, the label nudges and its
+     camera pushes in (CarStage.js). The window itself stays put: moving it left
+     the WebGL view a frame behind, a dark sliver at its old edge. */
+  .ms-tile-label { transition: translate 0.5s var(--ms-ease), color 0.3s ease; }
+  @media (hover: hover) and (pointer: fine) {
+    .ms-tile:hover .ms-tile-label { translate: 4px 0; }
+  }
+}
+
+/* looking closer: the copy steps back */
+.ms-copy, .ms-word, .ms-top, .ms-offer { transition: opacity 0.5s ease; }
+.ms-stage:not([data-view="full"]) :is(.ms-copy, .ms-word, .ms-offer) { opacity: 0; }
+.ms-stage:not([data-view="full"]) .ms-copy a { pointer-events: none; }
+
+/* ------------------------------------------------------- below the stage */
+.ms-specs { border-top: 1px solid rgba(255, 255, 255, 0.12); border-bottom: 1px solid rgba(255, 255, 255, 0.12); }
+.ms-specs-progress, .ms-spec-short { display: none; }
+.ms-specs dl { display: grid; grid-template-columns: repeat(5, 1fr); max-width: 1360px; margin: 0 auto; }
+.ms-specs dl > div { display: flex; flex-direction: column-reverse; gap: 4px; padding: 22px 28px; border-left: 1px solid rgba(255, 255, 255, 0.12); }
+.ms-specs dl > div:first-child { border-left: 0; }
+.ms-specs dd { font-family: var(--ms-font-head), sans-serif; font-size: clamp(20px, 2.2vw, 30px); letter-spacing: 0.04em; }
+.ms-specs dt { font-size: 12px; white-space: nowrap; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ms-ink-2); }
+.ms-stamp { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ms-accent); }
+.ms-footer { padding: 32px 40px 44px; border-top: 1px solid rgba(255, 255, 255, 0.12); font-size: 13px; color: var(--ms-ink-2); display: grid; gap: 8px; text-align: center; }
+
+/* ------------------------------------------------- tablets and phones */
+@media (max-width: 999px) {
+  .ms-stage { display: flex; flex-direction: column; height: auto; min-height: 0; padding: 22px 20px 30px; gap: 18px; }
+  .ms-top, .ms-copy, .ms-tiles, .ms-controls, .ms-view, .ms-offer { position: relative; inset: auto; left: auto; right: auto; top: auto; bottom: auto; translate: none; width: auto; }
+  .ms-top { order: 1; justify-self: start; align-self: flex-start; }
+  .ms-view { order: 2; aspect-ratio: 4 / 3; margin: 0 -20px; }
+  .ms-controls { order: 3; }
+  .ms-tiles { order: 5; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .ms-tile:not(.ms-tile-full) { --ar: 1.1 !important; }
+  .ms-tile-full-li { grid-column: 1 / -1; margin-top: 2px; }
+  .ms-tile-label { position: static; margin-top: 7px; white-space: normal; }
+  .ms-smoke i:nth-of-type(3) { display: none; }
+  .ms-floor { display: none; }
+  .ms-copy { order: 6; font-size: 15px; }
+  .ms-offer { order: 4; margin: 2px 0 6px; width: auto; }   /* right under the car, as on desktop, so it shows in the first screen */
+  .ms-offer-title { white-space: normal; font-size: 21px; }
+  /* the offer modal is a sheet at the bottom; the page scrolls to the top so the car shows above it */
+  .ms-offer-dialog { margin: auto 12px 12px; width: calc(100vw - 24px); max-height: max(62dvh, calc(100dvh - 205px)); }   /* up to just under the risen car */
+  .ms-offer-dialog .ms-offer-panel { padding: 22px 20px 16px; }
+  .ms-offer-panel-title { margin: 6px 0 10px; }
+  .ms-offer-terms-list > div { padding: 7px 0; gap: 10px; }
+  /* the calls to action stay pinned to the sheet's foot while the terms scroll */
+  .ms-offer-actions {
+    position: sticky; bottom: -16px; z-index: 1; margin: 14px -20px -16px; padding: 12px 20px 16px;
+    background: linear-gradient(to bottom, rgba(10, 16, 26, 0.55), rgba(10, 16, 26, 0.92));
+    -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .ms-offer-note:not(:empty), .ms-offer-fine { margin-top: 14px; }
+  .ms-offer-actions { flex-wrap: nowrap; gap: 8px; }
+  .ms-offer-actions .ms-btn { flex: 1 1 0; min-width: 0; padding: 0 6px; font-size: 9.5px; letter-spacing: 0.06em; }
+  .ms-offer-terms-list > div { grid-template-columns: 96px 1fr; }
+  .ms-offer-dialog[open] { animation: ms-sheet-in 0.55s var(--ms-ease); }
+  /* every spec is two lines on phones: the figure, then a short one-line label
+     (the full label stays for screen readers) */
+  .ms-specs dt { position: relative; white-space: nowrap; font-size: 11.5px; }   /* holds the hidden long label inside the scroller, or it widened the page */
+  .ms-spec-long { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .ms-spec-short { display: inline; }
+  .ms-word { left: 0; right: 0; top: 70px; font-size: 19.7vw; }
+  .ms-tile-label { flex-direction: column; gap: 2px; font-size: 9.5px; letter-spacing: 0.1em; }
+  .ms-loading { top: 30%; }
+  .ms-stage:not([data-view="full"]) :is(.ms-copy, .ms-offer) { opacity: 1; }
+  .ms-stage:not([data-view="full"]) .ms-copy a { pointer-events: auto; }
+  .ms-stage[data-state="fallback"] .ms-view { background-position: center; background-size: 96% auto; }
+  .ms-specs dl { grid-template-columns: repeat(2, 1fr); }
+  .ms-specs dl > div { padding: 24px 20px; }
+  .ms-specs dl > div:nth-child(odd) { border-left: 0; }
+  .ms-specs dl > div:nth-child(n + 3) { border-top: 1px solid rgba(255, 255, 255, 0.12); }
+  .ms-specs dl > div:nth-child(5) { grid-column: 1 / -1; }
+  .ms-footer { padding: 28px 20px 40px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ms-canvas, .ms-copy, .ms-word, .ms-paint, .ms-loading, .ms-smoke { transition: none; }
+  .ms-smoke i { animation: none !important; }
+}
+
+/* ----------------------------------- phones and tablets, round 2 (2026-11-17)
+   Order: label + paint dropdown (top right), the hero text (folds away once the
+   car is touched), the car (a shorter canvas, the drag hint at its feet in the
+   full view only), the windows, the offer, the brand line; the specs scroll
+   sideways. */
+@media (max-width: 999px) {
+  .ms-stage { padding-top: 18px; gap: 14px; }
+  .ms-controls, .ms-paint-rail { display: none; }
+  /* the hero text is hidden on phones, but stays in the page for screen readers (it holds the h1) */
+  .ms-copy { position: absolute !important; width: 1px !important; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; margin: 0; }
+  .ms-view { order: 3; aspect-ratio: 16 / 10; }
+  .ms-word { top: calc(var(--view-top, 70px) + 22vw + 20px - 0.85em); font-size: 26vw; }   /* the caps' foot (0.85em down the line box) just below the roofline (~18.5vw into the 16:10 view), so most of the word stays legible */
+  .ms-tiles { order: 4; }
+  .ms-offer { order: 5; }
+  .ms-hint-view { display: block; position: absolute; left: 50%; top: calc(var(--view-top, 70px) + 56vw); translate: -50% 0; margin: 0; z-index: 4; pointer-events: none; transition: opacity 0.35s ease; }
+  .ms-stage:not([data-view="full"]) .ms-hint-view { opacity: 0; }
+
+  .ms-paint-menu { display: block; position: absolute; z-index: 8; top: 16px; right: 20px; }
+  .ms-paint-menu-btn {
+    display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 14px 0 11px; border: 1px solid rgba(255, 255, 255, 0.22); border-radius: 22px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03)); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+    color: var(--ms-ink); font: inherit; cursor: pointer; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  }
+  .ms-paint-dot { width: 22px; height: 22px; flex: none; border-radius: 50%; background: var(--swatch); border: 1.5px solid rgba(255, 255, 255, 0.45); box-shadow: inset 0 -3px 6px rgba(0, 0, 0, 0.35), inset 0 2px 4px rgba(255, 255, 255, 0.25); }
+  .ms-paint-menu-name { display: none; }   /* names only inside the open menu */
+  .ms-chev { width: 7px; height: 7px; margin-left: 2px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; rotate: 45deg; translate: 0 -2px; transition: rotate 0.3s var(--ms-ease), translate 0.3s var(--ms-ease); }
+  .ms-paint-menu[data-open] .ms-chev { rotate: -135deg; translate: 0 2px; }
+  .ms-paint-menu-list {
+    position: absolute; right: 0; top: calc(100% + 8px); min-width: 210px; padding: 6px; border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 16px;
+    background: linear-gradient(160deg, rgba(40, 60, 92, 0.6), rgba(8, 12, 20, 0.86)); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+    opacity: 0; visibility: hidden; translate: 0 -6px; scale: 0.98; transform-origin: top right;
+    transition: opacity 0.25s ease, translate 0.35s var(--ms-ease), scale 0.35s var(--ms-ease), visibility 0s linear 0.35s;
+  }
+  .ms-paint-menu[data-open] .ms-paint-menu-list { opacity: 1; visibility: visible; translate: 0 0; scale: 1; transition-delay: 0s; }
+  .ms-paint-menu-list li {
+    display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 12px; border-radius: 11px; cursor: pointer; outline: none;
+    font-family: var(--ms-font-head), sans-serif; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ms-ink-2);
+  }
+  .ms-paint-menu[data-open] .ms-paint-menu-list li { animation: ms-in-up 0.4s var(--ms-ease) backwards; animation-delay: calc(var(--i) * 35ms); }
+  .ms-paint-menu-list li:is(:hover, :focus-visible) { background: rgba(255, 255, 255, 0.08); color: var(--ms-ink); }
+  .ms-paint-menu-list li[aria-selected="true"] { color: var(--ms-ink); }
+  .ms-check { margin-left: auto; width: 6px; height: 11px; border-right: 1.5px solid var(--ms-accent); border-bottom: 1.5px solid var(--ms-accent); rotate: 45deg; translate: 0 -2px; opacity: 0; }
+  .ms-paint-menu-list li[aria-selected="true"] .ms-check { opacity: 1; }
+
+  .ms-specs dl { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 0 20px; scroll-padding-inline: 20px; }
+  .ms-specs dl::-webkit-scrollbar { display: none; }
+  .ms-specs dl > div, .ms-specs dl > div:nth-child(n) { flex: 0 0 42%; scroll-snap-align: start; border-top: 0; border-left: 1px solid rgba(255, 255, 255, 0.12); padding: 20px 18px; }
+  .ms-specs dl > div:first-child { border-left: 0; padding-left: 0; }
+  .ms-specs dt { white-space: normal; }
+  .ms-specs dl > div, .ms-specs dl > div:nth-child(n) { flex: 0 0 40%; min-width: 0; }
+  /* scroll cues: a fade at the right edge while more lies that way, and a progress bar */
+  .ms-specs { position: relative; padding-bottom: 14px; }
+  .ms-specs::after { content: ""; position: absolute; top: 0; right: 0; bottom: 14px; width: 64px; pointer-events: none; background: linear-gradient(to right, rgba(5, 8, 14, 0), var(--ms-bg)); transition: opacity 0.3s ease; }
+  .ms-specs[data-more="false"]::after { opacity: 0; }
+  .ms-specs-progress { display: block; position: absolute; left: 20px; right: 20px; bottom: 8px; height: 2px; background: rgba(255, 255, 255, 0.12); border-radius: 2px; overflow: hidden; }
+  .ms-specs-progress::before { content: ""; position: absolute; top: 0; bottom: 0; left: calc(var(--p, 0) * (1 - var(--vis, 0.4)) * 100%); width: calc(var(--vis, 0.4) * 100%); background: var(--ms-accent); border-radius: 2px; }
+  .ms-specs[data-scrolls="false"] .ms-specs-progress { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ms-paint-menu-list, .ms-chev, .ms-hint-view { transition: none !important; }
+  .ms-paint-menu-list li, .ms-offer-dialog[open] { animation: none !important; }
+}
+
+/* ------------------------------------------------------------- preloader */
+/* the S650 / MUSTANG lockup (Preloader.js), large and centred over the page's
+   own background; the page's entrance waits, paused, until the cover lifts */
+.ms-pre {
+  position: fixed; inset: 0; z-index: 60; display: grid; place-items: center;
+  background: radial-gradient(70% 60% at 50% 40%, rgba(40, 70, 120, 0.32), transparent 72%), var(--ms-bg);
+  transition: opacity 0.7s ease 0.2s, visibility 0s linear 0.9s;
+  animation: ms-pre-safety 0.6s ease 9s forwards;                       /* no JS: it still lifts */
+}
+.ms-pre.is-done { opacity: 0; visibility: hidden; }
+.ms-pre.is-gone { display: none; }
+@keyframes ms-pre-safety { to { opacity: 0; visibility: hidden; } }
+:root:has(.ms-pre:not(.is-done)) { overflow: hidden; }
+.ms:has(.ms-pre:not(.is-done)) :is(.ms-stage, .ms-specs) * { animation-play-state: paused !important; }
+
+.ms-pre-lockup {
+  display: grid; gap: 10px; width: max-content;
+  font-family: var(--ms-font-head), sans-serif; font-size: clamp(20px, 5.6vw, 26px); letter-spacing: 0.18em; text-transform: uppercase; color: var(--ms-ink);
+  transition: translate 0.8s var(--ms-ease), scale 0.8s var(--ms-ease);
+}
+.ms-pre.is-done .ms-pre-lockup { translate: 0 -14px; scale: 0.96; }
+.ms-pre-row { display: flex; align-items: center; overflow: hidden; padding-block: 2px; padding-right: 0.18em; }   /* room for the last slash's lean */
+.ms-pre-word { display: block; }
+.ms-pre-rule { display: block; height: 1px; background: var(--ms-line); transform-origin: left; }
+.ms-pre-slashes { position: relative; display: inline-flex; gap: 0.16em; margin-left: 0.9em; padding-bottom: 0.32em; }
+.ms-pre-slashes i { width: 0.26em; height: 0.72em; background: var(--ms-ink-2); transform: skewX(-24deg); opacity: 0.18; }
+.ms-pre-slashes b { position: absolute; left: -0.1em; right: -0.1em; bottom: 0; height: 1px; background: var(--ms-line); transform-origin: left; }
+.ms-pre.is-done .ms-pre-slashes i { opacity: 1; transition: opacity 0.2s ease; }
+
+@keyframes ms-pre-rise { from { translate: 0 110%; } }
+@keyframes ms-pre-draw { from { transform: scaleX(0); } }
+@keyframes ms-pre-blink { 0%, 100% { opacity: 0.18; } 20%, 45% { opacity: 1; } }
+@media (prefers-reduced-motion: no-preference) {
+  .ms-pre-word { animation: ms-pre-rise 0.9s var(--ms-ease) 0.15s backwards; }
+  .ms-pre-row + .ms-pre-rule + .ms-pre-row .ms-pre-word { animation-delay: 0.3s; }
+  .ms-pre-rule { animation: ms-pre-draw 1s var(--ms-ease) 0.05s backwards; }
+  .ms-pre-slashes b { animation: ms-pre-draw 0.8s var(--ms-ease) 0.6s backwards; }
+  .ms-pre-slashes i { animation: ms-pre-blink 1.2s ease-in-out 0.7s infinite; }
+  .ms-pre-slashes i:nth-child(2) { animation-delay: 0.85s; }
+  .ms-pre-slashes i:nth-child(3) { animation-delay: 1s; }
+  .ms-pre-slashes i:nth-child(4) { animation-delay: 1.15s; }
+  .ms-pre.is-done .ms-pre-slashes i { animation: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ms-pre, .ms-pre-lockup { transition: opacity 0.3s ease, visibility 0s linear 0.3s; }
+  .ms-pre-slashes i { opacity: 1; }
+}
+
+/* ------------------------------------------------------------- scrollbar */
+/* the page's scrollbar in the accent blue of the [ Sample offer ] stamp */
+:root:has(.ms) { scrollbar-color: #7fb9ff #05080e; }
+@supports not (scrollbar-color: red blue) {                              /* Safari before 26 */
+  :root:has(.ms)::-webkit-scrollbar { width: 12px; background: #05080e; }
+  :root:has(.ms)::-webkit-scrollbar-thumb { background: #7fb9ff; border: 3px solid #05080e; border-radius: 6px; }
+}
+
+/* ------------------------------------------------- phones: windows read as tappable */
+/* an "opens larger" mark in each window's top-right corner, and, once per visit, a
+   light that runs one lap round each window in turn (CarStage.js adds .is-sweep) */
+.ms-tile-open { display: none; }
+@keyframes ms-sweep-26 { 0% { stroke-dashoffset: 26; opacity: 0; } 12%, 80% { opacity: 1; } 100% { stroke-dashoffset: -74; opacity: 0; } }
+@keyframes ms-sweep-34 { 0% { stroke-dashoffset: 34; opacity: 0; } 12%, 80% { opacity: 1; } 100% { stroke-dashoffset: -66; opacity: 0; } }
+@keyframes ms-sweep-12 { 0% { stroke-dashoffset: 12; opacity: 0; } 12%, 80% { opacity: 1; } 100% { stroke-dashoffset: -88; opacity: 0; } }
+@media (max-width: 999px), (hover: none) {
+  .ms-tile-open {
+    position: absolute; top: 6px; right: 6px; z-index: 1; display: grid; place-items: center; width: 26px; height: 26px;
+    border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 7px; background: rgba(5, 8, 14, 0.55); color: var(--ms-ink); pointer-events: none;
+  }
+  .ms-tile-open svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .ms-tile[aria-pressed="true"] .ms-tile-open { border-color: var(--ms-accent); color: var(--ms-accent); }
+}
+@media (prefers-reduced-motion: no-preference) and ((max-width: 999px) or (hover: none)) {
+  .ms-tiles.is-sweep > li:not(.ms-tile-full-li) .ms-glow-wide { animation: ms-sweep-26 1.5s ease-in-out var(--sd) 1 both; }
+  .ms-tiles.is-sweep > li:not(.ms-tile-full-li) .ms-glow-tail { animation: ms-sweep-34 1.5s ease-in-out var(--sd) 1 both; }
+  .ms-tiles.is-sweep > li:not(.ms-tile-full-li) .ms-glow-core { animation: ms-sweep-12 1.5s ease-in-out var(--sd) 1 both; }
+  .ms-tiles > li:nth-child(1) { --sd: 0s; }
+  .ms-tiles > li:nth-child(2) { --sd: 0.45s; }
+  .ms-tiles > li:nth-child(3) { --sd: 0.9s; }
+}
+
