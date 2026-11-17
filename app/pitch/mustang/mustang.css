@@ -213,7 +213,7 @@
 :where(.ms-stage > *, .ms-specs, .ms-footer) { transition: opacity 0.4s ease; }
 .ms:has(.ms-offer-dialog[open]) :is(.ms-stage > :not(.ms-bg, .ms-smoke, .ms-floor, .ms-canvas), .ms-specs, .ms-footer) { opacity: 0; pointer-events: none; }
 .ms-offer-dialog { pointer-events: auto; }   /* it sits inside the faded offer block, which turns pointer events off */
-:root:has(.ms-offer-dialog[open]) { overflow: hidden; }   /* phones also block touch scrolls outside the sheet (OfferDetails.js) */
+:root:has(.ms-offer-dialog[open]) { overflow: hidden; scrollbar-gutter: stable; }   /* the gutter keeps the scrollbar's space, so nothing shifts as the lock comes and goes */   /* phones also block touch scrolls outside the sheet (OfferDetails.js) */
 .ms-offer-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
 .ms-offer-actions .ms-btn { flex: 1 1 auto; justify-content: center; padding: 0 18px; white-space: nowrap; pointer-events: auto; }
 .ms .ms-btn-ghost { color: var(--ms-ink); border-color: rgba(255, 255, 255, 0.45); }
@@ -467,7 +467,7 @@
 .ms-pre.is-done { opacity: 0; visibility: hidden; }
 .ms-pre.is-gone { display: none; }
 @keyframes ms-pre-safety { to { opacity: 0; visibility: hidden; } }
-:root:has(.ms-pre:not(.is-done)) { overflow: hidden; }
+/* no overflow lock here: the page keeps its scrollbar under the cover, and Preloader.js holds it still */
 .ms:has(.ms-pre:not(.is-done)) :is(.ms-stage, .ms-specs) * { animation-play-state: paused !important; }
 
 .ms-pre-lockup {

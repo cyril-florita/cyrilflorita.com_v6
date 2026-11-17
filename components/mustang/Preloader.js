@@ -18,10 +18,25 @@ export default function Preloader() {
     const stage = document.querySelector(".ms-stage");
     const start = performance.now();
     let done = false, t1 = 0, t2 = 0, cap = 0, mo = null;
+    // The page holds still under the cover, but keeps its scrollbar (as on Viteo and Hearthside;
+    // hiding the overflow took the scrollbar away and the layout shifted when it came back):
+    // wheel, touch drags and scroll keys do nothing, and a dragged scrollbar snaps back.
+    const y0 = window.scrollY;
+    const KEYS = new Set([" ", "PageDown", "PageUp", "End", "Home", "ArrowDown", "ArrowUp"]);
+    const stop = (e) => { if (e.type !== "keydown" || KEYS.has(e.key)) e.preventDefault(); };
+    const hold = () => { if (window.scrollY !== y0) window.scrollTo({ top: y0, behavior: "instant" }); };
+    const opts = { passive: false };
+    window.addEventListener("wheel", stop, opts); window.addEventListener("touchmove", stop, opts);
+    window.addEventListener("keydown", stop); window.addEventListener("scroll", hold);
+    const release = () => {
+      window.removeEventListener("wheel", stop, opts); window.removeEventListener("touchmove", stop, opts);
+      window.removeEventListener("keydown", stop); window.removeEventListener("scroll", hold);
+    };
     const finish = () => {
       if (done) return; done = true;
       mo?.disconnect(); clearTimeout(cap);
       t1 = setTimeout(() => {
+        release();
         el.classList.add("is-done");                                     // slashes all lit, lockup lifts, cover fades
         t2 = setTimeout(() => el.classList.add("is-gone"), 900);
       }, Math.max(0, MIN - (performance.now() - start)));
@@ -31,7 +46,7 @@ export default function Preloader() {
     if (stage) { mo = new MutationObserver(check); mo.observe(stage, { attributes: true, attributeFilter: ["data-state"] }); }
     check();
     cap = setTimeout(finish, MAX);
-    return () => { mo?.disconnect(); clearTimeout(cap); clearTimeout(t1); clearTimeout(t2); };
+    return () => { release(); mo?.disconnect(); clearTimeout(cap); clearTimeout(t1); clearTimeout(t2); };
   }, []);
   return (
     <div className="ms-pre" ref={ref} aria-hidden="true">

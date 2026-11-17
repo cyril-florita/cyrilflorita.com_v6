@@ -39,7 +39,7 @@ An interactive Ford Mustang (S650) ad: a spec ad that uses the real name. Unoffi
 
 ## Preloader (`Preloader.js`)
 
-A fixed cover (z-index 60) with the S650 / MUSTANG lockup large and centred: the hairline draws across, the words rise out of their masks, the short rule under the slashes draws, and the four slashes light one after another while the car loads. Once the stage's `data-state` leaves `loading` (ready or fallback) and the fonts are in, all four light, the lockup lifts and the cover fades (at least 1.4s, at most 8s; a CSS timer lifts it after 9s without JS). While it's up the page can't scroll and every entrance animation in the stage and spec strip is paused (`:has(.ms-pre:not(.is-done))`), so they play when it lifts.
+A fixed cover (z-index 60) with the S650 / MUSTANG lockup large and centred: the hairline draws across, the words rise out of their masks, the short rule under the slashes draws, and the four slashes light one after another while the car loads. Once the stage's `data-state` leaves `loading` (ready or fallback) and the fonts are in, all four light, the lockup lifts and the cover fades (at least 1.4s, at most 8s; a CSS timer lifts it after 9s without JS). While it's up the page keeps its scrollbar (as on Viteo and Hearthside) but can't scroll — Preloader.js swallows wheel, touch drags and scroll keys and snaps a dragged scrollbar back; an `overflow: hidden` lock hid the scrollbar and shifted the layout when it lifted — and every entrance animation in the stage and spec strip is paused (`:has(.ms-pre:not(.is-done))`), so they play when it lifts.
 
 ## Windows read as clickable
 
