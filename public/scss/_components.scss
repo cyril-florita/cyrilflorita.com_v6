@@ -4087,6 +4087,9 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
     // space above, and some below before the next figure.
     &.cyril-case-cta-inline { margin: 32px 0 40px; }
 
+    // two calls to action side by side (Mustang: the ad and its campaign kit)
+    & .cyril-case-cta-actions { display: flex; flex-wrap: wrap; gap: 20px 24px; }
+
     @media screen and (max-width: 768px) {
         padding: 28px 22px;
     }

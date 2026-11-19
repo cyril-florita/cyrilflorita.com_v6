@@ -63,7 +63,7 @@ export default function Page() {
       <footer className="ms-footer">
         <p>3D model: <a href="https://sketchfab.com/3d-models/free-2024-ford-mustang-dark-horse-a29c8bb07f6e41b594fe2248366cffbf" target="_blank" rel="noopener noreferrer">“[FREE] 2024 Ford Mustang Dark Horse”</a> by <a href="https://sketchfab.com/livanovbog" target="_blank" rel="noopener noreferrer">livanovbog</a>, licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a> (closed up, recolored and compressed for this page).</p>
         <p>Unofficial concept. Not affiliated with or endorsed by Ford Motor Company. Ford and Mustang are trademarks of Ford Motor Company.</p>
-        <p>Design and Dev Pitch · © {year} Cyril Florita. All rights reserved. · <a href="/">Back to portfolio</a></p>
+        <p>Design and Dev Pitch · © {year} Cyril Florita. All rights reserved. · <a href="/pitch/mustang/kit/">Campaign kit</a> · <a href="/">Back to portfolio</a></p>
       </footer>
     </>
   );

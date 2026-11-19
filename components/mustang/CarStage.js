@@ -107,7 +107,13 @@ function Tile({ id, ar, slant, kicker, label, pressed, aria, size, onClick, onHo
   );
 }
 
-export default function CarStage({ children }) {
+// `spot` (the campaign kit's recording page, app/pitch/mustang/spot/): no windows, paint
+// controls or hints, and the car is driven by a clock instead of the pointer, so every
+// recording plays the same: { spin: radians per second (turntable), yaw0: the yaw at the
+// start, intro: glide the camera in as the landing does, lift: raises the car in its view (a share of its height), view: a feature pose to hold
+// (rear | cockpit | lights), paint: a hex, zoom: multiplies the full view's field of view }.
+// Once the clock starts it sets window.__msSpotT0 (Date.now()) for the capture scripts.
+export default function CarStage({ children, spot = null }) {
   const stageRef = useRef(null);
   const canvasRef = useRef(null);
   const viewRef = useRef(null);
@@ -118,6 +124,7 @@ export default function CarStage({ children }) {
   const [state, setState] = useState("loading"); // loading | ready | fallback
   const [said, setSaid] = useState("");
   const tilesRef = useRef(null);
+  const spotRef = useRef(spot);                                   // read once, when the scene is set up
   // Once the car is in and the windows are well in view, a light runs one lap round each window
   // in turn (the hover glow, mustang.css .is-sweep), once per visit; the class comes off after,
   // so the desktop hover glow works again.
@@ -148,6 +155,7 @@ export default function CarStage({ children }) {
   useEffect(() => {
     const stage = stageRef.current, canvas = canvasRef.current, viewEl = viewRef.current;
     let disposed = false, cleanup = () => {};
+    const sp = spotRef.current;
     (async () => {
       let THREE, GLTFLoader, DRACOLoader;
       try {
@@ -394,7 +402,7 @@ export default function CarStage({ children }) {
         return c;
       };
       let fov = FULL.fov, shift = 1, paintGoal = new THREE.Color(PAINTS[0].hex);
-      let introUntil = 0, hoverTile = null, modalOpen = false, modalT = 0;
+      let introUntil = 0, hoverTile = null, modalOpen = false, modalT = 0, spotT0 = 0;
       const tileH = Object.fromEntries(FEATURES.map((f) => [f.id, 0]));
       const lookW = new THREE.Vector3();
       const Y = new THREE.Vector3(0, 1, 0);
@@ -470,7 +478,7 @@ export default function CarStage({ children }) {
         const fit = Math.min(1.05, Math.max(0.6, (freeW - 112) / (0.465 * r.width)));
         main.aspect = r.width / r.height; main.fov = (fov / Math.max(narrow, 0.55) ** 0.9) * (1 + (1 / fit - 1) * mm);
         const wide = r.width > 900 ? shift : 0;
-        main.setViewOffset(r.width, r.height, (r.width - freeW) / 2 * mm, r.height * (0.02 * wide + 0.04 * mm + 0.3 * mp), r.width, r.height);   // centered in the stage
+        main.setViewOffset(r.width, r.height, (r.width - freeW) / 2 * mm, r.height * (0.02 * wide + 0.04 * mm + 0.3 * mp + (sp?.lift || 0)), r.width, r.height);   // centered in the stage
         main.position.copy(camPos); main.lookAt(camLook); main.updateProjectionMatrix();
         renderer.render(scene, main);
       };
@@ -478,7 +486,7 @@ export default function CarStage({ children }) {
       const frame = (now) => {
         raf = 0;
         const dt = Math.min(0.05, (now - last) / 1000); last = now;
-        const k = reduce ? 1 : 1 - Math.exp(-dt * (now < introUntil ? 1.9 : 5.5));
+        const k = reduce || (sp && !sp.intro) ? 1 : 1 - Math.exp(-dt * (now < introUntil ? 1.9 : 5.5));
         let moving = false;
         const mGoal = modalOpen ? 1 : 0;
         if (Math.abs(mGoal - modalT) > 0.001) { modalT += (mGoal - modalT) * (reduce ? 1 : 1 - Math.exp(-dt * 4)); moving = true; } else modalT = mGoal;
@@ -489,7 +497,10 @@ export default function CarStage({ children }) {
           else tileH[f.id] = g;
         }
         // the car's turn: drag, its glide afterwards, or a turn to a feature
-        if (yawGoal !== null) {
+        if (sp && spotT0 && sp.spin) {                                               // spot: the turntable runs on the clock
+          yaw = (sp.yaw0 ?? START_YAW) + (sp.spin || 0) * (now - spotT0) / 1000; yawGoal = null;
+          if (sp.spin) moving = true;
+        } else if (yawGoal !== null) {
           let d = ((yawGoal - yaw + Math.PI) % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2) - Math.PI;
           yaw += d * k; if (Math.abs(d) < 0.002) { yaw = yawGoal; yawGoal = null; } else moving = true;
         } else if (!dragging && Math.abs(yawVel) > 0.0004) {
@@ -511,7 +522,7 @@ export default function CarStage({ children }) {
           goalLook.copy(V(p.pos)).add(dir).applyQuaternion(q);
         }
         const phone = viewEl.clientWidth <= 999;                        // phones: a tighter full view, so the car spans the screen
-        const goalFov = mode === "full" ? FULL.fov * (phone ? 0.74 : 1) : POSES[mode].fov;
+        const goalFov = mode === "full" ? FULL.fov * (sp ? sp.zoom || 1 : phone ? 0.74 : 1) : POSES[mode].fov;
         const goalShift = mode === "full" ? 1 : mode === "cockpit" ? 0 : 0.6;
         if (camPos.distanceTo(goalPos) > 0.002 || camLook.distanceTo(goalLook) > 0.002 || Math.abs(fov - goalFov) > 0.02 || Math.abs(shift - goalShift) > 0.002) moving = true;
         camPos.lerp(goalPos, k); camLook.lerp(goalLook, k); fov += (goalFov - fov) * k; shift += (goalShift - shift) * k;
@@ -625,6 +636,14 @@ export default function CarStage({ children }) {
         renderer.compileAsync(scene, main).then(() => {
           if (disposed) return;
           ready = true; setState("ready");
+          if (sp) {
+            if (sp.paint) { paintGoal = new THREE.Color(sp.paint); mats.Paint.color.copy(paintGoal); reflMats.Paint?.color.copy(paintGoal); }
+            if (sp.view && POSES[sp.view]) { mode = sp.view; yaw = sp.view === "cockpit" ? sp.yaw0 ?? START_YAW : POSES[sp.view].yaw; }
+            else yaw = sp.yaw0 ?? START_YAW;
+            if (sp.intro && !reduce) { camPos.set(FULL.pos[0] - 3.2, FULL.pos[1] + 1.1, FULL.pos[2] + 6); fov = FULL.fov + 6; introUntil = performance.now() + 2600; }
+            requestAnimationFrame((t) => { spotT0 = t; window.__msSpotT0 = Date.now(); stage.dataset.spot = "go"; wake(3000); });
+            return;
+          }
           if (!reduce) {                                                   // the car glides in, turning into place
             camPos.set(FULL.pos[0] - 3.2, FULL.pos[1] + 1.1, FULL.pos[2] + 6); fov = FULL.fov + 6;
             yaw = START_YAW + 1.15; yawGoal = START_YAW; introUntil = performance.now() + 2600;
@@ -719,7 +738,7 @@ export default function CarStage({ children }) {
   const setTileWindow = (id, el) => { tileRefs.current[id] = el; };
 
   return (
-    <div className="ms-stage" ref={stageRef} data-view={view} data-state={state}>
+    <div className={spot ? "ms-stage ms-stage-spot" : "ms-stage"} ref={stageRef} data-view={view} data-state={state}>
       <canvas ref={canvasRef} className="ms-canvas" aria-hidden="true" />
       {children}
       <div
@@ -731,6 +750,7 @@ export default function CarStage({ children }) {
           ? "Inside the Mustang. Drag, or use the left and right arrow keys, to look around."
           : "A 3D Ford Mustang. Drag, or use the left and right arrow keys, to turn it all the way around."}
       />
+      {!spot && <>
       <ul className="ms-tiles" aria-label="Look closer" ref={tilesRef}>
         {FEATURES.map((f) => (
           <li key={f.id}>
@@ -763,6 +783,7 @@ export default function CarStage({ children }) {
           {view === "full" ? "Drag to turn · 360°" : view === "cockpit" ? "Drag to look around" : "Drag to turn · Esc for the full view"}
         </p>
       </div>
+      </>}
       <p className="ms-loading" aria-hidden={state !== "loading"}>Loading the 3D model…</p>
       <p className="ms-sr" role="status" aria-live="polite">{said}</p>
     </div>
