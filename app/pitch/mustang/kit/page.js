@@ -103,7 +103,6 @@ export default function Kit() {
               ["Subject", "The Mustang, all the way around"],
               ["Preview text", "Turn it, open it, and look closer: the Mustang Dark Horse in 3D. Lease from $499 a month."],
               ["Build", "600px, table layout with inline styles, stacks on phones; web fonts where the inbox allows them, Arial elsewhere"],
-              ["Before sending", "Upload the images to your email platform, and fill in the bracketed dealer details and unsubscribe links"],
             ]} />
             <div className="kit-actions">
               <a className="ms-btn" href={`${K}email.html`} target="_blank" rel="noopener noreferrer">Open the email <Out /></a>
@@ -139,7 +138,7 @@ export default function Kit() {
           <div className="kit-post">
             <p className="kit-label">Suggested post</p>
             <p className="kit-post-text">Turn it. Open it. Look closer. Explore the Mustang Dark Horse in 3D, from the tri-bar taillights to the cockpit, then see the offer. Link in bio.</p>
-            <p className="kit-post-note">The spots are silent, so they play the same with the sound off; add licensed music in the platform if you want it. Under the offer, each spot carries the [ Sample offer ] stamp: replace it with the dealer&apos;s real terms before running.</p>
+            <p className="kit-post-note">The spots are silent, so they play the same with the sound off; add licensed music in the platform if you want it.</p>
           </div>
         </Item>
 
@@ -173,7 +172,6 @@ export default function Kit() {
               ["HTML5", "Each zip is under 150 KB with GSAP inside it, the cap Google Ads sets; uses clickTag for the click-through"],
               ["GIF", "Under 150 KB each; the entrance, then the final frame, three plays"],
               ["Motion", "Stops by 11 seconds, inside the networks' 30-second limit; holds still for people who ask for reduced motion"],
-              ["Before running", "Set clickTag to the dealer's landing page, and replace the [ Sample offer ] terms with real ones"],
             ]} />
           </div>
         </Item>
