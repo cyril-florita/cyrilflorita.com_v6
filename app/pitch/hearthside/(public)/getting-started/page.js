@@ -1,6 +1,6 @@
 import { BASE, MEDICARE_CONDITIONS, MEDICARE_URL, PHONE, STEPS } from "@/components/hearthside/data";
 import { Button, CallButton, CallBand, Icon, PageHead, Photo, Row } from "@/components/hearthside/ui";
-import { StepStory } from "@/components/hearthside/client";
+import { StepTimeline } from "@/components/hearthside/client";
 
 export const metadata = {
   title: "Getting started",
@@ -43,19 +43,19 @@ export default function GettingStarted() {
 
       <Row label="The steps" labelledBy="gs-steps">
         <h2 id="gs-steps" className="hs-visually-hidden">The steps</h2>
-        {/* Desktop: the pinned scroll story, as on Home (StepStory). */}
-        <StepStory>
+        {/* Desktop: the timeline, as on Home (StepTimeline). */}
+        <StepTimeline>
         <ol className="hs-ruled hs-swipe">
           {STEPS.map((s, i) => (
             <li key={s.title} className="hs-step">
-              <Photo shot={s.title} src={s.photo.src} alt={s.photo.alt} position={s.photo.position} sizes="(max-width: 760px) 55vw, 30vw" />
+              <Photo shot={s.title} src={s.photo.src} alt={s.photo.alt} position={s.photo.position} sizes="(max-width: 760px) 55vw, (max-width: 1080px) 30vw, 36vw" />
               <span className="hs-step-n" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
               <h3>{s.title}</h3>
               <p>{s.text}</p>
             </li>
           ))}
         </ol>
-        </StepStory>
+        </StepTimeline>
       </Row>
 
       <Row label="Have ready" labelledBy="gs-ready">

@@ -103,7 +103,7 @@ None structural now that the car is the licensed model. The material table in Ca
 
 ## Campaign kit (`/pitch/mustang/kit/`)
 
-The deliverables page for the dealer's team (added 2026-11-19, noindex; linked from the ad's footer as "Campaign kit"): one concept carried across channels. `app/pitch/mustang/kit/` (`page.js` + `kit.css`, in the ad's tokens) shows each piece with its preview, use, specs and a download:
+The deliverables page for the dealer's team (added 2026-11-19, noindex; linked from the ad's footer as "Campaign kit"): one concept carried across channels. `app/pitch/mustang/kit/` (`page.js` + `kit.css`, in the ad's tokens) shows each piece with its preview, use, specs and a download. Its index of deliverables is `KitNav` (`components/mustang/KitNav.js`, `NAV` in page.js): at ≥1360px — the narrowest width where the 970 × 250 ad still fits beside it — a sticky sidebar left of the sections that marks the section being read (`aria-current`, the last one past 35% of the screen; an accent bar slides to it) with "See the ad" under it; narrower, a row of links under the head:
 
 1. **Landing page** — the ad itself (the case study's desktop and phone stills).
 2. **Email** — `public/pitch/mustang/kit/email.html`, a static file (not a Next route): 600px, table layout, inline styles, a bulletproof button (with VML for Outlook), columns that stack under 620px, Michroma / Exo 2 with Arial fallbacks, a preheader, bracketed dealer placeholders and `#` unsubscribe links. Its images are next to it with **relative** paths, so it previews on the site; before importing it into an email platform, upload them and make the paths absolute. The kit shows it in an iframe at 680px or 375px (`components/mustang/KitEmail.js`).

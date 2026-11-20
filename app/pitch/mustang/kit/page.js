@@ -1,5 +1,6 @@
 import KitEmail from "@/components/mustang/KitEmail";
 import KitAds from "@/components/mustang/KitAds";
+import KitNav from "@/components/mustang/KitNav";
 import "./kit.css";
 
 // The campaign kit (/pitch/mustang/kit/): every deliverable made from the ad's one concept,
@@ -22,6 +23,17 @@ const ADS = [
   { id: "160x600", w: 160, h: 600, name: "Wide skyscraper", zip: 114, gif: 126 },
   { id: "300x250", w: 300, h: 250, name: "Medium rectangle", zip: 140, gif: 111 },
   { id: "320x50", w: 320, h: 50, name: "Mobile banner", zip: 82, gif: 46 },
+];
+
+// the index: a sticky sidebar on wide screens (KitNav)
+const NAV = [
+  { id: "landing", label: "Landing page" },
+  { id: "email", label: "Email" },
+  { id: "gif", label: "Email GIF" },
+  { id: "spots", label: "Social spots" },
+  { id: "hero", label: "Website hero" },
+  { id: "ads", label: "Display ads" },
+  { id: "stills", label: "Stills" },
 ];
 
 const STILLS = [
@@ -68,18 +80,11 @@ export default function Kit() {
           <h1>Campaign kit</h1>
           <p className="kit-tagline">One concept, everywhere the buyer is.</p>
           <p className="kit-intro">The interactive ad is the center of the campaign. From the same car, stage, and type come a launch email with an animated hero, seven-second spots for social, a hero for the dealer&apos;s website, and display ads in the standard sizes, so the Mustang looks the same in the inbox, in the feed, and on every page. Everything here is ready to download; the prices and terms are sample content.</p>
-          <nav className="kit-index" aria-label="Deliverables">
-            <ol>
-              <li><a href="#landing">Landing page</a></li>
-              <li><a href="#email">Email</a></li>
-              <li><a href="#gif">Email GIF</a></li>
-              <li><a href="#spots">Social spots</a></li>
-              <li><a href="#hero">Website hero</a></li>
-              <li><a href="#ads">Display ads</a></li>
-              <li><a href="#stills">Stills</a></li>
-            </ol>
-          </nav>
         </header>
+
+        <div className="kit-body">
+        <KitNav items={NAV} />
+        <div className="kit-sections">
 
         <Item n={1} id="landing" title="Landing page" lede="Where every other piece points: a 3D Dark Horse to turn, repaint, and look inside, with the lease offer under the car.">
           <div className="kit-landing">
@@ -138,7 +143,7 @@ export default function Kit() {
           <div className="kit-post">
             <p className="kit-label">Suggested post</p>
             <p className="kit-post-text">Turn it. Open it. Look closer. Explore the Mustang Dark Horse in 3D, from the tri-bar taillights to the cockpit, then see the offer. Link in bio.</p>
-            <p className="kit-post-note">The spots are silent, so they play the same with the sound off; add licensed music in the platform if you want it.</p>
+            <p className="kit-post-note">The spots are silent, so they play the same with the sound off; licensed music in the platform can be added.</p>
           </div>
         </Item>
 
@@ -189,6 +194,8 @@ export default function Kit() {
             ))}
           </div>
         </Item>
+        </div>
+        </div>
       </main>
       <footer className="ms-footer">
         <p>3D model: <a href="https://sketchfab.com/3d-models/free-2024-ford-mustang-dark-horse-a29c8bb07f6e41b594fe2248366cffbf" target="_blank" rel="noopener noreferrer">“[FREE] 2024 Ford Mustang Dark Horse”</a> by <a href="https://sketchfab.com/livanovbog" target="_blank" rel="noopener noreferrer">livanovbog</a>, licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a> (closed up, recolored and compressed for this page).</p>

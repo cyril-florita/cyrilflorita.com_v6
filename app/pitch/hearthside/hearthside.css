@@ -1382,7 +1382,7 @@ html:has(> body > .hs), html:has(.hs) { overflow-x: clip; }
    the clinicians' own lines. */
 .hs { --hs-font-quote: var(--hs-font-serif), Georgia, serif; }
 /* Every use of the serif is set tight (-0.05em, the user's choice). */
-:is(.hs-statement-em, .hs-hero-em, .hs-title-em, .hs-bleed-line, .hs-quote p, .hs-clinician-note, .hs-steps-story.is-story .hs-step .hs-step-n) { letter-spacing: -0.05em; }
+:is(.hs-statement-em, .hs-hero-em, .hs-title-em, .hs-bleed-line, .hs-quote p, .hs-clinician-note, .hs-steps-zig .hs-step .hs-step-n) { letter-spacing: -0.05em; }
 /* The Home hero's headline and the key words of each page title, in the serif italic. */
 :is(.hs-hero-em, .hs-title-em) { font-family: var(--hs-font-quote); font-style: italic; font-weight: 400; font-size: 1.04em; }
 .hs-statement-em { font-family: var(--hs-font-quote); font-style: italic; font-weight: 400; font-size: 1em; } /* the same size as the sentence above */
@@ -1416,37 +1416,35 @@ html:has(> body > .hs), html:has(.hs) { overflow-x: clip; }
   main[data-hover] .hs-clinician:hover .hs-photo-img { scale: 1.06; }
 }
 
-/* ---------- How care begins: the pinned story (desktop) ----------
-   StepStory (client.js) adds .is-story at ≥1081px without reduced motion.
-   The wrapper is tall (one stretch of scroll per step); the list sticks in
-   view and its four steps share one place, photo left and text right. The
-   step on show (data-on) opens through the leaf as its number and text rise
-   in; the one leaving fades. A rail under the text fills with --hs-p. */
-.hs-steps-story.is-story { --hs-story-top: 96px; height: calc(var(--hs-story-h, 560px) + 4 * 55vh); }
-/* The sticky frame is the story's first child: on Home a wrapper holding the
-   heading, its lede and the list (so they stay in view while the steps play),
-   on Getting started the list itself. */
-.hs-steps-story.is-story > :first-child { position: sticky; top: var(--hs-story-top); }
-.hs-steps-story.is-story ol { position: relative; display: grid; grid-template-columns: 1fr; padding-bottom: 0; } /* the rail sits on its bottom edge, level with the photo's foot */
-.hs-steps-story.is-story .hs-step { grid-area: 1 / 1; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); grid-template-rows: auto auto 1fr; column-gap: 64px; align-content: center; padding: 0; border: 0; container-type: normal; opacity: 0; pointer-events: none; transition: opacity 0.5s var(--hs-ease) 0.1s; }
-.hs-steps-story.is-story .hs-step[data-on] { opacity: 1; pointer-events: auto; transition-delay: 0s; }
-.hs-steps-story.is-story .hs-step > .hs-photo-frame { grid-column: 1; grid-row: 1 / 4; align-self: stretch; margin: 0; /* at least its 4:3, taller when the text is, so its foot always meets the rail */ clip-path: inset(7% 9% round var(--hs-radius) var(--hs-leaf)); transition: clip-path 1s cubic-bezier(0.16, 1, 0.3, 1); }
-.hs-steps-story.is-story .hs-step > .hs-photo-frame .hs-photo-img { scale: 1.12; transition: scale 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
-.hs-steps-story.is-story .hs-step[data-on] > .hs-photo-frame { clip-path: inset(0 round var(--hs-radius) var(--hs-leaf)); }
-.hs-steps-story.is-story .hs-step[data-on] > .hs-photo-frame .hs-photo-img { scale: 1; }
-.hs-steps-story.is-story .hs-step .hs-step-n { position: static; grid-column: 2; grid-row: 1; align-self: end; width: auto; height: auto; display: block; margin-bottom: 20px; background: none; border-radius: 0; font-family: var(--hs-font-quote); font-style: italic; font-size: 112px; font-weight: 400; line-height: 0.9; color: var(--hs-ember-text); } /* letter-spacing: the serif rule above */
-.hs-steps-story.is-story .hs-step h3 { grid-column: 2; grid-row: 2; font-size: 34px; letter-spacing: -0.025em; }
-.hs-steps-story.is-story .hs-step p { grid-column: 2; grid-row: 3; align-self: start; margin-top: 16px; margin-bottom: 28px; max-width: 34ch; font-size: 19px; }
-.hs-steps-story.is-story .hs-step :is(.hs-step-n, h3, p) { translate: 0 22px; opacity: 0; transition: translate 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s var(--hs-ease); }
-.hs-steps-story.is-story .hs-step[data-on] :is(.hs-step-n, h3, p) { translate: 0 0; opacity: 1; }
-.hs-steps-story.is-story .hs-step[data-on] h3 { transition-delay: 0.08s; }
-.hs-steps-story.is-story .hs-step[data-on] p { transition-delay: 0.16s; }
-/* The rail: a track under the text column, filling as the story goes.
-   StepStory sets --hs-p on the list itself (not the page), so updating it
-   restyles only the list (it must inherit to reach the ::after). */
-@property --hs-p { syntax: "<number>"; inherits: true; initial-value: 0; }
-.hs-steps-story.is-story ol::before { content: ""; position: absolute; bottom: 0; left: calc((100% - 64px) * 1.25 / 2.25 + 64px); right: 0; height: 10px; border-radius: 10px; background: var(--hs-rule); }
-.hs-steps-story.is-story ol::after { content: ""; position: absolute; bottom: 0; left: calc((100% - 64px) * 1.25 / 2.25 + 64px); right: 0; height: 10px; border-radius: 10px; background: var(--hs-ember-text); transform-origin: 0 50%; scale: var(--hs-p) 1; } /* the fill matches the step numeral */
+/* ---------- How care begins: the timeline (desktop) ----------
+   ≥1081px: a line down the middle, the steps alternating sides — photo on
+   one, the italic numeral, title and text on the other, and a dot on the
+   line. StepTimeline (client.js) adds .is-live without reduced motion: the
+   line fills to the reading point (--hs-p, set on the list) and each step
+   the reader reaches lights up (data-on). Otherwise the line is full and
+   every step lit. */
+@property --hs-p { syntax: "<number>"; inherits: true; initial-value: 1; }
+@media (min-width: 1081px) {
+  .hs-steps-zig ol { position: relative; display: grid; grid-template-columns: 1fr; row-gap: 96px; column-gap: 0; padding: 0; }
+  .hs-steps-zig ol::before, .hs-steps-zig ol::after { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; translate: -50% 0; border-radius: 2px; background: var(--hs-rule); }
+  .hs-steps-zig ol::after { background: var(--hs-ember-text); transform-origin: 50% 0; scale: 1 var(--hs-p); } /* the fill matches the numerals */
+  .hs-steps-zig .hs-step { position: static; display: grid; grid-template-columns: minmax(0, 1fr) 96px minmax(0, 1fr); grid-template-rows: 1fr auto auto auto 1fr; /* the text sits centred beside the photo, tight */ row-gap: 0; padding: 0; border: 0; container-type: normal; }
+  .hs-steps-zig .hs-step::after { content: ""; grid-column: 2; grid-row: 1 / -1; align-self: center; justify-self: center; z-index: 1; width: 18px; height: 18px; border-radius: 50%; background: var(--hs-ember-text); border: 2px solid var(--hs-ember-text); }
+  .hs-steps-zig .hs-step > .hs-photo-frame { grid-column: 1; grid-row: 1 / -1; align-self: center; margin: 0; }
+  .hs-steps-zig .hs-step .hs-step-n { position: static; grid-column: 3; grid-row: 2; align-self: end; width: auto; height: auto; display: block; margin-bottom: 16px; background: none; border-radius: 0; font-family: var(--hs-font-quote); font-style: italic; font-size: 80px; font-weight: 400; line-height: 0.9; color: var(--hs-ember-text); } /* letter-spacing: the serif rule above */
+  .hs-steps-zig .hs-step h3 { grid-column: 3; grid-row: 3; max-width: 16em; font-size: 30px; letter-spacing: -0.025em; }
+  .hs-steps-zig .hs-step p { grid-column: 3; grid-row: 4; align-self: start; margin-top: 14px; max-width: 30em; font-size: 18px; }
+  /* Even steps flip: photo right, text left and right-aligned toward the line. */
+  .hs-steps-zig .hs-step:nth-child(even) > .hs-photo-frame { grid-column: 3; }
+  .hs-steps-zig .hs-step:nth-child(even) :is(.hs-step-n, h3, p) { grid-column: 1; justify-self: end; text-align: right; }
+  /* Live: unreached steps wait dimmed and lowered, their dot hollow. */
+  .hs-steps-zig.is-live .hs-step::after { background: var(--hs-page); border-color: var(--hs-rule); transition: background 0.3s, border-color 0.3s, scale 0.45s cubic-bezier(0.34, 1.56, 0.64, 1); }
+  .hs-steps-zig.is-live .hs-step[data-on]::after { background: var(--hs-ember-text); border-color: var(--hs-ember-text); scale: 1.25; }
+  .hs-steps-zig.is-live .hs-step > :is(.hs-photo-frame, .hs-step-n, h3, p) { opacity: 0.25; translate: 0 24px; transition: opacity 0.6s var(--hs-ease), translate 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+  .hs-steps-zig.is-live .hs-step[data-on] > :is(.hs-photo-frame, .hs-step-n, h3, p) { opacity: 1; translate: 0 0; }
+  .hs-steps-zig.is-live .hs-step[data-on] > h3 { transition-delay: 0.06s; }
+  .hs-steps-zig.is-live .hs-step[data-on] > p { transition-delay: 0.12s; }
+}
 
 /* ---------- Calm switching and scrolling ----------
    switchLook (client.js) adds .hs-switching for the moment light/dark or the
@@ -1498,13 +1496,8 @@ html[data-hs-vt="look"]::view-transition-new(*) { animation: hs-look-in 0.3s eas
   .hs-help .hs-seg { background: var(--hs-page); } /* the switch's track takes the page colour (the thumb's old look), and the thumb is the accent (peach in Shore dark) */
 }
 
-/* Home's How care begins: the heading and lede inside the story's frame keep
-   the row's look; while pinned the gap under the lede tightens, and on short
-   windows the lede steps aside so the steps aren't cut off. */
-.hs-story-frame > h2 { max-width: 20ch; }
-.hs-story-frame > .hs-lede { margin-bottom: 56px; }
-.hs-steps-story.is-story .hs-story-frame > .hs-lede { margin-bottom: 32px; }
-@media (max-height: 760px) { .hs-steps-story.is-story .hs-story-frame > .hs-lede { display: none; } }
+/* Home's How care begins: the heading keeps its short measure. */
+.hs-row-body > #hs-steps-title { max-width: 20ch; }
 
 /* ---------- Paragraphs, line by line (LineReveal in client.js) ----------
    Words are inline spans numbered by line (--li); each line fades in and

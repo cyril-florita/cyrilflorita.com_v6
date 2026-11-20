@@ -1,6 +1,6 @@
 import { BASE, CREDENTIALS, FAQS, MEDICARE_CONDITIONS, MEDICARE_URL, PHONE, SERVICES, STEPS, AREAS } from "@/components/hearthside/data";
 import { Button, CallBand, CallButton, Icon, PartnerLogos, Photo, Row, Sample } from "@/components/hearthside/ui";
-import { BehindTheScenes, HeroMask, PathSwitch, ScrollCue, StepStory, ZipCheck } from "@/components/hearthside/client";
+import { BehindTheScenes, HeroMask, PathSwitch, ScrollCue, StepTimeline, ZipCheck } from "@/components/hearthside/client";
 import { PHOTO_LQIP } from "@/components/hearthside/photo-lqip";
 
 export const metadata = {
@@ -158,26 +158,22 @@ export default function HearthsideHome() {
       </Row>
 
       <Row label="How care begins" labelledBy="hs-steps-title">
-        {/* Desktop: a pinned scroll story (StepStory in client.js) — the
-            heading, its lede and the four steps stick together as one frame
-            while the steps play through. Elsewhere, and under reduced motion,
-            the grid (a swipe row on phones). */}
-        <StepStory>
-        <div className="hs-story-frame">
         <h2 id="hs-steps-title">Four steps</h2>
         <p className="hs-lede">From your first call to your first visit. We&rsquo;ll tell you what&rsquo;s happening at each one.</p>
+        {/* Desktop: a timeline down the middle, steps alternating sides
+            (StepTimeline in client.js). Tablets: the grid; phones: a swipe row. */}
+        <StepTimeline>
         <ol className="hs-ruled hs-swipe">
           {STEPS.map((s, i) => (
             <li key={s.title} className="hs-step">
-              <Photo shot={s.title} src={s.photo.src} alt={s.photo.alt} position={s.photo.position} sizes="(max-width: 760px) 55vw, 30vw" />
+              <Photo shot={s.title} src={s.photo.src} alt={s.photo.alt} position={s.photo.position} sizes="(max-width: 760px) 55vw, (max-width: 1080px) 30vw, 36vw" />
               <span className="hs-step-n" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
               <h3>{s.title}</h3>
               <p>{s.text}</p>
             </li>
           ))}
         </ol>
-        </div>
-        </StepStory>
+        </StepTimeline>
       </Row>
 
       {/* A full-bleed photo between chapters: edge to edge, no frame, its one

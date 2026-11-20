@@ -320,7 +320,7 @@ export function ContactDock() {
 // fold is hidden, only once this runs, and never under reduced motion; the
 // classes come off once a piece has settled, so its own transitions (hovers)
 // aren't delayed. Re-runs per page.
-const REVEAL = ".hs-row-body > :not(.hs-ruled):not(.hs-services):not(.hs-creds):not(.hs-clinicians):not(h2):not(h3):not(.hs-steps-story):not(.hs-faq), .hs-ruled > *, .hs-services > *, .hs-creds > *, .hs-clinicians > *, .hs-bleed, .hs-band"; // row headings and the statement reveal word by word (SplitHeads)
+const REVEAL = ".hs-row-body > :not(.hs-ruled):not(.hs-services):not(.hs-creds):not(.hs-clinicians):not(h2):not(h3):not(.hs-steps-zig):not(.hs-faq), .hs-ruled > *, .hs-services > *, .hs-creds > *, .hs-clinicians > *, .hs-bleed, .hs-band"; // row headings and the statement reveal word by word (SplitHeads)
 export function Reveal() {
   const pathname = usePathname();
   useEffect(() => {
@@ -337,7 +337,7 @@ export function Reveal() {
     // (SplitHeads, LineReveal): a block fade on top hid those, which played
     // underneath it. Blocks with a photo or a widget keep the fade.
     const textOnly = (el) => el.matches("p, ul, ol, .hs-band") || (!el.querySelector("img, .hs-photo-frame, .hs-photo, .hs-bts, .hs-logos, .hs-zip, .hs-faq, form, svg.hs-map, .hs-area-map, table") && !!el.querySelector("p, h2, h3, li"));
-    const els = [...new Set([...document.querySelectorAll(`main :is(${REVEAL})`)].map((el) => (swipes(el) ? el.parentElement : el)))].filter((el) => el.getBoundingClientRect().top > fold && !el.closest(".hs-steps-story.is-story") && !textOnly(el));
+    const els = [...new Set([...document.querySelectorAll(`main :is(${REVEAL})`)].map((el) => (swipes(el) ? el.parentElement : el)))].filter((el) => el.getBoundingClientRect().top > fold && !el.closest(".hs-steps-zig.is-live") && !textOnly(el));
     const settle = (e) => { if (e.target === e.currentTarget && e.propertyName === "opacity") { e.target.classList.remove("hs-reveal", "is-in"); e.target.style.removeProperty("--hs-i"); e.target.removeEventListener("transitionend", settle); } };
     els.forEach((el) => {
       const sibs = [...el.parentElement.children].filter((c) => els.includes(c));
@@ -358,14 +358,14 @@ export function Reveal() {
 // back below the screen (scrolling up past it) resets, so it plays again on
 // the way down. Headings already on screen when the page opens show at once
 // (they join the cycle after). Not the Home hero (its own entrance) or the
-// pinned steps' titles (they animate with each step); never under reduced
+// timeline steps' titles (they light up with each step); never under reduced
 // motion. A heading's text becomes its accessible name and the word spans are
 // hidden from assistive tech.
 const SPLIT = "main :is(h1, h2, h3):not(.hs-visually-hidden), main .hs-bleed-line, .hs-footer h2"; // plus the line over the full-bleed photo, set like a headline, and the footer's headings
 // Live regions and React-updated text (role="status", aria-live, data-live)
 // are never split: rewriting their text nodes would break React's updates.
 const LIVE_SKIP = "[aria-live], [role=\"status\"], [role=\"alert\"], [data-live]";
-const SPLIT_SKIP = `.hs-hero, .hs-steps-story.is-story .hs-step, .hs-title-split, ${LIVE_SKIP}`; // page titles are split on the server
+const SPLIT_SKIP = `.hs-hero, .hs-steps-zig.is-live .hs-step, .hs-title-split, ${LIVE_SKIP}`; // page titles are split on the server
 export function SplitHeads() {
   const pathname = usePathname();
   useEffect(() => {
@@ -439,10 +439,10 @@ export function SplitHeads() {
 // their underline), grouped into lines by where they sit; the lines are
 // re-measured on resize. Replays like the headings: a paragraph that drops
 // back below the screen resets. On-screen ones at load show at once. Not the
-// hero, forms, the pinned steps, the hover notes or the design-system page;
+// hero, forms, the timeline steps, the hover notes or the design-system page;
 // never under reduced motion.
 const LINES = "main :is(p, .hs-list li, .hs-checks li, .hs-path-list li), .hs-footer p";
-const LINES_SKIP = `.hs-hero, .hs-bleed-line, form, .hs-steps-story.is-story .hs-step, .hs-clinician-note, .hs-bts, .hs-zip, .hs-faq, .hs-dock, .hs-sample, .hs-help-label, .hs-path-tag, ${LIVE_SKIP}`;
+const LINES_SKIP = `.hs-hero, .hs-bleed-line, form, .hs-steps-zig.is-live .hs-step, .hs-clinician-note, .hs-bts, .hs-zip, .hs-faq, .hs-dock, .hs-sample, .hs-help-label, .hs-path-tag, ${LIVE_SKIP}`;
 export function LineReveal() {
   const pathname = usePathname();
   useEffect(() => {
@@ -617,80 +617,50 @@ export function ScrollCalm() {
   return null;
 }
 
-// How care begins on desktop: a pinned scroll story. The steps sit stacked
-// in one sticky frame while the wrapper scrolls past; scroll progress picks
-// the step on show (data-on), whose photo opens through the leaf as its text
-// rises in, and a rail fills as the story goes (--hs-p). Only on desktop
-// (≥1081px) without reduced motion; otherwise the plain grid. All four steps
-// stay in the accessibility tree (hidden steps are transparent, not removed).
-export function StepStory({ children }) {
+// How care begins on desktop (≥1081px): a timeline. A line runs down the
+// middle with the steps alternating sides (photo one side, numeral, title and
+// text the other; hearthside.css). As the page scrolls, the line fills to the
+// reading point (--hs-p on the list) and each step the reading point has
+// reached lights up (data-on: its dot fills, its photo and text come up to
+// full strength). Without that (reduced motion) the line is full and every
+// step lit. Tablets and phones keep the grid / swipe row.
+export function StepTimeline({ children }) {
   const ref = useRef(null);
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    const list = el?.querySelector("ol");
+    if (!list) return;
     const mq = window.matchMedia("(min-width: 1081px) and (prefers-reduced-motion: no-preference)");
-    const frame = el.firstElementChild;
-    const all = [...el.querySelectorAll(".hs-step")];
-    // Scroll work stays cheap: geometry is measured on resize only, the
-    // listener is attached only while the story is near the screen, and the
-    // rail's progress is a non-inherited custom property on the list alone
-    // (registered in CSS), so updating it restyles nothing else.
-    let raf = 0, top = 0, span = 1, startY = 0, lastP = -1;
-    const measure = () => {
-      top = parseFloat(getComputedStyle(frame).top) || 0;
-      startY = el.getBoundingClientRect().top + window.scrollY;
-      span = Math.max(1, el.offsetHeight - frame.offsetHeight);
-    };
-    // Below the screen, no step is on, so step 1 plays its entrance (the
-    // photo opening, the numeral and text rising) as the story scrolls in —
-    // the first time and every time the reader comes back down to it.
-    const reset = () => all.forEach((li) => li.removeAttribute("data-on"));
+    const items = [...list.children];
+    let raf = 0, lastP = -1;
     const update = () => {
       raf = 0;
-      if (el.getBoundingClientRect().top > window.innerHeight * 0.8) return reset();
-      const p = Math.min(1, Math.max(0, (window.scrollY + top - startY) / span));
-      // Hysteresis: a step changes only once the scroll is clearly past the
-      // boundary (6% of a step), so small scrolls up and down around one
-      // don't flip the steps back and forth.
-      const x = p * all.length;
-      let on = all.findIndex((li) => li.hasAttribute("data-on"));
-      if (on < 0) on = Math.min(all.length - 1, Math.floor(x));
-      else if (x >= on + 1.06 || x <= on - 0.06) on = Math.min(all.length - 1, Math.max(0, Math.floor(x)));
-      if (Math.abs(p - lastP) > 0.002) { frame.style.setProperty("--hs-p", p.toFixed(3)); lastP = p; }
-      all.forEach((li, k) => { if (li.hasAttribute("data-on") !== (k === on)) li.toggleAttribute("data-on", k === on); });
+      const mid = window.innerHeight * 0.55; // the reading point
+      const r = list.getBoundingClientRect();
+      const p = Math.min(1, Math.max(0, (mid - r.top) / r.height));
+      if (Math.abs(p - lastP) > 0.001) { list.style.setProperty("--hs-p", p.toFixed(3)); lastP = p; }
+      items.forEach((li) => { const on = li.getBoundingClientRect().top + 80 < mid; if (li.hasAttribute("data-on") !== on) li.toggleAttribute("data-on", on); });
     };
     const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
-    const onResize = () => { measure(); onScroll(); };
+    // The listener is attached only while the timeline is near the screen.
     let near = false;
     const io = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting === near) return;
       near = e.isIntersecting;
-      if (near && el.classList.contains("is-story")) { measure(); update(); window.addEventListener("scroll", onScroll, { passive: true }); }
-      else {
-        window.removeEventListener("scroll", onScroll);
-        if (e.boundingClientRect.top > 0) reset(); // left below the screen: replay next time
-      }
+      if (near) { update(); window.addEventListener("scroll", onScroll, { passive: true }); }
+      else { window.removeEventListener("scroll", onScroll); update(); }
     }, { rootMargin: "50% 0px" });
     const apply = () => {
       const on = mq.matches;
-      el.classList.toggle("is-story", on);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onResize);
-      io.disconnect(); near = false;
-      if (on) {
-        measure(); update();
-        window.addEventListener("resize", onResize);
-        io.observe(el);
-      } else {
-        all.forEach((li) => li.removeAttribute("data-on"));
-        frame.style.removeProperty("--hs-p");
-      }
+      el.classList.toggle("is-live", on);
+      io.disconnect(); window.removeEventListener("scroll", onScroll);
+      if (on) { lastP = -1; update(); io.observe(el); }
+      else { items.forEach((li) => li.removeAttribute("data-on")); list.style.removeProperty("--hs-p"); }
     };
     apply();
     mq.addEventListener("change", apply);
-    return () => { mq.removeEventListener("change", apply); io.disconnect(); window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", onResize); cancelAnimationFrame(raf); };
+    return () => { mq.removeEventListener("change", apply); io.disconnect(); window.removeEventListener("scroll", onScroll); cancelAnimationFrame(raf); };
   }, []);
-  return <div ref={ref} className="hs-steps-story">{children}</div>;
+  return <div ref={ref} className="hs-steps-zig">{children}</div>;
 }
 
 // "How can we help?" on phones: a segmented switch (two toggle buttons, the
