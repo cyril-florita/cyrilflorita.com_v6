@@ -55,7 +55,7 @@ const Cta = ({ inline }) => (
   <div className={`cyril-case-cta${inline ? " cyril-case-cta-inline" : ""}`}>
     <div>
       <h3 className="cyril-case-subheading">Try it yourself</h3>
-      <p>Drag the car around, change its paint, and open the windows to see the taillights, the cockpit, and the headlights up close. Best with a mouse, and it works on a phone too. The campaign kit has the email, the social spots, and the stills, ready to download.</p>
+      <p>Drag the car around, change its paint, and open the windows to see the taillights, the cockpit, and the headlights up close. Best with a mouse, and it works on a phone too. The campaign kit has the email, the social spots, the website hero, the display ads, and the stills, ready to download.</p>
     </div>
     <div className="cyril-case-cta-actions">
       <a className="cyril-button" href={LIVE} target="_blank" rel="noopener noreferrer">Try the ad live <Arrow /></a>
@@ -110,7 +110,7 @@ const Page = () => {
                 <li><strong>The offer is buried:</strong> the monthly price is easy to find, but the terms behind it are a click and a page load away.</li>
                 <li><strong>Nothing invites a second look:</strong> a static banner gives nobody a reason to stay on it.</li>
               </ul>
-              <p>This is my pitch to a car dealership: a prototype that shows how I approach design across channels. At its center is a one-page interactive ad for the Mustang, built around a 3D Dark Horse you can turn, repaint, and look inside, with the lease offer under the car. It&apos;s designed mobile-first and progressively enhanced for desktops, and the same concept carries beyond the web: a launch email and seven-second spots for social, gathered in a campaign kit the dealer&apos;s team can download. I designed and built it on my own, from the layout and type to the 3D scene, with four goals:</p>
+              <p>This is my pitch to a car dealership: a prototype that shows how I approach design across channels. At its center is a one-page interactive ad for the Mustang, built around a 3D Dark Horse you can turn, repaint, and look inside, with the lease offer under the car. It&apos;s designed mobile-first and progressively enhanced for desktops, and the same concept carries beyond the ad: a launch email, seven-second spots for social, a hero for the dealer&apos;s website, and display ads, gathered in a campaign kit the dealer&apos;s team can download. I designed and built it on my own, from the layout and type to the 3D scene, with four goals:</p>
               <ul className="cyril-case-list">
                 <li>let people explore the car the way they would on the lot: walk around it, look inside, and pick a color</li>
                 <li>keep the offer in view the whole time, with its terms one tap away</li>
@@ -127,7 +127,7 @@ const Page = () => {
                 <li><strong>A preloader</strong> built from the S650 / MUSTANG lockup, which lights up while the car loads</li>
                 <li><strong>A phone version</strong> with the car full width, the windows in a row under it, and the offer as a bottom sheet</li>
                 <li><strong>A spec strip:</strong> 5.0 L V8, 500 hp, rear-wheel drive, 6 or 10 speeds, 2+2 seating</li>
-                <li><strong>A campaign kit:</strong> a launch email with the car turning in a GIF, seven-second spots in 9:16, 4:5, and 16:9, and stills of the three close-ups, all recorded from the same 3D car</li>
+                <li><strong>A campaign kit:</strong> a launch email with the car turning in a GIF, seven-second spots in 9:16, 4:5, and 16:9, a 1920 × 600 website hero, display ads in six standard sizes (HTML5 with GSAP, GIF, and backup JPG), and stills of the three close-ups, all made from the same 3D car</li>
               </ul>
               <p>It&apos;s a spec ad: unofficial, not affiliated with Ford, and every price and term in it is sample content. Nothing can be booked from it.</p>
               <Cta inline />
@@ -188,7 +188,7 @@ const Page = () => {
               <h3 className="cyril-case-subheading">A Car Launch, on a Page</h3>
               <p>The layout follows a poster: the car in the middle of a dark studio, the model name huge behind it, the windows like a contact sheet down the side, and the price under the tires. The stage is wet, scuffed concrete with smoke drifting over it, so the car&apos;s paint and chrome have something to reflect, and the floor shows a short, faded reflection under the tires and a soft shadow, as a showroom floor would. The type is narrow and loud for the name (Big Shoulders, chosen from ten condensed faces), wide and mechanical for headings (Michroma), and plain for reading (Exo 2, chosen from nine side by side). One accent blue marks everything you can act on.</p>
               <h3 className="cyril-case-subheading">One Concept, Many Channels</h3>
-              <p>The web page is one application of the idea, not the whole of it. The same stage, type, and car carry into a launch email and short spots for social: one creative concept with multiple applications, so the campaign looks and feels the same in the inbox, in the feed, and on the page. Every piece is in the <a className="cyril-dark" href={KIT} target="_blank" rel="noopener noreferrer">campaign kit</a>, with what it&apos;s for, its specs, and a download.</p>
+              <p>The web page is one application of the idea, not the whole of it. The same stage, type, and car carry into a launch email, short spots for social, a website hero, and display ads: one creative concept with multiple applications, so the campaign looks and feels the same in the inbox, in the feed, on the dealer&apos;s site, and across the web. Every piece is in the <a className="cyril-dark" href={KIT} target="_blank" rel="noopener noreferrer">campaign kit</a>, with what it&apos;s for, its specs, and a download.</p>
               <CaseFigure src={`${P}desktop-kit.jpg`} alt="The Mustang campaign kit page: one concept, everywhere the buyer is" caption="The campaign kit" frame="browser" url={`${URL}/kit/`} />
               <p><strong>The email.</strong> A launch email for the dealer&apos;s list, built the way email has to be: tables and inline styles, a 600px column that stacks on phones, a button that holds up in Outlook, and web fonts only where the inbox allows them. The car turns at the top as a GIF: one full turn, looping, opening on the front three-quarter view, the only frame Outlook on Windows shows. Under it, the three close-ups from the ad&apos;s windows, the specs, and the offer, with every image and button leading back to the 3D ad.</p>
               <CaseGrid layout="two">
@@ -204,6 +204,23 @@ const Page = () => {
               <CaseGrid layout="two">
                 <CaseVideo src={`${KIT}mustang-spot-story.mp4`} caption="9:16, for Reels, Stories, and TikTok" size="phone" />
                 <CaseVideo src={`${KIT}mustang-spot-feed.mp4`} caption="4:5, for Instagram and Facebook feeds" frame={false} />
+              </CaseGrid>
+              <p><strong>A hero for the dealer&apos;s website.</strong> A 1920 × 600 banner for the top of the dealer&apos;s home page, short enough to leave the inventory above the fold: the offer on the left and the car turning under MUSTANG on the right. It comes as an 8-second MP4 that loops without a seam (1 MB, the one to use), an HTML5 version in GSAP whose car turns again on hover, a GIF for places that don&apos;t allow video, and a still.</p>
+              <CaseVideo src={`${KIT}hero/mustang-hero.mp4`} caption="The website hero, 1920 × 600" frame={false} />
+              <p><strong>Display ads.</strong> The six standard sizes, from the 970 × 250 billboard to the 320 × 50 phone banner, each as an HTML5 ad, a GIF, and the backup image networks show when neither runs. In the HTML5 ads, one GSAP timeline spins the car into its front three-quarter view, lands the copy and the button, then turns the car once more and stops at about eleven seconds, inside the networks&apos; limits; the car turns again on hover. The car is a sprite sheet of 24 frames taken from the 3D model, crossfaded so the turn reads smoothly, and a script fits each ad under the 150 KB cap Google Ads sets, lowering image quality only as far as it needs to.</p>
+              <figure className="cyril-case-figure cyril-case-figure-full">
+                <img src={`${KIT}ads/mustang-970x250.gif`} width="970" height="250" alt="The 970 × 250 Mustang display ad: the car spinning into view beside the offer" loading="lazy" style={{ display: "block", width: "100%", height: "auto" }} />
+                <figcaption className="cyril-upper">970 × 250 billboard, GIF</figcaption>
+              </figure>
+              <CaseGrid layout="two">
+                <figure className="cyril-case-figure">
+                  <img src={`${KIT}ads/mustang-300x600.gif`} width="300" height="600" alt="The 300 × 600 Mustang display ad" loading="lazy" style={{ display: "block", width: "100%", maxWidth: 300, height: "auto", margin: "0 auto" }} />
+                  <figcaption className="cyril-upper">300 × 600 half page</figcaption>
+                </figure>
+                <figure className="cyril-case-figure">
+                  <img src={`${KIT}ads/mustang-300x250.gif`} width="300" height="250" alt="The 300 × 250 Mustang display ad" loading="lazy" style={{ display: "block", width: "100%", maxWidth: 300, height: "auto", margin: "0 auto" }} />
+                  <figcaption className="cyril-upper">300 × 250 medium rectangle</figcaption>
+                </figure>
               </CaseGrid>
             </CaseSection>
 
@@ -231,7 +248,7 @@ const Page = () => {
                   "A dark, moody stage needs care everywhere: the reflection, the floor, and the shadows each took several rounds before the car looked like it was standing on something.",
                 ]}
                 next={[
-                  "Run the kit with the dealer: send the email to a test list and compare its subject lines, and try the spots' first second against a still of the car.",
+                  "Run the kit with the dealer: send the email to a test list and compare its subject lines, and try the spots' first second against a still of the car; set the display ads' click-through to the dealer's page and compare the HTML5 ads with the GIFs.",
                   "Bring phone performance up: lift the preloader on the fonts and show a still of the car until the 3D one is ready, ship the smoke and grit as image files, and serve a lighter model to phones.",
                   "Put in the dealer's real offer, phone number, and test-drive booking, and its own photos for the share image.",
                   "Measure time on the ad, windows opened, paints tried, and taps through to the offer, then test which first view keeps people longest.",

@@ -110,7 +110,7 @@ function Tile({ id, ar, slant, kicker, label, pressed, aria, size, onClick, onHo
 // `spot` (the campaign kit's recording page, app/pitch/mustang/spot/): no windows, paint
 // controls or hints, and the car is driven by a clock instead of the pointer, so every
 // recording plays the same: { spin: radians per second (turntable), yaw0: the yaw at the
-// start, intro: glide the camera in as the landing does, lift: raises the car in its view (a share of its height), view: a feature pose to hold
+// start, intro: glide the camera in as the landing does, lift: raises the car in its view (a share of its height), panX: moves it right (a share of its width), floor: false hides the floor and the reflection, view: a feature pose to hold
 // (rear | cockpit | lights), paint: a hex, zoom: multiplies the full view's field of view }.
 // Once the clock starts it sets window.__msSpotT0 (Date.now()) for the capture scripts.
 export default function CarStage({ children, spot = null }) {
@@ -478,7 +478,7 @@ export default function CarStage({ children, spot = null }) {
         const fit = Math.min(1.05, Math.max(0.6, (freeW - 112) / (0.465 * r.width)));
         main.aspect = r.width / r.height; main.fov = (fov / Math.max(narrow, 0.55) ** 0.9) * (1 + (1 / fit - 1) * mm);
         const wide = r.width > 900 ? shift : 0;
-        main.setViewOffset(r.width, r.height, (r.width - freeW) / 2 * mm, r.height * (0.02 * wide + 0.04 * mm + 0.3 * mp + (sp?.lift || 0)), r.width, r.height);   // centered in the stage
+        main.setViewOffset(r.width, r.height, (r.width - freeW) / 2 * mm - (sp?.panX || 0) * r.width, r.height * (0.02 * wide + 0.04 * mm + 0.3 * mp + (sp?.lift || 0)), r.width, r.height);   // centered in the stage
         main.position.copy(camPos); main.lookAt(camLook); main.updateProjectionMatrix();
         renderer.render(scene, main);
       };
@@ -637,10 +637,12 @@ export default function CarStage({ children, spot = null }) {
           if (disposed) return;
           ready = true; setState("ready");
           if (sp) {
+            if (sp.floor === false) { floor.visible = false; mirror.visible = false; }   // the car and its shadows alone (the reflection needs the floor in front of it)
             if (sp.paint) { paintGoal = new THREE.Color(sp.paint); mats.Paint.color.copy(paintGoal); reflMats.Paint?.color.copy(paintGoal); }
             if (sp.view && POSES[sp.view]) { mode = sp.view; yaw = sp.view === "cockpit" ? sp.yaw0 ?? START_YAW : POSES[sp.view].yaw; }
             else yaw = sp.yaw0 ?? START_YAW;
             if (sp.intro && !reduce) { camPos.set(FULL.pos[0] - 3.2, FULL.pos[1] + 1.1, FULL.pos[2] + 6); fov = FULL.fov + 6; introUntil = performance.now() + 2600; }
+            window.__msSpotYaw = (y) => { yaw = y; yawGoal = null; wake(300); };   // the capture scripts turn the car frame by frame (spin 0)
             requestAnimationFrame((t) => { spotT0 = t; window.__msSpotT0 = Date.now(); stage.dataset.spot = "go"; wake(3000); });
             return;
           }
@@ -658,7 +660,7 @@ export default function CarStage({ children, spot = null }) {
         window.removeEventListener("pointermove", onMove); window.removeEventListener("pointerup", onUp);
         window.removeEventListener("pointercancel", onUp); window.removeEventListener("scroll", onScroll); window.removeEventListener("ms:modal", onModal);
         document.documentElement.removeEventListener("mouseleave", onLeave);
-        api.current = null;
+        api.current = null; delete window.__msSpotYaw;
         scene.traverse((o) => { o.geometry?.dispose?.(); });
         Object.values(mats).forEach((m) => { m.map?.dispose?.(); m.dispose(); }); Object.values(reflMats).forEach((m) => m.dispose()); flakes.dispose(); honeycomb.dispose(); dome.geometry.dispose(); dome.material.dispose();
         envTarget.dispose(); pmrem.dispose(); eraseGeo.dispose(); eraseMat.dispose(); Object.values(maskGeos).forEach((g) => g.dispose()); maskMat.dispose();

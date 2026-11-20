@@ -68,7 +68,24 @@
 .kit-post-text { font-size: 18px; line-height: 1.55; }
 .kit-post-note { font-size: 13.5px; line-height: 1.55; color: var(--ms-ink-2); }
 
-/* 05 stills */
+/* website hero: the loop, full width, then its downloads */
+.kit-hero { margin: 0; }
+.kit-hero video { display: block; width: 100%; height: auto; aspect-ratio: 1920 / 600; background: #070c16; border: 1px solid rgba(255, 255, 255, 0.16); }
+.kit-more { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-top: 20px !important; }
+
+/* display ads: each at its real size (the wide ones scroll sideways on phones), a replay, the downloads */
+.kit-ads { display: flex; flex-wrap: wrap; gap: 40px 36px; align-items: flex-start; }
+.kit-ad { margin: 0; display: grid; gap: 12px; max-width: 100%; }
+.kit-ad-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.kit-ad-head p { font-size: 13.5px; color: var(--ms-ink-2); }
+.kit-ad-size { margin-right: 8px; font-family: var(--ms-font-head), sans-serif; font-size: 12px; letter-spacing: 0.1em; color: var(--ms-ink); }
+.kit-replay { min-height: 32px; padding: 0 12px; border: 1px solid rgba(255, 255, 255, 0.3); background: none; color: var(--ms-ink); font-family: var(--ms-font-head), sans-serif; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; cursor: pointer; }
+.kit-replay:hover { border-color: var(--ms-ink); }
+.kit-ad-frame { max-width: 100%; overflow-x: auto; }
+.kit-ad-frame iframe { display: block; border: 0; }
+.kit-ad figcaption { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+
+/* stills */
 .kit-stills { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
 .kit-stills figure { margin: 0; }
 .kit-stills img { display: block; width: 100%; height: auto; border: 1px solid rgba(255, 255, 255, 0.16); }

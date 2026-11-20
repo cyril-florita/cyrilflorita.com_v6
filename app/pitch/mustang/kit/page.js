@@ -1,4 +1,5 @@
 import KitEmail from "@/components/mustang/KitEmail";
+import KitAds from "@/components/mustang/KitAds";
 import "./kit.css";
 
 // The campaign kit (/pitch/mustang/kit/): every deliverable made from the ad's one concept,
@@ -11,6 +12,16 @@ const SPOTS = [
   { id: "story", ratio: "9:16", size: "1080 × 1920", mb: "3.1", use: "Instagram and Facebook Reels and Stories, TikTok, YouTube Shorts", note: "Copy stays out of the top 14% and bottom 20%, where the apps draw their own buttons." },
   { id: "feed", ratio: "4:5", size: "1080 × 1350", mb: "2.4", use: "Instagram and Facebook feeds", note: "The tallest size the feeds show in full." },
   { id: "wide", ratio: "16:9", size: "1920 × 1080", mb: "4.2", use: "YouTube, X, LinkedIn, and the dealer's site", note: "Also works as a video banner or a showroom screen loop." },
+];
+
+// the display ads (scripts/mustang/make-banners.mjs), largest first; sizes in KB
+const ADS = [
+  { id: "970x250", w: 970, h: 250, name: "Billboard", zip: 139, gif: 130 },
+  { id: "728x90", w: 728, h: 90, name: "Leaderboard", zip: 139, gif: 137 },
+  { id: "300x600", w: 300, h: 600, name: "Half page", zip: 140, gif: 115 },
+  { id: "160x600", w: 160, h: 600, name: "Wide skyscraper", zip: 114, gif: 126 },
+  { id: "300x250", w: 300, h: 250, name: "Medium rectangle", zip: 140, gif: 111 },
+  { id: "320x50", w: 320, h: 50, name: "Mobile banner", zip: 82, gif: 46 },
 ];
 
 const STILLS = [
@@ -56,13 +67,15 @@ export default function Kit() {
           <p className="kit-top"><span>S650</span><span>Mustang <Slashes /></span></p>
           <h1>Campaign kit</h1>
           <p className="kit-tagline">One concept, everywhere the buyer is.</p>
-          <p className="kit-intro">The interactive ad is the center of the campaign. From the same car, stage, and type come a launch email with an animated hero and seven-second spots for social, so the Mustang looks the same in the inbox, in the feed, and on the page. Everything here is ready to download; the prices and terms are sample content.</p>
+          <p className="kit-intro">The interactive ad is the center of the campaign. From the same car, stage, and type come a launch email with an animated hero, seven-second spots for social, a hero for the dealer&apos;s website, and display ads in the standard sizes, so the Mustang looks the same in the inbox, in the feed, and on every page. Everything here is ready to download; the prices and terms are sample content.</p>
           <nav className="kit-index" aria-label="Deliverables">
             <ol>
               <li><a href="#landing">Landing page</a></li>
               <li><a href="#email">Email</a></li>
               <li><a href="#gif">Email GIF</a></li>
               <li><a href="#spots">Social spots</a></li>
+              <li><a href="#hero">Website hero</a></li>
+              <li><a href="#ads">Display ads</a></li>
               <li><a href="#stills">Stills</a></li>
             </ol>
           </nav>
@@ -130,7 +143,42 @@ export default function Kit() {
           </div>
         </Item>
 
-        <Item n={5} id="stills" title="Stills" lede="The three close-ups from the ad's windows, for the email, posts, and the dealer's site.">
+        <Item n={5} id="hero" title="Website hero" lede="A full-width banner for the top of the dealer's site, 1920 × 600: the offer on the left, the car turning under the giant word on the right, looping without a seam.">
+          <figure className="kit-hero">
+            <video src={`${K}hero/mustang-hero.mp4`} poster={`${K}hero/mustang-hero.jpg`} autoPlay muted loop playsInline aria-label="The website hero: the Mustang turning beside the offer" />
+          </figure>
+          <div className="kit-foot">
+            <Specs rows={[
+              ["Size", "1920 × 600, the common height for a full-width hero: room for the car and the offer, with the dealer's inventory still above the fold"],
+              ["Video", "8-second loop, H.264, silent, 1 MB; the version to use. Embed it as a muted, looping, inline video with the JPG as its poster"],
+              ["HTML5", "The same layout built live with GSAP: the word rises, the car turns in, the copy follows, then the car turns again on hover; it scales to its container"],
+              ["Also", "A GIF (1280 × 400, 2 MB) where video isn't allowed, and a JPG still"],
+            ]} />
+            <div className="kit-actions">
+              <a className="ms-btn ms-btn-ghost" href={`${K}hero/mustang-hero.mp4`} download>MP4 · 1 MB <Down /></a>
+              <a className="ms-btn ms-btn-ghost" href={`${K}ads/hero-1920x600/index.html`} target="_blank" rel="noopener noreferrer">Open HTML5 <Out /></a>
+            </div>
+          </div>
+          <p className="kit-more">
+            <a className="kit-dl" href={`${K}ads/mustang-hero-1920x600-html5.zip`} download>HTML5 zip · 603 KB <Down /></a>
+            <a className="kit-dl" href={`${K}hero/mustang-hero.gif`} download>GIF · 2 MB <Down /></a>
+            <a className="kit-dl" href={`${K}hero/mustang-hero.jpg`} download>JPG · 97 KB <Down /></a>
+          </p>
+        </Item>
+
+        <Item n={6} id="ads" title="Display ads" lede="The standard sizes for ad networks, each as an HTML5 ad animated with GSAP, a GIF, and the backup JPG networks show where neither runs. Each plays once, about ten seconds, and turns the car again on hover.">
+          <KitAds ads={ADS} base={`${K}ads/`} />
+          <div className="kit-foot">
+            <Specs rows={[
+              ["HTML5", "Each zip is under 150 KB with GSAP inside it, the cap Google Ads sets; uses clickTag for the click-through"],
+              ["GIF", "Under 150 KB each; the entrance, then the final frame, three plays"],
+              ["Motion", "Stops by 11 seconds, inside the networks' 30-second limit; holds still for people who ask for reduced motion"],
+              ["Before running", "Set clickTag to the dealer's landing page, and replace the [ Sample offer ] terms with real ones"],
+            ]} />
+          </div>
+        </Item>
+
+        <Item n={7} id="stills" title="Stills" lede="The three close-ups from the ad's windows, for the email, posts, and the dealer's site.">
           <div className="kit-stills">
             {STILLS.map((s) => (
               <figure key={s.id}>

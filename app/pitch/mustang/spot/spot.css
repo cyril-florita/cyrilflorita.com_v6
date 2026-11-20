@@ -63,6 +63,21 @@
 .sp-gif .sp-word { top: 12%; font-size: 27vw; }
 .sp-gif .ms-floor { height: 44%; }
 
+/* banner, 1920×600 (the dealer's website): copy on the left, the car right of centre under the word;
+   everything in place from the start, so the recording loops on the car's turn alone */
+.sp-banner .ms-view { inset: 0; }
+.sp-banner .sp-word { left: 40%; right: 0; top: 14%; font-size: 14vw; }
+.sp-banner .sp-top { left: 6.25vw; top: 15%; font-size: 0.72vw; }
+.sp-banner .sp-copy { left: 6.25vw; right: auto; top: 37%; justify-items: start; text-align: left; gap: 0.45vw; font-size: 0.95vw; }
+.sp-banner .sp-line { font-size: 0.7vw; margin-bottom: 0.35vw; }
+.sp-banner .sp-title { font-size: 1.75vw; }
+.sp-banner .sp-btn { margin-top: 1.1vw; padding: 0 1.7vw; min-height: 3vw; font-size: 0.72vw; }
+.sp-banner .sp-stamp { margin-top: 0.5vw; font-size: 0.58vw; }
+.sp.sp-banner .ms-stage[data-spot="go"] :is(.sp-word, .sp-top, .sp-copy > *) { animation: none; }
+.sp-banner .ms-floor { height: 42%; }
+/* the car alone on a transparent page (the GSAP banner's frames) */
+:root:has(.sp-car-only), :root:has(.sp-car-only) body, .ms:has(.sp-car-only) { background: transparent !important; }
+
 /* stills: the feature views alone, for the email */
 .sp-still .ms-view { inset: 0; }
 

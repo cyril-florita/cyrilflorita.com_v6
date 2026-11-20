@@ -14,12 +14,18 @@ import "./spot.css";
 //   story 1080×1920 · feed 1080×1350 · wide 1920×1080 — the 7s social spots
 //   gif 1200×640 — the email's turntable loop (one full turn in GIF_PERIOD seconds)
 //   still 1200×800 &view=rear|cockpit|lights — the email's feature shots
+//   turn 1600×700 &layer=car — the car alone, turned frame by frame (window.__msSpotYaw), for the GSAP banners' sprites
+//   banner 1920×600 — the website banner, copy in place, the car turning (a seamless loop);
+//     &layer=car shows the car alone on a transparent page, for the GSAP banner's frames
 const GIF_PERIOD = 6;
+const BANNER_PERIOD = 8;   // the website banner: one full turn in 8s (its loop, and the GSAP version's 48 frames)
 const FORMATS = {
   story: { spin: -0.33, yaw0: 1.7, intro: true, zoom: 0.9, lift: 0.2, smoke: true, copy: true },
   feed: { spin: -0.33, yaw0: 1.7, intro: true, zoom: 0.78, lift: 0.19, smoke: true, copy: true },
   wide: { spin: -0.33, yaw0: 1.7, intro: true, zoom: 0.74, lift: 0.15, smoke: true, copy: true },
+  banner: { spin: (-Math.PI * 2) / BANNER_PERIOD, yaw0: -0.62, intro: false, zoom: 0.8, lift: 0.05, panX: 0.2, smoke: false, copy: true },
   gif: { spin: (-Math.PI * 2) / GIF_PERIOD, yaw0: -0.62, intro: false, zoom: 0.58, smoke: false, copy: false },
+  turn: { spin: 0, yaw0: -0.62, intro: false, zoom: 0.62, lift: 0.06, floor: false, smoke: false, copy: false },
   still: { spin: 0, intro: false, smoke: false, copy: false },
 };
 
@@ -31,14 +37,15 @@ function Spot() {
   const fmt = FORMATS[f];
   const paint = PAINTS.find((p) => p.id === q.get("paint"))?.hex;
   const spot = { ...fmt, view: f === "still" ? q.get("view") || "rear" : null, paint };
+  const carOnly = q.get("layer") === "car";
   return (
-    <main className={`sp sp-${f}`}>
+    <main className={`sp sp-${f}${carOnly ? " sp-car-only" : ""}`}>
       <CarStage spot={spot}>
-        <div className="ms-bg" aria-hidden="true"><Grit /></div>
+        {!carOnly && <div className="ms-bg" aria-hidden="true"><Grit /></div>}
         {fmt.smoke && <Smoke />}
-        <div className="ms-floor" aria-hidden="true" />
-        {f !== "still" && <p className="sp-word" aria-hidden="true">MUSTANG</p>}
-        {fmt.copy && (
+        {!carOnly && <div className="ms-floor" aria-hidden="true" />}
+        {f !== "still" && f !== "turn" && !carOnly && <p className="sp-word" aria-hidden="true">MUSTANG</p>}
+        {fmt.copy && !carOnly && (
           <>
             <p className="sp-top"><span>S650</span><span>Mustang <Slashes /></span></p>
             <div className="sp-copy">
