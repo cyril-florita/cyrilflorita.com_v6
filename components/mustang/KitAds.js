@@ -11,7 +11,7 @@ const Down = () => (
 function Ad({ ad, base }) {
   const [run, setRun] = useState(0);
   return (
-    <figure className={`kit-ad kit-ad-${ad.id}`}>
+    <figure className={`kit-ad kit-ad-${ad.id}`} style={{ "--w": `${ad.w}px` }}>
       <div className="kit-ad-head">
         <p><span className="kit-ad-size">{ad.id.replace("x", " × ")}</span> {ad.name}</p>
         <button type="button" className="kit-replay" onClick={() => setRun((n) => n + 1)} aria-label={`Replay the ${ad.id} ad`}>Replay</button>
@@ -28,6 +28,22 @@ function Ad({ ad, base }) {
   );
 }
 
+// Rows of like shapes, divided by hairlines (kit.css) so each ad reads with its own label,
+// Replay and downloads: the billboard, the leaderboard, the two tall ones, then the rectangle
+// beside the mobile banner.
+const ROWS = [["970x250"], ["728x90"], ["300x600", "160x600"], ["300x250", "320x50"]];
+
 export default function KitAds({ ads, base }) {
-  return <div className="kit-ads">{ads.map((ad) => <Ad key={ad.id} ad={ad} base={base} />)}</div>;
+  const byId = Object.fromEntries(ads.map((a) => [a.id, a]));
+  const placed = new Set(ROWS.flat());
+  const rows = [...ROWS.map((r) => r.map((id) => byId[id]).filter(Boolean)), ads.filter((a) => !placed.has(a.id))].filter((r) => r.length);
+  return (
+    <div className="kit-ads">
+      {rows.map((row) => (
+        <div className="kit-ads-row" key={row[0].id}>
+          {row.map((ad) => <Ad key={ad.id} ad={ad} base={base} />)}
+        </div>
+      ))}
+    </div>
+  );
 }

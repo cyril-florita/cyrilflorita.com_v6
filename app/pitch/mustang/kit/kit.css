@@ -5,7 +5,7 @@
 .kit p { margin: 0; }
 .kit-top { display: grid; gap: 6px; justify-items: start; font-family: var(--ms-font-head), sans-serif; font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; }
 .kit-top span:first-child { padding-bottom: 6px; border-bottom: 1px solid var(--ms-line); }
-.kit-head { padding-bottom: 56px; border-bottom: 1px solid rgba(255, 255, 255, 0.12); }
+.kit-head { padding-bottom: 56px; border-bottom: 1px solid rgba(127, 185, 255, 0.5); }
 .kit-head h1 { margin-top: 72px; font-size: clamp(34px, 5.4vw, 72px); line-height: 1.05; letter-spacing: 0.02em; }
 /* the line under the title, in the accent: the kit's idea in one sentence */
 .kit-tagline { margin-top: 20px !important; font-size: clamp(19px, 1.9vw, 24px); line-height: 1.35; color: var(--ms-accent); }
@@ -39,7 +39,8 @@
 }
 @media (min-width: 1360px) and (prefers-reduced-motion: reduce) { .kit-index ol::before { transition: none; } }
 
-.kit-item { padding: 72px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.12); scroll-margin-top: 24px; }
+.kit-item { padding: 72px 0; border-bottom: 1px solid rgba(127, 185, 255, 0.5); scroll-margin-top: 24px; }
+.kit-item:last-child { border-bottom: 0; }
 .kit-item-head { display: grid; grid-template-columns: 72px minmax(0, 1fr); column-gap: 8px; margin-bottom: 36px; }
 .kit-n { grid-row: span 2; font-family: var(--ms-font-word), Impact, sans-serif; font-weight: 800; font-size: 56px; line-height: 0.9; color: #63799b; }
 .kit-item h2 { font-size: clamp(22px, 2.4vw, 30px); line-height: 1.2; letter-spacing: 0.04em; }
@@ -94,6 +95,14 @@
 .kit-use { font-size: 15px; line-height: 1.45; }
 .kit-note { font-size: 13px; line-height: 1.5; color: var(--ms-ink-2); }
 .kit-spot .kit-dl { margin-top: 6px; }
+/* desktop: the videos share one bottom line and the captions one top line (each figure
+   spans the grid's two rows as a subgrid: videos in the first, captions in the second) */
+@media (min-width: 1000px) {
+  .kit-spots { grid-template-rows: auto auto; row-gap: 16px; align-items: stretch; }
+  .kit-spot { grid-row: span 2; grid-template-rows: subgrid; gap: 16px 0; }
+  .kit-spot video { align-self: end; }
+  .kit-spot figcaption { min-height: 0; }
+}
 .kit-post { display: grid; gap: 10px; margin-top: 40px; padding: 26px 28px; border: 1px solid rgba(255, 255, 255, 0.14); background: rgba(255, 255, 255, 0.03); max-width: 760px; }
 .kit-post-text { font-size: 18px; line-height: 1.55; }
 .kit-post-note { font-size: 13.5px; line-height: 1.55; color: var(--ms-ink-2); }
@@ -104,16 +113,26 @@
 .kit-more { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-top: 20px !important; }
 
 /* display ads: each at its real size (the wide ones scroll sideways on phones), a replay, the downloads */
-.kit-ads { display: flex; flex-wrap: wrap; gap: 40px 36px; align-items: flex-start; }
-.kit-ad { margin: 0; display: grid; gap: 12px; max-width: 100%; }
+/* rows of like shapes divided by hairlines; ads sharing a row are split by a vertical rule, and
+   each ad's label, Replay and downloads keep to the ad's own width (--w, at least 300px) */
+.kit-ads { display: grid; grid-template-columns: minmax(0, 1fr); border-top: 1px solid rgba(255, 255, 255, 0.12); }
+.kit-ads-row { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 32px 0; padding: 36px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.12); }
+.kit-ad { margin: 0; display: grid; gap: 14px; width: max(var(--w), 300px); max-width: 100%; }
+.kit-ads-row > .kit-ad + .kit-ad { margin-left: 40px; padding-left: 40px; border-left: 1px solid rgba(255, 255, 255, 0.12); align-self: stretch; align-content: start; }
 .kit-ad-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-.kit-ad-head p { font-size: 13.5px; color: var(--ms-ink-2); }
-.kit-ad-size { margin-right: 8px; font-family: var(--ms-font-head), sans-serif; font-size: 12px; letter-spacing: 0.1em; color: var(--ms-ink); }
+.kit-ad-head p { display: grid; gap: 4px; font-size: 13.5px; color: var(--ms-ink-2); }
+.kit-ad-size { font-family: var(--ms-font-head), sans-serif; font-size: 12px; letter-spacing: 0.1em; color: var(--ms-ink); }
 .kit-replay { min-height: 32px; padding: 0 12px; border: 1px solid rgba(255, 255, 255, 0.3); background: none; color: var(--ms-ink); font-family: var(--ms-font-head), sans-serif; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; cursor: pointer; }
 .kit-replay:hover { border-color: var(--ms-ink); }
 .kit-ad-frame { max-width: 100%; overflow-x: auto; }
 .kit-ad-frame iframe { display: block; border: 0; }
 .kit-ad figcaption { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+@media (max-width: 999px) {
+  /* narrower: one ad per line, each with its own hairline */
+  .kit-ads-row { display: contents; }
+  .kit-ad { padding: 32px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.12); }
+  .kit-ads-row > .kit-ad + .kit-ad { margin-left: 0; padding-left: 0; border-left: 0; }
+}
 
 /* stills */
 .kit-stills { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
