@@ -126,6 +126,7 @@ const Page = () => {
                 <a className="cyril-button" href={LIVE} target="_blank" rel="noopener">Try Hearthside live <Arrow /></a>
               </div>
               <Clip name="hero" caption="The home page: the headline rises in, then the photo closes in on the nurse and patient as you scroll" />
+              <CaseVideo src={`${P}glance.mp4`} caption="Every screen at a glance" frame={false} />
             </CaseSection>
 
             {/* 02 — Results & Impact */}

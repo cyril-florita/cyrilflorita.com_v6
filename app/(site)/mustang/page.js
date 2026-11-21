@@ -132,6 +132,7 @@ const Page = () => {
               <p>It&apos;s a spec ad: unofficial, not affiliated with Ford, and every price and term in it is sample content. Nothing can be booked from it.</p>
               <Cta inline />
               <Clip name="intro" caption="The preloader lights the lockup, then the car glides in under the word" />
+              <CaseVideo src={`${P}glance.mp4`} caption="Every screen at a glance" frame={false} />
             </CaseSection>
 
             {/* 02 — Results & Impact */}

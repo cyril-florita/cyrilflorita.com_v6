@@ -127,6 +127,7 @@ const Page = () => {
                 <a className="cyril-button" href={LIVE} target="_blank" rel="noopener">Try Viteo live <Arrow /></a>
               </div>
               <Clip name="intro" caption="The intro: the product lands piece by piece" />
+              <CaseVideo src={`${P}glance.mp4`} caption="Every screen at a glance" frame={false} />
             </CaseSection>
 
             {/* 02 — Results & Impact */}
