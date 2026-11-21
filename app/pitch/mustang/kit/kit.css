@@ -44,6 +44,13 @@
 .kit-n { grid-row: span 2; font-family: var(--ms-font-word), Impact, sans-serif; font-weight: 800; font-size: 56px; line-height: 0.9; color: #63799b; }
 .kit-item h2 { font-size: clamp(22px, 2.4vw, 30px); line-height: 1.2; letter-spacing: 0.04em; }
 .kit-lede { margin-top: 10px !important; max-width: 64ch; font-size: 17px; line-height: 1.6; color: var(--ms-ink-2); }
+/* desktop: the section number sits at the right end of the head, the title and lede on the left */
+@media (min-width: 1000px) {
+  .kit-item-head { grid-template-columns: minmax(0, 1fr) auto; column-gap: 32px; }
+  .kit-n { grid-column: 2; grid-row: 1 / span 2; text-align: right; }
+  .kit-item h2, .kit-lede { grid-column: 1; }
+  .kit-item h2 { grid-row: 1; }
+}
 
 .kit-foot { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px 40px; margin-top: 32px; }
 .kit-specs { display: grid; gap: 10px; margin: 0; max-width: 760px; }
