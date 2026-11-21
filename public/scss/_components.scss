@@ -358,6 +358,37 @@ html.cyril-has-cursor * {
         opacity: 1;
     }
 
+    // Over a case-study screenshot: the filled diamond with a magnifier
+    // (it replaces the orange zoom box that used to sit on the image).
+    // The magnifier zooms up from small with a slight overshoot as the
+    // diamond grows, and shrinks away again on the way out.
+    & .cyril-cursor-icon {
+        position: absolute;
+        color: var(--color-on-accent);
+        opacity: 0;
+        scale: 0.3;
+        transition: opacity 0.2s ease, scale 0.25s ease;
+    }
+
+    &.cyril-cursor-zoom .cyril-cursor-ring-inner {
+        transform: rotate(45deg) scale(2.3);
+        background-color: var(--color-accent);
+    }
+
+    &.cyril-cursor-zoom .cyril-cursor-icon {
+        opacity: 1;
+        scale: 1;
+        transition: opacity 0.2s ease, scale 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    &.cyril-cursor-down.cyril-cursor-zoom .cyril-cursor-ring-inner {
+        transform: rotate(45deg) scale(2.05);
+    }
+
+    &.cyril-cursor-down.cyril-cursor-zoom .cyril-cursor-icon {
+        scale: 0.88;
+    }
+
     &.cyril-cursor-down .cyril-cursor-ring-inner {
         transform: rotate(45deg) scale(0.8);
     }
@@ -3410,9 +3441,11 @@ back to top
 
     }
 
+    // Collapse the offset shadow in its own colour: collapsing it in $soft (white
+    // in dark mode) made a grey box slide out from behind the image on hover-out.
     &:hover {
         cursor: pointer;
-        box-shadow: 0 0 0 0 variables.$soft;
+        box-shadow: 0 0 0 0 rgba(16, 16, 16, 0);
 
         & .cyril-hover-link {
             cursor: pointer;
@@ -4284,6 +4317,11 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
     &.cyril-case-figure-phone {
         max-width: 320px;
 
+        // the offset shadow follows the phone's rounded bezel, not a rectangle
+        & .cyril-project-figure {
+            border-radius: 44px;
+        }
+
         & .cyril-video-container,
         & .cyril-cover {
             padding: 12px;
@@ -4432,6 +4470,59 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
 
     .cyril-case-figure .cyril-project-figure:hover .cyril-hover-link {
         opacity: 1;
+    }
+}
+
+// Hover on a case-study screenshot: the image pushes in slowly inside its frame
+// (the img's own 1.2s scale transition), the custom cursor turns into a zoom
+// diamond, and the offset shadow stays put. The zoom box above is only for
+// mice without the custom cursor; touch screens keep it.
+.cyril-case-figure .cyril-case-shot {
+    display: block;
+    height: 100%;
+    overflow: hidden;
+}
+
+.cyril-case-figure-phone .cyril-case-shot {
+    border-radius: 32px;
+}
+
+// The frame line fades to orange while the screenshot is hovered: the plain
+// 2px border, the browser window's ring and the phone's bezel ring.
+.cyril-case-figure .cyril-cover {
+    transition: border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.cyril-case-figure .cyril-browser-frame {
+    transition: box-shadow 0.35s ease;
+}
+
+@media (hover: hover) {
+    .cyril-case-figure .cyril-project-figure:hover {
+        box-shadow: 7px 7px 0px 0px rgba(16, 16, 16, 0.18);
+    }
+
+    .cyril-case-figure .cyril-project-figure:hover .cyril-cover {
+        border-color: var(--color-accent);
+    }
+
+    .cyril-case-figure-phone .cyril-project-figure:hover .cyril-cover,
+    .cyril-case-figure .cyril-browser-frame:has(> .cyril-project-figure:hover) {
+        box-shadow: 0 0 0 2px var(--color-accent), 0 24px 60px rgba(0, 0, 0, 0.45);
+    }
+
+    .cyril-case-figure .cyril-project-figure:hover .cyril-case-shot img {
+        scale: 1.03;
+    }
+
+    html.cyril-has-cursor .cyril-case-figure .cyril-hover-link {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cyril-case-figure .cyril-project-figure:hover .cyril-case-shot img {
+        scale: 1;
     }
 }
 

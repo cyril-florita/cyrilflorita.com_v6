@@ -12,6 +12,8 @@ import { scrambleText, splitChars, hideSplitTitle, scrambleInTitle } from "@/pub
 // by delegation (closest()) so late-mounted content like the portfolio grid
 // works without re-binding.
 
+// Case-study screenshots (CaseFigure links), which open in the zoom viewer.
+const ZOOM_SELECTOR = '.cyril-case-figure a.cyril-project-figure';
 const CLICKABLE_SELECTOR = 'a, button, [role="button"], .cyril-dot, .cyril-prev, .cyril-next';
 // The pull is based on where the pointer is *relative to the element's size*
 // (centre = 0, edge = full pull), not on raw pixel distance — otherwise small
@@ -666,9 +668,12 @@ const MotionEffects = () => {
 
       // Cursor state
       const card = target?.closest('.cyril-portfolio-item');
+      // case-study screenshots open in the zoom viewer: the diamond shows a magnifier
+      const zoom = !card && target?.closest(ZOOM_SELECTOR);
       const link = target?.closest(CLICKABLE_SELECTOR);
       ring.classList.toggle('cyril-cursor-view', !!card);
-      ring.classList.toggle('cyril-cursor-link', !card && !!link);
+      ring.classList.toggle('cyril-cursor-zoom', !!zoom);
+      ring.classList.toggle('cyril-cursor-link', !card && !zoom && !!link);
       // Hide over icon buttons and the visible pixels of the hero photo.
       const mainImage = target?.closest(MAIN_IMAGE_SELECTOR);
       const overPhoto = !!mainImage && isOverVisiblePixel(mainImage, mouseX, mouseY);
@@ -752,6 +757,7 @@ const MotionEffects = () => {
       <div ref={ringRef} className="cyril-cursor-ring" aria-hidden="true">
         <div className="cyril-cursor-ring-inner" />
         <span className="cyril-cursor-label">View</span>
+        <svg className="cyril-cursor-icon" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"><circle cx="10.5" cy="10.5" r="6.5" /><path d="m15.5 15.5 5 5M10.5 7.5v6M7.5 10.5h6" /></svg>
       </div>
     </>
   );

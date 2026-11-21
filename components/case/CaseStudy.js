@@ -285,7 +285,9 @@ export const CaseFigure = ({ src, alt, caption, ratio, size = "full", frame, url
   const image = (
     <a href={src} className="cyril-project-figure">
       <div className="cyril-cover" style={ratio ? { aspectRatio: ratio } : undefined}>
-        <img {...imageProps(src, hint)} alt={alt} loading="lazy" decoding="async" className={ratio ? "cyril-case-cropped" : undefined} />
+        <div className="cyril-case-shot">
+          <img {...imageProps(src, hint)} alt={alt} loading="lazy" decoding="async" className={ratio ? "cyril-case-cropped" : undefined} />
+        </div>
         <div className="cyril-hover-link">
           <i className="fa fa-search-plus" />
         </div>
