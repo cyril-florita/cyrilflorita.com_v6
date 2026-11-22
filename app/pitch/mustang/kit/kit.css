@@ -23,14 +23,12 @@
 .kit-car-poster { position: absolute; z-index: 1; left: 50%; top: 50%; width: 92%; height: auto; translate: -50% -46%; transition: opacity 0.8s ease; pointer-events: none; }
 .kit-car[data-state="ready"] .kit-car-poster { opacity: 0; }
 .kit .kit-car .ms-loading { display: none; }
-.kit-car-hint { margin-top: -4px !important; text-align: center; font-family: var(--ms-font-head), sans-serif; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ms-ink-2); opacity: 0; transition: opacity 0.6s ease 1.8s; }
-.kit-head-car:has(.kit-car[data-state="ready"]) .kit-car-hint { opacity: 1; }
 @media (min-width: 1000px) {
   .kit-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); column-gap: 48px; align-items: start; }
   .kit-head > :not(.kit-head-car) { grid-column: 1; }
   .kit-head-car { grid-column: 2; grid-row: 1 / span 4; align-self: end; margin: 0 -40px; }
 }
-@media (prefers-reduced-motion: reduce) { .kit-car-poster, .kit-car-hint { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .kit-car-poster { transition: none; } }
 /* below 1360px the progress bar's sheet is the index, so the row of links is hidden */
 .kit-index { display: none; }
 .kit-index-label { display: none; }

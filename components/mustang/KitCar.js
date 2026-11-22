@@ -14,7 +14,6 @@ export default function KitCar() {
       <CarStage spot={SPOT} className="kit-car">
         <img className="kit-car-poster" src="/pitch/mustang/car-fallback.webp" width="1680" height="693" alt="" fetchPriority="high" />
       </CarStage>
-      <p className="kit-car-hint" aria-hidden="true">Drag to turn · 360°</p>
     </div>
   );
 }
