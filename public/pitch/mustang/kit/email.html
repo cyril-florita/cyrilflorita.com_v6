@@ -23,6 +23,10 @@
   table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
   img { -ms-interpolation-mode: bicubic; border: 0; outline: none; text-decoration: none; display: block; }
   body { margin: 0 !important; padding: 0 !important; width: 100% !important; background: #05080e; }
+  /* the kit's scrollbar: accent blue, squared ends (webkit), scrollbar-color for Firefox */
+  ::-webkit-scrollbar { width: 12px; height: 12px; background: #05080e; }
+  ::-webkit-scrollbar-thumb { background: #7fb9ff; border: 3px solid #05080e; border-radius: 0; }
+  @supports (-moz-appearance: none) { html { scrollbar-color: #7fb9ff #05080e; } }
   a { color: #7fb9ff; }
   .btn a:hover { opacity: 0.88; }
   @media screen and (max-width: 620px) {

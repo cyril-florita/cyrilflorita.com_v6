@@ -111,9 +111,12 @@ function Tile({ id, ar, slant, kicker, label, pressed, aria, size, onClick, onHo
 // controls or hints, and the car is driven by a clock instead of the pointer, so every
 // recording plays the same: { spin: radians per second (turntable), yaw0: the yaw at the
 // start, intro: glide the camera in as the landing does, lift: raises the car in its view (a share of its height), panX: moves it right (a share of its width), floor: false hides the floor and the reflection, view: a feature pose to hold
-// (rear | cockpit | lights), paint: a hex, zoom: multiplies the full view's field of view }.
+// (rear | cockpit | lights), paint: a hex, zoom: multiplies the full view's field of view,
+// turnIn: the car also turns into place during the intro, as on the landing }.
+// With spin 0 the car stays draggable (and turns with the arrow keys): the kit's head uses
+// that, with `className` for its own layout.
 // Once the clock starts it sets window.__msSpotT0 (Date.now()) for the capture scripts.
-export default function CarStage({ children, spot = null }) {
+export default function CarStage({ children, spot = null, className = "" }) {
   const stageRef = useRef(null);
   const canvasRef = useRef(null);
   const viewRef = useRef(null);
@@ -565,7 +568,8 @@ export default function CarStage({ children, spot = null }) {
       };
       const onMove = (e) => {
         const r = stage.getBoundingClientRect();
-        px = ((e.clientX - r.left) / r.width) * 2 - 1; py = ((e.clientY - r.top) / r.height) * 2 - 1;
+        const cl = (v) => Math.max(-1, Math.min(1, v));                 // a stage smaller than the screen (the kit's head) leans only as far as its own edges
+        px = cl(((e.clientX - r.left) / r.width) * 2 - 1); py = cl(((e.clientY - r.top) / r.height) * 2 - 1);
         if (e.pointerType === "mouse") setOverCar(hitCar(e.clientX, e.clientY));
         if (dragging) {
           const dx = e.clientX - lastX; lastX = e.clientX;
@@ -642,6 +646,7 @@ export default function CarStage({ children, spot = null }) {
             if (sp.view && POSES[sp.view]) { mode = sp.view; yaw = sp.view === "cockpit" ? sp.yaw0 ?? START_YAW : POSES[sp.view].yaw; }
             else yaw = sp.yaw0 ?? START_YAW;
             if (sp.intro && !reduce) { camPos.set(FULL.pos[0] - 3.2, FULL.pos[1] + 1.1, FULL.pos[2] + 6); fov = FULL.fov + 6; introUntil = performance.now() + 2600; }
+            if (sp.turnIn && !sp.spin && !reduce) { yaw += 1.15; yawGoal = sp.yaw0 ?? START_YAW; }
             window.__msSpotYaw = (y) => { yaw = y; yawGoal = null; wake(300); };   // the capture scripts turn the car frame by frame (spin 0)
             requestAnimationFrame((t) => { spotT0 = t; window.__msSpotT0 = Date.now(); stage.dataset.spot = "go"; wake(3000); });
             return;
@@ -740,7 +745,7 @@ export default function CarStage({ children, spot = null }) {
   const setTileWindow = (id, el) => { tileRefs.current[id] = el; };
 
   return (
-    <div className={spot ? "ms-stage ms-stage-spot" : "ms-stage"} ref={stageRef} data-view={view} data-state={state}>
+    <div className={`ms-stage${spot ? " ms-stage-spot" : ""}${className ? ` ${className}` : ""}`} ref={stageRef} data-view={view} data-state={state}>
       <canvas ref={canvasRef} className="ms-canvas" aria-hidden="true" />
       {children}
       <div

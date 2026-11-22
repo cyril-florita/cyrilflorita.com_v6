@@ -1,6 +1,7 @@
 import KitEmail from "@/components/mustang/KitEmail";
 import KitAds from "@/components/mustang/KitAds";
 import KitNav from "@/components/mustang/KitNav";
+import KitCar from "@/components/mustang/KitCar";
 import "./kit.css";
 
 // The campaign kit (/pitch/mustang/kit/): every deliverable made from the ad's one concept,
@@ -76,6 +77,7 @@ export default function Kit() {
       <a className="ms-skip" href="#main">Skip to content</a>
       <main id="main" className="kit">
         <header className="kit-head">
+          <KitCar />
           <p className="kit-top"><span>S650</span><span>Mustang <Slashes /></span></p>
           <h1>Campaign kit</h1>
           <p className="kit-tagline">One concept, everywhere the buyer is.</p>

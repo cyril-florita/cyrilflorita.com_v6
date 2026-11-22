@@ -10,6 +10,27 @@
 /* the line under the title, in the accent: the kit's idea in one sentence */
 .kit-tagline { margin-top: 20px !important; font-size: clamp(19px, 1.9vw, 24px); line-height: 1.35; color: var(--ms-accent); }
 .kit-intro { margin-top: 10px !important; max-width: 62ch; font-size: 18px; line-height: 1.6; color: var(--ms-ink-2); }
+/* the car: the ad's 3D car (KitCar.js → CarStage), draggable, first on phones and tablets (above
+   the lockup) and to the right of the lockup, title, tagline and intro on desktop. The ad's
+   no-WebGL still is its poster until the model is ready. The floor fades into the page at the
+   sides and the foot. */
+.kit-head-car { position: relative; margin: -8px -20px 24px; }
+.kit .kit-car { position: relative; display: block; height: auto; min-height: 0; padding: 0; aspect-ratio: 2 / 1; overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent), linear-gradient(#000 62%, transparent);
+  -webkit-mask-composite: source-in; mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent), linear-gradient(#000 62%, transparent); mask-composite: intersect; }
+.kit .kit-car .ms-view { position: absolute; inset: 0; order: 0; aspect-ratio: auto; margin: 0; }
+.kit .kit-car[data-state="fallback"] .ms-view { background: none; cursor: default; }
+.kit-car-poster { position: absolute; z-index: 1; left: 50%; top: 50%; width: 92%; height: auto; translate: -50% -46%; transition: opacity 0.8s ease; pointer-events: none; }
+.kit-car[data-state="ready"] .kit-car-poster { opacity: 0; }
+.kit .kit-car .ms-loading { display: none; }
+.kit-car-hint { margin-top: -4px !important; text-align: center; font-family: var(--ms-font-head), sans-serif; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ms-ink-2); opacity: 0; transition: opacity 0.6s ease 1.8s; }
+.kit-head-car:has(.kit-car[data-state="ready"]) .kit-car-hint { opacity: 1; }
+@media (min-width: 1000px) {
+  .kit-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); column-gap: 48px; align-items: start; }
+  .kit-head > :not(.kit-head-car) { grid-column: 1; }
+  .kit-head-car { grid-column: 2; grid-row: 1 / span 4; align-self: end; margin: 0 -40px; }
+}
+@media (prefers-reduced-motion: reduce) { .kit-car-poster, .kit-car-hint { transition: none; } }
 /* below 1360px the progress bar's sheet is the index, so the row of links is hidden */
 .kit-index { display: none; }
 .kit-index-label { display: none; }

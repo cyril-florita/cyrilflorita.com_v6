@@ -504,12 +504,13 @@
 }
 
 /* ------------------------------------------------------------- scrollbar */
-/* the page's scrollbar in the accent blue of the [ Sample offer ] stamp */
-:root:has(.ms) { scrollbar-color: #7fb9ff #05080e; }
-@supports not (scrollbar-color: red blue) {                              /* Safari before 26 */
-  :root:has(.ms)::-webkit-scrollbar { width: 12px; background: #05080e; }
-  :root:has(.ms)::-webkit-scrollbar-thumb { background: #7fb9ff; border: 3px solid #05080e; border-radius: 6px; }
-}
+/* the page's scrollbar (and the kit's scrolling frames) in the accent blue of the [ Sample offer ] stamp, with
+   squared ends: Chromium and Safari draw the ::-webkit-scrollbar rules (they're ignored wherever scrollbar-color
+   is set, and scrollbar-color can't square the thumb), Firefox gets scrollbar-color */
+:root:has(.ms)::-webkit-scrollbar, .ms ::-webkit-scrollbar { width: 12px; height: 12px; background: #05080e; }
+:root:has(.ms)::-webkit-scrollbar-thumb, .ms ::-webkit-scrollbar-thumb { background: #7fb9ff; border: 3px solid #05080e; border-radius: 0; }
+:root:has(.ms)::-webkit-scrollbar-corner, .ms ::-webkit-scrollbar-corner { background: #05080e; }
+@supports (-moz-appearance: none) { :root:has(.ms), .ms * { scrollbar-color: #7fb9ff #05080e; } }
 
 /* ------------------------------------------------- the windows read as tappable */
 /* on touch screens an "opens larger" mark in each window's top-right corner, and, at every size, once per visit, a
