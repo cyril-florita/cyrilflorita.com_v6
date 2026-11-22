@@ -23,7 +23,7 @@ const Skills = () => {
               <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-40">
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
-                    <div className="cyril-text-icon no-textured">
+                    <div className="cyril-text-icon">
                     <i className="fa-solid fa-check"></i>
                     </div>
                   </div>
@@ -36,7 +36,7 @@ const Skills = () => {
               <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-40">
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
-                    <div className="cyril-text-icon no-textured">
+                    <div className="cyril-text-icon">
                     <i className="fa-solid fa-check"></i>
                     </div>
                   </div>
@@ -49,7 +49,7 @@ const Skills = () => {
               <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-40">
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
-                    <div className="cyril-text-icon no-textured">
+                    <div className="cyril-text-icon">
                       <i className="fa-solid fa-check"></i>
                     </div>
                   </div>
@@ -62,7 +62,7 @@ const Skills = () => {
               <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-40">
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
-                    <div className="cyril-text-icon no-textured">
+                    <div className="cyril-text-icon">
                       <i className="fa-solid fa-check"></i>
                     </div>
                   </div>
@@ -75,7 +75,7 @@ const Skills = () => {
               <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-40">
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
-                    <div className="cyril-text-icon no-textured">
+                    <div className="cyril-text-icon">
                       <i className="fa-solid fa-check"></i>
                     </div>
                   </div>
@@ -88,7 +88,7 @@ const Skills = () => {
               <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-40">
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
-                    <div className="cyril-text-icon no-textured">
+                    <div className="cyril-text-icon">
                     <i className="fa-solid fa-check"></i>
                     </div>
                   </div>
@@ -101,7 +101,7 @@ const Skills = () => {
               <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-40">
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
-                    <div className="cyril-text-icon no-textured">
+                    <div className="cyril-text-icon">
                     <i className="fa-solid fa-check"></i>
                     </div>
                   </div>
@@ -114,7 +114,7 @@ const Skills = () => {
               <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-40">
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
-                    <div className="cyril-text-icon no-textured">
+                    <div className="cyril-text-icon">
                       <i className="fa-solid fa-check"></i>
                     </div>
                   </div>
@@ -127,7 +127,7 @@ const Skills = () => {
               <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-40">
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
-                    <div className="cyril-text-icon no-textured">
+                    <div className="cyril-text-icon">
                       <i className="fa-solid fa-check"></i>
                     </div>
                   </div>
@@ -140,7 +140,7 @@ const Skills = () => {
               <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-40">
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
-                    <div className="cyril-text-icon no-textured">
+                    <div className="cyril-text-icon">
                       <i className="fa-solid fa-check"></i>
                     </div>
                   </div>
@@ -153,7 +153,7 @@ const Skills = () => {
               <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-40">
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
-                    <div className="cyril-text-icon no-textured">
+                    <div className="cyril-text-icon">
                       <i className="fa-solid fa-check"></i>
                     </div>
                   </div>

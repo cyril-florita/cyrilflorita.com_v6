@@ -4,9 +4,10 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
 // The background shapes (.cyril-bg-item diamonds and their satellites, the hero's
-// .cyril-bg-title-boxed rectangles) drawn as ASCII instead of a CSS dot grid: one canvas per
-// shape, upright text on a 12px grid (mostly dots, some : + - *). Near the pointer the
-// characters are pushed away and turn denser (+ * x # % @), springing back once it leaves.
+// .cyril-bg-title-boxed rectangles) on a canvas instead of a CSS dot grid: one canvas per
+// shape, round dots on a 12px grid. Within the repulsion circle round the pointer the dots
+// are pushed away and turn into ASCII characters, denser toward the middle (. : + * x # % @),
+// springing back to dots once it leaves.
 // The canvases sit inside the shapes, so MotionEffects' parallax (`translate` on each shape)
 // carries them. The diamonds are squares turned 45° in CSS, so their canvas is turned back
 // (-45°) and sized to the diamond's bounding box; the shape clips it (overflow: hidden).
@@ -17,11 +18,10 @@ const CELL = 12;              // grid step, px
 const FONT = 11;              // px
 const RADIUS = 188;           // the pointer's reach, px (the repulsion circle)
 const PUSH = 28;              // the most a character is pushed, px
-const RAMP = ["+", "*", "x", "#", "%", "@"];
+const DOT = 1.2;              // dot radius at rest, px (the old CSS grid's dots were 2px squares)
+const RAMP = [".", ":", "+", "*", "x", "#", "%", "@"];
 const DPR_MAX = 1.5;          // the large diamonds are ~1000px canvases; this keeps memory down
 
-const hash = (i) => { const x = Math.sin(i * 12.9898 + 4.1414) * 43758.5453; return x - Math.floor(x); };
-const restChar = (i) => { const r = hash(i); return r < 0.6 ? "." : r < 0.8 ? ":" : r < 0.91 ? "+" : r < 0.97 ? "-" : "*"; };
 
 export default function AsciiFields() {
   const pathname = usePathname();
@@ -44,24 +44,30 @@ export default function AsciiFields() {
       const r0 = Math.max(0, Math.floor((y0 - f.oy) / CELL)), r1 = Math.min(f.rows - 1, Math.floor((y1 - f.oy) / CELL));
       ctx.save(); ctx.beginPath(); ctx.rect(x0, y0, x1 - x0, y1 - y0); ctx.clip();
       ctx.fillStyle = color;
+      ctx.beginPath();
       for (let r = r0; r <= r1; r++) {
         for (let c = c0; c <= c1; c++) {
-          const i = r * f.cols + c;
-          if (f.active.has(i)) continue;
-          ctx.fillText(restChar(i), f.ox + (c + 0.5) * CELL, f.oy + (r + 0.5) * CELL);
+          if (f.active.has(r * f.cols + c)) continue;
+          const x = f.ox + (c + 0.5) * CELL, y = f.oy + (r + 0.5) * CELL;
+          ctx.moveTo(x + DOT, y); ctx.arc(x, y, DOT, 0, Math.PI * 2);
         }
       }
+      ctx.fill();
       ctx.restore();
     };
     // the displaced characters, over the redrawn region (they may reach a little past it)
     const drawActive = (f) => {
       const { ctx } = f;
       ctx.fillStyle = color;
-      f.active.forEach((a, i) => {
+      ctx.beginPath();
+      f.active.forEach((a, i) => {                                    // the faintest stay dots, the rest become characters
         const c = i % f.cols, r = (i - c) / f.cols;
-        const ch = a.v > 0.08 ? (a.v > 0.35 && Math.random() < 0.12 ? RAMP[(Math.random() * RAMP.length) | 0] : RAMP[Math.min(RAMP.length - 1, (a.v * RAMP.length) | 0)]) : restChar(i);
-        ctx.fillText(ch, f.ox + (c + 0.5) * CELL + a.dx, f.oy + (r + 0.5) * CELL + a.dy);
+        const x = f.ox + (c + 0.5) * CELL + a.dx, y = f.oy + (r + 0.5) * CELL + a.dy;
+        if (a.v <= 0.08) { ctx.moveTo(x + DOT, y); ctx.arc(x, y, DOT, 0, Math.PI * 2); return; }
+        const ch = a.v > 0.35 && Math.random() < 0.12 ? RAMP[2 + ((Math.random() * (RAMP.length - 2)) | 0)] : RAMP[Math.min(RAMP.length - 1, ((a.v - 0.08) / 0.92 * RAMP.length) | 0)];
+        ctx.fillText(ch, x, y);
       });
+      ctx.fill();
     };
 
     const size = (f) => {

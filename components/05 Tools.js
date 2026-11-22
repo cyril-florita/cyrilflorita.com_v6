@@ -22,7 +22,7 @@ const Tools = () => {
               <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-30">
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
-                    <div className="cyril-text-icon no-textured">
+                    <div className="cyril-text-icon">
                       <img
                         src="/img/tools/ai-generator.png"
                         className="theme-aware-image"
@@ -42,7 +42,7 @@ const Tools = () => {
               <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-30">
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
-                    <div className="cyril-text-icon no-textured">                      
+                    <div className="cyril-text-icon">                      
                       <img
                         src="/img/tools/creative-suite.png"
                         className="theme-aware-image"
@@ -62,7 +62,7 @@ const Tools = () => {
               <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-30">
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
-                    <div className="cyril-text-icon no-textured">
+                    <div className="cyril-text-icon">
                       <img
                         src="/img/tools/axure.png"
                         className="theme-aware-image"
@@ -82,7 +82,7 @@ const Tools = () => {
               <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-30">
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
-                    <div className="cyril-text-icon no-textured">
+                    <div className="cyril-text-icon">
                       <i className="fab fa-figma" />
                     </div>
                   </div>
@@ -95,7 +95,7 @@ const Tools = () => {
               <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-30">
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
-                    <div className="cyril-text-icon no-textured">
+                    <div className="cyril-text-icon">
                       <img
                         src="/img/tools/miro.png"
                         className="theme-aware-image"
@@ -115,7 +115,7 @@ const Tools = () => {
               <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-30">
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
-                    <div className="cyril-text-icon no-textured">
+                    <div className="cyril-text-icon">
                       <img
                         src="/img/tools/framer.png"
                         className="theme-aware-image"
@@ -135,7 +135,7 @@ const Tools = () => {
               <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-30">
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
-                    <div className="cyril-text-icon no-textured">
+                    <div className="cyril-text-icon">
                       <i className="fab fa-webflow" />
                     </div>
                   </div>
@@ -148,7 +148,7 @@ const Tools = () => {
               <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-30">
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
-                    <div className="cyril-text-icon no-textured">
+                    <div className="cyril-text-icon">
                       <i className="fab fa-html5" />
                     </div>
                   </div>
@@ -161,7 +161,7 @@ const Tools = () => {
               <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-30">
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
-                    <div className="cyril-text-icon no-textured">
+                    <div className="cyril-text-icon">
                       <i className="fab fa-css3" />
                     </div>
                   </div>
@@ -174,7 +174,7 @@ const Tools = () => {
               <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-30">
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
-                    <div className="cyril-text-icon no-textured">
+                    <div className="cyril-text-icon">
                       <i className="fab fa-js" />
                     </div>
                   </div>
@@ -187,7 +187,7 @@ const Tools = () => {
               <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-30">
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
-                    <div className="cyril-text-icon no-textured">
+                    <div className="cyril-text-icon">
                       <i className="fab fa-node-js" />
                     </div>
                   </div>
@@ -200,7 +200,7 @@ const Tools = () => {
               <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-30">
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
-                    <div className="cyril-text-icon no-textured">
+                    <div className="cyril-text-icon">
                       <i className="fab fa-npm" />
                     </div>
                   </div>
@@ -213,7 +213,7 @@ const Tools = () => {
               <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-30">
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
-                    <div className="cyril-text-icon no-textured">
+                    <div className="cyril-text-icon">
                       <i className="fab fa-react" />
                     </div>
                   </div>
@@ -226,7 +226,7 @@ const Tools = () => {
               <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-30">
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
-                    <div className="cyril-text-icon no-textured">
+                    <div className="cyril-text-icon">
                       <i className="fab fa-git" />
                     </div>
                   </div>
@@ -239,7 +239,7 @@ const Tools = () => {
               <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-30">
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
-                    <div className="cyril-text-icon no-textured">
+                    <div className="cyril-text-icon">
                       <i className="fab fa-php" />
                     </div>
                   </div>
@@ -252,7 +252,7 @@ const Tools = () => {
               <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-30">
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
-                    <div className="cyril-text-icon no-textured">
+                    <div className="cyril-text-icon">
                       <i className="fab fa-wordpress" />
                     </div>
                   </div>

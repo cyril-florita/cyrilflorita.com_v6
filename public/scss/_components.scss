@@ -2013,8 +2013,7 @@ iconbox
         align-items: center;
         font-size: 32px;
 
-        &::before,
-        &::after {
+        &::before {
             content: '';
             position: absolute;
             left: -10px;
@@ -2031,28 +2030,6 @@ iconbox
                 height: 107%;
             }
 
-        }
-
-        &::after {
-            z-index: -1;
-            top: -40px;
-            left: auto;
-            right: -20px;
-            --dot-size: 2px;
-            --dot-space: 10px;
-            background-image:
-                linear-gradient(90deg, variables.$light calc(var(--dot-space) - var(--dot-size)), transparent 1%),
-                linear-gradient(variables.$light calc(var(--dot-space) - var(--dot-size)), transparent 1%);
-            background-position: center, center;
-            background-size: var(--dot-space) var(--dot-space), var(--dot-space) var(--dot-space);
-            background-color: variables.$dark;
-            opacity: 0.3;
-        }
-
-        &.no-textured {
-            &::after {
-                display: none;
-            }
         }
 
         @media screen and (max-width: 450px) {
