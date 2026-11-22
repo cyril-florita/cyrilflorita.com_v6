@@ -7,6 +7,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 import ThemeToggle from "./ThemeToggle";
 import MotionEffects from "./MotionEffects";
+import AsciiFields from "@/components/AsciiFields";
 import ScrollProgress from "./ScrollProgress";
 import { cyrilUtility } from "@/public/utility/index";
 
@@ -40,6 +41,7 @@ const SiteLayout = ({ children, header, footer, noFooter }) => {
       {/* First Tab stop: jump past the header/nav straight to the page. */}
       <a className="cyril-skip-link" href="#main">Skip to content</a>
       <MotionEffects />
+      <AsciiFields />
       {isProjectPage && <ScrollProgress />}
       <ZoomViewer />
       <div className="cyril-frame">

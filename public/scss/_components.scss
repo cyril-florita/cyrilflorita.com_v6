@@ -880,7 +880,7 @@ pagination
     background-size: var(--dot-space) var(--dot-space), var(--dot-space) var(--dot-space);
     background-color: variables.$dark;
 
-    &:before {
+    &:before, & > .cyril-bg-sat {
         content: '';
         width: 201px;
         height: 201px;
@@ -901,7 +901,7 @@ pagination
         height: 940px;
         margin: -222.5px;
 
-        &::before {
+        &::before, & > .cyril-bg-sat {
             display: none;
         }
     }
@@ -919,7 +919,7 @@ pagination
     height: 40.3vh;
     margin: -9.55vh;
 
-    &::before {
+    &::before, & > .cyril-bg-sat {
         width: 13.5vh;
         height: 13.5vh;
         top: 0;
@@ -948,7 +948,7 @@ pagination
     background-size: var(--dot-space) var(--dot-space), var(--dot-space) var(--dot-space);
     background-color: variables.$dark;
 
-    &:before {
+    &:before, & > .cyril-bg-sat {
         content: '';
         width: 100%;
         height: 100%;
@@ -967,6 +967,36 @@ pagination
     @media screen and (max-width: 1200px) {
         display: none;
     }
+}
+
+// ASCII background shapes (components/AsciiFields.js): once it runs, each shape (and its
+// satellite, now a real .cyril-bg-sat child instead of ::before) drops its dot grid for a
+// canvas of characters that scatter from the pointer. Diamonds turn their canvas back
+// upright (the shape is a square turned 45°) and clip it.
+.cyril-bg-item.is-ascii,
+.cyril-bg-title-boxed.is-ascii {
+    background: none;
+
+    &::before { display: none; }
+
+    & > .cyril-bg-sat { background: none; overflow: hidden; }
+}
+
+.cyril-ascii-field {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+.cyril-ascii-canvas {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: block;
+    translate: -50% -50%;
+    pointer-events: none;
+
+    &.is-diamond { rotate: -45deg; }
 }
 
 /* -------------------------------------------
@@ -3574,7 +3604,7 @@ contact band (components/ContactBand.js)
         aspect-ratio: 1 / 1;
         margin: 0;
 
-        &::before {
+        &::before, & > .cyril-bg-sat {
             width: 35.6%;
             height: 35.6%;
             top: 0;
