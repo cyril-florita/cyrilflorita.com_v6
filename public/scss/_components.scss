@@ -5512,3 +5512,11 @@ grounds (white / #121212) in both site themes, since the files include them.
         }
     }
 }
+
+/* About Me Skills: 18 skills make five rows; on short desktop screens (where the section is
+   one snapped screen) tighten the row gap so the label and heading stay on screen */
+@media (min-width: 1201px) and (max-height: 860px) {
+    .cyril-skills .cyril-mb-40 {
+        margin-bottom: 16px;
+    }
+}

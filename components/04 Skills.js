@@ -1,6 +1,6 @@
 const Skills = () => {
   return (
-    <div className="cyril-section cyril-op-space-90">
+    <div className="cyril-section cyril-op-space-90 cyril-skills">
       <div
         className="cyril-bg-item cyril-bg-item-large"
         style={{ top: "8%", right: "18%" }}
@@ -19,29 +19,15 @@ const Skills = () => {
           <div className="col-xl-1"></div>
           <div className="col-xl-11 cyril-mb-20">
             <div className="row">
-
               <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-40">
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
                     <div className="cyril-text-icon">
-                    <i className="fa-solid fa-check"></i>
+                      <i className="fa-solid fa-check"></i>
                     </div>
                   </div>
                   <div className="cyril-progress-inline">
-                    <span className="cyril-upper">Web Design</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-40">
-                <div className="cyril-text-row">
-                  <div className="cyril-icon-box">
-                    <div className="cyril-text-icon">
-                    <i className="fa-solid fa-check"></i>
-                    </div>
-                  </div>
-                  <div className="cyril-progress-inline">
-                    <span className="cyril-upper">Web Development</span>
+                    <span className="cyril-upper">UX &amp; UI Design</span>
                   </div>
                 </div>
               </div>
@@ -54,7 +40,137 @@ const Skills = () => {
                     </div>
                   </div>
                   <div className="cyril-progress-inline">
-                    <span className="cyril-upper">Product &amp; Brand Design</span>
+                    <span className="cyril-upper">App Design</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-40">
+                <div className="cyril-text-row">
+                  <div className="cyril-icon-box">
+                    <div className="cyril-text-icon">
+                      <i className="fa-solid fa-check"></i>
+                    </div>
+                  </div>
+                  <div className="cyril-progress-inline">
+                    <span className="cyril-upper">Product Design</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-40">
+                <div className="cyril-text-row">
+                  <div className="cyril-icon-box">
+                    <div className="cyril-text-icon">
+                      <i className="fa-solid fa-check"></i>
+                    </div>
+                  </div>
+                  <div className="cyril-progress-inline">
+                    <span className="cyril-upper">Design Systems &amp; Prototyping</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-40">
+                <div className="cyril-text-row">
+                  <div className="cyril-icon-box">
+                    <div className="cyril-text-icon">
+                      <i className="fa-solid fa-check"></i>
+                    </div>
+                  </div>
+                  <div className="cyril-progress-inline">
+                    <span className="cyril-upper">Web Design &amp; Development</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-40">
+                <div className="cyril-text-row">
+                  <div className="cyril-icon-box">
+                    <div className="cyril-text-icon">
+                      <i className="fa-solid fa-check"></i>
+                    </div>
+                  </div>
+                  <div className="cyril-progress-inline">
+                    <span className="cyril-upper">Brand Design</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-40">
+                <div className="cyril-text-row">
+                  <div className="cyril-icon-box">
+                    <div className="cyril-text-icon">
+                      <i className="fa-solid fa-check"></i>
+                    </div>
+                  </div>
+                  <div className="cyril-progress-inline">
+                    <span className="cyril-upper">Creative Direction</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-40">
+                <div className="cyril-text-row">
+                  <div className="cyril-icon-box">
+                    <div className="cyril-text-icon">
+                      <i className="fa-solid fa-check"></i>
+                    </div>
+                  </div>
+                  <div className="cyril-progress-inline">
+                    <span className="cyril-upper">Interactive 3D &amp; WebGL</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-40">
+                <div className="cyril-text-row">
+                  <div className="cyril-icon-box">
+                    <div className="cyril-text-icon">
+                      <i className="fa-solid fa-check"></i>
+                    </div>
+                  </div>
+                  <div className="cyril-progress-inline">
+                    <span className="cyril-upper">Web Animation</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-40">
+                <div className="cyril-text-row">
+                  <div className="cyril-icon-box">
+                    <div className="cyril-text-icon">
+                      <i className="fa-solid fa-check"></i>
+                    </div>
+                  </div>
+                  <div className="cyril-progress-inline">
+                    <span className="cyril-upper">Accessibility &amp; Performance</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-40">
+                <div className="cyril-text-row">
+                  <div className="cyril-icon-box">
+                    <div className="cyril-text-icon">
+                      <i className="fa-solid fa-check"></i>
+                    </div>
+                  </div>
+                  <div className="cyril-progress-inline">
+                    <span className="cyril-upper">Marketing Strategies</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-40">
+                <div className="cyril-text-row">
+                  <div className="cyril-icon-box">
+                    <div className="cyril-text-icon">
+                      <i className="fa-solid fa-check"></i>
+                    </div>
+                  </div>
+                  <div className="cyril-progress-inline">
+                    <span className="cyril-upper">Dashboard &amp; Data Design</span>
                   </div>
                 </div>
               </div>
@@ -80,7 +196,7 @@ const Skills = () => {
                     </div>
                   </div>
                   <div className="cyril-progress-inline">
-                    <span className="cyril-upper">Creative Direction &amp; Marketing</span>
+                    <span className="cyril-upper">Copywriting &amp; Content</span>
                   </div>
                 </div>
               </div>
@@ -89,20 +205,7 @@ const Skills = () => {
                 <div className="cyril-text-row">
                   <div className="cyril-icon-box">
                     <div className="cyril-text-icon">
-                    <i className="fa-solid fa-check"></i>
-                    </div>
-                  </div>
-                  <div className="cyril-progress-inline">
-                    <span className="cyril-upper">UI/UX &amp; Mobile/App Design</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-40">
-                <div className="cyril-text-row">
-                  <div className="cyril-icon-box">
-                    <div className="cyril-text-icon">
-                    <i className="fa-solid fa-check"></i>
+                      <i className="fa-solid fa-check"></i>
                     </div>
                   </div>
                   <div className="cyril-progress-inline">
@@ -119,20 +222,7 @@ const Skills = () => {
                     </div>
                   </div>
                   <div className="cyril-progress-inline">
-                    <span className="cyril-upper">Web &amp; Video Animation</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-sm-6 col-md-4 col-xl-3 cyril-mb-40">
-                <div className="cyril-text-row">
-                  <div className="cyril-icon-box">
-                    <div className="cyril-text-icon">
-                      <i className="fa-solid fa-check"></i>
-                    </div>
-                  </div>
-                  <div className="cyril-progress-inline">
-                    <span className="cyril-upper">Video Production &amp; Editing</span>
+                    <span className="cyril-upper">Visual &amp; Graphic Design</span>
                   </div>
                 </div>
               </div>
@@ -158,7 +248,7 @@ const Skills = () => {
                     </div>
                   </div>
                   <div className="cyril-progress-inline">
-                    <span className="cyril-upper">Print &amp; Graphic Design</span>
+                    <span className="cyril-upper">Video Production &amp; Motion</span>
                   </div>
                 </div>
               </div>
