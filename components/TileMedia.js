@@ -213,6 +213,14 @@ export const TILE_MEDIA = {
     shape: "wide",
   },
 
+  // Kord (design & dev pitch): a 12s loop recorded from the built site (CDP screencast, 1600×900): the hero, then the
+  // scroll story turning the bike side-on and taking it apart, and back up to the hero, so it loops without a seam.
+  "/kord": {
+    kind: "video", src: "/img/portfolio/kord_tile.mp4", poster: "/img/thumbs/portfolio/kord_tile-poster.webp",
+    label: "Kord: the 3D road bike turning side-on and coming apart into its labeled parts, then back together",
+    shape: "wide",
+  },
+
   // Mustang (design & dev pitch): a 12s loop recorded from the built ad (CDP screencast, 1600×900 @1.2, sped up
   // 1.5×, its last 0.5s crossfading into its first): a drag, two paints, the cockpit window and back.
   "/mustang": {

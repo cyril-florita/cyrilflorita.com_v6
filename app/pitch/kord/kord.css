@@ -1,0 +1,744 @@
+/* Kord — scoped under .cd. Tokens first, then the shell, the 3D story, sections. */
+
+/* The ™ after every model name is set in Archivo at normal width (a plain sans; the display text is
+   Archivo stretched to 125%) at regular weight even in bold headings, and the ® after Kord in JetBrains
+   Mono, the labels' font (the user's calls, 2026-11-24): two ~1 KB subsets holding just that glyph,
+   first in the stack with unicode-range, so any ™ or ® picks them up and nothing else changes. The ™
+   face is one regular instance declared for every weight, so the browser never bolds it. Made with fontTools from the build's own Archivo and JetBrains Mono files
+   (OFL); see the README. */
+@font-face { font-family: "Kord TM"; src: url(/pitch/kord/fonts/kord-tm.woff2) format("woff2"); font-weight: 1 1000; font-display: swap; unicode-range: U+2122; }
+@font-face { font-family: "Kord Reg"; src: url(/pitch/kord/fonts/kord-reg.woff2) format("woff2"); font-weight: 100 800; font-display: swap; unicode-range: U+00AE; }
+
+:root:has(.cd) { background: #0b0c0e; color-scheme: dark; scroll-behavior: smooth; overflow-x: clip; }   /* decorative giant words may run past a phone's edge; nothing scrolls sideways (as Hearthside) */
+body:has(.cd) { margin: 0; }   /* the browser's default 8px margin framed every page (the portfolio's reset isn't loaded here; Viteo resets it the same way) */
+@media (prefers-reduced-motion: reduce) { :root:has(.cd) { scroll-behavior: auto; } }
+:root:has(.cd)::-webkit-scrollbar, .cd ::-webkit-scrollbar { width: 12px; height: 12px; background: #0b0c0e; }
+:root:has(.cd)::-webkit-scrollbar-thumb, .cd ::-webkit-scrollbar-thumb { background: #c8f031; border: 3px solid #0b0c0e; border-radius: 0; }
+@supports (-moz-appearance: none) { :root:has(.cd) { scrollbar-color: #c8f031 #0b0c0e; } }
+
+.cd {
+  --cd-bg: #0b0c0e;
+  --cd-bg-2: #131418;
+  --cd-bg-3: #1b1d22;
+  --cd-ink: #f2f3f5;
+  --cd-ink-2: #a6aab2;            /* 8.2:1 on the page */
+  --cd-line: rgba(255, 255, 255, 0.12);
+  --cd-line-2: rgba(255, 255, 255, 0.22);
+  --cd-accent: #c8f031;           /* chartreuse */
+  --cd-on-accent: #0b0c0e;
+  --cd-radius: 14px;
+  --cd-gutter: clamp(20px, 4vw, 56px);
+  --cd-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  /* the soft light behind a bike's still (range cards, Compare, the cart): it fades to transparent inside
+     its own box, so it blends into whatever surface it sits on (it faded to --cd-bg-2, which left a hard
+     edge on the Compare table's slightly different panel) */
+  --cd-shot-glow: radial-gradient(closest-side at 50% 58%, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.03) 55%, rgba(255, 255, 255, 0));
+  min-height: 100vh;
+  background: var(--cd-bg);
+  color: var(--cd-ink);
+  font-family: "Kord TM", "Kord Reg", var(--cd-font), system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+:where(.cd), :where(.cd) *, :where(.cd) *::before, :where(.cd) *::after { box-sizing: border-box; }
+:where(.cd) :where(h1, h2, h3, p, ul, ol, dl, dd, figure) { margin: 0; }
+:where(.cd) :where(ul, ol) { padding: 0; list-style: none; }
+:where(.cd) a { color: inherit; }
+/* buttons and call-to-action links are uppercase too (2026-11-24, the user's call), slightly tracked */
+.cd-btn, .cd-card-build { text-transform: uppercase; letter-spacing: 0.04em; }
+/* headings — the white display type — are uppercase (2026-11-23, the user's call): h1–h3, the
+   3D hotspot and callout titles, the Find your bike questions. Running text, nav, buttons and
+   labels keep their case (the mono labels are uppercase on their own). */
+:where(.cd) :where(h1, h2, h3), .cd-hot-card strong, .cd-callout-body strong, .cd-legend strong, .cd-find-qs li, .cd-find-opt { text-transform: uppercase; }
+.cd :focus-visible { outline: 2px solid var(--cd-accent); outline-offset: 3px; }
+.cd-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.cd-wrap { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 var(--cd-gutter); }
+.cd-mono { font-family: var(--cd-mono), ui-monospace, monospace; }
+.cd-nowrap { white-space: nowrap; }
+
+/* type */
+/* a label sits under its heading, never above it as an eyebrow — the user's rule, everywhere: section
+   heads, the hero, cards, the builder's stage, the Find result, Compare's columns, the order confirmation
+   (2026-11-23, the user's pick from six treatments; applied site-wide 2026-11-24). Same small mono caps
+   and brand green. */
+.cd-subhead { font-family: var(--cd-mono), ui-monospace, monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cd-accent); }
+.cd-h1 { font-size: clamp(44px, 6vw, 92px); line-height: 0.96; font-weight: 800; font-stretch: 125%; letter-spacing: -0.035em; text-wrap: balance; }
+.cd-h2 { font-size: clamp(32px, 4vw, 60px); line-height: 1; font-weight: 800; font-stretch: 118%; letter-spacing: -0.03em; text-wrap: balance; }
+.cd-h3 { font-size: 24px; line-height: 1.1; font-weight: 750; font-stretch: 112%; letter-spacing: -0.015em; }
+.cd-lede { font-size: 19px; color: var(--cd-ink-2); max-width: 36ch; }
+
+/* buttons */
+.cd-btn {
+  position: relative; display: inline-flex; align-items: center; gap: 12px; height: 54px; padding: 0 26px;
+  border: 1.5px solid transparent; border-radius: 999px; background: none; font-family: inherit; font-weight: 700; font-size: 16px; text-decoration: none; white-space: nowrap;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, scale 0.2s var(--cd-ease); cursor: pointer;
+}
+.cd-btn:active { scale: 0.97; }
+.cd-btn-primary { background: var(--cd-accent); color: var(--cd-on-accent); }
+.cd-btn-primary:hover { background: #d8ff4a; }
+.cd-btn-ghost { border-color: var(--cd-line-2); color: var(--cd-ink); }
+.cd-btn-ghost:hover { border-color: var(--cd-ink); }
+.cd-btn-dark { background: var(--cd-on-accent); color: var(--cd-accent); }
+.cd-btn-dark:hover { background: #22252b; }
+.cd-btn-sm { height: 42px; padding: 0 18px; font-size: 14px; }
+.cd-arrow { transition: translate 0.25s var(--cd-ease); }
+.cd-btn:hover .cd-arrow { translate: 4px 0; }
+
+/* header: floats over the hero */
+.cd-header { position: fixed; inset: 0 0 auto; z-index: 40; padding: 18px 0; background: linear-gradient(rgba(11, 12, 14, 0.85), rgba(11, 12, 14, 0)); transition: translate 0.35s var(--cd-ease); }
+.cd-header.is-hidden { translate: 0 -100%; }   /* scrolling down (HeaderScroll.js) */
+@media (prefers-reduced-motion: reduce) { .cd-header { transition: none; } }
+/* once a screen down, the header turns solid so text scrolling under it doesn't show through
+   (CSS scroll-driven; where unsupported it keeps the gradient) */
+@supports (animation-timeline: scroll()) {
+  .cd-header { animation: cd-head-solid linear both; animation-timeline: scroll(root); animation-range: 0 100vh; }
+  @keyframes cd-head-solid { to { background-color: rgba(11, 12, 14, 0.98); box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06); } }
+}
+.cd-header-row { display: flex; align-items: center; gap: 40px; }
+.cd-logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--cd-ink); }
+.cd-logo-word { display: block; height: 11px; width: auto; }
+/* the ® after the wordmark (logo, preloader, design system): mono, small, level with the letters' tops */
+.cd-reg { font-family: "Kord Reg", var(--cd-mono), monospace; font-size: 10px; font-weight: 700; line-height: 1; }
+.cd-logo .cd-reg { margin-left: -6px; translate: 0 -4px; }   /* beside the 11 px wordmark, level with its top (the mark beside it is taller) */   /* the stretched wordmark (wordmark.js sets its ratio) */
+.cd-nav { margin-left: auto; }
+.cd-nav ul { display: flex; gap: 30px; }
+.cd-nav a { font-size: 15px; font-weight: 600; text-decoration: none; color: var(--cd-ink-2); transition: color 0.2s; }
+.cd-nav a:hover { color: var(--cd-ink); }
+.cd-header-end { display: flex; align-items: center; gap: 14px; }
+.cd-cart-link { position: relative; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; color: var(--cd-ink-2); transition: color 0.2s; }
+.cd-cart-link:hover { color: var(--cd-ink); }
+.cd-cart-n { position: absolute; right: 2px; top: 2px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: var(--cd-accent); color: var(--cd-on-accent); font-size: 11px; font-weight: 800; line-height: 18px; text-align: center; }
+
+/* ---------------------------------------------------------------- the 3D story */
+.cd-story { position: relative; height: 380vh; }
+.cd-sticky { position: sticky; top: 0; height: 100svh; overflow: hidden; isolation: isolate; }
+/* .cd-studio: the same studio on any stage (Find your bike's result, BikeViewer) */
+.cd-sticky, .cd-studio {
+  /* a dark photo studio (after the user's reference): the page's near-black, lit only around the
+     bike — a big, soft pool of light behind it that follows it (--hero) and the mouse — with the floor's texture
+     there too (::before). The lit floor is in the 3D scene (BikeStory), so it keeps its perspective. */
+  --cd-spot-x: calc(50% + 10% * var(--hero, 1) + var(--cd-lx, 0%));   /* --cd-lx/-ly: the mouse (BikeStory) */
+  --cd-spot-y: var(--cd-ly, 0%);
+  background:
+    radial-gradient(46% 58% at var(--cd-spot-x) calc(44% + var(--cd-spot-y)), rgba(156, 164, 178, 0.27), rgba(78, 83, 93, 0.11) 52%, transparent 82%),
+    var(--cd-bg); }
+/* the wall's texture, the same as the floor's (a faint wash, blurred mottling: wall.webp, baked from
+   bikeScene's mottle() so it paints with the page), masked to a soft area around the bike that follows it */
+.cd-sticky::before, .cd-studio::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: url(/pitch/kord/wall.webp) center / cover no-repeat;
+  -webkit-mask-image: radial-gradient(48% 60% at var(--cd-spot-x) calc(48% + var(--cd-spot-y)), #000 0%, rgba(0, 0, 0, 0.55) 50%, transparent 100%);
+  mask-image: radial-gradient(48% 60% at var(--cd-spot-x) calc(48% + var(--cd-spot-y)), #000 0%, rgba(0, 0, 0, 0.55) 50%, transparent 100%); }
+/* fine grain on the wall around the bike (not the floor or the bike: it's behind the canvas, and
+   fades out toward the floor line). grain.png is a 48px tile of random grey (16 levels; 32px showed a faint diagonal repeat) shown at 48px ÷
+   the screen's pixel density, so each grain is one device pixel and never looks pixelated. wall.webp
+   (720×450 at low quality, 1.6 KB) is kept that small on purpose: under 0.05 bits per pixel (of the
+   smaller of its own and its displayed size), Chrome doesn't count it as the largest paint (the grain tile is too small to count) — as full-screen backgrounds they were, and
+   Lighthouse's throttled estimate charged them for all the JavaScript requested before them (8.5 s). */
+.cd-sticky, .cd-studio { --cd-grain-size: 48px; }
+@media (min-resolution: 1.5dppx) { .cd-sticky, .cd-studio { --cd-grain-size: 32px; } }
+@media (min-resolution: 2dppx) { .cd-sticky, .cd-studio { --cd-grain-size: 24px; } }
+@media (min-resolution: 3dppx) { .cd-sticky, .cd-studio { --cd-grain-size: 16px; } }
+.cd-sticky::after, .cd-studio::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0.09; mix-blend-mode: screen;
+  background: url(/pitch/kord/grain.png) 0 0 / var(--cd-grain-size) repeat;
+  -webkit-mask-image: radial-gradient(50% 62% at var(--cd-spot-x) calc(46% + var(--cd-spot-y)), #000 0%, rgba(0, 0, 0, 0.5) 55%, transparent 100%), linear-gradient(#000 52%, transparent 68%);
+  -webkit-mask-composite: source-in;
+  mask-image: radial-gradient(50% 62% at var(--cd-spot-x) calc(46% + var(--cd-spot-y)), #000 0%, rgba(0, 0, 0, 0.5) 55%, transparent 100%), linear-gradient(#000 52%, transparent 68%);
+  mask-composite: intersect; }
+.cd-canvas, .cd-view { position: absolute; inset: 0; width: 100%; height: 100%; }
+.cd-canvas { z-index: 2; display: block; }
+.cd-view { z-index: 3; cursor: grab; touch-action: pan-y; }
+.cd-view.is-dragging { cursor: grabbing; }
+.cd-view:focus-visible { outline-offset: -6px; }
+.cd-story:not([data-state="ready"]) .cd-view { pointer-events: none; }
+
+.cd-word {
+  position: absolute; z-index: 1; left: calc(50% + 8% * var(--hero, 1)); top: 50%; translate: -50% -58%;
+  font-weight: 900; font-stretch: 125%; font-size: min(38vw, 64svh); line-height: 0.8; letter-spacing: -0.05em;
+  /* a very faint grey fill, no outline (the user's pick, 2026-11-23, after a sheet of eight
+     styles; a chartreuse outline and a dark fill were tried and taken off) */
+  color: rgba(225, 230, 238, 0.06);
+  user-select: none; pointer-events: none; white-space: nowrap;
+}
+
+.cd-poster { position: absolute; z-index: 2; right: 2%; top: 52%; width: 60%; height: auto; translate: 0 -50%; transition: opacity 0.6s; pointer-events: none; }
+.cd-story[data-state="ready"] .cd-poster { opacity: 0; }
+
+.cd-hero-copy {
+  position: absolute; z-index: 4; left: var(--cd-gutter); top: 50%; translate: 0 calc(-50% - 30px * (1 - var(--hero, 1)));
+  width: min(640px, 45vw); display: grid; gap: 22px; opacity: var(--hero, 1); pointer-events: none;
+}
+/* in caps the headline runs wider: a little smaller here, so it stays on two lines */
+.cd-hero-copy .cd-h1 { font-size: clamp(30px, 3.3vw, 48px); }
+.cd-hero-copy .cd-h1-lead { display: block; margin-bottom: 0.22em; font-size: 1.25em; }   /* its own line, with a little space before the second sentence (2026-11-24) */   /* "Refined speed." 25% bigger than the rest; the base is sized so it still fits on one line */   /* "Refined speed." on one line in the column from 900px up (sized for the earlier "Refined speed—", ~11.2em; it was 44–84px for "Speed you can hold.") */
+.cd-hero-copy a { pointer-events: auto; }
+.cd-hero-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: 8px; }
+.cd-hero-row .cd-btn { white-space: nowrap; flex-shrink: 0; }   /* the button stays one line; the price wraps under it if need be */
+.cd-price { font-size: 15px; color: var(--cd-ink-2); }
+.cd-price strong { color: var(--cd-ink); font-size: 20px; font-weight: 750; margin-left: 4px; }
+
+.cd-drag-hint { position: absolute; z-index: 5; left: var(--cd-hint-x, 68%); top: calc(var(--cd-hint-y, 78%) + 6px); translate: -50% 0; margin: 0; white-space: nowrap; pointer-events: none;
+  font-family: var(--cd-mono), monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cd-ink-2); opacity: var(--hero, 1); }
+.cd-story:not([data-state="ready"]) .cd-drag-hint, .cd-story[data-hero="off"] .cd-drag-hint { visibility: hidden; }   /* the still can't be turned */
+.cd-paints { position: absolute; z-index: 5; right: var(--cd-gutter); bottom: 132px; display: grid; gap: 10px; justify-items: end; opacity: var(--hero, 1); }
+/* scrolled past the hero: its controls leave the tab order; the copy itself stays (transparent),
+   so the page keeps its h1 for screen readers */
+.cd-story[data-hero="off"] .cd-paints, .cd-story[data-hero="off"] .cd-hero-copy :is(a, button) { visibility: hidden; }
+.cd-story[data-hero="off"] .cd-hero-copy { pointer-events: none; }
+.cd-paints-label { font-family: var(--cd-mono), monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cd-ink-2); }
+.cd-paints-label strong { color: var(--cd-ink); font-weight: 600; }
+.cd-paints-row { display: flex; gap: 10px; }
+.cd-swatch { width: 34px; height: 34px; border-radius: 50%; border: 0; padding: 0; cursor: pointer; background: var(--swatch);
+  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.42), 0 0 0 0 var(--cd-accent); transition: box-shadow 0.25s var(--cd-ease), scale 0.2s; }
+.cd-swatch:hover { scale: 1.08; }
+.cd-swatch[aria-checked="true"] { box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.42), 0 0 0 3px var(--cd-bg), 0 0 0 5px var(--cd-accent); }
+.cd-paints-rail-label { display: none; }
+/* desktop: the paint choice as a slim rail on the right edge, mid-height (after the Mustang ad's
+   left rail): a vertical label, the swatches in a column on a hairline, each name in a pill that
+   opens to the left on hover or keyboard focus */
+@media (min-width: 900px) {
+  .cd-paints { right: 30px; bottom: auto; top: 50%; translate: 0 -50%; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+  .cd-paints .cd-paints-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .cd-paints-rail-label { display: block; writing-mode: vertical-rl; font-family: var(--cd-mono), monospace; font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--cd-ink-2); }
+  .cd-paints .cd-paints-row { position: relative; flex-direction: column; gap: 14px; }
+  .cd-paints .cd-paints-row::before { content: ""; position: absolute; left: 50%; top: 6px; bottom: 6px; width: 1px; translate: -0.5px 0; background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.22) 20%, rgba(255, 255, 255, 0.22) 80%, transparent); }
+  .cd-paints .cd-swatch { position: relative; width: 26px; height: 26px; }
+  .cd-paints .cd-swatch::after {
+    content: attr(data-name); position: absolute; right: calc(100% + 14px); top: 50%; translate: 6px -50%; padding: 6px 12px; border-radius: 999px; white-space: nowrap; pointer-events: none;
+    border: 1px solid rgba(255, 255, 255, 0.22); background: rgba(19, 20, 24, 0.9); backdrop-filter: blur(8px);
+    font-family: var(--cd-mono), monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cd-ink);
+    opacity: 0; transition: opacity 0.25s ease, translate 0.35s var(--cd-ease);
+  }
+  .cd-paints .cd-swatch:is(:hover, :focus-visible)::after { opacity: 1; translate: 0 -50%; }
+  .cd-paints .cd-swatch:hover { scale: 1.12; }
+}
+
+/* hotspots: plus markers on the bike, opening a small card */
+.cd-hotspots { position: absolute; inset: 0; z-index: 6; pointer-events: none; }
+.cd-hot { position: absolute; left: 0; top: 0; width: 0; height: 0; transition: opacity 0.3s; }
+.cd-hot-btn {
+  position: absolute; left: -17px; top: -17px; width: 34px; height: 34px; border-radius: 50%; padding: 0; cursor: pointer; pointer-events: auto;
+  border: 1.5px solid var(--cd-accent); background: rgba(11, 12, 14, 0.55); backdrop-filter: blur(4px);
+  transition: background-color 0.2s, scale 0.2s var(--cd-ease);
+}
+.cd-hot-btn::before, .cd-hot-btn::after { content: ""; position: absolute; left: 50%; top: 50%; width: 12px; height: 1.5px; background: var(--cd-accent); translate: -50% -50%; transition: rotate 0.3s var(--cd-ease), background-color 0.2s; }
+.cd-hot-btn::after { rotate: 90deg; }
+.cd-hot-btn:hover { scale: 1.1; }
+.cd-hot.is-open .cd-hot-btn { background: var(--cd-accent); }
+.cd-hot.is-open .cd-hot-btn::before, .cd-hot.is-open .cd-hot-btn::after { background: var(--cd-on-accent); rotate: 45deg; }
+.cd-hot.is-open .cd-hot-btn::after { rotate: 135deg; }
+.cd-hot-btn::selection { background: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .cd-hot:not(.is-open) .cd-hot-btn { animation: cd-pulse 2.4s var(--cd-ease) infinite; }
+}
+@keyframes cd-pulse { 0%, 60%, 100% { box-shadow: 0 0 0 0 rgba(200, 240, 49, 0.45); } 30% { box-shadow: 0 0 0 10px rgba(200, 240, 49, 0); } }
+.cd-hot-card {
+  position: absolute; left: 28px; top: -18px; width: 240px; padding: 14px 16px; border-radius: 12px; display: grid; gap: 4px;
+  background: rgba(19, 20, 24, 0.88); border: 1px solid var(--cd-line-2); backdrop-filter: blur(10px); pointer-events: auto;
+  font-size: 14px; line-height: 1.4; color: var(--cd-ink-2);
+}
+.cd-hot-card[hidden] { display: none; }
+.cd-hot.is-left .cd-hot-card { left: auto; right: 28px; }   /* near the right edge: open to the left */
+.cd-hot-card strong { color: var(--cd-ink); font-size: 15px; }
+
+/* callouts on the exploded bike */
+.cd-callouts { position: absolute; inset: 0; z-index: 6; pointer-events: none; }
+.cd-callout { position: absolute; left: 0; top: 0; width: 0; height: 0; }
+.cd-callout-dot { position: absolute; left: -5px; top: -5px; width: 10px; height: 10px; border-radius: 50%; background: var(--cd-accent); box-shadow: 0 0 0 4px rgba(200, 240, 49, 0.2); }
+.cd-callout-body { position: absolute; left: 14px; bottom: 10px; width: 210px; display: grid; gap: 2px; padding-left: 12px; border-left: 1px solid var(--cd-line-2); font-size: 14px; line-height: 1.35; color: var(--cd-ink-2); }
+.cd-callout-body strong { color: var(--cd-ink); font-size: 16px; font-weight: 750; }
+.cd-callout-n { font-family: var(--cd-mono), monospace; font-size: 12px; color: var(--cd-accent); }
+.cd-callout.is-left .cd-callout-body { left: auto; right: 14px; bottom: auto; top: 0; transform: translateY(-50%); padding: 0 12px 0 0; border-left: 0; border-right: 1px solid var(--cd-line-2); text-align: right; }
+
+.cd-legend { display: none; }
+.cd-story-head {
+  position: absolute; z-index: 4; left: 50%; top: 104px; translate: -50% 0; text-align: center; display: grid; gap: 10px; pointer-events: none;
+  opacity: calc(clamp(0, (var(--p, 0) - 0.3) * 8, 1) * (1 - clamp(0, (var(--p, 0) - 0.94) * 16, 1)));
+}
+.cd-story-head p { color: var(--cd-ink-2); }
+.cd-scroll-cue {
+  position: absolute; z-index: 4; left: 50%; bottom: 96px; translate: -50% 0; font-family: var(--cd-mono), monospace; font-size: 12px;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--cd-ink-2); opacity: var(--hero, 1); display: none;
+}
+
+.cd-specs {
+  position: absolute; z-index: 4; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: repeat(4, 1fr);
+  padding: 0 var(--cd-gutter); border-top: 1px solid var(--cd-line); opacity: var(--hero, 1);
+  translate: 0 calc(40px * (1 - var(--hero, 1)));
+}
+.cd-specs li { display: grid; gap: 2px; padding: 22px 0 26px; }
+.cd-specs li + li { padding-left: 28px; border-left: 1px solid var(--cd-line); }
+.cd-spec-v { font-weight: 800; font-stretch: 118%; font-size: 30px; line-height: 1; letter-spacing: -0.02em; }
+.cd-spec-v small { font-size: 15px; font-weight: 600; margin-left: 4px; color: var(--cd-ink-2); letter-spacing: 0; }
+.cd-spec-l { font-size: 14px; color: var(--cd-ink-2); }
+
+/* ---------------------------------------------------------------- sections */
+.cd-section { padding: clamp(80px, 10vw, 150px) 0; }
+.cd-section-head { display: grid; gap: 16px; max-width: 900px; margin-bottom: clamp(40px, 5vw, 72px); }
+
+.cd-range { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.cd-card { position: relative; display: grid; border-radius: var(--cd-radius); background: var(--cd-bg-2); border: 1px solid var(--cd-line); overflow: hidden; transition: border-color 0.3s; }
+.cd-card:hover { border-color: var(--cd-line-2); }
+.cd-card-img { width: 100%; height: auto; aspect-ratio: 5 / 3; object-fit: contain; background: var(--cd-shot-glow); transition: scale 0.8s var(--cd-ease); }
+.cd-card:hover .cd-card-img { scale: 1.03; }
+.cd-card-body { display: grid; gap: 12px; padding: 8px 28px 28px; }
+.cd-card-type { font-family: var(--cd-mono), monospace; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cd-accent); }
+.cd-card-line { color: var(--cd-ink-2); max-width: 48ch; }
+.cd-card-specs { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 4px; padding-top: 16px; border-top: 1px solid var(--cd-line); }
+.cd-card-specs dt { font-size: 12px; color: var(--cd-ink-2); font-family: var(--cd-mono), monospace; text-transform: uppercase; letter-spacing: 0.08em; }
+.cd-card-specs dd { font-weight: 650; }
+.cd-card-price { color: var(--cd-ink-2); font-size: 15px; }
+.cd-card-price strong { color: var(--cd-ink); font-size: 19px; margin-left: 4px; }
+
+.cd-find { background: var(--cd-bg-2); border-block: 1px solid var(--cd-line); scroll-margin-top: 40px; }
+.cd-find-row { display: grid; grid-template-columns: 1.1fr 1fr; gap: 64px; align-items: center; }
+.cd-find-row > div { display: grid; gap: 22px; justify-items: start; }
+.cd-find-qs { display: grid; gap: 12px; }
+/* Find your bike, inline (FindBike.js): the intro's questions start the flow at that question */
+.cd-find-qs button, .cd-find-opt {
+  display: flex; align-items: center; gap: 20px; width: 100%; padding: 22px 26px; text-align: left; cursor: pointer;
+  border-radius: var(--cd-radius); background: var(--cd-bg-3); border: 1px solid var(--cd-line); color: var(--cd-ink);
+  font: inherit; font-size: 20px; font-weight: 650; text-transform: uppercase; transition: border-color 0.2s, background-color 0.2s;
+}
+.cd-find-qs button:hover, .cd-find-opt:hover { border-color: rgba(200, 240, 49, 0.5); }
+.cd-find-qs .cd-mono { font-size: 13px; color: var(--cd-accent); }
+.cd-find h2:focus { outline: none; }
+.cd-find-ask { align-items: start; grid-template-columns: 1fr 1.1fr; }
+@media (min-width: 900px) { .cd-find:not(.is-result) .cd-find-row { min-height: 360px; } }   /* intro and questions the same height, so the page below doesn't jump */
+.cd-find-qhead { display: grid; gap: 18px; justify-items: start; }
+.cd-find-progress { font-family: var(--cd-mono), monospace; font-size: 13px; letter-spacing: 0.12em; color: var(--cd-ink-2); }
+.cd-find-progress span { color: var(--cd-accent); }
+.cd-find-bar { display: flex; gap: 6px; width: min(260px, 100%); }
+.cd-find-bar i { flex: 1; height: 3px; border-radius: 2px; background: var(--cd-line-2); transition: background-color 0.3s; }
+.cd-find-bar i.is-now { background: var(--cd-ink-2); }
+.cd-find-bar i.is-done { background: var(--cd-accent); }
+.cd-find-note { color: var(--cd-ink-2); font-size: 16px; max-width: 38ch; }
+.cd-find-back { padding: 0; border: 0; background: none; color: var(--cd-ink-2); font: inherit; font-size: 15px; cursor: pointer; }
+.cd-find-back:hover { color: var(--cd-ink); }
+.cd-find-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.cd-find-opt { min-height: 96px; gap: 16px; font-size: 18px; }
+.cd-find-opt-dot { flex: none; width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid var(--cd-ink-2); transition: border-color 0.2s, box-shadow 0.2s; }
+.cd-find-opt.is-on { border-color: var(--cd-accent); background: rgba(200, 240, 49, 0.06); }
+.cd-find-opt.is-on .cd-find-opt-dot { border-color: var(--cd-accent); box-shadow: inset 0 0 0 4px var(--cd-bg-3), inset 0 0 0 10px var(--cd-accent); }
+/* the result: the copy left, the bike in its studio right (BikeViewer) */
+.cd-find-result { grid-template-columns: 0.9fr 1.1fr; gap: 56px; }
+.cd-find-copy { gap: 18px !important; }
+.cd-find-name { font-size: clamp(44px, 5.6vw, 84px); }
+.cd-find-meta { font-size: 18px; color: var(--cd-ink); }
+.cd-find-meta span { color: var(--cd-ink-2); }
+.cd-find-why { display: grid; gap: 10px; max-width: 46ch; }
+.cd-find-why li { position: relative; padding-left: 28px; color: var(--cd-ink-2); font-size: 16.5px; line-height: 1.45; }
+.cd-find-why li::before { content: ""; position: absolute; left: 2px; top: 5px; width: 12px; height: 7px; border-left: 2px solid var(--cd-accent); border-bottom: 2px solid var(--cd-accent); rotate: -45deg; }
+.cd-find-specs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 32px; padding-top: 18px; border-top: 1px solid var(--cd-line); width: 100%; max-width: 520px; }
+.cd-find-specs dt { font-family: var(--cd-mono), monospace; font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cd-ink-2); }
+.cd-find-specs dd { margin: 4px 0 0; font-size: 16px; font-weight: 600; color: var(--cd-ink); }
+.cd-find-price { width: 100%; max-width: 520px; margin-top: 6px; padding-top: 18px; border-top: 1px solid var(--cd-line-2); color: var(--cd-ink-2); }   /* set apart from the specs above (2026-11-24) */
+.cd-find-price strong { color: var(--cd-ink); font-size: 22px; margin-left: 4px; }
+.cd-find-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.cd-find-links { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+.cd-find-links button { padding: 0; border: 0; background: none; font: inherit; font-size: 15px; color: var(--cd-ink-2); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.cd-find-links button:hover { color: var(--cd-ink); }
+.cd-viewer { --hero: 0; position: relative; aspect-ratio: 4 / 3; border-radius: 20px; overflow: hidden; isolation: isolate; border: 1px solid var(--cd-line); width: 100%; }
+.cd-viewer .cd-view { z-index: 3; cursor: grab; touch-action: pan-y; }
+.cd-viewer .cd-view.is-dragging { cursor: grabbing; }
+.cd-viewer-still { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; object-fit: contain; padding: 6% 4% 10%; transition: opacity 0.6s; pointer-events: none; }
+.cd-viewer[data-state="ready"] .cd-viewer-still { opacity: 0; }
+
+.cd-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid var(--cd-line); }
+.cd-step { display: grid; align-content: start; gap: 14px; padding: 32px 28px 0 0; }
+.cd-step + .cd-step { padding-left: 28px; border-left: 1px solid var(--cd-line); }
+.cd-step-n { font-weight: 900; font-stretch: 125%; font-size: 64px; line-height: 1; letter-spacing: -0.04em; color: transparent; -webkit-text-stroke: 1.5px var(--cd-accent); }
+.cd-step p { color: var(--cd-ink-2); }
+
+.cd-band { background: var(--cd-accent); color: var(--cd-on-accent); padding: clamp(56px, 7vw, 96px) 0; }
+.cd-band-row { display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+.cd-band-title { font-size: clamp(36px, 5vw, 76px); line-height: 0.95; font-weight: 900; font-stretch: 125%; letter-spacing: -0.04em; max-width: 14ch; }
+.cd-band .cd-btn:focus-visible { outline-color: var(--cd-on-accent); }
+
+.cd-footer { padding: 64px 0 40px; border-top: 1px solid var(--cd-line); }
+.cd-footer-top { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; padding-bottom: 40px; border-bottom: 1px solid var(--cd-line); }
+.cd-footer-line { color: var(--cd-ink-2); max-width: 48ch; }
+@media (min-width: 1000px) { .cd-footer-line { max-width: none; white-space: nowrap; } }   /* the slogan on one line on desktop (2026-11-24) */
+.cd-footer-links { display: flex; flex-wrap: wrap; gap: 8px 28px; padding-top: 24px; font-size: 14px; }
+.cd-footer-links a { color: var(--cd-ink-2); text-underline-offset: 3px; }
+.cd-footer-links a:hover { color: var(--cd-ink); }
+.cd-legal { padding-top: 24px; font-size: 14px; color: var(--cd-ink-2); }
+.cd-credit { padding-top: 24px; font-size: 13px; color: var(--cd-ink-2); max-width: 90ch; }
+.cd-credit a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.cd-credit a:hover { color: var(--cd-accent); }
+
+.cd-sample { font-family: var(--cd-font), sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cd-accent); }
+.cd-sample::before { content: "[ "; }
+.cd-sample::after { content: " ]"; }
+
+/* ---------------------------------------------------------------- tablets and phones */
+@media (max-width: 1100px) {
+  .cd-nav { display: none; }
+  .cd-header-row { justify-content: space-between; }
+  .cd-steps { grid-template-columns: repeat(2, 1fr); row-gap: 40px; }
+  .cd-step:nth-child(3) { padding-left: 0; border-left: 0; }
+}
+@media (max-width: 899px) {
+  .cd-story { height: 320vh; }
+  .cd-word { left: 50%; top: calc(30% - var(--cd-lift, 0px)); font-size: 44vw; translate: -50% -50%; }
+  .cd-poster { right: 4%; width: 92%; top: calc(34% - 56px); }
+  .cd-hero-copy { left: var(--cd-gutter); right: var(--cd-gutter); top: auto; bottom: 28px; width: auto; translate: 0 calc(-30px * (1 - var(--hero, 1))); gap: 14px; }
+  .cd-h1 { font-size: clamp(36px, 10vw, 54px); }
+  .cd-hero-copy .cd-h1 { font-size: clamp(22px, 6.1vw, 34px); }   /* "Refined speed." on one line down to 360px */
+  .cd-lede { font-size: 16px; }
+  .cd-hero-row { margin-top: 2px; }
+  /* the hero lifted 56px (the user's call, 2026-11-24: the bike — BikeStory's LIFT —, the wall light and the giant
+     word, fading out with --hero as the story starts), and the paints centered under the bike (briefly at the top) */
+  .cd-sticky { --cd-lift: calc(56px * var(--hero, 1)); --cd-spot-y: calc(var(--cd-ly, 0%) - var(--cd-lift)); }
+  /* "Drag to turn 360°" close under the bike (the user's call), the paints under it */
+  .cd-drag-hint { left: 50%; top: calc(var(--cd-hint-y, calc(56svh - 66px)) + 4px); }
+  .cd-paints { left: 50%; right: auto; bottom: auto; top: calc(var(--cd-hint-y, calc(56svh - 66px)) + 52px); translate: -50% 0; justify-items: center; }
+  .cd-paints .cd-paints-label { display: none; }
+  .cd-paints .cd-swatch { width: 30px; height: 30px; }
+  .cd-specs { display: none; }
+  .cd-hot-card { width: 200px; }
+  .cd-story-head { top: 84px; width: calc(100% - 2 * var(--cd-gutter)); }
+  .cd-callout-body { left: 8px; bottom: 6px; width: auto; padding: 0; border: 0; }
+  .cd-callout.is-left .cd-callout-body { left: 8px; right: auto; top: auto; bottom: 6px; transform: none; padding: 0; border: 0; text-align: left; }
+  .cd-callout-body strong, .cd-callout-body span:last-child { display: none; }
+  .cd-callout-n { font-size: 13px; font-weight: 700; }
+  .cd-legend {
+    position: absolute; z-index: 4; left: var(--cd-gutter); right: var(--cd-gutter); bottom: 28px; display: grid; gap: 8px;
+    font-size: 14px; line-height: 1.35; color: var(--cd-ink-2); pointer-events: none;
+    opacity: calc(clamp(0, (var(--p, 0) - 0.5) * 8, 1) * (1 - clamp(0, (var(--p, 0) - 0.94) * 16, 1)));
+  }
+  .cd-legend li { display: flex; gap: 10px; align-items: baseline; }
+  .cd-legend strong { color: var(--cd-ink); font-weight: 700; }
+  .cd-range { grid-template-columns: 1fr; }
+  .cd-find-row { grid-template-columns: 1fr; gap: 40px; }
+  .cd-find-ask, .cd-find-result { grid-template-columns: 1fr; gap: 28px; }
+  .cd-find-opts { grid-template-columns: 1fr; }
+  .cd-find-opt { min-height: 68px; padding: 18px 20px; font-size: 16px; }
+  .cd-find-result .cd-viewer { order: -1; }
+  .cd-find-specs { gap: 12px 20px; }
+}
+@media (max-width: 560px) {
+  .cd-logo-word { height: 9px; }   /* ~135px wide, so the header keeps its button on one line */
+  .cd-steps { grid-template-columns: 1fr; }
+  .cd-step + .cd-step { padding-left: 0; border-left: 0; }
+  .cd-step { padding-top: 24px; border-top: 1px solid var(--cd-line); }
+  .cd-steps { border-top: 0; }
+  .cd-price strong { font-size: 18px; }
+}
+
+
+/* ------------------------------------------------------------------ the builder (/build/) */
+.cd-main-app { padding-top: 78px; }
+.cd-build { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(380px, 1fr); align-items: start; }
+.cd-build-stage { position: sticky; top: 0; height: 100svh; }   /* full height behind the header, which hides on scroll down (it stuck under the header before, which left a strip when the header hid) */
+.cd-viewer-stage { aspect-ratio: auto; height: 100%; border-radius: 0; border: 0; border-right: 1px solid var(--cd-line); }
+.cd-build-stage { container-type: inline-size; }
+.cd-build-tag { position: absolute; z-index: 4; left: var(--cd-gutter); top: 104px; display: grid; gap: 6px; pointer-events: none; }
+.cd-build-tag strong { font-size: min(110px, 10.5cqi);   /* sized to the stage (a container), so MERIDIAN™ fits too */ line-height: 0.9; font-weight: 800; font-stretch: 125%; letter-spacing: -0.04em; text-transform: uppercase; color: rgba(225, 230, 238, 0.08); }
+.cd-build-panel { display: grid; gap: 44px; padding: 40px var(--cd-gutter) 0 48px; }
+.cd-build-head { display: grid; gap: 14px; }
+.cd-build-head .cd-lede { font-size: 17px; }
+.cd-build-step { display: grid; gap: 16px; }
+.cd-build-h { display: flex; align-items: baseline; gap: 14px; font-size: 22px; font-weight: 800; font-stretch: 118%; letter-spacing: -0.01em; }
+.cd-build-h span { font-family: var(--cd-mono), monospace; font-size: 13px; font-weight: 400; letter-spacing: 0.12em; color: var(--cd-accent); }
+.cd-build-opts { display: grid; gap: 10px; }
+.cd-build-opts.is-2 { grid-template-columns: 1fr 1fr; }
+.cd-build-opts.is-sizes { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.cd-build-opt {
+  position: relative; display: grid; gap: 4px; justify-items: start; padding: 16px 18px; text-align: left; cursor: pointer;
+  border-radius: 12px; background: var(--cd-bg-2); border: 1px solid var(--cd-line); color: var(--cd-ink); font: inherit;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+.cd-build-opt:hover { border-color: rgba(200, 240, 49, 0.45); }
+.cd-build-opt.is-on { border-color: var(--cd-accent); background: rgba(200, 240, 49, 0.06); }
+.cd-build-opt strong { font-size: 16px; font-weight: 750; text-transform: uppercase; letter-spacing: 0.01em; }
+.cd-build-opt span { font-size: 14px; color: var(--cd-ink-2); line-height: 1.4; }
+.cd-build-opt em { font-style: normal; font-family: var(--cd-mono), monospace; font-size: 12px; letter-spacing: 0.06em; color: var(--cd-accent); }
+.is-sizes .cd-build-opt { justify-items: center; text-align: center; padding: 14px 6px; }
+.is-sizes .cd-build-opt strong { font-size: 20px; }
+.is-sizes .cd-build-opt span { font-size: 11.5px; }
+.cd-build-swatch { width: 26px; height: 26px; border-radius: 50%; background: var(--swatch); box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.42); margin-bottom: 6px; }
+.cd-build-note { font-size: 14px; color: var(--cd-ink-2); }
+.cd-build-note a { color: var(--cd-ink); }
+.cd-build-sum { position: sticky; bottom: 0; z-index: 5; margin: 0 calc(-1 * var(--cd-gutter)) 0 -48px; padding: 20px var(--cd-gutter) 22px 48px; display: grid; gap: 16px;
+  background: rgba(19, 20, 24, 0.94); backdrop-filter: blur(12px); border-top: 1px solid var(--cd-line-2); }
+.cd-build-sum-row { display: flex; justify-content: space-between; align-items: end; gap: 20px; }
+.cd-build-sum-name { font-weight: 750; text-transform: uppercase; font-size: 15px; }
+.cd-build-sum-spec, .cd-build-sum-ship { font-size: 13.5px; color: var(--cd-ink-2); }
+.cd-build-sum-ship { font-family: var(--cd-mono), monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cd-accent); margin-top: 4px; }
+.cd-build-price strong { font-size: 30px; font-weight: 800; font-stretch: 118%; letter-spacing: -0.02em; }
+.cd-build-sum-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; }
+.cd-build-copy { padding: 0; border: 0; background: none; font: inherit; font-size: 14px; color: var(--cd-ink-2); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.cd-build-copy:hover { color: var(--cd-ink); }
+.cd-build-added { display: inline-flex; align-items: center; gap: 8px; font-family: var(--cd-mono), monospace; font-size: 12.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cd-accent); }
+.cd-build-added svg { width: 16px; height: 16px; }
+@media (max-width: 899px) {
+  .cd-main-app { padding-top: 70px; }
+  .cd-build { grid-template-columns: 1fr; }
+  .cd-build-stage { position: relative; top: auto; height: 46svh; min-height: 280px; }
+  .cd-viewer-stage { border-right: 0; border-bottom: 1px solid var(--cd-line); }
+  .cd-build-tag { top: 16px; }
+  .cd-build-panel { padding: 28px var(--cd-gutter) 0; gap: 36px; }
+  .cd-build-opts.is-sizes { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
+  .is-sizes .cd-build-opt span { display: none; }
+  .cd-build-sum { margin: 0 calc(-1 * var(--cd-gutter)); padding: 14px var(--cd-gutter) 16px; }
+  .cd-build-price strong { font-size: 24px; }
+}
+@media (max-width: 420px) { .cd-build-opts.is-2 { grid-template-columns: 1fr; } }
+
+/* range cards: the price and a link into the builder */
+.cd-card-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 6px; padding-top: 18px; border-top: 1px solid var(--cd-line-2); }   /* the price set apart from the specs above (2026-11-24) */
+.cd-card-build { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; color: var(--cd-accent); text-decoration: none; }
+.cd-card-build:hover .cd-arrow { translate: 3px 0; }
+
+/* ------------------------------------------------------------------ compare (/compare/) */
+.cd-compare-page { padding-top: clamp(40px, 6vw, 80px); }
+.cd-compare-page .cd-lede a { color: var(--cd-ink); }
+.cd-compare-scroll { overflow-x: auto; border-radius: var(--cd-radius); border: 1px solid var(--cd-line); background: var(--cd-bg-2); }
+.cd-compare-scroll:focus-visible { outline: 2px solid var(--cd-accent); outline-offset: 2px; }
+.cd-compare { width: 100%; min-width: 860px; border-collapse: collapse; table-layout: fixed; }
+.cd-compare th, .cd-compare td { padding: 14px 18px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--cd-line); font-size: 15px; }
+.cd-compare td { color: var(--cd-ink); }
+.cd-compare tbody th { width: 170px; font-family: var(--cd-mono), monospace; font-size: 12px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cd-ink-2); }
+.cd-compare thead td, .cd-compare tbody th { position: sticky; left: 0; z-index: 1; background: var(--cd-bg-2); }
+.cd-compare thead th { padding: 18px; }
+.cd-compare thead th > * { display: block; }
+.cd-compare thead img { width: 100%; height: auto; aspect-ratio: 5 / 3; object-fit: contain; margin-bottom: 10px; background: var(--cd-shot-glow); border-radius: 10px; }
+.cd-compare thead strong { font-size: clamp(17px, 2.1vw, 24px);   /* MERIDIAN™ fits its column on tablets */ font-weight: 800; font-stretch: 118%; text-transform: uppercase; margin: 4px 0; }
+.cd-compare thead .cd-compare-price { display: flex; align-items: baseline; gap: 8px; margin: 12px 0 16px; padding-top: 12px; border-top: 1px solid var(--cd-line-2); }   /* the price, made to stand out (2026-11-24) */
+.cd-compare-price span { font-family: var(--cd-mono), monospace; font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cd-ink-2); }
+.cd-compare-price b { font-size: clamp(20px, 2vw, 28px); font-weight: 800; letter-spacing: -0.01em; color: var(--cd-ink); }
+.cd-compare thead .cd-btn { display: inline-flex; }
+.cd-compare .is-hi { background: rgba(200, 240, 49, 0.045); }
+.cd-compare thead th.is-hi { box-shadow: inset 0 3px 0 var(--cd-accent); }
+.cd-compare-sep th { padding-top: 28px !important; font-family: var(--cd-font) !important; font-size: 16px !important; font-weight: 800 !important; letter-spacing: 0.02em !important; color: var(--cd-ink) !important; text-transform: uppercase; }
+.cd-compare tr:last-child > * { border-bottom: 0; }
+/* the geometry's size picker, under its heading (2026-11-24): small square chips, the builder's radio look */
+.cd-compare-sep th > span { display: block; position: sticky; left: 18px; width: min(100%, calc(100vw - 2 * var(--cd-gutter) - 38px)); text-align: center; }   /* the heading centered over the picker, the same way (the user's call) */
+.cd-compare .cd-compare-sizes { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 12px;
+  /* centered (the user's call): across the row on desktop, across the visible part on phones, where the table
+     is wider than the screen and scrolls sideways — so it's as wide as the screen's table area and pinned left */
+  position: sticky; left: 18px; width: min(100%, calc(100vw - 2 * var(--cd-gutter) - 38px)); }
+.cd-compare .cd-compare-sizes .cd-build-opt { min-width: 56px; padding: 10px 12px; justify-content: center; text-align: center;
+  font-family: var(--cd-font); font-size: 15px; font-weight: 700; letter-spacing: 0; text-transform: none; }
+@media (max-width: 380px) { .cd-compare .cd-compare-sizes { gap: 6px; } .cd-compare .cd-compare-sizes .cd-build-opt { min-width: 50px; padding: 10px 8px; } }   /* one row at 360px */
+@media (max-width: 899px) { .cd-compare tbody th { width: 120px; } .cd-compare { min-width: 760px; } }
+
+/* ------------------------------------------------------------------ cart and checkout */
+.cd-cart { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 40px; align-items: start; }
+.cd-cart-list { display: grid; gap: 14px; }
+.cd-cart-item { display: grid; grid-template-columns: 200px minmax(0, 1fr) auto; gap: 24px; align-items: center; padding: 18px; border-radius: var(--cd-radius); background: var(--cd-bg-2); border: 1px solid var(--cd-line); }
+.cd-cart-item img { width: 100%; height: auto; border-radius: 10px; background: var(--cd-shot-glow); }
+.cd-cart-item > div { display: grid; gap: 8px; }
+.cd-cart-line { font-size: 14.5px; color: var(--cd-ink-2); }
+.cd-cart-price { font-size: 20px; font-weight: 800; align-self: start; }
+.cd-cart-sum { position: sticky; top: 100px; display: grid; gap: 16px; padding: 24px; border-radius: var(--cd-radius); background: var(--cd-bg-2); border: 1px solid var(--cd-line); }
+.cd-cart-sum dl { display: grid; gap: 10px; }
+.cd-cart-sum dl div { display: flex; justify-content: space-between; gap: 16px; font-size: 15px; }
+.cd-cart-sum dt { color: var(--cd-ink-2); }
+.cd-cart-sum dd { margin: 0; text-align: right; }
+.cd-cart-total { display: flex; justify-content: space-between; align-items: baseline; padding-top: 14px; border-top: 1px solid var(--cd-line); }
+.cd-cart-total strong { font-size: 26px; font-weight: 800; }
+.cd-cart-sum .cd-btn { justify-content: center; }
+.cd-cart-note { font-size: 13.5px; color: var(--cd-ink-2); }
+.cd-cart-back { font-size: 14px; color: var(--cd-ink-2); text-align: center; }
+.cd-cart-empty { display: grid; gap: 22px; justify-items: start; }
+.cd-checkout-steps { display: grid; gap: 40px; }
+.cd-checkout-steps section { display: grid; gap: 16px; }
+.cd-build-h .cd-sample { margin-left: 8px; }
+.cd-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.cd-fields label { display: grid; gap: 6px; font-family: var(--cd-mono), monospace; font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cd-ink-2); }
+.cd-fields label.is-wide { grid-column: 1 / -1; }
+.cd-fields input { height: 50px; padding: 0 14px; border-radius: 10px; border: 1px solid var(--cd-line-2); background: var(--cd-bg); color: var(--cd-ink); font: inherit; font-family: var(--cd-font); font-size: 16px; letter-spacing: 0; text-transform: none; }
+.cd-co-items { display: grid; gap: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--cd-line); }
+.cd-co-items li { display: grid; grid-template-columns: 72px minmax(0, 1fr) auto; gap: 12px; align-items: start; }
+.cd-co-items img { width: 100%; height: auto; border-radius: 6px; }
+.cd-co-items div { display: grid; gap: 3px; }
+.cd-co-items strong { font-size: 14px; text-transform: uppercase; }
+.cd-co-items span { font-size: 12.5px; color: var(--cd-ink-2); }
+.cd-co-items em { font-style: normal; font-size: 14px; font-weight: 700; }
+.cd-btn[aria-disabled="true"] { opacity: 0.7; cursor: progress; }
+.cd-done { display: grid; gap: 26px; justify-items: start; max-width: 860px; }
+.cd-done h1:focus { outline: none; }
+.cd-done h1 + .cd-subhead { margin-top: -12px; }   /* the order number sits under the heading, like every label */
+.cd-done-steps { display: grid; gap: 0; width: 100%; border-top: 1px solid var(--cd-line); }
+.cd-done-steps li { display: grid; grid-template-columns: 48px 220px minmax(0, 1fr); gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--cd-line); align-items: baseline; }
+.cd-done-steps span { font-family: var(--cd-mono), monospace; font-size: 13px; color: var(--cd-accent); }
+.cd-done-steps strong { text-transform: uppercase; font-size: 16px; }
+.cd-done-steps em { font-style: normal; color: var(--cd-ink-2); font-size: 15.5px; }
+.cd-done-total { color: var(--cd-ink-2); }
+@media (max-width: 899px) {
+  .cd-cart { grid-template-columns: 1fr; }
+  .cd-cart-item { grid-template-columns: 110px minmax(0, 1fr); }
+  .cd-cart-price { grid-column: 2; }
+  .cd-cart-sum { position: static; }
+  .cd-fields { grid-template-columns: 1fr; }
+  .cd-done-steps li { grid-template-columns: 40px minmax(0, 1fr); }
+  .cd-done-steps em { grid-column: 2; }
+}
+
+/* ------------------------------------------------------------------ virtual fit (/fit/) */
+.cd-fit { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+.cd-fit-form { display: grid; gap: 12px; }
+.cd-fit-field { display: grid; grid-template-columns: minmax(0, 1fr) 120px; gap: 16px; align-items: center; padding: 16px 18px; border-radius: 12px; background: var(--cd-bg-2); border: 1px solid var(--cd-line); }
+.cd-fit-field span { display: grid; gap: 3px; }
+.cd-fit-field strong { text-transform: uppercase; font-size: 15px; }
+.cd-fit-field em { font-style: normal; font-size: 13.5px; color: var(--cd-ink-2); }
+.cd-fit-field input { height: 48px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--cd-line-2); background: var(--cd-bg); color: var(--cd-ink); font: inherit; font-size: 18px; font-weight: 700; text-align: right; }
+.cd-fit-field input:focus-visible { outline: 2px solid var(--cd-accent); outline-offset: 1px; }
+.cd-fit-out { position: sticky; top: 100px; display: grid; gap: 18px; justify-items: start; padding: 26px; border-radius: var(--cd-radius); background: var(--cd-bg-2); border: 1px solid var(--cd-line); }
+.cd-fit-out dl { display: grid; width: 100%; }
+.cd-fit-out dl div { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--cd-line); }
+.cd-fit-out dt { font-family: var(--cd-mono), monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cd-ink-2); padding-top: 6px; }
+.cd-fit-out dd { margin: 0; display: grid; gap: 4px; }
+.cd-fit-out dd strong { font-size: 24px; font-weight: 800; font-stretch: 118%; }
+.cd-fit-out dd span { font-size: 14px; color: var(--cd-ink-2); }
+@media (max-width: 899px) {
+  .cd-fit { grid-template-columns: 1fr; }
+  .cd-fit-out { position: static; }
+  .cd-fit-field { grid-template-columns: minmax(0, 1fr) 96px; }
+  .cd-fit-out dl div { grid-template-columns: 1fr; gap: 4px; }
+}
+
+/* phones, tablets and small laptops (≤1100px, where the nav is hidden): the menu (MobileMenu.js) */
+.cd-menu-btn { display: none; width: 42px; height: 42px; place-items: center; border-radius: 50%; border: 1.5px solid var(--cd-line-2); background: none; color: var(--cd-ink); cursor: pointer; }
+.cd-menu { width: 100%; max-width: none; height: 100%; max-height: none; margin: 0; padding: 0; border: 0; background: var(--cd-bg); color: var(--cd-ink); }
+.cd-menu::backdrop { background: transparent; }
+.cd-menu-inner { display: grid; align-content: start; gap: 28px; padding: 18px var(--cd-gutter) 40px; font-family: "Kord TM", "Kord Reg", var(--cd-font), system-ui, sans-serif; }
+.cd-menu-close { justify-self: end; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; border: 1.5px solid var(--cd-line-2); background: none; color: var(--cd-ink); cursor: pointer; }
+.cd-menu ul { display: grid; }
+.cd-menu li a { display: block; padding: 14px 0; border-bottom: 1px solid var(--cd-line); font-size: 28px; font-weight: 800; font-stretch: 118%; text-transform: uppercase; text-decoration: none; color: var(--cd-ink); }
+.cd-menu .cd-btn { justify-self: start; }
+/* the menu button wherever the header's nav is hidden (≤1100px); the Build a bike button gives way to it only on phones */
+@media (max-width: 1100px) { .cd-menu-btn { display: grid; } }
+@media (max-width: 899px) { .cd-header-build { display: none; } }
+
+/* short phones (an SE, 360×640): the hero's description goes, so the copy stays clear of the swatches */
+@media (max-width: 899px) and (max-height: 700px) {
+  .cd-hero-copy .cd-lede { display: none; }
+}
+
+/* ---------------------------------------------------------------- preloader (Preloader.js, landing) */
+.cd-pre { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; background: var(--cd-bg); color: var(--cd-ink);
+  transition: opacity 0.6s ease, visibility 0s 0.6s; animation: cd-pre-safety 0.6s ease 9s forwards; }   /* no JS: it still lifts */
+.cd-pre.is-done { opacity: 0; visibility: hidden; }
+.cd-pre.is-gone, html.cd-pre-skip .cd-pre { display: none; }
+@keyframes cd-pre-safety { to { opacity: 0; visibility: hidden; } }
+.cd-pre-lockup { display: grid; justify-items: center; gap: 26px; transition: translate 0.6s var(--cd-ease), opacity 0.45s ease; }
+.cd-pre.is-done .cd-pre-lockup { translate: 0 -16px; opacity: 0; }
+.cd-pre-mark { width: 76px; height: 76px; }
+.cd-pre-arc { transform-box: view-box; transform-origin: 50% 50%; animation: cd-pre-turn 1.15s cubic-bezier(0.45, 0.05, 0.4, 0.95) infinite; }
+@keyframes cd-pre-turn { to { rotate: 360deg; } }
+.cd-pre-row { display: flex; overflow: hidden; padding-block: 2px; }
+.cd-pre-row .cd-reg { margin: -0.1em 0 0 4px; font-size: 13px; animation: cd-word-in 0.8s var(--cd-ease) 0.15s backwards; }
+.cd-pre-word { display: block; height: 18px; width: auto; animation: cd-word-in 0.8s var(--cd-ease) 0.15s backwards; }
+.cd-pre-bar { display: block; width: 168px; height: 2px; background: var(--cd-line); overflow: hidden; }
+.cd-pre-bar b { display: block; height: 100%; background: var(--cd-accent); transform-origin: left; scale: var(--p, 0) 1; transition: scale 0.35s ease; }
+@media (prefers-reduced-motion: reduce) { .cd-pre-arc, .cd-pre-word { animation: none; } }
+
+/* ---------------------------------------------------------------- text and entrances */
+/* <Words>: each word in its own mask, so it can rise out of it (padding keeps commas and the ™ inside) */
+.cd-w { display: inline-block; overflow: hidden; vertical-align: top; padding: 0.06em 0 0.12em; margin: -0.06em 0 -0.12em; }
+.cd-w > span { display: inline-block; }
+@keyframes cd-word-in { from { translate: 0 112%; } }
+@keyframes cd-fade-up { from { opacity: 0; translate: 0 18px; } }
+@keyframes cd-fade-in { from { opacity: 0; } }
+@keyframes cd-pop-in { from { opacity: 0; scale: 0.4; } }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* the hero, held under the preloader (below), then: the headline word by word, label, description,
+     button, the giant word, the paint rail, the hotspots, the spec strip; the bike turns in meanwhile (BikeStory) */
+  .cd-hero-copy .cd-w > span { animation: cd-word-in 0.95s var(--cd-ease) backwards; animation-delay: calc(0.1s + var(--i) * 60ms); }
+  .cd-hero-copy .cd-subhead { animation: cd-fade-up 0.8s var(--cd-ease) 0.55s backwards; }
+  .cd-hero-copy .cd-lede { animation: cd-fade-up 0.8s var(--cd-ease) 0.65s backwards; }
+  .cd-hero-copy .cd-hero-row { animation: cd-fade-up 0.8s var(--cd-ease) 0.75s backwards; }
+  .cd-story .cd-word { animation: cd-fade-in 1.6s ease 0.2s backwards; }
+  .cd-story :is(.cd-paints, .cd-drag-hint) { animation: cd-fade-in 0.8s ease 0.95s backwards; }
+  .cd-hot:not(.is-open) .cd-hot-btn { animation: cd-pop-in 0.6s var(--cd-ease) calc(1.05s + var(--hi, 0) * 90ms) backwards, cd-pulse 2.4s var(--cd-ease) calc(1.8s + var(--hi, 0) * 90ms) infinite; }
+  .cd-specs li { animation: cd-fade-up 0.8s var(--cd-ease) backwards; }
+  .cd-specs li:nth-child(1) { animation-delay: 0.9s; } .cd-specs li:nth-child(2) { animation-delay: 0.98s; }
+  .cd-specs li:nth-child(3) { animation-delay: 1.06s; } .cd-specs li:nth-child(4) { animation-delay: 1.14s; }
+  html:not(.cd-pre-skip) .cd:has(.cd-pre:not(.is-done)) .cd-story :is(*, *::before, *::after) { animation-play-state: paused !important; }
+
+  /* the app pages' titles (Compare, Fit, Cart, Checkout, the builder) on load, Hearthside-style */
+  .cd-main-app h1 .cd-w > span { animation: cd-word-in 0.9s var(--cd-ease) backwards; animation-delay: calc(0.05s + var(--i) * 55ms); }
+  .cd-main-app h1 ~ .cd-subhead { animation: cd-fade-up 0.7s var(--cd-ease) 0.35s backwards; }
+  .cd-main-app h1 ~ .cd-lede { animation: cd-fade-up 0.7s var(--cd-ease) 0.45s backwards; }
+
+  /* scroll reveals (Reveal.js): headings word by word, everything else a fade up, staggered (--rv-d) */
+  .cd-rv:not(:has(> .cd-w)) { opacity: 0; translate: 0 18px; }
+  .cd-rv.is-in:not(:has(> .cd-w)) { opacity: 1; translate: 0 0; transition: opacity 0.7s ease var(--rv-d, 0s), translate 0.9s var(--cd-ease) var(--rv-d, 0s); }
+  .cd-rv .cd-w > span { translate: 0 112%; }
+  .cd-rv.is-in .cd-w > span { translate: 0 0; transition: translate 0.9s var(--cd-ease) calc(var(--i) * 50ms); }
+}
+
+/* tablets in portrait (700–899px): the range two by two (one card a row left half the width empty) */
+@media (min-width: 700px) and (max-width: 899px) {
+  .cd-range { grid-template-columns: 1fr 1fr; }
+}
+
+/* Find your bike's result: the studio is the whole section's backdrop (the user's call, 2026-11-24; it was
+   a framed 4:3 box on the right) — the viewer fills the section behind the copy, the bike stands on the
+   right (BikeViewer's `place`), and the wall light sits behind it. Phones keep the bike above the copy,
+   edge to edge, unframed. */
+.cd-find.is-result { position: relative; isolation: isolate; background: var(--cd-bg); }
+@media (min-width: 900px) {
+  .cd-find.is-result { overflow: hidden; border-block-color: transparent; }
+  .cd-find.is-result .cd-viewer { position: absolute; inset: 0; z-index: 0; width: auto; aspect-ratio: auto; border: 0; border-radius: 0;
+    --cd-spot-x: calc(70% + var(--cd-lx, 0%)); --cd-spot-y: calc(-12% + var(--cd-ly, 0%)); }   /* the light behind the bike, which stands high (place.y) */
+  .cd-find.is-result .cd-viewer-still { inset: 0 0 0 44%; width: 56%; padding: 6% 4% 8%; }
+  .cd-find.is-result .cd-find-result { min-height: min(640px, 72svh); grid-template-columns: minmax(0, 0.9fr) 1.1fr; }
+  .cd-find.is-result .cd-find-copy { position: relative; z-index: 1; }
+  .cd-find.is-result .cd-find-result { align-items: start; }
+}
+@media (max-width: 899px) {
+  .cd-find.is-result .cd-viewer { width: auto; margin-inline: calc(-1 * var(--cd-gutter)); border: 0; border-radius: 0; }
+}
+
+/* Why Kord® (#why-kord, 2026-11-24): the guarantees (the steps' four columns, a word or two as the
+   outlined figure), then How it compares — Kord® against a typical online store and a bike shop, the
+   Kord® column lit in the accent. The table scrolls sideways on small screens, like Compare. */
+.cd-guarantees .cd-step, .cd-ds-steps .cd-step { container-type: inline-size; }
+.cd-guarantee-n { font-size: min(clamp(30px, 2.8vw, 44px), 13cqi); white-space: nowrap; }   /* shrinks to its column ("Lifetime" can't wrap) */
+.cd-diff { display: grid; gap: 24px; margin-top: clamp(64px, 8vw, 112px); }
+.cd-diff-scroll { overflow-x: auto; border: 1px solid var(--cd-line); border-radius: var(--cd-radius); }
+.cd-diff-table { width: 100%; min-width: 680px; border-collapse: collapse; font-size: 15px; }
+.cd-diff-table :is(th, td) { padding: 16px 22px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--cd-line); }
+.cd-diff-table tbody tr:last-child :is(th, td) { border-bottom: 0; }
+.cd-diff-table thead th { font-weight: 800; font-stretch: 118%; font-size: 17px; text-transform: uppercase; color: var(--cd-ink-2); }
+.cd-diff-table thead th.is-kord { color: var(--cd-accent); }
+.cd-diff-table tbody th { width: 18%; font-family: var(--cd-mono), monospace; font-size: 12px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cd-ink-2); padding-top: 19px; }
+.cd-diff-table td { color: var(--cd-ink-2); }
+.cd-diff-table .is-kord { width: 34%; background: rgba(200, 240, 49, 0.05); }
+.cd-diff-table td.is-kord { color: var(--cd-ink); font-weight: 600; }
+.cd-diff-check { width: 16px; height: 16px; margin: 0 10px -3px 0; color: var(--cd-accent); }
+
+/* small phones: a button's uppercase label may wrap onto two lines rather than widen the page (in caps,
+   "COMPARE WITH THE MERIDIAN™" is wider than a 360px screen; one unwrappable button made Chrome widen
+   the whole layout) */
+@media (max-width: 480px) {
+  .cd-btn { white-space: normal; height: auto; min-height: 54px; padding-block: 12px; line-height: 1.2; text-align: left; }
+  .cd-btn-sm { min-height: 42px; padding-block: 8px; }
+}
+
+/* back to top (ToTop.js): bottom right, once the page is a screen down; above the builder's pinned
+   summary (--cd-totop-lift) */
+.cd-totop {
+  position: fixed; right: var(--cd-gutter); bottom: calc(24px + var(--cd-totop-lift, 0px)); z-index: 45;
+  display: grid; place-items: center; width: 48px; height: 48px; padding: 0; border-radius: 50%; cursor: pointer;
+  border: 1.5px solid var(--cd-line-2); background: rgba(19, 20, 24, 0.85); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); color: var(--cd-ink);
+  opacity: 0; visibility: hidden; translate: 0 12px;
+  transition: opacity 0.3s, translate 0.35s var(--cd-ease), visibility 0s 0.35s, border-color 0.2s, color 0.2s, scale 0.2s var(--cd-ease);
+}
+.cd-totop.is-on { opacity: 1; visibility: visible; translate: 0 0; transition: opacity 0.3s, translate 0.35s var(--cd-ease), visibility 0s, border-color 0.2s, color 0.2s, scale 0.2s var(--cd-ease); }
+.cd-totop:hover { border-color: var(--cd-accent); color: var(--cd-accent); }
+.cd main:focus { outline: none; }   /* focused by Back to top, as a starting point */
+.cd-totop:active { scale: 0.94; }
+@media (max-width: 899px) { .cd-totop { bottom: calc(16px + var(--cd-totop-lift, 0px)); width: 44px; height: 44px; } }
+@media (prefers-reduced-motion: reduce) { .cd-totop { translate: none; } }
+
+/* Find your bike's result: price, buttons and links on one line under the bike, across the section */
+.cd-find-row > .cd-find-buy { grid-column: 1 / -1; position: relative; z-index: 1; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; padding-top: 22px; border-top: 1px solid var(--cd-line-2); }
+.cd-find-buy .cd-find-price { width: auto; max-width: none; margin: 0; padding: 0; border: 0; }
+.cd-find-buy .cd-find-links { margin-left: 4px; }
+

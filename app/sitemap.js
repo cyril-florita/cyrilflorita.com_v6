@@ -5,6 +5,7 @@ const SITE = 'https://cyrilflorita.com';
 
 // Project case-study routes (app/<slug>/page.js), in My Work grid order.
 const PROJECTS = [
+  'kord',
   'hearthside',
   'mustang',
   'viteo',

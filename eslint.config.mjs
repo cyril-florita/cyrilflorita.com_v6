@@ -29,6 +29,7 @@ const eslintConfig = defineConfig([
     'new-work/**',
     // Vendored Draco decoder (three.js), served as-is for the Mustang pitch.
     'public/pitch/mustang/draco/**',
+    'public/pitch/kord/draco/**',
   ]),
 ])
 

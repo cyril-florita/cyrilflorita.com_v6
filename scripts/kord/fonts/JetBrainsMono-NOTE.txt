@@ -1,0 +1,11 @@
+JetBrainsMono-TM-ExtraBold.ttf (and public/pitch/kord/fonts/kord-reg.woff2) are subsets of
+JetBrains Mono, Copyright 2020 The JetBrains Mono Project Authors
+(https://github.com/JetBrains/JetBrainsMono), licensed under the SIL Open Font License 1.1.
+They hold the registered sign (U+00AE; the TTF also ™, unused since 2026-11-24).
+
+Archivo-TM.ttf (and public/pitch/kord/fonts/kord-tm.woff2) are subsets of Archivo,
+Copyright 2017 The Archivo Project Authors (https://github.com/Omnibus-Type/Archivo), licensed under
+the SIL Open Font License 1.1 (OFL.txt in this folder). They hold only the trademark sign (U+2122),
+at normal width and regular weight (wdth 100, wght 400).
+
+All made with fontTools from the font files next/font downloads (see app/pitch/kord/README.md).

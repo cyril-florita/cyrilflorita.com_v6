@@ -57,6 +57,8 @@ const IMAGES = {
   hearthside: ["/img/portfolio/hearthside_desktop-home.jpg", "cover", "top"],
   // the stage only: from just above the label to just above the spec strip (2x capture, 1.905:1)
   mustang: ["/img/portfolio/mustang_desktop-landing.jpg", "cover", "centre", { left: 0, top: 43, width: 2880, height: 1512 }],
+  // from the top (logo and nav in, the spec strip out), 2x capture, 1.905:1
+  kord: ["/img/portfolio/kord_desktop-landing.jpg", "cover", "centre", { left: 0, top: 0, width: 2880, height: 1512 }],
   "volunteer-leadership-team": ["/img/thumbs/portfolio/chf-volunteer-leadership_preview-poster.webp", "cover"],
 };
 
