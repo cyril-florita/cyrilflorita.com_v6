@@ -71,7 +71,7 @@ preloader
         // Flat fallback = the noise image's average grey (it's opaque, so
         // it hides this once loaded): until the 365KB PNG arrives the layer
         // already has its final tone, so nothing jumps from black to grey.
-        background: #b5b5b5 url(../img/bg-static.png) repeat 0 0;
+        background: #b5b5b5 url(../img/bg-static.webp) repeat 0 0;
         background-repeat: repeat;
         animation: bg-animation .2s infinite;
 
@@ -162,6 +162,15 @@ scroll reveal (see cyrilUtility.revealOnScroll)
         transform: none;
         transition: none;
     }
+}
+
+// A case study's hero (eyebrow, summary, facts, the media card) only rises, without the fade (2026-11-25):
+// it sits under the preloader anyway, and a hidden summary was the page's largest paint, so on a phone
+// Lighthouse counted everything loaded while the preloader was up (analytics, posters, the hero video) as
+// holding it up — the case studies read 71-72 with a 9-10s LCP. Painted from the start, it counts at once.
+.cyril-case-hero .cyril-reveal,
+.cyril-case-hero-media .cyril-reveal {
+    opacity: 1;
 }
 
 /* -------------------------------------------
@@ -697,7 +706,11 @@ page
     // not `hidden`, so it isn't a scroll container and sticky still works.
     overflow-x: clip;
     transform: translateY(90px) scale(0.95);
-    opacity: 0;
+    // 0.01, not 0 (2026-11-25): Chrome doesn't count anything at opacity 0 as painted, so the whole page's
+    // largest paint waited for the preloader to lift, and Lighthouse's phone simulation charged everything
+    // loaded meanwhile to it (case studies read 71-72, LCP 9-10s). At 0.01 it's still invisible (and under
+    // the preloader), but it counts from the first paint.
+    opacity: 0.01;
     transition: variables.$tr;
     min-height: calc(var(--vh, 1vh) * 100);
     overscroll-behavior-y: contain;
@@ -4955,7 +4968,7 @@ zoom viewer (components/ZoomViewer.js)
         // Flat fallback = the noise image's average grey (it's opaque, so
         // it hides this once loaded): until the 365KB PNG arrives the layer
         // already has its final tone, so nothing jumps from black to grey.
-        background: #b5b5b5 url(../img/bg-static.png) repeat 0 0;
+        background: #b5b5b5 url(../img/bg-static.webp) repeat 0 0;
         animation: bg-animation .2s infinite;
         will-change: transform;
         opacity: var(--bg-static-opacity, 0.21);

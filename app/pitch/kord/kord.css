@@ -112,7 +112,7 @@ body:has(.cd) { margin: 0; }   /* the browser's default 8px margin framed every 
 
 /* ---------------------------------------------------------------- the 3D story */
 .cd-story { position: relative; height: 380vh; }
-.cd-sticky { position: sticky; top: 0; height: 100svh; overflow: hidden; isolation: isolate; }
+.cd-sticky { position: sticky; top: 0; height: 100svh; overflow: hidden; isolation: isolate; container-type: inline-size; }   /* cqw: the still's placement (.cd-poster) */
 /* .cd-studio: the same studio on any stage (Find your bike's result, BikeViewer) */
 .cd-sticky, .cd-studio {
   /* a dark photo studio (after the user's reference): the page's near-black, lit only around the
@@ -161,7 +161,12 @@ body:has(.cd) { margin: 0; }   /* the browser's default 8px margin framed every 
   user-select: none; pointer-events: none; white-space: nowrap;
 }
 
-.cd-poster { position: absolute; z-index: 2; right: 2%; top: 52%; width: 60%; height: auto; translate: 0 -50%; transition: opacity 0.6s; pointer-events: none; }
+/* the bike's still, under the 3D until it's ready, placed exactly where the 3D bike stands (2026-11-25: the
+   cover now lifts on the still when the 3D is slow, then the 3D crossfades in over it). The 3D framing is
+   linear in the stage's width and height, so these were fitted from the 3D bike's measured box at seven desktop
+   and ten phone/tablet sizes (within 2px) and the bike's box in bike-fallback.webp (68.94% of its width, centred
+   at 53.78% / 52%). Re-measure if BikeStory's framing (frac, shiftX/shiftY, LIFT) or the still changes. */
+.cd-poster { position: absolute; z-index: 2; left: calc(31.89% - 19px); top: calc(49.34% - 19.7cqw + 1px); width: calc(71.79% - 9px); height: auto; transition: opacity 0.6s; pointer-events: none; }
 .cd-story[data-state="ready"] .cd-poster { opacity: 0; }
 
 .cd-hero-copy {
@@ -381,7 +386,7 @@ body:has(.cd) { margin: 0; }   /* the browser's default 8px margin framed every 
 @media (max-width: 899px) {
   .cd-story { height: 320vh; }
   .cd-word { left: 50%; top: calc(30% - var(--cd-lift, 0px)); font-size: 44vw; translate: -50% -50%; }
-  .cd-poster { right: 4%; width: 92%; top: calc(34% - 56px); }
+  .cd-poster { left: calc(-6.54% - 11px); top: calc(36.62% - 31.57cqw - 56.6px); width: 112.94%; }
   .cd-hero-copy { left: var(--cd-gutter); right: var(--cd-gutter); top: auto; bottom: 28px; width: auto; translate: 0 calc(-30px * (1 - var(--hero, 1))); gap: 14px; }
   .cd-h1 { font-size: clamp(36px, 10vw, 54px); }
   .cd-hero-copy .cd-h1 { font-size: clamp(22px, 6.1vw, 34px); }   /* "Refined speed." on one line down to 360px */
@@ -391,8 +396,8 @@ body:has(.cd) { margin: 0; }   /* the browser's default 8px margin framed every 
      word, fading out with --hero as the story starts), and the paints centered under the bike (briefly at the top) */
   .cd-sticky { --cd-lift: calc(56px * var(--hero, 1)); --cd-spot-y: calc(var(--cd-ly, 0%) - var(--cd-lift)); }
   /* "Drag to turn 360°" close under the bike (the user's call), the paints under it */
-  .cd-drag-hint { left: 50%; top: calc(var(--cd-hint-y, calc(56svh - 66px)) + 4px); }
-  .cd-paints { left: 50%; right: auto; bottom: auto; top: calc(var(--cd-hint-y, calc(56svh - 66px)) + 52px); translate: -50% 0; justify-items: center; }
+  .cd-drag-hint { left: 50%; top: calc(var(--cd-hint-y, calc(36.03% + 31.25cqw - 56.6px)) + 4px); }
+  .cd-paints { left: 50%; right: auto; bottom: auto; top: calc(var(--cd-hint-y, calc(36.03% + 31.25cqw - 56.6px)) + 52px); translate: -50% 0; justify-items: center; }
   .cd-paints .cd-paints-label { display: none; }
   .cd-paints .cd-swatch { width: 30px; height: 30px; }
   .cd-specs { display: none; }

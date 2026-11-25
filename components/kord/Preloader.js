@@ -8,10 +8,13 @@ import { WORDMARK } from "@/components/kord/wordmark";
 // like a pedal stroke, the stretched KORD rising out of a mask, and a thin bar filling while the 3D bike
 // loads. When the story's `data-state` leaves `loading` (ready or fallback) and the fonts are in, the
 // bar fills, the lockup lifts, the cover fades, `kd:pre-done` fires (BikeStory turns the bike in) and
-// the hero's entrance, held while the cover is up (kord.css), plays. At least 1.2s so it reads, at most
-// 8s; a CSS timer lifts it after 9s without JS. Skipped (before first paint, by the inline script) on
+// the hero's entrance, held while the cover is up (kord.css), plays. The 3D gets GRACE ms; past that the
+// cover lifts as soon as the fonts and the bike's still (.cd-poster) are in, and the 3D crossfades in
+// over the still when it's ready (2026-11-25: on a throttled phone the cover held the page for the 3D,
+// and Lighthouse's speed index read 5.8s). At least 1.2s so it reads, at most 8s; a CSS timer lifts it
+// after 9s without JS. Skipped (before first paint, by the inline script) on
 // links into a section (a hash, e.g. a shared Find your bike result) and under reduced motion.
-const MIN = 1200, MAX = 8000;
+const MIN = 1200, GRACE = 2200, MAX = 8000;
 const SKIP = `if(location.hash||matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("cd-pre-skip")`;
 
 export default function Preloader() {
@@ -28,6 +31,9 @@ export default function Preloader() {
     const story = document.querySelector(".cd-story");
     const start = performance.now();
     let finished = false, raf = 0, t1 = 0, t2 = 0, t3 = 0, cap = 0, mo = null, p = 0, floor = 0;
+    const poster = story?.querySelector(".cd-poster");
+    const posterIn = !poster || poster.complete ? Promise.resolve()
+      : new Promise((r) => { poster.addEventListener("load", r, { once: true }); poster.addEventListener("error", r, { once: true }); });
     // the page holds still under the cover but keeps its scrollbar (as on Mustang, Viteo and Hearthside)
     const y0 = window.scrollY;
     const KEYS = new Set([" ", "PageDown", "PageUp", "End", "Home", "ArrowDown", "ArrowUp"]);
@@ -59,6 +65,7 @@ export default function Preloader() {
     const check = () => { if (isReady()) (document.fonts?.ready ?? Promise.resolve()).then(finish); };
     if (story) { mo = new MutationObserver(check); mo.observe(story, { attributes: true, attributeFilter: ["data-state"] }); }
     check();
+    t3 = setTimeout(() => Promise.all([document.fonts?.ready, posterIn]).then(finish), GRACE);   // the 3D is slow: go with the still
     cap = setTimeout(finish, MAX);
     return () => { release(); mo?.disconnect(); cancelAnimationFrame(raf); [t1, t2, t3, cap].forEach(clearTimeout); };
   }, []);

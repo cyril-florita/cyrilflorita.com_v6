@@ -4,6 +4,7 @@ import { gsap } from "gsap";
 import { BLOG_GRAPHICS } from "@/components/data/blogGraphics";
 import { RESOURCE_GRAPHICS } from "@/components/data/resourceGraphics";
 import { imageProps, SIZES_HINT } from "@/components/imageProps";
+import { onPreloaderHidden } from "@/components/Preloader";
 
 // Each case study's thumbnail, defined once and shared by its My Work tile
 // (components/PortfolioIsotope.js) and the "Next project" band on the page
@@ -15,18 +16,28 @@ import { imageProps, SIZES_HINT } from "@/components/imageProps";
 // and downloads nothing until the tile is near the viewport (preload="none"),
 // plays only while on screen, pauses when scrolled away. Reduced motion: the
 // poster only. Styled like tile images (grayscale → color on hover).
+// It starts watching only 1.5s after the preloader has lifted, once the page's
+// entrance has played (2026-11-25): a case study's hero video is on screen at
+// once, and its download, started during the entrance, was counted by
+// Lighthouse's phone simulation as holding up the page's largest paint (the
+// summary text) — /kord read 71 with a 9.6s LCP. The poster shows meanwhile.
 export const GridVideo = ({ src, poster, label }) => {
   const ref = useRef(null);
   useEffect(() => {
     const video = ref.current;
     if (!video || !("IntersectionObserver" in window)) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) video.play().catch(() => {});
-      else if (!video.paused) video.pause();
-    }, { rootMargin: "200px 0px" });
-    observer.observe(video);
-    return () => observer.disconnect();
+    let observer = null, timer = 0;
+    const off = onPreloaderHidden(() => {
+      timer = setTimeout(() => {
+        observer = new IntersectionObserver(([entry]) => {
+          if (entry.isIntersecting) video.play().catch(() => {});
+          else if (!video.paused) video.pause();
+        }, { rootMargin: "200px 0px" });
+        observer.observe(video);
+      }, 1500);
+    });
+    return () => { off(); clearTimeout(timer); observer?.disconnect(); };
   }, []);
   return (
     <video

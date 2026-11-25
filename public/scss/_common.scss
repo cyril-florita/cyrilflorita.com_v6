@@ -284,7 +284,7 @@ body {
         // Flat fallback = the noise image's average grey (it's opaque, so
         // it hides this once loaded): until the 365KB PNG arrives the layer
         // already has its final tone, so nothing jumps from black to grey.
-        background: #b5b5b5 url(../img/bg-static.png) repeat 0 0;
+        background: #b5b5b5 url(../img/bg-static.webp) repeat 0 0;
         background-repeat: repeat;
         animation: bg-animation .2s infinite;
         // Its own GPU layer, so the jitter never repaints the page.

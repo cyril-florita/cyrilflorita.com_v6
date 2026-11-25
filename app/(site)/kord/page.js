@@ -143,10 +143,10 @@ const Page = () => {
               <CaseStats items={[
                 { value: "100", label: "Accessibility" },
                 { value: "100", label: "Best practices" },
-                { value: "95", label: "Performance, desktop" },
+                { value: "91", label: "Performance, desktop" },
                 { value: "0", label: "Accessibility violations" },
               ]} />
-              <p>Lighthouse scores from a production build. An axe audit (WCAG A and AA, plus best practices) of every page at desktop and phone widths, with the phone menu open too, finds no violations, and everything works by keyboard and with reduced motion. Each model is its own 3D bike, about 820 KB with its baked shading, and phones get a version a third lighter. Once it runs, the numbers to watch are how many people finish Find your bike, how many go from a match to the builder, and how many builds reach the cart.</p>
+              <p>Lighthouse 13.6 on the live site: desktop scores 90 to 91 on the landing and 96 on the builder, and a throttled phone 83 to 86 on the landing and 85 on the builder, with 100 for accessibility and best practices on every page. An axe audit (WCAG A and AA, plus best practices) of every page at desktop and phone widths, with the phone menu open too, finds no violations, and everything works by keyboard and with reduced motion. Each model is its own 3D bike, about 820 KB with its baked shading, and phones get a version a third lighter. Once it runs, the numbers to watch are how many people finish Find your bike, how many go from a match to the builder, and how many builds reach the cart.</p>
 
               <Desktop name="landing" caption="The landing" />
               <p><strong>A bike you can walk around.</strong> The Arc™ stands in a dark studio, its name huge on the wall behind it. Drag it and it turns and carries on a little when you let go. A soft light on the wall follows the pointer, the way a lamp would. Four hotspots open short cards about the frame, the wheels, the drivetrain, and the cockpit.</p>
@@ -234,7 +234,7 @@ const Page = () => {
                 next={[
                   "Test Find your bike with riders: how many finish it, whether they agree with the match, and how many go on to build that bike.",
                   "Measure the path from match to builder to cart, and which choices people change most in the builder.",
-                  "Re-measure on the live site now that a preloader holds the first screen, and tune it if the mobile score drops.",
+                  "Bring the phone landing up from the mid-80s: the preloader holds the first screen until the 3D bike is ready, which costs speed index (5.8 seconds on a throttled phone).",
                 ]}
               />
             </CaseSection>

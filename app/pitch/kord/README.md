@@ -191,3 +191,17 @@ Noindex like the rest. No site header: the shared `DsChrome` (Viteo's and Hearth
 - **Every screen at a glance** (Fig. 02, after the turn clip; 2026-11-24): `kord_glance.mp4`, a silent 24.1 s loop, 1280×720, 2.5 MB (crf 28), poster at 5.4 s. Made like Viteo's, Hearthside's and Mustang's with the shared `new-work/glance-lib/build-glance.mjs` from `new-work/kord-glance/spec.mjs` (rows: the store, phone & tablet, choosing and buying; the design system as the scrolling column), then `npx hyperframes@0.8.223 render` and ffmpeg. Its 24 shots are its own fresh captures in `new-work/kord-glance/shots/` (tablet 834×1194 @1.5, the design system full page at 0.76); the case-study stills are encoded from the same shots. Rebuild it after recapturing: re-run the shots script, `node ../glance-lib/build-glance.mjs` in the folder (delete `assets/` first, since it only copies missing files), render, encode.
 
 Found and fixed while capturing: `BikeViewer` built its scene with the paint from its first render, so the builder ignored `?paint=` (a Glacier link showed a black bike); it now starts from the latest paint (`paintRef`).
+
+## Live scores (2026-11-25, after the deploy)
+
+Lighthouse 13.6 run locally against the live site (the PageSpeed Insights API's keyless daily quota was used up), simulated throttling, three runs on the landing:
+
+| Page | Mobile | Desktop |
+| --- | --- | --- |
+| Landing | 83 / 85 / 86 (FCP 1.8–1.9 s, LCP 3.1–3.2 s, TBT 140–210 ms, speed index 5.8 s, CLS 0) | 90 / 91 / 91 (FCP 0.9 s, LCP 1.2–1.3 s, TBT 0–10 ms, speed index 2.6 s) |
+| Builder | 85 (LCP 3.8 s, TBT 190 ms) | 96 |
+| `/kord` case study | 71 (LCP 9.6 s) | 82 (LCP 2.7 s) |
+
+Accessibility and best practices 100 everywhere; Agentic Browsing 100. SEO is 69 on the pitch pages only because they're noindex on purpose (`is-crawlable`); the case study scores 100. Performance loses its points mostly on speed index: the preloader holds the first screen until the 3D bike is ready. The case study quotes these (desktop 91 in its stats). Open: the case study's phone LCP (9.6 s, likely its hero video) and the landing's speed index.
+
+**Speed index, 2026-11-25** (the user's call, after the live scores): the preloader gives the 3D bike `GRACE` (2.2s); past that it lifts as soon as the fonts and the bike's still (`.cd-poster`) are in, and the 3D crossfades in over the still when it's ready, with no turn-in (BikeStory skips it when the cover lifted first). For that the still now stands exactly where the 3D bike will: `.cd-poster`'s left / top / width are linear fits (percentages of the stage, `cqw` — `.cd-sticky` is an inline-size container — and px) of the 3D bike's measured box at 7 desktop and 10 phone/tablet sizes, within 4px everywhere (also at 1536×864, not in the fit); the phones' paints use the same kind of fit for `--cd-hint-y` until the 3D sets it, so they don't jump. Re-fit if BikeStory's framing (frac, shiftX/shiftY, LIFT) or the still changes. Locally (uncompressed server) the landing's phone speed index went from 5.8s (live, before) to 3.3–3.6s; the case studies, after the portfolio's own fixes (CLAUDE.md, "Lighthouse and the preloader"), from 72 to 96. Re-measure live after the deploy and update the case study's figures.

@@ -218,7 +218,9 @@ export default function BikeStory() {
             introHold = true;
             const go = () => { introHold = false; introT0 = performance.now(); wake(2200); };
             window.addEventListener("kd:pre-done", go, { once: true });
-          } else introT0 = performance.now();
+          } else if (!window.__kdPreDone || document.documentElement.classList.contains("cd-pre-skip")) introT0 = performance.now();
+          // else: the cover lifted on the still before the 3D was ready (Preloader's GRACE) — no turn-in,
+          // the 3D simply crossfades in over the still in the same pose
         }
         wake(2200);
       }, (err) => { console.warn("Kord bike failed to load", err); setState("fallback"); });
