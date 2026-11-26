@@ -757,6 +757,7 @@ body:has(.cd) { margin: 0; }   /* the browser's default 8px margin framed every 
   transition: opacity 0.6s ease, visibility 0s 0.6s; animation: cd-pre-safety 0.6s ease 9s forwards; }   /* no JS: it still lifts */
 .cd-pre.is-done { opacity: 0; visibility: hidden; }
 .cd-pre.is-gone, html.cd-pre-skip .cd-pre { display: none; }
+html.cd-fonts-wait .cd main.cd-main-app { visibility: hidden; }   /* an app page, until its fonts are in (Preloader.js: no font-swap layout shift under the cover) */
 /* leaving for another page: the cover fades back in over the page (the lockup with it), and stays until the browser goes */
 .cd-pre.is-leaving { display: grid; visibility: visible; opacity: 1; transition: none; animation: cd-fade-in 0.36s ease both; }
 html.cd-pre-skip .cd-pre.is-leaving { display: grid; }

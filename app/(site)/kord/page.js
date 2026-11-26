@@ -118,22 +118,22 @@ const Page = () => {
               <h3 className="cyril-case-subheading">What&apos;s Built</h3>
               <ul className="cyril-case-list">
                 <li><strong>A 3D bike you can turn</strong> by dragging, with momentum, or with the arrow keys, in a dark studio with a light that follows the pointer</li>
-                <li><strong>Four paints</strong> on a rail down the right edge, each repainting the bike</li>
+                <li><strong>Five paints</strong> on a rail down the right edge, each repainting the bike, and every bike comes in every one</li>
                 <li><strong>Hotspots</strong> on the frame, wheels, drivetrain, and cockpit that open a card on hover or tap</li>
                 <li><strong>A scroll story</strong> that turns the bike side-on and takes it apart into its labeled parts</li>
-                <li><strong>Find your bike:</strong> four questions about where you ride, how far, what matters most, and how tall you are, answered with a bike, a size, the reasons, and the bike in 3D</li>
+                <li><strong>Help me choose:</strong> four questions about where you ride, how far, what matters most, and how tall you are, in a dialog that opens from any page, answered with a bike, a size, the reasons, and the bike in 3D</li>
                 <li><strong>A builder</strong> with five choices (bike, size, paint, groupset, wheels) and a live price, weight, and ship date, each one shown on the 3D bike</li>
-                <li><strong>Compare, cart, and checkout:</strong> the four bikes side by side, a cart that remembers your builds, and a checkout with a fit call (payments are switched off)</li>
+                <li><strong>Compare, cart, and checkout:</strong> the four bikes side by side in any paint, with their frames drawn over each other in the size you pick, a cart that remembers your builds, and a checkout with a fit call (payments are switched off)</li>
                 <li><strong>A virtual fit:</strong> five measurements in, a frame size, saddle height, crank, stem, and bar width out</li>
-                <li><strong>The Kord® Guarantee:</strong> a 30-day ride, a lifetime frame warranty, crash replacement, and a year of fit adjustments, with a table comparing Kord with a typical online store and a bike shop</li>
+                <li><strong>The Kord® Guarantee:</strong> a page of its own with the full terms of a 30-day ride, a lifetime frame warranty, crash replacement, and a year of fit adjustments, how a return works, and a table comparing Kord with a typical online store and a bike shop</li>
                 <li><strong>A brand:</strong> the name, a mark, and a stretched wordmark that&apos;s also printed on the bike&apos;s down tube</li>
-                <li><strong>A preloader and text motion:</strong> the mark&apos;s arc turns like a pedal stroke while the bike loads, then the hero comes in, and headings and copy rise into view as you scroll</li>
+                <li><strong>A preloader and text motion:</strong> the mark&apos;s arc turns like a pedal stroke while each page gets ready, and fades back in when you move to another page, so leaving and arriving read as one move; then the page comes in, and headings and copy rise into view as you scroll</li>
                 <li><strong>A design system page</strong> with every token, component, and the 3D studio, all live</li>
               </ul>
               <p>Kord is a concept brand: every bike, price, and order in it is sample content, and nothing can be bought.</p>
               <Cta inline />
               <Clip name="intro" caption="The preloader hands over to the hero" />
-              <Clip name="turn" caption="Turning the bike, a hotspot, and the four paints" />
+              <Clip name="turn" caption="Turning the bike, a hotspot, and the five paints" />
               <CaseVideo src={`${P}glance.mp4`} caption="Every screen at a glance" frame={false} />
             </CaseSection>
 
@@ -143,27 +143,28 @@ const Page = () => {
               <CaseStats items={[
                 { value: "100", label: "Accessibility" },
                 { value: "100", label: "Best practices" },
-                { value: "91", label: "Performance, desktop" },
+                { value: "95", label: "Performance, desktop" },
                 { value: "0", label: "Accessibility violations" },
               ]} />
-              <p>Lighthouse 13.6 on the live site: desktop scores 90 to 91 on the landing and 96 on the builder, and a throttled phone 83 to 86 on the landing and 85 on the builder, with 100 for accessibility and best practices on every page. An axe audit (WCAG A and AA, plus best practices) of every page at desktop and phone widths, with the phone menu open too, finds no violations, and everything works by keyboard and with reduced motion. Each model is its own 3D bike, about 820 KB with its baked shading, and phones get a version a third lighter. Once it runs, the numbers to watch are how many people finish Find your bike, how many go from a match to the builder, and how many builds reach the cart.</p>
+              <p>Lighthouse 12.8 on the live site: desktop scores 95 on the landing, 94 on the Guarantee page, and 96 on Compare, and a throttled phone 88 on the landing, 81 on the Guarantee page, and 85 on Compare, with 100 for accessibility and best practices on every page. An axe audit (WCAG A and AA, plus best practices) of every page at desktop and phone widths, with the phone menu open too, finds no violations, and everything works by keyboard and with reduced motion. Each model is its own 3D bike, about 820 KB with its baked shading, and phones get a version a third lighter. Once it runs, the numbers to watch are how many people finish Find your bike, how many go from a match to the builder, and how many builds reach the cart.</p>
 
               <Desktop name="landing" caption="The landing" />
               <p><strong>A bike you can walk around.</strong> The Arc™ stands in a dark studio, its name huge on the wall behind it. Drag it and it turns and carries on a little when you let go. A soft light on the wall follows the pointer, the way a lamp would. Four hotspots open short cards about the frame, the wheels, the drivetrain, and the cockpit.</p>
-              <p><strong>Pick a color.</strong> The paint rail runs down the right edge. Each swatch repaints the frame, and the KORD on the down tube takes the paint&apos;s own decal color. All four paints are matte, because a glossy coat read as glare under the studio lights.</p>
+              <p><strong>Pick a color.</strong> The paint rail runs down the right edge. Each swatch repaints the frame, and the KORD on the down tube takes the paint&apos;s own decal color. All five paints are matte, because a glossy coat read as glare under the studio lights. Paint isn&apos;t part of a model: every bike comes in every paint, so the range cards, Compare, and the builder each have their own swatches, and every bike has a studio photo in every paint.</p>
               <CaseGrid layout="two">
                 <Desktop name="volt" caption="Volt" />
+                <Desktop name="cobalt" caption="Cobalt" />
                 <Desktop name="glacier" caption="Glacier" />
                 <Desktop name="ember" caption="Ember" />
-                <Desktop name="range" caption="The range: four bikes, one for every road" />
               </CaseGrid>
+              <Desktop name="range" caption="The range: four bikes, one for every road, each in any paint" />
 
               <p><strong>Take it apart.</strong> Scrolling past the hero turns the bike side-on, then pulls it apart: wheels out, cranks down, cockpit and saddle up, each part with a label that says what it is and what it weighs. The wheels and cranks roll with the scroll. Scroll back and it comes together again.</p>
               <Clip name="story" caption="The scroll story" />
               <Desktop name="story" caption="Inside the Arc™" />
 
-              <p><strong>Find your bike.</strong> Four questions, one at a time: where you ride, how long a big day is, what matters most, and how tall you are. The answer is a bike and a size, with the reasons in your own words (&ldquo;You ride hills and mountains, and at 6.8 kg with a 10–36 cassette, it&apos;s built to climb&rdquo;), the bike in 3D in its own paint and your size, and links to build it or compare it with the runner-up. Answers are remembered, and a result can be shared as a link.</p>
-              <Clip name="find" caption="Four questions to a match" />
+              <p><strong>Help me choose.</strong> A dialog that opens from any page, with four questions, one at a time: where you ride, how long a big day is, what matters most, and how tall you are. The answer is a bike and a size, with the reasons in your own words (&ldquo;You ride hills and mountains, and at 6.8 kg with a 10–36 cassette, it&apos;s built to climb&rdquo;), the bike in 3D in its own paint and your size, and links to build it or compare it with the runner-up. Answers are remembered, a result can be shared as a link, and the result fits the dialog on every screen without scrolling.</p>
+              <Clip name="find" caption="Help me choose: four questions to a match" />
               <CaseGrid layout="two">
                 <Desktop name="find-ask" caption="One question at a time" />
                 <Desktop name="find" caption="The match, in 3D" />
@@ -173,7 +174,7 @@ const Page = () => {
               <Clip name="build" caption="Building a Meridian™: the size, the paint, then the deep wheels and the Pro groupset on the bike" path="/build/" />
               <Desktop name="build" caption="The builder" path="/build/" />
 
-              <p><strong>Everything around it.</strong> Compare puts the four bikes side by side, from weight and gearing to where each one is happiest, with their geometry in whichever size you pick. The cart keeps every build with its options, and checkout books a 20-minute fit call before the bike ships. The virtual fit turns five tape-measure measurements into a starting fit and carries the size into the builder.</p>
+              <p><strong>Everything around it.</strong> Compare puts the four bikes side by side as cards, in whichever paint you pick, from weight and gearing to where each one is happiest, then draws their frames over each other in the size you choose, so the differences in geometry are shapes rather than numbers in a table. The cart keeps every build with its options, and checkout books a 20-minute fit call before the bike ships. The virtual fit turns five tape-measure measurements into a starting fit and carries the size into the builder.</p>
               <CaseGrid layout="two">
                 <Desktop name="compare" caption="Compare" path="/compare/" />
                 <Desktop name="cart" caption="The cart" path="/cart/" />
@@ -202,10 +203,10 @@ const Page = () => {
                 <Phone name="menu" caption="The menu" />
               </CaseGrid>
               <h3 className="cyril-case-subheading">What If It&apos;s Wrong?</h3>
-              <p>Buying a bike you&apos;ve never ridden is the leap, so the section that once explained the ordering steps now answers the worry behind it: what happens if it&apos;s wrong. Four guarantees lead with their terms in big outlined figures, and a table sets Kord beside a typical online store and a bike shop, row by row.</p>
+              <p>Buying a bike you&apos;ve never ridden is the leap, so the guarantee answers the worry behind it: what happens if it&apos;s wrong. The landing shows the four promises in big outlined figures and links to a page of their own, where the 3D bike stands beside them and each one carries its full terms: what&apos;s refunded and what isn&apos;t, who&apos;s covered, and what it costs. Three steps explain a return, and a table sets Kord beside a typical online store and a bike shop, row by row.</p>
               <CaseGrid layout="two">
-                <Desktop name="guarantee" caption="The Kord® Guarantee" />
-                <Desktop name="compares" caption="How it compares" />
+                <Desktop name="guarantee" caption="The Kord® Guarantee, a page of its own" path="/guarantee/" />
+                <Desktop name="compares" caption="How it compares" path="/guarantee/" />
               </CaseGrid>
             </CaseSection>
 
@@ -218,6 +219,7 @@ const Page = () => {
                 <li><strong>One scene, three places:</strong> the hero, Find your bike, and the builder share one studio module (lights, materials, floor, shadow), and each renders only while something moves. The groupset&apos;s parts have their own material, so a choice in the builder eases them to a new finish, and the rims are reshaped in the browser, vertex by vertex, from the model&apos;s depth to the one you picked. Sizes work the same way: the Blender script&apos;s own stretch for each model&apos;s taller front end or compact rear runs live, lowering or raising the head tube, seat cluster, and saddle, so one model covers every size.</li>
                 <li><strong>A fast first paint:</strong> the studio&apos;s wall texture and grain were drawn by script after the 3D loaded, and Chrome counted them as the page&apos;s largest paint, 16 seconds in on a throttled phone. They&apos;re now tiny image files, under the detail level Chrome counts, so the first paint is the page&apos;s own text.</li>
                 <li><strong>Choices you can use by keyboard:</strong> every set of options is a radio group with arrow-key navigation, the 3D bike turns with the arrow keys, hotspots are buttons with their cards linked, and results are announced to screen readers.</li>
+                <li><strong>Page to page:</strong> every page opens under the same cover until its fonts and its 3D bike are ready, and a link to another Kord page fades the cover back in before the browser leaves, while links to a section of the same page, the Help me choose dialog, and new tabs skip it.</li>
                 <li><strong>Fallbacks:</strong> without WebGL, a still of the bike stays in place; under reduced motion, nothing animates on its own.</li>
               </ul>
             </CaseSection>
@@ -234,7 +236,7 @@ const Page = () => {
                 next={[
                   "Test Find your bike with riders: how many finish it, whether they agree with the match, and how many go on to build that bike.",
                   "Measure the path from match to builder to cart, and which choices people change most in the builder.",
-                  "Bring the phone landing up from the mid-80s: the preloader holds the first screen until the 3D bike is ready, which costs speed index (5.8 seconds on a throttled phone).",
+                  "Bring the phone scores up from the 80s: the cover holds each page until its 3D bike is ready, which costs speed index (5.4 seconds on the landing on a throttled phone).",
                 ]}
               />
             </CaseSection>
