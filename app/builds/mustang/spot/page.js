@@ -7,7 +7,7 @@ import Smoke from "@/components/mustang/Smoke";
 import Grit from "@/components/mustang/Grit";
 import "./spot.css";
 
-// The campaign kit's recording page (/pitch/mustang/spot/?f=…): the ad's stage laid out
+// The campaign kit's recording page (/builds/mustang/spot/?f=…): the ad's stage laid out
 // for one deliverable at a time, with the car on a clock (CarStage's `spot`), so the
 // capture scripts (README: "Campaign kit") record the same thing every time. Open it at
 // the deliverable's own pixel size with a device scale of 1:

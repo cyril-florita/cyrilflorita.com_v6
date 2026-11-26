@@ -18,7 +18,7 @@ export function LogoMark({ size = 28 }) {
   );
 }
 
-export function Logo({ href = "/pitch/kord/" }) {
+export function Logo({ href = "/builds/kord/" }) {
   return (
     <a className="cd-logo" href={href} aria-label={`${BRAND.name} home`}>
       <LogoMark />
@@ -32,10 +32,10 @@ export function Logo({ href = "/pitch/kord/" }) {
 }
 
 export const NAV = [
-  { href: "/pitch/kord/#range", label: "Models" },
-  { href: "/pitch/kord/#find", label: "Help me choose" },
-  { href: "/pitch/kord/compare/", label: "Compare" },
-  { href: "/pitch/kord/guarantee/", label: "The Kord® Guarantee" },
+  { href: "/builds/kord/#range", label: "Models" },
+  { href: "/builds/kord/#find", label: "Help me choose" },
+  { href: "/builds/kord/compare/", label: "Compare" },
+  { href: "/builds/kord/guarantee/", label: "The Kord® Guarantee" },
 ];
 
 export function Header() {
@@ -51,8 +51,8 @@ export function Header() {
         </nav>
         <div className="cd-header-end">
           <CartLink />
-          <a className="cd-btn cd-btn-ghost cd-btn-sm cd-header-build" href="/pitch/kord/build/">Build yours</a>
-          <MobileMenu links={[...NAV, { href: "/pitch/kord/fit/", label: "Virtual fit" }, { href: "/pitch/kord/cart/", label: "Cart" }]} />
+          <a className="cd-btn cd-btn-ghost cd-btn-sm cd-header-build" href="/builds/kord/build/">Build yours</a>
+          <MobileMenu links={[...NAV, { href: "/builds/kord/fit/", label: "Virtual fit" }, { href: "/builds/kord/cart/", label: "Cart" }]} />
         </div>
       </div>
     </header>
@@ -85,9 +85,9 @@ export function Footer() {
         <p className="cd-credit">
           3D model: frame, fork, cockpit and saddle based on <a href="https://sketchfab.com/3d-models/road-bike-cb03b0657fbc4693b59194124ba713db" target="_blank" rel="noopener noreferrer">“Road Bike”</a> by <a href="https://sketchfab.com/tanity" target="_blank" rel="noopener noreferrer">tanity</a>, licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a> (rescaled, recolored and fitted with new wheels, drivetrain, brakes and decals).
         </p>
-        <p className="cd-footer-links"><a href="/pitch/kord/fit/">Virtual fit</a><a href="/pitch/kord/design-system/">Design system</a></p>
+        <p className="cd-footer-links"><a href="/builds/kord/fit/">Virtual fit</a><a href="/builds/kord/design-system/">Design system</a></p>
         <p className="cd-legal">
-          Design and Dev Pitch · © {year} <a href="/">Cyril Florita</a>. All rights reserved.
+          Designed and built by <a href="/">Cyril Florita</a> · © {year}. All rights reserved.
         </p>
       </div>
     </footer>

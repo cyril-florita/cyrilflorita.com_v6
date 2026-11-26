@@ -4,7 +4,7 @@ import { useState } from "react";
 import { FIT_FIELDS, fitFor } from "@/components/kord/data";
 import { Sample } from "@/components/kord/ui";
 
-// Virtual fit (/pitch/kord/fit/): five measurements, starting from a sample rider, and a starting
+// Virtual fit (/builds/kord/fit/): five measurements, starting from a sample rider, and a starting
 // fit that updates as you type — size, saddle height, crank, stem, bar — each with why. Nothing is
 // sent anywhere; "Build with this fit" opens the builder in that size.
 
@@ -39,7 +39,7 @@ export default function Fit() {
           ))}
         </dl>
         <p className="cd-build-note">A starting point, not the last word: a fitter checks it with you on a video call, or from two photos, before we build.</p>
-        <a className="cd-btn cd-btn-primary" href={`/pitch/kord/build/?size=${f.size}`}>Build with this fit<span className="cd-arrow" aria-hidden="true">→</span></a>
+        <a className="cd-btn cd-btn-primary" href={`/builds/kord/build/?size=${f.size}`}>Build with this fit<span className="cd-arrow" aria-hidden="true">→</span></a>
       </section>
     </div>
   );

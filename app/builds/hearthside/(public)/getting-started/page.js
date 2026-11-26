@@ -4,7 +4,7 @@ import { StepTimeline } from "@/components/hearthside/client";
 
 export const metadata = {
   title: "Getting started",
-  alternates: { canonical: "/pitch/hearthside/getting-started/" },
+  alternates: { canonical: "/builds/hearthside/getting-started/" },
 };
 
 // How care begins, what to have ready, the first visit, and coverage

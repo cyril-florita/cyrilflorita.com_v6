@@ -1,7 +1,7 @@
 import { BASE, PITCH_EMAIL, PITCH_MAILTO } from "@/components/hearthside/data";
 import { Button, Icon, Logo, PageHead, Row } from "@/components/hearthside/ui";
 import { ModeSwitch, PrintButton } from "@/components/hearthside/client";
-import "@/app/pitch/hearthside/css/proposal.css";
+import "@/app/builds/hearthside/css/proposal.css";
 
 // The pitch's one-pager for agency owners: what Cyril would build for their
 // agency, how the work runs, and what it costs. Outside (public), so it has
@@ -162,7 +162,7 @@ export default function Proposal() {
         </section>
       </main>
       <footer className="hs-wrap hs-prop-foot">
-        <p>Design and Dev Pitch · &copy; {new Date().getFullYear()} Cyril Florita. All rights reserved.</p>
+        <p>Designed and built by Cyril Florita · &copy; {new Date().getFullYear()}. All rights reserved.</p>
       </footer>
     </div>
   );

@@ -7,12 +7,12 @@ import "../css/design-system.css";
 
 export const metadata = {
   title: "Design system · Kord",
-  description: "Kord's design system: the stretched wordmark, a chartreuse accent on near-black, Archivo and JetBrains Mono, buttons, choices, hotspots and the 3D studio. A design and dev pitch by Cyril Florita.",
-  alternates: { canonical: "/pitch/kord/design-system/" },
+  description: "Kord's design system: the stretched wordmark, a chartreuse accent on near-black, Archivo and JetBrains Mono, buttons, choices, hotspots and the 3D studio. Designed and built by Cyril Florita.",
+  alternates: { canonical: "/builds/kord/design-system/" },
   robots: { index: false, follow: true },
 };
 
-// The design system (/pitch/kord/design-system/): every sample is the real class or component.
+// The design system (/builds/kord/design-system/): every sample is the real class or component.
 // Chrome is the shared DsChrome (Viteo's and Hearthside's): a sticky sidebar ≥1200px, a top bar
 // and full-screen menu below. Contrast ratios are computed here from the token values, so keep
 // TOKENS in sync with the top of kord.css.
@@ -86,7 +86,7 @@ export default function DesignSystem() {
                     <figcaption>Wordmark on the accent</figcaption>
                   </figure>
                   <figure className="cd-ds-tile is-wide cd-ds-frame">
-                    <div className="cd-ds-tile-stage"><img src={`/pitch/kord/bikes/${arc.id}-stealth.webp`} width="1200" height="720" alt="The Kord Arc in Stealth, with the KORD wordmark on its down tube" loading="lazy" /></div>
+                    <div className="cd-ds-tile-stage"><img src={`/builds/kord/bikes/${arc.id}-stealth.webp`} width="1200" height="720" alt="The Kord Arc in Stealth, with the KORD wordmark on its down tube" loading="lazy" /></div>
                     <figcaption>On the frame · KORD® on the down tube, the model name (ARC™) across the head tube</figcaption>
                   </figure>
                   <figure className="cd-ds-tile is-full">
@@ -187,7 +187,7 @@ export default function DesignSystem() {
                 <div className="cd-ds-grid is-2">
                   <ul className="cd-range cd-ds-one">
                     <li className={`cd-card cd-card-${arc.id}`}>
-                      <img className="cd-card-img" src={`/pitch/kord/bikes/${arc.id}-stealth.webp`} width="1200" height="720" alt={`The Kord ${plain(arc.name)}`} loading="lazy" />
+                      <img className="cd-card-img" src={`/builds/kord/bikes/${arc.id}-stealth.webp`} width="1200" height="720" alt={`The Kord ${plain(arc.name)}`} loading="lazy" />
                       <div className="cd-card-body">
                         <h3 className="cd-h3">{arc.name}</h3>
                         <p className="cd-card-type">{arc.type}</p>
@@ -199,7 +199,7 @@ export default function DesignSystem() {
                         </dl>
                         <div className="cd-card-foot">
                           <p className="cd-card-price">From <strong>{money(arc.from)}</strong></p>
-                          <a className="cd-card-build" href={`/pitch/kord/build/?bike=${arc.id}`}>Build yours<span className="cd-arrow" aria-hidden="true">→</span><span className="cd-sr">: the {plain(arc.name)}</span></a>
+                          <a className="cd-card-build" href={`/builds/kord/build/?bike=${arc.id}`}>Build yours<span className="cd-arrow" aria-hidden="true">→</span><span className="cd-sr">: the {plain(arc.name)}</span></a>
                         </div>
                       </div>
                     </li>
@@ -213,7 +213,7 @@ export default function DesignSystem() {
               </Section>
 
               <Section id="studio" title="3D studio" lede="The bike in its studio: a dark wall lit around the bike, a mottled floor with a baked shadow, matte paint. Drag it or use the arrow keys. Without WebGL the range still stays.">
-                <BikeViewer paint={stealth} still={`/pitch/kord/bikes/${arc.id}-stealth.webp`} label="The Kord Arc" />
+                <BikeViewer paint={stealth} still={`/builds/kord/bikes/${arc.id}-stealth.webp`} label="The Kord Arc" />
               </Section>
 
               <Section id="foundations" title="Foundations">

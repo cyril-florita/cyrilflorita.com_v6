@@ -5,14 +5,14 @@ import DsChrome from "@/components/DsChrome";
 import RoutineGraph from "@/components/viteo/RoutineGraph";
 import Reviews from "@/components/viteo/Reviews";
 // Page-only styles (split out of viteo.css so the landing skips them).
-import "@/app/pitch/viteo/css/design-system.css";
-import "@/app/pitch/viteo/css/account.css";
+import "@/app/builds/viteo/css/design-system.css";
+import "@/app/builds/viteo/css/account.css";
 
 export const metadata = {
   title: "Design system",
   description:
     "Viteo's design system: three themes with light and dark modes, WCAG AA color tokens, type, buttons, icon buttons, forms, surfaces, charts, accordions, carousels, overlays and 3D pill renders. Designed and built by Cyril Florita.",
-  alternates: { canonical: "/pitch/viteo/design-system/" },
+  alternates: { canonical: "/builds/viteo/design-system/" },
 };
 
 // Viteo's design system, rendered from the same tokens (viteo.css) and

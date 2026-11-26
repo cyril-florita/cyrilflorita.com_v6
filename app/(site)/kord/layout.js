@@ -1,6 +1,6 @@
 // Server layout so this route can export metadata (page.js is a client component).
-const title = "Kord — 3D Road-Bike Store (Design & Dev Pitch)";
-const description = "A design and dev pitch for an online-only road-bike brand: a 3D bike you can turn, repaint, and take apart as you scroll, four questions that match you to a bike and a size, and a builder, comparison, cart, and virtual fit around it.";
+const title = "Kord — 3D Road-Bike Store (Designed & Built)";
+const description = "An online-only road-bike brand, designed and built end to end: a 3D bike you can turn, repaint, and take apart as you scroll, four questions that match you to a bike and a size, and a builder, comparison, cart, and virtual fit around it.";
 const url = "/kord/";
 const images = [{ url: "/og/kord.jpg", width: 1200, height: 630, alt: "Kord: the Arc road bike in 3D in a dark studio, with its headline and paint rail" }];
 

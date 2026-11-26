@@ -3,8 +3,8 @@ import Checkout from "@/components/kord/Checkout";
 
 export const metadata = {
   title: "Checkout · Kord",
-  description: "Kord's checkout, in preview: nothing is charged. A design and dev pitch by Cyril Florita.",
-  alternates: { canonical: "/pitch/kord/checkout/" },
+  description: "Kord's checkout, in preview: nothing is charged. Designed and built by Cyril Florita.",
+  alternates: { canonical: "/builds/kord/checkout/" },
   robots: { index: false, follow: true },
 };
 

@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { BASE, money } from "./data";
 import { Arrow, Button, onRadioKeyDown, radioTabIndex, useBackdropClose } from "./ui";
 // Page-only styles (split out of viteo.css so the landing skips them).
-import "@/app/pitch/viteo/css/account.css";
+import "@/app/builds/viteo/css/account.css";
 
 // Cancelling, without the trap. A modal in three short steps, each with a
 // way straight to cancelling: (1) an optional reason; (2) one alternative

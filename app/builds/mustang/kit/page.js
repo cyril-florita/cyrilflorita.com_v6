@@ -4,11 +4,11 @@ import KitNav from "@/components/mustang/KitNav";
 import KitCar from "@/components/mustang/KitCar";
 import "./kit.css";
 
-// The campaign kit (/pitch/mustang/kit/): every deliverable made from the ad's one concept,
+// The campaign kit (/builds/mustang/kit/): every deliverable made from the ad's one concept,
 // each with a preview, what it's for, its specs and a download. The spots, the GIF and the
-// stills are recorded from /pitch/mustang/spot/ (see the README's "Campaign kit"); the
-// email is a static file, public/pitch/mustang/kit/email.html.
-const K = "/pitch/mustang/kit/";
+// stills are recorded from /builds/mustang/spot/ (see the README's "Campaign kit"); the
+// email is a static file, public/builds/mustang/kit/email.html.
+const K = "/builds/mustang/kit/";
 
 const SPOTS = [
   { id: "story", ratio: "9:16", size: "1080 × 1920", mb: "3.1", use: "Instagram and Facebook Reels and Stories, TikTok, YouTube Shorts", note: "Copy stays out of the top 14% and bottom 20%, where the apps draw their own buttons." },
@@ -90,16 +90,16 @@ export default function Kit() {
 
         <Item n={1} id="landing" title="Landing page" lede="Where every other piece points: a 3D Dark Horse to turn, repaint, and look inside, with the lease offer under the car.">
           <div className="kit-landing">
-            <a className="kit-shot kit-shot-desk" href="/pitch/mustang/">
+            <a className="kit-shot kit-shot-desk" href="/builds/mustang/">
               <img src="/img/thumbs/portfolio/mustang_desktop-landing@1600.webp" width="1600" height="1000" alt="The landing page on a desktop: the car under a giant MUSTANG, the paint rail, three close-up windows and the offer" />
             </a>
-            <a className="kit-shot kit-shot-phone" href="/pitch/mustang/">
+            <a className="kit-shot kit-shot-phone" href="/builds/mustang/">
               <img src="/img/thumbs/portfolio/mustang_mobile-landing.webp" width="780" height="1688" alt="The landing page on a phone: the car full width, the windows in a row and the offer" />
             </a>
           </div>
           <div className="kit-foot">
-            <Specs rows={[["Built for", "Phones first, enhanced for desktops"], ["Made with", "Next.js, three.js, a licensed 3D model"], ["Link", "cyrilflorita.com/pitch/mustang"]]} />
-            <a className="ms-btn" href="/pitch/mustang/">Open the landing page <Out /></a>
+            <Specs rows={[["Built for", "Phones first, enhanced for desktops"], ["Made with", "Next.js, three.js, a licensed 3D model"], ["Link", "cyrilflorita.com/builds/mustang"]]} />
+            <a className="ms-btn" href="/builds/mustang/">Open the landing page <Out /></a>
           </div>
         </Item>
 
@@ -202,7 +202,7 @@ export default function Kit() {
       <footer className="ms-footer">
         <p>3D model: <a href="https://sketchfab.com/3d-models/free-2024-ford-mustang-dark-horse-a29c8bb07f6e41b594fe2248366cffbf" target="_blank" rel="noopener noreferrer">“[FREE] 2024 Ford Mustang Dark Horse”</a> by <a href="https://sketchfab.com/livanovbog" target="_blank" rel="noopener noreferrer">livanovbog</a>, licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a> (closed up, recolored and compressed for this page).</p>
         <p>Unofficial concept. Not affiliated with or endorsed by Ford Motor Company. Ford and Mustang are trademarks of Ford Motor Company.</p>
-        <p>Design and Dev Pitch · © {year} Cyril Florita. All rights reserved. · <a href="/pitch/mustang/">The ad</a> · <a href="/">Back to portfolio</a></p>
+        <p>Designed and built by Cyril Florita · © {year}. All rights reserved. · <a href="/builds/mustang/">The ad</a> · <a href="/">Back to portfolio</a></p>
       </footer>
     </>
   );

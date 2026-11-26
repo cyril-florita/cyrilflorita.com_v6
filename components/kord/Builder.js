@@ -10,7 +10,7 @@ import BikeViewer from "@/components/kord/BikeViewer";
 import Choice from "@/components/kord/Choice";
 import { Words } from "@/components/kord/ui";
 
-// The builder (/pitch/kord/build/): the bike in 3D on the left (sticky; on phones, on top), five
+// The builder (/builds/kord/build/): the bike in 3D on the left (sticky; on phones, on top), five
 // steps on the right — bike, size, paint, groupset, wheels — and a summary pinned under them with
 // the price, the weight and a ship date, which update as you choose. Starts from the query string
 // (?bike=meridian&size=54&paint=ember&group=race&wheels=deep, as Find your bike and the range send
@@ -54,13 +54,13 @@ export default function Builder() {
 
   const add = () => { addToCart(build); setAdded(true); setSaid(`Added the Kord ${plain(bike.name)} to your cart.`); };
   const copy = async () => {
-    try { await navigator.clipboard.writeText(`${location.origin}/pitch/kord/build/${buildQuery(build)}`); setSaid("Link copied"); } catch { /* ignore */ }
+    try { await navigator.clipboard.writeText(`${location.origin}/builds/kord/build/${buildQuery(build)}`); setSaid("Link copied"); } catch { /* ignore */ }
   };
 
   return (
     <div className="cd-build">
       <div className="cd-build-stage">
-        <BikeViewer className="cd-viewer-stage" bike={bike.id} spec={{ group: build.group, rim: (wheels.id === "stock" ? parseInt(bike.wheels, 10) : parseInt(wheels.short, 10)) / 1000, size: build.size }} paint={paint} still={`/pitch/kord/bikes/${bike.id}-${paint.id}.webp`} label={`The Kord ${plain(bike.name)}`} />
+        <BikeViewer className="cd-viewer-stage" bike={bike.id} spec={{ group: build.group, rim: (wheels.id === "stock" ? parseInt(bike.wheels, 10) : parseInt(wheels.short, 10)) / 1000, size: build.size }} paint={paint} still={`/builds/kord/bikes/${bike.id}-${paint.id}.webp`} label={`The Kord ${plain(bike.name)}`} />
         {/* the label goes under the name, never above it as an eyebrow (the user's rule) */}
         <div className="cd-build-tag" aria-hidden="true">
           <strong>{plain(bike.name)}</strong>
@@ -79,14 +79,14 @@ export default function Builder() {
           {/* each bike's key stats in its own box (2026-11-25, the user's pick: the specs as part of the choice) */}
           <Choice label="Bike" name="bike" value={build.bike} options={BIKES} onPick={(v) => set("bike", v)} className="is-2"
             render={(b) => (<><strong>{b.name}</strong><span>{b.type}</span><span className="cd-build-stats">{b.weight} kg · {parseInt(b.wheels, 10)} mm wheels · {b.tires} tires</span><em>From {money(b.from)}</em></>)} />
-          <p className="cd-build-note">Want every spec side by side? <a href={`/pitch/kord/compare/?a=${build.bike}&size=${build.size}&paint=${build.paint}`}>Compare all four</a>.</p>
+          <p className="cd-build-note">Want every spec side by side? <a href={`/builds/kord/compare/?a=${build.bike}&size=${build.size}&paint=${build.paint}`}>Compare all four</a>.</p>
         </section>
 
         <section className="cd-build-step" aria-labelledby="st-size">
           <h2 id="st-size" className="cd-build-h"><span>02</span> Size</h2>
           <Choice label="Size" name="size" value={build.size} options={SIZES.map((s) => ({ id: s }))} onPick={(v) => set("size", v)} className="is-sizes"
             render={(s) => (<><strong>{s.id}</strong><span>{SIZE_FOR[s.id]}</span></>)} />
-          <p className="cd-build-note">Not sure? <a href="/pitch/kord/#find">Find your bike and size</a>. We confirm your size with your fit details before we build.</p>
+          <p className="cd-build-note">Not sure? <a href="/builds/kord/#find">Find your bike and size</a>. We confirm your size with your fit details before we build.</p>
         </section>
 
         <section className="cd-build-step" aria-labelledby="st-paint">
@@ -123,7 +123,7 @@ export default function Builder() {
             {added ? (
               <>
                 <p className="cd-build-added"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>Added to cart</p>
-                <a ref={cartRef} className="cd-btn cd-btn-primary" href="/pitch/kord/cart/">View cart<span className="cd-arrow" aria-hidden="true">→</span></a>
+                <a ref={cartRef} className="cd-btn cd-btn-primary" href="/builds/kord/cart/">View cart<span className="cd-arrow" aria-hidden="true">→</span></a>
               </>
             ) : (
               <>

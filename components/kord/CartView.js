@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { BIKES, PAINTS, GROUPSETS, WHEELSETS, SHIP_DAYS, priceBuild, weighBuild, buildQuery, money, plain } from "@/components/kord/data";
 import { useCart, removeFromCart } from "@/components/kord/cartStore";
 
-// The cart (/pitch/kord/cart/): the builds saved in this browser (cartStore.js), each with its still,
+// The cart (/builds/kord/cart/): the builds saved in this browser (cartStore.js), each with its still,
 // spec line, price, an edit link back into the builder and Remove; the subtotal, free delivery,
 // the ship date and the 30-day ride, then Checkout. Empty: where to start.
 
@@ -29,8 +29,8 @@ export default function Cart() {
     <div className="cd-cart-empty">
       <p className="cd-lede">Your cart is empty. Start with the bike that fits how you ride, or build one from scratch.</p>
       <div className="cd-find-actions">
-        <a className="cd-btn cd-btn-primary" href="/pitch/kord/#find">Find your bike<span className="cd-arrow" aria-hidden="true">→</span></a>
-        <a className="cd-btn cd-btn-ghost" href="/pitch/kord/build/">Build yours</a>
+        <a className="cd-btn cd-btn-primary" href="/builds/kord/#find">Find your bike<span className="cd-arrow" aria-hidden="true">→</span></a>
+        <a className="cd-btn cd-btn-ghost" href="/builds/kord/build/">Build yours</a>
       </div>
     </div>
   );
@@ -42,12 +42,12 @@ export default function Cart() {
           const d = describe(x);
           return (
             <li key={x.id} className="cd-cart-item">
-              <span className="cd-shot cd-studio"><img src={`/pitch/kord/bikes/${x.bike}-${x.paint}.webp`} width="1200" height="720" alt="" /></span>
+              <span className="cd-shot cd-studio"><img src={`/builds/kord/bikes/${x.bike}-${x.paint}.webp`} width="1200" height="720" alt="" /></span>
               <div>
                 <h2 className="cd-h3">Kord® {d.bike.name}</h2>
                 <p className="cd-cart-line">{d.line}</p>
                 <p className="cd-find-links">
-                  <a href={`/pitch/kord/build/${buildQuery(x)}`}>Edit this build</a>
+                  <a href={`/builds/kord/build/${buildQuery(x)}`}>Edit this build</a>
                   <button type="button" onClick={() => removeFromCart(x.id)}>Remove<span className="cd-sr"> the {plain(d.bike.name)}</span></button>
                 </p>
               </div>
@@ -63,7 +63,7 @@ export default function Cart() {
           <div><dt>Ships by</dt><dd>{ship || " "}</dd></div>
         </dl>
         <p className="cd-cart-total"><span>Total</span><strong>{money(total)}</strong></p>
-        <a className="cd-btn cd-btn-primary" href="/pitch/kord/checkout/">Checkout<span className="cd-arrow" aria-hidden="true">→</span></a>
+        <a className="cd-btn cd-btn-primary" href="/builds/kord/checkout/">Checkout<span className="cd-arrow" aria-hidden="true">→</span></a>
         <p className="cd-cart-note">Built to order and fitted to you. Ride it for 30 days; if it isn&apos;t right, send it back for a refund of the bike price.</p>
       </aside>
     </div>

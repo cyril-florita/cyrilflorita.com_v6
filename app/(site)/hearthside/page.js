@@ -19,7 +19,7 @@ import {
 } from "@/components/case/CaseStudy";
 import { CASE_SUMMARIES } from "@/components/data/caseSummaries";
 
-// Hearthside: a design & dev pitch (the live site is /pitch/hearthside/,
+// Hearthside: a design & dev pitch (the live site is /builds/hearthside/,
 // outside the portfolio layout). Screenshots were captured from the prototype
 // in headless Chrome: desktop at 1440×900, tablet at 820×1180, phone at
 // 390×844; the clips with CDP screencast (see CLAUDE.md).
@@ -33,8 +33,8 @@ const SECTIONS = [
 ];
 
 const P = "/img/portfolio/hearthside_";
-const URL = "cyrilflorita.com/pitch/hearthside";
-const LIVE = "/pitch/hearthside/";
+const URL = "cyrilflorita.com/builds/hearthside";
+const LIVE = "/builds/hearthside/";
 
 // Desktop screens in the browser frame; phone screens in the phone frame.
 const Desktop = ({ name, caption, ratio, path = "" }) => (
@@ -75,14 +75,14 @@ const Page = () => {
 
           <CaseHero
             category="Product Design & Development"
-            detail="Design & Dev Pitch"
+            detail="Designed & Built"
             title="Hearthside"
             summary={CASE_SUMMARIES["/hearthside"]}
             facts={[
               { label: "Target Clients", value: "Owners of home health agencies" },
               { label: "Role", value: "Product Designer & Front-End Developer" },
               { label: "Platform & Tools", value: "Web — Desktop, Tablet, Mobile · Next.js, React, CSS" },
-              { label: "Try It Live", value: <a className="cyril-dark" href={LIVE} target="_blank" rel="noopener">cyrilflorita.com/pitch/hearthside</a> },
+              { label: "Try It Live", value: <a className="cyril-dark" href={LIVE} target="_blank" rel="noopener">cyrilflorita.com/builds/hearthside</a> },
             ]}
             tile="/hearthside"
           />
@@ -97,7 +97,7 @@ const Page = () => {
                 <li><strong>Referrals arrive by fax and voicemail:</strong> discharge planners send them and hear nothing back.</li>
                 <li><strong>Intake runs on inboxes:</strong> nobody can see who owns a referral, what&apos;s missing, or what&apos;s overdue.</li>
               </ul>
-              <p>Hearthside Home Health is my pitch for an agency serving the San Fernando and Santa Clarita Valleys: a public website and the intake system behind it, working together. As product designer and front-end developer, I took it from brand to working product, solo, with three goals:</p>
+              <p>Hearthside Home Health is my concept for an agency serving the San Fernando and Santa Clarita Valleys: a public website and the intake system behind it, working together. As product designer and front-end developer, I took it from brand to working product, solo, with three goals:</p>
               <ul className="cyril-case-list">
                 <li>make a stressful decision calm, with plain answers and one obvious next step</li>
                 <li>give referral partners a fast, trustworthy way to send a patient and follow it</li>
@@ -131,7 +131,7 @@ const Page = () => {
 
             {/* 02 — Results & Impact */}
             <CaseSection id="results" number={2} title="Results & Impact">
-              <p>Hearthside is a pitch, not a live agency, so there are no patient or referral numbers, and I won&apos;t invent any. What it delivers is a complete, working product, fast and accessible on the live site:</p>
+              <p>Hearthside is a concept, not a live agency, so there are no patient or referral numbers, and I won&apos;t invent any. What it delivers is a complete, working product, fast and accessible on the live site:</p>
               <CaseStats items={[
                 { value: "92", label: "Performance (mobile)" },
                 { value: "100", label: "Accessibility" },

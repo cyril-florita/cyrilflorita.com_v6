@@ -20,7 +20,7 @@ import {
 import { CASE_SUMMARIES } from "@/components/data/caseSummaries";
 
 // Mustang: a design & dev pitch to a car dealership (the live ad is
-// /pitch/mustang/, outside the portfolio layout; see its README). Stills were
+// /builds/mustang/, outside the portfolio layout; see its README). Stills were
 // captured from the built ad in headless Chrome with the GPU on: desktop at
 // 1440×900 @2x, tablet at 820×1180 @1.5x, phone at 390×844 @2x; the clips
 // with CDP screencast (1280×800, the phone at 390×844 → 600 wide).
@@ -34,9 +34,9 @@ const SECTIONS = [
 ];
 
 const P = "/img/portfolio/mustang_";
-const URL = "cyrilflorita.com/pitch/mustang";
-const LIVE = "/pitch/mustang/";
-const KIT = "/pitch/mustang/kit/";
+const URL = "cyrilflorita.com/builds/mustang";
+const LIVE = "/builds/mustang/";
+const KIT = "/builds/mustang/kit/";
 
 const Desktop = ({ name, caption }) => (
   <CaseFigure src={`${P}desktop-${name}.jpg`} alt={`Mustang ad — ${caption}`} caption={caption} frame="browser" url={`${URL}/`} />
@@ -88,7 +88,7 @@ const Page = () => {
 
           <CaseHero
             category="Interactive Ad Design & Development"
-            detail="Design & Dev Pitch"
+            detail="Designed & Built"
             title="Mustang"
             summary={CASE_SUMMARIES["/mustang"]}
             facts={[
@@ -110,7 +110,7 @@ const Page = () => {
                 <li><strong>The offer is buried:</strong> the monthly price is easy to find, but the terms behind it are a click and a page load away.</li>
                 <li><strong>Nothing invites a second look:</strong> a static banner gives nobody a reason to stay on it.</li>
               </ul>
-              <p>This is my pitch to a car dealership: a prototype that shows how I approach design across channels. At its center is a one-page interactive ad for the Mustang, built around a 3D Dark Horse you can turn, repaint, and look inside, with the lease offer under the car. It&apos;s designed mobile-first and progressively enhanced for desktops, and the same concept carries beyond the ad: a launch email, seven-second spots for social, a hero for the dealer&apos;s website, and display ads, gathered in a campaign kit the dealer&apos;s team can download. I designed and built it on my own, from the layout and type to the 3D scene, with four goals:</p>
+              <p>This is my concept for a car dealership: a prototype that shows how I approach design across channels. At its center is a one-page interactive ad for the Mustang, built around a 3D Dark Horse you can turn, repaint, and look inside, with the lease offer under the car. It&apos;s designed mobile-first and progressively enhanced for desktops, and the same concept carries beyond the ad: a launch email, seven-second spots for social, a hero for the dealer&apos;s website, and display ads, gathered in a campaign kit the dealer&apos;s team can download. I designed and built it on my own, from the layout and type to the 3D scene, with four goals:</p>
               <ul className="cyril-case-list">
                 <li>let people explore the car the way they would on the lot: walk around it, look inside, and pick a color</li>
                 <li>keep the offer in view the whole time, with its terms one tap away</li>

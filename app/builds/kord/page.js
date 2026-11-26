@@ -48,7 +48,7 @@ export default function KordHome() {
                 </li>
               ))}
             </ul>
-            <a className="cd-btn cd-btn-ghost cd-guar-more" href="/pitch/kord/guarantee/">Read more of the Kord® Guarantee<span className="cd-arrow" aria-hidden="true">→</span></a>
+            <a className="cd-btn cd-btn-ghost cd-guar-more" href="/builds/kord/guarantee/">Read more of the Kord® Guarantee<span className="cd-arrow" aria-hidden="true">→</span></a>
           </div>
         </section>
 

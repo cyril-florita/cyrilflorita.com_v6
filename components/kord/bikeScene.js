@@ -3,8 +3,8 @@
 // baked ambient occlusion and the rubber grain added in the shader), the floor, the baked shadow,
 // and loading the model. The caller owns the camera's framing, the animation loop and the DOM.
 // Each model's bike is built in Blender (scripts/kord/build_bike.py --bike <id>) and loaded from
-// public/pitch/kord/models/<id>.glb (<id>-lite.glb, decimated, on phones: modelUrl below)
-// (Draco; decoder in /pitch/kord/draco/). See app/pitch/kord/README.md.
+// public/builds/kord/models/<id>.glb (<id>-lite.glb, decimated, on phones: modelUrl below)
+// (Draco; decoder in /builds/kord/draco/). See app/builds/kord/README.md.
 
 import { PAINTS, BIKES, SIZE_GEO } from "@/components/kord/data";
 
@@ -20,7 +20,7 @@ const RIM_M = Object.fromEntries(BIKES.map((b) => [b.id, parseInt(b.wheels, 10) 
 
 export const modelUrl = (id = "arc") => {
   const lite = typeof window !== "undefined" && window.matchMedia("(max-width: 899px)").matches;
-  return `/pitch/kord/models/${id}${lite ? "-lite" : ""}.glb`;
+  return `/builds/kord/models/${id}${lite ? "-lite" : ""}.glb`;
 };
 
 export async function loadThree() {
@@ -56,8 +56,8 @@ export function mottle(g, w, h, grain = 40, alphaGrain = true) {
 }
 
 // The wall behind the bike is CSS only (kord.css, `.cd-studio` / `.cd-sticky`): its mottled wash
-// (public/pitch/kord/wall.webp, drawn once by mottle() above, saved at 720×450) and its grain tile
-// (public/pitch/kord/grain.png, 48px of random grey in 16 levels, one grain per device pixel through
+// (public/builds/kord/wall.webp, drawn once by mottle() above, saved at 720×450) and its grain tile
+// (public/builds/kord/grain.png, 48px of random grey in 16 levels, one grain per device pixel through
 // resolution media queries). Both were drawn here at runtime until 2026-11-24, which set them after
 // three.js loaded, so each became the phone's largest paint (~16 s, then ~8 s, on a throttled phone).
 // The wall is kept under 0.05 bits per pixel, so Chrome never counts it as the largest paint; see kord.css.
@@ -182,7 +182,7 @@ export function createBikeScene(T, canvas, { paint = PAINTS[0], onWake = () => {
   // the floor shadow, baked in Blender (build_bike.py --shadow: Cycles, a shadow-catcher floor under
   // a big overhead softbox, seen from straight above over SHADOW_W x SHADOW_D m, its edges faded to
   // nothing): dark where the tires touch, soft behind. On a plane under the bike, so it turns with it.
-  let shadowTex = new THREE.TextureLoader().load("/pitch/kord/shadows/arc.webp", () => onWake(300));   // each model's own (load)
+  let shadowTex = new THREE.TextureLoader().load("/builds/kord/shadows/arc.webp", () => onWake(300));   // each model's own (load)
   shadowTex.colorSpace = THREE.SRGBColorSpace; shadowTex.anisotropy = 4;
   const shadow = new THREE.Mesh(new THREE.PlaneGeometry(SHADOW_W, SHADOW_D), new THREE.MeshBasicMaterial({ map: shadowTex, transparent: true, depthWrite: false, toneMapped: false }));
   shadow.rotation.x = -Math.PI / 2; shadow.position.set(0.09, 0.001, 0); bike.add(shadow);
@@ -327,7 +327,7 @@ export function createBikeScene(T, canvas, { paint = PAINTS[0], onWake = () => {
   // surface sheen; this way the bike only reflects the softboxes
   let studioTarget = null;
   const studio = new Promise((resolve) => {
-    new HDRLoader().load("/pitch/kord/studio.hdr", (tex) => {
+    new HDRLoader().load("/builds/kord/studio.hdr", (tex) => {
       if (disposed) { tex.dispose(); return resolve(); }
       tex.mapping = THREE.EquirectangularReflectionMapping;
       studioTarget = pmrem.fromEquirectangular(tex); tex.dispose();
@@ -341,7 +341,7 @@ export function createBikeScene(T, canvas, { paint = PAINTS[0], onWake = () => {
   // load(id): this model's bike (modelUrl: its own build, the lighter one on phones); resolves with
   // the named parts (each with userData.home) once it's in, the studio is ready and the shaders are
   // compiled. Loading another model replaces the one shown (the builder and Find your bike switch).
-  const draco = new DRACOLoader().setDecoderPath("/pitch/kord/draco/");
+  const draco = new DRACOLoader().setDecoderPath("/builds/kord/draco/");
   const parts = {};
   let current = null, loadSeq = 0;
   const load = (id = "arc") => new Promise((resolve, reject) => {
@@ -366,7 +366,7 @@ export function createBikeScene(T, canvas, { paint = PAINTS[0], onWake = () => {
       for (const o of [...gltf.scene.children]) { o.userData.home = o.position.clone(); parts[o.name] = o; }
       current = gltf.scene; bike.add(gltf.scene);
       // this model's floor shadow, and its wheels' rims and spokes for setSpec's rim depth
-      const tex = new THREE.TextureLoader().load(`/pitch/kord/shadows/${id}.webp`, () => onWake(300));
+      const tex = new THREE.TextureLoader().load(`/builds/kord/shadows/${id}.webp`, () => onWake(300));
       tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 4;
       shadow.material.map = tex; shadow.material.needsUpdate = true; shadowTex.dispose(); shadowTex = tex;
       rimBase = RIM_M[id] ?? 0.05; rimSets = [];

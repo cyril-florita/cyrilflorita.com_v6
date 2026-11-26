@@ -58,16 +58,22 @@ AddType application/wasm .wasm
   </If>
 </IfModule>
 
-# Viteo moved from /lab/viteo/ to /pitch/viteo/ (mod_alias; no RewriteEngine).
-RedirectMatch 301 ^/lab/viteo(/.*)?$ /pitch/viteo$1
+# mod_alias applies the first RedirectMatch that matches, so the specific old addresses come
+# before the general /pitch/ -> /builds/ move below (each lands in one hop).
+
+# Viteo moved from /lab/viteo/ to /pitch/viteo/, then /builds/viteo/ (mod_alias; no RewriteEngine).
+RedirectMatch 301 ^/lab/viteo(/.*)?$ /builds/viteo$1
 
 # Hearthside's contact page became a modal on every page: the old URL goes to
 # Home, which opens it (?call).
-RedirectMatch 301 ^/pitch/hearthside/contact/?$ /pitch/hearthside/?call=1
+RedirectMatch 301 ^/(?:pitch|builds)/hearthside/contact/?$ /builds/hearthside/?call=1
 
 # Viteo's questions moved from /quiz/ to /personalize/ (2026-11-04), so the
 # prototype has no "quiz" wording left; old links and bookmarks land there.
-RedirectMatch 301 ^/pitch/viteo/quiz/?$ /pitch/viteo/personalize/
+RedirectMatch 301 ^/(?:pitch|builds)/viteo/quiz/?$ /builds/viteo/personalize/
+
+# The projects moved from /pitch/ to /builds/ (2026-11-25): every old address, query kept.
+RedirectMatch 301 ^/pitch(/.*)?$ /builds$1
 
 # deploy.js's record of deployed files: not for the public.
 <IfModule mod_authz_core.c>

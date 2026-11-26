@@ -36,7 +36,7 @@ export const metadata = {
     template: "%s · Viteo",
   },
   description:
-    "Viteo is a direct-to-consumer personalized vitamin subscription (eight-question personalization, plan, checkout and self-serve account), designed and built by Cyril Florita as a design and dev pitch.",
+    "Viteo is a direct-to-consumer personalized vitamin subscription (eight-question personalization, plan, checkout and self-serve account), designed and built by Cyril Florita.",
   openGraph: {
     type: "website",
     siteName: "Cyril Florita",
@@ -44,10 +44,10 @@ export const metadata = {
     images: [{ url: "/og/viteo.jpg", width: 1200, height: 630, alt: "Viteo, a personalized vitamin subscription" }],
   },
   twitter: { card: "summary_large_image", images: ["/og/viteo.jpg"] },
-  // Installable (a PWA scoped to /pitch/viteo/; see InstallApp.js).
-  manifest: "/pitch/viteo/manifest.webmanifest",
+  // Installable (a PWA scoped to /builds/viteo/; see InstallApp.js).
+  manifest: "/builds/viteo/manifest.webmanifest",
   appleWebApp: { capable: true, title: "Viteo", statusBarStyle: "black-translucent" },
-  icons: { apple: "/pitch/viteo/apple-touch-icon.png" },
+  icons: { apple: "/builds/viteo/apple-touch-icon.png" },
 };
 
 // Pinch-zoom stays available on Viteo (the root layout locks it for the
@@ -60,7 +60,7 @@ export const viewport = { themeColor: "#13151F", maximumScale: 5, userScalable: 
 // page it also marks the intro as pending (unless reduced motion is on), so
 // the hero's objects are hidden from the first paint until the intro's
 // timeline starts (IntroMoment.js) instead of flashing in place first.
-const THEME_SCRIPT = `(function(){var e=document.currentScript.parentElement;try{var t=localStorage.getItem('dl-theme');var m=localStorage.getItem('dl-mode');if(t==='aqua'||t==='grove'||t==='peach')e.setAttribute('data-dl-theme',t);if(m==='light'||m==='dark')e.setAttribute('data-dl-mode',m);}catch(x){}try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!location.hash&&location.pathname.replace(/\\/+$/,'')==='/pitch/viteo')e.classList.add('is-intro-pending');}catch(x){}})();`;
+const THEME_SCRIPT = `(function(){var e=document.currentScript.parentElement;try{var t=localStorage.getItem('dl-theme');var m=localStorage.getItem('dl-mode');if(t==='aqua'||t==='grove'||t==='peach')e.setAttribute('data-dl-theme',t);if(m==='light'||m==='dark')e.setAttribute('data-dl-mode',m);}catch(x){}try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!location.hash&&location.pathname.replace(/\\/+$/,'')==='/builds/viteo')e.classList.add('is-intro-pending');}catch(x){}})();`;
 
 export default function ViteoLayout({ children }) {
   return (

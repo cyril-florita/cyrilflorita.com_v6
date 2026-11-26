@@ -23,7 +23,7 @@ export default function StudioHero({ title, subhead, lede }) {
             {/* the brand name in the wordmark's own lettering, faint behind the bike: as wide as its stage, its top level
                 with the bike's (the user's calls, 2026-11-25; it was the giant ARC) */}
             <svg className="cd-sh-word" viewBox={WORDMARK.viewBox} style={{ aspectRatio: WORDMARK.ratio }} aria-hidden="true" focusable="false"><path d={WORDMARK.d} fill="currentColor" /></svg>
-            <BikeViewer bike={ARC.id} paint={PAINTS[0]} still={`/pitch/kord/bikes/${ARC.id}-${PAINTS[0].id}.webp`} label={`The Kord ${plain(ARC.name)}`} className="cd-sh-viewer" />
+            <BikeViewer bike={ARC.id} paint={PAINTS[0]} still={`/builds/kord/bikes/${ARC.id}-${PAINTS[0].id}.webp`} label={`The Kord ${plain(ARC.name)}`} className="cd-sh-viewer" />
           </div>
           <p className="cd-sh-hint" aria-hidden="true">Drag to turn 360°</p>
         </div>

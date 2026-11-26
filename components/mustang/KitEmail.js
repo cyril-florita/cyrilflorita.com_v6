@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-// The kit page's email preview: the real email (public/pitch/mustang/kit/email.html) in an
+// The kit page's email preview: the real email (public/builds/mustang/kit/email.html) in an
 // iframe at a desktop inbox's width or a phone's, so its stacking rules can be seen working.
 const SIZES = [
   { id: "desktop", label: "Desktop", width: 680 },
@@ -20,7 +20,7 @@ export default function KitEmail() {
         ))}
       </div>
       <div className="kit-email-frame" style={{ "--w": `${w}px` }}>
-        <iframe src="/pitch/mustang/kit/email.html" title={`The Mustang email at ${w}px wide`} loading="lazy" />
+        <iframe src="/builds/mustang/kit/email.html" title={`The Mustang email at ${w}px wide`} loading="lazy" />
       </div>
     </div>
   );

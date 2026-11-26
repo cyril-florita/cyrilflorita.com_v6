@@ -8,8 +8,8 @@ import StudioHero from "@/components/kord/StudioHero";
 // and the calls to action in the closing band.
 export const metadata = {
   title: "The Kord® Guarantee · Kord",
-  description: "Ride it for 30 days, a lifetime frame warranty, crash replacement, and a year of fit adjustments. A design and dev pitch by Cyril Florita.",
-  alternates: { canonical: "/pitch/kord/guarantee/" },
+  description: "Ride it for 30 days, a lifetime frame warranty, crash replacement, and a year of fit adjustments. Designed and built by Cyril Florita.",
+  alternates: { canonical: "/builds/kord/guarantee/" },
   robots: { index: false, follow: true },
 };
 
@@ -95,8 +95,8 @@ export default function GuaranteePage() {
               <p>Every Kord® is built to order and fitted before it ships. If something still isn&apos;t right, four promises have you covered.</p>
             </div>
             <div className="cd-guar-actions">
-              <a className="cd-btn cd-btn-dark" href="/pitch/kord/#range">Shop bikes<span className="cd-arrow" aria-hidden="true">→</span></a>
-              <a className="cd-btn cd-btn-outline-dark" href="/pitch/kord/#find">Help me choose</a>
+              <a className="cd-btn cd-btn-dark" href="/builds/kord/#range">Shop bikes<span className="cd-arrow" aria-hidden="true">→</span></a>
+              <a className="cd-btn cd-btn-outline-dark" href="/builds/kord/#find">Help me choose</a>
             </div>
           </div>
         </section>

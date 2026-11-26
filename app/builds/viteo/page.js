@@ -11,11 +11,11 @@ import PersonalizeBar from "@/components/viteo/PersonalizeBar";
 import { Arrow, BigWordHead, LogoMark, Pill, ProductBox } from "@/components/viteo/ui";
 
 export const metadata = {
-  title: { absolute: "Viteo · Personalized vitamin subscription | Design and dev pitch by Cyril Florita" },
-  alternates: { canonical: "/pitch/viteo/" },
+  title: { absolute: "Viteo · Personalized vitamin subscription | Designed & built by Cyril Florita" },
+  alternates: { canonical: "/builds/viteo/" },
   openGraph: {
-    title: "Viteo · Personalized vitamin subscription | Design and dev pitch by Cyril Florita",
-    url: "/pitch/viteo/",
+    title: "Viteo · Personalized vitamin subscription | Designed & built by Cyril Florita",
+    url: "/builds/viteo/",
     images: [{ url: "/og/viteo.jpg", width: 1200, height: 630, alt: "Viteo, a personalized vitamin subscription" }],
   },
 };

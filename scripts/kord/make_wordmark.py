@@ -6,7 +6,7 @@ Writes:
   scripts/kord/fonts/ArchivoExpanded-Black.ttf   static instance (Blender's down-tube wordmark;
                                                  build_bike.py stretches its text the same way)
   components/kord/wordmark.js                    the outlined, stretched path for the site's logo
-  public/pitch/kord/kord-wordmark.svg            the same as a file
+  public/builds/kord/kord-wordmark.svg            the same as a file
 
   python3 scripts/kord/make_wordmark.py <Archivo[wdth,wght].ttf>
 """

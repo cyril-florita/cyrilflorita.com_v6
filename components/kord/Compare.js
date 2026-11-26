@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import { DETAILS, FIND, PAINTS, SIZES, SIZE_GEO, compareOrder, money, plain, sizeGeo } from "@/components/kord/data";
 import Choice from "@/components/kord/Choice";
-import "@/app/pitch/kord/css/compare.css";
+import "@/app/builds/kord/css/compare.css";
 
-// Compare (/pitch/kord/compare/, rebuilt 2026-11-25 at the user's call — it was a table): the four bikes
+// Compare (/builds/kord/compare/, rebuilt 2026-11-25 at the user's call — it was a table): the four bikes
 // as cards side by side, each with its studio still, name, price and Build button and then its specs; the
 // rows line up across the cards (CSS subgrid). Under them, "How the frames differ": the four frames drawn
 // to scale over each other, then the size picker (between the drawing and the table, so a change shows in
@@ -99,13 +99,13 @@ export default function Compare() {
         {bikes.map((b) => {
           return (
             <article key={b.id} className={`cd-cmp-card${hi(b.id) ? " is-hi" : ""}${focus === b.id ? " is-focus" : ""}`} style={{ "--c": COLOR[b.id] }} {...hover(b.id)}>
-              <span className="cd-shot cd-studio"><img src={`/pitch/kord/bikes/${b.id}-${paint}.webp`} width="1200" height="720" alt="" loading="lazy" /></span>
+              <span className="cd-shot cd-studio"><img src={`/builds/kord/bikes/${b.id}-${paint}.webp`} width="1200" height="720" alt="" loading="lazy" /></span>
               <div className="cd-cmp-head">
                 <h2><span className="cd-cmp-dot" aria-hidden="true" />{b.name}</h2>
                 <p className="cd-card-type">{b.type}</p>
               </div>
               <p className="cd-cmp-price"><span>From</span> <b>{money(b.from)}</b></p>
-              <a className="cd-btn cd-btn-ghost cd-btn-sm cd-cmp-build" href={`/pitch/kord/build/?bike=${b.id}&size=${size}&paint=${paint}`}>Build<span className="cd-sr"> the {plain(b.name)}</span><span className="cd-arrow" aria-hidden="true">→</span></a>
+              <a className="cd-btn cd-btn-ghost cd-btn-sm cd-cmp-build" href={`/builds/kord/build/?bike=${b.id}&size=${size}&paint=${paint}`}>Build<span className="cd-sr"> the {plain(b.name)}</span><span className="cd-arrow" aria-hidden="true">→</span></a>
               <dl className="cd-cmp-list">
                 {SPECS.map((s) => (
                   <div key={s.k} className="cd-cmp-row">

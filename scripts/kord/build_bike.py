@@ -6,7 +6,7 @@ an integrated drop-bar cockpit, saddle and disc brakes.
   /Applications/Blender.app/Contents/MacOS/Blender -b -P scripts/kord/build_bike.py -- <out_dir> [--preview] [--glb <file>] [--stills <dir>] [--donor <scene.gltf>]
 
 With --donor, the frame, fork, cockpit, seatpost and saddle come from "Road Bike" by tanity
-(CC BY 4.0; see "donor frame" below) instead of being built here. The site's models (public/pitch/kord/models/) use it.
+(CC BY 4.0; see "donor frame" below) instead of being built here. The site's models (public/builds/kord/models/) use it.
 
 Units are metres. X runs along the bike (front = +X), Y across (drive side = -Y, the rider's right), Z up.
 Geometry: a 56 cm race frame — 990 mm wheelbase, 410 mm chainstays, 70 mm BB drop,

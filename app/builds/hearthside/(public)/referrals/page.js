@@ -5,7 +5,7 @@ import ReferralForm from "@/components/hearthside/ReferralForm";
 
 export const metadata = {
   title: "For referral partners",
-  alternates: { canonical: "/pitch/hearthside/referrals/" },
+  alternates: { canonical: "/builds/hearthside/referrals/" },
 };
 
 // For physicians, hospitals and discharge planners: separate from the family

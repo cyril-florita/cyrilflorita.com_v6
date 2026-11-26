@@ -1,8 +1,8 @@
 // Viteo — a fictional personalized-vitamin subscription, built as a
-// product design concept (/pitch/viteo/). Everything here is made up:
+// product design concept (/builds/viteo/). Everything here is made up:
 // products, prices, people. No health claims; nothing is medical advice.
 
-export const BASE = "/pitch/viteo";
+export const BASE = "/builds/viteo";
 
 // An own-property lookup for keys that come from the URL, storage or a form
 // (so "__proto__", "constructor" and the like never resolve to anything).

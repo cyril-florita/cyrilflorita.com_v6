@@ -20,7 +20,7 @@ export default function RangeCard({ id }) {
   };
   return (
     <li className={`cd-card cd-card-${b.id}`}>
-      <span className="cd-shot cd-studio"><img className="cd-card-img" src={`/pitch/kord/bikes/${b.id}-${paint}.webp`} width="1200" height="720" alt={`The Kord ${plain(b.name)} in ${cur.name}`} loading="lazy" /></span>
+      <span className="cd-shot cd-studio"><img className="cd-card-img" src={`/builds/kord/bikes/${b.id}-${paint}.webp`} width="1200" height="720" alt={`The Kord ${plain(b.name)} in ${cur.name}`} loading="lazy" /></span>
       <div className="cd-card-body">
         <div className="cd-card-head">
           <h3 className="cd-h3">{b.name}</h3>
@@ -44,7 +44,7 @@ export default function RangeCard({ id }) {
         </dl>
         <div className="cd-card-foot">
           <p className="cd-card-price">From <strong>{money(b.from)}</strong></p>
-          <a className="cd-card-build" href={`/pitch/kord/build/?bike=${b.id}&paint=${paint}`}>Build yours<span className="cd-arrow" aria-hidden="true">→</span><span className="cd-sr">: the {plain(b.name)} in {cur.name}</span></a>
+          <a className="cd-card-build" href={`/builds/kord/build/?bike=${b.id}&paint=${paint}`}>Build yours<span className="cd-arrow" aria-hidden="true">→</span><span className="cd-sr">: the {plain(b.name)} in {cur.name}</span></a>
         </div>
       </div>
     </li>

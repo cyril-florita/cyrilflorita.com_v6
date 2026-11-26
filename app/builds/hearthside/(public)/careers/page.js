@@ -4,7 +4,7 @@ import { ApplyForm } from "@/components/hearthside/Forms";
 
 export const metadata = {
   title: "Careers",
-  alternates: { canonical: "/pitch/hearthside/careers/" },
+  alternates: { canonical: "/builds/hearthside/careers/" },
 };
 
 export default function Careers() {

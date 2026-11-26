@@ -6,7 +6,7 @@ import Choice from "@/components/kord/Choice";
 import DsChrome from "@/components/DsChrome";
 import { Logo } from "@/components/kord/ui";
 
-// The design system's live samples (/pitch/kord/design-system/): the real components and classes,
+// The design system's live samples (/builds/kord/design-system/): the real components and classes,
 // working, so the page shows how they behave as well as how they look.
 
 const SIZE_FOR = Object.fromEntries(FIND.find((q) => q.id === "height").a.map((a) => [a.size, a.label]));
@@ -20,7 +20,7 @@ const onArrows = (e, i, n, pick) => {
 
 export function Chrome({ sections }) {
   return (
-    <DsChrome prefix="cd" sections={sections} logo={<Logo />} logoIsLink home="/pitch/kord/" homeLabel="Back to Kord® home"
+    <DsChrome prefix="cd" sections={sections} logo={<Logo />} logoIsLink home="/builds/kord/" homeLabel="Back to Kord® home"
       homeClass="cd-btn cd-btn-ghost cd-btn-sm" linkIcon={<span className="cd-arrow" aria-hidden="true">→</span>} />
   );
 }

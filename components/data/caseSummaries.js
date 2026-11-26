@@ -2,10 +2,10 @@
 // study hero's summary (CaseHero) and in the My Work grid's hover "thought"
 // card (useTileThought in components/PortfolioIsotope.js) — edit it here.
 export const CASE_SUMMARIES = {
-  "/kord": "A design and dev pitch for an online-only road-bike brand: a 3D bike you can turn, repaint, and take apart as you scroll, four questions that match you to a bike and a size, and a builder, comparison, cart, and virtual fit around it.",
-  "/mustang": "A design and dev pitch for a car dealership: a mobile-first interactive Mustang ad, enhanced for desktops, with a 3D Dark Horse you can turn, repaint, and look inside, and a campaign kit that carries the same concept into email, social, a website hero, and display ads.",
-  "/hearthside": "A design and dev pitch for a home health agency: a calm, phone-first website for families and referral partners, and the intake system behind it, where every referral is routed, tracked, and followed up from the first call to the first visit.",
-  "/viteo": "A design and dev pitch: a personalized vitamin subscription, designed and built end to end, from a 3D product that opens as you scroll and eight questions that build your pack as you answer, to a plan that explains every pill and an account that keeps subscribers in control.",
+  "/kord": "An online-only road-bike brand, designed and built end to end: a 3D bike you can turn, repaint, and take apart as you scroll, four questions that match you to a bike and a size, and a builder, comparison, cart, and virtual fit around it.",
+  "/mustang": "A concept for a car dealership, designed and built end to end: a mobile-first interactive Mustang ad, enhanced for desktops, with a 3D Dark Horse you can turn, repaint, and look inside, and a campaign kit that carries the same concept into email, social, a website hero, and display ads.",
+  "/hearthside": "A concept for a home health agency, designed and built end to end: a calm, phone-first website for families and referral partners, and the intake system behind it, where every referral is routed, tracked, and followed up from the first call to the first visit.",
+  "/viteo": "A personalized vitamin subscription, designed and built end to end, from a 3D product that opens as you scroll and eight questions that build your pack as you answer, to a plan that explains every pill and an account that keeps subscribers in control.",
   "/35-day-generosity-challenge": "A living landing page for a five-week, multi-channel campaign: one hub that evolved every Monday as supporters worked through a week-by-week journey of generosity.",
   "/giving-tuesday": "A single-purpose donation page for Children's Hunger Fund's biggest giving day of the year: rebuilt for conversion, re-engineered overnight for a corporate match, and run live, hour by hour.",
   "/grace-stream": "Grace Stream, Grace to You's 24/7 online broadcast of John MacArthur's teaching: I designed its brand and built the front end of its player page.",

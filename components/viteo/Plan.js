@@ -5,7 +5,7 @@ import { BASE, PARTNERS, PLANS, PRODUCTS, getOwn, money, priceFor, recommend } f
 import { useHydrated, useStored, write } from "./store";
 import { Arrow, BigWordHead, Button, Pill, PillTray, ProductBox, onRadioKeyDown, radioTabIndex } from "./ui";
 // Page-only styles (split out of viteo.css so the landing skips them).
-import "@/app/pitch/viteo/css/plan.css";
+import "@/app/builds/viteo/css/plan.css";
 
 // "Your plan": the recommended pack with a reason for every item, add /
 // remove, a delivery-frequency picker, and a running price summary. Without

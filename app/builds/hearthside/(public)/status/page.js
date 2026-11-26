@@ -3,7 +3,7 @@ import StatusTracker from "@/components/hearthside/StatusTracker";
 
 export const metadata = {
   title: "Referral status",
-  alternates: { canonical: "/pitch/hearthside/status/" },
+  alternates: { canonical: "/builds/hearthside/status/" },
   // Only useful with a ?ref= reference, so not indexed.
   robots: { index: false, follow: true },
 };

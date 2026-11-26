@@ -3,7 +3,7 @@
 // general guidance that points to medicare.gov; nothing on the site makes an
 // eligibility or coverage decision.
 
-export const BASE = "/pitch/hearthside";
+export const BASE = "/builds/hearthside";
 
 // PHONE is Cyril Florita's real number, so calls from the pitch reach him;
 // the referral fax stays a fictional 555-01xx number (reserved for fiction).

@@ -12,7 +12,7 @@ export default function KitCar() {
   return (
     <div className="kit-head-car">
       <CarStage spot={SPOT} className="kit-car">
-        <img className="kit-car-poster" src="/pitch/mustang/car-fallback.webp" width="1680" height="693" alt="" fetchPriority="high" />
+        <img className="kit-car-poster" src="/builds/mustang/car-fallback.webp" width="1680" height="693" alt="" fetchPriority="high" />
       </CarStage>
     </div>
   );

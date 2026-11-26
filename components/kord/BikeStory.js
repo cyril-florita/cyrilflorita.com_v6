@@ -255,7 +255,7 @@ export default function BikeStory() {
     <section ref={sectionRef} className="cd-story" data-state={state} aria-label="The Kord Arc">
       <div className="cd-sticky">
         <p className="cd-word" aria-hidden="true">{plain(ARC.name).toUpperCase()}</p>
-        <img className="cd-poster" src="/pitch/kord/bike-fallback.webp" width="1600" height="900" alt="" fetchPriority="high" />
+        <img className="cd-poster" src="/builds/kord/bike-fallback.webp" width="1600" height="900" alt="" fetchPriority="high" />
         <canvas ref={canvasRef} className="cd-canvas" aria-hidden="true" />
         <div ref={viewRef} className="cd-view" tabIndex={0} role="group" aria-roledescription="3D viewer"
           aria-label="The Kord Arc in 3D. Drag, or use the left and right arrow keys, to turn it." />
@@ -271,7 +271,7 @@ export default function BikeStory() {
           <p className="cd-subhead">Kord® {ARC.name} · {ARC.type} road</p>
           <p className="cd-lede">A 7.4 kg aero bike with 50 mm carbon wheels and wireless 2×12 shifting. Built to order, shipped ride-ready.</p>
           <div className="cd-hero-row">
-            <a className="cd-btn cd-btn-primary" href={`/pitch/kord/build/?bike=${ARC.id}`}>Build your {ARC.name}<span className="cd-arrow" aria-hidden="true">→</span></a>
+            <a className="cd-btn cd-btn-primary" href={`/builds/kord/build/?bike=${ARC.id}`}>Build your {ARC.name}<span className="cd-arrow" aria-hidden="true">→</span></a>
             <span className="cd-price">From <strong>{money(ARC.from)}</strong></span>
           </div>
         </div>

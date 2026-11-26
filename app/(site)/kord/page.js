@@ -19,7 +19,7 @@ import {
 } from "@/components/case/CaseStudy";
 import { CASE_SUMMARIES } from "@/components/data/caseSummaries";
 
-// Kord: a design & dev pitch, an online-only road-bike brand (the live site is /pitch/kord/,
+// Kord: a design & dev pitch, an online-only road-bike brand (the live site is /builds/kord/,
 // outside the portfolio layout; see its README). Stills were captured from a production build in
 // headless Chrome with the GPU on: desktop at 1440×900 @2x, phone at 390×844 @2x; the clips with
 // CDP screencast at 1280×800 (the tile at 1600×900), encoded with ffmpeg.
@@ -33,8 +33,8 @@ const SECTIONS = [
 ];
 
 const P = "/img/portfolio/kord_";
-const URL = "cyrilflorita.com/pitch/kord";
-const LIVE = "/pitch/kord/";
+const URL = "cyrilflorita.com/builds/kord";
+const LIVE = "/builds/kord/";
 
 const Desktop = ({ name, caption, path = "/" }) => (
   <CaseFigure src={`${P}desktop-${name}.jpg`} alt={`Kord — ${caption}`} caption={caption} frame="browser" url={`${URL}${path}`} />
@@ -86,7 +86,7 @@ const Page = () => {
 
           <CaseHero
             category="E-commerce Design & Development"
-            detail="Design & Dev Pitch"
+            detail="Designed & Built"
             title="Kord"
             summary={CASE_SUMMARIES["/kord"]}
             facts={[
@@ -108,7 +108,7 @@ const Page = () => {
                 <li><strong>You can&apos;t tell which one is yours:</strong> aero, climbing, endurance, and all-road bikes look alike in a grid, and the differences are in geometry tables most riders can&apos;t read.</li>
                 <li><strong>You can&apos;t be fitted:</strong> in a shop, someone checks your size and sets the bike up; online, you guess a frame size and hope.</li>
               </ul>
-              <p>Kord is my answer, built as a pitch: an online-only road-bike brand with four bikes, designed and built end to end, from the name and the logo to the 3D bike and the checkout. I did all of it on my own, with four goals:</p>
+              <p>Kord is my answer, a concept of my own: an online-only road-bike brand with four bikes, designed and built end to end, from the name and the logo to the 3D bike and the checkout. I did all of it on my own, with four goals:</p>
               <ul className="cyril-case-list">
                 <li>let people look at the bike the way they would in a shop: turn it, pick a color, and see what it&apos;s made of</li>
                 <li>help them choose the right bike and size in under a minute, in their own words</li>

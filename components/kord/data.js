@@ -187,7 +187,7 @@ export function decodeFind(s) {
 }
 
 // ---------------------------------------------------------------- The builder
-// /pitch/kord/build/ (Builder.js): bike, size, paint, groupset, wheels; the price and weight update
+// /builds/kord/build/ (Builder.js): bike, size, paint, groupset, wheels; the price and weight update
 // as you go. Groupsets are Kord's own fictional "Drive 12" tiers (no real component maker named).
 // A build is { bike, size, paint, group, wheels } (ids); `normalizeBuild` fills and checks one.
 export const SIZES = ["49", "52", "54", "56", "58"];
@@ -243,7 +243,7 @@ export function weighBuild(b) {
 export const buildQuery = (b) => `?bike=${b.bike}&size=${b.size}&paint=${b.paint}&group=${b.group}&wheels=${b.wheels}`;
 
 // ---------------------------------------------------------------- Compare
-// /pitch/kord/compare/: every bike side by side. Geometry is for a 56 cm frame (mm and degrees); `sizeGeo` gives
+// /builds/kord/compare/: every bike side by side. Geometry is for a 56 cm frame (mm and degrees); `sizeGeo` gives
 // it in any size (Compare's size picker).
 export const DETAILS = {
   arc: { position: "Race", mounts: "Two bottles", best: "Fast group rides, flat and rolling roads",
@@ -273,7 +273,7 @@ export function compareOrder(a, b) {
 }
 
 // ---------------------------------------------------------------- Virtual fit
-// /pitch/kord/fit/: five measurements (cm) -> a starting fit. Saddle height is the classic
+// /builds/kord/fit/: five measurements (cm) -> a starting fit. Saddle height is the classic
 // inseam x 0.883 (to the top of the saddle from the crank's centre); the stem grows or shrinks
 // from 100 mm with the torso and arms against what's typical for the height; the bar matches the
 // shoulders. A fitter confirms it on the call or from photos. Values outside FIT_RANGE are clamped.
@@ -296,7 +296,7 @@ export function fitFor(m) {
   return { v, size, saddle, crank, stem, bar };
 }
 
-// The Kord® Guarantee: its own page since 2026-11-25 (/pitch/kord/guarantee/, the user's call; it was the
+// The Kord® Guarantee: its own page since 2026-11-25 (/builds/kord/guarantee/, the user's call; it was the
 // landing's #kord-guarantee section, which replaced How it works on 2026-11-24, and is now a teaser linking
 // there): the guarantees and their terms (the user's copy, 2026-11-25), how a return works, then how
 // buying a Kord differs from a typical online store and a bike shop. The design system's cards sample shows
@@ -305,7 +305,7 @@ export const GUARANTEES = [
   { id: "ride", figure: "30 days", title: "Ride it, or send it back", line: "Ride it for 30 days. If it isn’t right, return it in its original condition for a refund of the bike price. A prepaid return label and replacement shipping box are $95, deducted from your refund. Original shipping, and any damaged or missing parts, are not refunded." },
   { id: "frame", figure: "Lifetime", title: "Frame warranty", line: "Kord® frames and forks are covered against manufacturing defects in materials and workmanship for as long as the original owner owns the bike. We’ll repair or replace the frame at our discretion. Crashes, misuse, modifications, and normal wear aren’t covered. Proof of purchase is required." },
   { id: "crash", figure: "3 years", title: "Crash replacement", line: "If you damage the frame in a crash within three years, we’ll offer a replacement frame at our cost price. We’ll need photos and an inspection first. The offer is limited to one replacement per bike, and you pay shipping." },
-  { id: "fit", figure: "1 year", title: "Fit adjustments", line: "If the fit feels off in the first year, we’ll swap your stem, bar, or saddle for a different size. Your first swap ships free, and later swaps cost shipping. Parts must be unused or lightly used.", href: "/pitch/kord/fit/", cta: "Try the virtual fit" },
+  { id: "fit", figure: "1 year", title: "Fit adjustments", line: "If the fit feels off in the first year, we’ll swap your stem, bar, or saddle for a different size. Your first swap ships free, and later swaps cost shipping. Parts must be unused or lightly used.", href: "/builds/kord/fit/", cta: "Try the virtual fit" },
 ];
 // how a return works, on the Guarantee page (matches the 30-day terms above)
 export const RETURN_STEPS = [

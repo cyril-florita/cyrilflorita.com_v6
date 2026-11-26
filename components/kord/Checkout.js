@@ -6,7 +6,7 @@ import { useCart, clearCart } from "@/components/kord/cartStore";
 import { describe, shipDate } from "@/components/kord/CartView";
 import { Sample, Words } from "@/components/kord/ui";
 
-// Checkout (/pitch/kord/checkout/), a preview that can't take a real payment: sample delivery
+// Checkout (/builds/kord/checkout/), a preview that can't take a real payment: sample delivery
 // details in read-only fields, a fit call to book (or skip), and a card form whose fields are
 // read-only and filled with a public test card. "Place order" shows a short busy state, then the
 // confirmation — a sample order number and what happens next — and empties the cart.
@@ -53,7 +53,7 @@ export default function Checkout() {
         <li><span>04</span><strong>Ride it for 30 days</strong><em>If it isn&apos;t right, send it back for a refund of the bike price.</em></li>
       </ol>
       <p className="cd-done-total">Total {money(order.total)} · nothing was charged in this preview.</p>
-      <a className="cd-btn cd-btn-ghost" href="/pitch/kord/">Back to Kord®</a>
+      <a className="cd-btn cd-btn-ghost" href="/builds/kord/">Back to Kord®</a>
       <p className="cd-sr" role="status" aria-live="polite">{said}</p>
     </div>
   );
@@ -62,8 +62,8 @@ export default function Checkout() {
     <div className="cd-cart-empty">
       <p className="cd-lede">There&apos;s nothing to check out yet.</p>
       <div className="cd-find-actions">
-        <a className="cd-btn cd-btn-primary" href="/pitch/kord/build/">Build yours<span className="cd-arrow" aria-hidden="true">→</span></a>
-        <a className="cd-btn cd-btn-ghost" href="/pitch/kord/#find">Find your bike</a>
+        <a className="cd-btn cd-btn-primary" href="/builds/kord/build/">Build yours<span className="cd-arrow" aria-hidden="true">→</span></a>
+        <a className="cd-btn cd-btn-ghost" href="/builds/kord/#find">Find your bike</a>
       </div>
     </div>
   );
@@ -82,7 +82,7 @@ export default function Checkout() {
         </section>
         <section aria-labelledby="co-2">
           <h2 id="co-2" className="cd-build-h"><span>02</span> Fit call</h2>
-          <p className="cd-build-note">A 20-minute video call with a fitter, to set your bar, stem and saddle. Or skip it: we set them from your <a href="/pitch/kord/fit/">measurements</a>.</p>
+          <p className="cd-build-note">A 20-minute video call with a fitter, to set your bar, stem and saddle. Or skip it: we set them from your <a href="/builds/kord/fit/">measurements</a>.</p>
           <div className="cd-build-opts is-2" role="radiogroup" aria-label="Fit call">
             {[...slots.map((s, i) => ({ id: String(i), label: s })), { id: "skip", label: "Skip, use my measurements" }].map((o) => (
               <button key={o.id} type="button" role="radio" aria-checked={slot === o.id} tabIndex={slot === o.id ? 0 : -1}
@@ -103,7 +103,7 @@ export default function Checkout() {
       <aside className="cd-cart-sum" aria-label="Order summary">
         <ul className="cd-co-items">
           {items.map((x) => { const d = describe(x); return (
-            <li key={x.id}><img src={`/pitch/kord/bikes/${x.bike}-${x.paint}.webp`} width="1200" height="720" alt="" /><div><strong>Kord® {d.bike.name}</strong><span>{d.line}</span></div><em>{money(d.price)}</em></li>
+            <li key={x.id}><img src={`/builds/kord/bikes/${x.bike}-${x.paint}.webp`} width="1200" height="720" alt="" /><div><strong>Kord® {d.bike.name}</strong><span>{d.line}</span></div><em>{money(d.price)}</em></li>
           ); })}
         </ul>
         <dl>
@@ -114,7 +114,7 @@ export default function Checkout() {
         <button type="button" className="cd-btn cd-btn-primary" aria-disabled={stage !== "form"} onClick={place}>
           {stage === "busy" ? "Placing order…" : `Place order · ${money(total)}`}
         </button>
-        <a className="cd-cart-back" href="/pitch/kord/cart/">Back to cart</a>
+        <a className="cd-cart-back" href="/builds/kord/cart/">Back to cart</a>
       </aside>
       <p className="cd-sr" role="status" aria-live="polite">{said}</p>
     </div>

@@ -77,7 +77,7 @@
 }
 .ms-view.is-dragging { cursor: grabbing; }
 .ms-view:focus-visible { outline-offset: -6px; }
-.ms-stage[data-state="fallback"] .ms-view { background: url(/pitch/mustang/car-fallback.webp) 50% 55% / min(60%, 900px) auto no-repeat; cursor: default; }
+.ms-stage[data-state="fallback"] .ms-view { background: url(/builds/mustang/car-fallback.webp) 50% 55% / min(60%, 900px) auto no-repeat; cursor: default; }
 
 .ms-top, .ms-copy, .ms-offer { position: absolute; z-index: 4; pointer-events: none; }
 .ms-top a, .ms-copy a, .ms-copy button { pointer-events: auto; }

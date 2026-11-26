@@ -3,7 +3,7 @@ import { Atkinson_Hyperlegible, Space_Grotesk } from "next/font/google";
 // Preloads the portfolio's fonts for portfolio routes only. The root layout
 // (app/layout.js) defines the same fonts with `preload: false` — it has to put
 // their CSS variables on <html> for the portfolio's `body` styles, and a
-// preload there would make every /pitch prototype download fonts it never
+// preload there would make every /builds prototype download fonts it never
 // uses (68KB on Viteo). These calls use identical options, so they resolve
 // to the same font files: rendering one hidden element with them (SiteFonts)
 // is enough for Next to preload those files on the routes that render it.

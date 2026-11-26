@@ -3,7 +3,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 // The pitch's interactive stage: one WebGL canvas (three.js, loaded on demand)
-// behind the page's text. The car (public/pitch/mustang/car.glb, built by
+// behind the page's text. The car (public/builds/mustang/car.glb, built by
 // scripts/mustang/build_car.py in Blender) turns a full 360 degrees when
 // dragged, leans a little toward the pointer, and is drawn four times a frame:
 // the main view plus three "windows" (the tiles), each a fixed camera riding
@@ -107,7 +107,7 @@ function Tile({ id, ar, slant, kicker, label, pressed, aria, size, onClick, onHo
   );
 }
 
-// `spot` (the campaign kit's recording page, app/pitch/mustang/spot/): no windows, paint
+// `spot` (the campaign kit's recording page, app/builds/mustang/spot/): no windows, paint
 // controls or hints, and the car is driven by a clock instead of the pointer, so every
 // recording plays the same: { spin: radians per second (turntable), yaw0: the yaw at the
 // start, intro: glide the camera in as the landing does, lift: raises the car in its view (a share of its height), panX: moves it right (a share of its width), floor: false hides the floor and the reflection, view: a feature pose to hold
@@ -611,10 +611,10 @@ export default function CarStage({ children, spot = null, className = "" }) {
       };
 
       // The car: "[FREE] 2024 Ford Mustang Dark Horse" by livanovbog (CC BY 4.0), prepared by
-      // scripts/mustang/prep_dark_horse.py; Draco-compressed, so it needs the decoder in /pitch/mustang/draco/.
-      const draco = new DRACOLoader().setDecoderPath("/pitch/mustang/draco/");
+      // scripts/mustang/prep_dark_horse.py; Draco-compressed, so it needs the decoder in /builds/mustang/draco/.
+      const draco = new DRACOLoader().setDecoderPath("/builds/mustang/draco/");
       const gltfLoader = new GLTFLoader().setDRACOLoader(draco);
-      gltfLoader.load("/pitch/mustang/car.glb", (gltf) => {
+      gltfLoader.load("/builds/mustang/car.glb", (gltf) => {
         if (disposed) return;
         gltf.scene.traverse((o) => {
           if (!o.isMesh || !mats[o.material?.name]) return;

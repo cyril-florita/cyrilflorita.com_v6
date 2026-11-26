@@ -3,8 +3,8 @@ import Cart from "@/components/kord/CartView";
 
 export const metadata = {
   title: "Your cart · Kord",
-  description: "Your Kord builds. A design and dev pitch by Cyril Florita.",
-  alternates: { canonical: "/pitch/kord/cart/" },
+  description: "Your Kord builds. Designed and built by Cyril Florita.",
+  alternates: { canonical: "/builds/kord/cart/" },
   robots: { index: false, follow: true },
 };
 

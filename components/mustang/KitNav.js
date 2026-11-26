@@ -84,7 +84,7 @@ export default function KitNav({ items }) {
             </li>
           ))}
         </ol>
-        <a className="kit-sheet-ad" href="/pitch/mustang/">See the ad ↗</a>
+        <a className="kit-sheet-ad" href="/builds/mustang/">See the ad ↗</a>
       </div>
     </dialog>
     <nav className="kit-index" aria-label="Deliverables">
@@ -96,7 +96,7 @@ export default function KitNav({ items }) {
           </li>
         ))}
       </ol>
-      <a className="kit-index-ad" href="/pitch/mustang/">See the ad</a>
+      <a className="kit-index-ad" href="/builds/mustang/">See the ad</a>
     </nav>
     </>
   );

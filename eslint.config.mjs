@@ -28,8 +28,8 @@ const eslintConfig = defineConfig([
     // Staging folder for new project materials (git-ignored).
     'new-work/**',
     // Vendored Draco decoder (three.js), served as-is for the Mustang pitch.
-    'public/pitch/mustang/draco/**',
-    'public/pitch/kord/draco/**',
+    'public/builds/mustang/draco/**',
+    'public/builds/kord/draco/**',
   ]),
 ])
 

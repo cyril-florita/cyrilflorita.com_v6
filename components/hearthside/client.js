@@ -859,7 +859,7 @@ export function HeroMask() {
   return null;
 }
 
-// Home's preloader (first load only: the pre-paint script in ../../app/pitch/
+// Home's preloader (first load only: the pre-paint script in ../../app/builds/
 // hearthside/layout.js adds .is-loading to .hs on a fresh load of Home on
 // desktop with a mouse — the screens that load the 3D side mark — without a
 // hash, ?call or reduced motion, and clears it — and .is-entering — after 7s

@@ -2,13 +2,13 @@ import { AREAS, BASE, CREDENTIALS, FAQS, SERVICES } from "@/components/hearthsid
 import { Button, CallBand, CallButton, Icon, Logo, LogoMark, PartnerLogos, Photo, Row, Sample, titleWords } from "@/components/hearthside/ui";
 import { ModeSwitch, ZipCheck } from "@/components/hearthside/client";
 import DsChrome from "@/components/DsChrome";
-import "@/app/pitch/hearthside/css/design-system.css";
+import "@/app/builds/hearthside/css/design-system.css";
 
 export const metadata = {
   title: "Design system",
   description:
     "Hearthside Home Health's design system: an editorial grid, light and dark color tokens measured to WCAG AAA for body text, type, buttons, forms, status labels, and photo placeholders. Designed and built by Cyril Florita.",
-  alternates: { canonical: "/pitch/hearthside/design-system/" },
+  alternates: { canonical: "/builds/hearthside/design-system/" },
 };
 
 // Rendered from the same tokens (hearthside.css) and components the site

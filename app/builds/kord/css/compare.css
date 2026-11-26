@@ -1,4 +1,4 @@
-/* Compare (/pitch/kord/compare/, Compare.js; 2026-11-25): four spec cards, bars on every number, and the
+/* Compare (/builds/kord/compare/, Compare.js; 2026-11-25): four spec cards, bars on every number, and the
    frames drawn to scale over each other. Page-only, imported by Compare.js. */
 .cd-cmp { display: grid; gap: clamp(32px, 4vw, 48px); }
 

@@ -43,7 +43,7 @@ export default function MobileMenu({ links }) {
           <nav aria-label="Main">
             <ul>{links.map((l, i) => <li key={l.href} style={{ "--i": i }}><a href={l.href} onClick={shut}>{l.label}</a></li>)}</ul>
           </nav>
-          <a className="cd-btn cd-btn-primary cd-menu-cta" style={{ "--i": links.length }} href="/pitch/kord/build/" onClick={shut}>Build yours<span className="cd-arrow" aria-hidden="true">→</span></a>
+          <a className="cd-btn cd-btn-primary cd-menu-cta" style={{ "--i": links.length }} href="/builds/kord/build/" onClick={shut}>Build yours<span className="cd-arrow" aria-hidden="true">→</span></a>
         </div>
       </dialog>
     </>

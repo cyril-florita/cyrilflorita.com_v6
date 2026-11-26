@@ -8,7 +8,7 @@ export { focusAfterMenuLink, onRadioKeyDown, radioTabIndex, useBackdropClose, us
 import { focusAfterMenuLink, onRadioKeyDown, radioTabIndex } from "./a11y";
 
 // Shared Viteo UI: logo, pill illustrations, buttons, and the page shell
-// (header, footer with the concept notice). Styles: app/pitch/viteo/viteo.css.
+// (header, footer with the concept notice). Styles: app/builds/viteo/viteo.css.
 
 // The Viteo mark: a "V" of two capsules meeting at the base, one glossy in
 // the theme's accent, one in ink. Gradient ids are per instance (useId).
@@ -180,7 +180,7 @@ export const Arrow = () => (
 );
 
 // Theme + mode live as attributes on the .dl root (set before paint by the
-// script in app/pitch/viteo/layout.js). This reads them live and writes
+// script in app/builds/viteo/layout.js). This reads them live and writes
 // them back, saving the choice for the next visit.
 export const THEMES = [
   {
@@ -528,10 +528,10 @@ export const Footer = () => (
         <InstallApp />
       </nav>
     </div>
-    {/* Always visible: this is a design & dev pitch, not a store. */}
+    {/* Always visible: this is a concept, designed and built, not a store. */}
     <div className="dl-wrap dl-footer-legal">
       <p>
-        <strong>Design and Dev Pitch</strong> &middot; &copy; {new Date().getFullYear()} Cyril Florita. All
+        <strong>Designed and built by Cyril Florita</strong> &middot; &copy; {new Date().getFullYear()}. All
         rights reserved.
       </p>
       {/* A full page load: the portfolio uses a different layout and styles. */}

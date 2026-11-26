@@ -3,7 +3,7 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { useBackdropClose } from "./a11y";
 
 // "Install the app" (footer). Viteo is a Progressive Web App: a manifest
-// scoped to /pitch/viteo/ (public/pitch/viteo/manifest.webmanifest) and a
+// scoped to /builds/viteo/ (public/builds/viteo/manifest.webmanifest) and a
 // small service worker (sw.js: network-first, branded offline page). This
 // registers the worker and offers installing: where the browser has an
 // install prompt (Chrome, Edge, Android) the button opens it; elsewhere
@@ -32,7 +32,7 @@ export default function InstallApp() {
 
   useEffect(() => {
     if ("serviceWorker" in navigator && process.env.NODE_ENV === "production") {
-      navigator.serviceWorker.register("/pitch/viteo/sw.js", { scope: "/pitch/viteo/" }).catch(() => {});
+      navigator.serviceWorker.register("/builds/viteo/sw.js", { scope: "/builds/viteo/" }).catch(() => {});
     }
     const onPrompt = (e) => { e.preventDefault(); deferred.current = e; };
     const onInstalled = () => setInstalled(true);

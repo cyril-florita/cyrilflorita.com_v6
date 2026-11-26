@@ -4,7 +4,7 @@ import AreaMap from "@/components/hearthside/AreaMap";
 
 export const metadata = {
   title: "Service area",
-  alternates: { canonical: "/pitch/hearthside/service-area/" },
+  alternates: { canonical: "/builds/hearthside/service-area/" },
 };
 
 export default function ServiceArea() {

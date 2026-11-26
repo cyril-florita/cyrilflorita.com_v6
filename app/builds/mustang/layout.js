@@ -19,17 +19,17 @@ const body = Exo_2({ subsets: ["latin"], variable: "--ms-font-body", display: "s
 export const metadata = {
   title: "Ford Mustang · Interactive ad concept",
   description:
-    "An interactive ad concept for the Ford Mustang: a 3D car you can turn all the way around, with live windows on its taillights, cockpit and headlights. A design and dev pitch by Cyril Florita, not affiliated with Ford.",
-  alternates: { canonical: "/pitch/mustang/" },
+    "An interactive ad concept for the Ford Mustang: a 3D car you can turn all the way around, with live windows on its taillights, cockpit and headlights. Designed and built by Cyril Florita; not affiliated with Ford.",
+  alternates: { canonical: "/builds/mustang/" },
   robots: { index: false, follow: true },
   // its own share image (from the desktop landing, via npm run og), not the portfolio's default
   openGraph: {
     type: "website",
     siteName: "Cyril Florita",
     locale: "en_US",
-    url: "/pitch/mustang/",
+    url: "/builds/mustang/",
     title: "Ford Mustang · Interactive ad concept",
-    description: "A 3D Mustang Dark Horse you can turn all the way around, with live windows on its taillights, cockpit and headlights. A design and dev pitch by Cyril Florita.",
+    description: "A 3D Mustang Dark Horse you can turn all the way around, with live windows on its taillights, cockpit and headlights. Designed and built by Cyril Florita.",
     images: [{ url: "/og/mustang.jpg", width: 1200, height: 630, alt: "The Ford Mustang interactive ad: a blue Dark Horse under a giant MUSTANG, with its offer and three close-up windows" }],
   },
   twitter: { card: "summary_large_image", images: ["/og/mustang.jpg"] },

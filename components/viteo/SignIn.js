@@ -5,7 +5,7 @@ import { BASE } from "./data";
 import { read, write } from "./store";
 import { BigWordHead, PreviewNotice, Button, SrStatus, useBackdropClose, useMounted } from "./ui";
 // Page-only styles (split out of viteo.css so the landing skips them).
-import "@/app/pitch/viteo/css/signin.css";
+import "@/app/builds/viteo/css/signin.css";
 
 // Sign in, passwordless, as a modern DTC brand would do it: an email
 // sign-in link, or a passkey. Both are simulated (preview mode): the "email"

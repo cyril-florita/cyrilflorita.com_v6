@@ -25,7 +25,7 @@ export default function FindBike() {
 
   const warm = () => {           // start fetching the studio and the decoder while they answer (the model depends on the match)
     if (warmed.current) return; warmed.current = true;
-    for (const u of ["/pitch/kord/studio.hdr", "/pitch/kord/draco/draco_decoder.wasm"]) fetch(u).catch(() => {});
+    for (const u of ["/builds/kord/studio.hdr", "/builds/kord/draco/draco_decoder.wasm"]) fetch(u).catch(() => {});
   };
 
   // restore: a shared link wins over what this browser remembers
@@ -73,7 +73,7 @@ export default function FindBike() {
   };
   const restart = () => { local.remove(KEY); setAnswers({}); setCopied(false); start(0); };
   const copyLink = async () => {
-    const url = `${location.origin}/pitch/kord/?find=${encodeFind(answers)}`;   // opens this result in the dialog
+    const url = `${location.origin}/builds/kord/?find=${encodeFind(answers)}`;   // opens this result in the dialog
     try { await navigator.clipboard.writeText(url); setCopied(true); setSaid("Link copied"); } catch { /* ignore */ }
   };
   const onOptKey = (e, i, n) => {
@@ -130,13 +130,13 @@ export default function FindBike() {
                 <div><dt>Tires</dt><dd>{r.bike.tires}, {r.bike.clearance} clearance</dd></div>
               </dl>
             </div>
-            <BikeViewer bike={r.bike.id} spec={{ size: r.size }} paint={paint} still={`/pitch/kord/bikes/${r.bike.id}-${r.paint}.webp`} label={`The Kord ${plain(r.bike.name)}`} />
+            <BikeViewer bike={r.bike.id} spec={{ size: r.size }} paint={paint} still={`/builds/kord/bikes/${r.bike.id}-${r.paint}.webp`} label={`The Kord ${plain(r.bike.name)}`} />
             {/* price, the two buttons and the links on one line under the copy and the bike */}
             <div className="cd-find-buy">
               <p className="cd-find-price">From <strong>{money(r.bike.from)}</strong></p>
               <div className="cd-find-actions">
-                <a className="cd-btn cd-btn-primary" href={`/pitch/kord/build/?bike=${r.bike.id}&size=${r.size}&paint=${r.paint}`}>Build your {r.bike.name}<span className="cd-arrow" aria-hidden="true">→</span></a>
-                <a className="cd-btn cd-btn-ghost" href={`/pitch/kord/compare/?a=${r.bike.id}&b=${r.runner.id}&size=${r.size}`}>Compare with the {r.runner.name}</a>
+                <a className="cd-btn cd-btn-primary" href={`/builds/kord/build/?bike=${r.bike.id}&size=${r.size}&paint=${r.paint}`}>Build your {r.bike.name}<span className="cd-arrow" aria-hidden="true">→</span></a>
+                <a className="cd-btn cd-btn-ghost" href={`/builds/kord/compare/?a=${r.bike.id}&b=${r.runner.id}&size=${r.size}`}>Compare with the {r.runner.name}</a>
               </div>
               <p className="cd-find-links">
                 <button type="button" onClick={restart}>Start over</button>

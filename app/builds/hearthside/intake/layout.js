@@ -1,5 +1,5 @@
 import IntakeShell from "@/components/hearthside/IntakeShell";
-import "@/app/pitch/hearthside/css/intake.css";
+import "@/app/builds/hearthside/css/intake.css";
 
 // The intake system (staff side of the pitch): its own app shell, sample data
 // in the browser only. Not indexed.

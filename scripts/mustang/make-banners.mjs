@@ -4,9 +4,9 @@
 //
 // framesDir (default new-work/mustang/turn-frames, git-ignored) holds 00.png … 47.png: one full turn
 // of the car alone on a transparent page, 7.5° apart, starting on the front three-quarter view,
-// captured from /pitch/mustang/spot/?f=turn&layer=car at 1600×700 with window.__msSpotYaw (README:
+// captured from /builds/mustang/spot/?f=turn&layer=car at 1600×700 with window.__msSpotYaw (README:
 // "Campaign kit"; the turn format hides the floor and the reflection, so only the car and its soft
-// shadows are left). For each size in SIZES it writes public/pitch/mustang/kit/ads/<id>/: index.html
+// shadows are left). For each size in SIZES it writes public/builds/mustang/kit/ads/<id>/: index.html
 // (the ad), car.jpg + alpha.jpg (every other frame — 24, 15° apart — cropped to the car and stacked
 // top to bottom: the colour, and the transparency as greyscale; ad networks don't take WebP and a
 // transparent PNG would be several times the size, so the ad joins the two on a canvas when it loads,
@@ -24,11 +24,11 @@ const sharp = require("sharp");
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "../..");
 const FRAMES = path.resolve(process.argv[2] || path.join(ROOT, "new-work/mustang/turn-frames"));
-const OUT = path.join(ROOT, "public/pitch/mustang/kit/ads");
+const OUT = path.join(ROOT, "public/builds/mustang/kit/ads");
 const BG = "#060a13";                  // the ads' background (and the colour under car.jpg's transparent pixels, which keeps the JPG clean)
 const CROP = { left: 40, top: 96, width: 1520, height: 500 };   // the car and its shadow, at every angle, in the 1600×700 frames
 const N = 24;                          // frames in each sprite (every other master frame)
-const LINK = "https://cyrilflorita.com/pitch/mustang/";
+const LINK = "https://cyrilflorita.com/builds/mustang/";
 
 // Every size's layout, in px. car: the sprite's box (its height follows CROP's ratio); word: the
 // giant MUSTANG behind it; the copy pieces are absolutely placed; `title` and `cta` can be

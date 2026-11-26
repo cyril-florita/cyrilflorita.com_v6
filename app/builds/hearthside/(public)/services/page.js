@@ -4,7 +4,7 @@ import CareGuide from "@/components/hearthside/CareGuide";
 
 export const metadata = {
   title: "Services",
-  alternates: { canonical: "/pitch/hearthside/services/" },
+  alternates: { canonical: "/builds/hearthside/services/" },
 };
 
 export default function Services() {

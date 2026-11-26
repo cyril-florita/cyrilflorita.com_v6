@@ -40,7 +40,7 @@ export default function Preloader() {
       const a = e.target.closest?.("a[href]");
       if (!a || a.target === "_blank" || a.hasAttribute("download") || a.closest("[data-open-find]")) return;
       const url = new URL(a.href, location.href);
-      if (url.origin !== location.origin || !url.pathname.startsWith("/pitch/kord/")) return;
+      if (url.origin !== location.origin || !url.pathname.startsWith("/builds/kord/")) return;
       if (url.hash === "#find") return;                                                        // Help me choose's dialog
       if (url.pathname === location.pathname && url.search === location.search) return;       // a section on this page
       e.preventDefault();

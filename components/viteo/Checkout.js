@@ -6,8 +6,8 @@ import { useHydrated, useStored, write } from "./store";
 import { PaymentStep } from "./Payment";
 import { Arrow, BigWordHead, Button, PillTray, ProductBox, SrStatus, onRadioKeyDown, radioTabIndex, useMounted } from "./ui";
 // Page-only styles (split out of viteo.css so the landing skips them).
-import "@/app/pitch/viteo/css/plan.css";
-import "@/app/pitch/viteo/css/checkout.css";
+import "@/app/builds/viteo/css/plan.css";
+import "@/app/builds/viteo/css/checkout.css";
 
 // Checkout in four steps (Details, Delivery, Payment, Review), then a
 // confirmation. The order is saved to localStorage so the account page can

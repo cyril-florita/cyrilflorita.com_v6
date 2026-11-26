@@ -19,7 +19,7 @@ import {
 } from "@/components/case/CaseStudy";
 import { CASE_SUMMARIES } from "@/components/data/caseSummaries";
 
-// Viteo: a design & dev pitch (the live product is /pitch/viteo/, outside the
+// Viteo: a design & dev pitch (the live product is /builds/viteo/, outside the
 // portfolio layout). Screenshots were captured from the built prototype in
 // headless Chrome: desktop at 1440×900, tablet at 820×1180, phone at 390×844.
 
@@ -32,8 +32,8 @@ const SECTIONS = [
 ];
 
 const P = "/img/portfolio/viteo_";
-const URL = "cyrilflorita.com/pitch/viteo";
-const LIVE = "/pitch/viteo/";
+const URL = "cyrilflorita.com/builds/viteo";
+const LIVE = "/builds/viteo/";
 
 // Desktop screens in the browser frame; phone screens in the phone frame.
 const Desktop = ({ name, caption, ratio, path = "" }) => (
@@ -74,14 +74,14 @@ const Page = () => {
 
           <CaseHero
             category="Product Design & Development"
-            detail="Design & Dev Pitch"
+            detail="Designed & Built"
             title="Viteo"
             summary={CASE_SUMMARIES["/viteo"]}
             facts={[
               { label: "Target Clients", value: "Founders launching a subscription or wellness brand" },
               { label: "Role", value: "Product Designer & Front-End Developer" },
               { label: "Platform & Tools", value: "Web — Desktop, Tablet, Mobile · Next.js, React, three.js, CSS" },
-              { label: "Try It Live", value: <a className="cyril-dark" href={LIVE} target="_blank" rel="noopener">cyrilflorita.com/pitch/viteo</a> },
+              { label: "Try It Live", value: <a className="cyril-dark" href={LIVE} target="_blank" rel="noopener">cyrilflorita.com/builds/viteo</a> },
             ]}
             tile="/viteo"
           />
@@ -96,7 +96,7 @@ const Page = () => {
                 <li><strong>No &ldquo;why&rdquo;:</strong> people don&apos;t know why something is in their pack, so they stop taking it.</li>
                 <li><strong>Hard to control:</strong> skipping or pausing is buried, and cancelling feels like a trap.</li>
               </ul>
-              <p>Viteo is my pitch for a direct-to-consumer subscription that fixes all three. As product designer and front-end developer, I took it from brand to working product, solo, with three goals:</p>
+              <p>Viteo is my concept for a direct-to-consumer subscription that fixes all three. As product designer and front-end developer, I took it from brand to working product, solo, with three goals:</p>
               <ul className="cyril-case-list">
                 <li>personalize every pack, and explain every pill in it</li>
                 <li>put customers in control, so retention is earned rather than trapped</li>

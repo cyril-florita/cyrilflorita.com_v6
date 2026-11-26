@@ -4,8 +4,8 @@ import { BehindTheScenes, HeroMask, PathSwitch, ScrollCue, StepTimeline, ZipChec
 import { PHOTO_LQIP } from "@/components/hearthside/photo-lqip";
 
 export const metadata = {
-  title: { absolute: "Hearthside Home Health · Skilled care at home | Design & dev pitch by Cyril Florita" },
-  alternates: { canonical: "/pitch/hearthside/" },
+  title: { absolute: "Hearthside Home Health · Skilled care at home | Designed & built by Cyril Florita" },
+  alternates: { canonical: "/builds/hearthside/" },
 };
 
 // Home, roughly in the order the brief sets out (services and geography up

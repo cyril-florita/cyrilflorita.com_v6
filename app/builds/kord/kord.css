@@ -6,8 +6,8 @@
    first in the stack with unicode-range, so any ™ or ® picks them up and nothing else changes. The ™
    face is one regular instance declared for every weight, so the browser never bolds it. Made with fontTools from the build's own Archivo and JetBrains Mono files
    (OFL); see the README. */
-@font-face { font-family: "Kord TM"; src: url(/pitch/kord/fonts/kord-tm.woff2) format("woff2"); font-weight: 1 1000; font-display: swap; unicode-range: U+2122; }
-@font-face { font-family: "Kord Reg"; src: url(/pitch/kord/fonts/kord-reg.woff2) format("woff2"); font-weight: 100 900; font-display: swap; unicode-range: U+00AE; }   /* Archivo at normal width since 2026-11-25 (it was JetBrains Mono, which read thin and tall) */
+@font-face { font-family: "Kord TM"; src: url(/builds/kord/fonts/kord-tm.woff2) format("woff2"); font-weight: 1 1000; font-display: swap; unicode-range: U+2122; }
+@font-face { font-family: "Kord Reg"; src: url(/builds/kord/fonts/kord-reg.woff2) format("woff2"); font-weight: 100 900; font-display: swap; unicode-range: U+00AE; }   /* Archivo at normal width since 2026-11-25 (it was JetBrains Mono, which read thin and tall) */
 /* the mono labels get the same ® and ™ (next/font sets JetBrains Mono as --cd-mono-face on .cd) */
 .cd { --cd-mono: "Kord TM", "Kord Reg", var(--cd-mono-face); }
 
@@ -146,7 +146,7 @@ body:has(.cd) { margin: 0; }   /* the browser's default 8px margin framed every 
 /* the wall's texture, the same as the floor's (a faint wash, blurred mottling: wall.webp, baked from
    bikeScene's mottle() so it paints with the page), masked to a soft area around the bike that follows it */
 .cd-sticky::before, .cd-studio::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background: url(/pitch/kord/wall.webp) center / cover no-repeat;
+  background: url(/builds/kord/wall.webp) center / cover no-repeat;
   -webkit-mask-image: radial-gradient(48% 60% at var(--cd-spot-x) calc(48% + var(--cd-spot-y)), #000 0%, rgba(0, 0, 0, 0.55) 50%, transparent 100%);
   mask-image: radial-gradient(48% 60% at var(--cd-spot-x) calc(48% + var(--cd-spot-y)), #000 0%, rgba(0, 0, 0, 0.55) 50%, transparent 100%); }
 /* fine grain on the wall around the bike (not the floor or the bike: it's behind the canvas, and
@@ -160,7 +160,7 @@ body:has(.cd) { margin: 0; }   /* the browser's default 8px margin framed every 
 @media (min-resolution: 2dppx) { .cd-sticky, .cd-studio { --cd-grain-size: 24px; } }
 @media (min-resolution: 3dppx) { .cd-sticky, .cd-studio { --cd-grain-size: 16px; } }
 .cd-sticky::after, .cd-studio::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0.09; mix-blend-mode: screen;
-  background: url(/pitch/kord/grain.png) 0 0 / var(--cd-grain-size) repeat;
+  background: url(/builds/kord/grain.png) 0 0 / var(--cd-grain-size) repeat;
   -webkit-mask-image: radial-gradient(50% 62% at var(--cd-spot-x) calc(46% + var(--cd-spot-y)), #000 0%, rgba(0, 0, 0, 0.5) 55%, transparent 100%), linear-gradient(#000 52%, transparent 68%);
   -webkit-mask-composite: source-in;
   mask-image: radial-gradient(50% 62% at var(--cd-spot-x) calc(46% + var(--cd-spot-y)), #000 0%, rgba(0, 0, 0, 0.5) 55%, transparent 100%), linear-gradient(#000 52%, transparent 68%);
@@ -838,7 +838,7 @@ html.cd-pre-skip .cd-pre.is-leaving { display: grid; }
 /* the landing's teaser links on to the page */
 .cd-guar-more { margin-top: clamp(40px, 5vw, 56px); }
 
-/* The Kord® Guarantee page (/pitch/kord/guarantee/, 2026-11-25): the promise beside a bike in the studio, the
+/* The Kord® Guarantee page (/builds/kord/guarantee/, 2026-11-25): the promise beside a bike in the studio, the
    four guarantees as cards with what each covers, how a return works, how buying a Kord compares */
 /* StudioHero (the Guarantee page and Virtual fit): the heading on the left; on the right the landing's 3D Arc
    (BikeViewer, frameless, its floor feathered out at the stage's edges) over its giant word, which you can drag

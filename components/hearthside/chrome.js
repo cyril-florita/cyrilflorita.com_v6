@@ -45,7 +45,7 @@ export function Footer() {
           <ThemeSwitch />
         </div>
         <p className="hs-footer-pitch">
-          Design and Dev Pitch · © {year} <a href="/">Cyril Florita</a>. All rights reserved.
+          Designed and built by <a href="/">Cyril Florita</a> · © {year}. All rights reserved.
         </p>
       </div>
       {/* Last, after the legal lines: for home health owners who find the

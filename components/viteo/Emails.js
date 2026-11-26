@@ -2,7 +2,7 @@
 import { PRODUCTS, money } from "./data";
 import { BigWordHead, LogoMark, Pill } from "./ui";
 // Page-only styles (split out of viteo.css so the landing skips them).
-import "@/app/pitch/viteo/css/emails.css";
+import "@/app/builds/viteo/css/emails.css";
 
 // Lifecycle messages, designed on the same brand: the shipping reminder
 // (three days before a box ships, with one-tap skip, pause and edit, so the
@@ -38,7 +38,7 @@ const EmailFoot = ({ why }) => (
   <div className="dl-email-foot">
     <p>{why}</p>
     <p>Manage email preferences · Unsubscribe from reminders</p>
-    <p>Viteo · A design and dev pitch by Cyril Florita. Sample email; nothing was sent.</p>
+    <p>Viteo · Designed and built by Cyril Florita. Sample email; nothing was sent.</p>
   </div>
 );
 

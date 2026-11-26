@@ -5,7 +5,7 @@ import { PHOTO_LQIP } from "./photo-lqip";
 
 // Hearthside's shared, server-safe pieces: the logo, icons, buttons and the
 // honesty labels. Interactive bits (header menu, mode switch) live in
-// client.js. Styles: app/pitch/hearthside/hearthside.css (all under .hs).
+// client.js. Styles: app/builds/hearthside/hearthside.css (all under .hs).
 
 // The mark: a plain H knocked out of a leaf, the shape every photo and
 // illustration backdrop on the site uses (large quarter-circle sweeps top

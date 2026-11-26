@@ -8,7 +8,7 @@ import Preloader from "@/components/kord/Preloader";
 // Kord: an online-only road-bike brand, the fourth design and dev pitch (in progress).
 // Like the other pitches it lives outside app/(site), so none of the portfolio's styles or
 // chrome load here. The bike is modelled in Blender (scripts/kord/build_bike.py) and drawn
-// with three.js (components/kord/BikeStory.js). Read app/pitch/kord/README.md.
+// with three.js (components/kord/BikeStory.js). Read app/builds/kord/README.md.
 
 // Archivo for everything (expanded and heavy for display, normal width for text; the bike's
 // logo and frame wordmark are Archivo Expanded Black, stretched — see scripts/kord/make_wordmark.py),
@@ -19,8 +19,8 @@ const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--cd-mono-face", di
 export const metadata = {
   title: "Kord · Road bikes, built to order",
   description:
-    "Kord is an online-only road-bike brand: a 3D bike you can turn and take apart, a range of four road bikes, and ride-ready delivery. A design and dev pitch by Cyril Florita.",
-  alternates: { canonical: "/pitch/kord/" },
+    "Kord is an online-only road-bike brand: a 3D bike you can turn and take apart, a range of four road bikes, and ride-ready delivery. Designed and built by Cyril Florita.",
+  alternates: { canonical: "/builds/kord/" },
   robots: { index: false, follow: true },
   openGraph: {
     type: "website",

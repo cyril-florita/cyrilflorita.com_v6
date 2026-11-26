@@ -4,8 +4,8 @@ import Fit from "@/components/kord/Fit";
 
 export const metadata = {
   title: "Virtual fit · Kord",
-  description: "Five measurements and a starting fit for your Kord: size, saddle height, crank, stem and bar. A design and dev pitch by Cyril Florita.",
-  alternates: { canonical: "/pitch/kord/fit/" },
+  description: "Five measurements and a starting fit for your Kord: size, saddle height, crank, stem and bar. Designed and built by Cyril Florita.",
+  alternates: { canonical: "/builds/kord/fit/" },
   robots: { index: false, follow: true },
 };
 
