@@ -30,6 +30,9 @@ DONOR = argv[argv.index("--donor") + 1] if "--donor" in argv else None     # see
 BAKE_AO = "--ao" in argv                                                    # bake ambient occlusion into a color attribute
 HDRI = argv[argv.index("--hdri") + 1] if "--hdri" in argv else None        # an equirect .hdr lighting the stills
 HDRI_STRENGTH = float(argv[argv.index("--hdri-strength") + 1]) if "--hdri-strength" in argv else 1.5   # = ENV_GAIN on the page
+ALL_PAINTS = "--all-paints" in argv                                         # stills of this bike in every paint: <bike>-<paint>.png
+RANGE_DIM = "--range-light" not in argv                                     # off by default: the rig made the bike look fake (the user, 2026-11-25); --range-light turns it on
+RANGE_POWER = float(argv[argv.index("--range-power") + 1]) if "--range-power" in argv else 0.7   # scales that rig (0.7: the whole bike reads, and black stays black)
 SHADOW = argv[argv.index("--shadow") + 1] if "--shadow" in argv else None   # bake the floor shadow to a PNG
 SHADOW_W, SHADOW_D = 2.4, 1.2           # its area (m), along and across the bike: = SHADOW_W/_D in BikeStory.js
 CYCLES = "--pathtrace" in argv                                               # render the stills with Cycles
@@ -1123,8 +1126,33 @@ if STILLS:
         bpy.ops.render.render(write_still=True)
     paint("#16171a", "#c8f031", 0.05, 0.68, 0.0, 0.5, "#c8f031")           # Stealth, the page's default
     if BIKE == "arc": shot(os.path.join(STILLS, "hero.png"), 0.5, 0.06, 60, 1600, 900, 0.86)
-    for bid, *pv in (("arc", "#16171a", "#c8f031", 0.05, 0.68, 0.0, 0.5, "#c8f031"), ("crest", "#e4e8ec", "#f4f6f8", 0.0, 0.64, 0.0, 0.5, "#16171a"),
-                     ("meridian", "#b8321c", "#f4f1ea", 0.15, 0.6, 0.0, 0.5, "#f4f1ea"), ("atlas", "#c8f031", "#c8f031", 0.0, 0.64, 0.0, 0.5, "#16171a")):
+    # An optional product-shot rig for the range stills (--range-light; off by default: tried on 2026-11-25 for
+    # dark bikes on dark cards, and the user found it made the bike look fake — the cards' brighter backdrop,
+    # --cd-shot-glow in kord.css, does that job instead). The hero still above keeps
+    # the studio alone, since it must match the 3D hero it crossfades into. An overhead softbox for sheen
+    # along the top tube, saddle and bars; a soft key from the camera's side and a gentle fill opposite; and
+    # two tall strips behind the bike that rim the tires, frame and bars against the dark card.
+    if not RANGE_DIM:
+        area((0.1, 0, 2.7), (0.1, 0, 0.4), 2.6, 0.9, RANGE_POWER * 260)          # overhead softbox
+        area((1.4, -2.6, 1.7), (0.1, 0, 0.5), 2.0, 1.4, RANGE_POWER * 190)       # key, camera side
+        area((-1.8, -2.2, 1.0), (0.1, 0, 0.5), 1.6, 1.0, RANGE_POWER * 70)       # fill
+        area((-1.7, 2.1, 1.1), (0.1, 0, 0.55), 0.35, 1.8, RANGE_POWER * 160)     # rims, behind
+        area((1.9, 1.9, 1.1), (0.1, 0, 0.55), 0.35, 1.8, RANGE_POWER * 160)
+    # every paint, as PAINTS in data.js (hex, decal, metal, rough, coat, coat roughness, badge)
+    PAINTS_PY = {"stealth": ("#16171a", "#c8f031", 0.05, 0.68, 0.0, 0.5, "#c8f031"), "volt": ("#c8f031", "#c8f031", 0.0, 0.64, 0.0, 0.5, "#16171a"),
+                 "glacier": ("#e4e8ec", "#f4f6f8", 0.0, 0.64, 0.0, 0.5, "#16171a"), "ember": ("#b8321c", "#f4f1ea", 0.15, 0.6, 0.0, 0.5, "#f4f1ea"),
+                 "cobalt": ("#2350c8", "#f4f6f8", 0.12, 0.6, 0.0, 0.5, "#f4f6f8")}
+    # --paints cobalt,volt: only those (a new paint renders without redoing the rest)
+    ONLY = argv[argv.index("--paints") + 1].split(",") if "--paints" in argv else None
+    if ALL_PAINTS:
+        # the page shows any bike in any paint (Compare's paint picker, the range cards' swatches, the cart),
+        # so paint isn't read as part of the model (2026-11-25): bikes/<bike>-<paint>.webp
+        for pid, pv in PAINTS_PY.items():
+            if ONLY and pid not in ONLY: continue
+            paint(*pv)
+            shot(os.path.join(STILLS, f"{BIKE}-{pid}.png"), 0.22, 0.05, 70, 1200, 720, 0.84)
+    for bid, *pv in (() if ALL_PAINTS else (("arc", "#16171a", "#c8f031", 0.05, 0.68, 0.0, 0.5, "#c8f031"), ("crest", "#e4e8ec", "#f4f6f8", 0.0, 0.64, 0.0, 0.5, "#16171a"),
+                     ("meridian", "#b8321c", "#f4f1ea", 0.15, 0.6, 0.0, 0.5, "#f4f1ea"), ("atlas", "#c8f031", "#c8f031", 0.0, 0.64, 0.0, 0.5, "#16171a"))):
         if bid != BIKE: continue                    # each model's build renders its own still
         paint(*pv)
         shot(os.path.join(STILLS, f"{bid}.png"), 0.22, 0.05, 70, 1200, 720, 0.84)

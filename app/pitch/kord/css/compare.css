@@ -1,0 +1,99 @@
+/* Compare (/pitch/kord/compare/, Compare.js; 2026-11-25): four spec cards, bars on every number, and the
+   frames drawn to scale over each other. Page-only, imported by Compare.js. */
+.cd-cmp { display: grid; gap: clamp(32px, 4vw, 48px); }
+
+/* the paint picker, centred at the top: every bike in the same paint */
+.cd-cmp-paint { display: grid; justify-items: center; gap: 12px; text-align: center; }
+.cd-cmp .cd-cmp-paints { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.cd-cmp .cd-cmp-paints .cd-build-opt { display: inline-flex; flex-direction: row; align-items: center; gap: 10px; padding: 9px 16px 9px 10px; }
+.cd-cmp .cd-cmp-paints .cd-build-swatch { width: 22px; height: 22px; margin: 0; }
+.cd-cmp .cd-cmp-paints strong { font-size: 14px; }
+@media (max-width: 520px) { .cd-cmp .cd-cmp-paints .cd-build-opt { padding: 8px 12px 8px 8px; gap: 8px; } .cd-cmp .cd-cmp-paints .cd-build-swatch { width: 18px; height: 18px; } .cd-cmp .cd-cmp-paints strong { font-size: 13px; } }
+
+/* the size picker, centred between the drawing and the table, which it drives; the drawing (640px wide), the
+   picker and the table fit one 800px-tall screen together, so a size change shows in both */
+.cd-cmp-size { display: grid; justify-items: center; gap: 10px; text-align: center; }
+.cd-cmp-size-label { font-family: var(--cd-mono), monospace; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cd-ink-2); }
+.cd-cmp-size-label strong { color: var(--cd-ink); font-weight: 600; }
+.cd-cmp .cd-cmp-sizes { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.cd-cmp .cd-cmp-sizes .cd-build-opt { min-width: 56px; padding: 10px 12px; justify-content: center; text-align: center;
+  font-family: var(--cd-font); font-size: 15px; font-weight: 700; letter-spacing: 0; text-transform: none; }
+@media (max-width: 520px) { .cd-cmp .cd-cmp-sizes { gap: 6px; } .cd-cmp .cd-cmp-sizes .cd-build-opt { min-width: 50px; padding: 10px 8px; } }
+
+/* the cards: on desktop four columns whose rows line up (each card is a subgrid of 14 rows: still, name,
+   price, Build, ten specs) */
+.cd-cmp-cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 16px; }
+.cd-cmp-cards:focus-visible { outline: 2px solid var(--cd-accent); outline-offset: 4px; border-radius: var(--cd-radius); }
+.cd-cmp-card { display: grid; grid-row: span 14; grid-template-rows: subgrid; row-gap: 0; min-width: 0;
+  background: var(--cd-bg-2); border: 1px solid var(--cd-line); border-radius: var(--cd-radius); overflow: hidden;
+  transition: border-color 0.3s; }
+.cd-cmp-card.is-hi { border-color: var(--cd-accent); }               /* the pair from Find your bike */
+.cd-cmp-card.is-focus { border-color: var(--c); }
+.cd-cmp-card > .cd-shot { border-bottom: 1px solid var(--cd-line); }
+.cd-cmp-card .cd-shot img { width: 100%; height: auto; aspect-ratio: 5 / 3; object-fit: contain; }
+.cd-cmp-head { padding: 22px 22px 0; }
+.cd-cmp-head h2 { display: flex; align-items: center; gap: 10px; font-size: clamp(18px, 1.7vw, 24px); font-weight: 800; font-stretch: 118%; line-height: 1.1; }
+.cd-cmp-head .cd-card-type { margin-top: 8px; }
+.cd-cmp-dot { flex: none; width: 10px; height: 10px; border-radius: 50%; background: var(--c); }
+.cd-cmp-price { display: flex; align-items: baseline; gap: 8px; padding: 16px 22px 0; }
+.cd-cmp-price span { font-family: var(--cd-mono), monospace; font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cd-ink-2); }
+.cd-cmp-price b { font-size: clamp(22px, 2vw, 28px); font-weight: 800; letter-spacing: -0.01em; }
+.cd-cmp-build { justify-self: start; align-self: start; margin: 14px 22px 22px; }
+.cd-cmp-list { display: contents; }
+.cd-cmp-row { display: grid; align-content: start; gap: 6px; padding: 14px 22px; border-top: 1px solid var(--cd-line); }
+.cd-cmp-row dt { font-family: var(--cd-mono), monospace; font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cd-ink-2); }
+.cd-cmp-row dd { margin: 0; font-size: 15px; line-height: 1.4; color: var(--cd-ink); }
+/* phones and tablets: a swipe row of whole cards, the next one peeking */
+@media (max-width: 1099px) {
+  .cd-cmp-cards { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+    margin-inline: calc(-1 * var(--cd-gutter)); padding: 4px var(--cd-gutter) 12px; scroll-padding-inline: var(--cd-gutter); scrollbar-width: none; }
+  .cd-cmp-cards::-webkit-scrollbar { display: none; }
+  .cd-cmp-card { flex: 0 0 min(44%, 380px); grid-row: auto; grid-template-rows: none; scroll-snap-align: start; align-content: start; }
+}
+@media (max-width: 699px) { .cd-cmp-card { flex-basis: min(84%, 360px); } }
+
+/* the drawing: the four frames to scale, over each other; hovering a card or its key brings one forward */
+.cd-cmp-draw { display: grid; gap: 20px; margin: 0; padding: clamp(20px, 3vw, 40px); background: var(--cd-bg-2); border: 1px solid var(--cd-line); border-radius: var(--cd-radius); }
+.cd-cmp-draw svg { display: block; width: 100%; max-width: 640px; height: auto; margin: 8px auto 0; overflow: visible; }   /* headroom over the tallest saddle (a 58's) */
+/* what the drawing is and how to read it, for riders new to bike geometry (2026-11-25) */
+.cd-cmp-draw-head { display: grid; justify-items: center; gap: 10px; max-width: 640px; margin: 0 auto; text-align: center; }
+.cd-cmp-draw-head h2 { font-size: clamp(22px, 2.4vw, 32px); font-weight: 800; font-stretch: 118%; line-height: 1.1; letter-spacing: -0.01em; }
+.cd-cmp-draw-lede { margin-top: 4px; font-size: 15.5px; line-height: 1.55; color: var(--cd-ink-2); }
+.cd-cmp-size-fit { font-size: 14px; color: var(--cd-ink-2); }
+.cd-cmp-read { display: grid; gap: 14px; padding-top: 22px; border-top: 1px solid var(--cd-line); }
+.cd-cmp-read h3 { font-family: var(--cd-mono), monospace; font-size: 12px; font-weight: 400; letter-spacing: 0.12em; color: var(--cd-ink-2); }
+.cd-cmp-read ul { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px 28px; }
+.cd-cmp-read li { font-size: 14px; line-height: 1.5; color: var(--cd-ink-2); }
+.cd-cmp-read strong { display: block; margin-bottom: 2px; color: var(--cd-ink); font-weight: 700; }
+@media (max-width: 699px) { .cd-cmp-read ul { grid-template-columns: 1fr; } }
+.cd-cmp-ground { stroke: var(--cd-line-2); stroke-width: 3; }
+.cd-cmp-frame { color: var(--c); mix-blend-mode: screen; transition: opacity 0.3s; }   /* where frames overlap their colours add up, so each shows */
+.cd-cmp-frame circle { fill: none; stroke: currentColor; stroke-width: 3; opacity: 0.35; transition: cx 0.6s var(--cd-ease), cy 0.6s var(--cd-ease); }
+.cd-cmp-tubes { fill: none; stroke: currentColor; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; transition: d 0.6s var(--cd-ease); }
+.cd-cmp-seat { fill: none; stroke: currentColor; stroke-width: 11; stroke-linecap: round; transition: d 0.6s var(--cd-ease); }
+.cd-cmp-draw svg.has-focus .cd-cmp-frame:not(.is-focus) { opacity: 0.16; }
+.cd-cmp-draw figcaption { display: grid; gap: 20px; width: 100%; max-width: 920px; margin-inline: auto; }
+/* the measures that change with the size, per bike; the column heads are the drawing's key */
+.cd-cmp-geo-wrap { overflow-x: auto; }
+.cd-cmp-geo { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 15px; }
+.cd-cmp-geo caption { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.cd-cmp-geo th, .cd-cmp-geo td { padding: 9px 10px; border-bottom: 1px solid var(--cd-line); text-align: right; font-weight: 400; transition: background-color 0.2s; }
+.cd-cmp-geo thead th { font-family: var(--cd-mono), monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cd-ink); cursor: default; white-space: nowrap; }
+.cd-cmp-geo thead th .cd-cmp-dot { display: inline-block; margin-right: 8px; vertical-align: 1px; }
+.cd-cmp-geo tbody th { width: 34%; text-align: left; font-family: var(--cd-mono), monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cd-ink-2); }
+.cd-cmp-geo tbody th span { text-transform: none; letter-spacing: 0; }
+.cd-cmp-geo td { color: var(--cd-ink); font-variant-numeric: tabular-nums; }
+.cd-cmp-geo .is-focus { background: rgba(255, 255, 255, 0.05); }
+.cd-cmp-geo tr:last-child > * { border-bottom: 0; }
+@media (max-width: 699px) {
+  .cd-cmp-geo { font-size: 14px; }
+  .cd-cmp-geo th, .cd-cmp-geo td { padding: 10px 4px; }
+  .cd-cmp-geo thead th { font-size: 10.5px; letter-spacing: 0.04em; }
+  .cd-cmp-geo thead th .cd-cmp-dot { display: block; margin: 0 0 6px auto; }
+  .cd-cmp-geo tbody th { width: 28%; font-size: 10.5px; letter-spacing: 0.06em; }
+}
+.cd-cmp-read em { font-style: normal; font-family: var(--cd-mono), monospace; font-size: 11px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cd-accent); margin-left: 6px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cd-cmp-frame, .cd-cmp-frame circle, .cd-cmp-tubes, .cd-cmp-seat, .cd-cmp-card { transition: none; }
+}

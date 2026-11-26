@@ -132,7 +132,7 @@ export default function BikeStory() {
         for (const h of HOTSPOTS) {
           const el = hotRefs.current[h.id]; if (!el) continue;
           project(h.at[0], h.at[1], h.at[2], pt);
-          el.style.transform = `translate(${pt.x}px, ${pt.y}px)`;
+          el.style.translate = `${pt.x}px ${pt.y}px`;           // the property, so the pop-in's scale composes around the button
           el.classList.toggle("is-left", pt.x > W - 300);      // near the right edge: the card opens to the left
           el.style.opacity = ready ? heroAlpha * intro : 0;
           el.style.visibility = heroAlpha < 0.02 ? "hidden" : "visible";
@@ -303,7 +303,7 @@ export default function BikeStory() {
                 onClick={() => setOpen(open === h.id ? null : h.id)}>
                 <span className="cd-sr">{h.title}</span>
               </button>
-              <div id={`hot-${h.id}`} className="cd-hot-card" hidden={open !== h.id}>
+              <div id={`hot-${h.id}`} className="cd-hot-card">
                 <strong>{h.title}</strong>
                 <span>{h.line}</span>
               </div>

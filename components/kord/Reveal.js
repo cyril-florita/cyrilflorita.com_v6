@@ -10,8 +10,8 @@ import { useEffect } from "react";
 // hover transitions are back. The hero and the app pages' titles have their own entrance (kord.css).
 const HEADS = ".cd-section .cd-h2:has(> .cd-w), .cd-band-title:has(> .cd-w)";
 const BLOCKS = [
-  ".cd-section-head > p", ".cd-card", ".cd-step", ".cd-find-qs li", ".cd-find-row > div > p", ".cd-find-row > div > .cd-btn",
-  ".cd-band-row > .cd-btn", ".cd-compare-scroll", ".cd-diff", ".cd-fit-form", ".cd-fit-out", ".cd-footer-top", ".cd-credit", ".cd-footer-links", ".cd-legal",
+  ".cd-section-head > p", ".cd-card", ".cd-step", ".cd-find-row > div > p", ".cd-find-row > div > .cd-btn",
+  ".cd-band-row > .cd-btn", ".cd-cmp-size", ".cd-cmp-cards", ".cd-cmp-draw", ".cd-diff", ".cd-guar-card", ".cd-guar-more", ".cd-fit-form", ".cd-fit-out", ".cd-footer-top", ".cd-credit", ".cd-footer-links", ".cd-legal",
 ].join(", ");
 
 export default function Reveal() {

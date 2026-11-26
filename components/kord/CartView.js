@@ -30,7 +30,7 @@ export default function Cart() {
       <p className="cd-lede">Your cart is empty. Start with the bike that fits how you ride, or build one from scratch.</p>
       <div className="cd-find-actions">
         <a className="cd-btn cd-btn-primary" href="/pitch/kord/#find">Find your bike<span className="cd-arrow" aria-hidden="true">→</span></a>
-        <a className="cd-btn cd-btn-ghost" href="/pitch/kord/build/">Build a bike</a>
+        <a className="cd-btn cd-btn-ghost" href="/pitch/kord/build/">Build yours</a>
       </div>
     </div>
   );
@@ -42,7 +42,7 @@ export default function Cart() {
           const d = describe(x);
           return (
             <li key={x.id} className="cd-cart-item">
-              <img src={`/pitch/kord/bikes/${x.bike}.webp`} width="1200" height="720" alt="" />
+              <span className="cd-shot cd-studio"><img src={`/pitch/kord/bikes/${x.bike}-${x.paint}.webp`} width="1200" height="720" alt="" /></span>
               <div>
                 <h2 className="cd-h3">Kord® {d.bike.name}</h2>
                 <p className="cd-cart-line">{d.line}</p>
@@ -64,7 +64,7 @@ export default function Cart() {
         </dl>
         <p className="cd-cart-total"><span>Total</span><strong>{money(total)}</strong></p>
         <a className="cd-btn cd-btn-primary" href="/pitch/kord/checkout/">Checkout<span className="cd-arrow" aria-hidden="true">→</span></a>
-        <p className="cd-cart-note">Built to order and fitted to you. Ride it for 30 days; if it isn&apos;t right, we collect it and refund you in full.</p>
+        <p className="cd-cart-note">Built to order and fitted to you. Ride it for 30 days; if it isn&apos;t right, send it back for a refund of the bike price.</p>
       </aside>
     </div>
   );

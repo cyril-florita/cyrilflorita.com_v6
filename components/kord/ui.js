@@ -35,7 +35,7 @@ export const NAV = [
   { href: "/pitch/kord/#range", label: "Models" },
   { href: "/pitch/kord/#find", label: "Help me choose" },
   { href: "/pitch/kord/compare/", label: "Compare" },
-  { href: "/pitch/kord/#kord-guarantee", label: "The Kord® Guarantee" },
+  { href: "/pitch/kord/guarantee/", label: "The Kord® Guarantee" },
 ];
 
 export function Header() {
@@ -51,7 +51,7 @@ export function Header() {
         </nav>
         <div className="cd-header-end">
           <CartLink />
-          <a className="cd-btn cd-btn-ghost cd-btn-sm cd-header-build" href="/pitch/kord/build/">Build a bike</a>
+          <a className="cd-btn cd-btn-ghost cd-btn-sm cd-header-build" href="/pitch/kord/build/">Build yours</a>
           <MobileMenu links={[...NAV, { href: "/pitch/kord/fit/", label: "Virtual fit" }, { href: "/pitch/kord/cart/", label: "Cart" }]} />
         </div>
       </div>

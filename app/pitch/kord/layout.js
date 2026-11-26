@@ -2,6 +2,8 @@ import { Archivo, JetBrains_Mono } from "next/font/google";
 import "./kord.css";
 import Reveal from "@/components/kord/Reveal";
 import ToTop from "@/components/kord/ToTop";
+import FindModal from "@/components/kord/FindModal";
+import Preloader from "@/components/kord/Preloader";
 
 // Kord: an online-only road-bike brand, the fourth design and dev pitch (in progress).
 // Like the other pitches it lives outside app/(site), so none of the portfolio's styles or
@@ -12,7 +14,7 @@ import ToTop from "@/components/kord/ToTop";
 // logo and frame wordmark are Archivo Expanded Black, stretched — see scripts/kord/make_wordmark.py),
 // JetBrains Mono for specs.
 const archivo = Archivo({ subsets: ["latin"], axes: ["wdth"], variable: "--cd-font", display: "swap" });
-const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--cd-mono", display: "swap", preload: false });
+const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--cd-mono-face", display: "swap", preload: false });   // kord.css builds --cd-mono from it, with the ® font first
 
 export const metadata = {
   title: "Kord · Road bikes, built to order",
@@ -32,5 +34,6 @@ export const metadata = {
 export const viewport = { themeColor: "#0B0C0E", maximumScale: 5, userScalable: true };
 
 export default function KordLayout({ children }) {
-  return <div className={`cd ${archivo.variable} ${mono.variable}`}>{children}<Reveal /><ToTop /></div>;
+  // the preloader on every page, and between pages (2026-11-25, the user's call; it was the landing's only)
+  return <div className={`cd ${archivo.variable} ${mono.variable}`}><Preloader />{children}<Reveal /><ToTop /><FindModal /></div>;
 }

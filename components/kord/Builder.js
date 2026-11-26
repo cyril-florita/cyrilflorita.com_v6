@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import {
-  BIKES, PAINTS, SIZES, PAINT_PRICE, GROUPSETS, WHEELSETS, SHIP_DAYS, BIKE_PAINT, FIND,
+  BIKES, PAINTS, SIZES, PAINT_PRICE, GROUPSETS, WHEELSETS, SHIP_DAYS, FIND,
   normalizeBuild, priceBuild, weighBuild, buildQuery, money, plain,
 } from "@/components/kord/data";
 import { addToCart } from "@/components/kord/cartStore";
@@ -22,7 +22,6 @@ const grams = (kg) => (kg ? `${kg > 0 ? "+" : "−"}${Math.round(Math.abs(kg) * 
 
 export default function Builder() {
   const [build, setBuild] = useState(() => normalizeBuild({}));
-  const [paintPicked, setPaintPicked] = useState(false);
   const [ship, setShip] = useState("");
   const [said, setSaid] = useState("");
   const [added, setAdded] = useState(false);
@@ -33,7 +32,7 @@ export default function Builder() {
   useEffect(() => {
     const q = Object.fromEntries(new URLSearchParams(location.search));
     // eslint-disable-next-line react-hooks/set-state-in-effect -- reading the query string after hydration
-    setBuild(normalizeBuild(q)); setPaintPicked(Boolean(q.paint));
+    setBuild(normalizeBuild(q));
     const d = new Date(); d.setDate(d.getDate() + SHIP_DAYS);
     setShip(d.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" }));
   }, []);
@@ -42,10 +41,9 @@ export default function Builder() {
     setAdded(false);
     setBuild((b) => {
       const n = { ...b, [k]: v };
-      if (k === "bike" && !paintPicked) n.paint = BIKE_PAINT[v];
+      // a new bike keeps the paint: every bike comes in every paint (2026-11-25; it used to switch to the bike's "own" paint)
       return normalizeBuild(n);
     });
-    if (k === "paint") setPaintPicked(true);
   };
 
   const bike = BIKES.find((b) => b.id === build.bike);
@@ -62,7 +60,7 @@ export default function Builder() {
   return (
     <div className="cd-build">
       <div className="cd-build-stage">
-        <BikeViewer className="cd-viewer-stage" bike={bike.id} spec={{ group: build.group, rim: (wheels.id === "stock" ? parseInt(bike.wheels, 10) : parseInt(wheels.short, 10)) / 1000, size: build.size }} paint={paint} still={`/pitch/kord/bikes/${bike.id}.webp`} label={`The Kord ${plain(bike.name)}`} />
+        <BikeViewer className="cd-viewer-stage" bike={bike.id} spec={{ group: build.group, rim: (wheels.id === "stock" ? parseInt(bike.wheels, 10) : parseInt(wheels.short, 10)) / 1000, size: build.size }} paint={paint} still={`/pitch/kord/bikes/${bike.id}-${paint.id}.webp`} label={`The Kord ${plain(bike.name)}`} />
         {/* the label goes under the name, never above it as an eyebrow (the user's rule) */}
         <div className="cd-build-tag" aria-hidden="true">
           <strong>{plain(bike.name)}</strong>
@@ -78,8 +76,10 @@ export default function Builder() {
 
         <section className="cd-build-step" aria-labelledby="st-bike">
           <h2 id="st-bike" className="cd-build-h"><span>01</span> Bike</h2>
+          {/* each bike's key stats in its own box (2026-11-25, the user's pick: the specs as part of the choice) */}
           <Choice label="Bike" name="bike" value={build.bike} options={BIKES} onPick={(v) => set("bike", v)} className="is-2"
-            render={(b) => (<><strong>{b.name}</strong><span>{b.type}</span><em>From {money(b.from)}</em></>)} />
+            render={(b) => (<><strong>{b.name}</strong><span>{b.type}</span><span className="cd-build-stats">{b.weight} kg · {parseInt(b.wheels, 10)} mm wheels · {b.tires} tires</span><em>From {money(b.from)}</em></>)} />
+          <p className="cd-build-note">Want every spec side by side? <a href={`/pitch/kord/compare/?a=${build.bike}&size=${build.size}&paint=${build.paint}`}>Compare all four</a>.</p>
         </section>
 
         <section className="cd-build-step" aria-labelledby="st-size">
@@ -91,6 +91,7 @@ export default function Builder() {
 
         <section className="cd-build-step" aria-labelledby="st-paint">
           <h2 id="st-paint" className="cd-build-h"><span>03</span> Paint</h2>
+          <p className="cd-build-note cd-build-note-top">Every Kord® comes in every paint, on any bike and in any size.</p>
           <Choice label="Paint" name="paint" value={build.paint} options={PAINTS} onPick={(v) => set("paint", v)} className="is-2"
             render={(p) => (<><i className="cd-build-swatch" style={{ "--swatch": p.hex }} aria-hidden="true" /><strong>{p.name}</strong><em>{PAINT_PRICE[p.id] ? `Signature, +${money(PAINT_PRICE[p.id])}` : "Included"}</em></>)} />
         </section>

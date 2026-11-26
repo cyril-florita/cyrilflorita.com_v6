@@ -2,8 +2,8 @@ import { describe, it, expect } from "vitest";
 import { normalizeBuild, priceBuild, weighBuild, buildQuery, BIKES } from "@/components/kord/data";
 
 describe("Kord: the builder", () => {
-  it("fills a build with the bike's own paint and sensible defaults", () => {
-    expect(normalizeBuild({ bike: "meridian" })).toEqual({ bike: "meridian", size: "54", paint: "ember", group: "sport", wheels: "stock" });
+  it("fills a build with Stealth and sensible defaults (no bike has its own paint)", () => {
+    expect(normalizeBuild({ bike: "meridian" })).toEqual({ bike: "meridian", size: "54", paint: "stealth", group: "sport", wheels: "stock" });
     expect(normalizeBuild({ bike: "nope", size: "99", paint: "pink" }).bike).toBe("arc");
     expect(normalizeBuild({ bike: "constructor" }).bike).toBe("arc");
   });

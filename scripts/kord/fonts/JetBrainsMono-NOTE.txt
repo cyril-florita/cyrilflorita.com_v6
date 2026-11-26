@@ -1,11 +1,19 @@
-JetBrainsMono-TM-ExtraBold.ttf (and public/pitch/kord/fonts/kord-reg.woff2) are subsets of
+JetBrainsMono-TM-ExtraBold.ttf is a subset of
 JetBrains Mono, Copyright 2020 The JetBrains Mono Project Authors
 (https://github.com/JetBrains/JetBrainsMono), licensed under the SIL Open Font License 1.1.
-They hold the registered sign (U+00AE; the TTF also ™, unused since 2026-11-24).
+It holds the registered sign (U+00AE; also ™, unused since 2026-11-24), used on the 3D bike's down tube.
 
 Archivo-TM.ttf (and public/pitch/kord/fonts/kord-tm.woff2) are subsets of Archivo,
 Copyright 2017 The Archivo Project Authors (https://github.com/Omnibus-Type/Archivo), licensed under
 the SIL Open Font License 1.1 (OFL.txt in this folder). They hold only the trademark sign (U+2122),
 at normal width and regular weight (wdth 100, wght 400).
+Since 2026-11-25 the web subset's ™ (kord-tm.woff2, not Archivo-TM.ttf) is redrawn like the ® below: a quarter
+of the em tall (×0.622), its top at the cap height (686), 30 units either side.
+
+public/pitch/kord/fonts/kord-reg.woff2 (since 2026-11-25; it was JetBrains Mono) is a subset of Archivo too:
+only the registered sign (U+00AE), at normal width (wdth 100) with the weight axis kept (wght 100–900).
+Its glyph is redrawn smaller (also 2026-11-25): scaled to a quarter of the em tall (×0.352, the weight
+variations too; HVAR dropped, so advances come from the scaled phantom points) with its top at the cap
+height (686) and 30 units either side, so every ® is a quarter of its line's size, raised like a superscript.
 
 All made with fontTools from the font files next/font downloads (see app/pitch/kord/README.md).

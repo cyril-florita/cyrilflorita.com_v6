@@ -50,7 +50,7 @@ export default function Checkout() {
         <li><span>01</span><strong>Built to order</strong><em>Starting today: {order.items.map((d) => `the ${d.bike.name}`).join(", ")}.</em></li>
         <li><span>02</span><strong>Fitted to you</strong><em>{order.fit ? `Your fit call: ${order.fit}.` : "We set it up from your measurements; you can book a fit call any time."}</em></li>
         <li><span>03</span><strong>Shipped</strong><em>By {order.ship}, 95% assembled, in one box.</em></li>
-        <li><span>04</span><strong>Ride it for 30 days</strong><em>If it isn&apos;t right, we collect it and refund you in full.</em></li>
+        <li><span>04</span><strong>Ride it for 30 days</strong><em>If it isn&apos;t right, send it back for a refund of the bike price.</em></li>
       </ol>
       <p className="cd-done-total">Total {money(order.total)} · nothing was charged in this preview.</p>
       <a className="cd-btn cd-btn-ghost" href="/pitch/kord/">Back to Kord®</a>
@@ -62,7 +62,7 @@ export default function Checkout() {
     <div className="cd-cart-empty">
       <p className="cd-lede">There&apos;s nothing to check out yet.</p>
       <div className="cd-find-actions">
-        <a className="cd-btn cd-btn-primary" href="/pitch/kord/build/">Build a bike<span className="cd-arrow" aria-hidden="true">→</span></a>
+        <a className="cd-btn cd-btn-primary" href="/pitch/kord/build/">Build yours<span className="cd-arrow" aria-hidden="true">→</span></a>
         <a className="cd-btn cd-btn-ghost" href="/pitch/kord/#find">Find your bike</a>
       </div>
     </div>
@@ -103,7 +103,7 @@ export default function Checkout() {
       <aside className="cd-cart-sum" aria-label="Order summary">
         <ul className="cd-co-items">
           {items.map((x) => { const d = describe(x); return (
-            <li key={x.id}><img src={`/pitch/kord/bikes/${x.bike}.webp`} width="1200" height="720" alt="" /><div><strong>Kord® {d.bike.name}</strong><span>{d.line}</span></div><em>{money(d.price)}</em></li>
+            <li key={x.id}><img src={`/pitch/kord/bikes/${x.bike}-${x.paint}.webp`} width="1200" height="720" alt="" /><div><strong>Kord® {d.bike.name}</strong><span>{d.line}</span></div><em>{money(d.price)}</em></li>
           ); })}
         </ul>
         <dl>

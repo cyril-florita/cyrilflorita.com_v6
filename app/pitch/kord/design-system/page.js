@@ -86,7 +86,7 @@ export default function DesignSystem() {
                     <figcaption>Wordmark on the accent</figcaption>
                   </figure>
                   <figure className="cd-ds-tile is-wide cd-ds-frame">
-                    <div className="cd-ds-tile-stage"><img src={`/pitch/kord/bikes/${arc.id}.webp`} width="1200" height="720" alt="The Kord Arc in Stealth, with the KORD wordmark on its down tube" loading="lazy" /></div>
+                    <div className="cd-ds-tile-stage"><img src={`/pitch/kord/bikes/${arc.id}-stealth.webp`} width="1200" height="720" alt="The Kord Arc in Stealth, with the KORD wordmark on its down tube" loading="lazy" /></div>
                     <figcaption>On the frame · KORD® on the down tube, the model name (ARC™) across the head tube</figcaption>
                   </figure>
                   <figure className="cd-ds-tile is-full">
@@ -149,7 +149,7 @@ export default function DesignSystem() {
                 <div className="cd-ds-row">
                   <a className="cd-btn cd-btn-primary" href="#ds-buttons">Find your bike<span className="cd-arrow" aria-hidden="true">→</span></a>
                   <button type="button" className="cd-btn cd-btn-ghost">Copy link</button>
-                  <a className="cd-btn cd-btn-ghost cd-btn-sm" href="#ds-buttons">Build a bike</a>
+                  <a className="cd-btn cd-btn-ghost cd-btn-sm" href="#ds-buttons">Build yours</a>
                   <a className="cd-card-build" href="#ds-buttons">Build yours<span className="cd-arrow" aria-hidden="true">→</span></a>
                 </div>
                 <div className="cd-ds-row cd-ds-on-accent">
@@ -187,7 +187,7 @@ export default function DesignSystem() {
                 <div className="cd-ds-grid is-2">
                   <ul className="cd-range cd-ds-one">
                     <li className={`cd-card cd-card-${arc.id}`}>
-                      <img className="cd-card-img" src={`/pitch/kord/bikes/${arc.id}.webp`} width="1200" height="720" alt={`The Kord ${plain(arc.name)}`} loading="lazy" />
+                      <img className="cd-card-img" src={`/pitch/kord/bikes/${arc.id}-stealth.webp`} width="1200" height="720" alt={`The Kord ${plain(arc.name)}`} loading="lazy" />
                       <div className="cd-card-body">
                         <h3 className="cd-h3">{arc.name}</h3>
                         <p className="cd-card-type">{arc.type}</p>
@@ -213,7 +213,7 @@ export default function DesignSystem() {
               </Section>
 
               <Section id="studio" title="3D studio" lede="The bike in its studio: a dark wall lit around the bike, a mottled floor with a baked shadow, matte paint. Drag it or use the arrow keys. Without WebGL the range still stays.">
-                <BikeViewer paint={stealth} still={`/pitch/kord/bikes/${arc.id}.webp`} label="The Kord Arc" />
+                <BikeViewer paint={stealth} still={`/pitch/kord/bikes/${arc.id}-stealth.webp`} label="The Kord Arc" />
               </Section>
 
               <Section id="foundations" title="Foundations">

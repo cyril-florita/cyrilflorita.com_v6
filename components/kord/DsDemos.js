@@ -77,7 +77,7 @@ export function HotspotDemo() {
         <button type="button" className="cd-hot-btn" aria-expanded={open} aria-controls="ds-hot" onClick={() => setOpen(!open)}>
           <span className="cd-sr">{h.title}</span>
         </button>
-        <div id="ds-hot" className="cd-hot-card" hidden={!open}><strong>{h.title}</strong><span>{h.line}</span></div>
+        <div id="ds-hot" className="cd-hot-card"><strong>{h.title}</strong><span>{h.line}</span></div>
       </div>
     </div>
   );

@@ -93,9 +93,9 @@
 .cd-ds-tile.is-accent figcaption { color: var(--cd-on-accent); }
 .cd-ds-logo-lg { max-width: 100%; display: inline-flex; align-items: center; gap: 22px; color: var(--cd-ink); }
 .cd-ds-logo-lg svg:last-of-type { height: 40px; width: auto; min-width: 0; max-width: 100%; }
-.cd-ds-word-wrap { display: flex; width: 70%; }
+.cd-ds-word-wrap { display: flex; width: 70%; container-type: inline-size; }
 .cd-ds-word-only { flex: 1; min-width: 0; height: auto; }
-.cd-ds-tile .cd-reg { align-self: flex-start; margin: 0 0 0 -10px; font-size: clamp(12px, 1.4vw, 20px); }
+.cd-ds-tile .cd-reg { align-self: center; margin-left: -16px; --reg-h: 40px; }   /* the wordmark's height (see .cd-reg) */
 .cd-ds-frame .cd-ds-tile-stage { min-height: 0; }
 .cd-ds-frame img { width: 100%; height: auto; }
 .cd-ds-giant span { font-size: clamp(96px, 16vw, 220px); font-weight: 900; font-stretch: 125%; letter-spacing: -0.04em; color: rgba(255, 255, 255, 0.06); }
@@ -159,10 +159,10 @@
   .cd-ds-tokens li > :nth-child(n + 3), .cd-ds-paints li > :nth-child(n + 3) { grid-column: 2; }
   .cd-ds-tokens li > i, .cd-ds-paints li > i { grid-row: span 3; }
   .cd-ds-type > div { grid-template-columns: 1fr; gap: 8px; }
-  .cd-ds-logo-lg { gap: 14px; } .cd-ds-logo-lg svg:first-child { width: 44px; height: 44px; } .cd-ds-logo-lg svg:last-of-type { height: 26px; }
+  .cd-ds-logo-lg { gap: 14px; } .cd-ds-logo-lg svg:first-child { width: 44px; height: 44px; } .cd-ds-logo-lg svg:last-of-type { height: 26px; } .cd-ds-logo-lg .cd-reg { --reg-h: 26px; margin-left: -10px; }
   .cd-ds-section { padding-top: 64px; }
   .cd:has(.cd-ds) .cd-footer .cd-wrap { padding-inline: 20px; }
 }
-.cd-ds-word-wrap .cd-reg { margin-left: 4px; }
+.cd-ds-word-wrap .cd-reg { align-self: flex-start; margin-left: 4px; --reg-h: calc(100cqi / 15.04); }   /* the wordmark's height (its ratio is 15.04) */
 /* the guarantees sample one per row where its tile is narrow (long words like ADJUSTMENTS can't wrap) */
 @media (max-width: 1100px) { .cd-ds-steps { grid-template-columns: minmax(0, 1fr); } .cd-ds-steps .cd-step { padding-left: 0; border-left: 0; } }

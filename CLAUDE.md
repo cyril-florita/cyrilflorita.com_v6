@@ -24,7 +24,7 @@ Deploys are incremental: `deploy.js` keeps `.deploy-manifest.json` (path → con
 
 `npm run build` runs both first (`prebuild`; they skip unchanged files), and `npm run deploy` goes through `npm run build`. Running `npx next build` directly skips them.
 
-`next.config.js` keeps `experimental: { agentUpgrade: "security" }` on purpose (the user chose it, 2026-10-22): each build checks Next.js security advisories, and when one applies it offers `next upgrade --agent=security`, which starts a separate Claude Code session that upgrades to the patched stable release in a git worktree and commits/merges it. It does not update this checkout's `node_modules`, so run `npm install` afterwards (the 16.4.0 → 16.4.2 upgrade needed that). `next` is pinned exactly (`"next": "16.4.2"`).
+`next.config.js` keeps `experimental: { agentUpgrade: "security" }` on purpose (the user chose it, 2026-10-22): each build checks Next.js security advisories, and when one applies it offers `next upgrade --agent=security`, which starts a separate Claude Code session that upgrades to the patched stable release in a git worktree and commits/merges it. It does not update this checkout's `node_modules`, so run `npm install` afterwards (the 16.4.0 → 16.4.2 upgrade needed that). `next` is pinned exactly (`"next": "16.4.6"` as of 2026-11-25).
 
 Font Awesome is subset to the icons actually used: `scripts/subset-icons.py` (needs `pip install fonttools brotli`) writes `public/fonts/font-awesome/css/fa-subset.css` + `webfonts/fa-*-subset.woff2`, which `app/layout.js` imports instead of `all.min.css`. **Re-run it after using a new `fa-*` icon**, or the new icon renders blank.
 

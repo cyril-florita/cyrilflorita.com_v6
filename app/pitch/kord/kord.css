@@ -7,7 +7,9 @@
    face is one regular instance declared for every weight, so the browser never bolds it. Made with fontTools from the build's own Archivo and JetBrains Mono files
    (OFL); see the README. */
 @font-face { font-family: "Kord TM"; src: url(/pitch/kord/fonts/kord-tm.woff2) format("woff2"); font-weight: 1 1000; font-display: swap; unicode-range: U+2122; }
-@font-face { font-family: "Kord Reg"; src: url(/pitch/kord/fonts/kord-reg.woff2) format("woff2"); font-weight: 100 800; font-display: swap; unicode-range: U+00AE; }
+@font-face { font-family: "Kord Reg"; src: url(/pitch/kord/fonts/kord-reg.woff2) format("woff2"); font-weight: 100 900; font-display: swap; unicode-range: U+00AE; }   /* Archivo at normal width since 2026-11-25 (it was JetBrains Mono, which read thin and tall) */
+/* the mono labels get the same ® and ™ (next/font sets JetBrains Mono as --cd-mono-face on .cd) */
+.cd { --cd-mono: "Kord TM", "Kord Reg", var(--cd-mono-face); }
 
 :root:has(.cd) { background: #0b0c0e; color-scheme: dark; scroll-behavior: smooth; overflow-x: clip; }   /* decorative giant words may run past a phone's edge; nothing scrolls sideways (as Hearthside) */
 body:has(.cd) { margin: 0; }   /* the browser's default 8px margin framed every page (the portfolio's reset isn't loaded here; Viteo resets it the same way) */
@@ -32,7 +34,20 @@ body:has(.cd) { margin: 0; }   /* the browser's default 8px margin framed every 
   /* the soft light behind a bike's still (range cards, Compare, the cart): it fades to transparent inside
      its own box, so it blends into whatever surface it sits on (it faded to --cd-bg-2, which left a hard
      edge on the Compare table's slightly different panel) */
-  --cd-shot-glow: radial-gradient(closest-side at 50% 58%, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.03) 55%, rgba(255, 255, 255, 0));
+  /* the bike stills' floor (2026-11-25, the user's call: the stills sit in the builder's studio — .cd-shot with
+     .cd-studio's wall light, texture and grain — so they get the floor the 3D scene would draw: a faint lit floor
+     round the bike and a soft contact shadow where its tires touch down, 88.7% down the 1200×720 stills). It
+     replaced a plain lit pool behind the stills. */
+  --cd-shot-floor:
+    /* the bike's shadow (the user asked for it, 2026-11-25): a dark contact patch under each tire (rear at
+       28.7% / 86.1%, front at 72% / 88.7% — the bike is turned a little toward the camera; the same on all four
+       models within 1.5%), a soft band under the bike joining them, and a wide faint shadow round it all */
+    radial-gradient(10% 2.6% at 28.7% 86.5%, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)),
+    radial-gradient(11% 2.8% at 72.2% 89%, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)),
+    radial-gradient(36% 7.5% at 50.5% 88.5%, rgba(0, 0, 0, 0.66), rgba(0, 0, 0, 0.3) 55%, rgba(0, 0, 0, 0)),
+    radial-gradient(50% 14% at 50.5% 89%, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0) 80%),
+    radial-gradient(62% 24% at 50% 87%, rgba(150, 158, 172, 0.16), rgba(150, 158, 172, 0) 75%),
+    linear-gradient(rgba(255, 255, 255, 0) 58%, rgba(255, 255, 255, 0.03) 74%, rgba(255, 255, 255, 0) 100%);
   min-height: 100vh;
   background: var(--cd-bg);
   color: var(--cd-ink);
@@ -50,7 +65,7 @@ body:has(.cd) { margin: 0; }   /* the browser's default 8px margin framed every 
 /* headings — the white display type — are uppercase (2026-11-23, the user's call): h1–h3, the
    3D hotspot and callout titles, the Find your bike questions. Running text, nav, buttons and
    labels keep their case (the mono labels are uppercase on their own). */
-:where(.cd) :where(h1, h2, h3), .cd-hot-card strong, .cd-callout-body strong, .cd-legend strong, .cd-find-qs li, .cd-find-opt { text-transform: uppercase; }
+:where(.cd) :where(h1, h2, h3), .cd-hot-card strong, .cd-callout-body strong, .cd-legend strong, .cd-find-opt { text-transform: uppercase; }
 .cd :focus-visible { outline: 2px solid var(--cd-accent); outline-offset: 3px; }
 .cd-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .cd-wrap { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 var(--cd-gutter); }
@@ -98,9 +113,14 @@ body:has(.cd) { margin: 0; }   /* the browser's default 8px margin framed every 
 .cd-header-row { display: flex; align-items: center; gap: 40px; }
 .cd-logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--cd-ink); }
 .cd-logo-word { display: block; height: 11px; width: auto; }
-/* the ® after the wordmark (logo, preloader, design system): mono, small, level with the letters' tops */
-.cd-reg { font-family: "Kord Reg", var(--cd-mono), monospace; font-size: 10px; font-weight: 700; line-height: 1; }
-.cd-logo .cd-reg { margin-left: -6px; translate: 0 -4px; }   /* beside the 11 px wordmark, level with its top (the mark beside it is taller) */   /* the stretched wordmark (wordmark.js sets its ratio) */
+/* the ® after the wordmark (logo, preloader, design system, the Find dialog): half the wordmark's height, level with
+   its top (2026-11-25: every ® is a quarter of its line, but beside the small wordmark a quarter read as a speck, so
+   the logo's is half, the user's call). kord-reg.woff2's ® is a quarter of the em tall with its top at the cap height,
+   so the font-size is twice the wordmark's height (--reg-h); line-height 0.5 keeps the box the wordmark's height, and
+   `top` sets the glyph's top level with the box's (0.19em, measured in Chrome; the font's 878/210 ascent and descent
+   alone predict 0.10em) */
+.cd-reg { --reg-h: 11px; font-family: "Kord Reg", var(--cd-font), sans-serif; font-size: calc(var(--reg-h) * 2); font-weight: 700; line-height: 0.5; position: relative; top: 0.19em; }
+.cd-logo .cd-reg { margin-left: -7px; }   /* beside the 11 px wordmark, level with its top (the mark beside it is taller) */   /* the stretched wordmark (wordmark.js sets its ratio) */
 .cd-nav { margin-left: auto; }
 .cd-nav ul { display: flex; gap: 30px; }
 .cd-nav a { font-size: 15px; font-weight: 600; text-decoration: none; color: var(--cd-ink-2); transition: color 0.2s; }
@@ -242,8 +262,15 @@ body:has(.cd) { margin: 0; }   /* the browser's default 8px margin framed every 
   background: rgba(19, 20, 24, 0.88); border: 1px solid var(--cd-line-2); backdrop-filter: blur(10px); pointer-events: auto;
   font-size: 14px; line-height: 1.4; color: var(--cd-ink-2);
 }
-.cd-hot-card[hidden] { display: none; }
-.cd-hot.is-left .cd-hot-card { left: auto; right: 28px; }   /* near the right edge: open to the left */
+/* the card fades up and grows from the button's side as it opens, and back as it closes (2026-11-25, the user's
+   call; it was shown and hidden at once). Closed it's visibility: hidden, so it's out of reach of the pointer and
+   screen readers (the button's aria-expanded says it's shut). */
+.cd-hot-card { opacity: 0; visibility: hidden; translate: 0 6px; scale: 0.97; transform-origin: 0 24px;
+  transition: opacity 0.22s ease, translate 0.3s var(--cd-ease), scale 0.3s var(--cd-ease), visibility 0s 0.3s; }
+.cd-hot.is-open .cd-hot-card { opacity: 1; visibility: visible; translate: 0 0; scale: 1;
+  transition: opacity 0.3s ease, translate 0.4s var(--cd-ease), scale 0.4s var(--cd-ease), visibility 0s; }
+@media (prefers-reduced-motion: reduce) { .cd-hot-card, .cd-hot.is-open .cd-hot-card { translate: none; scale: none; } }
+.cd-hot.is-left .cd-hot-card { left: auto; right: 28px; transform-origin: 100% 24px; }   /* near the right edge: open to the left */
 .cd-hot-card strong { color: var(--cd-ink); font-size: 15px; }
 
 /* callouts on the exploded bike */
@@ -284,9 +311,25 @@ body:has(.cd) { margin: 0; }   /* the browser's default 8px margin framed every 
 .cd-range { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
 .cd-card { position: relative; display: grid; border-radius: var(--cd-radius); background: var(--cd-bg-2); border: 1px solid var(--cd-line); overflow: hidden; transition: border-color 0.3s; }
 .cd-card:hover { border-color: var(--cd-line-2); }
-.cd-card-img { width: 100%; height: auto; aspect-ratio: 5 / 3; object-fit: contain; background: var(--cd-shot-glow); transition: scale 0.8s var(--cd-ease); }
+.cd-shot { position: relative; display: block; isolation: isolate; overflow: hidden; --hero: 0; }   /* a bike still in the studio (.cd-studio), centred */
+.cd-shot > img { display: block; background: var(--cd-shot-floor); }
+.cd-card-img { width: 100%; height: auto; aspect-ratio: 5 / 3; object-fit: contain; transition: scale 0.8s var(--cd-ease); }
 .cd-card:hover .cd-card-img { scale: 1.03; }
-.cd-card-body { display: grid; gap: 12px; padding: 8px 28px 28px; }
+/* a range card's paint swatches, flush right on the name's line (2026-11-25): every bike in every paint */
+.cd-card-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; }   /* the name, the paint swatches flush right on its line (the user's call) */
+.cd-card-paint { display: flex; align-items: center; gap: 12px; }
+.cd-card-swatches { display: flex; gap: 8px; }
+.cd-card-swatch { width: 22px; height: 22px; padding: 0; border-radius: 50%; border: 0; cursor: pointer; background: var(--swatch);
+  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.42); transition: box-shadow 0.2s, scale 0.2s var(--cd-ease); }
+.cd-card-swatch:hover { scale: 1.12; }
+.cd-card-swatch[aria-checked="true"] { box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.42), 0 0 0 2px var(--cd-bg-2), 0 0 0 3.5px var(--cd-accent); }
+.cd-card-swatch:focus-visible { outline: 2px solid var(--cd-accent); outline-offset: 4px; }
+.cd-card-paint-name { font-family: var(--cd-mono), monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cd-ink-2); }
+/* narrow cards (phones, two-up tablets): just the swatches, so they stay beside every name, MERIDIAN™ too */
+.cd-card { container-type: inline-size; }
+@container (max-width: 560px) { .cd-card-paint-name { display: none; } .cd-card-swatches { gap: 7px; } .cd-card-swatch { width: 20px; height: 20px; } }
+@container (max-width: 330px) { .cd-card-swatches { gap: 6px; } .cd-card-swatch { width: 17px; height: 17px; } }
+.cd-card-body { display: grid; gap: 12px; padding: 24px 28px 28px; }   /* 24px under the studio photo (it was 8px under a transparent still) */
 .cd-card-type { font-family: var(--cd-mono), monospace; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cd-accent); }
 .cd-card-line { color: var(--cd-ink-2); max-width: 48ch; }
 .cd-card-specs { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 4px; padding-top: 16px; border-top: 1px solid var(--cd-line); }
@@ -295,21 +338,102 @@ body:has(.cd) { margin: 0; }   /* the browser's default 8px margin framed every 
 .cd-card-price { color: var(--cd-ink-2); font-size: 15px; }
 .cd-card-price strong { color: var(--cd-ink); font-size: 19px; margin-left: 4px; }
 
-.cd-find { background: var(--cd-bg-2); border-block: 1px solid var(--cd-line); scroll-margin-top: 40px; }
+/* Help me choose, in its dialog (FindModal; 2026-11-25): the dialog is a panel on a dimmed, blurred page,
+   wide enough for the result's copy and its 3D bike side by side; a sheet that fills the screen on phones */
+.cd-modal { width: min(1120px, calc(100vw - 48px)); max-width: none; max-height: calc(100dvh - 48px); padding: 0; overflow: auto; overscroll-behavior: contain;
+  border: 1px solid var(--cd-line-2); border-radius: 20px; color: var(--cd-ink); isolation: isolate; }
+/* the result is the studio (2026-11-25, the user's call: the shot's backdrop for the dialog) — its light
+   behind the bike (right on desktop, at the top on phones);
+   the result's stage drops its own frame and backdrop, so the bike stands in the dialog's light */
+.cd-modal.cd-studio { --hero: 0; }
+/* …but only on the result (the user's call, 2026-11-25): the questions keep the plain panel */
+.cd-modal.cd-studio:not(:has(.cd-find.is-result)) { background: var(--cd-bg-2); }
+.cd-modal.cd-studio:not(:has(.cd-find.is-result))::before, .cd-modal.cd-studio:not(:has(.cd-find.is-result))::after { content: none; }
+.cd-modal:has(.cd-find.is-result) { --cd-lx: 22%; --cd-ly: -4%; }
+.cd-modal .cd-viewer.cd-studio { border-color: transparent; background: none; border-radius: 0;   /* the 3D floor fades out at the stage's sides and foot, so it has no edge */
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 14%, #000 86%, transparent), linear-gradient(#000 72%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent, #000 14%, #000 86%, transparent), linear-gradient(#000 72%, transparent);
+  mask-composite: intersect; }
+.cd-modal .cd-viewer.cd-studio::before, .cd-modal .cd-viewer.cd-studio::after { content: none; }
+.cd-modal::backdrop { background: rgba(5, 6, 8, 0.72); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+:root:has(.cd-modal[open]) { overflow: hidden; }
+.cd-modal-close { position: sticky; top: 14px; float: right; z-index: 5; display: grid; place-items: center; width: 44px; height: 44px; margin: 14px 14px -58px 0;
+  padding: 0; border: 1px solid var(--cd-line-2); border-radius: 50%; background: rgba(19, 20, 24, 0.85); color: var(--cd-ink); cursor: pointer; transition: border-color 0.2s, color 0.2s; }
+.cd-modal-close:hover { border-color: var(--cd-accent); color: var(--cd-accent); }
+.cd-find { padding: clamp(28px, 4vw, 48px); }
+/* from 700px the close button (44px, 14px in) floats over the panel's top right: keep every phase's content 30px clear of it */
+@media (min-width: 700px) {
+  .cd-find { padding-right: 88px; } .cd-find .cd-h2 { padding-right: 0; }
+  /* the questions start below the close button instead (the user's call, 2026-11-25), so they keep even side padding */
+  .cd-find.is-ask { padding: 84px clamp(28px, 4vw, 48px) clamp(28px, 4vw, 48px); }
+}
+/* the questions' backdrop: KORD®, the wordmark, large and faint, in the dialog's bottom-left corner, inset like the
+   content (the user's call, 2026-11-25; it bled off the corner at first); not on the result */
+.cd-modal-mark { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.cd-modal-word { --h: clamp(34px, 4.4vw, 56px); position: absolute; left: clamp(28px, 4vw, 48px); bottom: clamp(28px, 4vw, 48px); display: flex; align-items: flex-start; gap: calc(var(--h) * 0.1);
+  color: rgba(225, 230, 238, 0.05); }
+.cd-modal-word svg { display: block; height: var(--h); width: auto; }
+.cd-modal-word .cd-reg { --reg-h: var(--h); }
+.cd-modal:has(.cd-find.is-result) .cd-modal-mark { display: none; }
+@media (max-width: 699px) { .cd-modal-word { --h: 22px; left: 18px; bottom: 20px; } }
+.cd-find .cd-h2 { font-size: clamp(28px, 3.2vw, 44px); padding-right: 48px; }
+.cd-find .cd-find-name { font-size: clamp(32px, 3.6vw, 52px); }
+@media (max-width: 699px) {
+  .cd-modal { width: 100vw; max-height: none; height: 100dvh; margin: 0; border: 0; border-radius: 0; }
+  .cd-find { padding: 18px 18px 20px; }
+  /* the result fits a phone's screen (the user asked for it to fit the dialog): a 16:9 stage, tighter type and gaps */
+  .cd-find .cd-find-result { gap: 14px; }
+  .cd-find .cd-find-result .cd-viewer { aspect-ratio: 16 / 9; }
+  .cd-modal:has(.cd-find.is-result) { --cd-lx: 0%; --cd-ly: -26%; }
+  .cd-find .cd-find-copy { gap: 10px !important; }
+  .cd-find .cd-find-name { font-size: 30px; }
+  .cd-find .cd-find-meta { font-size: 15px; }
+  .cd-find .cd-find-why { gap: 6px; }
+  .cd-find .cd-find-why li { font-size: 14.5px; line-height: 1.4; }
+  .cd-find .cd-find-specs { gap: 8px 16px; padding-top: 12px; }
+  .cd-find .cd-find-specs dt { font-size: 10.5px; }
+  .cd-find .cd-find-specs dd { margin-top: 2px; font-size: 14px; }
+  .cd-find .cd-find-buy { gap: 10px 20px; padding-top: 14px; }
+  .cd-find .cd-find-actions { gap: 8px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .cd-modal[open] { animation: cd-modal-in 0.35s var(--cd-ease); }
+  .cd-modal[open]::backdrop { animation: cd-fade-in 0.35s ease; }
+}
+@keyframes cd-modal-in { from { opacity: 0; translate: 0 16px; scale: 0.98; } }
+/* tablets keep the result side by side (stacked, its 4:3 stage ran the dialog well past the screen), and short
+   screens tighten up, so the result fits the dialog without scrolling (measured: 1366×768, 1024×768, 1280×800,
+   1440×900, 768×1024, 834×1194, 390×844) */
+@media (min-width: 700px) {
+  .cd-find .cd-find-result { grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); }
+  .cd-find .cd-find-result .cd-viewer { order: 0; }
+}
+@media (min-width: 700px) and (max-height: 820px) {
+  .cd-find { padding: 26px 88px 28px 32px; }
+  .cd-find.is-ask { padding: 76px 32px 28px; }
+  .cd-find .cd-find-name { font-size: clamp(30px, 3vw, 42px); }
+  .cd-find .cd-find-copy { gap: 12px !important; }
+  .cd-find .cd-find-why li { font-size: 15px; }
+  .cd-find .cd-find-specs { padding-top: 14px; gap: 10px 24px; }
+}
+/* the landing's band that opens it */
+/* the landing's Help me choose band: the heading with its subhead under it, the button beside them, centred */
+.cd-find-band { background: var(--cd-bg-2); border-block: 1px solid var(--cd-line); }
+.cd-find-band-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 28px 48px; }
+.cd-find-band-row > div { display: grid; gap: 16px; flex: 1 1 0; min-width: min(100%, 320px); max-width: 1080px; }
 .cd-find-row { display: grid; grid-template-columns: 1.1fr 1fr; gap: 64px; align-items: center; }
 .cd-find-row > div { display: grid; gap: 22px; justify-items: start; }
-.cd-find-qs { display: grid; gap: 12px; }
-/* Find your bike, inline (FindBike.js): the intro's questions start the flow at that question */
-.cd-find-qs button, .cd-find-opt {
+/* Find your bike's answers (FindBike.js) */
+.cd-find-opt {
   display: flex; align-items: center; gap: 20px; width: 100%; padding: 22px 26px; text-align: left; cursor: pointer;
   border-radius: var(--cd-radius); background: var(--cd-bg-3); border: 1px solid var(--cd-line); color: var(--cd-ink);
   font: inherit; font-size: 20px; font-weight: 650; text-transform: uppercase; transition: border-color 0.2s, background-color 0.2s;
 }
-.cd-find-qs button:hover, .cd-find-opt:hover { border-color: rgba(200, 240, 49, 0.5); }
-.cd-find-qs .cd-mono { font-size: 13px; color: var(--cd-accent); }
+.cd-find-opt:hover { border-color: rgba(200, 240, 49, 0.5); }
 .cd-find h2:focus { outline: none; }
 .cd-find-ask { align-items: start; grid-template-columns: 1fr 1.1fr; }
-@media (min-width: 900px) { .cd-find:not(.is-result) .cd-find-row { min-height: 360px; } }   /* intro and questions the same height, so the page below doesn't jump */
+@media (min-width: 900px) { .cd-find:not(.is-result) .cd-find-row { min-height: 340px; } }   /* every question the same height, so the dialog doesn't jump between them */
 .cd-find-qhead { display: grid; gap: 18px; justify-items: start; }
 .cd-find-progress { font-family: var(--cd-mono), monospace; font-size: 13px; letter-spacing: 0.12em; color: var(--cd-ink-2); }
 .cd-find-progress span { color: var(--cd-accent); }
@@ -326,7 +450,7 @@ body:has(.cd) { margin: 0; }   /* the browser's default 8px margin framed every 
 .cd-find-opt.is-on { border-color: var(--cd-accent); background: rgba(200, 240, 49, 0.06); }
 .cd-find-opt.is-on .cd-find-opt-dot { border-color: var(--cd-accent); box-shadow: inset 0 0 0 4px var(--cd-bg-3), inset 0 0 0 10px var(--cd-accent); }
 /* the result: the copy left, the bike in its studio right (BikeViewer) */
-.cd-find-result { grid-template-columns: 0.9fr 1.1fr; gap: 56px; }
+.cd-find-result { grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); gap: 28px 44px; align-items: start; }
 .cd-find-copy { gap: 18px !important; }
 .cd-find-name { font-size: clamp(44px, 5.6vw, 84px); }
 .cd-find-meta { font-size: 18px; color: var(--cd-ink); }
@@ -423,7 +547,7 @@ body:has(.cd) { margin: 0; }   /* the browser's default 8px margin framed every 
   .cd-find-specs { gap: 12px 20px; }
 }
 @media (max-width: 560px) {
-  .cd-logo-word { height: 9px; }   /* ~135px wide, so the header keeps its button on one line */
+  .cd-logo-word { height: 9px; } .cd-logo .cd-reg { --reg-h: 9px; }   /* ~135px wide, so the header keeps its button on one line */
   .cd-steps { grid-template-columns: 1fr; }
   .cd-step + .cd-step { padding-left: 0; border-left: 0; }
   .cd-step { padding-top: 24px; border-top: 1px solid var(--cd-line); }
@@ -465,6 +589,9 @@ body:has(.cd) { margin: 0; }   /* the browser's default 8px margin framed every 
 .cd-build-swatch { width: 26px; height: 26px; border-radius: 50%; background: var(--swatch); box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.42); margin-bottom: 6px; }
 .cd-build-note { font-size: 14px; color: var(--cd-ink-2); }
 .cd-build-note a { color: var(--cd-ink); }
+.cd-build-note-top { margin-top: -4px; }
+/* each bike's key stats in its box (2026-11-25): weight · wheel depth · tire width */
+.cd-build-opt .cd-build-stats { font-size: 13px; line-height: 1.4; color: var(--cd-ink); margin-top: 2px; }
 .cd-build-sum { position: sticky; bottom: 0; z-index: 5; margin: 0 calc(-1 * var(--cd-gutter)) 0 -48px; padding: 20px var(--cd-gutter) 22px 48px; display: grid; gap: 16px;
   background: rgba(19, 20, 24, 0.94); backdrop-filter: blur(12px); border-top: 1px solid var(--cd-line-2); }
 .cd-build-sum-row { display: flex; justify-content: space-between; align-items: end; gap: 20px; }
@@ -499,41 +626,17 @@ body:has(.cd) { margin: 0; }   /* the browser's default 8px margin framed every 
 /* ------------------------------------------------------------------ compare (/compare/) */
 .cd-compare-page { padding-top: clamp(40px, 6vw, 80px); }
 .cd-compare-page .cd-lede a { color: var(--cd-ink); }
-.cd-compare-scroll { overflow-x: auto; border-radius: var(--cd-radius); border: 1px solid var(--cd-line); background: var(--cd-bg-2); }
-.cd-compare-scroll:focus-visible { outline: 2px solid var(--cd-accent); outline-offset: 2px; }
-.cd-compare { width: 100%; min-width: 860px; border-collapse: collapse; table-layout: fixed; }
-.cd-compare th, .cd-compare td { padding: 14px 18px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--cd-line); font-size: 15px; }
-.cd-compare td { color: var(--cd-ink); }
-.cd-compare tbody th { width: 170px; font-family: var(--cd-mono), monospace; font-size: 12px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cd-ink-2); }
-.cd-compare thead td, .cd-compare tbody th { position: sticky; left: 0; z-index: 1; background: var(--cd-bg-2); }
-.cd-compare thead th { padding: 18px; }
-.cd-compare thead th > * { display: block; }
-.cd-compare thead img { width: 100%; height: auto; aspect-ratio: 5 / 3; object-fit: contain; margin-bottom: 10px; background: var(--cd-shot-glow); border-radius: 10px; }
-.cd-compare thead strong { font-size: clamp(17px, 2.1vw, 24px);   /* MERIDIAN™ fits its column on tablets */ font-weight: 800; font-stretch: 118%; text-transform: uppercase; margin: 4px 0; }
-.cd-compare thead .cd-compare-price { display: flex; align-items: baseline; gap: 8px; margin: 12px 0 16px; padding-top: 12px; border-top: 1px solid var(--cd-line-2); }   /* the price, made to stand out (2026-11-24) */
-.cd-compare-price span { font-family: var(--cd-mono), monospace; font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cd-ink-2); }
-.cd-compare-price b { font-size: clamp(20px, 2vw, 28px); font-weight: 800; letter-spacing: -0.01em; color: var(--cd-ink); }
-.cd-compare thead .cd-btn { display: inline-flex; }
-.cd-compare .is-hi { background: rgba(200, 240, 49, 0.045); }
-.cd-compare thead th.is-hi { box-shadow: inset 0 3px 0 var(--cd-accent); }
-.cd-compare-sep th { padding-top: 28px !important; font-family: var(--cd-font) !important; font-size: 16px !important; font-weight: 800 !important; letter-spacing: 0.02em !important; color: var(--cd-ink) !important; text-transform: uppercase; }
-.cd-compare tr:last-child > * { border-bottom: 0; }
-/* the geometry's size picker, under its heading (2026-11-24): small square chips, the builder's radio look */
-.cd-compare-sep th > span { display: block; position: sticky; left: 18px; width: min(100%, calc(100vw - 2 * var(--cd-gutter) - 38px)); text-align: center; }   /* the heading centered over the picker, the same way (the user's call) */
-.cd-compare .cd-compare-sizes { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 12px;
-  /* centered (the user's call): across the row on desktop, across the visible part on phones, where the table
-     is wider than the screen and scrolls sideways — so it's as wide as the screen's table area and pinned left */
-  position: sticky; left: 18px; width: min(100%, calc(100vw - 2 * var(--cd-gutter) - 38px)); }
-.cd-compare .cd-compare-sizes .cd-build-opt { min-width: 56px; padding: 10px 12px; justify-content: center; text-align: center;
-  font-family: var(--cd-font); font-size: 15px; font-weight: 700; letter-spacing: 0; text-transform: none; }
-@media (max-width: 380px) { .cd-compare .cd-compare-sizes { gap: 6px; } .cd-compare .cd-compare-sizes .cd-build-opt { min-width: 50px; padding: 10px 8px; } }   /* one row at 360px */
-@media (max-width: 899px) { .cd-compare tbody th { width: 120px; } .cd-compare { min-width: 760px; } }
+/* the comparison itself: css/compare.css (page-only, imported by Compare.js) */
 
 /* ------------------------------------------------------------------ cart and checkout */
 .cd-cart { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 40px; align-items: start; }
 .cd-cart-list { display: grid; gap: 14px; }
-.cd-cart-item { display: grid; grid-template-columns: 200px minmax(0, 1fr) auto; gap: 24px; align-items: center; padding: 18px; border-radius: var(--cd-radius); background: var(--cd-bg-2); border: 1px solid var(--cd-line); }
-.cd-cart-item img { width: 100%; height: auto; border-radius: 10px; background: var(--cd-shot-glow); }
+.cd-cart-item { display: grid; grid-template-columns: 200px minmax(0, 1fr) auto; gap: 0 24px; align-items: center; overflow: hidden; border-radius: var(--cd-radius); background: var(--cd-bg-2); border: 1px solid var(--cd-line); }
+/* the photo bleeds to the item's edges, a hairline on its right (2026-11-25, the user's call); the text and price keep the padding */
+.cd-cart-item .cd-shot { align-self: stretch; display: flex; align-items: center; border-right: 1px solid var(--cd-line); }
+.cd-cart-item > div { padding-block: 18px; }
+.cd-cart-item .cd-cart-price { padding: 18px 18px 18px 0; }
+.cd-cart-item img { width: 100%; height: auto; }
 .cd-cart-item > div { display: grid; gap: 8px; }
 .cd-cart-line { font-size: 14.5px; color: var(--cd-ink-2); }
 .cd-cart-price { font-size: 20px; font-weight: 800; align-self: start; }
@@ -575,7 +678,10 @@ body:has(.cd) { margin: 0; }   /* the browser's default 8px margin framed every 
 @media (max-width: 899px) {
   .cd-cart { grid-template-columns: 1fr; }
   .cd-cart-item { grid-template-columns: 110px minmax(0, 1fr); }
+  .cd-cart-item .cd-shot { grid-row: 1 / span 2; }
+  .cd-cart-item > div { padding: 18px 18px 6px 0; }
   .cd-cart-price { grid-column: 2; }
+  .cd-cart-item .cd-cart-price { padding: 0 18px 18px 0; }
   .cd-cart-sum { position: static; }
   .cd-fields { grid-template-columns: 1fr; }
   .cd-done-steps li { grid-template-columns: 40px minmax(0, 1fr); }
@@ -614,7 +720,30 @@ body:has(.cd) { margin: 0; }   /* the browser's default 8px margin framed every 
 .cd-menu ul { display: grid; }
 .cd-menu li a { display: block; padding: 14px 0; border-bottom: 1px solid var(--cd-line); font-size: 28px; font-weight: 800; font-stretch: 118%; text-transform: uppercase; text-decoration: none; color: var(--cd-ink); }
 .cd-menu .cd-btn { justify-self: start; }
-/* the menu button wherever the header's nav is hidden (≤1100px); the Build a bike button gives way to it only on phones */
+/* the menu, animated (2026-11-25): a shutter comes down from the top, the close button turns in, each row rises
+   out of its own mask 45ms after the one above (its hairline drawing in under it), then Build yours fades up;
+   `.is-closing` (MobileMenu.js, 0.42s) lifts the shutter back up with the rows dropping away first */
+@media (prefers-reduced-motion: no-preference) {
+  .cd-menu[open] { animation: cd-menu-in 0.62s cubic-bezier(0.76, 0, 0.24, 1) both; }
+  .cd-menu li { overflow: hidden; position: relative; }
+  .cd-menu li a { border-bottom-color: transparent; }
+  .cd .cd-menu li a:focus-visible { outline-offset: -3px; }   /* the row's mask would clip a ring outside it */
+  .cd-menu li::after { content: ""; position: absolute; inset: auto 0 0; height: 1px; background: var(--cd-line); transform-origin: 0 50%; }
+  .cd-menu[open] li a { animation: cd-menu-row 0.7s var(--cd-ease) both; animation-delay: calc(0.22s + var(--i) * 45ms); }
+  .cd-menu[open] li::after { animation: cd-menu-line 0.8s var(--cd-ease) both; animation-delay: calc(0.26s + var(--i) * 45ms); }
+  .cd-menu[open] .cd-menu-close { animation: cd-menu-x 0.6s var(--cd-ease) 0.3s both; }
+  .cd-menu[open] .cd-menu-cta { animation: cd-menu-cta 0.6s var(--cd-ease) both; animation-delay: calc(0.3s + var(--i) * 45ms); }
+  .cd-menu.is-closing { animation: cd-menu-out 0.42s cubic-bezier(0.76, 0, 0.24, 1) both; }
+  .cd-menu.is-closing :is(li a, li::after, .cd-menu-close, .cd-menu-cta) { animation: cd-menu-away 0.2s ease-in both; }
+}
+@keyframes cd-menu-in { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0); } }
+@keyframes cd-menu-out { from { clip-path: inset(0); } to { clip-path: inset(0 0 100% 0); } }
+@keyframes cd-menu-row { from { translate: 0 105%; } to { translate: 0 0; } }
+@keyframes cd-menu-line { from { scale: 0 1; } to { scale: 1 1; } }
+@keyframes cd-menu-x { from { opacity: 0; rotate: -90deg; scale: 0.6; } to { opacity: 1; rotate: 0deg; scale: 1; } }
+@keyframes cd-menu-cta { from { opacity: 0; translate: 0 16px; } to { opacity: 1; translate: 0 0; } }
+@keyframes cd-menu-away { to { opacity: 0; translate: 0 -12px; } }
+/* the menu button wherever the header's nav is hidden (≤1100px); the Build yours button gives way to it only on phones */
 @media (max-width: 1100px) { .cd-menu-btn { display: grid; } }
 @media (max-width: 899px) { .cd-header-build { display: none; } }
 
@@ -623,11 +752,14 @@ body:has(.cd) { margin: 0; }   /* the browser's default 8px margin framed every 
   .cd-hero-copy .cd-lede { display: none; }
 }
 
-/* ---------------------------------------------------------------- preloader (Preloader.js, landing) */
+/* ---------------------------------------------------------------- preloader (Preloader.js, every page and between pages) */
 .cd-pre { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; background: var(--cd-bg); color: var(--cd-ink);
   transition: opacity 0.6s ease, visibility 0s 0.6s; animation: cd-pre-safety 0.6s ease 9s forwards; }   /* no JS: it still lifts */
 .cd-pre.is-done { opacity: 0; visibility: hidden; }
 .cd-pre.is-gone, html.cd-pre-skip .cd-pre { display: none; }
+/* leaving for another page: the cover fades back in over the page (the lockup with it), and stays until the browser goes */
+.cd-pre.is-leaving { display: grid; visibility: visible; opacity: 1; transition: none; animation: cd-fade-in 0.36s ease both; }
+html.cd-pre-skip .cd-pre.is-leaving { display: grid; }
 @keyframes cd-pre-safety { to { opacity: 0; visibility: hidden; } }
 .cd-pre-lockup { display: grid; justify-items: center; gap: 26px; transition: translate 0.6s var(--cd-ease), opacity 0.45s ease; }
 .cd-pre.is-done .cd-pre-lockup { translate: 0 -16px; opacity: 0; }
@@ -635,7 +767,7 @@ body:has(.cd) { margin: 0; }   /* the browser's default 8px margin framed every 
 .cd-pre-arc { transform-box: view-box; transform-origin: 50% 50%; animation: cd-pre-turn 1.15s cubic-bezier(0.45, 0.05, 0.4, 0.95) infinite; }
 @keyframes cd-pre-turn { to { rotate: 360deg; } }
 .cd-pre-row { display: flex; overflow: hidden; padding-block: 2px; }
-.cd-pre-row .cd-reg { margin: -0.1em 0 0 4px; font-size: 13px; animation: cd-word-in 0.8s var(--cd-ease) 0.15s backwards; }
+.cd-pre-row .cd-reg { margin: 0 0 0 4px; --reg-h: 18px; animation: cd-word-in 0.8s var(--cd-ease) 0.15s backwards; }
 .cd-pre-word { display: block; height: 18px; width: auto; animation: cd-word-in 0.8s var(--cd-ease) 0.15s backwards; }
 .cd-pre-bar { display: block; width: 168px; height: 2px; background: var(--cd-line); overflow: hidden; }
 .cd-pre-bar b { display: block; height: 100%; background: var(--cd-accent); transform-origin: left; scale: var(--p, 0) 1; transition: scale 0.35s ease; }
@@ -659,11 +791,14 @@ body:has(.cd) { margin: 0; }   /* the browser's default 8px margin framed every 
   .cd-hero-copy .cd-hero-row { animation: cd-fade-up 0.8s var(--cd-ease) 0.75s backwards; }
   .cd-story .cd-word { animation: cd-fade-in 1.6s ease 0.2s backwards; }
   .cd-story :is(.cd-paints, .cd-drag-hint) { animation: cd-fade-in 0.8s ease 0.95s backwards; }
-  .cd-hot:not(.is-open) .cd-hot-btn { animation: cd-pop-in 0.6s var(--cd-ease) calc(1.05s + var(--hi, 0) * 90ms) backwards, cd-pulse 2.4s var(--cd-ease) calc(1.8s + var(--hi, 0) * 90ms) infinite; }
+  /* the pop-in is on the hotspot itself, whose class never changes, so it plays once: on the button, keyed to
+     :not(.is-open), it replayed every time a card closed, and the button vanished for a second (2026-11-25) */
+  .cd-story .cd-hot { animation: cd-pop-in 0.6s var(--cd-ease) calc(1.05s + var(--hi, 0) * 90ms) backwards; }
+  .cd-hot:not(.is-open) .cd-hot-btn { animation: cd-pulse 2.4s var(--cd-ease) calc(1.8s + var(--hi, 0) * 90ms) infinite; }
   .cd-specs li { animation: cd-fade-up 0.8s var(--cd-ease) backwards; }
   .cd-specs li:nth-child(1) { animation-delay: 0.9s; } .cd-specs li:nth-child(2) { animation-delay: 0.98s; }
   .cd-specs li:nth-child(3) { animation-delay: 1.06s; } .cd-specs li:nth-child(4) { animation-delay: 1.14s; }
-  html:not(.cd-pre-skip) .cd:has(.cd-pre:not(.is-done)) .cd-story :is(*, *::before, *::after) { animation-play-state: paused !important; }
+  html:not(.cd-pre-skip) .cd:has(.cd-pre:not(.is-done)) :is(.cd-story, .cd-main-app) :is(*, *::before, *::after) { animation-play-state: paused !important; }   /* the app pages' entrances too (the cover is on every page) */
 
   /* the app pages' titles (Compare, Fit, Cart, Checkout, the builder) on load, Hearthside-style */
   .cd-main-app h1 .cd-w > span { animation: cd-word-in 0.9s var(--cd-ease) backwards; animation-delay: calc(0.05s + var(--i) * 55ms); }
@@ -680,24 +815,6 @@ body:has(.cd) { margin: 0; }   /* the browser's default 8px margin framed every 
 /* tablets in portrait (700–899px): the range two by two (one card a row left half the width empty) */
 @media (min-width: 700px) and (max-width: 899px) {
   .cd-range { grid-template-columns: 1fr 1fr; }
-}
-
-/* Find your bike's result: the studio is the whole section's backdrop (the user's call, 2026-11-24; it was
-   a framed 4:3 box on the right) — the viewer fills the section behind the copy, the bike stands on the
-   right (BikeViewer's `place`), and the wall light sits behind it. Phones keep the bike above the copy,
-   edge to edge, unframed. */
-.cd-find.is-result { position: relative; isolation: isolate; background: var(--cd-bg); }
-@media (min-width: 900px) {
-  .cd-find.is-result { overflow: hidden; border-block-color: transparent; }
-  .cd-find.is-result .cd-viewer { position: absolute; inset: 0; z-index: 0; width: auto; aspect-ratio: auto; border: 0; border-radius: 0;
-    --cd-spot-x: calc(70% + var(--cd-lx, 0%)); --cd-spot-y: calc(-12% + var(--cd-ly, 0%)); }   /* the light behind the bike, which stands high (place.y) */
-  .cd-find.is-result .cd-viewer-still { inset: 0 0 0 44%; width: 56%; padding: 6% 4% 8%; }
-  .cd-find.is-result .cd-find-result { min-height: min(640px, 72svh); grid-template-columns: minmax(0, 0.9fr) 1.1fr; }
-  .cd-find.is-result .cd-find-copy { position: relative; z-index: 1; }
-  .cd-find.is-result .cd-find-result { align-items: start; }
-}
-@media (max-width: 899px) {
-  .cd-find.is-result .cd-viewer { width: auto; margin-inline: calc(-1 * var(--cd-gutter)); border: 0; border-radius: 0; }
 }
 
 /* Why Kord® (#why-kord, 2026-11-24): the guarantees (the steps' four columns, a word or two as the
@@ -717,6 +834,68 @@ body:has(.cd) { margin: 0; }   /* the browser's default 8px margin framed every 
 .cd-diff-table .is-kord { width: 34%; background: rgba(200, 240, 49, 0.05); }
 .cd-diff-table td.is-kord { color: var(--cd-ink); font-weight: 600; }
 .cd-diff-check { width: 16px; height: 16px; margin: 0 10px -3px 0; color: var(--cd-accent); }
+/* the landing's teaser links on to the page */
+.cd-guar-more { margin-top: clamp(40px, 5vw, 56px); }
+
+/* The Kord® Guarantee page (/pitch/kord/guarantee/, 2026-11-25): the promise beside a bike in the studio, the
+   four guarantees as cards with what each covers, how a return works, how buying a Kord compares */
+/* StudioHero (the Guarantee page and Virtual fit): the heading on the left; on the right the landing's 3D Arc
+   (BikeViewer, frameless, its floor feathered out at the stage's edges) over its giant word, which you can drag
+   round; the studio fills the section edge to edge and up behind the fixed header, its light behind the bike;
+   stacked on phones and tablets, the bike first */
+.cd-sh { position: relative; isolation: isolate; overflow: hidden; --hero: 0; --cd-lx: 17%; margin-top: -78px; padding: 78px 0 clamp(40px, 5vw, 72px); }
+.cd-sh-row { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 24px clamp(24px, 4vw, 64px); align-items: center; }
+.cd-sh-copy { display: grid; gap: 16px; justify-items: start; }
+.cd-sh-copy .cd-lede { margin-top: 6px; max-width: 34ch; }
+.cd-sh + .cd-section { padding-top: 0; }   /* the page carries on right under it */
+/* KORD, the wordmark, as faint as the landing's giant word, behind the bike only: as wide as the stage, its top level with
+   the bike's (the 3D framing is fixed for the 5:3 stage, so the bike's top — saddle and hoods — sits 13.4% down it) */
+.cd-sh-frame { position: relative; display: grid; width: min(100%, (100svh - 210px) * 5 / 3); }   /* the viewer's size */
+.cd-sh-word { position: absolute; z-index: -1; left: 50%; top: 13.4%; translate: -50% 0; width: 100%; height: auto; color: rgba(225, 230, 238, 0.06); pointer-events: none; }
+.cd-sh-stage { display: grid; justify-items: center; gap: 2px; }
+.cd-sh-viewer.cd-viewer { width: 100%; aspect-ratio: 5 / 3; border-color: transparent; border-radius: 0; background: none;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent), linear-gradient(#000 76%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent), linear-gradient(#000 76%, transparent);
+  mask-composite: intersect; }
+.cd-sh-viewer.cd-viewer::before, .cd-sh-viewer.cd-viewer::after { content: none; }
+.cd-sh-hint { margin: -4% 0 0; position: relative; font-family: var(--cd-mono), monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cd-ink-2); }
+.cd-sh-stage:not(:has(.cd-viewer[data-state="ready"])) .cd-sh-hint { visibility: hidden; }   /* the still can't be turned */
+@media (max-width: 899px) {
+  .cd-sh { --cd-lx: 0%; --cd-ly: -14%; }
+  .cd-sh-row { grid-template-columns: 1fr; }
+  .cd-sh-stage { order: -1; }
+}
+/* the closing band carries the promise and both calls to action */
+.cd-guar-cta-copy { display: grid; gap: 18px; max-width: 860px; }
+.cd-guar-cta .cd-band-title { max-width: 17ch; }
+.cd-guar-cta-copy p { font-size: clamp(17px, 1.5vw, 20px); line-height: 1.5; max-width: 44ch; }
+.cd-guar-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.cd-btn-outline-dark { border-color: var(--cd-on-accent); color: var(--cd-on-accent); }
+.cd-btn-outline-dark:hover { background: rgba(11, 12, 14, 0.08); }
+@media (max-width: 899px) { .cd-sh { margin-top: -70px; padding-top: 70px; } }
+.cd-guar-list, .cd-guar-return { padding-top: 0; }
+.cd-guar-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.cd-guar-card { display: grid; align-content: start; justify-items: start; gap: 14px; padding: clamp(28px, 3vw, 40px); container-type: inline-size;
+  background: var(--cd-bg-2); border: 1px solid var(--cd-line); border-radius: var(--cd-radius); }
+.cd-guar-card .cd-guarantee-n { font-size: min(clamp(40px, 4vw, 60px), 18cqi); }
+.cd-guar-line { color: var(--cd-ink-2); max-width: 44ch; }
+.cd-guar-card .cd-card-build { margin-top: 6px; }
+.cd-steps-3 { grid-template-columns: repeat(3, 1fr); }
+.cd-guar-diff { padding-top: 0; }
+.cd-guar-diff .cd-diff { margin-top: 0; }
+@media (max-width: 1100px) {
+  .cd-steps-3 { grid-template-columns: repeat(3, 1fr); }
+  .cd-steps-3 .cd-step:nth-child(3) { padding-left: 28px; border-left: 1px solid var(--cd-line); }
+}
+@media (max-width: 899px) {
+  .cd-guar-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  .cd-steps-3 { grid-template-columns: 1fr; border-top: 0; }
+  .cd-steps-3 .cd-step, .cd-steps-3 .cd-step + .cd-step, .cd-steps-3 .cd-step:nth-child(3) { padding: 24px 0 0; border-left: 0; border-top: 1px solid var(--cd-line); }
+  .cd-steps-3 { row-gap: 32px; }
+}
 
 /* small phones: a button's uppercase label may wrap onto two lines rather than widen the page (in caps,
    "COMPARE WITH THE MERIDIAN™" is wider than a 360px screen; one unwrappable button made Chrome widen

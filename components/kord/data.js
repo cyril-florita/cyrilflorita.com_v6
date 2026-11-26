@@ -37,13 +37,15 @@ export const BIKES = [
 // it too, removed 2026-11-23). The wordmark sits on carbon (the frame is paint banded with carbon
 // edges), so every decal is light.
 export const PAINTS = [
-  // `coat` / `coatRough`: the clear coat's strength and roughness. All four are matte, with no
+  // `coat` / `coatRough`: the clear coat's strength and roughness. All five are matte, with no
   // coat (2026-11-23: a gloss coat read as glare); Ember keeps a little metallic flake.
   // The first is the default (Stealth; Volt was the default for a while on 2026-11-23).
   // `decal`: the down-tube wordmark (on raw carbon); `badge`: the model name on the head tube's front,
   // which is paint, so it takes a color that contrasts with the paint.
   { id: "stealth", name: "Stealth", hex: "#16171a", decal: "#c8f031", badge: "#c8f031", metal: 0.05, rough: 0.68, coat: 0, coatRough: 0.5 },
   { id: "volt", name: "Volt", hex: "#c8f031", decal: "#c8f031", badge: "#16171a", metal: 0.0, rough: 0.64, coat: 0, coatRough: 0.5 },
+  // a deep matte blue with a little flake, white lettering, between Volt and Glacier (2026-11-25, the user's call: "another paint: blue")
+  { id: "cobalt", name: "Cobalt", hex: "#2350c8", decal: "#f4f6f8", badge: "#f4f6f8", metal: 0.12, rough: 0.6, coat: 0, coatRough: 0.5 },
   { id: "glacier", name: "Glacier", hex: "#e4e8ec", decal: "#f4f6f8", badge: "#16171a", metal: 0.0, rough: 0.64, coat: 0, coatRough: 0.5 },
   { id: "ember", name: "Ember", hex: "#b8321c", decal: "#f4f1ea", badge: "#f4f1ea", metal: 0.15, rough: 0.6, coat: 0, coatRough: 0.5 },
 ];
@@ -203,7 +205,7 @@ export const SIZE_GEO = {
 // `geo`: the size's real geometry against the 56, for the numbers (Compare): small frames are lower and
 // shorter, with a slacker head angle and a steeper seat angle, as a typical race range runs; chainstays
 // and BB drop don't change. (The 3D's `stack` above is softened; these are the real ones.)
-export const PAINT_PRICE = { stealth: 0, volt: 0, glacier: 350, ember: 350 };   // the last two: signature paints
+export const PAINT_PRICE = { stealth: 0, volt: 0, cobalt: 350, glacier: 350, ember: 350 };   // the last three: signature paints
 export const GROUPSETS = [
   { id: "sport", name: "Drive 12 Sport", line: "Wireless 2×12, hydraulic discs.", price: 0, weight: 0 },
   { id: "race", name: "Drive 12 Race", line: "Lighter shifters and derailleurs, a carbon crank.", price: 1400, weight: -0.25 },
@@ -222,7 +224,7 @@ export function normalizeBuild(raw = {}) {
   return {
     bike: bike.id,
     size: pick(raw.size, SIZES, "54"),
-    paint: pick(raw.paint, PAINTS.map((p) => p.id), BIKE_PAINT[bike.id]),
+    paint: pick(raw.paint, PAINTS.map((p) => p.id), PAINTS[0].id),   // Stealth when none is given: no bike has "its" paint (2026-11-25)
     group: pick(raw.group, GROUPSETS.map((g) => g.id), "sport"),
     wheels: pick(raw.wheels, WHEELSETS.map((w) => w.id), "stock"),
   };
@@ -294,20 +296,28 @@ export function fitFor(m) {
   return { v, size, saddle, crank, stem, bar };
 }
 
-// The Kord® Guarantee (the landing's #kord-guarantee; "Why Kord®" for a moment), which replaced How it works on 2026-11-24, the user's call): the
-// guarantees, then how buying a Kord differs from a typical online store and a bike shop. The design
-// system's cards sample shows the guarantees too.
+// The Kord® Guarantee: its own page since 2026-11-25 (/pitch/kord/guarantee/, the user's call; it was the
+// landing's #kord-guarantee section, which replaced How it works on 2026-11-24, and is now a teaser linking
+// there): the guarantees and their terms (the user's copy, 2026-11-25), how a return works, then how
+// buying a Kord differs from a typical online store and a bike shop. The design system's cards sample shows
+// the guarantees too.
 export const GUARANTEES = [
-  { id: "ride", figure: "30 days", title: "Ride it, or send it back", line: "Ride it for 30 days. If it isn't right, we collect it from your door and refund you in full." },
-  { id: "frame", figure: "Lifetime", title: "Frame warranty", line: "Every Kord® frame and fork is covered for as long as you own the bike." },
-  { id: "crash", figure: "3 years", title: "Crash replacement", line: "Break the frame in a crash in the first three years and we replace it at our cost price." },
-  { id: "fit", figure: "1 year", title: "Fit adjustments", line: "If the fit feels off in the first year, we send a different stem, bar, or saddle, free.", href: "/pitch/kord/fit/", cta: "Try the virtual fit" },
+  { id: "ride", figure: "30 days", title: "Ride it, or send it back", line: "Ride it for 30 days. If it isn’t right, return it in its original condition for a refund of the bike price. A prepaid return label and replacement shipping box are $95, deducted from your refund. Original shipping, and any damaged or missing parts, are not refunded." },
+  { id: "frame", figure: "Lifetime", title: "Frame warranty", line: "Kord® frames and forks are covered against manufacturing defects in materials and workmanship for as long as the original owner owns the bike. We’ll repair or replace the frame at our discretion. Crashes, misuse, modifications, and normal wear aren’t covered. Proof of purchase is required." },
+  { id: "crash", figure: "3 years", title: "Crash replacement", line: "If you damage the frame in a crash within three years, we’ll offer a replacement frame at our cost price. We’ll need photos and an inspection first. The offer is limited to one replacement per bike, and you pay shipping." },
+  { id: "fit", figure: "1 year", title: "Fit adjustments", line: "If the fit feels off in the first year, we’ll swap your stem, bar, or saddle for a different size. Your first swap ships free, and later swaps cost shipping. Parts must be unused or lightly used.", href: "/pitch/kord/fit/", cta: "Try the virtual fit" },
+];
+// how a return works, on the Guarantee page (matches the 30-day terms above)
+export const RETURN_STEPS = [
+  { id: "tell", title: "Tell us", line: "Message us or call within 30 days of delivery. No form to fill in, and no reason needed." },
+  { id: "ship", title: "We send a box", line: "A prepaid return label and a replacement shipping box, $95, deducted from your refund. Pack the bike in its original condition." },
+  { id: "refund", title: "You're refunded", line: "The bike price, less the $95, within five working days of the bike reaching us. Original shipping isn’t refunded." },
 ];
 export const DIFFERENCES = [
   { label: "Built", kord: "To order, for you", online: "From stock", shop: "From stock" },
   { label: "Fitted", kord: "Before it ships, from your measurements and a video call", online: "Rarely: you pick a size", shop: "In the store" },
   { label: "Arrives", kord: "Ride-ready: 95% assembled, bar and front wheel to fit", online: "Partly assembled", shop: "Ready, collected in store" },
-  { label: "Trial", kord: "30 days, collected free", online: "Returns if unridden", shop: "Rarely" },
+  { label: "Trial", kord: "30 days, the bike price refunded", online: "Returns if unridden", shop: "Rarely" },
   { label: "Frame warranty", kord: "Lifetime, plus crash replacement", online: "Varies by brand", shop: "Varies by brand" },
   { label: "Price", kord: "Direct, with no dealer margin", online: "Direct", shop: "Includes the shop's margin" },
 ];
