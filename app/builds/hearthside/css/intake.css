@@ -256,7 +256,10 @@
 @media (max-width: 900px) {
   /* Phones and tablets: the search button shrinks to an icon in the top bar. */
   .hs-app-search { width: 44px; padding: 0; justify-content: center; margin-left: auto; }
-  .hs-app-search span, .hs-app-search kbd { display: none; }
+  /* the label stays for screen readers (the button is named by it since 2026-11-26: an aria-label of "Search" didn't
+     hold the visible "Search ⌘K", axe's label-content-name-mismatch); only the shortcut hint goes */
+  .hs-app-search span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .hs-app-search kbd { display: none; }
   .hs-app-side-foot { margin-left: 4px; }
   .hs-cmd { margin-top: 16px; max-height: calc(100dvh - 32px); }
   .hs-cmd-foot { display: none; }

@@ -119,7 +119,8 @@ export default function Plan() {
                 <ul>
                   {extras.map((p) => (
                     <li key={p.id}>
-                      <button type="button" className="dl-chip" onClick={() => add(p.id)} aria-label={`Add ${p.name}`}>
+                      {/* the name holds the visible text, name and price (axe's label-content-name-mismatch, 2026-11-26) */}
+                      <button type="button" className="dl-chip" onClick={() => add(p.id)} aria-label={`Add ${p.name} +${money(p.price)}`}>
                         <Pill id={p.id} size="sm" tilt={-20} /> {p.name} <span className="dl-meta">+{money(p.price)}</span>
                       </button>
                     </li>

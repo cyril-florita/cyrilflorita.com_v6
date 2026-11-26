@@ -77,7 +77,12 @@
 }
 .ms-view.is-dragging { cursor: grabbing; }
 .ms-view:focus-visible { outline-offset: -6px; }
-.ms-stage[data-state="fallback"] .ms-view { background: url(/builds/mustang/car-fallback.webp) 50% 55% / min(60%, 900px) auto no-repeat; cursor: default; }
+/* the car's still (2026-11-26): shown while the 3D car loads (the preloader lifts on it after 2.2s, so a slow
+   phone sees the car at once) and fading out as the canvas fades in; it stays without WebGL (fallback) */
+.ms-view::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 0.8s ease;
+  background: url(/builds/mustang/car-fallback.webp) 50% 55% / min(60%, 900px) auto no-repeat; }
+.ms-stage:is([data-state="loading"], [data-state="fallback"]) .ms-view::before { opacity: 1; }
+.ms-stage[data-state="fallback"] .ms-view { cursor: default; }
 
 .ms-top, .ms-copy, .ms-offer { position: absolute; z-index: 4; pointer-events: none; }
 .ms-top a, .ms-copy a, .ms-copy button { pointer-events: auto; }
@@ -231,7 +236,8 @@
 .ms-offer-close { position: absolute; top: 10px; right: 10px; width: 44px; height: 44px; border: 0; background: none; color: var(--ms-ink-2); font-size: 22px; line-height: 1; cursor: pointer; }
 .ms-offer-close:hover { color: var(--ms-ink); }
 .ms-offer-more[open] .ms-offer-panel { animation: ms-in-up 0.35s var(--ms-ease); }
-.ms-loading { position: absolute; z-index: 4; left: 50%; top: 52%; translate: -50% -50%; font-family: var(--ms-font-head), sans-serif; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ms-ink-2); transition: opacity 0.4s ease; }
+/* screen readers only since 2026-11-26: the still shows where the car will be */
+.ms-loading { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .ms-stage:not([data-state="loading"]) .ms-loading { opacity: 0; visibility: hidden; }
 
 /* smoke: three drifting layers of the generated texture (Smoke.js) */
@@ -378,7 +384,7 @@
   .ms-loading { top: 30%; }
   .ms-stage:not([data-view="full"]) :is(.ms-copy, .ms-offer) { opacity: 1; }
   .ms-stage:not([data-view="full"]) .ms-copy a { pointer-events: auto; }
-  .ms-stage[data-state="fallback"] .ms-view { background-position: center; background-size: 96% auto; }
+  .ms-view::before { background-position: center; background-size: 96% auto; }
   .ms-specs dl { grid-template-columns: repeat(2, 1fr); }
   .ms-specs dl > div { padding: 24px 20px; }
   .ms-specs dl > div:nth-child(odd) { border-left: 0; }

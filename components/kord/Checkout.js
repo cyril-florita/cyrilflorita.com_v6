@@ -60,6 +60,7 @@ export default function Checkout() {
 
   if (!items.length) return (
     <div className="cd-cart-empty">
+      <h1 className="cd-h2"><Words text="Checkout" /></h1>
       <p className="cd-lede">There&apos;s nothing to check out yet.</p>
       <div className="cd-find-actions">
         <a className="cd-btn cd-btn-primary" href="/builds/kord/build/">Build yours<span className="cd-arrow" aria-hidden="true">→</span></a>

@@ -9,7 +9,12 @@ import { useEffect, useRef } from "react";
 // the lockup lifts and the cover fades, and the page's own entrance (held
 // while the cover is up, mustang.css) plays. At least 1.4s so it reads, at most
 // 8s; without JS a CSS timer fades it out.
-const MIN = 1400, MAX = 8000;
+// The car gets GRACE ms (2026-11-26): past that the cover lifts as soon as the fonts and the car's still
+// (car-fallback.webp, shown in the stage until the 3D car is ready — mustang.css) are in, and the 3D car
+// glides in over the still when it's ready. Waiting for the 2.4 MB model held a throttled phone under the
+// cover for ~7s, and Lighthouse read 56-59 (as Kord, whose preloader does the same).
+const MIN = 1400, GRACE = 2200, MAX = 8000;
+const STILL = "/builds/mustang/car-fallback.webp";
 
 export default function Preloader() {
   const ref = useRef(null);
@@ -45,8 +50,12 @@ export default function Preloader() {
     const check = () => { if (isReady()) document.fonts.ready.then(finish); };
     if (stage) { mo = new MutationObserver(check); mo.observe(stage, { attributes: true, attributeFilter: ["data-state"] }); }
     check();
+    // the car is slow: go with the still
+    const still = new Image(); still.src = STILL;
+    const stillIn = still.decode ? still.decode().catch(() => {}) : Promise.resolve();
+    const grace = setTimeout(() => Promise.all([document.fonts.ready, stillIn]).then(finish), GRACE);
     cap = setTimeout(finish, MAX);
-    return () => { release(); mo?.disconnect(); clearTimeout(cap); clearTimeout(t1); clearTimeout(t2); };
+    return () => { release(); mo?.disconnect(); clearTimeout(cap); clearTimeout(grace); clearTimeout(t1); clearTimeout(t2); };
   }, []);
   return (
     <div className="ms-pre" ref={ref} aria-hidden="true">

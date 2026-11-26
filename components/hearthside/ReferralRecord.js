@@ -28,7 +28,7 @@ export default function ReferralRecord() {
   }, []);
   if (!data) return <Skeleton blocks={2} />;
   const r = data.referrals.find((x) => x.id === id);
-  if (!r) return <p>Referral not found. <Link href={`${BASE}/intake/`}>Back to the board</Link></p>;
+  if (!r) return <><h1>Referral not found</h1><p><Link href={`${BASE}/intake/`}>Back to the board</Link></p></>;
 
   const c = coordinator(r.coordinator);
   const open = !["soc", "declined"].includes(r.stage);
