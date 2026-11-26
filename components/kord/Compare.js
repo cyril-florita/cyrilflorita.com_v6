@@ -90,7 +90,7 @@ export default function Compare() {
   return (
     <div className="cd-cmp">
       <div className="cd-cmp-paint">
-        <p className="cd-cmp-size-label">Every bike comes in every paint · <strong>{PAINTS.find((p) => p.id === paint).name}</strong></p>
+        <p className="cd-cmp-size-label">Every bike comes in every paint<span className="cd-cmp-dot"> · </span><strong>{PAINTS.find((p) => p.id === paint).name}</strong></p>
         <Choice label="Paint" name="compare-paint" value={paint} options={PAINTS} onPick={setPaint} className="cd-cmp-paints"
           render={(p) => (<><i className="cd-build-swatch" style={{ "--swatch": p.hex }} aria-hidden="true" /><strong>{p.name}</strong></>)} />
       </div>

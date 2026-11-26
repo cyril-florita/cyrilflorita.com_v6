@@ -18,10 +18,10 @@ import { WORDMARK } from "@/components/kord/wordmark";
 // Between pages: a click on a link to another Kord page fades the cover in (0.38s) before the browser leaves, so
 // leaving and arriving read as one move; Back from the next page (the back/forward cache) clears it.
 const MIN_HOME = 1200, MIN_PAGE = 700, GRACE = 2200, MAX = 8000, LEAVE = 380;
-// Under the cover, an app page's content stays invisible until the fonts are in (html.cd-fonts-wait, kord.css): the
-// headings re-wrap when Archivo arrives, and Lighthouse counted that as a layout shift even under the cover (Compare on a
-// phone read CLS 0.107, 2026-11-25). Nothing looks different — the cover is up meanwhile. A 4s timer lifts it regardless.
-const SKIP = `(function(){var d=document.documentElement;if(location.hash||matchMedia("(prefers-reduced-motion: reduce)").matches){d.classList.add("cd-pre-skip");return}d.classList.add("cd-fonts-wait");setTimeout(function(){d.classList.remove("cd-fonts-wait")},4000)})()`;
+// (2026-11-25 to -26 an app page's content also stayed invisible under the cover until the fonts were in, to stop
+// a font-swap layout shift on Compare — CLS 0.107 — at the cost of a later largest paint; the shift itself was then
+// fixed in compare.css, every Kord page measured with no movement at all on the swap, and the hiding was removed.)
+const SKIP = `if(location.hash||matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("cd-pre-skip")`;
 
 export default function Preloader() {
   const ref = useRef(null);
@@ -83,7 +83,7 @@ export default function Preloader() {
       if (!finished) raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
-    document.fonts?.ready.then(() => { floor = Math.max(floor, 0.3); document.documentElement.classList.remove("cd-fonts-wait"); });
+    document.fonts?.ready.then(() => { floor = Math.max(floor, 0.3); });
     const finish = () => {
       if (finished) return; finished = true;
       mo?.disconnect(); clearTimeout(cap); cancelAnimationFrame(raf);

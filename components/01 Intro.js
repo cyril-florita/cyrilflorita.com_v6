@@ -7,7 +7,17 @@ import { Fragment } from "react";
 
 const HEADLINE = "Cyril Florita";
 
-const Banner = ( { bgImage = "/img/cyril-florita-profile.webp" } ) => {
+// The hero photo at three widths (2026-11-26): phones show it ~260px wide and used to download the
+// 98KB full size; now 20KB (480w), tablets 46KB (800w). Both <img>s (the desktop banner and the phone/
+// tablet avatar, one of them hidden) share one srcset and sizes, so they still pick the same file and
+// it downloads once.
+const PHOTO = "/img/cyril-florita-profile.webp";
+const PHOTO_SRCSET = "/img/cyril-florita-profile-480.webp 480w, /img/cyril-florita-profile-800.webp 800w, /img/cyril-florita-profile.webp 1185w";
+const PHOTO_SIZES = "(max-width: 767px) 260px, (max-width: 1200px) 810px, 1080px";
+
+const Banner = ( { bgImage = PHOTO } ) => {
+  const srcSet = bgImage === PHOTO ? PHOTO_SRCSET : undefined;
+  const sizes = srcSet ? PHOTO_SIZES : undefined;
   const pathname = usePathname();
   return (
     <div className="cyril-section cyril-banner cyril-banner-right" id="intro">
@@ -88,12 +98,14 @@ const Banner = ( { bgImage = "/img/cyril-florita-profile.webp" } ) => {
           <div className="col-xl-5">
             <img
               src={bgImage}
+              srcSet={srcSet}
+              sizes={sizes}
               fetchPriority="high"
               alt="Cyril Florita"
               className="cyril-banner-image"
             />
             <div className="cyril-about-person cyril-hero-mobile-photo cyril-mb-30">
-              <img src={bgImage} alt="Cyril Florita" className="cyril-avatar" fetchPriority="high" />
+              <img src={bgImage} srcSet={srcSet} sizes={sizes} alt="Cyril Florita" className="cyril-avatar" fetchPriority="high" />
             </div>
           </div>
         </div>

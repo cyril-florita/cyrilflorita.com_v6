@@ -4,6 +4,9 @@
 
 /* the paint picker, centred at the top: every bike in the same paint */
 .cd-cmp-paint { display: grid; justify-items: center; gap: 12px; text-align: center; }
+/* phones: the paint's name always on its own line (2026-11-26) — at 412px the label fit on one line in Archivo but
+   wrapped in the backup font, so the cards jumped 18px when the web font arrived (Lighthouse's CLS, 0.107) */
+@media (max-width: 520px) { .cd-cmp-paint .cd-cmp-dot { display: none; } .cd-cmp-paint .cd-cmp-size-label strong { display: block; } }
 .cd-cmp .cd-cmp-paints { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
 .cd-cmp .cd-cmp-paints .cd-build-opt { display: inline-flex; flex-direction: row; align-items: center; gap: 10px; padding: 9px 16px 9px 10px; }
 .cd-cmp .cd-cmp-paints .cd-build-swatch { width: 22px; height: 22px; margin: 0; }

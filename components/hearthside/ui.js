@@ -30,7 +30,8 @@ export function Logo({ href = `${BASE}/` }) {
       <LogoMark size={36} />
       <span className="hs-logo-rule" aria-hidden="true" />
       <span className="hs-logo-text">
-        <span className="hs-logo-name">Hearthside</span>
+        {/* the space makes the visible text "Hearthside Home Health", inside the link's name (axe's label-content-name-mismatch); the grid ignores it */}
+        <span className="hs-logo-name">Hearthside</span>{" "}
         <span className="hs-logo-sub">Home Health</span>
       </span>
     </Link>

@@ -1441,6 +1441,9 @@ html:has(> body > .hs), html:has(.hs) { overflow-x: clip; }
   .hs-steps-zig.is-live .hs-step::after { background: var(--hs-page); border-color: var(--hs-rule); transition: background 0.3s, border-color 0.3s, scale 0.45s cubic-bezier(0.34, 1.56, 0.64, 1); }
   .hs-steps-zig.is-live .hs-step[data-on]::after { background: var(--hs-ember-text); border-color: var(--hs-ember-text); scale: 1.25; }
   .hs-steps-zig.is-live .hs-step > :is(.hs-photo-frame, .hs-step-n, h3, p) { opacity: 0.25; translate: 0 24px; transition: opacity 0.6s var(--hs-ease), translate 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+  /* a step not reached yet keeps its text at 80% (2026-11-26): at 25% its numeral and title were 1.7–2.1:1 (an axe failure), and at 60% its
+     description still fell to 3.0–4.3:1 in some looks; 80% passes AA in all four, and the 25% photo still reads as unlit */
+  .hs-steps-zig.is-live .hs-step > :is(.hs-step-n, h3, p) { opacity: 0.8; }
   .hs-steps-zig.is-live .hs-step[data-on] > :is(.hs-photo-frame, .hs-step-n, h3, p) { opacity: 1; translate: 0 0; }
   .hs-steps-zig.is-live .hs-step[data-on] > h3 { transition-delay: 0.06s; }
   .hs-steps-zig.is-live .hs-step[data-on] > p { transition-delay: 0.12s; }
