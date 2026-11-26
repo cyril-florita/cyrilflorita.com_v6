@@ -134,12 +134,12 @@ const Page = () => {
             <CaseSection id="results" number={2} title="Results & Impact">
               <p>Viteo hasn&apos;t launched, so there are no market numbers, and I won&apos;t invent any. What it delivers is a complete, working product rather than mockups, measured on the live site:</p>
               <CaseStats items={[
-                { value: "98", label: "Performance (mobile)" },
+                { value: "97", label: "Performance (mobile)" },
                 { value: "100", label: "Accessibility" },
                 { value: "100", label: "Best practices" },
                 { value: "100", label: "SEO" },
               ]} />
-              <p>PageSpeed Insights scores for the live landing page on a phone, 3D scene included; on desktop it scores 99. Fixing what the first audit found took desktop performance from 72 to 95 and accessibility from 94 to 100. A mobile pass (WebP renders, fonts and analytics off the critical path, page-only CSS split out) then took mobile from 62 to 79, and later tuning brought it to 98, with the largest paint at 1.1 seconds. Every text color passes WCAG AA in all three themes, light and dark. At launch, the metrics to watch are question-to-checkout conversion, edits on the plan page, and skips and pauses against cancellations.</p>
+              <p>PageSpeed Insights scores for the live landing page on a phone, 3D scene included (November 2026); on desktop it scores 98. Fixing what the first audit found took desktop performance from 72 to 95 and accessibility from 94 to 100. A mobile pass (WebP renders, fonts and analytics off the critical path, page-only CSS split out) then took mobile from 62 to 79, and later tuning brought it into the high 90s: two runs a few minutes apart in November 2026 read 90 and 97, since a simulated phone varies from run to run. Every text color passes WCAG AA in all three themes, light and dark. At launch, the metrics to watch are question-to-checkout conversion, edits on the plan page, and skips and pauses against cancellations.</p>
 
               <Desktop name="landing" caption="Landing page" />
               <p><strong>Depth under the pointer.</strong> On desktop, the pack is the pivot of the hero: near pills follow the cursor, far ones drift the other way, and the box turns far enough to show its side, then springs back into place.</p>
