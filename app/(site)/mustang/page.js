@@ -145,7 +145,7 @@ const Page = () => {
                 { value: "2.7 MB", label: "The 3D car, down from 26 MB" },
                 { value: "0", label: "Accessibility violations" },
               ]} />
-              <p>Lighthouse scores for the live ad. The licensed car model came as 26 MB of geometry and textures; trimmed, compressed, and with its textures resized, it loads at 2.7 MB. An axe audit (WCAG A and AA, plus best practices) at desktop, tablet, and phone widths, with motion on and off, finds no violations. Performance is the open item: Lighthouse 13 on the live ad reads 75 on desktop and 56 to 59 on a simulated phone (up from 43), almost all of it from the 3D model and the shaders, and the rest of the fix is planned below. Once it runs, the numbers to watch are how long people stay on the ad, how many open a window or change the paint, and how many tap through to the offer and book a test drive.</p>
+              <p>Lighthouse scores for the live ad. The licensed car model came as 26 MB of geometry and textures; trimmed, compressed, and with its textures resized, it loads at 2.7 MB. An axe audit (WCAG A and AA, plus best practices) at desktop, tablet, and phone widths, with motion on and off, finds no violations. Performance was the open item: the opening screen waited for the whole 3D car, so Lighthouse read 77 on desktop and 43 on a simulated phone. Now the page opens on a still of the car after two seconds and the 3D car glides in over it once it has loaded, and Lighthouse 13 on the live ad reads 92 to 93 on desktop and about 70 on a simulated phone. The rest of the phone fix is planned below. Once it runs, the numbers to watch are how long people stay on the ad, how many open a window or change the paint, and how many tap through to the offer and book a test drive.</p>
 
               <Desktop name="landing" caption="The ad" />
               <p><strong>Walk around the car.</strong> Drag the car and it turns all the way around and carries on a little when you let go, like a turntable. Point at it and the smoke behind it stirs. The giant word sits behind the car, so the car always reads first.</p>
@@ -251,7 +251,7 @@ const Page = () => {
                 ]}
                 next={[
                   "Run the kit with the dealer: send the email to a test list and compare its subject lines, and try the spots' first second against a still of the car; set the display ads' click-through to the dealer's page and compare the HTML5 ads with the GIFs.",
-                  "Bring phone performance up: lift the preloader on the fonts and show a still of the car until the 3D one is ready, ship the smoke and grit as image files, and serve a lighter model to phones.",
+                  "Bring phone performance further up: serve a lighter model to phones, so less has to download and decode while the page is already in use.",
                   "Put in the dealer's real offer, phone number, and test-drive booking, and its own photos for the share image.",
                   "Measure time on the ad, windows opened, paints tried, and taps through to the offer, then test which first view keeps people longest.",
                   "Add the trims and their prices, and let the paint carry through to the offer.",
