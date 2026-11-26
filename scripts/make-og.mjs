@@ -9,8 +9,8 @@
 //   whose important content survives a light crop, "contain" for transparent
 //   PNGs, logos, text-heavy graphics, portrait or very tall images so nothing
 //   gets cut off.
-// - public/og/default.jpg from the home hero photo (used by / and as the
-//   fallback for every page).
+// - public/og/default.jpg from a light-mode capture of the home hero,
+//   public/img/og-home.jpg (used by / and as the fallback for every page).
 // - public/apple-touch-icon.png (180×180) and public/icon-512.png (512×512):
 //   the site's bold uppercase "C" mark (as in the preloader/header logo)
 //   rendered from an SVG, white with the mark's soft offset shadow, on black.
@@ -32,7 +32,9 @@ const BLACK = { r: 0, g: 0, b: 0, alpha: 1 };
 
 // slug → [source image (under public/), fit, optional sharp position]
 const IMAGES = {
-  default: ["/img/cyril-florita-profile.png", "contain"],
+  // the home hero in light mode, the site's default since 2026-11-26 (a 1440×756 @2x capture, taken between
+  // the title's glitch flickers); it was the profile photo on black
+  default: ["/img/og-home.jpg", "cover"],
   gty_v9: ["/img/portfolio/main_gty9.png", "contain"],
   gty_v8: ["/img/portfolio/main_gty8.png", "contain"],
   "the-study-bible-app": ["/img/portfolio/main_the-study-bible-app.jpg", "cover"],
