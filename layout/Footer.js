@@ -1,6 +1,7 @@
 const Footer = () => {
   return (
-    <div className="cyril-bottom-panel">
+    // a <footer>, so the social links sit in the page's contentinfo landmark (axe's "region")
+    <footer className="cyril-bottom-panel">
       <div className="cyril-bp-frame">
 
         <div className="cyril-footer">
@@ -61,7 +62,7 @@ const Footer = () => {
 
       </div>
 
-    </div>
+    </footer>
 
   );
 };

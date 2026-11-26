@@ -1928,6 +1928,7 @@ about
 
     & .cyril-avatar {
         width: 100%;
+        height: auto;   // keeps the photo's ratio now that the img carries width/height (for the reserved space)
         object-fit: cover;
         object-position: center;
         margin-right: 60px;

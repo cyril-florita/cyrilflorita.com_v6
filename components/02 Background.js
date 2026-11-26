@@ -15,10 +15,14 @@ const Background = ( { bgImage = "/img/cyril-profile-w-a-smile.jpg" } ) => {
           
           <div className="col-xl-4">
             <div className="cyril-about-person cyril-mb-30">
+              {/* its intrinsic size, so the page reserves the photo's space before it loads (on a phone the
+                  text below jumped down when it arrived: Lighthouse read CLS 0.22, 2026-11-26) */}
               <img
                 src={bgImage}
                 alt="Cyril Florita"
                 className="cyril-avatar"
+                width={597}
+                height={598}
               />
             </div>
           </div>

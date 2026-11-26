@@ -43,7 +43,8 @@ const Header = () => {
   };
 
   return (
-    <div className="cyril-top-panel cyril-tp-2">
+    // a <header>, so the logo and nav sit in the page's banner landmark (axe's "region")
+    <header className="cyril-top-panel cyril-tp-2">
       <div className="cyril-tp-frame">
         <a
           href="/"
@@ -56,7 +57,7 @@ const Header = () => {
           <Nav />
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 
