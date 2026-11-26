@@ -706,6 +706,11 @@ page
     // not `hidden`, so it isn't a scroll container and sticky still works.
     overflow-x: clip;
     transform: translateY(90px) scale(0.95);
+    // scaled from the page's top (2026-11-26): from its middle — the default — a long case study's top started
+    // ~520px low (5% of a page thousands of pixels tall), which pushed the hero card below the screen until
+    // the entrance played, so on desktop Chrome counted it as the largest paint only then (~2.5s; Lighthouse
+    // desktop read 80-87). From the top every page gets the same 90px rise, and the card counts at once.
+    transform-origin: 50% 0;
     // 0.01, not 0 (2026-11-25): Chrome doesn't count anything at opacity 0 as painted, so the whole page's
     // largest paint waited for the preloader to lift, and Lighthouse's phone simulation charged everything
     // loaded meanwhile to it (case studies read 71-72, LCP 9-10s). At 0.01 it's still invisible (and under
