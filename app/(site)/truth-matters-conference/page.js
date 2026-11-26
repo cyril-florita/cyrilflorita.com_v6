@@ -62,7 +62,7 @@ const Page = () => {
             title="Truth Matters Conference"
             summary={CASE_SUMMARIES["/truth-matters-conference"]}
             facts={[
-              { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank" rel="noopener noreferrer">Grace to You</a>&mdash;A Christian Media Organization</> },
+              { label: "Employer", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank" rel="noopener noreferrer">Grace to You</a>&mdash;A Christian Media Organization</> },
               { label: "Role", value: "Brand, Motion, and Web Designer & Developer" },
               { label: "Platform & Tools", value: "Illustrator, Photoshop, After Effects" },
             ]}

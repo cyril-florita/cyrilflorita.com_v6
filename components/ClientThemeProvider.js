@@ -6,7 +6,7 @@ import { local } from '@/components/safeStorage';
 export function ClientThemeProvider({ children }) {
   useEffect(() => {
     const savedTheme = local.get('theme');
-    const initialTheme = savedTheme || 'dark';
+    const initialTheme = savedTheme || 'light';   // light by default (2026-11-26; it was dark)
     
     document.documentElement.setAttribute('data-theme', initialTheme);
 

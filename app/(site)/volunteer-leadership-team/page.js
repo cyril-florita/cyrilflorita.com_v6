@@ -64,7 +64,7 @@ const Page = () => {
             title="Volunteer Leadership Team"
             summary={CASE_SUMMARIES["/volunteer-leadership-team"]}
             facts={[
-              { label: "Client", value: <><a className="cyril-dark" href="https://childrenshungerfund.org" target="_blank" rel="noopener noreferrer">Children&apos;s Hunger Fund</a>&mdash;A Christian Non-Profit Ministry</> },
+              { label: "Employer", value: <><a className="cyril-dark" href="https://childrenshungerfund.org" target="_blank" rel="noopener noreferrer">Children&apos;s Hunger Fund</a>&mdash;A Christian Non-Profit Ministry</> },
               { label: "Role", value: "Designer & Developer (sole developer)" },
               { label: "Platform & Tools", value: <>{"WordPress"}<br />{"PHP, HTML & CSS, WPForms"}</> },
               { label: "Deliverables", value: "Landing page, lead-capture form, event registration hand-off" },

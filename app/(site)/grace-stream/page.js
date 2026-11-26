@@ -122,7 +122,7 @@ const Page = () => {
             title="Grace Stream"
             summary={CASE_SUMMARIES["/grace-stream"]}
             facts={[
-              { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank" rel="noopener noreferrer">Grace to You</a>&mdash;A Christian Media Organization</> },
+              { label: "Employer", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank" rel="noopener noreferrer">Grace to You</a>&mdash;A Christian Media Organization</> },
               { label: "Role", value: "Product Designer & Web Developer" },
               { label: "Website", value: <a className="cyril-dark" href="https://www.gty.org/listen/gracestream" target="_blank" rel="noopener noreferrer">gty.org/listen/gracestream</a> },
               { label: "Platform & Tools", value: "Radio.co" },

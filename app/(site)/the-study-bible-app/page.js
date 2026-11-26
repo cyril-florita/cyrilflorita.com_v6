@@ -79,7 +79,7 @@ const Page = () => {
             title="The Study Bible App"
             summary={CASE_SUMMARIES["/the-study-bible-app"]}
             facts={[
-              { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank" rel="noopener noreferrer">Grace to You</a>&mdash;A Christian Media Organization</> },
+              { label: "Employer", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank" rel="noopener noreferrer">Grace to You</a>&mdash;A Christian Media Organization</> },
               { label: "Role", value: "User Experience Designer" },
               { label: "Deliverables", value: "Research, Interactive Prototype, Style Guide" },
               { label: "Website", value: <a className="cyril-dark" href="https://studybible.org" target="_blank" rel="noopener noreferrer">studybible.org</a> },

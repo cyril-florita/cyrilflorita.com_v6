@@ -78,7 +78,7 @@ const Page = () => {
             summary={CASE_SUMMARIES["/gty_v9"]}
             result={{ value: "+50%", label: "Engaged sessions vs. v8" }}
             facts={[
-              { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank" rel="noopener noreferrer">Grace to You</a>&mdash;A Christian Media Organization</> },
+              { label: "Employer", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank" rel="noopener noreferrer">Grace to You</a>&mdash;A Christian Media Organization</> },
               { label: "Role", value: "User Experience Designer" },
               { label: "Platform & Tools", value: <>{"Web — Mobile, Tablet, Desktop"}<br />{"Axure RP, Google Analytics"}</> },
               { label: "Deliverables", value: "Research, IA, Personas & Journeys, Wireframes, Prototypes" },

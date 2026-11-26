@@ -93,10 +93,11 @@ const Page = () => {
             summary={CASE_SUMMARIES["/mustang"]}
             facts={[
               { label: "Target Clients", value: "Car dealerships" },
-              { label: "Role", value: "Designer & Front-End Developer" },
+              { label: "Role", value: "Designer & Front‑End Developer" },   // a non-breaking hyphen: on narrower screens it wraps after "&", not inside "Front-End"
               { label: "Platform & Tools", value: "Web — Desktop, Tablet, Mobile · Next.js, three.js, Blender" },
-              { label: "Try It Live", value: <><a className="cyril-dark" href={LIVE} target="_blank" rel="noopener noreferrer">The ad</a> · <a className="cyril-dark" href={KIT} target="_blank" rel="noopener noreferrer">The campaign kit</a></> },
+              { label: "Try It Live", value: <>The ad: <a className="cyril-dark" href={LIVE} target="_blank" rel="noopener noreferrer">cyrilflorita.com/builds/mustang</a><br />The campaign kit: <a className="cyril-dark" href={KIT} target="_blank" rel="noopener noreferrer">cyrilflorita.com/builds/mustang/kit</a></> },
             ]}
+            factCols="max-content minmax(0, 0.9fr) minmax(0, 1.1fr) max-content"   // the short fact and the links at their own width; Role and Platform share the rest
             tile="/mustang"
           />
 

@@ -86,7 +86,7 @@ const Page = () => {
             title="GTY Blog Graphics"
             summary={CASE_SUMMARIES["/gty-blog-graphics"]}
             facts={[
-              { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank" rel="noopener noreferrer">Grace to You</a>&mdash;A Christian Media Organization</> },
+              { label: "Employer", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank" rel="noopener noreferrer">Grace to You</a>&mdash;A Christian Media Organization</> },
               { label: "Role", value: "Web Designer & Developer" },
             ]}
             tile="/gty-blog-graphics"

@@ -63,7 +63,7 @@ const Page = () => {
             title="35-Day Generosity Challenge"
             summary={CASE_SUMMARIES["/35-day-generosity-challenge"]}
             facts={[
-              { label: "Client", value: <><a className="cyril-dark" href="https://childrenshungerfund.org" target="_blank" rel="noopener noreferrer">Children&apos;s Hunger Fund</a>&mdash;A Christian Non-Profit Ministry</> },
+              { label: "Employer", value: <><a className="cyril-dark" href="https://childrenshungerfund.org" target="_blank" rel="noopener noreferrer">Children&apos;s Hunger Fund</a>&mdash;A Christian Non-Profit Ministry</> },
               { label: "Role", value: "Designer & Developer (sole developer)" },
               { label: "Platform & Tools", value: <>{"WordPress"}<br />{"PHP, SASS, JavaScript/jQuery"}</> },
               { label: "Deliverables", value: "Landing page, 5 weekly updates, 5 blog posts, downloadable resource" },

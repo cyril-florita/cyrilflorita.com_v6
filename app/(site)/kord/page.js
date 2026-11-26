@@ -93,7 +93,7 @@ const Page = () => {
               { label: "Target Clients", value: "Direct-to-consumer brands" },
               { label: "Role", value: "Brand, Product Designer & Front-End Developer" },
               { label: "Platform & Tools", value: "Web — Desktop, Tablet, Mobile · Next.js, three.js, Blender" },
-              { label: "Try It Live", value: <a className="cyril-dark" href={LIVE} target="_blank" rel="noopener noreferrer">The site</a> },
+              { label: "Try It Live", value: <a className="cyril-dark" href={LIVE} target="_blank" rel="noopener noreferrer">cyrilflorita.com/builds/kord</a> },
             ]}
             tile="/kord"
           />

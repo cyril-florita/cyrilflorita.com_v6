@@ -64,7 +64,7 @@ const Page = () => {
             title="Hunger Action Month Campaign Dashboard"
             summary={CASE_SUMMARIES["/hunger-action-month-dashboard"]}
             facts={[
-              { label: "Client", value: <><a className="cyril-dark" href="https://childrenshungerfund.org" target="_blank" rel="noopener noreferrer">Children&apos;s Hunger Fund</a>&mdash;A Christian Non-Profit Ministry</> },
+              { label: "Employer", value: <><a className="cyril-dark" href="https://childrenshungerfund.org" target="_blank" rel="noopener noreferrer">Children&apos;s Hunger Fund</a>&mdash;A Christian Non-Profit Ministry</> },
               { label: "Role", value: "Designer, Developer & Analytics (sole developer)" },
               { label: "Platform & Tools", value: <>{"WordPress (custom plugin)"}<br />{"PHP, JavaScript, Google Analytics 4, Google Tag Manager"}</> },
               { label: "Deliverables", value: "Tracking infrastructure plan, implementation backlog, campaign dashboard" },

@@ -64,7 +64,7 @@ const Page = () => {
             title="Giving Tuesday Campaign"
             summary={CASE_SUMMARIES["/giving-tuesday"]}
             facts={[
-              { label: "Client", value: <><a className="cyril-dark" href="https://childrenshungerfund.org" target="_blank" rel="noopener noreferrer">Children&apos;s Hunger Fund</a>&mdash;A Christian Non-Profit Ministry</> },
+              { label: "Employer", value: <><a className="cyril-dark" href="https://childrenshungerfund.org" target="_blank" rel="noopener noreferrer">Children&apos;s Hunger Fund</a>&mdash;A Christian Non-Profit Ministry</> },
               { label: "Role", value: "Designer & Developer (sole developer)" },
               { label: "Platform & Tools", value: <>{"WordPress"}<br />{"PHP, SASS, JavaScript/jQuery, embedded giving forms"}</> },
               { label: "Deliverables", value: "Landing page, live donation tracker, post-campaign page" },

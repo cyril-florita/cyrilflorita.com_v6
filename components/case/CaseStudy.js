@@ -29,7 +29,7 @@ const prefersReducedMotion = () =>
 // the facts row, then (optionally)
 // a framed image in the content width — or a looping, muted video (`video`, with its poster
 // from videoSizes.json) — that settles from a slight zoom as it scrolls up.
-export const CaseHero = ({ category, detail, title, summary, result, facts, image, imageAlt, video, tile }) => {
+export const CaseHero = ({ category, detail, title, summary, result, facts, factCols, image, imageAlt, video, tile }) => {
   const imgRef = useRef(null);
 
   // The video plays only while it's on screen, and never under reduced
@@ -95,7 +95,7 @@ export const CaseHero = ({ category, detail, title, summary, result, facts, imag
           </p>
         )}
         {facts && (
-          <dl className="cyril-case-facts" style={{ "--fact-count": facts.length }}>
+          <dl className="cyril-case-facts" style={{ "--fact-count": facts.length, ...(factCols && { "--fact-cols": factCols }) }}>
             {facts.map(({ label, value }) => (
               <div key={label} className="cyril-case-fact">
                 <dt className="cyril-upper">{label}</dt>

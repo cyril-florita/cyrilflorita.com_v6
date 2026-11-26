@@ -81,7 +81,7 @@ const Page = () => {
             title="GTY App Landing Page"
             summary={CASE_SUMMARIES["/gty-app-landing"]}
             facts={[
-              { label: "Client", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank" rel="noopener noreferrer">Grace to You</a>&mdash;A Christian Media Organization</> },
+              { label: "Employer", value: <><a className="cyril-dark" href="https://www.gty.org" target="_blank" rel="noopener noreferrer">Grace to You</a>&mdash;A Christian Media Organization</> },
               { label: "Role", value: "Web Designer & Developer" },
               { label: "Platform & Tools", value: "Web — Desktop, Tablet, Mobile" },
             ]}

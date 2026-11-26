@@ -90,14 +90,14 @@ const PERSON_JSON_LD = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" data-theme="dark" className={`${space_grotest.variable} ${atkinson.variable}`} suppressHydrationWarning={true}>
+    <html lang="en" data-theme="light" className={`${space_grotest.variable} ${atkinson.variable}`} suppressHydrationWarning={true}>
       <head>
-        {/* Set theme before first paint (default dark) to avoid a flash on navigation */}
+        {/* Set theme before first paint (default light since 2026-11-26; dark until then) to avoid a flash on navigation */}
         <InlineScript
           html={`
               (function () {
                 try {
-                  var theme = localStorage.getItem('theme') || 'dark';
+                  var theme = localStorage.getItem('theme') || 'light';
                   document.documentElement.setAttribute('data-theme', theme);
                 } catch (e) {}
               })();

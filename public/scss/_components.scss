@@ -3884,8 +3884,11 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
     margin: 80px 0 0;
     display: grid;
     // one column per fact (--fact-count is set inline by CaseHero), so three
-    // or four facts share the full width instead of five fixed columns
-    grid-template-columns: repeat(var(--fact-count, 5), minmax(0, 1fr));
+    // or four facts share the full width instead of five fixed columns; a page
+    // can size its own columns on desktop with CaseHero's `factCols` (--fact-cols),
+    // e.g. Mustang, whose short and link facts take their content's width so the
+    // links don't wrap (the tablet and phone rules below still apply)
+    grid-template-columns: var(--fact-cols, repeat(var(--fact-count, 5), minmax(0, 1fr)));
     border-top: 2px solid var(--color-frame);
 
     @media screen and (max-width: 992px) {
@@ -3921,6 +3924,12 @@ scoped to .cyril-case-* so the other project pages keep their old layout.
         // long URLs have no spaces to break at; let them wrap rather than
         // run into the next cell
         overflow-wrap: anywhere;
+    }
+
+    // links in the facts (Try It Live, Website, Client) in the accent orange (the user's call,
+    // 2026-11-26), so they read as links; beats the .cyril-dark they carry
+    & dd a {
+        color: var(--color-accent-text);
     }
 
     @media screen and (max-width: 992px) {
