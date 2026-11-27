@@ -4,8 +4,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 // The pitch's interactive stage: one WebGL canvas (three.js, loaded on demand)
 // behind the page's text. The car (public/builds/mustang/car.glb, built by
-// scripts/mustang/prep_dark_horse.py in Blender; phones, ≤999px, get the
-// decimated car-lite.glb with 512px textures) turns a full 360 degrees when
+// scripts/mustang/build_car.py in Blender) turns a full 360 degrees when
 // dragged, leans a little toward the pointer, and is drawn four times a frame:
 // the main view plus three "windows" (the tiles), each a fixed camera riding
 // on the car — the rear, the cockpit and the headlights. Choosing a window
@@ -615,8 +614,7 @@ export default function CarStage({ children, spot = null, className = "" }) {
       // scripts/mustang/prep_dark_horse.py; Draco-compressed, so it needs the decoder in /builds/mustang/draco/.
       const draco = new DRACOLoader().setDecoderPath("/builds/mustang/draco/");
       const gltfLoader = new GLTFLoader().setDRACOLoader(draco);
-      const lite = matchMedia("(max-width: 999px)").matches;          // phones: the lighter model (--lite in the prep script)
-      gltfLoader.load(`/builds/mustang/car${lite ? "-lite" : ""}.glb`, (gltf) => {
+      gltfLoader.load("/builds/mustang/car.glb", (gltf) => {
         if (disposed) return;
         gltf.scene.traverse((o) => {
           if (!o.isMesh || !mats[o.material?.name]) return;
