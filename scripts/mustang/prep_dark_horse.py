@@ -4,9 +4,13 @@ Prepares the licensed Dark Horse model for the page.
   "[FREE] 2024 Ford Mustang Dark Horse" by livanovbog, CC BY 4.0
   https://sketchfab.com/3d-models/free-2024-ford-mustang-dark-horse-a29c8bb07f6e41b594fe2248366cffbf
 
-  /Applications/Blender.app/Contents/MacOS/Blender -b -P scripts/mustang/prep_dark_horse.py -- <scene.gltf> <out_dir> [--inspect] [--glb <file>]
+  /Applications/Blender.app/Contents/MacOS/Blender -b -P scripts/mustang/prep_dark_horse.py -- <scene.gltf> <out_dir> [--inspect] [--glb <file>] [--lite <ratio>] [--tex <px>]
 
 --inspect lists the top-level objects and renders a quick look into out_dir.
+--lite <ratio> builds the phones' model (car-lite.glb, built with --lite 0.3 --tex 512): every
+  mesh decimated to that ratio except the paint and the interior (both crumpled, and clearing
+  their normals afterwards made it worse) and the small, flat or see-through parts.
+--tex <px> caps the textures' longest side (default 1024).
 """
 import bpy, sys, os, math
 from mathutils import Vector, Matrix
@@ -15,6 +19,8 @@ argv = sys.argv[sys.argv.index("--") + 1:]
 SRC, OUT = argv[0], argv[1]
 INSPECT = "--inspect" in argv
 GLB = argv[argv.index("--glb") + 1] if "--glb" in argv else None
+LITE = float(argv[argv.index("--lite") + 1]) if "--lite" in argv else None
+TEX = int(argv[argv.index("--tex") + 1]) if "--tex" in argv else 1024
 os.makedirs(OUT, exist_ok=True)
 
 bpy.ops.wm.read_factory_settings(use_empty=True)
@@ -91,7 +97,29 @@ if GLB:
                     if hasattr(sock, "default_value") and len(sock.default_value) >= 3: sock.default_value = (avg, avg, avg, 1)
                 m.node_tree.nodes.remove(n)
 
-    # Textures: at most 1024px (they ship as WebP).
+    # Only the first two UV sets are used (UV1 by a few normal and emissive maps); the
+    # source's other three were shipped on every mesh for nothing.
+    for me in {o.data for o in scene.objects if o.type == "MESH"}:
+        for uv in list(me.uv_layers)[2:]: me.uv_layers.remove(uv)
+
+    # The phones' model: decimate everything but the paint and the interior (the body and the
+    # cockpit close-up crumple when collapsed) and the parts that are small, flat or see-through,
+    # where a collapse would show (window and lamp edges, badges, the plate).
+    if LITE:
+        KEEP = ("Paint", "M_CarPaint", "Glass", "M_LGlass", "M_Glass", "M_Badge", "M_RimBadge", "M_LicensePlate", "M_Grille", "M_Detail", "M_Interior")
+        before = after = 0
+        for o in [o for o in scene.objects if o.type == "MESH"]:
+            names = [s.material.name for s in o.material_slots if s.material]
+            tris = sum(len(p.vertices) - 2 for p in o.data.polygons); before += tris
+            if tris > 200 and not any(n.startswith(KEEP) for n in names):
+                if o.data.users > 1: o.data = o.data.copy()
+                m = o.modifiers.new("Lite", "DECIMATE"); m.ratio = LITE
+                bpy.context.view_layer.objects.active = o
+                bpy.ops.object.modifier_apply(modifier=m.name)
+            after += sum(len(p.vertices) - 2 for p in o.data.polygons)
+        print("LITE", LITE, "triangles", before, "->", after)
+
+    # Textures: at most TEX px (1024 by default; they ship as WebP).
     for img in list(bpy.data.images):
         if not img.size[0]: continue
         if img.channels < 3:                                   # WebP can't hold single-channel images: rebuild as RGBA
@@ -101,7 +129,7 @@ if GLB:
                 v = px[i * c]; rgba += [v, v, v, px[i * c + 1] if c == 2 else 1.0]
             new = bpy.data.images.new(img.name + "_rgba", w, h, alpha=True); new.pixels = rgba
             img.user_remap(new); img = new
-        k = min(1, 1024 / max(img.size))                     # scaling every image also re-encodes palette PNGs WebP can't take
+        k = min(1, TEX / max(img.size))                     # scaling every image also re-encodes palette PNGs WebP can't take
         img.scale(max(1, int(img.size[0] * k)), max(1, int(img.size[1] * k)))
 
     lo, hi = world_bbox([o for o in scene.objects if o.type == "MESH"])
@@ -110,5 +138,6 @@ if GLB:
         print("WHEEL", w.name, [round(v, 3) for v in w.matrix_world.translation])
     bpy.ops.export_scene.gltf(filepath=GLB, export_format="GLB", export_image_format="WEBP", export_image_quality=82,
                               export_draco_mesh_compression_enable=True, export_draco_mesh_compression_level=6,
+                              **({"export_draco_position_quantization": 12, "export_draco_texcoord_quantization": 10} if LITE else {}),
                               export_apply=True, export_yup=True)
     print("EXPORTED", GLB, os.path.getsize(GLB))
