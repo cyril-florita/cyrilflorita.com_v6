@@ -251,7 +251,7 @@ const Page = () => {
                 ]}
                 next={[
                   "Run the kit with the dealer: send the email to a test list and compare its subject lines, and try the spots' first second against a still of the car; set the display ads' click-through to the dealer's page and compare the HTML5 ads with the GIFs.",
-                  "Bring phone performance further up: serve a lighter model to phones, so less has to download and decode while the page is already in use.",
+                  "Bring phone performance further up: what remains is the 3D car's setup, decoding it and preparing its shaders while the page is already in use.",
                   "Put in the dealer's real offer, phone number, and test-drive booking, and its own photos for the share image.",
                   "Measure time on the ad, windows opened, paints tried, and taps through to the offer, then test which first view keeps people longest.",
                   "Add the trims and their prices, and let the paint carry through to the offer.",

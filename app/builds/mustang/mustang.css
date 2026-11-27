@@ -83,6 +83,9 @@
   background: url(/builds/mustang/car-fallback.webp) 50% 55% / min(60%, 900px) auto no-repeat; }
 .ms-stage:is([data-state="loading"], [data-state="fallback"]) .ms-view::before { opacity: 1; }
 .ms-stage[data-state="fallback"] .ms-view { cursor: default; }
+/* Without the 3D car (no WebGL, or no GPU: softwareGL.js) there is nothing to drag and no window to
+   open, so the hints and the windows go; the still and the offer stay. */
+.ms-stage[data-state="fallback"] :is(.ms-hint, .ms-tiles) { display: none; }
 
 .ms-top, .ms-copy, .ms-offer { position: absolute; z-index: 4; pointer-events: none; }
 .ms-top a, .ms-copy a, .ms-copy button { pointer-events: auto; }
@@ -258,6 +261,7 @@
 .ms-smoke i:nth-of-type(1) { opacity: 0.34; animation: ms-drift-a 46s linear infinite alternate; }
 .ms-smoke i:nth-of-type(2) { opacity: 0.24; background-size: 900px; animation: ms-drift-b 64s linear infinite alternate; }
 .ms-smoke i:nth-of-type(3) { opacity: 0.14; background-size: 420px; animation: ms-drift-c 38s linear infinite alternate; }
+.ms-smoke[data-still] i { animation: none; }                    /* no GPU (Smoke.js) */
 @keyframes ms-drift-a { from { transform: translate3d(-4%, 2%, 0); } to { transform: translate3d(7%, -3%, 0); } }
 @keyframes ms-drift-b { from { transform: translate3d(6%, -2%, 0) scale(1.05); } to { transform: translate3d(-6%, 3%, 0) scale(1.05); } }
 @keyframes ms-drift-c { from { transform: translate3d(0, 4%, 0); } to { transform: translate3d(-8%, -2%, 0); } }

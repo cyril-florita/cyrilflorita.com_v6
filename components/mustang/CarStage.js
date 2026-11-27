@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import softwareGL from "./softwareGL";
 
 // The pitch's interactive stage: one WebGL canvas (three.js, loaded on demand)
 // behind the page's text. The car (public/builds/mustang/car.glb, built by
@@ -160,6 +161,8 @@ export default function CarStage({ children, spot = null, className = "" }) {
     let disposed = false, cleanup = () => {};
     const sp = spotRef.current;
     (async () => {
+      // No GPU: keep the still, without loading three.js or the model (see softwareGL.js).
+      if (softwareGL()) { setState("fallback"); return; }
       let THREE, GLTFLoader, DRACOLoader;
       try {
         THREE = await import("three");
@@ -169,7 +172,7 @@ export default function CarStage({ children, spot = null, className = "" }) {
       if (disposed) return;
       let renderer;
       try {
-        renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: "high-performance" });
+        renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: "high-performance", failIfMajorPerformanceCaveat: true });
       } catch { setState("fallback"); return; }
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       const coarse = window.matchMedia("(pointer: coarse)").matches;

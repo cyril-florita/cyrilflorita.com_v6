@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import softwareGL from "./softwareGL";
 
 // Background smoke, after the poster's billowing fog, behind the giant word and
 // kept off the floor.
@@ -9,9 +10,9 @@ import { useEffect, useRef } from "react";
 //   While the pointer is over the car (CarStage's "ms:car-hover") it stirs:
 //   time runs ~3x faster, the fog swirls round the pointer and brightens, then
 //   eases back. It pauses while the tab is hidden or the stage is off screen.
-// - Phones, tablets, or no WebGL: three CSS layers of a generated noise texture
+// - Phones, tablets, no WebGL or no GPU (softwareGL.js): three CSS layers of a generated noise texture
 //   drift past each other (screen blend); the hover speeds their playback up.
-// - Reduced motion: one still frame (or still layers).
+// - Reduced motion, or no GPU: one still frame (or still layers).
 
 const VERT = `#version 300 es
 in vec2 aPos; void main() { gl_Position = vec4(aPos, 0.0, 1.0); }`;
@@ -156,6 +157,11 @@ export default function Smoke() {
     if (!el || !stage) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    // No GPU (softwareGL.js): the CSS layers hold still too — three drifting, blurred,
+    // screen-blended layers cost ~50ms a frame to composite in software, and everything
+    // that waits on the compositor (canvas reads, the 3D check) queued behind them.
+    const soft = softwareGL();
+    if (soft) el.dataset.still = "";
 
     // The CSS layers' texture is always prepared, so they can stand in at once
     // if WebGL is missing or its context is lost.
@@ -172,7 +178,7 @@ export default function Smoke() {
     // The shader gets a fresh canvas each run (React runs effects twice in
     // development, and a canvas whose context was released can't get it back).
     let stopShader = null, canvas = null;
-    if (fine) {
+    if (fine && !soft) {
       canvas = document.createElement("canvas");
       canvas.className = "ms-smoke-gl";
       el.prepend(canvas);
