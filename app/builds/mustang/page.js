@@ -37,7 +37,7 @@ export default function Page() {
           <div className="ms-copy">
             <h1 className="ms-title">Ford Mustang</h1>
             <p className="ms-sub">Turn it. Open it. Look closer. <Slashes /></p>
-            <p>A long hood, a fastback roof, and three bars of light at every corner. Drag the car to see all of it, or open a window to look at the rear, the cockpit, and the headlights up close.</p>
+            <p>A long hood, a fastback roof, and three bars of light at every corner.<span className="ms-copy-3d"> Drag the car to see all of it, or open a window to look at the rear, the cockpit, and the headlights up close.</span></p>
           </div>
           <section className="ms-offer" id="offer" aria-labelledby="ms-offer-title">
             <h2 className="ms-offer-title" id="ms-offer-title">Yours from $499 a month.</h2>

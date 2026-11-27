@@ -83,9 +83,19 @@
   background: url(/builds/mustang/car-fallback.webp) 50% 55% / min(60%, 900px) auto no-repeat; }
 .ms-stage:is([data-state="loading"], [data-state="fallback"]) .ms-view::before { opacity: 1; }
 .ms-stage[data-state="fallback"] .ms-view { cursor: default; }
-/* Without the 3D car (no WebGL, or no GPU: softwareGL.js) there is nothing to drag and no window to
-   open, so the hints and the windows go; the still and the offer stay. */
-.ms-stage[data-state="fallback"] :is(.ms-hint, .ms-tiles) { display: none; }
+/* Without the 3D car (no WebGL, or no GPU: softwareGL.js) there is nothing to drag, no window to open
+   and no paint to change, so the hints, the windows, the paint picker (rail and phone menu) and the copy's
+   "Drag the car…" sentence go; the still and the offer stay. The still's floor has hard edges (it's cut
+   from a render), so here it fades out at the sides and the bottom: a mask the still's own size and place
+   (1680×693, so its height is 0.4125 of its width; cqw from the view), sides and foot intersected. While
+   the 3D car loads the still keeps its edges, since the canvas fades in over it. */
+.ms-stage[data-state="fallback"] :is(.ms-hint, .ms-tiles, .ms-paint-rail, .ms-paint-menu, .ms-copy-3d) { display: none; }
+.ms-stage[data-state="fallback"] .ms-view { container-type: inline-size; }
+.ms-stage[data-state="fallback"] .ms-view::before { --w: min(60cqw, 900px); --at: 50% 55%;
+  mask: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent) var(--at) / var(--w) calc(var(--w) * 0.4125) no-repeat,
+        linear-gradient(#000 55%, transparent) var(--at) / var(--w) calc(var(--w) * 0.4125) no-repeat;
+  mask-composite: intersect; }
+@media (max-width: 999px) { .ms-stage[data-state="fallback"] .ms-view::before { --w: 96cqw; --at: 50% 50%; } }
 
 .ms-top, .ms-copy, .ms-offer { position: absolute; z-index: 4; pointer-events: none; }
 .ms-top a, .ms-copy a, .ms-copy button { pointer-events: auto; }
